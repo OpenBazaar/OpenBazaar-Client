@@ -398,32 +398,6 @@ launchOnboarding = function(guidCreating) {
   });
 };
 
-launchServerConnect = function() {
-  // if (!serverConnectModal) {
-  //   serverConnectModal = new ServerConnectModal();
-
-  //   serverConnectModal.on('connected', function(authenticated) {
-  //     $loadingModal.removeClass('hide');
-
-  //     if (authenticated) {
-  //       serverConnectModal && serverConnectModal.remove();
-  //       serverConnectModal = null;
-  //     }
-  //   });
-
-  //   serverConnectModal.render()
-  //     .open()
-  //     .start();
-  // } else {
-  //   if (!serverConnectModal.isOpen()) {
-  //     serverConnectModal.open();
-  //     if (!serverConnectModal.isStarted()) serverConnectModal.start();
-  //   }
-  // }
-
-  // !app.serverConnectModal.isOpen() && app.serverConnectModal.open().connect();
-};
-
 app.connectHeartbeatSocket();
 app.serverConnectModal = new ServerConnectModal().render();
 app.serverConnectModal.on('connected', (authenticated) => {
@@ -488,17 +462,10 @@ app.getHeartbeatSocket().on('message', function(e) {
         launchOnboarding(guidCreating);
         break;
       case 'GUID generation complete':
-        var creds = {
+        app.serverConfigs.getActive().save({
           username: e.jsonData.username,
           password: e.jsonData.password
-        };
-
-        if (app.serverConfigs.getActive().isLocalServer()) {
-          creds.local_username = e.jsonData.username;
-          creds.local_password = e.jsonData.password;
-        }
-
-        serverConfigMd.save(creds);
+        });
 
         app.login().done(function() {
           guidCreating.resolve();
@@ -506,8 +473,6 @@ app.getHeartbeatSocket().on('message', function(e) {
 
         break;
       case 'online':
-        console.log(`1: ${!!loadProfileNeeded}, 2: ${!!guidCreating}`);
-
         if (loadProfileNeeded && !guidCreating) {
           loadProfileNeeded = false;
 
@@ -525,10 +490,8 @@ app.getHeartbeatSocket().on('message', function(e) {
                     if (__.isEmpty(profile)) {
                       launchOnboarding(guidCreating = $.Deferred().resolve().promise());
                     } else {
-                      console.log('bu');
                       app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
                       loadProfile();
-                      console.log('lones');
                     }
                   });
             } else {

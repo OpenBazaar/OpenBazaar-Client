@@ -20,13 +20,6 @@ module.exports = BaseModal.extend({
     'click .js-msg-bar-close': 'hideMessageBar'
   },
 
-  // constructor: function (options) {
-  //   BaseModal.prototype.constructor.call(this, 
-  //     __.extend({
-  //       showCloseButton: true
-  //     }, options));
-  // },
-
   initialize: function(options) {
     this.options = options || {};
 
@@ -46,48 +39,6 @@ module.exports = BaseModal.extend({
     this.listenTo(this.serverConfigsVw, 'edit-config', this.onEditConfig);
     this.listenTo(this.serverConfigsVw, 'connect', this.onConnectClick);
     this.listenTo(this.serverConfigsVw, 'cancel', this.onCancelClick);
-
-    // In case connection drops outside of this modal's connect() flow.
-    app.getHeartbeatSocket().on('close', (e) => {
-      return;
-      console.log('close detected');
-
-      if (!this.connectAttempt) {
-        // console.log('you be bringin it straight fleece out style');
-        this.failConnection(null, this.serverConfigs.getActive());
-
-        // !this.isOpen() && this.open();
-      }
-    });
-
-    $(document).ajaxComplete((this.onAjaxComplete = (e, jqXhr, settings) => {
-      return;
-      var failedConfig,
-          activeConfig;
-
-      if (
-        jqXhr.status === 401 ||
-        (
-          settings && settings.url.endsWith('/login') &&
-          !(jqXhr.responseJSON && jqXhr.responseJSON.success)
-        )
-      ) {
-        // auth failed
-        if (
-          !this.connectAttempt &&
-          (failedConfig = this.serverConfigs.get(jqXhr.serverConfig)) &&
-          (activeConfig = this.serverConfigs.getActive()) &&
-          activeConfig.id === failedConfig.id           
-        ) {
-          this.failConnection(
-            jqXhr.responseJSON.reason === 'too many attempts' ?
-              'failed-auth-too-many' : 'failed-auth',
-            activeConfig
-          );
-          !this.isOpen() && this.open();
-        }
-      }
-    }));    
   },
 
   remove: function() {
@@ -175,8 +126,6 @@ module.exports = BaseModal.extend({
 
     if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
 
-    console.log(`gonna succeed ${configMd.get('name')}`);
-
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
       status: 'connected'
@@ -196,7 +145,6 @@ module.exports = BaseModal.extend({
 
     var msg;
 
-    console.log(`you fail me, but the conny is ${this.connectAttempt ? this.connectAttempt.state() : ' no mo no mo no mo '}`);
     if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
 
     this.serverConfigsVw.setConnectionState({
@@ -228,36 +176,24 @@ module.exports = BaseModal.extend({
     }
 
     this.connectAttempt && this.connectAttempt.cancel();
-    this.serverConfigs.setActive(configMd.id);
     this.hideMessageBar();
+
+    this.serverConfigsVw.setConnectionState({
+      id: this.serverConfigs.getActive().id,
+      status: 'not-connected'
+    });
 
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
       status: 'connecting'
     });
 
-    this.serverConfigs.each((md) => {
-      if (md.id !== configMd.id) {
-        this.serverConfigsVw.setConnectionState({
-          id: md.id,
-          status: 'not-connected'
-        });
-      }
-    });
-
     this.setModalOptions({ showCloseButton: false });
+    this.serverConfigs.setActive(configMd.id);
 
     this.connectAttempt = this.attemptConnection().done(() => {
-      console.log('great success');
-      
-      // this.serverConfigsVw.setConnectionState({
-      //   id: configMd.id,
-      //   status: 'connected'
-      // });
-
       this.succeedConnection(configMd);
     }).fail((reason) => {
-      console.log(`yuo be rejected because ${reason}`);
       this.failConnection(reason, configMd)
     }).always(() => {
       this.connectAttempt = null;
