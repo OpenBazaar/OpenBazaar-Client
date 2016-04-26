@@ -13,7 +13,7 @@ module.exports = baseVw.extend({
 
       defaults = {
         dismissOnOverlayClick: false,
-        includeCloseButton: false,
+        showCloseButton: false,
         closeButtonClass: 'btn-corner btn-cornerTR',
         innerWrapperClass: 'modal-child modal-childMain custCol-primary'
       };
@@ -22,14 +22,8 @@ module.exports = baseVw.extend({
       this.className = 'modal modal-opaque ' + __.result(this, 'className', '');
       this._open = false;
 
-      if (this.__options.dismissOnOverlayClick) {
-        events['click'] = '__modalClick';
-      }
-
-      if (this.__options.includeCloseButton) {
-        events['click .js-modal-close'] = '__closeClick';
-      }      
-
+      events['click'] = '__modalClick';
+      events['click .js-modal-close'] = '__closeClick';
       this.events = __.extend({}, events, this.events || {});
 
       baseVw.prototype.constructor.apply(this, arguments);
@@ -73,6 +67,18 @@ module.exports = baseVw.extend({
       return this;
     },
 
+    setModalOptions: function(options) {
+      if (!options) return;
+
+      __.extend(this.__options, options);
+
+      if (typeof options.showCloseButton !== 'undefined') {
+        this.$modalClose[options.showCloseButton ? 'removeClass' : 'addClass']('hide');
+      }
+
+      // TODO: allow other options to be modifiable via this method.
+    },
+
     remove: function() {
       this.close();
       baseVw.prototype.remove.apply(this, arguments);
@@ -88,6 +94,8 @@ module.exports = baseVw.extend({
           t( __.extend({} , self.__options, { innerContent: self.el.innerHTML}) )
         );
       });
+
+      this.$modalClose = this.$('.js-modal-close');
 
       return this;
     }

@@ -20,6 +20,13 @@ module.exports = BaseModal.extend({
     'click .js-msg-bar-close': 'hideMessageBar'
   },
 
+  // constructor: function (options) {
+  //   BaseModal.prototype.constructor.call(this, 
+  //     __.extend({
+  //       showCloseButton: true
+  //     }, options));
+  // },
+
   initialize: function(options) {
     this.options = options || {};
 
@@ -166,6 +173,7 @@ module.exports = BaseModal.extend({
     });
 
     this.hideMessageBar();
+    this.setModalOptions({ showCloseButton: true });
 
     return this;
   },
@@ -223,6 +231,8 @@ module.exports = BaseModal.extend({
         });
       }
     });
+
+    this.setModalOptions({ showCloseButton: false });
 
     this.connectAttempt = this.attemptConnection().done(() => {
       console.log('great success');
