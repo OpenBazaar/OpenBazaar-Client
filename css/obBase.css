@@ -4045,6 +4045,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 100%;
 }
 
+.tooltip.tooltip-box2:hover:after {
+  height: auto;
+  width: 200px;
+  white-space: normal;
+  bottom: auto;
+  top: 100%;
+}
+
 .tooltip.tooltip-box.tooltip-boxUp:hover:after {
   bottom: 120%;
 }

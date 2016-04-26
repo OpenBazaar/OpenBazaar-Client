@@ -72,8 +72,8 @@
   </div>
   <%
   var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'country'), ob.ships_to));
-  if(matchedItemShippableCountries.length > 0 || ob.ships_to[0] == "ALL"){
-  print("<div class='violatorTR violator1'><div class='positionTopRight marginRight10 rowTop10 fontSize16'><i class='ion-bag'></i></div></div>");
+  if(matchedItemShippableCountries.length > 0 || ob.ships_to[0] == "ALL" || ob.ships_to.length == 0){
+  print("<div class='positionTopRight tooltip tooltip-box2 tooltip-left' data-tooltip='"+polyglot.t('ShippableHelp')+"'><div class='violatorTR violator1'><div class='positionTopRight marginRight10 rowTop10 fontSize16'><i class='ion-bag'></i></div></div></div>");
   }
   %>
 </div>
