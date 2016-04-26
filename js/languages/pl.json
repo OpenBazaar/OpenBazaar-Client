@@ -598,7 +598,7 @@
     "guidStillCreating": {
         "HangTight": "Poczekaj chwilę...",
         "YourPersonal": "Twoje osobiste klucze i ID OpenBazaar są generowane, to potrwa około 30 sekund,\n\nPo zakończeniu tego procesu zostaniesz automatycznie połączony z siecią.",
-        "LookingFor": "Nie masz co robić? Zerknij na naszego<a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">bloga</a>."
+        "LookingFor": "Nie masz co robić? Zerknij na naszego <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">bloga</a>."
     },
     "walletProviders": {
         "ExchangeAndWallet": "Wymiana i portfel",
