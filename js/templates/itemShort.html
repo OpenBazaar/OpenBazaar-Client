@@ -1,4 +1,5 @@
 <div class="gridItem clearfix custCol-border">
+
   <div class="itemImg row10 color-secondary custCol-secondary overflowHidden js-item" data-id="<%= ob.contract_hash %>">
     <div class="itemImg <% if(ob.cloak){ %> nsfw <% } %>" style="background-image: url(<%= ob.imageURL %>), url(imgs/defaultItem.png);"></div>
   </div>
@@ -69,6 +70,12 @@
       </div>
     </div>
   </div>
+  <%
+  var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'country'), ob.ships_to));
+  if(matchedItemShippableCountries.length > 0 || ob.ships_to[0] == "ALL" || ob.ships_to.length == 0){
+  print("<div class='positionTopRight tooltip tooltip-box2 tooltip-left' data-tooltip='"+polyglot.t('ShippableHelp')+"'><div class='violatorTR violator1'><div class='positionTopRight marginRight10 rowTop10 fontSize16'><i class='ion-bag'></i></div></div></div>");
+  }
+  %>
 </div>
 <% if(ob.cloak){ %>
 <div class="fullCentered btn btn-large custCol-secondary div-fade">
