@@ -201,6 +201,7 @@ module.exports = baseVw.extend({
     item.userID = item.guid;
     item.discover = true;
     item.ownGuid = this.userModel.get('guid');
+    item.userAddresses = this.userModel.get('shipping_addresses');
 
 
     item.ownFollowing = this.ownFollowing.indexOf(item.guid) != -1;

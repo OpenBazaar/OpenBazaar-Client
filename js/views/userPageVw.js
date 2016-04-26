@@ -742,6 +742,7 @@ module.exports = baseVw.extend({
       arrayItem.userID = self.pageID;
       arrayItem.ownPage = self.options.ownPage;
       arrayItem.onUserPage = true;
+      arrayItem.userAddresses = self.options.userModel.get('shipping_addresses');
       arrayItem.skipNSFWmodal = skipNSFWmodal;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         selectOptions[arrayItem.category] = true;

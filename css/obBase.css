@@ -4261,7 +4261,32 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 }
 
-/* protect customize controls from custom page styles */
+.violatorTR {
+  /* sets triangle to be in the top right corner */
+  /* must be given equal height and width properties */
+  /* text or icons inside the violator should have positionTopRight and a right and top margin or padding based on the violator size */
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-clip-path: polygon(50% 0, 100% 0, 100% 50%);
+  z-index: 1; /* this shouldn't need to be higher. Make it the last element in its container */
+  text-align: center;
+}
+
+.violator1 {
+  width: 150px;
+  height: 150px;
+  background: #215175; /* this should be overridden with a color class */
+  color: #fff;
+}
+
+.violatorTxt{
+  /* use on content of a violator to rotate it to match the violator */
+  display: block;
+  transform: rotate(45deg);
+}
+
+  /* protect customize controls from custom page styles */
 #ov1 #customizeControls .labelWrap {
   height: 40px;
   border-radius: 0;
@@ -4517,11 +4542,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .positionBottom {
   position: absolute;
   bottom: 0;
+  right: 0;
 }
 
 #ov1 .positionTop {
   position: absolute;
   top: 0;
+  right: 0;
 }
 
 #ov1 .positionTopRight {
