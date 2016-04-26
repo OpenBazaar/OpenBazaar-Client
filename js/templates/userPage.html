@@ -279,7 +279,7 @@
               </a>
             <%}%>
             <% if(ob.page.profile.about) { %>
-             <div class="js-userAbout margin0 editableContent"><%= ob.page.profile.displayAbout %></div>
+             <div class="js-userAbout margin0 editableContent fontSize14"><%= ob.page.profile.displayAbout %></div>
             <%}else{%>
               <span class="textOpacity75"><%= polyglot.t('AboutEmpty') %></span>
             <%}%>
@@ -289,7 +289,7 @@
           <div class="flexRow">
             <div class="flexRow borderBottom custCol-border">
               <div class="rowItem positionWrapper">
-                <div class="textOpacity75"><%= polyglot.t('Guid') %></div>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Guid') %></div>
                 <div class="textSize11px noOverflow">
                   <%= ob.page.profile.guid %>
                 </div>
@@ -297,7 +297,7 @@
             </div>
             <div class="flexRow custCol-border">
               <div class="rowItem positionWrapper">
-                <div class="textOpacity75"><%= polyglot.t('Website') %></div>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Website') %></div>
                 <div class="noOverflow">
                   <% if(ob.ownPage) { %>
                     <a href="#settings/page" class="userPageEditBtn">
@@ -317,7 +317,7 @@
             </div>
             <div class="flexRow custCol-border">
               <div class="rowItem positionWrapper">
-                <div class="textOpacity75"><%= polyglot.t('Email') %></div>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Email') %></div>
                 <div class="noOverflow">
                   <% if(ob.ownPage) { %>
                     <a href="#settings/page" class="userPageEditBtn">
@@ -345,7 +345,7 @@
                     </div>
                   </a>
                 <%}%>
-                <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Facebook') %></div>
                 <div class="noOverflow">
                   <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
                     <a href="https://facebook.com/<%= ob.page.profile.social_accounts.facebook.username %>">
@@ -367,7 +367,7 @@
                     </div>
                   </a>
                 <%}%>
-                <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Twitter') %></div>
                 <div class="noOverflow">
                   <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
                     <a href="https://twitter.com/<%= ob.page.profile.social_accounts.twitter.username %>">
@@ -389,7 +389,7 @@
                     </div>
                   </a>
                 <%}%>
-                <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Instagram') %></div>
                 <div class="noOverflow">
                   <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
                     <a href="https://instagram.com/<%= ob.page.profile.social_accounts.instagram.username %>">
@@ -411,7 +411,7 @@
                     </div>
                   </a>
                 <%}%>
-                <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Snapchat') %></div>
                 <div class="noOverflow">
                   <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
                     <a href="https://snapchat.com/add/<%= ob.page.profile.social_accounts.snapchat.username %>">
@@ -433,7 +433,7 @@
                     </div>
                   </a>
                 <%}%>
-                <div class="textOpacity75"><%= polyglot.t('PGPKey') %></div>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('PGPKey') %></div>
                 <div class="noOverflow">
                   <%= polyglot.t('NotProvided') %>
                 </div>
