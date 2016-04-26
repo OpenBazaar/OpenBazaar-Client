@@ -4,6 +4,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     messageModal = require('../utils/messageModal.js'),
     setTheme = require('../utils/setTheme.js'),
+    Papa = require('papaparse'),
     chosen = require('../utils/chosen.jquery.min.js'),
     transactionsCl = require('../collections/transactionsCl'),
     baseVw = require('./baseVw'),
@@ -22,7 +23,8 @@ module.exports = baseVw.extend({
     'click .js-casesTab': 'tabHandler',
     'change .js-transactionFilter': 'transactionFilter',
     'keyup .search': 'searchKeyup',
-    'click .js-transactionsSearchClear': 'searchClear'
+    'click .js-transactionsSearchClear': 'searchClear',
+    'click .js-downloadCSV': 'downloadCSV'
   },
 
   initialize: function(options){
@@ -279,6 +281,38 @@ module.exports = baseVw.extend({
     });
     this.registerChild(orderShort);
     tabWrapper.append(orderShort.render().el);
+  },
+
+  downloadCSV: function(){
+    var rawData = {},
+        dataCSV = '',
+        tempAnchor = document.createElement('a'),
+        dataBlob;
+
+    console.log(this.state)
+
+    switch(this.state){
+      case "purchases":
+        rawData = this.purchasesCol.toJSON();
+        break;
+      case "sales":
+        rawData = this.salesCol.toJSON();
+        break;
+      case "cases":
+        rawData = this.casesCol.toJSON();
+        break;
+    }
+
+    dataCSV = Papa.unparse(rawData.map(function(order){
+      order.status = polyglot.t('transactions.OrderStatus'+order.status);
+      order.timestamp = new Date(order.timestamp * 1000);
+      return __.omit(order, "thumbnail_hash", "btAve", "imageUrl", "order_date");
+    }));
+    dataBlob = new Blob([dataCSV], {'type':'application\/octet-stream'});
+    tempAnchor.href = window.URL.createObjectURL(dataBlob);
+    tempAnchor.download = 'export.csv';
+    tempAnchor.click();
+    console.log(dataCSV)
   },
 
   openOrderModal: function(options){
