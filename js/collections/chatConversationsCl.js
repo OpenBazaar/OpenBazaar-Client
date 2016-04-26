@@ -4,7 +4,7 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.Collection.extend({
   url: function() {
-    return app.serverConfig.getServerBaseUrl() + '/get_chat_conversations';
+    return app.serverConfigs.getActive().getServerBaseUrl() + '/get_chat_conversations';
   },
 
   model: ChatConversationMd,

@@ -3,14 +3,10 @@ var ipcRenderer = require('ipc-renderer'),
     __ = require('underscore'),
     $ = require('jquery'),
     Socket = require('./utils/Socket'),
-    LanguagesMd = require('./models/languagesMd'),
-    languages = new LanguagesMd(),
-    ServerConfigsCl = require('./collections/serverConfigsCl'),
     _app;
 
 function App() {
-  var self = this,
-      serverConfig;
+  var self = this;
 
   // ensure we're a singleton
   if (_app) return _app;
@@ -20,54 +16,24 @@ function App() {
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
 
-  this.serverConfigs = new ServerConfigsCl();
-  this.serverConfigs.fetch();
-
-  if (!(serverConfig = this.getServerConfig())) {
-    this.setServerConfig(
-      this.serverConfigs.create({
-        name: polyglot.t('serverConnectModal.defaultServerName'),
-        default: true
-      }).id
-    );
-  }
-
-  this.connectHeartbeatSocket();
-};
-
-App.prototype.getServerConfig = function() {
-  var config = this.serverConfigs.get(localStorage.activeServer);
-
-  if ((!localStorage.activeServer || !config) && this.serverConfigs.length) {
-    localStorage.activeServer = this.serverConfigs.at(this.serverConfigs.length - 1).id;
-    config = this.serverConfigs.get(localStorage.activeServer);
-  }
-
-  return config;  
-};
-
-App.prototype.setServerConfig = function(id) {
-  if (!this.serverConfigs.get(id)) {
-    throw new Error(`Unable to set the server config. It must be an id of one of the available
-        server configs stored via the ServerConfigs collection.`)
-  }
-
-  localStorage.activeServer = id;
+  // TODO: rather than attach the serverConfigs CL
+  // in main.js, pass in the instance here so the
+  // dependency is more explicit.
 };
 
 App.prototype.connectHeartbeatSocket = function() {
-  var config;
+  var activeServer = this.serverConfigs.getActive();
 
-  if (!(config = this.getServerConfig())) {
-    throw new Error(`No server config is set. Please set one via setServerConfig().`);
+  if (!activeServer) {
+    throw new Error(`No active server set. Please set via the Server Configs collection.`);
   }
 
   clearTimeout(this.heartbeatSocketTimesup);
 
   if (this._heartbeatSocket) {
-    this._heartbeatSocket.connect(config.getHeartbeatSocketUrl());
+    this._heartbeatSocket.connect(activeServer.getHeartbeatSocketUrl());
   } else {
-    this._heartbeatSocket = new Socket(config.getHeartbeatSocketUrl());
+    this._heartbeatSocket = new Socket(activeServer.getHeartbeatSocketUrl());
 
     this._heartbeatSocket.on('close', () => {
       clearTimeout(this._heartbeatSocketTimesup);
@@ -80,7 +46,7 @@ App.prototype.connectHeartbeatSocket = function() {
       this._heartbeatSocket._socket.close(); //turn off for now, until server issues are fixed
       // alert(polyglot.t('errorMessages.serverTimeout'));
     }
-  }, 3000); //wait for 30 seconds, sometimes the server stalls  
+  }, 10000); //wait for 30 seconds, sometimes the server stalls  
 };
 
 App.prototype.getHeartbeatSocket = function() {
@@ -88,18 +54,18 @@ App.prototype.getHeartbeatSocket = function() {
 };
 
 App.prototype.login = function() {
-  var config;
+  var activeServer = this.serverConfigs.getActive();
 
-  if (!(config = this.getServerConfig())) {
-    throw new Error(`No server config is set. Please set one via setServerConfig().`);
+  if (!activeServer) {
+    throw new Error(`No active server set. Please set via the Server Configs collection.`);
   }
 
   return $.ajax({
-    url: config.getServerBaseUrl() + '/login',
+    url: activeServer.getServerBaseUrl() + '/login',
     method: 'POST',
     data: {
-      username: config.get('username'),
-      password: config.get('password')
+      username: activeServer.get('username'),
+      password: activeServer.get('password')
     },
     timeout: 3000
   });  

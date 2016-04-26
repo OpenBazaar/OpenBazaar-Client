@@ -8,7 +8,7 @@
         <div class="vertAlignMid">
           <%= ob.server_ip %>
         </div>
-        <div style="width: 190px;" class="alignRight">
+        <div style="width: 190px;height: 32px" class="alignRight vertAlignMid">
             <% if (ob.status === 'not-connected' || ob.status === 'failed') { %>
             <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 marginLeft5 js-connect">
               <% print(ob.status === 'not-connected' ? polyglot.t('serverConnectModal.connect') : polyglot.t('Retry')) %>
@@ -22,7 +22,7 @@
               </a>
               <% } %>
             <% } else if (ob.status === 'connected') { %>
-            <span class="ion-connection-bars textOpacity1 fullCentered"></span> <%= polyglot.t('serverConnectModal.connected') %>
+            <span class="ion-connection-bars textOpacity1"></span> <%= polyglot.t('serverConnectModal.connected') %>
             <% } else if (ob.status === 'connecting') { %>
             <span class="vertAlignMid"><%= polyglot.t('serverConnectModal.connecting') %>...</span> 
             <a class="btn btn-txt btn-secondary custCol-secondary fontSize13 marginLeft10 js-cancel">

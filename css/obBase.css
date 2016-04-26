@@ -4249,6 +4249,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 372px;
 }
 
+#ov1 .server-config-row {
+  /*min-height: 73px;*/
+}
+
 #ov1 .server-config-row .connection-failed::after {
   content: '';
   position: absolute;

@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     "use strict";
     var self = this,
-        socketAddress = app.getServerConfig().getApiSocketUrl();
+        socketAddress = app.serverConfigs.getActive().getApiSocketUrl();
 
     //socket should be opened when view is created, and stay open
     try{

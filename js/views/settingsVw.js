@@ -18,8 +18,7 @@ var __ = require('underscore'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
-    getBTPrice = require('../utils/getBitcoinPrice'),
-    ServerConnectModal = require('./serverConnectModal');
+    getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.View.extend({
 
@@ -969,33 +968,35 @@ module.exports = Backbone.View.extend({
   },
 
   launchServerConfig: function() {
-    var serverConnectModal = new ServerConnectModal({
-      includeCloseButton: true,
-      initialState: {
-        status: 'connected'
-      }
-    }).render().open();
+    // var serverConnectModal = new ServerConnectModal({
+    //   includeCloseButton: true,
+    //   initialState: {
+    //     status: 'connected'
+    //   }
+    // }).render().open();
 
-    this.serverConnectSyncHandler &&
-    this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
+    // this.serverConnectSyncHandler &&
+    // this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
 
-    this.serverConnectSyncHandler = function() {
-      // todo: bit of a hack to hide the close button. really, the
-      // modal api should provide this if we want to allow
-      // this type of stuff.
-      serverConnectModal.$('.js-modal-close').hide();
-    };
+    // this.serverConnectSyncHandler = function() {
+    //   // todo: bit of a hack to hide the close button. really, the
+    //   // modal api should provide this if we want to allow
+    //   // this type of stuff.
+    //   serverConnectModal.$('.js-modal-close').hide();
+    // };
 
-    this.listenTo(app.serverConfig, 'sync', this.serverConnectSyncHandler);
+    // this.listenTo(app.serverConfig, 'sync', this.serverConnectSyncHandler);
 
-    serverConnectModal.on('connected', function() {
-      location.reload();
-    });
+    // serverConnectModal.on('connected', function() {
+    //   location.reload();
+    // });
 
-    serverConnectModal.on('close', function() {
-      serverConnectModal.remove();
-      this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
-    });
+    // serverConnectModal.on('close', function() {
+    //   serverConnectModal.remove();
+    //   this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
+    // });
+
+    app.serverConnectModal.open();
   },
 
   shutdownServer: function(){
@@ -1052,7 +1053,7 @@ module.exports = Backbone.View.extend({
     }
 
     this.serverConnectSyncHandler &&
-    app.serverConfig.off(null, this.serverConnectSyncHandler);
+    app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);
 
     this.model.off();
     this.off();
