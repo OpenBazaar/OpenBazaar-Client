@@ -303,16 +303,77 @@ module.exports = baseVw.extend({
         break;
     }
 
-    dataCSV = Papa.unparse(rawData.map(function(order){
-      order.status = polyglot.t('transactions.OrderStatus'+order.status);
-      order.timestamp = new Date(order.timestamp * 1000);
-      return __.omit(order, "thumbnail_hash", "btAve", "imageUrl", "order_date");
-    }));
+    rawData.map((transaction)=> {
+      transaction.status = polyglot.t('transactions.OrderStatus'+transaction.status);
+      transaction.timestamp = new Date(transaction.timestamp * 1000);
+      return this.getTransactionData(transaction.order_id, transaction);
+    });
+
+    console.log(rawData)
+
+    dataCSV = Papa.unparse(rawData);
+    console.log(dataCSV);
     dataBlob = new Blob([dataCSV], {'type':'application\/octet-stream'});
     tempAnchor.href = window.URL.createObjectURL(dataBlob);
     tempAnchor.download = 'export.csv';
     tempAnchor.click();
-    console.log(dataCSV)
+  },
+
+  getTransactionData: function(orderID, dataObject){
+    var self = this;
+    dataObject = dataObject || {};
+
+    $.getJSON(this.serverUrl + 'get_order',{'order_id': orderID}, function(data){
+      //format and add flat data to the object
+      if(data.buyer_order){
+        var dPayment = data.buyer_order.order.payment;
+
+        dataObject.quantity = data.buyer_order.order.quantity;
+        if(data.buyer_order.order.shipping){
+          var dShipping = data.buyer_order.order.shipping;
+          dataObject.shipping_address = dShipping.ship_to + "\n" + dShipping.address +", " + dShipping.city + ", " + dShipping.state + ", " + dShipping.postal_code + ", " + dShipping.country;
+        }
+        dataObject.payment_amount = dPayment.amount;
+        dataObject.payment_address = dPayment.address;
+        dataObject.refund_tx_fee = dPayment.refund_tx_fee || 0;
+        dataObject.chaincode = dPayment.chaincode || "";
+        dataObject.redeem_script = dPayment.redeem_script || "";
+        dataObject.refund_address = data.buyer_order.order.refund_address;
+
+        if (data.buyer_order.order.moderator) {
+          var matchedModerator = data.vendor_offer.listing.moderators.filter(function (moderator) {
+            return moderator.guid == data.buyer_order.order.moderator;
+          });
+          dataObject.moderator_name = matchedModerator[0].name;
+          dataObject.moderator_guid = matchedModerator[0].guid;
+          dataObject.moderator_fee = matchedModerator[0].fee;
+        }
+
+      }
+
+      if(data.vendor_offer.policy){
+        dataObject.return_policy = data.vendor_offer.policy.returns;
+      }
+
+      if(data.bitcoin_txs){
+        __.each(data.bitcoin_txs, function(tx, i){
+          dataObject["bitcoin_tx_"+(i+1)+"_confirmations"] = tx.confirmations;
+          dataObject["bitcoin_tx_"+(i+1)+"_type"] = tx.type;
+          dataObject["bitcoin_tx_"+(i+1)+"_value"] = tx.value;
+          dataObject["bitcoin_tx_"+(i+1)+"_txid"] = tx.txid;
+        })
+      }
+
+      dataObject.raw_contract_data = JSON.stringify(data, null, 2);
+      console.log(dataObject)
+
+      return dataObject;
+
+    }).always(function(data, textStatus){
+      if(textStatus == 'parsererror'){
+        alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+      }
+    });
   },
 
   openOrderModal: function(options){
