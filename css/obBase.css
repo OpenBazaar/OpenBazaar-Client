@@ -477,6 +477,29 @@ form {
   flex-grow: 1;
 }
 
+.listingType {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 11px;
+  font-weight: 500;
+  transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.listingDoesNotShipToYou {
+  background-color: rgba(37, 37, 37, 0.65); 
+  /*border-radius: 20px;*/
+  height: 20px; 
+  left: 32px;
+  line-height: 20px; 
+  padding: 8px 4px; 
+  position: absolute; 
+  text-align: center; 
+  top: calc(50% - 32px); 
+  width: 242px; 
+  transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
 .noPointerEvents {
   pointer-events: none;
 }
@@ -531,6 +554,17 @@ form {
   box-shadow: 0px 0px 37px -17px rgb(0, 0, 0);
   opacity: 1;
   padding-top: 20px;
+}
+
+.userPage-subViews .gridItem:hover > .listingType,
+.homeView .gridItem:hover > .listingType {
+  opacity: 1;
+  top: 26px;
+}
+
+.userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
+.homeView .gridItem:hover > .listingDoesNotShipToYou {
+  top: calc(50% - 46px);
 }
 
 .userPage-subViews .gridItem:hover .gridItemControls,
@@ -4282,8 +4316,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .violator1 {
-  width: 150px;
-  height: 150px;
+  width: 50px;
+  height: 50px;
   background: #215175; /* this should be overridden with a color class */
   color: #fff;
 }
@@ -4292,6 +4326,27 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   /* use on content of a violator to rotate it to match the violator */
   display: block;
   transform: rotate(45deg);
+}
+
+.listingTypeDigital:before {
+  color: #EFEF4C;
+  content: "\f137";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+.listingTypePhysical:before {
+  color: #805C17;
+  content: "\f318";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+.listingTypeService:before {
+  color: #DEDEDE;
+  content: "\f2ad";
+  font-family: Ionicons;
+  font-size: 12px;
 }
 
   /* protect customize controls from custom page styles */

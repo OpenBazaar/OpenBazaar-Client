@@ -1,9 +1,16 @@
+<!-- Not sure where this should belong, but I'm using this var in a few places -->
+<% 
+  var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'country'), ob.ships_to)); 
+%>
+
 <div class="gridItem clearfix custCol-border">
 
-  <div class="itemImg row10 color-secondary custCol-secondary overflowHidden js-item" data-id="<%= ob.contract_hash %>">
+  <div class="itemImg row10 color-secondary custCol-secondary overflowHidden js-item <%
+  if(ob.userAddresses.length == 0 || matchedItemShippableCountries.length > 0 || ob.ships_to[0] == "ALL" || ob.ships_to.length == 0){ %>textOpacity1<% }else{ %>textOpacity25<% } %>" data-id="<%= ob.contract_hash %>">
     <div class="itemImg <% if(ob.cloak){ %> nsfw <% } %>" style="background-image: url(<%= ob.imageURL %>), url(imgs/defaultItem.png);"></div>
   </div>
-  <div class="table">
+  <div class="table <%
+  if(ob.userAddresses.length == 0 || matchedItemShippableCountries.length > 0 || ob.ships_to[0] == "ALL" || ob.ships_to.length == 0){ %>textOpacity1<% }else{ %>textOpacity25<% } %>">
     <div>
       <% if(ob.showAvatar) { %>
       <div class="thumbnail-small js-avatar tooltip" data-tooltip="<% if(ob.handle) { %><%= ob.handle %><% }else{ %><%= ob.guid %><% } %>" data-handle="<%= ob.handle %>"
@@ -70,13 +77,42 @@
       </div>
     </div>
   </div>
-  <%
-  var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'country'), ob.ships_to));
-  if(matchedItemShippableCountries.length > 0 || ob.ships_to[0] == "ALL" || ob.ships_to.length == 0){
-  print("<div class='positionTopRight tooltip tooltip-box2 tooltip-left' data-tooltip='"+polyglot.t('ShippableHelp')+"'><div class='violatorTR violator1'><div class='positionTopRight marginRight10 rowTop10 fontSize16'><i class='ion-bag'></i></div></div></div>");
-  }
+
+  <!-- TEMP CODE - using until we have an API  -->
+  <% 
+    var types = ["Physical", "Digital", "Service"];
+    var type = types[Math.floor(Math.random()*types.length)];
   %>
+  <!-- END TEMP CODE  -->
+
+  <div class="listingType color-secondary borderRadius3 js-item <%
+    if(ob.userAddresses.length == 0 || matchedItemShippableCountries.length > 0 || ob.ships_to[0] == "ALL" || ob.ships_to.length == 0){ %>textOpacity90<% }else{ %>textOpacity25<% } %>" style="padding: 6px;
+      background: #252525;"> 
+        <span class="
+        <% if(type == "Digital"){ %>
+          listingTypeDigital
+        <% }else if(type== "Service"){ %>
+          listingTypeService
+        <% }else{ %>
+          listingTypePhysical
+        <% } %>"> </span> 
+        <%= type %>
+  </div>
+
+<!-- TO DO
+  - We need to add to the logic to not show this div if the type is digital or service (pending API)
+-->
+  <% if(ob.userAddresses.length > 0){ %> 
+    <% if(matchedItemShippableCountries.length == 0 && ob.ships_to[0] != "ALL" || ob.ships_to.length == 0){ %>
+      <div class="listingDoesNotShipToYou">
+        <span class="ion-alert-circled fontSize11" style="color: #EFEF4C"></span>
+        Does not ship to you
+      </div>
+    <% } %>
+  <% } %>
+
 </div>
+
 <% if(ob.cloak){ %>
 <div class="fullCentered btn btn-large custCol-secondary div-fade">
   NSFW
