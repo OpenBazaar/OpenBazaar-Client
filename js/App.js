@@ -28,25 +28,11 @@ App.prototype.connectHeartbeatSocket = function() {
     throw new Error(`No active server set. Please set via the Server Configs collection.`);
   }
 
-  clearTimeout(this.heartbeatSocketTimesup);
-
   if (this._heartbeatSocket) {
     this._heartbeatSocket.connect(activeServer.getHeartbeatSocketUrl());
   } else {
     this._heartbeatSocket = new Socket(activeServer.getHeartbeatSocketUrl());
-
-    this._heartbeatSocket.on('close', () => {
-      clearTimeout(this._heartbeatSocketTimesup);
-    });    
   }
-
-  // give up if it takes to long
-  this._heartbeatSocketTimesup = setTimeout(() => {
-    if (this._heartbeatSocket.getReadyState() !== 1) {
-      this._heartbeatSocket._socket.close(); //turn off for now, until server issues are fixed
-      // alert(polyglot.t('errorMessages.serverTimeout'));
-    }
-  }, 10000); //wait for 30 seconds, sometimes the server stalls  
 };
 
 App.prototype.getHeartbeatSocket = function() {

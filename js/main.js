@@ -45,6 +45,7 @@ var Polyglot = require('node-polyglot'),
     ServerConfigsCl = require('./collections/serverConfigsCl'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
+    PageConnectModal = require('./views/pageConnectModal'), 
     serverConfigMd = app.serverConfig,
     heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
@@ -59,6 +60,7 @@ var Polyglot = require('node-polyglot'),
     newSocketView,
     serverConnectModal,
     onboardingModal,
+    pageConnectModal,
     launchOnboarding,
     setServerUrl,
     guidCreating;
@@ -111,7 +113,6 @@ app.serverConfigs.getActive().on('sync', (onActiveServerSync = function(md) {
 }));
 
 app.serverConfigs.on('activeServerChange', (md) => {
-  console.log(`active server change to ${md.get('name')}`);
   setServerUrl();
   app.serverConfigs.getActive().off(null, onActiveServerSync);
   app.serverConfigs.getActive().off('sync', onActiveServerSync);
@@ -351,9 +352,6 @@ $(document).ajaxSend(function(e, jqXhr, settings) {
 });
 
 launchOnboarding = function(guidCreating) {
-  // serverConnectModal && serverConnectModal.remove();
-  // serverConnectModal = null;
-
   onboardingModal && onboardingModal.remove();
   onboardingModal = new OnboardingModal({
     model: user,
@@ -372,6 +370,27 @@ launchOnboarding = function(guidCreating) {
   });
 };
 
+// start - server connection and app initialization flow
+(() => {
+  var activeServer = app.serverConfigs.getActive();
+
+  pageConnectModal = new PageConnectModal({
+    className: 'startup-server-connect top0',
+    initialState: {
+      statusText: activeServer && activeServer.get('default') ?
+        polyglot.t('serverConnectModal.connectingToDefault') :
+        polyglot.t('serverConnectModal.connectingTo', { serverName: activeServer.get('name') })
+    }
+  });
+})()
+
+pageConnectModal.on('cancel', () => {
+  app.getHeartbeatSocket().off('close', startUpRetry);
+  app.getHeartbeatSocket().close();
+  pageConnectModal.remove();
+  app.serverConnectModal.open();
+}).render().open();
+
 app.connectHeartbeatSocket();
 app.serverConnectModal = new ServerConnectModal().render();
 app.serverConnectModal.on('connected', (authenticated) => {
@@ -385,13 +404,13 @@ app.serverConnectModal.on('connected', (authenticated) => {
 
 app.getHeartbeatSocket().on('open', function(e) {
   app.getHeartbeatSocket().off('close', startUpRetry);
+  pageConnectModal.remove();
+  onboardingModal && onboardingModal.remove();
 
   // clear some flags so the heartbeat events will
   // appropriatally loadProfile or launch onboarding
   guidCreating = null;
   loadProfileNeeded = true;
-
-  onboardingModal && onboardingModal.remove();
 });
 
 app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
@@ -469,3 +488,4 @@ app.getHeartbeatSocket().on('message', function(e) {
     }
   }
 });
+// end - server connection and app initialization flow

@@ -9,6 +9,7 @@ var Backbone = require('backbone'),
 module.exports = baseVw.extend({
     constructor: function (options) {
       var events = {},
+          args = Array.prototype.slice.call(arguments),
           defaults;
 
       defaults = {
@@ -18,15 +19,18 @@ module.exports = baseVw.extend({
         innerWrapperClass: 'modal-child modal-childMain custCol-primary'
       };
 
-      this.__options = __.extend({}, defaults, options || {});
-      this.className = 'modal modal-opaque ' + __.result(this, 'className', '');
+      options = options || {};
+      options.className = 'modal modal-opaque ' + __.result(this, 'className', '') +
+        (' ' + options.className || '');
+      args[0] = options;
+      this.__options = __.extend({}, defaults, options);
       this._open = false;
 
       events['click'] = '__modalClick';
       events['click .js-modal-close'] = '__closeClick';
       this.events = __.extend({}, events, this.events || {});
 
-      baseVw.prototype.constructor.apply(this, arguments);
+      baseVw.prototype.constructor.apply(this, args);
     },
 
     __modalClick: function(e) {

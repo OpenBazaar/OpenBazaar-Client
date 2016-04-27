@@ -179,11 +179,6 @@ module.exports = BaseModal.extend({
     this.hideMessageBar();
 
     this.serverConfigsVw.setConnectionState({
-      id: this.serverConfigs.getActive().id,
-      status: 'not-connected'
-    });
-
-    this.serverConfigsVw.setConnectionState({
       id: configMd.id,
       status: 'connecting'
     });
@@ -206,31 +201,42 @@ module.exports = BaseModal.extend({
     var self = this,
         deferred = $.Deferred(),
         promise = deferred.promise(),
+        startTime = Date.now(),
+        minAttemptTime = 1000,
         loginRequest,
         timesup,
-        rejectLater,
-        rejectLogin,
-        rejectLoginLater,
+        conclude,
         login,
         onClose;
 
-    rejectLogin = function(reason) {
-      rejectLoginLater = setTimeout(function() {
-        deferred.reject(reason);
-      }, 500);
-    };
+    conclude = function(reject) {
+      // Sometimes the connection attempt concludes so fast that the UI doesn't
+      // even have a chance to show that we've tried to connect. So, we'll do a
+      // bit of slight of hand to ensure the attempt takes at least 'minAttemptTime'.
+      var _conclude = () =>
+            deferred[reject ? 'reject' : 'resolve'].apply(promise, Array.prototype.slice.call(arguments, 1));
+
+      if (
+        startTime + minAttemptTime < Date.now() ||
+        reject && arguments[1] === 'canceled'
+      ) {
+        _conclude();
+      } else {
+        setTimeout(_conclude, startTime + minAttemptTime - Date.now());
+      }
+    }
 
     login = function() {
       // check authentication
       loginRequest = app.login().done(function(data) {
         if (data.success) {
-          deferred.resolve(data);
+          conclude(data);
           self.trigger('connected', true);
         } else {
           if (data.reason === 'too many attempts') {
-            rejectLogin('failed-auth-too-many');  
+            conclude(true, 'failed-auth-too-many');
           } else {
-            rejectLogin('failed-auth');  
+            conclude(true, 'failed-auth');
           }
 
           self.trigger('connected', false);
@@ -240,7 +246,8 @@ module.exports = BaseModal.extend({
         
         // assuming rest server is down or
         // wrong port set
-        rejectLogin();
+        // rejectLogin();
+        conclude(true);
       });
     };
 
@@ -248,15 +255,14 @@ module.exports = BaseModal.extend({
 
     promise.cleanup = function() {
       clearTimeout(timesup);
-      clearTimeout(rejectLater);
-      clearTimeout(rejectLoginLater);
+      clearTimeout(conclude);
       loginRequest && loginRequest.abort();
       app.getHeartbeatSocket().off(null, login);
       app.getHeartbeatSocket().off(null, onClose);
     };
 
     promise.cancel = function() {
-      deferred.reject('canceled');
+      conclude(true, 'canceled');
     };
 
     promise.always(function() {
@@ -270,16 +276,14 @@ module.exports = BaseModal.extend({
       // almost instantaneous and the UI can't even show the
       // user we're attempting to connect. So we'll put up a bit
       // of a facade.
-      rejectLater = setTimeout(function() {
-        deferred.reject();
-      }, 1000);
+      conclude(true);
     }));    
 
     timesup = setTimeout(function() {
       // not timeing out our connections for now, due to
       // server issue where valid connections may take
       // 1 min. +
-      // deferred.reject('timedout');
+      // conclude(true, 'timedout');
     }, 10000);
 
     return promise;

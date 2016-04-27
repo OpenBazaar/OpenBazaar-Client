@@ -674,13 +674,15 @@
     "saveChanges": "Save Changes",
     "defaultServerName": "default",
     "connectionFailed": "Connection failed to %{serverName}",
+    "connectingTo": "Connecting to %{serverName}",
+    "connectingToDefault": "Connecting to the default server",
     "authFailed": "authentication failed",
     "authFailedTooManyAttempts": "too many failed authentication attempts",
     "serverConfigsHeaderMsg": "Your Server Configurations",
     "newConfigHeaderMsg": "Enter Server Details",
     "editConfigHeaderMsg": "Configuration Settings",
     "serverConfigsTitle": "Server Configurations",
-    "newConfigTitle": "New Configuration"    
+    "newConfigTitle": "New Configuration"
   },
   "timezones": {
     "-12": "(GMT -12:00) Eniwetok, Kwajalein",
