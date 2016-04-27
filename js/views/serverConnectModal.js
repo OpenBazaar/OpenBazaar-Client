@@ -165,6 +165,7 @@ module.exports = BaseModal.extend({
     }
 
     reason !== 'canceled' && this.showMessageBar(msg);
+    this.setModalOptions({ showCloseButton: false });
 
     return this;
   },

@@ -54,6 +54,7 @@ var Polyglot = require('node-polyglot'),
     startUpConnectMaxTime = 6 * 1000,
     startTime = Date.now(),
     startUpRetry,
+    removeStartupRetry,
     onActiveServerSync,
     extendPolyglot,
     newPageNavView,
@@ -391,7 +392,7 @@ launchOnboarding = function(guidCreating) {
 })()
 
 pageConnectModal.on('cancel', () => {
-  app.getHeartbeatSocket().off('close', startUpRetry);
+  removeStartupRetry();
   app.getHeartbeatSocket().close();
   pageConnectModal.remove();
   app.serverConnectModal.open();
@@ -409,7 +410,7 @@ app.serverConnectModal.on('connected', (authenticated) => {
 });
 
 app.getHeartbeatSocket().on('open', function(e) {
-  app.getHeartbeatSocket().off('close', startUpRetry);
+  removeStartupRetry();
   pageConnectModal.remove();
   $loadingModal.removeClass('hide');
   onboardingModal && onboardingModal.remove();
@@ -434,6 +435,14 @@ app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
       .open();
   }
 }));
+
+removeStartupRetry = function() {
+  app.getHeartbeatSocket().off('close', startUpRetry);
+  app.getHeartbeatSocket().on('close', () => {
+    app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
+      .open();    
+  });
+};
 
 app.getHeartbeatSocket().on('message', function(e) {
   if (e.jsonData && e.jsonData.status) {

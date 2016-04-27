@@ -81,6 +81,9 @@ module.exports = baseVw.extend({
       }
 
       // TODO: allow other options to be modifiable via this method.
+      // TODO: any options passed in here will be merged with existing ones,
+      // but what if you want to replace the options?? Perhaps this should
+      // replace and then we need a getModalOptions function?
     },
 
     remove: function() {
