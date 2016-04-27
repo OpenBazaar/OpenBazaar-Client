@@ -12,7 +12,7 @@ var __ = require('underscore'),
     ServerConfigsVw = require('./serverConfigsVw');
 
 module.exports = BaseModal.extend({
-  className: 'server-connect-modal',
+  className: 'server-connect-modal top0',
 
   events: {
     'click .js-close': 'closeConfigForm',
@@ -126,6 +126,8 @@ module.exports = BaseModal.extend({
 
     if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
 
+    this.connectedServer = configMd;
+
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
       status: 'connected'
@@ -146,6 +148,7 @@ module.exports = BaseModal.extend({
     var msg;
 
     if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
+    if (this.connectedServer && this.connectedServer.id === configMd.id) this.connectedServer = null;
 
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
@@ -178,6 +181,15 @@ module.exports = BaseModal.extend({
     this.connectAttempt && this.connectAttempt.cancel();
     this.hideMessageBar();
 
+    if (this.connectedServer) {
+      this.serverConfigsVw.setConnectionState({
+        id: this.connectedServer.id,
+        status: 'not-connected'
+      });
+
+      this.connectedServer = null;    
+    }
+
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
       status: 'connecting'
@@ -193,6 +205,8 @@ module.exports = BaseModal.extend({
     }).always(() => {
       this.connectAttempt = null;
     });
+
+    this.connectAttempt.serverId = configMd.id;
 
     return this;
   },

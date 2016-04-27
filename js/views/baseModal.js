@@ -34,7 +34,7 @@ module.exports = baseVw.extend({
     },
 
     __modalClick: function(e) {
-      if (e.target === this.el) {
+      if (this.__options.dismissOnOverlayClick && e.target === this.el) {
         this.close();
       }
     },

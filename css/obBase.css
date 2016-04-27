@@ -4214,6 +4214,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .server-connect-modal .modal-child {
   height: 625px;
+  overflow: hidden;
 }
 
 #ov1 .server-connect-modal .message-bar {
