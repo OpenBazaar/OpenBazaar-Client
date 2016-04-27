@@ -40,6 +40,7 @@
       </div>
     </div>
   </div>
+  <!--
   <div class="modal modal-opaque hide js-loadingMessageModal">
     <div class="modal-child modal-childMain">
       <div class="btn-corner btn-cornerTR js-closeIndexModal">
@@ -71,6 +72,7 @@
       </div>
     </div>
   </div>
+  -->
   <div id="statusBar"></div>
   <div id="pageNav" class="bar navBar navBar-main custCol-secondary padding0"></div>
   <!-- the loading modal must be on top of the page nav or the reload button is hidden -->
@@ -78,8 +80,9 @@
     <div class="spinner-with-logo fullCentered">
       <i class="ion-android-sync spinner fontSize30 spinner-with-logo-icon"></i>
     </div>
-    <div class="rowTop20">
-      <a class="btn btn-txt btn-corner btn-cornerTR js-indexReload"><i class="ion-android-sync"></i> Reload</a>
+    <div class="width100 positionTop">
+      <a class="btn btn-txt rowTop10 marginRight10 pull-right js-indexReload"><i class="ion-android-sync"></i> <span class="js-translate" data-translate="Reload"></span></a>
+      <a class="btn btn-txt rowTop10 marginRight10 pull-right" href="#home"><i class="ion-home"></i> <span class="js-translate" data-translate="LoadIndex"></span></a>
     </div>
   </div>
 
@@ -89,6 +92,13 @@
   <script>
     var app = require('./js/main'),
         remote = require('remote');
+
+    window.translateIndex = function(){
+      $('.js-translate').each(function() {
+        $(this).text(polyglot.t($(this).data("translate")));
+      });
+    };
+    translateIndex();
     $('.js-closeIndexModal').on('click', function(){
       $(this).closest('.modal').addClass('hide');
     });

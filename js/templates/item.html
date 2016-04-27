@@ -41,7 +41,7 @@
       <ul class="itemMeta">
         <li class="alignCenter itemPrice">
           <span class="textSize22px textOpacity1 fontWeight500 marginRight2">
-            <%= ob.vendorBTCPrice.toFixed(4) %> BTC
+            <%= Number(ob.vendorBTCPrice.toFixed(4)) %> BTC
           </span>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
           <span class="textSize22px textOpacity65">(<%= ob.displayPrice %>)</span>
@@ -166,9 +166,9 @@
           <%= polyglot.t('ShippingReturns') %>
         </a>
       </div>
-      <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight300 <% ob.activeTab !== 'description' && print('hide') %>">
+      <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity1 minHeight300 <% ob.activeTab !== 'description' && print('hide') %>">
         <div class="flexRow">
-          <div class="rowItem fontSize16 padding30 paddingTop10 lineHeight24 fontWeight400 flexContainer editableContent">
+          <div class="rowItem fontSize16 padding30 paddingTop20 lineHeight24 fontWeight400 flexContainer editableContent">
             <%= ob.vendor_offer.listing.item.displayDescription %>
           </div>
         </div>
@@ -188,36 +188,37 @@
         <% if(ob.vendor_offer.listing.shipping.shipping_regions.length || ob.vendor_offer.listing.policy.returns || ob.vendor_offer.listing.policy.terms_conditions) { %>
           <div class="flexCol-6">
             <div class="rowItem fontSize16 padding30 lineHeight24 fontWeight400">
-              <% if(ob.vendor_offer.listing.shipping.free == false) { %>
-                <h3><%= polyglot.t('Domestic') %> <%= ob.displayShippingOrigin || ob.userCountry %></h3>
+                <h3><%= polyglot.t('ShipsFrom2', {country: ob.displayShippingOrigin || ob.userCountry}) %></h3>
+                <h3><%= polyglot.t('Local') %></h3>
                 <div>
                   <% if(ob.userCurrencyCode != "BTC"){ %>
-                  <%= polyglot.t('Shipping2') %> <%= ob.displayDomesticShipping %> (<%= ob.domesticShippingBTC.toFixed(8) %> BTC)
+                  <%= polyglot.t('Shipping2') %> <%= ob.displayDomesticShipping %> (<%= Number(ob.domesticShippingBTC.toFixed(8)) %> BTC)
                 <% } else { %>
-                  <%= polyglot.t('Shipping2') %> <%= ob.domesticShippingBTC.toFixed(8) %> BTC
+                  <%= polyglot.t('Shipping2') %> <%= Number(ob.domesticShippingBTC.toFixed(8)) %> BTC
                 <% } %>
                 </div>
                 <p><%= polyglot.t('transactions.EstimatedDelivery') %> <%= ob.vendor_offer.listing.shipping.est_delivery.domestic %></p>
-                <hr/>
-                <h3><%= polyglot.t('International') %></h3>
-                <div>
-                  <% if(ob.userCurrencyCode != "BTC"){ %>
-                    <%= polyglot.t('Shipping2') %> <%= ob.displayInternationalShipping %> (<%= ob.internationalShippingBTC.toFixed(8) %> BTC)
-                <% } else { %>
-                  <%= polyglot.t('Shipping2') %> <%= ob.internationalShippingBTC.toFixed(8) %> BTC
+                <% if(ob.internationalShippingBTC){ %>
+                  <hr/>
+                  <h3><%= polyglot.t('International') %></h3>
+                  <div>
+                    <% if(ob.userCurrencyCode != "BTC"){ %>
+                      <%= polyglot.t('Shipping2') %> <%= ob.displayInternationalShipping %> (<%= Number(ob.internationalShippingBTC.toFixed(8)) %> BTC)
+                  <% } else { %>
+                    <%= polyglot.t('Shipping2') %> <%= Number(ob.internationalShippingBTC.toFixed(8)) %> BTC
+                  <% } %>
+                  </div>
+                  <p><%= polyglot.t('transactions.EstimatedDelivery') %> <%= ob.vendor_offer.listing.shipping.est_delivery.international %></p>
                 <% } %>
-                </div>
-                <p><%= polyglot.t('transactions.EstimatedDelivery') %> <%= ob.vendor_offer.listing.shipping.est_delivery.international %></p>
                 <hr/>
-              <% } %>
-              <% if(ob.vendor_offer.listing.policy.returns) { %>
-                <h3><%= polyglot.t('ReturnsPolicy') %></h3>
-                <p><%= ob.vendor_offer.listing.policy.returns %></p>
-              <% } %>
-              <% if(ob.vendor_offer.listing.policy.terms_conditions) { %>
-                <h3><%= polyglot.t('TermsAndConditions') %></h3>
-                <p><%= ob.vendor_offer.listing.policy.terms_conditions %></p>
-              <% } %>
+                <% if(ob.vendor_offer.listing.policy.returns) { %>
+                  <h3><%= polyglot.t('ReturnsPolicy') %></h3>
+                  <p><%= ob.vendor_offer.listing.policy.returns %></p>
+                <% } %>
+                <% if(ob.vendor_offer.listing.policy.terms_conditions) { %>
+                  <h3><%= polyglot.t('TermsAndConditions') %></h3>
+                  <p><%= ob.vendor_offer.listing.policy.terms_conditions %></p>
+                <% } %>
             </div>
           </div>
           <div class="flexCol-6">

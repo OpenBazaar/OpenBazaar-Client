@@ -501,11 +501,11 @@ module.exports = baseVw.extend({
   },
 
   navBackClick: function(){
-    window.history.back();
+    history.back();
   },
 
   navFwdClick: function(){
-    window.history.forward();
+    history.forward();
   },
 
   navRefreshClick: function(){

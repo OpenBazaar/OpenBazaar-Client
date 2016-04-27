@@ -85,6 +85,9 @@ user.on('change:language', function(md, lang) {
   window.lang = lang;
   extendPolyglot(lang);
   localStorage.setItem('lang', lang);
+  //trigger translation function on index
+  window.translateIndex();
+
 });
 
 app.serverConfigs = new ServerConfigsCl();
@@ -282,6 +285,8 @@ var profileLoaded;
 var loadProfile = function(landingRoute, onboarded) {
   var externalRoute = remote.getGlobal('externalRoute');
 
+  landingRoute = landingRoute && landingRoute != undefined ? landingRoute : '#';
+
   profileLoaded = true;
 
   //get the guid from the user profile to put in the user model
@@ -323,7 +328,7 @@ var loadProfile = function(landingRoute, onboarded) {
                   Backbone.history.start();
                 });
               } else {
-                location.hash = landingRoute || '#';
+                location.hash = landingRoute;
                 Backbone.history.start();
               }
             });

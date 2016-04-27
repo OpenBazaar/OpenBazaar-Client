@@ -65,10 +65,10 @@
         </div>
       </div>
     <% } else if(ob.status > 0) { %>
-      <div class="positionTop padding10 width100 custCol-primary">
+      <div class="positionTop padding10 width100 custCol-secondary borderRadiusTop">
         <div class="clearfix">
         <% if(ob.status == 1 && ob.transactionType == "sales"){ %>
-          <a class="btn btn-txt custCol-secondary pull-left borderRight textOpacity1 js-showConfirmForm custCol-border" style="border-top-right-radius: 0; border-bottom-right-radius: 0">
+          <a class="btn btn-txt custCol-primary pull-left borderRight textOpacity1 js-showConfirmForm custCol-border" style="border-top-right-radius: 0; border-bottom-right-radius: 0">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
             <% if(ob.vendor_offer.listing.metadata.category == "digital good" || ob.vendor_offer.listing.metadata.category == "service") { %>
               <%= polyglot.t('transactions.ConfirmOrder') %>
@@ -76,24 +76,24 @@
               <%= polyglot.t('transactions.MarkAsShipped') %>
             <% } %>
           </a>
-          <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransaction tooltip"
+          <a class="btn btn-txt custCol-primary pull-left textOpacity1 js-refundTransaction tooltip"
              data-tooltip="<%= polyglot.t('transactions.RefundOrderTooltip') %>" style="border-top-left-radius: 0; border-bottom-left-radius: 0">
             <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('transactions.RefundOrder') %>
           </a>
         <% } else if(ob.transactionType == "purchases" && ob.status == 2){ %>
-          <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
+          <a class="btn btn-txt custCol-primary pull-left js-showCompleteForm textOpacity1">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('transactions.CompleteOrder') %>
           </a>
         <% } else if(ob.transactionType == "sales" && ob.status == 2){ %>
-          <a class="btn btn-txt custCol-secondary pull-left js-confirmOrderResend textOpacity1 tooltip tooltip-box"
+          <a class="btn btn-txt custCol-primary pull-left js-confirmOrderResend textOpacity1 tooltip tooltip-box"
              data-tooltip="<%= polyglot.t('transactions.ConfirmOrderResendTooltip') %>">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('transactions.ConfirmOrderResend') %>
           </a>
         <% } else if(ob.transactionType == "purchases" && !ob.resendComplete && ob.status == 3){ %>
-          <a class="btn btn-txt custCol-secondary pull-left js-completeOrderResend textOpacity1 tooltip tooltip-box marginRight5"
+          <a class="btn btn-txt custCol-primary pull-left js-completeOrderResend textOpacity1 tooltip tooltip-box marginRight5"
              data-tooltip="<%= polyglot.t('transactions.CompleteOrderResendTooltip') %>">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('transactions.CompleteOrderResend') %>
@@ -104,24 +104,24 @@
                     ob.dispute_resolution &&
                     ob.dispute_resolution.resolution &&
                     ob.dispute_resolution.resolution.buyer_payout > ob.dispute_resolution.resolution.vendor_payout){ %>
-          <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
+          <a class="btn btn-txt custCol-primary pull-left js-showCompleteForm textOpacity1">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('transactions.LeaveReview') %>
           </a>
         <% } else if(ob.status == 5 && ob.dispute_resolution && ob.transactionType != "cases"){ %>
-          <a class="btn btn-txt custCol-secondary pull-left row10 js-acceptResolution">
+          <a class="btn btn-txt custCol-primary pull-left row10 js-acceptResolution">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('transactions.AcceptDisputeResolution') %>
           </a>
         <% } else if(ob.status == 7 && ob.transactionType == "sales"){ %>
-        <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransactionResend tooltip tooltip-box"
+        <a class="btn btn-txt custCol-primary pull-left textOpacity1 js-refundTransactionResend tooltip tooltip-box"
            data-tooltip="<%= polyglot.t('transactions.RefundOrderResendTooltip') %>">
           <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
           <%= polyglot.t('transactions.RefundOrderResend') %>
         </a>
         <% } %>
         <% if(ob.status != 0){ %>
-        <a class="btn btn-txt custCol-secondary pull-right js-transactionShowContract textOpacity1">
+        <a class="btn btn-txt custCol-primary pull-right js-transactionShowContract textOpacity1">
           <span class="fontSize12 ion-code"></span>
           <%= polyglot.t('transactions.ContractDetails') %>
         </a>

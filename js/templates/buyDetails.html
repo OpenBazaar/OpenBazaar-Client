@@ -40,9 +40,7 @@
     </div>
     <div class="flexCol-4">
       <div class="rowItem padding2015 alignRight marginTop20">
-        <span class="noOverflow fontSize13 js-buyWizardBTCPrice">
-          <%= ob.vendorBTCPrice.toFixed(4) %> BTC
-        </span>
+        <span class="noOverflow fontSize13 js-buyWizardBTCPrice"></span>
         <span class="noOverflow textOpacity75 fontSize13 js-buyWizardPrice">
           <% if(ob.userCurrencyCode != 'BTC'){ %>
             (<%= ob.displayPrice %>)
