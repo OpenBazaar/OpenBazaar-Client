@@ -1419,6 +1419,14 @@ h5 {
   padding-top: 70px;
 }
 
+.modal-cover-fullscreen {
+  top: 0;
+}
+
+.modal-cover-fullscreen .modal-childMain {
+  top: 50px;
+}
+
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
