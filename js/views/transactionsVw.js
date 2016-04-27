@@ -24,7 +24,7 @@ module.exports = baseVw.extend({
     'change .js-transactionFilter': 'transactionFilter',
     'keyup .search': 'searchKeyup',
     'click .js-transactionsSearchClear': 'searchClear',
-    'click .js-downloadCSV': 'downloadCSV'
+    'click .js-downloadCSV': 'clickDownloadCSV'
   },
 
   initialize: function(options){
@@ -57,6 +57,7 @@ module.exports = baseVw.extend({
     });
     this.searchTransactions;
     this.filterBy; //used for filtering the collections
+    this.currentExportData = []; //used for export to CSV data
 
     this.countries = new countriesMd();
     this.countriesArray = this.countries.get('countries');
@@ -197,6 +198,7 @@ module.exports = baseVw.extend({
   setState: function(state, orderID){
     var addID = orderID ? "/" + orderID : "";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
+    this.state = state;
     //add action to history
     Backbone.history.navigate("#transactions/" + state + addID);
   },
@@ -283,13 +285,30 @@ module.exports = baseVw.extend({
     tabWrapper.append(orderShort.render().el);
   },
 
-  downloadCSV: function(){
-    var rawData = {},
+  clickDownloadCSV: function(e){
+    var targBtn = $(e.target);
+    targBtn.closest('.btn').addClass('loading');
+    this.downloadCSV(targBtn);
+  },
+
+  downloadCSV: function(targBtn){
+    var self = this,
+        rawData = [],
+        calls = [],
         dataCSV = '',
         tempAnchor = document.createElement('a'),
-        dataBlob;
+        dataBlob,
+        exportData = function(data){
+          "use strict";
+          dataCSV = Papa.unparse(data);
+          dataBlob = new Blob([dataCSV], {'type':'application\/octet-stream'});
+          tempAnchor.href = window.URL.createObjectURL(dataBlob);
+          tempAnchor.download = 'export.csv';
+          tempAnchor.click();
+        };
 
-    console.log(this.state)
+    //clear existing data
+    this.currentExportData = [];
 
     switch(this.state){
       case "purchases":
@@ -303,27 +322,38 @@ module.exports = baseVw.extend({
         break;
     }
 
-    rawData.map((transaction)=> {
+    $.each(rawData,(i, transaction)=> {
       transaction.status = polyglot.t('transactions.OrderStatus'+transaction.status);
       transaction.timestamp = new Date(transaction.timestamp * 1000);
-      return this.getTransactionData(transaction.order_id, transaction);
+      transaction = __.omit(transaction, "thumbnail_hash", "btAve", "imageUrl", "order_date", "cCode", "displayPrice", "vendor", "transactionType");
+      calls.push(this.getTransactionData(transaction.order_id, transaction));
     });
 
-    console.log(rawData)
-
-    dataCSV = Papa.unparse(rawData);
-    console.log(dataCSV);
-    dataBlob = new Blob([dataCSV], {'type':'application\/octet-stream'});
-    tempAnchor.href = window.URL.createObjectURL(dataBlob);
-    tempAnchor.download = 'export.csv';
-    tempAnchor.click();
+    $.when.apply(null, calls)
+        .done(function(){
+          exportData(self.currentExportData);
+          targBtn && targBtn.removeClass('loading');
+        });
   },
 
   getTransactionData: function(orderID, dataObject){
-    var self = this;
     dataObject = dataObject || {};
 
-    $.getJSON(this.serverUrl + 'get_order',{'order_id': orderID}, function(data){
+    var getCall = $.getJSON(this.serverUrl + 'get_order',{'order_id': orderID}, function(data){
+      //add blank data so first object has all the columns
+      dataObject.quantity = '';
+      dataObject.shipping_address = '';
+      dataObject.payment_amount = '';
+      dataObject.payment_address = '';
+      dataObject.refund_tx_fee = '';
+      dataObject.chaincode = '';
+      dataObject.redeem_script = '';
+      dataObject.refund_address = '';
+      dataObject.moderator_name = '';
+      dataObject.moderator_guid = '';
+      dataObject.moderator_fee = '';
+      dataObject.return_policy = '';
+
       //format and add flat data to the object
       if(data.buyer_order){
         var dPayment = data.buyer_order.order.payment;
@@ -331,11 +361,11 @@ module.exports = baseVw.extend({
         dataObject.quantity = data.buyer_order.order.quantity;
         if(data.buyer_order.order.shipping){
           var dShipping = data.buyer_order.order.shipping;
-          dataObject.shipping_address = dShipping.ship_to + "\n" + dShipping.address +", " + dShipping.city + ", " + dShipping.state + ", " + dShipping.postal_code + ", " + dShipping.country;
+          dataObject.shipping_address = dShipping.ship_to + " " + dShipping.address +", " + dShipping.city + ", " + dShipping.state + ", " + dShipping.postal_code + ", " + dShipping.country;
         }
         dataObject.payment_amount = dPayment.amount;
         dataObject.payment_address = dPayment.address;
-        dataObject.refund_tx_fee = dPayment.refund_tx_fee || 0;
+        dataObject.refund_tx_fee = dPayment.refund_tx_fee || "";
         dataObject.chaincode = dPayment.chaincode || "";
         dataObject.redeem_script = dPayment.redeem_script || "";
         dataObject.refund_address = data.buyer_order.order.refund_address;
@@ -355,25 +385,16 @@ module.exports = baseVw.extend({
         dataObject.return_policy = data.vendor_offer.policy.returns;
       }
 
-      if(data.bitcoin_txs){
-        __.each(data.bitcoin_txs, function(tx, i){
-          dataObject["bitcoin_tx_"+(i+1)+"_confirmations"] = tx.confirmations;
-          dataObject["bitcoin_tx_"+(i+1)+"_type"] = tx.type;
-          dataObject["bitcoin_tx_"+(i+1)+"_value"] = tx.value;
-          dataObject["bitcoin_tx_"+(i+1)+"_txid"] = tx.txid;
-        })
-      }
-
       dataObject.raw_contract_data = JSON.stringify(data, null, 2);
-      console.log(dataObject)
 
-      return dataObject;
-
-    }).always(function(data, textStatus){
+    }).always((data, textStatus)=> {
       if(textStatus == 'parsererror'){
         alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
       }
+      this.currentExportData.push(dataObject);
     });
+
+    return getCall;
   },
 
   openOrderModal: function(options){
