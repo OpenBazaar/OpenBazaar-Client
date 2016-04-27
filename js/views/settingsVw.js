@@ -991,34 +991,6 @@ module.exports = Backbone.View.extend({
   },
 
   launchServerConfig: function() {
-    // var serverConnectModal = new ServerConnectModal({
-    //   includeCloseButton: true,
-    //   initialState: {
-    //     status: 'connected'
-    //   }
-    // }).render().open();
-
-    // this.serverConnectSyncHandler &&
-    // this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
-
-    // this.serverConnectSyncHandler = function() {
-    //   // todo: bit of a hack to hide the close button. really, the
-    //   // modal api should provide this if we want to allow
-    //   // this type of stuff.
-    //   serverConnectModal.$('.js-modal-close').hide();
-    // };
-
-    // this.listenTo(app.serverConfig, 'sync', this.serverConnectSyncHandler);
-
-    // serverConnectModal.on('connected', function() {
-    //   location.reload();
-    // });
-
-    // serverConnectModal.on('close', function() {
-    //   serverConnectModal.remove();
-    //   this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
-    // });
-
     app.serverConnectModal.open();
   },
 
