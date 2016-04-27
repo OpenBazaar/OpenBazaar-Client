@@ -352,6 +352,7 @@ $(document).ajaxSend(function(e, jqXhr, settings) {
 });
 
 launchOnboarding = function(guidCreating) {
+  app.serverConnectModal.close();
   onboardingModal && onboardingModal.remove();
   onboardingModal = new OnboardingModal({
     model: user,
@@ -405,6 +406,7 @@ app.serverConnectModal.on('connected', (authenticated) => {
 app.getHeartbeatSocket().on('open', function(e) {
   app.getHeartbeatSocket().off('close', startUpRetry);
   pageConnectModal.remove();
+  $loadingModal.removeClass('hide');
   onboardingModal && onboardingModal.remove();
 
   // clear some flags so the heartbeat events will

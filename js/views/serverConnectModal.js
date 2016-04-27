@@ -42,7 +42,6 @@ module.exports = BaseModal.extend({
   },
 
   remove: function() {
-    $(document).off(null, this.onAjaxComplete);
     BaseModal.prototype.remove.apply(this, arguments);
   },
 
@@ -244,7 +243,7 @@ module.exports = BaseModal.extend({
       // check authentication
       loginRequest = app.login().done(function(data) {
         if (data.success) {
-          conclude(data);
+          conclude(false, data);
           self.trigger('connected', true);
         } else {
           if (data.reason === 'too many attempts') {
@@ -260,7 +259,6 @@ module.exports = BaseModal.extend({
         
         // assuming rest server is down or
         // wrong port set
-        // rejectLogin();
         conclude(true);
       });
     };
