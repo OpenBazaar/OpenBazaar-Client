@@ -3,6 +3,13 @@
   var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'country'), ob.ships_to)); 
 %>
 
+<!-- TEMP CODE - using until we have an API  -->
+<% 
+  var types = ["Physical", "Digital", "Service"];
+  var type = types[Math.floor(Math.random()*types.length)];
+%>
+<!-- END TEMP CODE  -->
+
 <div class="gridItem clearfix custCol-border">
 
   <div class="itemImg row10 color-secondary custCol-secondary overflowHidden js-item <%
@@ -78,16 +85,8 @@
     </div>
   </div>
 
-  <!-- TEMP CODE - using until we have an API  -->
-  <% 
-    var types = ["Physical", "Digital", "Service"];
-    var type = types[Math.floor(Math.random()*types.length)];
-  %>
-  <!-- END TEMP CODE  -->
-
-  <div class="listingType color-secondary borderRadius3 js-item <%
-    if(ob.userAddresses.length == 0 || matchedItemShippableCountries.length > 0 || ob.ships_to[0] == "ALL" || ob.ships_to.length == 0){ %>textOpacity90<% }else{ %>textOpacity25<% } %>" style="padding: 6px;
-      background: #252525;"> 
+  <div class="listingType borderRadius3 js-item <%
+    if(ob.userAddresses.length == 0 || matchedItemShippableCountries.length > 0 || ob.ships_to[0] == "ALL" || ob.ships_to.length == 0){ %>textOpacity90<% }else{ %>textOpacity25<% } %>"> 
         <span class="
         <% if(type == "Digital"){ %>
           listingTypeDigital

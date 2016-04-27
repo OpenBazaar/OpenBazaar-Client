@@ -478,7 +478,10 @@ form {
 }
 
 .listingType {
+  background-color: #252525;
+  color: #ffffff;
   position: absolute;
+  padding: 6px;
   top: 40px;
   right: 40px;
   font-size: 11px;
