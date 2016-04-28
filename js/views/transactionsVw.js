@@ -299,10 +299,11 @@ module.exports = baseVw.extend({
         exportData = function(data){
           var dataCSV = Papa.unparse(data),
               dataBlob = new Blob([dataCSV], {'type':'application\/octet-stream'}),
-              tempAnchor = document.createElement('a');
+              tempAnchor = document.createElement('a'),
+              saveDate = new Date();
 
           tempAnchor.href = window.URL.createObjectURL(dataBlob);
-          tempAnchor.download = 'export.csv';
+          tempAnchor.download = ('export_'+saveDate.toLocaleString(window.lang)+'.csv').replace(/,/g , '_');
           tempAnchor.click();
         };
 
@@ -328,6 +329,7 @@ module.exports = baseVw.extend({
       transaction.status = polyglot.t('transactions.OrderStatus'+transaction.status);
       transaction.timestamp = new Date(transaction.timestamp * 1000);
       transaction.currency_code = transaction.cCode;
+      transaction.fiat_price = transaction.displayPrice;
       transaction = __.omit(transaction, "thumbnail_hash", "btAve", "imageUrl", "order_date", "cCode", "displayPrice", "vendor", "transactionType");
       calls.push(this.getTransactionData(transaction.order_id, transaction));
     });
