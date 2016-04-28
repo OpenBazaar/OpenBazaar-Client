@@ -68,7 +68,6 @@ module.exports = Backbone.Model.extend({
           }
         });
         response.shipping_addresses = tempAddresses;
-        console.log(tempAddresses)
       } catch(e) {
         //server may set a malformed shipping_address value
         console.log("Error in shipping_addresses:");
