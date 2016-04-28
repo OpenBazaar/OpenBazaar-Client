@@ -118,7 +118,6 @@ app.serverConfigs.getActive().on('sync', (onActiveServerSync = function(md) {
 
 app.serverConfigs.on('activeServerChange', (md) => {
   setServerUrl();
-  app.serverConfigs.getActive().off(null, onActiveServerSync);
   app.serverConfigs.getActive().off('sync', onActiveServerSync);
 });
 
@@ -212,6 +211,11 @@ $(window).bind('keydown', function(e) {
         char = String.fromCharCode(e.which).toLowerCase();
 
     switch (char) {
+      case config.keyShortcuts.undo:
+        //run undo programmatically to avoid crash
+        e.preventDefault();
+        document.execCommand('undo');
+        break;      
       case config.keyShortcuts.discover:
         route = 'home';
         break;
