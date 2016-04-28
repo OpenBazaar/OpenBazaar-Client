@@ -408,7 +408,7 @@
         "OrderStatus7": "Возмещено",
         "AcceptDisputeResolution": "Принять компенсацию по спору",
         "InEscrow": "- в Эскроу",
-        "OrderTotal": "Всего заказов на сумму",
+        "OrderTotal": "Заказано на сумму",
         "OrderTotalInBTC": "Всего BTC",
         "NoMessages": "Нет сообщений",
         "PaymentProtection": "Протекция платежа",
