@@ -320,6 +320,9 @@ module.exports = baseVw.extend({
     }
 
     $.each(rawData,(i, transaction)=> {
+      //if filter is active, don't process transactions of a different type
+      if(Number.isInteger(Number(this.filterBy)) && transaction.status != this.filterBy) return;
+
       transaction.status = polyglot.t('transactions.OrderStatus'+transaction.status);
       transaction.timestamp = new Date(transaction.timestamp * 1000);
       transaction.currency_code = transaction.cCode;
@@ -335,7 +338,13 @@ module.exports = baseVw.extend({
           }));
         })
         .done(()=>{
-          exportData(this.currentExportData);
+          if(calls.length > 0){
+            exportData(this.currentExportData);
+          } else {
+            messageModal.show(polyglot.t('errorMessages.noData'));
+          }
+        })
+        .always(()=> {
           targBtn && targBtn.removeClass('loading');
         });
   },
