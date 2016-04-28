@@ -396,15 +396,8 @@ module.exports = baseVw.extend({
       if(data.vendor_offer.policy){
         dataObject.return_policy = data.vendor_offer.policy.returns;
       }
-
-      //dataObject.raw_contract_data = JSON.stringify(data, null, 2);
-
+      
       this.currentExportData.push(dataObject);
-
-    }).always((data, textStatus)=> {
-      if(textStatus == 'parsererror'){
-        alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
-      }
     });
 
     return getCall;
