@@ -288,10 +288,12 @@ module.exports = baseVw.extend({
   clickDownloadCSV: function(e){
     var targBtn = $(e.target);
     targBtn.closest('.btn').addClass('loading');
-    this.downloadCSV(targBtn);
+    this.downloadCSV().always(()=> {
+      targBtn && targBtn.removeClass('loading');
+    });
   },
 
-  downloadCSV: function(targBtn){
+  downloadCSV: function(){
     var rawData = [],
         calls = [],
         exportData = function(data){
@@ -330,7 +332,7 @@ module.exports = baseVw.extend({
       calls.push(this.getTransactionData(transaction.order_id, transaction));
     });
 
-    $.when.apply(null, calls)
+    return $.when.apply(null, calls)
         .fail(function(){
           messageModal.show(polyglot.t('errorMessages.getError'), polyglot.t('errorMessages.serverError') + "\n\n<i>" + errorThrown + "</i>");
           calls.forEach((call => {
@@ -343,9 +345,6 @@ module.exports = baseVw.extend({
           } else {
             messageModal.show(polyglot.t('errorMessages.noData'));
           }
-        })
-        .always(()=> {
-          targBtn && targBtn.removeClass('loading');
         });
   },
 
