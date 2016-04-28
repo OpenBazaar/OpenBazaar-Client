@@ -165,7 +165,7 @@ module.exports = baseVw.extend({
     formData.append('guid', this.model.get('guid'));
 
     $.ajax({
-      url: app.serverConfig.getServerBaseUrl() + '/chat_conversation?guid=' + this.model.get('guid'),
+      url: app.serverConfigs.getActive().getServerBaseUrl() + '/chat_conversation?guid=' + this.model.get('guid'),
       type: 'DELETE'
     });
 

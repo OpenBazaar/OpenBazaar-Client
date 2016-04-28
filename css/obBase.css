@@ -1419,6 +1419,14 @@ h5 {
   padding-top: 70px;
 }
 
+.modal-cover-fullscreen {
+  top: 0;
+}
+
+.modal-cover-fullscreen .modal-childMain {
+  top: 50px;
+}
+
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
@@ -4200,12 +4208,64 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 9;
 }
 
-#loadingModal {
+#loadingModal, .page-connect-modal.startup-server-connect {
   z-index: 14;
 }
 
-.server-connect-modal {
+#ov1 .server-connect-modal {
   z-index: 15;
+}
+
+#ov1 .server-connect-modal .modal-child {
+  height: 625px;
+  overflow: hidden;
+}
+
+#ov1 .server-connect-modal .message-bar {
+  top: 50px;
+  left: 25px;
+  right: 25px;
+  z-index: 1;
+  transition: top .2s, opacity .2s;
+}
+
+#ov1 .server-connect-modal .message-bar > div {
+  background-color: red;
+  padding: 8px 10px;
+  line-height: 2.2;
+  display: inline-block;
+}
+
+#ov1 .server-connect-modal .message-bar .message-bar-close {
+  top: -12px;
+  right: -3px;
+}
+
+#ov1 .server-connect-modal .message-bar.slide-out {
+  top: -45px;
+  opacity: 0;
+}
+
+#ov1 .server-config-form {
+  transition: top 250ms;
+}
+
+#ov1 .server-config-form.slide-out {
+  top: 372px;
+}
+
+#ov1 .server-config-row {
+  /*min-height: 73px;*/
+}
+
+#ov1 .server-config-row .connection-failed::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  background-color: red;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
 
 #loadingModal .btn {
@@ -4572,6 +4632,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   overflow-x: hidden;
 }
 
+#ov1 .autoOverflowYHideX {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+#ov1 .vertAlignMid {
+  vertical-align: middle;
+}
 
 #ov1 .vCentered {
   /* must be inside a relatively positioned containing element */
@@ -5192,8 +5261,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 46px;
 }
 
-
-
 #ov1  .height30 {
   height: 30px;
   line-height: 30px;
@@ -5683,6 +5750,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: auto;
   display: block;
 }
+
+#ov1 .marginCenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 
 #ov1 .heightAuto {
   height: auto;

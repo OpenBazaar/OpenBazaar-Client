@@ -1,7 +1,8 @@
 var ipcRenderer = require('ipc-renderer'),
-    Socket = require('./utils/Socket'),
+    Polyglot = require('node-polyglot'),
+    __ = require('underscore'),
     $ = require('jquery'),
-    ServerConfigMd = require('./models/serverConfigMd'),
+    Socket = require('./utils/Socket'),
     _app;
 
 function App() {
@@ -15,42 +16,23 @@ function App() {
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
 
-  // TODO: what is wrong with the localStorage adapter??? shouldn't need
-  // to manually provide the data to the model. All that should be needed
-  // is an ID and then a subsequent fetch, but that doesn't return the data.
-  // Investigate!
-  this.serverConfig = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
-
-  // serverConfigMd.fetch();
-  if (!localStorage['_serverConfig-1']) {
-    this.serverConfig.save();
-  }  
-
-  this.connectHeartbeatSocket();
-}
+  // TODO: rather than attach the serverConfigs CL
+  // in main.js, pass in the instance here so the
+  // dependency is more explicit.
+};
 
 App.prototype.connectHeartbeatSocket = function() {
-  var self = this;
+  var activeServer = this.serverConfigs.getActive();
 
-  clearTimeout(this.heartbeatSocketTimesup);
-
-  if (this._heartbeatSocket) {
-    this._heartbeatSocket.connect(this.serverConfig.getHeartbeatSocketUrl());
-  } else {
-    this._heartbeatSocket = new Socket(this.serverConfig.getHeartbeatSocketUrl());
-
-    this._heartbeatSocket.on('close', function() {
-      clearTimeout(self._heartbeatSocketTimesup);
-    });
+  if (!activeServer) {
+    throw new Error(`No active server set. Please set via the Server Configs collection.`);
   }
 
-  // give up if it takes to long
-  this._heartbeatSocketTimesup = setTimeout(function() {
-    if (self._heartbeatSocket.getReadyState() !== 1) {
-      //self._heartbeatSocket._socket.close(); //turn off for now, until server issues are fixed
-      alert(polyglot.t('errorMessages.serverTimeout'));
-    }
-  }, 30000); //wait for 30 seconds, sometimes the server stalls
+  if (this._heartbeatSocket) {
+    this._heartbeatSocket.connect(activeServer.getHeartbeatSocketUrl());
+  } else {
+    this._heartbeatSocket = new Socket(activeServer.getHeartbeatSocketUrl());
+  }
 };
 
 App.prototype.getHeartbeatSocket = function() {
@@ -58,12 +40,18 @@ App.prototype.getHeartbeatSocket = function() {
 };
 
 App.prototype.login = function() {
+  var activeServer = this.serverConfigs.getActive();
+
+  if (!activeServer) {
+    throw new Error(`No active server set. Please set via the Server Configs collection.`);
+  }
+
   return $.ajax({
-    url: this.serverConfig.getServerBaseUrl() + '/login',
+    url: activeServer.getServerBaseUrl() + '/login',
     method: 'POST',
     data: {
-      username: this.serverConfig.get('username'),
-      password: this.serverConfig.get('password')
+      username: activeServer.get('username'),
+      password: activeServer.get('password')
     },
     timeout: 3000
   });  
@@ -148,7 +136,4 @@ App.getApp = function() {
   return _app;
 };
 
-
 module.exports = App;
-
-
