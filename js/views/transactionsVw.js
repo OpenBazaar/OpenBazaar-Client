@@ -292,16 +292,13 @@ module.exports = baseVw.extend({
   },
 
   downloadCSV: function(targBtn){
-    var self = this,
-        rawData = [],
+    var rawData = [],
         calls = [],
-        dataCSV = '',
-        tempAnchor = document.createElement('a'),
-        dataBlob,
         exportData = function(data){
-          "use strict";
-          dataCSV = Papa.unparse(data);
-          dataBlob = new Blob([dataCSV], {'type':'application\/octet-stream'});
+          var dataCSV = Papa.unparse(data),
+              dataBlob = new Blob([dataCSV], {'type':'application\/octet-stream'}),
+              tempAnchor = document.createElement('a');
+
           tempAnchor.href = window.URL.createObjectURL(dataBlob);
           tempAnchor.download = 'export.csv';
           tempAnchor.click();
@@ -325,13 +322,20 @@ module.exports = baseVw.extend({
     $.each(rawData,(i, transaction)=> {
       transaction.status = polyglot.t('transactions.OrderStatus'+transaction.status);
       transaction.timestamp = new Date(transaction.timestamp * 1000);
+      transaction.currency_code = transaction.cCode;
       transaction = __.omit(transaction, "thumbnail_hash", "btAve", "imageUrl", "order_date", "cCode", "displayPrice", "vendor", "transactionType");
       calls.push(this.getTransactionData(transaction.order_id, transaction));
     });
 
     $.when.apply(null, calls)
-        .done(function(){
-          exportData(self.currentExportData);
+        .fail(function(){
+          messageModal.show(polyglot.t('errorMessages.getError'), polyglot.t('errorMessages.serverError') + "\n\n<i>" + errorThrown + "</i>");
+          calls.forEach((call => {
+            call.abort();
+          }));
+        })
+        .done(()=>{
+          exportData(this.currentExportData);
           targBtn && targBtn.removeClass('loading');
         });
   },
@@ -339,7 +343,7 @@ module.exports = baseVw.extend({
   getTransactionData: function(orderID, dataObject){
     dataObject = dataObject || {};
 
-    var getCall = $.getJSON(this.serverUrl + 'get_order',{'order_id': orderID}, function(data){
+    var getCall = $.getJSON(this.serverUrl + 'get_order',{'order_id': orderID}, (data)=> {
       //add blank data so first object has all the columns
       dataObject.quantity = '';
       dataObject.shipping_address = '';
@@ -385,13 +389,14 @@ module.exports = baseVw.extend({
         dataObject.return_policy = data.vendor_offer.policy.returns;
       }
 
-      dataObject.raw_contract_data = JSON.stringify(data, null, 2);
+      //dataObject.raw_contract_data = JSON.stringify(data, null, 2);
+
+      this.currentExportData.push(dataObject);
 
     }).always((data, textStatus)=> {
       if(textStatus == 'parsererror'){
         alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
       }
-      this.currentExportData.push(dataObject);
     });
 
     return getCall;
