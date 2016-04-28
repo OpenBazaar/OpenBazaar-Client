@@ -722,9 +722,13 @@ module.exports = baseVw.extend({
   renderItems: function (model, skipNSFWmodal) {
     "use strict";
 
-    var self = this;
-    var select = this.$el.find('.js-categories');
-    var selectOptions = [];
+    var self = this,
+        select = this.$el.find('.js-categories'),
+        selectOptions = [],
+        addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country }),
+        userCountry = this.userModel.get('country');
+
+    addressCountries.push(userCountry);
     skipNSFWmodal = skipNSFWmodal || this.skipNSFWmodal;
     model = model || [];
     __.each(model, function (arrayItem) {
@@ -742,6 +746,7 @@ module.exports = baseVw.extend({
       arrayItem.userID = self.pageID;
       arrayItem.ownPage = self.options.ownPage;
       arrayItem.onUserPage = true;
+      arrayItem.userCountries = addressCountries;
       arrayItem.skipNSFWmodal = skipNSFWmodal;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         selectOptions[arrayItem.category] = true;
