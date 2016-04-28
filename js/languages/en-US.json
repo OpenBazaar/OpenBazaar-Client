@@ -675,6 +675,7 @@
     "password": "Password",
     "saveChanges": "Save Changes",
     "defaultServerName": "default",
+    "portedConnectionName": "ported connection",
     "connectionFailed": "Connection failed to %{serverName}",
     "connectingTo": "Connecting to %{serverName}",
     "connectingToDefault": "Connecting to the default server",

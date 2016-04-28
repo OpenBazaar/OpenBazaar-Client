@@ -93,13 +93,41 @@ user.on('change:language', function(md, lang) {
 
 app.serverConfigs = new ServerConfigsCl();
 app.serverConfigs.fetch().done(() => {
+  var oldConfig,
+      defaultConfig;
+
   if (!app.serverConfigs.getActive()) {
-    app.serverConfigs.setActive(
-      app.serverConfigs.serverConfigs.create({
-        name: polyglot.t('serverConnectModal.defaultServerName'),
-        default: true
-      }).id
-    );
+    defaultConfig = app.serverConfigs.create({
+      name: polyglot.t('serverConnectModal.defaultServerName'),
+      default: true
+    })
+
+    // migrate any existing connection from the
+    // old single config set-up (_serverConfig-1)
+    if (oldConfig = localStorage['_serverConfig-1']) {
+      oldConfig = JSON.parse(oldConfig);
+      
+      app.serverConfigs.setActive(
+        app.serverConfigs.create(
+          __.extend(
+            {},
+            __.omit(oldConfig, ['local_username', 'local_password', 'id']),
+            { name: polyglot.t('serverConnectModal.portedConnectionName') }
+          )
+        ).id          
+      );
+
+      if (oldConfig.local_username && oldConfig.local_password) {
+        defaultConfig.save({
+          local_username: oldConfig.local_username,
+          local_password: oldConfig.local_password
+        });
+      }
+
+      localStorage.removeItem('_serverConfig-1');
+    } else {
+      app.serverConfigs.setActive(defaultConfig.id);
+    }
   }  
 });
 
@@ -397,7 +425,7 @@ launchOnboarding = function(guidCreating) {
 
 pageConnectModal.on('cancel', () => {
   removeStartupRetry();
-  app.getHeartbeatSocket().close();
+  app.getHeartbeatSocket().cancel();
   pageConnectModal.remove();
   app.serverConnectModal.open();
 }).render().open();
@@ -430,7 +458,7 @@ app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
     Date.now() - startTime < startUpConnectMaxTime &&
     startUpConnectMaxRetries
   ) {
-    setTimeout(() => {
+    startUpRetry.timeout = setTimeout(() => {
       startUpConnectMaxRetries--;
       app.connectHeartbeatSocket();
     }, startUpConnectRetryDelay);
@@ -441,8 +469,9 @@ app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
 }));
 
 removeStartupRetry = function() {
+  clearTimeout(startUpRetry.timeout);
   app.getHeartbeatSocket().off('close', startUpRetry);
-  app.getHeartbeatSocket().on('close', () => {
+  app.getHeartbeatSocket().on('close', (e) => {
     app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
       .open();    
   });
