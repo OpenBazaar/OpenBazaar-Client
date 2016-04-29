@@ -245,7 +245,8 @@ var iShouldQuit = app.makeSingleInstance(function(commandLine, workingDirectory)
   }
   return true;
 });
-if(iShouldQuit){app.quit();return;}
+
+if (iShouldQuit) app.quit();
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {

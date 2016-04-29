@@ -1,5 +1,4 @@
 var ipcRenderer = require('ipc-renderer'),
-    Polyglot = require('node-polyglot'),
     __ = require('underscore'),
     $ = require('jquery'),
     Socket = require('./utils/Socket'),

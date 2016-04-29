@@ -69,6 +69,8 @@ module.exports = Backbone.Router.extend({
   },
 
   translateRoute: function(route) {
+    if(!route) throw new Error('You must provide a route');
+    
     var guid = "",
         handle = "",
         state = "",

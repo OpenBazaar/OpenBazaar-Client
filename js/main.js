@@ -93,13 +93,41 @@ user.on('change:language', function(md, lang) {
 
 app.serverConfigs = new ServerConfigsCl();
 app.serverConfigs.fetch().done(() => {
+  var oldConfig,
+      defaultConfig;
+
   if (!app.serverConfigs.getActive()) {
-    app.serverConfigs.setActive(
-      app.serverConfigs.create({
-        name: polyglot.t('serverConnectModal.defaultServerName'),
-        default: true
-      }).id
-    );
+    defaultConfig = app.serverConfigs.create({
+      name: polyglot.t('serverConnectModal.defaultServerName'),
+      default: true
+    })
+
+    // migrate any existing connection from the
+    // old single config set-up (_serverConfig-1)
+    if (oldConfig = localStorage['_serverConfig-1']) {
+      oldConfig = JSON.parse(oldConfig);
+      
+      app.serverConfigs.setActive(
+        app.serverConfigs.create(
+          __.extend(
+            {},
+            __.omit(oldConfig, ['local_username', 'local_password', 'id']),
+            { name: polyglot.t('serverConnectModal.portedConnectionName') }
+          )
+        ).id          
+      );
+
+      if (oldConfig.local_username && oldConfig.local_password) {
+        defaultConfig.save({
+          local_username: oldConfig.local_username,
+          local_password: oldConfig.local_password
+        });
+      }
+
+      localStorage.removeItem('_serverConfig-1');
+    } else {
+      app.serverConfigs.setActive(defaultConfig.id);
+    }
   }  
 });
 
@@ -118,7 +146,6 @@ app.serverConfigs.getActive().on('sync', (onActiveServerSync = function(md) {
 
 app.serverConfigs.on('activeServerChange', (md) => {
   setServerUrl();
-  app.serverConfigs.getActive().off(null, onActiveServerSync);
   app.serverConfigs.getActive().off('sync', onActiveServerSync);
 });
 
@@ -207,49 +234,67 @@ $('body').on('keypress', 'input', function(event) {
 
 //keyboard shortucts
 $(window).bind('keydown', function(e) {
-  if ((e.ctrlKey || e.metaKey) && !e.altKey) { //test for alt key to prevent international keyboard issues
-    var route = null,
-        char = String.fromCharCode(e.which).toLowerCase();
+  var char = String.fromCharCode(e.which).toLowerCase(),
+      ctrl = (e.ctrlKey || e.metaKey) && !e.altKey, //test for alt key to prevent international keyboard issues
+      route = null;
 
-    switch (char) {
-      case config.keyShortcuts.discover:
-        route = 'home';
-        break;
-      case config.keyShortcuts.myPage:
-        route = 'userPage';
-        break;
-      case config.keyShortcuts.customizePage:
-        route = 'userPage/' + user.get('guid') + '/customize';
-        break;
-      case config.keyShortcuts.create:
-        route = 'userPage/' + user.get('guid') + '/listingNew';
-        break;
-      case config.keyShortcuts.purchases:
-        route = 'transactions/purchases';
-        break;
-      case config.keyShortcuts.sales:
-        route = 'transactions/sales';
-        break;
-      case config.keyShortcuts.cases:
-        route = 'transactions/cases';
-        break;
-      case config.keyShortcuts.settings:
-        route = 'settings';
-        break;
-    }
+  if (e.keyCode == 116) { //on F5 press
+    Backbone.history.loadUrl();
+  }
 
-    if (route !== null) {
+  switch (char) {
+    case config.keyShortcuts.undo:
+      //run undo programmatically to avoid crash
       e.preventDefault();
-      Backbone.history.navigate(route, {
-        trigger: true
-      });
-    }
-
-    // Select all text in address bar
-    if (char === config.keyShortcuts.addressBar) {
+      document.execCommand('undo');
+      break;      
+    case config.keyShortcuts.discover:
+      route = 'home';
+      break;
+    case config.keyShortcuts.myPage:
+      route = 'userPage';
+      break;
+    case config.keyShortcuts.customizePage:
+      route = 'userPage/' + user.get('guid') + '/customize';
+      break;
+    case config.keyShortcuts.create:
+      route = 'userPage/' + user.get('guid') + '/listingNew';
+      break;
+    case config.keyShortcuts.purchases:
+      route = 'transactions/purchases';
+      break;
+    case config.keyShortcuts.sales:
+      route = 'transactions/sales';
+      break;
+    case config.keyShortcuts.cases:
+      route = 'transactions/cases';
+      break;
+    case config.keyShortcuts.settings:
+      route = 'settings';
+      break;
+    case config.keyShortcuts.addressBar:
       // Select all text in address bar
       $('.js-navAddressBar').select();
-    }
+      break;
+    case config.keyShortcuts.save:
+      window.obEventBus.trigger('saveCurrentForm');
+      break;
+    case config.keyShortcuts.refresh:
+      Backbone.history.loadUrl();
+      break;
+  }
+
+  if (route !== null) {
+    e.preventDefault();
+    Backbone.history.navigate(route, {
+      trigger: true
+    });
+  }
+
+  // Select all text in address bar
+  if (char === config.keyShortcuts.addressBar) {
+    // Select all text in address bar
+    $('.js-navAddressBar').select();
   }
 });
 
@@ -393,6 +438,7 @@ launchOnboarding = function(guidCreating) {
 
 pageConnectModal.on('cancel', () => {
   removeStartupRetry();
+  app.getHeartbeatSocket()._socket.onclose = null;
   app.getHeartbeatSocket().close();
   pageConnectModal.remove();
   app.serverConnectModal.open();
@@ -426,7 +472,7 @@ app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
     Date.now() - startTime < startUpConnectMaxTime &&
     startUpConnectMaxRetries
   ) {
-    setTimeout(() => {
+    startUpRetry.timeout = setTimeout(() => {
       startUpConnectMaxRetries--;
       app.connectHeartbeatSocket();
     }, startUpConnectRetryDelay);
@@ -437,8 +483,9 @@ app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
 }));
 
 removeStartupRetry = function() {
+  clearTimeout(startUpRetry.timeout);
   app.getHeartbeatSocket().off('close', startUpRetry);
-  app.getHeartbeatSocket().on('close', () => {
+  app.getHeartbeatSocket().on('close', (e) => {
     app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
       .open();    
   });

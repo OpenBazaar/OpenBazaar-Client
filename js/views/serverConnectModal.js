@@ -12,7 +12,7 @@ var __ = require('underscore'),
     ServerConfigsVw = require('./serverConfigsVw');
 
 module.exports = BaseModal.extend({
-  className: 'server-connect-modal modal-cover-fullscreen',
+  className: 'server-connect-modal modal-navBlock',
 
   events: {
     'click .js-close': 'closeConfigForm',
@@ -98,7 +98,9 @@ module.exports = BaseModal.extend({
       this.connect(md);
     });
     
-    this.$jsConfigFormWrap.removeClass('slide-out');    
+    this.$jsConfigFormWrap.one('transitionend', () => {
+      this.serverConfigFormVw.$('input[name="name"]').focus();
+    }).removeClass('slide-out');    
   },
 
   newConfigForm: function() {
