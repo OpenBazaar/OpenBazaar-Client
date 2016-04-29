@@ -1,4 +1,4 @@
-<div class="rowItem padding12 positionRelative <% ob.status === 'failed' && print('connection-failed') %>">
+<div class="rowItem padding15 positionRelative <% ob.status === 'failed' && print('connection-failed') %>">
   <div class="flexRow">
     <div class="table">
       <div>
@@ -22,7 +22,7 @@
               </a>
               <% } %>
             <% } else if (ob.status === 'connected') { %>
-            <span class="ion-radio-waves textOpacity1"></span> <%= polyglot.t('serverConnectModal.connected') %>
+            <span class="ion-checkmark textOpacity1"></span> <%= polyglot.t('serverConnectModal.connected') %>
             <% } else if (ob.status === 'connecting') { %>
             <span class="vertAlignMid"><%= polyglot.t('serverConnectModal.connecting') %>...</span> 
             <a class="btn btn-txt btn-secondary custCol-secondary fontSize13 marginLeft10 js-cancel">
