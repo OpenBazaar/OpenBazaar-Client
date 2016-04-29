@@ -280,6 +280,7 @@ module.exports = baseVw.extend({
     } else {
       this.options.ownPage = false;
       this.userProfileFetchParameters = $.param({'guid': this.pageID});
+      //this.userProfileFetchParameters = $.param({'guid': this.pageID, 'start': 0});
     }
 
     this.userProfileFetch = this.userProfile.fetch({
