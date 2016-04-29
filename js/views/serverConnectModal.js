@@ -98,7 +98,9 @@ module.exports = BaseModal.extend({
       this.connect(md);
     });
     
-    this.$jsConfigFormWrap.removeClass('slide-out');    
+    this.$jsConfigFormWrap.one('transitionend', () => {
+      this.serverConfigFormVw.$('input[name="name"]').focus();
+    }).removeClass('slide-out');    
   },
 
   newConfigForm: function() {

@@ -57,18 +57,6 @@ Socket.prototype.send = function() {
   this._socket.send.apply(this._socket, arguments);
 };
 
-Socket.prototype.cancel = function() {
-  // this will not result in a 'close' event
-  // todo: perhaps we should fire a 'cancel' event?
-  if (this._socket) {
-    this._socket.onopen = null;
-    this._socket.onclose = null;
-    this._socket.onerror = null;
-    this._socket.onmessage = null;
-    this._socket.close();
-  }  
-};
-
 Socket.prototype.getReadyState = function() {
   return this._socket.readyState;
 };

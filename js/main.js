@@ -425,7 +425,8 @@ launchOnboarding = function(guidCreating) {
 
 pageConnectModal.on('cancel', () => {
   removeStartupRetry();
-  app.getHeartbeatSocket().cancel();
+  app.getHeartbeatSocket()._socket.onclose = null;
+  app.getHeartbeatSocket().close();
   pageConnectModal.remove();
   app.serverConnectModal.open();
 }).render().open();
