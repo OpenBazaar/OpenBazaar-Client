@@ -725,8 +725,8 @@ module.exports = baseVw.extend({
     var self = this,
         select = this.$el.find('.js-categories'),
         selectOptions = [],
-        addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country }),
-        userCountry = this.userModel.get('country');
+        addressCountries = self.options.userModel.get('shipping_addresses').map(function(address){ return address.country }),
+        userCountry = self.options.userModel.get('country');
 
     addressCountries.push(userCountry);
     skipNSFWmodal = skipNSFWmodal || this.skipNSFWmodal;
