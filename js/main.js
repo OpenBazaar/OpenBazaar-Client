@@ -192,8 +192,8 @@ $(window).bind('keydown', function(e) {
   var char = String.fromCharCode(e.which).toLowerCase(),
       ctrl = (e.ctrlKey || e.metaKey) && !e.altKey, //test for alt key to prevent international keyboard issues
       route = null;
-    
-  if (event.keyCode == 116) { //on F5 press
+
+  if (e.keyCode == 116) { //on F5 press
     Backbone.history.loadUrl();
   }
 
@@ -234,6 +234,9 @@ $(window).bind('keydown', function(e) {
         break;
       case config.keyShortcuts.save:
         window.obEventBus.trigger('saveCurrentForm');
+        break;
+      case config.keyShortcuts.refresh:
+        Backbone.history.loadUrl();
         break;
     }
 
