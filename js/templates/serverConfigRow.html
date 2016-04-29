@@ -14,10 +14,10 @@
               <% print(ob.status === 'not-connected' ? polyglot.t('serverConnectModal.connect') : polyglot.t('Retry')) %>
             </a>
               <% if (!ob.default) { %>
-              <a class="btn btn-txt btn-secondary custCol-secondary pull-right marginLeft5 positionWrapper js-edit-config tooltip" data-tooltip="Edit Configuration">
+              <a class="btn btn-txt btn-secondary custCol-secondary pull-right marginLeft5 positionWrapper js-edit-config tooltip tooltip-leftTop zIndex4" data-tooltip="Edit Configuration">
                 <span class="ion-ios-gear textOpacity1 fullCentered"></span>
               </a>
-              <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 positionWrapper js-delete-config tooltip" data-tooltip="Delete Configuration">
+              <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 positionWrapper js-delete-config tooltip tooltip-leftTop" data-tooltip="Delete Configuration">
                 <span class="ion-ios-trash textOpacity1 fullCentered"></span>
               </a>
               <% } %>
