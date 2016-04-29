@@ -95,7 +95,7 @@ app.serverConfigs = new ServerConfigsCl();
 app.serverConfigs.fetch().done(() => {
   if (!app.serverConfigs.getActive()) {
     app.serverConfigs.setActive(
-      app.serverConfigs.serverConfigs.create({
+      app.serverConfigs.create({
         name: polyglot.t('serverConnectModal.defaultServerName'),
         default: true
       }).id

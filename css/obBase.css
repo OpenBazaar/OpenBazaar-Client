@@ -3746,7 +3746,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .modal .homeModal-heroText {
   position: absolute;
   bottom: 0px;
-  top: 210px;
+  top: 200px;
   color: #fff;
   font-size: 20px;
   line-height: 22px;
@@ -4261,7 +4261,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .server-config-row .connection-failed::after {
   content: '';
   position: absolute;
-  width: 10px;
+  width: 6px;
   background-color: red;
   top: 0;
   left: 0;
