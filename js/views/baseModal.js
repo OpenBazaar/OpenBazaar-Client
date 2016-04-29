@@ -21,7 +21,7 @@ module.exports = baseVw.extend({
 
       options = options || {};
       options.className = 'modal modal-opaque ' + __.result(this, 'className', '') +
-        (' ' + options.className || '');
+        (' ' + (options.className || ''));
       args[0] = options;
       this.__options = __.extend({}, defaults, options);
       this._open = false;
