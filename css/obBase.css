@@ -2407,7 +2407,6 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMessageTimestamp {
   font-size: 11px;
-  color: #fff;
   opacity: .35;
   font-weight: 500;
   letter-spacing: 0;
@@ -3415,7 +3414,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 10px 0;
   width: 230px;
   overflow: hidden;
-  transform: translateY(-330px);
+  transform: translateY(-110%);
   transition: transform 200ms;
 }
 
@@ -4668,7 +4667,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .positionTop {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
 }
 
 #ov1 .positionTopRight {

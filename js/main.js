@@ -234,10 +234,13 @@ $('body').on('keypress', 'input', function(event) {
 
 //keyboard shortucts
 $(window).bind('keydown', function(e) {
-  if ((e.ctrlKey || e.metaKey) && !e.altKey) { //test for alt key to prevent international keyboard issues
-    var route = null,
-        char = String.fromCharCode(e.which).toLowerCase();
+  var char = String.fromCharCode(e.which).toLowerCase(),
+      ctrl = (e.ctrlKey || e.metaKey) && !e.altKey, //test for alt key to prevent international keyboard issues
+      route = null;
 
+  if (e.keyCode == 116) { //on F5 press
+    Backbone.history.loadUrl();
+  }
     switch (char) {
       case config.keyShortcuts.undo:
         //run undo programmatically to avoid crash
@@ -267,6 +270,16 @@ $(window).bind('keydown', function(e) {
         break;
       case config.keyShortcuts.settings:
         route = 'settings';
+        break;
+      case config.keyShortcuts.addressBar:
+        // Select all text in address bar
+        $('.js-navAddressBar').select();
+        break;
+      case config.keyShortcuts.save:
+        window.obEventBus.trigger('saveCurrentForm');
+        break;
+      case config.keyShortcuts.refresh:
+        Backbone.history.loadUrl();
         break;
     }
 
