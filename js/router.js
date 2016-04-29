@@ -191,6 +191,11 @@ module.exports = Backbone.Router.extend({
   },
 
   launchPageConnectModal: function(config) {
+    var defaults = {
+      connectText: 'Connecting...',
+      failedText: 'Unable to Connect.'
+    };
+
     if (!(
         config &&
         config.promise &&
@@ -199,11 +204,7 @@ module.exports = Backbone.Router.extend({
       throw new Error('At a minimum, the config must contain a config.promise.');
     }
 
-    var defaults = {
-      connectText: 'Connecting...',
-      failedText: 'Unable to Connect.'
-    };
-
+    $('#loadingModal').addClass('hide');
     config = __.extend({}, defaults, config);
 
     this.pageConnectModal && this.pageConnectModal.remove();

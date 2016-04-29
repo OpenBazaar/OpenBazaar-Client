@@ -190,7 +190,7 @@ module.exports = baseVw.extend({
     this.slideOut();
 
     // mark as read
-    // $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', { guid: model.get('guid') });
+    // $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_chat_message_as_read', { guid: model.get('guid') });
     this.markConvoAsRead(model.get('guid'));
 
     // mark as read on chat head
@@ -362,7 +362,7 @@ module.exports = baseVw.extend({
         });
 
         if (openlyChatting) {
-          // $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: msg.sender});
+          // $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_chat_message_as_read', {guid: msg.sender});
           this.markConvoAsRead(msg.sender);
         }
       } else {
@@ -379,7 +379,7 @@ module.exports = baseVw.extend({
       if ((!window.focused || !openlyChatting) && !this.model.isBlocked(msg.sender))  {
         new Notification(msg.handle || msg.sender + ':', {
           body: msg.message,
-          icon: avatar = msg.avatar_hash ? app.serverConfig.getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
+          icon: avatar = msg.avatar_hash ? app.serverConfigs.getActive().getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
             '&guid=' + msg.sender : '/imgs/defaultUser.png',
           silent: true
         });
@@ -389,7 +389,7 @@ module.exports = baseVw.extend({
     } else if (msg.message_type === 'ORDER' || msg.message_type === 'DISPUTE_OPEN' || msg.message_type === 'DISPUTE_CLOSE') {
       new Notification(msg.handle || msg.sender + ':', {
         body: msg.message,
-        icon: avatar = msg.avatar_hash ? app.serverConfig.getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
+        icon: avatar = msg.avatar_hash ? app.serverConfigs.getActive().getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
         '&guid=' + msg.sender : '/imgs/defaultUser.png',
         silent: true
       });
@@ -404,7 +404,7 @@ module.exports = baseVw.extend({
     if (!guid) return;
 
     if (document.hasFocus() && chatHead && chatHead.get('unread')) {
-      $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: guid});
+      $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_chat_message_as_read', {guid: guid});
       chatHead.set('unread', 0);
       this.setAggregateUnreadCount()
     }
