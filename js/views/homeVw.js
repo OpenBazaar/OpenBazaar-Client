@@ -188,7 +188,11 @@ module.exports = baseVw.extend({
 
   renderItem: function(item){
     var self = this,
-        blocked;
+        blocked,
+        addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country }),
+        userCountry = this.userModel.get('country');
+
+    addressCountries.push(userCountry);
 
     //don't show if NSFW and filter is set to false
     if(item.listing.nsfw && !this.showNSFW) return;
@@ -201,6 +205,7 @@ module.exports = baseVw.extend({
     item.userID = item.guid;
     item.discover = true;
     item.ownGuid = this.userModel.get('guid');
+    item.userCountries = addressCountries;
 
 
     item.ownFollowing = this.ownFollowing.indexOf(item.guid) != -1;

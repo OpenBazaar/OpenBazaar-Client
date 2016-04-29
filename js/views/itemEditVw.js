@@ -193,7 +193,8 @@ module.exports = baseVw.extend({
       self.inputKeyword = new Taggle('inputKeyword', {
         tags: keywordTags,
         preserveCase: true,
-        saveOnBlur: true
+        saveOnBlur: true,
+        placeholder: polyglot.t('KeywordsPlaceholder')
       });
     },0);
 

@@ -123,6 +123,10 @@ App.prototype.setUnreadChatMessageCount = function(count) {
   }
 };
 
+App.prototype.intlNumFormat = function(numberToFormat, maxDigits){
+  return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
+};
+
 App.getApp = function() {
   if (!_app) {
     throw new Error('The app instance was never instantiated and is therefore not available.');

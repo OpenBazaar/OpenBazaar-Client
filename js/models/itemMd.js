@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     getBTPrice = require('../utils/getBitcoinPrice'),
+    app = require('../App').getApp(),
     countriesMd = require('./countriesMd'),
     autolinker = require( '../utils/customLinker');
 
@@ -246,21 +247,21 @@ module.exports = window.Backbone.Model.extend({
         newAttributes.internationalShippingBTC = vendorInternationalShippingInBitCoin;
 
         if(userCCode != 'BTC'){
-          newAttributes.price = (vendorPrice*vendToUserBTCRatio).toFixed(2);
+          newAttributes.price = vendorPrice*vendToUserBTCRatio;
           newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
             style: 'currency',
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             currency: userCCode
           }).format(newAttributes.price);
-          newAttributes.domesticShipping = (vendorDomesticShipping*vendToUserBTCRatio).toFixed(2);
+          newAttributes.domesticShipping = vendorDomesticShipping*vendToUserBTCRatio;
           newAttributes.displayDomesticShipping = new Intl.NumberFormat(window.lang, {
             style: 'currency',
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             currency: userCCode
           }).format(newAttributes.domesticShipping);
-          newAttributes.internationalShipping = (vendorInternationalShipping*vendToUserBTCRatio).toFixed(2);
+          newAttributes.internationalShipping = vendorInternationalShipping*vendToUserBTCRatio;
           newAttributes.displayInternationalShipping = new Intl.NumberFormat(window.lang, {
             style: 'currency',
             minimumFractionDigits: 2,
@@ -269,11 +270,11 @@ module.exports = window.Backbone.Model.extend({
           }).format(newAttributes.internationalShipping);
         } else {
           newAttributes.price = vendorPriceInBitCoin;
-          newAttributes.displayPrice = vendorPriceInBitCoin.toFixed(4) + " BTC";
+          newAttributes.displayPrice = app.intlNumFormat(vendorPriceInBitCoin, 4) + " BTC";
           newAttributes.domesticShipping = vendorDomesticShippingInBitCoin;
-          newAttributes.displayDomesticShipping = vendorDomesticShippingInBitCoin.toFixed(4) + " BTC";
+          newAttributes.displayDomesticShipping = app.intlNumFormat(vendorDomesticShippingInBitCoin, 4) + " BTC";
           newAttributes.internationalShipping = vendorInternationalShippingInBitCoin;
-          newAttributes.displayInternationalShipping = vendorInternationalShippingInBitCoin.toFixed(4) + " BTC";
+          newAttributes.displayInternationalShipping = app.intlNumFormat(vendorInternationalShippingInBitCoin, 4) + " BTC";
         }
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();
