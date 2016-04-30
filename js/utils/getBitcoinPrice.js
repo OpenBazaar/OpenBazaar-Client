@@ -24,7 +24,7 @@ module.exports = function (currency, callback) {
 
     var getBTCPrices = function(){
       $.ajax({
-        url: app.serverConfig.getServerBaseUrl() + '/btc_price',
+        url: app.serverConfigs.getActive().getServerBaseUrl() + '/btc_price',
         dataType: 'json',
         cache: false //just in case
       })

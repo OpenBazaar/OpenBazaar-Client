@@ -28,6 +28,16 @@ module.exports = {
     restart:         'r'
   },
   
+  // Can't use charCodeAt() from values above
+  // because it returns different integers than keypress event
+  keyCodes: {
+    purchases:  188,
+    sales:      190,
+    cases:      191,
+    settings:   186,
+    addressBar: 219
+  },
+  
   setTestnet: function(testNetBoolean){
     localStorage.setItem('testnet', testNetBoolean);
   }

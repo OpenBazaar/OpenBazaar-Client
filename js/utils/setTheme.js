@@ -87,7 +87,8 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .user-page-header-slim-bg { box-shadow: inset 0px -120px 112px -52px rgba(" + opaque1.r + ", " + opaque1.g + ", " + opaque1.b + ", .65);}" +
       "#ov1 #userPage .custCol-background { background-color: " + backgroundColor + ";}" +
       "#ov1 #userPage .modal-childMain { box-shadow: 0px 0px 15px " + shadeColor2(backgroundColor, -0.15)  + ";}" +
-      "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
+      "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}" +
+      "#ov1 #userPage .server-config-row { color: " + textColor + "; }";
       
     // Medium Editor
     customStyleTag.innerHTML += 
