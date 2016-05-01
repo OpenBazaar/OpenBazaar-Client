@@ -15,17 +15,17 @@ module.exports = {
   keyShortcuts: {
     undo:            'z',
     discover:        'd',
-    myPage:          'j',
-    customizePage:   'k',
-    create:          'l',
-    purchases:       ',',
-    sales:           '.',
-    cases:           '/',
-    settings:        ';',
-    addressBar:      '[',
+    myPage:          't',
+    customizePage:   'e',
+    create:          'n',
+    purchases:       'k',
+    sales:           'm',
+    cases:           'j',
+    settings:        'g',
+    addressBar:      'l',
     save:            's',
-    refresh:         't',
-    restart:         'r'
+    refresh:         'r',
+    restart:         'f'
   },
   
   setTestnet: function(testNetBoolean){
