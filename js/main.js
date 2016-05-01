@@ -198,10 +198,10 @@ $(window).bind('keydown', function(e) {
   }
 
   if (ctrl) {
+    e.preventDefault();
     switch (char) {
       case config.keyShortcuts.undo:
         //run undo programmatically to avoid crash
-        e.preventDefault();
         document.execCommand('undo');
         break;
       case config.keyShortcuts.discover:
@@ -237,6 +237,9 @@ $(window).bind('keydown', function(e) {
         break;
       case config.keyShortcuts.refresh:
         Backbone.history.loadUrl();
+        break;
+      case config.keyShortcuts.restart:
+        location.reload();
         break;
     }
 
