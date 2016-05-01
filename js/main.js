@@ -198,9 +198,9 @@ $(window).bind('keydown', function(e) {
   }
 
   if (ctrl) {
-    e.preventDefault();
     switch (char) {
       case config.keyShortcuts.undo:
+        e.preventDefault();
         //run undo programmatically to avoid crash
         document.execCommand('undo');
         break;
@@ -236,6 +236,7 @@ $(window).bind('keydown', function(e) {
         window.obEventBus.trigger('saveCurrentForm');
         break;
       case config.keyShortcuts.refresh:
+        e.preventDefault();
         Backbone.history.loadUrl();
         break;
       case config.keyShortcuts.restart:
