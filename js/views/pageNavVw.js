@@ -44,7 +44,9 @@ module.exports = baseVw.extend({
     'click .js-navInstallUpdate': 'sendInstallUpdate',
     'click .js-navDismisslUpdate': 'dismissUpdate',
     'click [data-popmenu]': 'onPopMenuNavClick',
-    'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro'
+    'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro',
+    'mouseenter .js-server-config-submenu-trigger': 'mouseenterServerSubmenuTrigger',
+    'mouseleave .js-server-config-submenu-trigger': 'mouseleaveServerSubmenuTrigger'
   },
 
   initialize: function(options){
@@ -281,6 +283,8 @@ module.exports = baseVw.extend({
 
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
+      self.serverSubmenu = self.$('.js-serverSubmenu');
+
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
@@ -596,6 +600,17 @@ module.exports = baseVw.extend({
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
+
+  mouseenterServerSubmenuTrigger: function(e) {
+    this.ServerSubmenuTimeout = setTimeout(() => {
+      this.serverSubmenu.addClass('server-submenu-opened');
+    }, 150);
+  },
+
+  mouseleaveServerSubmenuTrigger: function(e) {
+    clearTimeout(this.ServerSubmenuTimeout);
+    this.serverSubmenu.removeClass('server-submenu-opened');
+  },  
 
   remove: function() {
     $(document).off('click', this.onDocumentClick);
