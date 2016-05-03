@@ -1,5 +1,5 @@
 <div class="width100 cursorDefault">
-  <div class="rowItem padding20">
+  <div class="rowItem padding20 <%= ob.status == 3 || ob.status >= 5 && ob.status <= 7 ? '' : 'rowHighlight' %>">
     <div class="flexRow">
       <div class="width100">
         <div class="clearFix">

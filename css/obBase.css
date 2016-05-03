@@ -721,6 +721,19 @@ form {
   padding: 25px 15px;
 }
 
+.rowItem.rowHighlight {
+    position: relative;
+}
+.rowItem.rowHighlight::after {
+    content: "";
+    background: #FFA428;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 6px;
+}
+
 .rowItem input[type=radio] {
   vertical-align: middle;
   margin-top: 0;
