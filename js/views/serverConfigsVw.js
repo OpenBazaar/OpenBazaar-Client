@@ -2,7 +2,6 @@
 
 var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
-    // app = require('../App.js').getApp(),        
     BaseVw = require('./baseVw'),
     ServerConfigRowVw = require('./serverConfigRowVw');
 
@@ -57,10 +56,6 @@ module.exports = BaseVw.extend({
         .setState(__.omit(state, 'id'));
     }
   },
-
-  remove: function() {
-    BaseVw.prototype.remove.apply(this, arguments);
-  },  
 
   render: function() {
     var scrollTop;

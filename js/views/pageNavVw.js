@@ -11,6 +11,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
+    PageNavServersVw = require('../views/pageNavServersVw'),
     remote = require('remote'),
     pjson = require('../../package.json');
 
@@ -45,8 +46,10 @@ module.exports = baseVw.extend({
     'click .js-navDismisslUpdate': 'dismissUpdate',
     'click [data-popmenu]': 'onPopMenuNavClick',
     'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro',
-    'mouseenter .js-server-config-submenu-trigger': 'mouseenterServerSubmenuTrigger',
-    'mouseleave .js-server-config-submenu-trigger': 'mouseleaveServerSubmenuTrigger'
+    'mouseenter .js-serverSubmenuTrigger': 'mouseenterServerSubmenuTrigger',
+    'mouseleave .js-serverSubmenuTrigger': 'mouseleaveServerSubmenuTrigger',
+    'mouseenter .js-serverSubmenu': 'mouseenterServerSubmenu',
+    'mouseleave .js-serverSubmenu': 'mouseleaveServerSubmenu'
   },
 
   initialize: function(options){
@@ -272,7 +275,15 @@ module.exports = baseVw.extend({
       self.$notifMenu.find('#notificationsPanel')
           .html(self.notificationsVw.render().el);
 
-      self.setNotificationCount(self.getUnreadNotifCount());          
+      self.setNotificationCount(self.getUnreadNotifCount());
+
+      self.pageNavServersVw && self.pageNavServersVw.remove();
+      self.pageNavServersVw = new PageNavServersVw({
+        collection: app.serverConfigs
+      });
+      self.$('.js-serverSubmenu').html(
+        self.pageNavServersVw.render().el
+      );
 
       //add the admin panel
       /*
@@ -608,6 +619,21 @@ module.exports = baseVw.extend({
   },
 
   mouseleaveServerSubmenuTrigger: function(e) {
+    clearTimeout(this.ServerSubmenuTimeout);
+
+    setTimeout(() => {
+      if (!this.overServerSubmenu) {
+        this.serverSubmenu.removeClass('server-submenu-opened');
+      }
+    }, 100);
+  },
+
+  mouseenterServerSubmenu: function(e) {
+    this.overServerSubmenu = true;
+  },
+
+  mouseleaveServerSubmenu: function(e) {
+    this.overServerSubmenu = false;
     clearTimeout(this.ServerSubmenuTimeout);
     this.serverSubmenu.removeClass('server-submenu-opened');
   },  

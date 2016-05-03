@@ -2,7 +2,6 @@
 
 var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
-    // app = require('../App.js').getApp(),        
     BaseVw = require('./baseVw');
 
 module.exports = BaseVw.extend({
@@ -54,10 +53,6 @@ module.exports = BaseVw.extend({
       this.render();
     }
   },
-
-  remove: function() {
-    BaseVw.prototype.remove.apply(this, arguments);
-  },  
 
   render: function() {
     loadTemplate('./js/templates/serverConfigRow.html', (t) => {

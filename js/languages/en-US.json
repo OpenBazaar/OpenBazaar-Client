@@ -573,7 +573,9 @@
     "about": "About OpenBazaar",
     "support": "Support OpenBazaar",
     "Forward": "Forward",
-    "Back": "Back"
+    "Back": "Back",
+    "newServer": "New Server",
+    "manageServers": "Manage Servers"
   },
   "onboarding": {
     "intro": "OpenBazaar Configuration",

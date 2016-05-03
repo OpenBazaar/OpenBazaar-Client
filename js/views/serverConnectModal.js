@@ -41,10 +41,6 @@ module.exports = BaseModal.extend({
     this.listenTo(this.serverConfigsVw, 'cancel', this.onCancelClick);
   },
 
-  remove: function() {
-    BaseModal.prototype.remove.apply(this, arguments);
-  },
-
   hideMessageBar: function() {
     this.$jsMsgBar.addClass('slide-out');
   },

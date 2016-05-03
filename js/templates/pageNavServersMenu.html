@@ -1,0 +1,53 @@
+<% ob.servers.forEach((server) => {  %>
+<a class="flexRow">
+  <div class="rowItem positionRelative padding010">
+    <div class="flexRow">
+      <div class="table">
+        <div>
+          <div class="vertAlignMid noOverflow" style="width: 20px;">
+            <% if (server.id === ob.connectedServer) { %>
+            <span class="ion-checkmark fontSize12 marginRight2 textOpacity1"></span>
+            <% } %>
+          </div>
+          <div class="vertAlignMid noOverflow">
+            <%= server.name %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+<% }); %>
+<hr/>
+<a class="flexRow js-newServer">
+  <div class="rowItem positionRelative padding010">
+    <div class="flexRow">
+      <div class="table">
+        <div>
+          <div class="vertAlignMid noOverflow" style="width: 20px;">
+            <span class="ion-plus fontSize12 textOpacity1"></span>
+          </div>
+          <div class="vertAlignMid noOverflow">
+            <%= polyglot.t('nav.newServer') %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+<a class="flexRow js-manageServers">
+  <div class="rowItem positionRelative padding010">
+    <div class="flexRow">
+      <div class="table">
+        <div>
+          <div class="vertAlignMid noOverflow" style="width: 20px;">
+            <span class="ion-gear-a fontSize10 marginRight3 textOpacity1"></span>
+          </div>
+          <div class="vertAlignMid noOverflow">
+            <%= polyglot.t('nav.manageServers') %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
