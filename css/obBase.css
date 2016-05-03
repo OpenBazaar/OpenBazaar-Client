@@ -4269,7 +4269,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 9;
 }
 
-#loadingModal, .page-connect-modal.startup-server-connect {
+#loadingModal, .page-connect-modal.server-connect {
   z-index: 14;
 }
 
@@ -4309,16 +4309,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0;
 }
 
-#ov1 .server-config-form {
+#ov1 .server-config-form:not('.no-transition') {
   transition: top 250ms;
 }
 
 #ov1 .server-config-form.slide-out {
   top: 372px;
-}
-
-#ov1 .server-config-row {
-  /*min-height: 73px;*/
 }
 
 #ov1 .server-config-row .connection-failed::after {

@@ -1,5 +1,5 @@
 <% ob.servers.forEach((server) => {  %>
-<a class="flexRow">
+<a class="flexRow js-pageNavServer <% server.id === ob.connectedServer && print('noPointerEvents') %>" data-server-config-id="<%= server.id %>">
   <div class="rowItem positionRelative padding010">
     <div class="flexRow">
       <div class="table">

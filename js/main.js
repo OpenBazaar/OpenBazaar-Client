@@ -427,7 +427,7 @@ launchOnboarding = function(guidCreating) {
   var activeServer = app.serverConfigs.getActive();
 
   pageConnectModal = new PageConnectModal({
-    className: 'startup-server-connect top0',
+    className: 'server-connect top0',
     initialState: {
       statusText: activeServer && activeServer.get('default') ?
         polyglot.t('serverConnectModal.connectingToDefault') :

@@ -489,7 +489,9 @@ module.exports = baseVw.extend({
 
   closeNav: function() {
     app.hideOverlay();
-    self.$('.js-navProfileMenu').removeClass('popMenu-opened');    
+    self.$('.js-navProfileMenu').removeClass('popMenu-opened');
+    clearTimeout(this.ServerSubmenuTimeout);
+    this.serverSubmenu.removeClass('server-submenu-opened');    
   },
 
   navCloseClick: function(){

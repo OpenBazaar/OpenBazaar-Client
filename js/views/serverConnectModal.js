@@ -62,10 +62,14 @@ module.exports = BaseModal.extend({
       title: polyglot.t('serverConnectModal.serverConfigsTitle'),
       showNew: true
     });
+
+    return this;
   },  
 
   showConfigForm: function(configMd) {
     var model = configMd;
+
+    this._state = this.options.initialState || {};
 
     if (!model) {
       model = new ServerConfigMd();
@@ -96,7 +100,9 @@ module.exports = BaseModal.extend({
     
     this.$jsConfigFormWrap.one('transitionend', () => {
       this.serverConfigFormVw.$('input[name="name"]').focus();
-    }).removeClass('slide-out');    
+    }).removeClass(`slide-out ${!this.isOpen() ? 'no-transition' : ''}`);    
+
+    return this;
   },
 
   newConfigForm: function() {
@@ -169,10 +175,12 @@ module.exports = BaseModal.extend({
   },
 
   connect: function(configMd) {
+    var connectAttempt;
+
     configMd = configMd || this.serverConfigs.getActive();
 
     if (!configMd) {
-      throw new Error(`Unable to connect because no config was created, nor is there a stored
+      throw new Error(`Unable to connect because no config was provided, nor is there a stored
         active configuration in the ServerConfigs collection.`);
     }
 
@@ -205,11 +213,12 @@ module.exports = BaseModal.extend({
     });
 
     this.connectAttempt.serverId = configMd.id;
+    connectAttempt = this.connectAttempt;
 
-    return this;
+    return connectAttempt;
   },
 
-  attemptConnection: function() {
+  attemptConnection: function(options) {
     var self = this,
         deferred = $.Deferred(),
         promise = deferred.promise(),
