@@ -256,7 +256,11 @@ module.exports = baseVw.extend({
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     this.model.set('version', pjson.version);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      var connectedServer = app.serverConnectModal.getConnectedServer();
+
+      self.$el.html(loadedTemplate(
+        __.extend(self.model.toJSON(), { connectedServer: connectedServer && connectedServer.toJSON() })
+      ));
 
       self.$notifMenu = self.$('.js-navNotificationsMenu');
       self.$navNotif = self.$('.js-navNotifications');
