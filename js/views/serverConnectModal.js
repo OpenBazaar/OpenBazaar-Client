@@ -54,6 +54,8 @@ module.exports = BaseModal.extend({
   },  
 
   closeConfigForm: function() {
+    var disp;
+
     if (!this.$jsConfigFormWrap) return;
     
     this.$jsConfigFormWrap.addClass('slide-out');
@@ -62,6 +64,22 @@ module.exports = BaseModal.extend({
       title: polyglot.t('serverConnectModal.serverConfigsTitle'),
       showNew: true
     });
+
+    setTimeout(() => {
+      if (this.isOpen()) {
+        // for some reason, when launching the modal and immediatally
+        // opening the config, a subsequent close doesn't position it
+        // properly unless we force a redraw (at least on Mac chrome).
+        this.$jsConfigFormWrap.one('transitionend', () => {
+          disp = this.$jsConfigFormWrap[0].style.display;
+          this.$jsConfigFormWrap[0].style.display = 'none';
+      
+          setTimeout(() => {
+            this.$jsConfigFormWrap[0].style.display = disp;
+          }, 100);      
+        });
+      }
+    }, 0);
 
     return this;
   },  
@@ -98,9 +116,19 @@ module.exports = BaseModal.extend({
       this.connect(md);
     });
     
-    this.$jsConfigFormWrap.one('transitionend', () => {
-      this.serverConfigFormVw.$('input[name="name"]').focus();
-    }).removeClass(`slide-out ${!this.isOpen() ? 'no-transition' : ''}`);    
+    if (this.isOpen()) {
+      this.$jsConfigFormWrap.one('transitionend', () => {
+        this.serverConfigFormVw.$('input[name="name"]').focus();
+      }).removeClass('slide-out');
+    } else {
+      this.$jsConfigFormWrap.addClass('no-transition')
+        .removeClass('slide-out');
+
+      setTimeout(() => {
+        this.serverConfigFormVw.$('input[name="name"]').focus();
+        this.$jsConfigFormWrap.removeClass('no-transition');
+      }, 0);      
+    }
 
     return this;
   },

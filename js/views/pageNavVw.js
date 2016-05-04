@@ -295,6 +295,7 @@ module.exports = baseVw.extend({
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
       self.serverSubmenu = self.$('.js-serverSubmenu');
+      self.serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
 
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
@@ -487,7 +488,17 @@ module.exports = baseVw.extend({
     }
   },
 
-  closeNav: function() {
+  closeNav: function(e) {
+    if (
+      e &&
+      (
+        e.target === this.serverSubmenuTrigger[0] ||
+        $(e.target).parents('.js-serverSubmenuTrigger').length
+      )
+    ) {
+      return;
+    }    
+
     app.hideOverlay();
     self.$('.js-navProfileMenu').removeClass('popMenu-opened');
     clearTimeout(this.ServerSubmenuTimeout);

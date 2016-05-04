@@ -4309,7 +4309,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0;
 }
 
-#ov1 .server-config-form:not('.no-transition') {
+#ov1 .server-config-form:not(.no-transition) {
   transition: top 250ms;
 }
 
