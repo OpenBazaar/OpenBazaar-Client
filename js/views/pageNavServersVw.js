@@ -53,23 +53,21 @@ module.exports = BaseVw.extend({
       app.serverConnectModal.open();      
     }).open();
 
-    app.serverConnectModal.connect(serverConfig);
-      // .done(() => {
-      //   alert('im done');
-      //   this.pageConnectModal.remove();
-      // }).fail(() => {
-      //   alert('ive failed');
-      //   return;
-      //   alert('china town');
-      //   this.pageConnectModal.remove();
-      //   app.serverConnectModal.open();
-      // });
+    app.serverConnectModal.connect(serverConfig)
+      .done(() => {
+        this.pageConnectModal.remove();
+      }).fail(() => {
+        this.pageConnectModal.remove();
+        app.serverConnectModal.open();
+      });
   },
 
   render: function() {
+    var connectedServerConfig = app.serverConnectModal.getConnectedServer();
+
     loadTemplate('./js/templates/pageNavServersMenu.html', (t) => {
       this.$el.html(t({
-        connectedServer: this.collection.at(0).id,
+        connectedServer: connectedServerConfig && connectedServerConfig.id,
         servers: this.collection.toJSON()
       }));
     });

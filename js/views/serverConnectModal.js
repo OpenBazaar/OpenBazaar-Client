@@ -129,7 +129,7 @@ module.exports = BaseModal.extend({
 
     if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
 
-    this.connectedServer = configMd;
+    this._connectedServer = configMd;
 
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
@@ -151,7 +151,7 @@ module.exports = BaseModal.extend({
     var msg;
 
     if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
-    if (this.connectedServer && this.connectedServer.id === configMd.id) this.connectedServer = null;
+    if (this._connectedServer && this._connectedServer.id === configMd.id) this._connectedServer = null;
 
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
@@ -187,13 +187,13 @@ module.exports = BaseModal.extend({
     this.connectAttempt && this.connectAttempt.cancel();
     this.hideMessageBar();
 
-    if (this.connectedServer) {
+    if (this._connectedServer) {
       this.serverConfigsVw.setConnectionState({
-        id: this.connectedServer.id,
+        id: this._connectedServer.id,
         status: 'not-connected'
       });
 
-      this.connectedServer = null;    
+      this._connectedServer = null;    
     }
 
     this.serverConfigsVw.setConnectionState({
@@ -307,6 +307,10 @@ module.exports = BaseModal.extend({
     }, 10000);
 
     return promise;
+  },
+
+  getConnectedServer: function() {
+    return this._connectedServer;
   },
 
   close: function() {

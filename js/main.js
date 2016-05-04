@@ -399,7 +399,14 @@ var loadProfile = function(landingRoute, onboarded) {
 $(document).ajaxSend(function(e, jqXhr, settings) {
   // With this we could map ajax responses to the server config
   // that was active when they were initiated.
-  jqXhr.serverConfig = app.serverConfigs.getActive().id;
+  jqXhr.serverConfig = app.serverConfigs.getActive();
+});
+
+$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+  if (jqxhr.status === 401 && jqxhr.serverConfig.id === app.serverConfigs.getActive().id) {
+    app.serverConnectModal.failConnection('failed-auth', jqxhr.serverConfig)
+      .open();
+  }
 });
 
 launchOnboarding = function(guidCreating) {
@@ -447,11 +454,19 @@ pageConnectModal.on('cancel', () => {
 app.connectHeartbeatSocket();
 app.serverConnectModal = new ServerConnectModal().render();
 app.serverConnectModal.on('connected', (authenticated) => {
-  $loadingModal.removeClass('hide');
-
-  if (authenticated) {
-    profileLoaded && location.reload();
+  if (profileLoaded) {
+    // If we've already loaded called loadProfile() and then, we connect
+    // to a new server (or reconnect to the same server) we'll reload the
+    // app since some of the "global" components (Router, PageNav,
+    // SocketView...) were not designed to handle a new connection.
+    authenticated && location.reload();
+  } else {
+    // clear some flags so the heartbeat events will
+    // appropriatally loadProfile or launch onboarding
+    guidCreating = null;
+    loadProfileNeeded = true;
     app.serverConnectModal.close();
+    $loadingModal.removeClass('hide');
   }
 });
 
@@ -459,12 +474,6 @@ app.getHeartbeatSocket().on('open', function(e) {
   removeStartupRetry();
   pageConnectModal.remove();
   $loadingModal.removeClass('hide');
-  onboardingModal && onboardingModal.remove();
-
-  // clear some flags so the heartbeat events will
-  // appropriatally loadProfile or launch onboarding
-  guidCreating = null;
-  loadProfileNeeded = true;
 });
 
 app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
@@ -518,6 +527,7 @@ app.getHeartbeatSocket().on('message', function(e) {
       case 'online':
         if (loadProfileNeeded && !guidCreating) {
           loadProfileNeeded = false;
+          onboardingModal && onboardingModal.remove();
 
           app.login().done(function(data) {
             if (data.success) {
