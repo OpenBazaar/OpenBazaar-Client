@@ -453,20 +453,13 @@ pageConnectModal.on('cancel', () => {
 
 app.connectHeartbeatSocket();
 app.serverConnectModal = new ServerConnectModal().render();
-app.serverConnectModal.on('connected', (authenticated) => {
+app.serverConnectModal.on('connected', () => {
   if (profileLoaded) {
     // If we've already loaded called loadProfile() and then, we connect
     // to a new server (or reconnect to the same server) we'll reload the
     // app since some of the "global" components (Router, PageNav,
     // SocketView...) were not designed to handle a new connection.
-    authenticated && location.reload();
-  } else {
-    // clear some flags so the heartbeat events will
-    // appropriatally loadProfile or launch onboarding
-    guidCreating = null;
-    loadProfileNeeded = true;
-    app.serverConnectModal.close();
-    $loadingModal.removeClass('hide');
+    location.reload();
   }
 });
 
@@ -474,6 +467,15 @@ app.getHeartbeatSocket().on('open', function(e) {
   removeStartupRetry();
   pageConnectModal.remove();
   $loadingModal.removeClass('hide');
+
+  if (!profileLoaded) {
+    // clear some flags so the heartbeat events will
+    // appropriatally loadProfile or launch onboarding
+    guidCreating = null;
+    loadProfileNeeded = true;
+    app.serverConnectModal.close();
+    $loadingModal.removeClass('hide');    
+  }  
 });
 
 app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
@@ -495,8 +497,16 @@ removeStartupRetry = function() {
   clearTimeout(startUpRetry.timeout);
   app.getHeartbeatSocket().off('close', startUpRetry);
   app.getHeartbeatSocket().on('close', (e) => {
-    app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
-      .open();    
+    app.serverConnectModal.failConnection(null, app.serverConfigs.getActive());
+    
+    if (app.serverConnectModal.getConnectAttempt()) {
+      app.serverConnectModal.getConnectAttempt()
+        .fail(() => {
+          app.serverConnectModal.open();
+        });
+    } else {
+      app.serverConnectModal.open();
+    }      
   });
 };
 
@@ -504,6 +514,7 @@ app.getHeartbeatSocket().on('message', function(e) {
   if (e.jsonData && e.jsonData.status) {
     switch (e.jsonData.status) {
       case 'generating GUID':
+        profileLoaded && location.reload();
         if (guidCreating) return;
 
         // todo: put in some timeout in the off chance the guid
@@ -514,6 +525,8 @@ app.getHeartbeatSocket().on('message', function(e) {
         launchOnboarding(guidCreating);
         break;
       case 'GUID generation complete':
+        profileLoaded && location.reload();
+
         app.serverConfigs.getActive().save({
           username: e.jsonData.username,
           password: e.jsonData.password

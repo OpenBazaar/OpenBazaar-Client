@@ -142,7 +142,7 @@ module.exports = BaseModal.extend({
   },
 
   onCancelClick: function(e) {
-    this.connectAttempt && this.connectAttempt.cancel();
+    this._connectAttempt && this._connectAttempt.cancel();
   },  
 
   onConnectClick: function(e) {
@@ -155,9 +155,9 @@ module.exports = BaseModal.extend({
 
     // todo: validate args
 
-    if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
-
     this._connectedServer = configMd;
+
+    if (this._connectAttempt && this._connectAttempt.state() === 'pending') return this;
 
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
@@ -178,8 +178,8 @@ module.exports = BaseModal.extend({
 
     var msg;
 
-    if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
     if (this._connectedServer && this._connectedServer.id === configMd.id) this._connectedServer = null;
+    if (this._connectAttempt && this._connectAttempt.state() === 'pending') return this;
 
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
@@ -212,7 +212,7 @@ module.exports = BaseModal.extend({
         active configuration in the ServerConfigs collection.`);
     }
 
-    this.connectAttempt && this.connectAttempt.cancel();
+    this._connectAttempt && this._connectAttempt.cancel();
     this.hideMessageBar();
 
     if (this._connectedServer) {
@@ -232,16 +232,16 @@ module.exports = BaseModal.extend({
     this.setModalOptions({ showCloseButton: false });
     this.serverConfigs.setActive(configMd.id);
 
-    this.connectAttempt = this.attemptConnection().done(() => {
+    this._connectAttempt = this.attemptConnection().done(() => {
       this.succeedConnection(configMd);
     }).fail((reason) => {
       this.failConnection(reason, configMd)
     }).always(() => {
-      this.connectAttempt = null;
+      this._connectAttempt = null;
     });
 
-    this.connectAttempt.serverId = configMd.id;
-    connectAttempt = this.connectAttempt;
+    this._connectAttempt.serverId = configMd.id;
+    connectAttempt = this._connectAttempt;
 
     return connectAttempt;
   },
@@ -280,7 +280,6 @@ module.exports = BaseModal.extend({
       loginRequest = app.login().done(function(data) {
         if (data.success) {
           conclude(false, data);
-          self.trigger('connected', true);
         } else {
           if (data.reason === 'too many attempts') {
             conclude(true, 'failed-auth-too-many');
@@ -340,6 +339,10 @@ module.exports = BaseModal.extend({
   getConnectedServer: function() {
     return this._connectedServer;
   },
+
+  getConnectAttempt: function() {
+    return this._connectAttempt;
+  },  
 
   close: function() {
     this.closeConfigForm();
