@@ -94,7 +94,7 @@
     "ReturnPolicyPlaceholder": "반품 정책 입력",
     "CategoryPlaceholder": "제품 분류 입력",
     "CategoryHelperText": "제품 분류는 스토어의 제품 목록을 그룹으로 묶고 구성하는 데 사용합니다.",
-    "KeywordsHelperText": "Adding tags helps your listing to be discovered in the market. You can only have one of each tag, and a maximum of 10 tags",
+    "KeywordsHelperText": "태크가 추가 된게 시장에서 발견되면 당신의 목록을 도울수 있습니다. 당신은 오직 각 최대치 10개의 태그를 가질수 있습니다.",
     "ExpirationDateHelperText": "스토어에서 자동으로 목록을 내릴 날짜를 지정합니다.",
     "ClearExpirationDate": "만료일 삭제",
     "ReturnPolicy": "반품 정책",
@@ -118,8 +118,8 @@
     "Shipping": "배송",
     "Shipping2": "배송:",
     "ShippingReturns": "배송 & 반품",
-    "CountryOfOrigin": "원산지:",
-    "CanBeShippedTo": "Can Ship to You In:",
+    "CountryOfOrigin": "원산지",
+    "CanBeShippedTo": "당신에게 ..으로 선박을 보낼수 있을까요:",
     "NoShippableAddress": "None of your saved addresses are in a country this listing can be shipped to.",
     "Addresses": "주소",
     "Files": "파일",
@@ -137,7 +137,7 @@
     "SelectRegion": "선택 지역 추가",
     "AllRegions": "모든 국가",
     "EuropeanUnion": "유럽 연합",
-    "EuropeanEconomicArea": "European Economic Area",
+    "EuropeanEconomicArea": "European Economic Area (유럽 경제 지역)",
     "Optional": "옵션",
     "Customize": "사용자 지정",
     "Save": "저장",
@@ -281,10 +281,10 @@
     "Summary": "요약",
     "Funds": "Funds",
     "Discussion": "Discussion",
-    "Quantity": "Quantity:",
-    "ShippingTo": "Shipping To",
+    "Quantity": "분량:",
+    "ShippingTo": "받는 사람",
     "ModeratedBy": "Moderated by",
-    "Submit": "Submit",
+    "Submit": "제출",
     "maxLength20": "max length 20 char",
     "maxLength80": "max length 80 char",
     "maxLength200": "max length 200 char",
@@ -298,8 +298,8 @@
     "ClickToChange": "Click to change",
     "NotProvided": "not provided",
     "NotFollowingAnyone": "Not following anyone",
-    "NoFollowers": "No followers",
-    "NoReviews": "No reviews",
+    "NoFollowers": "팔로워 없는",
+    "NoReviews": "리뷰 없는",
     "NoDetailsSpecified": "No details specified",
     "Moderator": "Moderator",
     "Moderator2": "Moderator:",
@@ -327,7 +327,7 @@
     "AdditionalPaymentData": "Additional payment data",
     "AdditionalPaymentDataInfo": "Include name of purchase and order number in payment QR code?",
     "firewall": {
-        "Open": "Open",
+        "Open": "열기",
         "Restricted": "Restricted",
         "SeverelyRestricted": "Severely Restricted"
     },
@@ -339,18 +339,18 @@
     "BecomeModerator": "Become a Moderator",
     "EditModerator": "Moderator Settings",
     "overallRatingKeys": {
-        "fiveStar": "Excellent all around",
-        "fourStar": "Good",
-        "threeStar": "Average",
-        "twoStar": "Poor",
-        "oneStar": "Terrible"
+        "fiveStar": "훌륭한 all around",
+        "fourStar": "좋은",
+        "threeStar": "평균",
+        "twoStar": "가난한",
+        "oneStar": "끔찍한"
     },
     "qualityRatingKeys": {
-        "fiveStar": "Excellent quality",
-        "fourStar": "Good quality",
-        "threeStar": "Average quality",
-        "twoStar": "Poor quality",
-        "oneStar": "Terrible quality"
+        "fiveStar": "훌륭한 quality",
+        "fourStar": "좋은 quality",
+        "threeStar": "평균 quality",
+        "twoStar": "가난한 quality",
+        "oneStar": "끔찍한 quality"
     },
     "descriptionRatingKeys": {
         "fiveStar": "Exactly as described",
@@ -360,11 +360,11 @@
         "oneStar": "Did not match description"
     },
     "deliveryRatingKeys": {
-        "fiveStar": "Extremly fast",
-        "fourStar": "Relatively fast",
-        "threeStar": "Average",
-        "twoStar": "Slow",
-        "oneStar": "Terribly slow"
+        "fiveStar": "너무 빨른",
+        "fourStar": "Relatively 빨른",
+        "threeStar": "평균 속도",
+        "twoStar": "느린",
+        "oneStar": "끔찍한 느린"
     },
     "customerServiceRatingKeys": {
         "fiveStar": "Excellent",
