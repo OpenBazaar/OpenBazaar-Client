@@ -1,0 +1,19 @@
+<div class="modal-hero modal-shadow-inner1 bg-dark-blue custCol-secondary-darken">
+  <div class="modal-hero-icon"></div>
+  <p class="h6 homeModal-heroText fancy-heading <%= ob.msgClass || '' %>"><%= ob.msg %></p>
+</div>
+
+<div class="bar barTxt h6 color-secondary custCol-secondary custCol-text">
+  <%= ob.title %>
+  <span class="fontSize14 floatRight">
+    <% if (ob.showNew) { %>
+    <a class="btn btn-txt marginTop9 textOpacity90 color-primary custCol-primary js-new">
+      <%= polyglot.t('New') %>
+    </a>
+    <% } else { %>
+    <a class="btn btn-txt marginTop9 textOpacity90 color-primary custCol-primary js-close">
+      <%= polyglot.t('Close') %>
+    </a>
+    <% } %>
+  </span>
+</div>

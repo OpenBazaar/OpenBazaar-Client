@@ -161,7 +161,7 @@ module.exports = baseVw.extend({
     if (data.hasOwnProperty('notification')) {
       notif = data.notification;
       username = notif.handle ? notif.handle : notif.guid.substring(0,10) + '...';
-      avatar = notif.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
+      avatar = notif.image_hash ? app.serverConfigs.getActive().getServerBaseUrl + '/get_image?hash=' +
         notif.image_hash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
       notifStamp = Date.now();
 
@@ -408,7 +408,7 @@ module.exports = baseVw.extend({
       });
 
       $.ajax({
-        url: app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read',
+        url: app.serverConfigs.getActive().getServerBaseUrl() + '/mark_notification_as_read',
         type: 'POST',
         contentType: false,
         processData: false,

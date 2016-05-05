@@ -42,8 +42,10 @@ var Polyglot = require('node-polyglot'),
     socketView = require('./views/socketVw'),
     cCode = "",
     $loadingModal = $('.js-loadingModal'),
+    ServerConfigsCl = require('./collections/serverConfigsCl'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
+    PageConnectModal = require('./views/pageConnectModal'), 
     serverConfigMd = app.serverConfig,
     heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
@@ -51,19 +53,18 @@ var Polyglot = require('node-polyglot'),
     startUpConnectRetryDelay = 2 * 1000,
     startUpConnectMaxTime = 6 * 1000,
     startTime = Date.now(),
+    startUpRetry,
+    removeStartupRetry,
+    onActiveServerSync,
     extendPolyglot,
     newPageNavView,
     newSocketView,
     serverConnectModal,
     onboardingModal,
-    startInitSequence,
-    startLocalInitSequence,
-    startRemoteInitSequence,
+    pageConnectModal,
     launchOnboarding,
-    launchServerConnect,
     setServerUrl,
-    guidCreating,
-    after401LoginRequest;
+    guidCreating;
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 //retrieve the stored value, since user is a blank model at this point
@@ -90,17 +91,62 @@ user.on('change:language', function(md, lang) {
 
 });
 
-//keep user and profile urls synced with the server configuration
+app.serverConfigs = new ServerConfigsCl();
+app.serverConfigs.fetch().done(() => {
+  var oldConfig,
+      defaultConfig;
+
+  if (!app.serverConfigs.getActive()) {
+    defaultConfig = app.serverConfigs.create({
+      name: polyglot.t('serverConnectModal.defaultServerName'),
+      default: true
+    })
+
+    // migrate any existing connection from the
+    // old single config set-up (_serverConfig-1)
+    if (oldConfig = localStorage['_serverConfig-1']) {
+      oldConfig = JSON.parse(oldConfig);
+      
+      app.serverConfigs.setActive(
+        app.serverConfigs.create(
+          __.extend(
+            {},
+            __.omit(oldConfig, ['local_username', 'local_password', 'id']),
+            { name: polyglot.t('serverConnectModal.portedConnectionName') }
+          )
+        ).id          
+      );
+
+      if (oldConfig.local_username && oldConfig.local_password) {
+        defaultConfig.save({
+          local_username: oldConfig.local_username,
+          local_password: oldConfig.local_password
+        });
+      }
+
+      localStorage.removeItem('_serverConfig-1');
+    } else {
+      app.serverConfigs.setActive(defaultConfig.id);
+    }
+  }  
+});
+
+//keep user and profile urls synced with the active server configuration
 (setServerUrl = function() {
-  var baseServerUrl = serverConfigMd.getServerBaseUrl();
+  var baseServerUrl = app.serverConfigs.getActive().getServerBaseUrl();
 
   user.urlRoot = baseServerUrl + "/settings";
   user.set('serverUrl', baseServerUrl + '/');
   userProfile.urlRoot = baseServerUrl + "/profile";
 })();
 
-serverConfigMd.on('sync', function(md) {
+app.serverConfigs.getActive().on('sync', (onActiveServerSync = function(md) {
   setServerUrl();
+}));
+
+app.serverConfigs.on('activeServerChange', (md) => {
+  setServerUrl();
+  app.serverConfigs.getActive().off('sync', onActiveServerSync);
 });
 
 //put the event bus into the window so it's available everywhere
@@ -124,10 +170,9 @@ $('body').on('click', 'a', function(e){
 
   if(targUrl.startsWith('ob')){
     e.preventDefault();
-    app.router.translateRoute(targUrl.replace('ob://', '')).done((translatedRoute) => {
-      app.router.navigate(translatedRoute, {trigger:true});
+    app.router.translateRoute(targUrl.replace('ob://', '')).done((route) => {
+      Backbone.history.navigate(route, {trigger:true});
     });
-
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
     e.preventDefault();
 
@@ -249,7 +294,7 @@ $(window).bind('keydown', function(e) {
       Backbone.history.navigate(route, {
         trigger: true
       });
-	  }
+    }
   }
 });
 
@@ -351,30 +396,14 @@ var loadProfile = function(landingRoute, onboarded) {
   });
 };
 
-$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
-  if (jqxhr.status === 401) {
-    if (after401LoginRequest && after401LoginRequest.state() === 'pending') return;
-
-    after401LoginRequest = app.login().done(function(data) {
-      var route = location.hash;
-
-      if (data.success) {
-        // refresh the current route
-        Backbone.history.navigate('blah-blah-blah');
-        Backbone.history.navigate(route, { replace: true, trigger: true });
-      } else {
-        launchServerConnect();
-      }
-    }).fail(function() {
-      launchServerConnect();
-    });
-  }
+$(document).ajaxSend(function(e, jqXhr, settings) {
+  // With this we could map ajax responses to the server config
+  // that was active when they were initiated.
+  jqXhr.serverConfig = app.serverConfigs.getActive().id;
 });
 
 launchOnboarding = function(guidCreating) {
-  serverConnectModal && serverConnectModal.remove();
-  serverConnectModal = null;
-
+  app.serverConnectModal.close();
   onboardingModal && onboardingModal.remove();
   onboardingModal = new OnboardingModal({
     model: user,
@@ -385,6 +414,7 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.render().open();
 
   onboardingModal.on('onboarding-complete', function(guid) {
+    app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
     onboardingModal && onboardingModal.remove();
     onboardingModal = null;
     loadProfile('#userPage/' + guid + '/store', true);
@@ -392,58 +422,76 @@ launchOnboarding = function(guidCreating) {
   });
 };
 
-launchServerConnect = function() {
-  if (!serverConnectModal) {
-    serverConnectModal = new ServerConnectModal();
+// start - server connection and app initialization flow
+(() => {
+  var activeServer = app.serverConfigs.getActive();
 
-    serverConnectModal.on('connected', function(authenticated) {
-      $loadingModal.removeClass('hide');
-
-      if (authenticated) {
-        serverConnectModal && serverConnectModal.remove();
-        serverConnectModal = null;
-      }
-    });
-
-    serverConnectModal.render()
-      .open()
-      .start();
-  } else {
-    if (!serverConnectModal.isOpen()) {
-      serverConnectModal.open();
-      if (!serverConnectModal.isStarted()) serverConnectModal.start();
+  pageConnectModal = new PageConnectModal({
+    className: 'startup-server-connect top0',
+    initialState: {
+      statusText: activeServer && activeServer.get('default') ?
+        polyglot.t('serverConnectModal.connectingToDefault') :
+        polyglot.t('serverConnectModal.connectingTo', { serverName: activeServer.get('name') })
     }
-  }
-};
+  });
+})()
 
-heartbeat.on('open', function(e) {
-  if (profileLoaded) {
-    location.reload();
-  } else {
-    // clear some flags so the heartbeat events will
-    // appropriatally loadProfile or launch onboarding
-    guidCreating = null;
-    loadProfileNeeded = true;
+pageConnectModal.on('cancel', () => {
+  removeStartupRetry();
+  app.getHeartbeatSocket()._socket.onclose = null;
+  app.getHeartbeatSocket().close();
+  pageConnectModal.remove();
+  app.serverConnectModal.open();
+}).render().open();
 
-    onboardingModal && onboardingModal.remove();
+app.connectHeartbeatSocket();
+app.serverConnectModal = new ServerConnectModal().render();
+app.serverConnectModal.on('connected', (authenticated) => {
+  $loadingModal.removeClass('hide');
+
+  if (authenticated) {
+    profileLoaded && location.reload();
+    app.serverConnectModal.close();
   }
 });
 
-heartbeat.on('close', function(e) {
+app.getHeartbeatSocket().on('open', function(e) {
+  removeStartupRetry();
+  pageConnectModal.remove();
+  $loadingModal.removeClass('hide');
+  onboardingModal && onboardingModal.remove();
+
+  // clear some flags so the heartbeat events will
+  // appropriatally loadProfile or launch onboarding
+  guidCreating = null;
+  loadProfileNeeded = true;
+});
+
+app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
   if (
     Date.now() - startTime < startUpConnectMaxTime &&
     startUpConnectMaxRetries
   ) {
-    setTimeout(() => {
+    startUpRetry.timeout = setTimeout(() => {
       startUpConnectMaxRetries--;
       app.connectHeartbeatSocket();
     }, startUpConnectRetryDelay);
   } else {
-    launchServerConnect();
+    app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
+      .open();
   }
-});
+}));
 
-heartbeat.on('message', function(e) {
+removeStartupRetry = function() {
+  clearTimeout(startUpRetry.timeout);
+  app.getHeartbeatSocket().off('close', startUpRetry);
+  app.getHeartbeatSocket().on('close', (e) => {
+    app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
+      .open();    
+  });
+};
+
+app.getHeartbeatSocket().on('message', function(e) {
   if (e.jsonData && e.jsonData.status) {
     switch (e.jsonData.status) {
       case 'generating GUID':
@@ -457,17 +505,10 @@ heartbeat.on('message', function(e) {
         launchOnboarding(guidCreating);
         break;
       case 'GUID generation complete':
-        var creds = {
+        app.serverConfigs.getActive().save({
           username: e.jsonData.username,
           password: e.jsonData.password
-        };
-
-        if (app.serverConfig.isLocalServer()) {
-          creds.local_username = e.jsonData.username;
-          creds.local_password = e.jsonData.password;
-        }
-
-        serverConfigMd.save(creds);
+        });
 
         app.login().done(function() {
           guidCreating.resolve();
@@ -480,30 +521,34 @@ heartbeat.on('message', function(e) {
 
           app.login().done(function(data) {
             if (data.success) {
-              $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile')
-                  .done(function(profile) {
+              $.getJSON(app.serverConfigs.getActive().getServerBaseUrl() + '/profile')
+                  .done(function(profile, textStatus) {
+                    if (textStatus == 'parsererror') {
+                      alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+                      app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
+                        .open();
+                      return;
+                    }
+
                     if (__.isEmpty(profile)) {
                       launchOnboarding(guidCreating = $.Deferred().resolve().promise());
                     } else {
+                      app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
                       loadProfile();
-                    }
-                  })
-                  .always(function(data, textStatus){
-                    if(textStatus == 'parsererror'){
-                      alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
                     }
                   });
             } else {
-              launchServerConnect();
+              app.serverConnectModal.failConnection(
+                data.reason === 'too many attempts' ? 'failed-auth-too-many' : 'failed-auth',
+                app.serverConfigs.getActive()
+              ).open();              
             }
           }).fail(function() {
-            launchServerConnect();
+            app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
+              .open();
           });
         }
-
-        // todo: check for edge case where guid creating
-        // is still pending here, meaning the GUID generation
-        // complete message never arrived. Auth will fail.
     }
   }
 });
+// end - server connection and app initialization flow
