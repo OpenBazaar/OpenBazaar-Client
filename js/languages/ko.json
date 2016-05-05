@@ -6,6 +6,7 @@
     "EnterMessage": "메세지를 입력하십시오.",
     "Recommended": "권장",
     "Reload": "다시 로드",
+    "LoadIndex": "Load Index",
     "You": "You",
     "Skip": "건너뛰기",
     "Done": "완료",
@@ -48,6 +49,8 @@
     "ViewListing": "보기 목록",
     "Unfollow": "팔로우 취소",
     "ConfirmUnfollow": "팔로우 취소 확인",
+    "AddModerator": "Add as Moderator",
+    "RemoveModerator": "Remove as Moderator",
     "About": "정보",
     "Version": "버전 %{version}",
     "NoDescriptionAdded": "추가 설명 없음",
@@ -94,6 +97,7 @@
     "ReturnPolicyPlaceholder": "반품 정책 입력",
     "CategoryPlaceholder": "제품 분류 입력",
     "CategoryHelperText": "제품 분류는 스토어의 제품 목록을 그룹으로 묶고 구성하는 데 사용합니다.",
+    "KeywordsPlaceholder": "Enter One or More Tags",
     "KeywordsHelperText": "태크가 추가 된게 시장에서 발견되면 당신의 목록을 도울수 있습니다. 당신은 오직 각 최대치 10개의 태그를 가질수 있습니다.",
     "ExpirationDateHelperText": "스토어에서 자동으로 목록을 내릴 날짜를 지정합니다.",
     "ClearExpirationDate": "만료일 삭제",
@@ -131,6 +135,7 @@
     "Tags": "태그",
     "Keywords": "키워드",
     "ShipsFrom": "배송지로 부터",
+    "ShipsFrom2": "Ships From %{country}",
     "ShipsTo": "배송지",
     "AddShipToRegion": "배송 지역",
     "AddShipToRegionNote": "지역에 모든 국가를 추가",
@@ -230,6 +235,8 @@
     "Moderators": "중재인",
     "CurrentModerators": "현재 중재인",
     "AddModerators": "새 중재인 추가",
+    "ManualAddModerator": "Add Moderators by GUID",
+    "ManualAddModeratorHelp": "Enter the GUIDs of one or more moderators, separated by commas, here. The GUID is on the right side of their About tab on their page. Adding the GUID of a user that is not a moderator will have no effect, that GUID will be ignored.",
     "DeselectToRemoveModerator": "제거하려는 중재인의 선택을 취소",
     "SelectToAddModerator": "추가하려는 중재인을 선택",
     "Categories": "분류",
@@ -322,10 +329,11 @@
     "ServerChangeWarningHeadline": "Caution: Record Your Settings",
     "ServerChangeWarning": "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.",
     "ModeratorFee": "Fee:",
-    "PriceForOne": "Price per single item, file, or service.",
+    "PriceForOne": "Price per single item, file, or service. Based on the listing's base price and the current exchange rate of BTC. This may not match the order total, which is based on the exchange rate of BTC at the time you purchased this listing.",
     "Avatar": "Avatar",
     "AdditionalPaymentData": "Additional payment data",
     "AdditionalPaymentDataInfo": "Include name of purchase and order number in payment QR code?",
+    "ShippableHelp": "This product can be shipped to one of your currently saved addresses. Add more addresses in the Settings/Addresses section to be able to purchase more listings.",
     "firewall": {
         "Open": "열기",
         "Restricted": "Restricted",
@@ -489,7 +497,8 @@
         "UpdatingOrder": "거래 업데이트 중",
         "UpdateComplete": "거래 업데이트 완료",
         "UpdateFailed": "Your transaction update did not complete. Open the transaction and try again",
-        "UpdateInvalid": "Your transaction update returned invalid data. Open the transaction and try again"
+        "UpdateInvalid": "Your transaction update returned invalid data. Open the transaction and try again",
+        "ExportCSV": "Export to CSV"
     },
     "errorMessages": {
         "saveError": "데이터를 저장할 수 없습니다.",
@@ -510,7 +519,8 @@
         "tooManyPhotosBody": "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.",
         "badJSON": "The JSON data returned from the server was malformed",
         "refundAlreadySent": "The refund has already been successfully sent for this order",
-        "serverTimeout": "No response was received from the server. It may be unreachable or taking a very long time to respond."
+        "serverTimeout": "No response was received from the server. It may be unreachable or taking a very long time to respond.",
+        "noData": "No data is available for the options you have selected."
     },
     "pageConnectingMessages": {
         "listingConnect": "Connecting to listing ${listing}",
@@ -557,6 +567,7 @@
         "cases": "사례",
         "notifications": "알림",
         "settings": "설정",
+        "refresh": "Refresh Page",
         "restart": "앱 시작",
         "about": "오픈바자 정보",
         "support": "오픈바자 지원",
