@@ -280,14 +280,13 @@ module.exports = BaseModal.extend({
       loginRequest = app.login().done(function(data) {
         if (data.success) {
           conclude(false, data);
+          self.trigger('connected');
         } else {
           if (data.reason === 'too many attempts') {
             conclude(true, 'failed-auth-too-many');
           } else {
             conclude(true, 'failed-auth');
           }
-
-          self.trigger('connected', false);
         }
       }).fail(function(jqxhr) {
         if (jqxhr.statusText === 'abort') return;
