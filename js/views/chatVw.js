@@ -66,6 +66,20 @@ module.exports = baseVw.extend({
 
       this.setAggregateUnreadCount();
     });
+    
+    this.listenTo(this.chatConversationsCl, 'sort', (cl) => {
+      if (this.chatHeadsVw) {
+        this.chatHeadsVw.setCollection(
+          this.chatConversationsCl
+        );
+
+        this.chatHeadsVw.render();
+  
+        this.$chatHeadsContainer.animate({
+          scrollTop: 0
+        });
+      }
+    });
 
     this.listenTo(this.chatConversationsCl, 'add remove', (md, cl, opts) => {
       if (opts.add) {
@@ -114,8 +128,8 @@ module.exports = baseVw.extend({
         filteredMd && filteredMd.set(md.attributes);
       }
 
-      md.hasChanged('unread') && this.setAggregateUnreadCount();          
-    });      
+      md.hasChanged('unread') && this.setAggregateUnreadCount();
+    });
   },
 
   setAggregateUnreadCount: function() {
