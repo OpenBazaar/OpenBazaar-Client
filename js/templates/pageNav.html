@@ -69,59 +69,59 @@
 <div class="popMenu popMenu-navBar js-navProfileMenu">
   <a href="#userPage">
     <span class="ion-document-text fontSize12 marginRight2 textOpacity1"></span>
-  	<%= polyglot.t('nav.myPage') %>
-  	<span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.myPage.toUpperCase() %></span>
+    <%= polyglot.t('nav.myPage') %>
+    <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.myPage.toUpperCase() %></span>
   </a>
   <a href="#userPage/<%= ob.guid %>/customize">
     <span class="ion-paintbucket fontSize10  textOpacity1"></span>
     <%= polyglot.t('nav.customizePage') %>
-	<span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.customizePage.toUpperCase() %></span>
+    <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.customizePage.toUpperCase() %></span>
   </a>
   <% if(ob.vendor) { %>
-    <a href="#userPage/<%= ob.guid %>/listingNew" >
-      <span class="ion-ios-pricetag fontSize10 marginRight2 textOpacity1"></span>
-      <%= polyglot.t('nav.createListing') %>
-	  <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.create.toUpperCase() %></span>
-    </a>
+  <a href="#userPage/<%= ob.guid %>/listingNew" >
+    <span class="ion-ios-pricetag fontSize10 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.createListing') %>
+    <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.create.toUpperCase() %></span>
+  </a>
   <% }else{ %>
-    <a href="#userPage/<%= ob.guid %>/createStore">
-      <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
-      <%= polyglot.t('CreateStore') %>
-    </a>
+  <a href="#userPage/<%= ob.guid %>/createStore">
+    <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('CreateStore') %>
+  </a>
   <% } %>
   <% if(!ob.moderator){ %>
-    <a href="#userPage/<%- ob.guid %>/becomeModerator">
-      <span class="ion-bowtie fontSize11 marginRight2 textOpacity1"></span>
+  <a href="#userPage/<%- ob.guid %>/becomeModerator">
+    <span class="ion-bowtie fontSize11 marginRight2 textOpacity1"></span>
       <span class="js-userPageBecomeModerator">
         <%= polyglot.t('BecomeModerator') %>
       </span>
-    </a>
+  </a>
   <% } %>
   <hr/>
   <a href="#transactions/purchases">
     <span class="ion-log-out fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('nav.purchases') %>
-	<span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.purchases.toUpperCase() %></span>
+    <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.purchases.toUpperCase() %></span>
   </a>
   <% if(ob.vendor) { %>
-    <a href="#transactions/sales">
-      <span class="ion-log-in fontSize11 marginRight2 textOpacity1"></span>
-      <%= polyglot.t('nav.sales') %>
-	  <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.sales.toUpperCase() %></span>
-    </a>
+  <a href="#transactions/sales">
+    <span class="ion-log-in fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.sales') %>
+    <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.sales.toUpperCase() %></span>
+  </a>
   <% } %>
   <% if(ob.moderator) { %>
-    <a href="#transactions/cases">
-      <span class="ion-briefcase fontSize11 marginRight2 textOpacity1"></span>
-      <%= polyglot.t('nav.cases') %>
-	  <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.cases.toUpperCase() %></span>
-    </a>
+  <a href="#transactions/cases">
+    <span class="ion-briefcase fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.cases') %>
+    <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.cases.toUpperCase() %></span>
+  </a>
   <% } %>
   <hr/>
   <a href="#settings">
     <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('nav.settings') %>
-	<span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.settings.toUpperCase() %></span>
+    <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.settings.toUpperCase() %></span>
   </a>
   <hr/>
   <a class="js-showAboutModal">
@@ -184,16 +184,16 @@
     <% }else{ %>
     style="background-image: url(imgs/defaultUser.png)"
     <% } %>></div>
-  </div>
+</div>
 
-  <div class="statusBar navBar navBar-main fadeOut js-navStatusBar">
-    <div class="pad20 js-statusBarMessage"></div>
-    <div class="btn-corner btn-cornerTR btn-cornerTRSmall js-closeStatus">
-      <h3 class="txt-unleaded ion-close-circled"></h3>
-    </div>
+<div class="statusBar navBar navBar-main fadeOut js-navStatusBar">
+  <div class="pad20 js-statusBarMessage"></div>
+  <div class="btn-corner btn-cornerTR btn-cornerTRSmall js-closeStatus">
+    <h3 class="txt-unleaded ion-close-circled"></h3>
   </div>
+</div>
 
-  <div id="adminPanel"></div>
+<div id="adminPanel"></div>
 </div>
 
 <div class="softwareUpdate softwareUpdateHidden js-softwareUpdate">
