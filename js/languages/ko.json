@@ -532,7 +532,7 @@
     },
     "discover": {
         "searchDefaultText": "네트워크 스캔 중",
-        "searchingText": "Scanning your network for",
+        "searchingText": "네트워크 스캔 중:",
         "noResults": "네트워크에서 제품을 찾을 수 없음",
         "noTaggedResults": "No listings found in your network tagged with"
     },
@@ -557,10 +557,10 @@
         "cases": "사례",
         "notifications": "알림",
         "settings": "설정",
-        "restart": "Restart Application",
+        "restart": "앱 시작",
         "about": "오픈바자 정보",
         "support": "오픈바자 지원",
-        "Forward": "Forward",
+        "Forward": "압",
         "Back": "뒤로"
     },
     "onboarding": {
@@ -585,17 +585,17 @@
         "yourDescription": "설명",
         "handle": "핸들",
         "chooseHandle": "핸들 선택",
-        "knownAs": "You're currently known as:",
+        "knownAs": "오픈바자 핸들 지금의:",
         "wouldYou": "기억하기 쉬운 핸들은 등록하시겠습니까?",
         "registerNew": "새로운 등록",
         "recommended": "팔로우할 추천 페이지",
         "avatar": "아바타 설정",
         "chooseAvatar": "아바타 선택",
-        "discoverCallOut": "OpenBazaar에서 제품과 페이지 탐색",
+        "discoverCallOut": "오픈바자에서 제품과 페이지 탐색",
         "Finished": "완료"
     },
     "guidStillCreating": {
-        "HangTight": "Hang tight for a few...",
+        "HangTight": "잠시만...",
         "YourPersonal": "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.",
         "LookingFor": "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>."
     },
@@ -614,9 +614,9 @@
         "BitGoTagline": "The world's most secure bitcoin wallet. Trusted by leading Bitcoin businesses."
     },
     "softwareUpdate": {
-        "updateAvailable": "OpenBazaar Update Available",
-        "installUpdate": "Install Update",
-        "dismiss": "Dismiss"
+        "updateAvailable": "오픈바자 업데이트 있어",
+        "installUpdate": "업데이트 설치",
+        "dismiss": "닫기"
     },
     "buyFlow": {
         "PayForOrder": "Pay for Order",
@@ -629,9 +629,9 @@
         "ModeratedPayment": "Moderated Payment",
         "DisputeFee": "Dispute fee",
         "DisputeFee2": "Dispute fee:",
-        "HaveWallet": "Do you have a Bitcoin Wallet?",
+        "HaveWallet": "당신은 지갑 있어?",
         "QuickSetup": "It only takes a few minutes to set one up",
-        "CreateWallet": "Create a Wallet",
+        "CreateWallet": "지갑 만들기",
         "DirectPaymentDescription": "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.",
         "DirectPayment": "직접 지불",
         "SendDirectlyTo": "Send direct payment to %{handle}",
@@ -656,21 +656,21 @@
         "paymentNote": "Payment can take several minutes or more to complete. You can leave this screen, and go to the Purchases section to see if your payment has completed later."
     },
     "chat": {
-        "noSearchResultsFound": "No results found"
+        "noSearchResultsFound": "채트에서 제품을 찾을 수 없음"
     },
     "serverConnectModal": {
         "statusTryingToConnect": "Trying to connect to your server...",
-        "statusConnected": "Connected.",
+        "statusConnected": "연결!",
         "statusFailedConnection": "Unable to connect to your server",
-        "statusFailedAuthentication": "Authentication failed",
+        "statusFailedAuthentication": "입증 실패",
         "statusTooManyAttempts": "Too many failed login attempts",
         "serverConfiguration": "Server Configuration",
-        "connecting": "Connecting...",
+        "connecting": "연결 증...",
         "intro": "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.",
-        "serverIP": "Server IP",
-        "restApiPort": "Rest API port",
-        "websocketApiPort": "Websocket API port",
-        "heartbeatSocketApiPort": "Heartbeat socket port",
+        "serverIP": "서버 IP",
+        "restApiPort": "Rest API 포트",
+        "websocketApiPort": "Websocket API 포트",
+        "heartbeatSocketApiPort": "Heartbeat socket 포트",
         "username": "사용자 이름",
         "password": "암호",
         "restoreDefaults": "기본값 되돌리기",
@@ -704,7 +704,7 @@
         "6": "(GMT +6:00) Almaty, Dhaka, Colombo",
         "7": "(GMT +7:00) Bangkok, Hanoi, Jakarta",
         "8": "(GMT +8:00) Beijing, Perth, Singapore, Hong Kong",
-        "9": "(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk",
+        "9": "(GMT +9:00) Tokyo, Seoul, 대한민국, Osaka, Sapporo, Yakutsk",
         "9.5": "(GMT +9:30) Adelaide, Darwin",
         "10": "(GMT +10:00) Eastern Australia, Guam, Vladivostok",
         "11": "(GMT +11:00) Magadan, Solomon Islands, New Caledonia",
