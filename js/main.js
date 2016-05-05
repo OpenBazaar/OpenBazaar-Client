@@ -94,15 +94,13 @@ user.on('change:language', function(md, lang) {
 app.serverConfigs = new ServerConfigsCl();
 app.serverConfigs.fetch().done(() => {
   var oldConfig,
-      defaultConfig,
-      defaultConfigFlat;
+      defaultConfig;
 
   if (!app.serverConfigs.getActive()) {
     defaultConfig = app.serverConfigs.create({
       name: polyglot.t('serverConnectModal.defaultServerName'),
       default: true
     });
-    defaultConfigFlat = defaultConfig.toJSON();
 
     // migrate any existing connection from the
     // old single config set-up (_serverConfig-1)
@@ -135,7 +133,7 @@ app.serverConfigs.fetch().done(() => {
         username: oldConfig.username,
         password: oldConfig.password
       });
-      
+
       localStorage.removeItem('_serverConfig-1');
     } else {
       app.serverConfigs.setActive(defaultConfig.id);
