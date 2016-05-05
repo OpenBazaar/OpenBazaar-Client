@@ -399,7 +399,14 @@ var loadProfile = function(landingRoute, onboarded) {
 $(document).ajaxSend(function(e, jqXhr, settings) {
   // With this we could map ajax responses to the server config
   // that was active when they were initiated.
-  jqXhr.serverConfig = app.serverConfigs.getActive().id;
+  jqXhr.serverConfig = app.serverConfigs.getActive();
+});
+
+$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+  if (jqxhr.status === 401 && jqxhr.serverConfig.id === app.serverConfigs.getActive().id) {
+    app.serverConnectModal.failConnection('failed-auth', jqxhr.serverConfig)
+      .open();
+  }
 });
 
 launchOnboarding = function(guidCreating) {
@@ -427,7 +434,7 @@ launchOnboarding = function(guidCreating) {
   var activeServer = app.serverConfigs.getActive();
 
   pageConnectModal = new PageConnectModal({
-    className: 'startup-server-connect top0',
+    className: 'server-connect top0',
     initialState: {
       statusText: activeServer && activeServer.get('default') ?
         polyglot.t('serverConnectModal.connectingToDefault') :
@@ -446,12 +453,13 @@ pageConnectModal.on('cancel', () => {
 
 app.connectHeartbeatSocket();
 app.serverConnectModal = new ServerConnectModal().render();
-app.serverConnectModal.on('connected', (authenticated) => {
-  $loadingModal.removeClass('hide');
-
-  if (authenticated) {
-    profileLoaded && location.reload();
-    app.serverConnectModal.close();
+app.serverConnectModal.on('connected', () => {
+  if (profileLoaded) {
+    // If we've already loaded called loadProfile() and then, we connect
+    // to a new server (or reconnect to the same server) we'll reload the
+    // app since some of the "global" components (Router, PageNav,
+    // SocketView...) were not designed to handle a new connection.
+    location.reload();
   }
 });
 
@@ -459,12 +467,15 @@ app.getHeartbeatSocket().on('open', function(e) {
   removeStartupRetry();
   pageConnectModal.remove();
   $loadingModal.removeClass('hide');
-  onboardingModal && onboardingModal.remove();
 
-  // clear some flags so the heartbeat events will
-  // appropriatally loadProfile or launch onboarding
-  guidCreating = null;
-  loadProfileNeeded = true;
+  if (!profileLoaded) {
+    // clear some flags so the heartbeat events will
+    // appropriatally loadProfile or launch onboarding
+    guidCreating = null;
+    loadProfileNeeded = true;
+    app.serverConnectModal.close();
+    $loadingModal.removeClass('hide');    
+  }  
 });
 
 app.getHeartbeatSocket().on('close', (startUpRetry = function(e) {
@@ -486,8 +497,16 @@ removeStartupRetry = function() {
   clearTimeout(startUpRetry.timeout);
   app.getHeartbeatSocket().off('close', startUpRetry);
   app.getHeartbeatSocket().on('close', (e) => {
-    app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
-      .open();    
+    app.serverConnectModal.failConnection(null, app.serverConfigs.getActive());
+    
+    if (app.serverConnectModal.getConnectAttempt()) {
+      app.serverConnectModal.getConnectAttempt()
+        .fail(() => {
+          app.serverConnectModal.open();
+        });
+    } else {
+      app.serverConnectModal.open();
+    }      
   });
 };
 
@@ -495,6 +514,7 @@ app.getHeartbeatSocket().on('message', function(e) {
   if (e.jsonData && e.jsonData.status) {
     switch (e.jsonData.status) {
       case 'generating GUID':
+        profileLoaded && location.reload();
         if (guidCreating) return;
 
         // todo: put in some timeout in the off chance the guid
@@ -505,6 +525,8 @@ app.getHeartbeatSocket().on('message', function(e) {
         launchOnboarding(guidCreating);
         break;
       case 'GUID generation complete':
+        profileLoaded && location.reload();
+
         app.serverConfigs.getActive().save({
           username: e.jsonData.username,
           password: e.jsonData.password
@@ -518,6 +540,7 @@ app.getHeartbeatSocket().on('message', function(e) {
       case 'online':
         if (loadProfileNeeded && !guidCreating) {
           loadProfileNeeded = false;
+          onboardingModal && onboardingModal.remove();
 
           app.login().done(function(data) {
             if (data.success) {

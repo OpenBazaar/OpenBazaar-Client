@@ -1,7 +1,6 @@
 'use strict';
 
 var loadTemplate = require('../utils/loadTemplate'),
-    // app = require('../App.js').getApp(),        
     BaseVw = require('./baseVw');
 
 module.exports = BaseVw.extend({
@@ -54,10 +53,6 @@ module.exports = BaseVw.extend({
 
   sslOff: function(){
     this.model.set('SSL', true);
-  },  
-
-  remove: function() {
-    BaseVw.prototype.remove.apply(this, arguments);
   },  
 
   render: function() {

@@ -11,6 +11,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
+    PageNavServersVw = require('../views/pageNavServersVw'),
     remote = require('remote'),
     pjson = require('../../package.json');
 
@@ -44,7 +45,11 @@ module.exports = baseVw.extend({
     'click .js-navInstallUpdate': 'sendInstallUpdate',
     'click .js-navDismisslUpdate': 'dismissUpdate',
     'click [data-popmenu]': 'onPopMenuNavClick',
-    'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro'
+    'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro',
+    'mouseenter .js-serverSubmenuTrigger': 'mouseenterServerSubmenuTrigger',
+    'mouseleave .js-serverSubmenuTrigger': 'mouseleaveServerSubmenuTrigger',
+    'mouseenter .js-serverSubmenu': 'mouseenterServerSubmenu',
+    'mouseleave .js-serverSubmenu': 'mouseleaveServerSubmenu'
   },
 
   initialize: function(options){
@@ -251,7 +256,11 @@ module.exports = baseVw.extend({
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     this.model.set('version', pjson.version);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      var connectedServer = app.serverConnectModal.getConnectedServer();
+
+      self.$el.html(loadedTemplate(
+        __.extend(self.model.toJSON(), { connectedServer: connectedServer && connectedServer.toJSON() })
+      ));
 
       self.$notifMenu = self.$('.js-navNotificationsMenu');
       self.$navNotif = self.$('.js-navNotifications');
@@ -270,7 +279,15 @@ module.exports = baseVw.extend({
       self.$notifMenu.find('#notificationsPanel')
           .html(self.notificationsVw.render().el);
 
-      self.setNotificationCount(self.getUnreadNotifCount());          
+      self.setNotificationCount(self.getUnreadNotifCount());
+
+      self.pageNavServersVw && self.pageNavServersVw.remove();
+      self.pageNavServersVw = new PageNavServersVw({
+        collection: app.serverConfigs
+      });
+      self.$('.js-serverSubmenu').html(
+        self.pageNavServersVw.render().el
+      );
 
       //add the admin panel
       /*
@@ -281,6 +298,9 @@ module.exports = baseVw.extend({
 
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
+      self.serverSubmenu = self.$('.js-serverSubmenu');
+      self.serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
+
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
@@ -472,9 +492,21 @@ module.exports = baseVw.extend({
     }
   },
 
-  closeNav: function() {
+  closeNav: function(e) {
+    if (
+      e &&
+      (
+        e.target === this.serverSubmenuTrigger[0] ||
+        $(e.target).parents('.js-serverSubmenuTrigger').length
+      )
+    ) {
+      return;
+    }    
+
     app.hideOverlay();
-    self.$('.js-navProfileMenu').removeClass('popMenu-opened');    
+    self.$('.js-navProfileMenu').removeClass('popMenu-opened');
+    clearTimeout(this.ServerSubmenuTimeout);
+    this.serverSubmenu.removeClass('server-submenu-opened');    
   },
 
   navCloseClick: function(){
@@ -596,6 +628,32 @@ module.exports = baseVw.extend({
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
+
+  mouseenterServerSubmenuTrigger: function(e) {
+    this.ServerSubmenuTimeout = setTimeout(() => {
+      this.serverSubmenu.addClass('server-submenu-opened');
+    }, 150);
+  },
+
+  mouseleaveServerSubmenuTrigger: function(e) {
+    clearTimeout(this.ServerSubmenuTimeout);
+
+    setTimeout(() => {
+      if (!this.overServerSubmenu) {
+        this.serverSubmenu.removeClass('server-submenu-opened');
+      }
+    }, 100);
+  },
+
+  mouseenterServerSubmenu: function(e) {
+    this.overServerSubmenu = true;
+  },
+
+  mouseleaveServerSubmenu: function(e) {
+    this.overServerSubmenu = false;
+    clearTimeout(this.ServerSubmenuTimeout);
+    this.serverSubmenu.removeClass('server-submenu-opened');
+  },  
 
   remove: function() {
     $(document).off('click', this.onDocumentClick);

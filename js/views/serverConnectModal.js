@@ -41,10 +41,6 @@ module.exports = BaseModal.extend({
     this.listenTo(this.serverConfigsVw, 'cancel', this.onCancelClick);
   },
 
-  remove: function() {
-    BaseModal.prototype.remove.apply(this, arguments);
-  },
-
   hideMessageBar: function() {
     this.$jsMsgBar.addClass('slide-out');
   },
@@ -58,6 +54,8 @@ module.exports = BaseModal.extend({
   },  
 
   closeConfigForm: function() {
+    var disp;
+
     if (!this.$jsConfigFormWrap) return;
     
     this.$jsConfigFormWrap.addClass('slide-out');
@@ -66,10 +64,30 @@ module.exports = BaseModal.extend({
       title: polyglot.t('serverConnectModal.serverConfigsTitle'),
       showNew: true
     });
+
+    setTimeout(() => {
+      if (this.isOpen()) {
+        // for some reason, when launching the modal and immediatally
+        // opening the config, a subsequent close doesn't position it
+        // properly unless we force a redraw (at least on Mac chrome).
+        this.$jsConfigFormWrap.one('transitionend', () => {
+          disp = this.$jsConfigFormWrap[0].style.display;
+          this.$jsConfigFormWrap[0].style.display = 'none';
+      
+          setTimeout(() => {
+            this.$jsConfigFormWrap[0].style.display = disp;
+          }, 100);      
+        });
+      }
+    }, 0);
+
+    return this;
   },  
 
   showConfigForm: function(configMd) {
     var model = configMd;
+
+    this._state = this.options.initialState || {};
 
     if (!model) {
       model = new ServerConfigMd();
@@ -98,9 +116,21 @@ module.exports = BaseModal.extend({
       this.connect(md);
     });
     
-    this.$jsConfigFormWrap.one('transitionend', () => {
-      this.serverConfigFormVw.$('input[name="name"]').focus();
-    }).removeClass('slide-out');    
+    if (this.isOpen()) {
+      this.$jsConfigFormWrap.one('transitionend', () => {
+        this.serverConfigFormVw.$('input[name="name"]').focus();
+      }).removeClass('slide-out');
+    } else {
+      this.$jsConfigFormWrap.addClass('no-transition')
+        .removeClass('slide-out');
+
+      setTimeout(() => {
+        this.serverConfigFormVw.$('input[name="name"]').focus();
+        this.$jsConfigFormWrap.removeClass('no-transition');
+      }, 0);      
+    }
+
+    return this;
   },
 
   newConfigForm: function() {
@@ -112,7 +142,7 @@ module.exports = BaseModal.extend({
   },
 
   onCancelClick: function(e) {
-    this.connectAttempt && this.connectAttempt.cancel();
+    this._connectAttempt && this._connectAttempt.cancel();
   },  
 
   onConnectClick: function(e) {
@@ -125,9 +155,9 @@ module.exports = BaseModal.extend({
 
     // todo: validate args
 
-    if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
+    this._connectedServer = configMd;
 
-    this.connectedServer = configMd;
+    if (this._connectAttempt && this._connectAttempt.state() === 'pending') return this;
 
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
@@ -148,8 +178,8 @@ module.exports = BaseModal.extend({
 
     var msg;
 
-    if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
-    if (this.connectedServer && this.connectedServer.id === configMd.id) this.connectedServer = null;
+    if (this._connectedServer && this._connectedServer.id === configMd.id) this._connectedServer = null;
+    if (this._connectAttempt && this._connectAttempt.state() === 'pending') return this;
 
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
@@ -173,23 +203,25 @@ module.exports = BaseModal.extend({
   },
 
   connect: function(configMd) {
+    var connectAttempt;
+
     configMd = configMd || this.serverConfigs.getActive();
 
     if (!configMd) {
-      throw new Error(`Unable to connect because no config was created, nor is there a stored
+      throw new Error(`Unable to connect because no config was provided, nor is there a stored
         active configuration in the ServerConfigs collection.`);
     }
 
-    this.connectAttempt && this.connectAttempt.cancel();
+    this._connectAttempt && this._connectAttempt.cancel();
     this.hideMessageBar();
 
-    if (this.connectedServer) {
+    if (this._connectedServer) {
       this.serverConfigsVw.setConnectionState({
-        id: this.connectedServer.id,
+        id: this._connectedServer.id,
         status: 'not-connected'
       });
 
-      this.connectedServer = null;    
+      this._connectedServer = null;    
     }
 
     this.serverConfigsVw.setConnectionState({
@@ -200,20 +232,21 @@ module.exports = BaseModal.extend({
     this.setModalOptions({ showCloseButton: false });
     this.serverConfigs.setActive(configMd.id);
 
-    this.connectAttempt = this.attemptConnection().done(() => {
+    this._connectAttempt = this.attemptConnection().done(() => {
       this.succeedConnection(configMd);
     }).fail((reason) => {
       this.failConnection(reason, configMd)
     }).always(() => {
-      this.connectAttempt = null;
+      this._connectAttempt = null;
     });
 
-    this.connectAttempt.serverId = configMd.id;
+    this._connectAttempt.serverId = configMd.id;
+    connectAttempt = this._connectAttempt;
 
-    return this;
+    return connectAttempt;
   },
 
-  attemptConnection: function() {
+  attemptConnection: function(options) {
     var self = this,
         deferred = $.Deferred(),
         promise = deferred.promise(),
@@ -247,7 +280,6 @@ module.exports = BaseModal.extend({
       loginRequest = app.login().done(function(data) {
         if (data.success) {
           conclude(false, data);
-          self.trigger('connected', true);
         } else {
           if (data.reason === 'too many attempts') {
             conclude(true, 'failed-auth-too-many');
@@ -303,6 +335,14 @@ module.exports = BaseModal.extend({
 
     return promise;
   },
+
+  getConnectedServer: function() {
+    return this._connectedServer;
+  },
+
+  getConnectAttempt: function() {
+    return this._connectAttempt;
+  },  
 
   close: function() {
     this.closeConfigForm();

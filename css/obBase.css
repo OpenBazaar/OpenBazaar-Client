@@ -3413,6 +3413,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .popMenu-navBar {
   top: 50px;
   right: 10px;
+  transform: none;
+  transition: none;
+}
+
+.popMenu-navBar.popMenu-opened {
+  transform: none;
+}
+
+.popMenu-navBarSubMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
   background-color: #252525;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
   border-bottom-left-radius: 4px;
@@ -3423,10 +3435,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 230px;
   overflow: hidden;
   transform: translateY(-110%);
-  transition: transform 200ms;
+  transition: transform 200ms;   
 }
 
-.popMenu-navBar.popMenu-opened {
+.popMenu-opened .popMenu-navBarSubMenu-pageNav,
+.popMenu-navBarSubMenu-servers.server-submenu-opened {
   transform: translateY(0);
 }
 
@@ -3436,6 +3449,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   line-height: 26px;
   padding: 0 16px;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.popMenu-navBar .popMenu-navBarSubMenu-servers a {
+  padding: 0;
 }
 
 .popMenu-navBar a:hover {
@@ -4252,7 +4269,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 9;
 }
 
-#loadingModal, .page-connect-modal.startup-server-connect {
+#loadingModal, .page-connect-modal.server-connect {
   z-index: 14;
 }
 
@@ -4292,16 +4309,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0;
 }
 
-#ov1 .server-config-form {
+#ov1 .server-config-form:not(.no-transition) {
   transition: top 250ms;
 }
 
 #ov1 .server-config-form.slide-out {
   top: 372px;
-}
-
-#ov1 .server-config-row {
-  /*min-height: 73px;*/
 }
 
 #ov1 .server-config-row .connection-failed::after {
@@ -5503,6 +5516,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 40px;
 }
 
+#ov1  .padding010 {
+  padding: 0px 10px;
+}
 #ov1  .padding015 {
   padding: 0px 15px;
 }
