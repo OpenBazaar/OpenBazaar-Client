@@ -18,11 +18,11 @@ Socket.prototype.connect = function(url) {
   this.url = url || this.url;
 
   if (this._socket) {
-    this._socket.close();
     this._socket.onopen = null;
     this._socket.onclose = null;
     this._socket.onerror = null;
     this._socket.onmessage = null;
+    this._socket.close();
   }
 
   this._socket = new WebSocket(this.url);
