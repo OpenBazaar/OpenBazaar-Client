@@ -49,6 +49,8 @@
     "ViewListing": "Przeglądaj oferty",
     "Unfollow": "Przestań obserwować",
     "ConfirmUnfollow": "Przestań obserwować",
+    "AddModerator": "Dodaj jako arbitra",
+    "RemoveModerator": "Usuń jako arbitra",
     "About": "O mnie",
     "Version": "Wersja %{version}",
     "NoDescriptionAdded": "Brak opisu",
@@ -95,7 +97,8 @@
     "ReturnPolicyPlaceholder": "Wprowadź zasady dokonywania zwrotów...",
     "CategoryPlaceholder": "Wprowadź kategorię",
     "CategoryHelperText": "Kategorie służą grupowaniu i organizowaniu ofert w twoim sklepie.",
-    "KeywordsHelperText": "Dodanie tagów pomoże w znalezieniu Twojej oferty w sieci. Maksymalnie możesz użyć 10 tagów.",
+    "KeywordsPlaceholder": "Wprowadź jeden lub więcej tagów",
+    "KeywordsHelperText": "Dodanie etykiet pomaga wyszukać Twoją ofertę przez zainteresowanych. Każda etykieta musi być inna. Maksymalnie 10 etykiet oddzielonych przecinkami lub naciśnięciem klawisza enter.",
     "ExpirationDateHelperText": "Ustaw datę wygaśnięcia pozycji z twojego sklepu.",
     "ClearExpirationDate": "Wyczyść datę wygaśnięcia",
     "ReturnPolicy": "Zasady dokonywania zwrotów",
@@ -132,6 +135,7 @@
     "Tags": "Tagi",
     "Keywords": "Słowa kluczowe",
     "ShipsFrom": "Wysyłka z",
+    "ShipsFrom2": "Wysyłka z %{country}",
     "ShipsTo": "Wysyłka do",
     "AddShipToRegion": "Obszar dostawy",
     "AddShipToRegionNote": "Dodaje wszystkie państwa w obszarze",
@@ -230,7 +234,9 @@
     "SearchForCategory": "Szukaj w kategorii",
     "Moderators": "Arbitrzy",
     "CurrentModerators": "Obecni arbitrzy",
-    "AddModerators": "Dodaj nowych arbitrów",
+    "AddModerators": "Dodaj arbitrów",
+    "ManualAddModerator": "Dodaj arbitrów przez GUID",
+    "ManualAddModeratorHelp": "Wprowadź tutaj identyfikator GUID jednego lub wielu moderatorów oddzielone przecinkami. GUID znajdziesz po prawej stronie w zakładce About/O mnie na ich stronach. Dodając identyfikator użytkownika, który nie jest moderatorem nie odniesie skutku i zostanie zignorowane.",
     "DeselectToRemoveModerator": "Odznacz arbitrów, których chcesz usunąć",
     "SelectToAddModerator": "Zaznacz arbitrów, których chcesz dodać",
     "Categories": "Kategorie",
@@ -323,10 +329,11 @@
     "ServerChangeWarningHeadline": "Uwaga: Nagraj swoje ustawienia",
     "ServerChangeWarning": "Rekomendujemy utworzenie kopii Twoich poprzednich ustawień pokazanych niżej. Twoja poprzednia nazwa użytkownika i hasło nie będzie dłużej dostępna.",
     "ModeratorFee": "Prowizja:",
-    "PriceForOne": "Cena za pojedynczy przedmiot, plik lub usługę.",
+    "PriceForOne": "Cena za pojedynczy produkt, plik lub usługę, oparta na cenie głównej i aktualnej cenie wymiany BTC. Cena ta może się różnić od ceny ostatecznej, która bazuje na cenie wymiany BTC w momencie dokonania zakupu.",
     "Avatar": "Awatar",
-    "AdditionalPaymentData": "Additional payment data",
-    "AdditionalPaymentDataInfo": "Include name of purchase and order number in payment QR code?",
+    "AdditionalPaymentData": "Dodatkowe informacje o płatności",
+    "AdditionalPaymentDataInfo": "Umieszczać nazwę płatności i numer zamówienia w kodzie QR?",
+    "ShippableHelp": "Produkt zostanie dostarczony na jeden z Twoich aktualnie zapisanych adresów. Dodaj więcej adresów w ustawieniach w sekcji Adresy, aby otrzymywać zamówienie w wielu lokalizacjach.",
     "firewall": {
         "Open": "Otwarty",
         "Restricted": "Ograniczony",
@@ -490,7 +497,8 @@
         "UpdatingOrder": "Aktualizowanie twojej transakcji",
         "UpdateComplete": "Aktualizacja transakcji zakończona",
         "UpdateFailed": "Aktualizacja transakcji nie została zakończona. Otwórz transakcję i spróbuj ponownie.",
-        "UpdateInvalid": "Aktualizacja transakcji zwróciła nieprawidłowe dane. Otwórz transakcję i spróbuj ponownie."
+        "UpdateInvalid": "Aktualizacja transakcji zwróciła nieprawidłowe dane. Otwórz transakcję i spróbuj ponownie.",
+        "ExportCSV": "Eksportuj do CSV"
     },
     "errorMessages": {
         "saveError": "Nie można zapisać zmian.",
@@ -511,7 +519,8 @@
         "tooManyPhotosBody": "Niektóre lub wszystkie Twoje zdjęcia nie zostały przesłane, ponieważ przekroczyłeś ich limit.",
         "badJSON": "Dane JSON zwrócone z serwera były w nieprawidłowym formacie",
         "refundAlreadySent": "Zwrot do tego zamówienia został już pomyślnie wysłany",
-        "serverTimeout": "Serwer nie odpowiada. Może być nieosiągalny albo potrzebuje bardzo wiele czasu na odpowiedź."
+        "serverTimeout": "Serwer nie odpowiada. Może być nieosiągalny albo potrzebuje bardzo wiele czasu na odpowiedź.",
+        "noData": "Brak danych dla wybranej opcji."
     },
     "pageConnectingMessages": {
         "listingConnect": "Łączenie z ofertą ${listing}",
@@ -523,7 +532,7 @@
     },
     "aboutSection": {
         "about": "<p>OpenBazaar to sieć osób kupujących i sprzedających dobra oraz usługi bez żadnych pośredników, przy użyciu Bitcoina. Sieć ta jest zdecentralizowana i nie podlega żadnej organizacji.</p>\n\n<p>Oprogramowanie jest otwarte i udostępniane na licencji MIT. Kod źródłowy dostępny jest na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">GitHubie</a>.</p>\n\n<p>OpenBazaar to projekt społeczośniowy, zachęcamy do wejścia na nasz kanał <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> i odwiedzenia naszego <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddita</a>.</p>\n\n<p>Jeśli potrzebujesz pomocy, przeczytaj <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">poradnik</a> w wersji 1.0.</p>\n\n<p>Jeśli masz jeszcze jakieś pytania - <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">kliknij tutaj</a>.</p>",
-        "contributors": "<p>\nOpenBazaar jest rozwijany przez międzynarodową społeczność, złożoną zarówno z deweloperów, jak i wolontariuszy poświęcających swój czas, aby uczynić handel wolnym. <br /><br />\nOto niepełna lista osób, które wsparły projekt poprzez pisanie kodu lub w inny sposób:\n</p>\n\n<ul>\n  <li>Giannis Adamopoulos</li>\n  <li>Ariadni-Karolina Alexiou</li>\n  <li>Tikhon Bernstam</li>\n  <li>Brad Burnham</li>\n  <li>George Chatzisofroniou</li>\n  <li>Patrick Connolly</li>\n  <li>Chris Dixon</li>\n  <li>Simon de la Rouviere</li>\n  <li>Braden Glasgow</li>\n  <li>Brian Hoffman</li>\n  <li>Ben Holden-Crowther</li>\n  <li>Joshua Jeffryes</li>\n  <li>Nikolas Korasidis</li>\n  <li>Regan Lawton</li>\n  <li>Sami Lehtinen</li>\n  <li>Angel Leon</li>\n  <li>Joye Lin</li>\n  <li>Joel Monegro</li>\n  <li>William Mougayar</li>\n  <li>Jonas David Nick</li>\n  <li>Onename</li>\n  <li>Chris Pacia</li>\n  <li>Sam Patterson</li>\n  <li>Chara Podimata</li>\n  <li>Samuel Reed</li>\n  <li>Washington Sanchez</li>\n  <li>Aeron Paul Sioson</li>\n  <li>Adrian Smith</li>\n  <li>Adam Snodgrass</li>\n  <li>Thomas Stilwell</li>\n  <li>Amir Taaki</li>\n  <li>Mike Wolf</li>\n  <li>Dionysis Zindros</li>\n  <li>secret-bitcoin-login</li>\n  <li>Rav3nPL</li>\n  <li>El--Presidente</li>\n  <li>Tinytin</li>\n  <li>ULRichard</li>\n  <li>Michał Pado</li>\n  <li>programmerpeter</li>\n</ul>",
+        "contributors": "<p>\nOpenBazaar jest rozwijany przez międzynarodową społeczność, złożoną zarówno z deweloperów, jak i wolontariuszy poświęcających swój czas, aby uczynić handel wolnym. <br /><br />\nOto niepełna lista osób, które wsparły projekt poprzez pisanie kodu lub w inny sposób:\n</p>\n\n<ul>\n  <li>Giannis Adamopoulos</li>\n  <li>Ariadni-Karolina Alexiou</li>\n  <li>Tikhon Bernstam</li>\n  <li>Brad Burnham</li>\n  <li>George Chatzisofroniou</li>\n  <li>Patrick Connolly</li>\n  <li>Chris Dixon</li>\n  <li>Simon de la Rouviere</li>\n  <li>Braden Glasgow</li>\n  <li>Brian Hoffman</li>\n  <li>Ben Holden-Crowther</li>\n  <li>Joshua Jeffryes</li>\n  <li>Nikolas Korasidis</li>\n  <li>Regan Lawton</li>\n  <li>Sami Lehtinen</li>\n  <li>Angel Leon</li>\n  <li>Joye Lin</li>\n  <li>Joel Monegro</li>\n  <li>William Mougayar</li>\n  <li>Jonas David Nick</li>\n  <li>Onename</li>\n  <li>Chris Pacia</li>\n  <li>Sam Patterson</li>\n  <li>Chara Podimata</li>\n  <li>Samuel Reed</li>\n  <li>Washington Sanchez</li>\n  <li>Aeron Paul Sioson</li>\n  <li>Adrian Smith</li>\n  <li>Adam Snodgrass</li>\n  <li>Thomas Stilwell</li>\n  <li>Amir Taaki</li>\n  <li>Mike Wolf</li>\n  <li>Dionysis Zindros</li>\n  <li>secret-bitcoin-login</li>\n  <li>Rav3nPL</li>\n  <li>El--Presidente</li>\n  <li>Tinytin</li>\n  <li>ULRichard</li>\n  <li>Michał Pado</li>\n  <li>Libter</li>\n</ul>",
         "support": "<p>Możesz wesprzeć OpenBazaar na wiele sposobów.</p><p>Kupowanie i sprzedawanie dóbr i usług przyczynia się do powiększenia naszej społeczności, a to z kolei zwiększa atrakcyjność platformy w oczach potencjalnych użytkowników. Uprzejme zapytania kierowane do sprzedawców o akceptację płatności w BTC za pośrednictwem naszej platformy pomagają docierać do kolejnych osób i pokazują, że jest zapotrzebowanie na handel P2P.</p><p>Jeśli jesteś programistą, możesz odwiedzić naszego <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">GitHuba</a> i sprawdzić, czy może nie ma czegoś, w czym mógłbyś nam pomóc. Oprócz pomocy z kodem źródłowym mamy nadzieję, że liberalna natura projektu zachęci was do tworzenia nowych usług bazujących na istniejącej sieci.</p><p>Możesz również <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">wesprzeć nas finansowo.</a> Środki zostaną wykorzystane na pokrycie kosztów związanych z konferencjami, programem Bug Bounty i promocją OpenBazaar.</p><p>Dołącz do naszego <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slacka</a>, jeśli masz jakieś pomysły związane z projektem lub chciałbyś o coś zapytać deweloperów.",
         "licensing": "<p>OpenBazaar to otwarte oprogramowanie oparte na licencj MIT. To liberalna licencja, zezwala pozwala na wykorzystanie kodu przy innych otwartych projektach, jak i projektach prawnie zastrzeżonych. Pełna treść licencji dostępna jest pod poniższym linkiem.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>"
     },
@@ -558,6 +567,7 @@
         "cases": "Sprawy",
         "notifications": "Powiadomienia",
         "settings": "Ustawienia",
+        "refresh": "Odśwież stronę.",
         "restart": "Restart programu",
         "about": "O projekcie",
         "support": "Wspomóż projekt",
@@ -660,13 +670,13 @@
         "noSearchResultsFound": "Brak wyników"
     },
     "serverConnectModal": {
-        "statusTryingToConnect": "Trwa łączenie się z serwerem...",
+        "statusTryingToConnect": "Łączę się z Twoim serwerem ...",
         "statusConnected": "Połączono.",
-        "statusFailedConnection": "Nie można połączyć z serwerem",
-        "statusFailedAuthentication": "Błąd uwierzytelniania",
-        "statusTooManyAttempts": "Przekroczono limit błędnych logowań",
+        "statusFailedConnection": "Nie można połączyć się z Twoim serwerem.",
+        "statusFailedAuthentication": "Błąd uwierzytelniania.",
+        "statusTooManyAttempts": "Przekroczona liczba błędnych logowań.",
         "serverConfiguration": "Konfiguracja serwera",
-        "connecting": "Łączenie...",
+        "connecting": "Łączę ...",
         "intro": "OpenBazaar pozwala na działanie serwera niezależnie od klienta. Domyślnie serwer działa lokalnie, ale możesz zastąpić go poniżej.",
         "serverIP": "IP serwera",
         "restApiPort": "Port API REST",
@@ -674,7 +684,7 @@
         "heartbeatSocketApiPort": "Port Hearbeat",
         "username": "Pseudonim",
         "password": "Hasło",
-        "restoreDefaults": "Przywróć domyślne",
+        "restoreDefaults": "Przywróć domyślne ustawienia.",
         "saveChanges": "Zapisz wprowadzone zmiany",
         "retry": "Ponów połączenie"
     },
