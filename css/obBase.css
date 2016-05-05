@@ -1456,6 +1456,14 @@ h5 {
   padding-top: 70px;
 }
 
+.modal-cover-fullscreen {
+  top: 0;
+}
+
+.modal-cover-fullscreen .modal-childMain {
+  top: 50px;
+}
+
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
@@ -2407,7 +2415,6 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMessageTimestamp {
   font-size: 11px;
-  color: #fff;
   opacity: .35;
   font-weight: 500;
   letter-spacing: 0;
@@ -3406,6 +3413,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .popMenu-navBar {
   top: 50px;
   right: 10px;
+  transform: none;
+  transition: none;
+}
+
+.popMenu-navBar.popMenu-opened {
+  transform: none;
+}
+
+.popMenu-navBarSubMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
   background-color: #252525;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
   border-bottom-left-radius: 4px;
@@ -3415,11 +3434,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 10px 0;
   width: 230px;
   overflow: hidden;
-  transform: translateY(-330px);
-  transition: transform 200ms;
+  transform: translateY(-110%);
+  transition: transform 200ms;   
 }
 
-.popMenu-navBar.popMenu-opened {
+.popMenu-opened .popMenu-navBarSubMenu-pageNav,
+.popMenu-navBarSubMenu-servers.server-submenu-opened {
   transform: translateY(0);
 }
 
@@ -3429,6 +3449,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   line-height: 26px;
   padding: 0 16px;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.popMenu-navBar .popMenu-navBarSubMenu-servers a {
+  padding: 0;
 }
 
 .popMenu-navBar a:hover {
@@ -3775,7 +3799,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .modal .homeModal-heroText {
   position: absolute;
   bottom: 0px;
-  top: 210px;
+  top: 200px;
   color: #fff;
   font-size: 20px;
   line-height: 22px;
@@ -4245,12 +4269,62 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 9;
 }
 
-#loadingModal {
+#loadingModal, .page-connect-modal.server-connect {
   z-index: 14;
 }
 
-.server-connect-modal {
+#ov1 .server-connect-modal {
   z-index: 15;
+}
+
+#ov1 .server-connect-modal .modal-child {
+  height: 625px;
+  overflow: hidden;
+}
+
+#ov1 .server-connect-modal .message-bar {
+  top: 50px;
+  left: 25px;
+  right: 25px;
+  z-index: 1;
+  transition: top .2s, opacity .2s;
+}
+
+#ov1 .server-connect-modal .message-bar > div {
+  background-color: #C62D2D;
+  padding: 8px 20px;
+  line-height: 2.2;
+  display: inline-block;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#ov1 .server-connect-modal .message-bar .message-bar-close {
+  top: -12px;
+  right: -3px;
+}
+
+#ov1 .server-connect-modal .message-bar.slide-out {
+  top: -45px;
+  opacity: 0;
+}
+
+#ov1 .server-config-form:not(.no-transition) {
+  transition: top 250ms;
+}
+
+#ov1 .server-config-form.slide-out {
+  top: 372px;
+}
+
+#ov1 .server-config-row .connection-failed::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: #C62D2D;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
 
 #loadingModal .btn {
@@ -4614,7 +4688,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .positionTop {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
 }
 
 #ov1 .positionTopRight {
@@ -4665,6 +4739,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   overflow-x: hidden;
 }
 
+#ov1 .autoOverflowYHideX {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+#ov1 .vertAlignMid {
+  vertical-align: middle;
+}
 
 #ov1 .vCentered {
   /* must be inside a relatively positioned containing element */
@@ -5285,8 +5368,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 46px;
 }
 
-
-
 #ov1  .height30 {
   height: 30px;
   line-height: 30px;
@@ -5435,6 +5516,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 40px;
 }
 
+#ov1  .padding010 {
+  padding: 0px 10px;
+}
 #ov1  .padding015 {
   padding: 0px 15px;
 }
@@ -5776,6 +5860,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: auto;
   display: block;
 }
+
+#ov1 .marginCenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 
 #ov1 .heightAuto {
   height: auto;

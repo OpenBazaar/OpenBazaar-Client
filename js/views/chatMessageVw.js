@@ -43,7 +43,7 @@ module.exports = baseVw.extend({
       this.$el.html(
         tmpl(
           __.extend(this.model.toJSON(), {
-            serverUrl: app.serverConfig.getServerBaseUrl(),
+            serverUrl: app.serverConfigs.getActive().getServerBaseUrl(),
             moment: moment,
             sanitizedMsg: sanitizedMsg,
             user: this.user.toJSON()
