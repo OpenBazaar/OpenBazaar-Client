@@ -1,19 +1,31 @@
+<%
+var shipsToYou = false;
+if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "ALL" || ob.ships_to.length == 0){
+  shipsToYou = true;
+}
+%>
+
+
 <div class="gridItem clearfix custCol-border">
-  <div class="itemImg row10 color-secondary custCol-secondary overflowHidden js-item" data-id="<%= ob.contract_hash %>">
+
+  <div class="itemImg row10 color-secondary custCol-secondary overflowHidden js-item <% if(!shipsToYou){ %>textOpacity25<% } %>" data-id="<%= ob.contract_hash %>">
     <div class="itemImg <% if(ob.cloak){ %> nsfw <% } %>" style="background-image: url(<%= ob.imageURL %>), url(imgs/defaultItem.png);"></div>
   </div>
-  <div class="table">
+  <div class="table <% if(!shipsToYou){ %>textOpacity25<% } %>">
     <div>
       <% if(ob.showAvatar) { %>
       <div class="thumbnail-small js-avatar tooltip" data-tooltip="<% if(ob.handle) { %><%= ob.handle %><% }else{ %><%= ob.guid %><% } %>" data-handle="<%= ob.handle %>"
         style="background-image: <% if(ob.avatar_hash && ob.avatarURL) { %> url(<%= ob.avatarURL %>), <% } %>url(imgs/defaultUser.png);"></div>
       <% } %>
-      <div class="js-item pad8Left <% if(ob.title.length >= 30) { %>tooltip<% } %>" <% if(ob.title.length >= 30) { %>data-tooltip="<%= ob.title.substring(0, 40) %>"<% } %> data-id="<%= ob.contract_hash %>">
-        <div class="textSize14px noOverflow textOpacity1 js-searchTitle"><%= ob.title %></div>
+      <div class="js-item pad8Left <% if(ob.title.length >= 30) { %>tooltip<% } %>"
+      <% if(ob.title.length >= 30) { %>data-tooltip="<%= ob.title.substring(0, 40) %>"<% } %> data-id="<%= ob.contract_hash %>">
+        <div class="textSize14px noOverflow textOpacity1 js-searchTitle">
+          <%= ob.title %>
+        </div>
         <div class="textSize13px txt-fade textWeightNormal">
           <%= ob.intlNumFormat(ob.vendorBTCPrice, 4) %> BTC
           <% if(ob.userCurrencyCode != 'BTC'){ %>
-          (<%= ob.displayPrice %>)
+           (<%= ob.displayPrice %>)
           <% } %>
         </div>
       </div>
@@ -69,7 +81,22 @@
       </div>
     </div>
   </div>
+
+  <% if(ob.type){ %><!-- type is not yet implemented -->
+    <div class="listingType borderRadius3 js-item <% if(shipsToYou){ %>textOpacity90<% }else{ %>textOpacity25<% } %>">
+          <span class="<% print('listingType'+ob.type) %>"></span>
+    </div>
+  <% } %>
+
+  <% if(!shipsToYou && ob.ships_to.length != 0){ %>
+    <div class="listingDoesNotShipToYou">
+      <span class="ion-alert-circled fontSize11" style="color: #EFEF4C"></span>
+      Does not ship to you
+    </div>
+  <% } %>
+
 </div>
+
 <% if(ob.cloak){ %>
 <div class="fullCentered btn btn-large custCol-secondary div-fade">
   NSFW

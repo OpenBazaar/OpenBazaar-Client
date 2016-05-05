@@ -477,6 +477,32 @@ form {
   flex-grow: 1;
 }
 
+.listingType {
+  background-color: #252525;
+  color: #ffffff;
+  position: absolute;
+  padding: 6px;
+  top: 40px;
+  right: 40px;
+  font-size: 11px;
+  font-weight: 500;
+  transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.listingDoesNotShipToYou {
+  background-color: rgba(37, 37, 37, 0.65); 
+  /*border-radius: 20px;*/
+  height: 20px; 
+  left: 32px;
+  line-height: 20px; 
+  padding: 8px 4px; 
+  position: absolute; 
+  text-align: center; 
+  top: calc(50% - 32px); 
+  width: 242px; 
+  transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
 .noPointerEvents {
   pointer-events: none;
 }
@@ -531,6 +557,17 @@ form {
   box-shadow: 0px 0px 37px -17px rgb(0, 0, 0);
   opacity: 1;
   padding-top: 20px;
+}
+
+.userPage-subViews .gridItem:hover > .listingType,
+.homeView .gridItem:hover > .listingType {
+  opacity: 1;
+  top: 26px;
+}
+
+.userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
+.homeView .gridItem:hover > .listingDoesNotShipToYou {
+  top: calc(50% - 46px);
 }
 
 .userPage-subViews .gridItem:hover .gridItemControls,
@@ -2370,7 +2407,6 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMessageTimestamp {
   font-size: 11px;
-  color: #fff;
   opacity: .35;
   font-weight: 500;
   letter-spacing: 0;
@@ -3378,7 +3414,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 10px 0;
   width: 230px;
   overflow: hidden;
-  transform: translateY(-330px);
+  transform: translateY(-110%);
   transition: transform 200ms;
 }
 
@@ -4045,6 +4081,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 100%;
 }
 
+.tooltip.tooltip-box2:hover:after {
+  height: auto;
+  width: 200px;
+  white-space: normal;
+  bottom: auto;
+  top: 100%;
+}
+
 .tooltip.tooltip-box.tooltip-boxUp:hover:after {
   bottom: 120%;
 }
@@ -4261,7 +4305,53 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 }
 
-/* protect customize controls from custom page styles */
+.violatorTR {
+  /* sets triangle to be in the top right corner */
+  /* must be given equal height and width properties */
+  /* text or icons inside the violator should have positionTopRight and a right and top margin or padding based on the violator size */
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-clip-path: polygon(50% 0, 100% 0, 100% 50%);
+  z-index: 1; /* this shouldn't need to be higher. Make it the last element in its container */
+  text-align: center;
+}
+
+.violator1 {
+  width: 50px;
+  height: 50px;
+  background: #215175; /* this should be overridden with a color class */
+  color: #fff;
+}
+
+.violatorTxt{
+  /* use on content of a violator to rotate it to match the violator */
+  display: block;
+  transform: rotate(45deg);
+}
+
+.listingTypeDigital:before {
+  color: #EFEF4C;
+  content: "\f137";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+.listingTypePhysical:before {
+  color: #805C17;
+  content: "\f318";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+.listingTypeService:before {
+  color: #DEDEDE;
+  content: "\f2ad";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+  /* protect customize controls from custom page styles */
 #ov1 #customizeControls .labelWrap {
   height: 40px;
   border-radius: 0;
@@ -4517,11 +4607,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .positionBottom {
   position: absolute;
   bottom: 0;
+  right: 0;
 }
 
 #ov1 .positionTop {
   position: absolute;
   top: 0;
+  left: 0;
 }
 
 #ov1 .positionTopRight {

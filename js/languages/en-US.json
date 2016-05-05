@@ -333,6 +333,7 @@
   "Avatar": "Avatar",
   "AdditionalPaymentData": "Additional payment data",
   "AdditionalPaymentDataInfo": "Include name of purchase and order number in payment QR code?",
+  "ShippableHelp": "This product can be shipped to one of your currently saved addresses. Add more addresses in the Settings/Addresses section to be able to purchase more listings.",
   "firewall": {
     "Open": "Open",
     "Restricted": "Restricted",
@@ -496,7 +497,8 @@
     "UpdatingOrder": "Updating your transaction",
     "UpdateComplete": "Your transaction update is complete",
     "UpdateFailed": "Your transaction update did not complete. Open the transaction and try again",
-    "UpdateInvalid": "Your transaction update returned invalid data. Open the transaction and try again"
+    "UpdateInvalid": "Your transaction update returned invalid data. Open the transaction and try again",
+    "ExportCSV": "Export to CSV"
   },
   "errorMessages": {
     "saveError": "Data could not be saved.",
@@ -517,7 +519,8 @@
     "tooManyPhotosBody": "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.",
     "badJSON": "The JSON data returned from the server was malformed",
     "refundAlreadySent": "The refund has already been successfully sent for this order",
-    "serverTimeout": "No response was received from the server. It may be unreachable or taking a very long time to respond."
+    "serverTimeout": "No response was received from the server. It may be unreachable or taking a very long time to respond.",
+    "noData": "No data is available for the options you have selected."
   },
   "pageConnectingMessages": {
     "listingConnect": "Connecting to listing ${listing}",
@@ -564,6 +567,7 @@
     "cases": "Cases",
     "notifications": "Notifications",
     "settings": "Settings",
+    "refresh": "Refresh Page",
     "restart": "Restart Application",
     "about": "About OpenBazaar",
     "support": "Support OpenBazaar",

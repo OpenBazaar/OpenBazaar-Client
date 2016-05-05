@@ -123,11 +123,6 @@
     <%= polyglot.t('nav.settings') %>
 	<span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.settings.toUpperCase() %></span>
   </a>
-  <a class="js-navRestart">
-    <span class="ion-refresh fontSize11 marginRight2 textOpacity1"></span>
-    <%= polyglot.t('nav.restart') %>
-    <span class="pull-right txt-muted"><%= config.keyShortcutPrefix + config.keyShortcuts.restart.toUpperCase() %></span>
-  </a>
   <hr/>
   <a class="js-showAboutModal">
     <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
@@ -160,7 +155,7 @@
     <a class="btn btn-togRight btn-fwd ion-chevron-right js-navFwd custCol-primary custCol-text fontSize13 tooltip" data-tooltip="<%= polyglot.t('nav.Forward') %>"></a>
   </div>
   <div class="ctrlGroup">
-    <a class="btn btn-home ion-refresh custCol-primary custCol-text js-navRefresh tooltip" data-tooltip="<%= polyglot.t('Reload') %>"></a>
+    <a class="btn btn-home ion-refresh custCol-primary custCol-text js-navRefresh tooltip" data-tooltip="<%= polyglot.t('Reload') %> <%= config.keyShortcutPrefix + config.keyShortcuts.refresh.toUpperCase() %>"> </a>
   </div>
   <div class="ctrlGroup flexExpand">
     <div class="txtFieldWrapper searchWrapper mainSearchWrapper js-mainSearchWrapper">
