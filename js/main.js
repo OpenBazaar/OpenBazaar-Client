@@ -100,29 +100,39 @@ app.serverConfigs.fetch().done(() => {
     defaultConfig = app.serverConfigs.create({
       name: polyglot.t('serverConnectModal.defaultServerName'),
       default: true
-    })
+    });
 
     // migrate any existing connection from the
     // old single config set-up (_serverConfig-1)
     if (oldConfig = localStorage['_serverConfig-1']) {
       oldConfig = JSON.parse(oldConfig);
       
-      app.serverConfigs.setActive(
-        app.serverConfigs.create(
-          __.extend(
-            {},
-            __.omit(oldConfig, ['local_username', 'local_password', 'id']),
-            { name: polyglot.t('serverConnectModal.portedConnectionName') }
-          )
-        ).id          
-      );
-
-      if (oldConfig.local_username && oldConfig.local_password) {
-        defaultConfig.save({
-          local_username: oldConfig.local_username,
-          local_password: oldConfig.local_password
-        });
+      // don't create a ported connection if it's the same as the default one
+      if (
+        oldConfig.server_ip +
+        oldConfig.rest_api_port +
+        oldConfig.api_socket_port +
+        oldConfig.SSL !==
+        defaultConfig.get('server_ip') +
+        defaultConfig.get('rest_api_port') +
+        defaultConfig.get('api_socket_port') +
+        defaultConfig.get('SSL')
+      ) {
+        app.serverConfigs.setActive(
+          app.serverConfigs.create(
+            __.extend(
+              {},
+              __.omit(oldConfig, ['local_username', 'local_password', 'id']),
+              { name: polyglot.t('serverConnectModal.portedConnectionName') }
+            )
+          ).id          
+        );
       }
+
+      defaultConfig.save({
+        username: oldConfig.username,
+        password: oldConfig.password
+      });
 
       localStorage.removeItem('_serverConfig-1');
     } else {
@@ -455,7 +465,7 @@ app.connectHeartbeatSocket();
 app.serverConnectModal = new ServerConnectModal().render();
 app.serverConnectModal.on('connected', () => {
   if (profileLoaded) {
-    // If we've already loaded called loadProfile() and then, we connect
+    // If we've already called loadProfile() and then, we connect
     // to a new server (or reconnect to the same server) we'll reload the
     // app since some of the "global" components (Router, PageNav,
     // SocketView...) were not designed to handle a new connection.
