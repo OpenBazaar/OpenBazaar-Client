@@ -112,7 +112,7 @@ var platform = process.platform;
 if(platform === "linux") {
   var scaleFactor = require('screen').getPrimaryDisplay().scaleFactor;
   if (scaleFactor === 0) {
-      scaleFactor = 1;
+    scaleFactor = 1;
   }
   $("body").css("zoom", 1 / scaleFactor);
 }
@@ -141,23 +141,23 @@ $('body').on('click', 'a', function(e){
 });
 
 $(document).on('mouseenter',
-  `.js-userPageAboutSection a:not(.tooltip),
+    `.js-userPageAboutSection a:not(.tooltip),
    .js-item .js-description a:not(.tooltip)`,
-  function(e) {
-    var thisHref = $(this).attr('href'),
-        linkPattern = /^[a-zA-Z]+:\/\//;
-    if(thisHref && linkPattern.test(thisHref)){
-      $(this).attr({
-        'data-tooltip': thisHref,
-        'data-href-tooltip': true
-      }).addClass('tooltip');
-    }
-  });
+    function(e) {
+      var thisHref = $(this).attr('href'),
+          linkPattern = /^[a-zA-Z]+:\/\//;
+      if(thisHref && linkPattern.test(thisHref)){
+        $(this).attr({
+          'data-tooltip': thisHref,
+          'data-href-tooltip': true
+        }).addClass('tooltip');
+      }
+    });
 
 $(document).on('mouseleave', 'a[data-href-tooltip]', function(e) {
   $(this).removeAttr('data-tooltip')
-    .removeAttr('data-href-tooltip')
-    .removeClass('tooltip');
+      .removeAttr('data-href-tooltip')
+      .removeClass('tooltip');
 });
 
 //record changes to the app state
@@ -198,9 +198,9 @@ $(window).bind('keydown', function(e) {
   }
 
   if (ctrl) {
-    e.preventDefault();
     switch (char) {
       case config.keyShortcuts.undo:
+        e.preventDefault();
         //run undo programmatically to avoid crash
         document.execCommand('undo');
         break;
@@ -239,6 +239,7 @@ $(window).bind('keydown', function(e) {
         Backbone.history.loadUrl();
         break;
       case config.keyShortcuts.restart:
+        e.preventDefault();
         location.reload();
         break;
     }
@@ -248,7 +249,7 @@ $(window).bind('keydown', function(e) {
       Backbone.history.navigate(route, {
         trigger: true
       });
-	  }
+    }
   }
 });
 
@@ -405,8 +406,8 @@ launchServerConnect = function() {
     });
 
     serverConnectModal.render()
-      .open()
-      .start();
+        .open()
+        .start();
   } else {
     if (!serverConnectModal.isOpen()) {
       serverConnectModal.open();
@@ -430,8 +431,8 @@ heartbeat.on('open', function(e) {
 
 heartbeat.on('close', function(e) {
   if (
-    Date.now() - startTime < startUpConnectMaxTime &&
-    startUpConnectMaxRetries
+      Date.now() - startTime < startUpConnectMaxTime &&
+      startUpConnectMaxRetries
   ) {
     setTimeout(() => {
       startUpConnectMaxRetries--;
