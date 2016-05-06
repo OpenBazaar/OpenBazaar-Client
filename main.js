@@ -100,11 +100,48 @@ if(platform == "mac" || platform == "linux") {
   daemon = "openbazaard";
 }
 
-var serverPath = __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep;
-var serverOut = '';
+var serverPath = __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep,
+    serverOut = '',
+    serverRunning = false,
+    pendingKill,
+    startAfterClose;
+
+var kill_local_server = function() {
+  console.log('Shutting down server daemon');
+
+  if (subpy) {
+    if (pendingKill) {
+      console.log('removing deferred start');
+      startAfterClose && pendingKill.removeListener('close', startAfterClose);
+    } else {
+      pendingKill = subpy;
+      pendingKill.once('close', () => {
+        console.log('pending kill is done');
+        pendingKill = null;
+      });
+    }
+
+    if(platform == "mac" || platform == "linux") {
+      subpy.kill('SIGINT');
+    } else {
+      require('child_process').spawn("taskkill", ["/pid", subpy.pid, '/f', '/t']);
+    }
+  }
+}
 
 var start_local_server = function() {
+  console.log('start local server called');
+  
   if(fs.existsSync(serverPath)) {
+    console.log('Starting OpenBazaar Server');
+
+    if (pendingKill) {
+      console.log('Binding deferred start');
+      pendingKill.once('close', (startAfterClose = () => {
+        console.log('Deferred Start....Go');
+        start_local_server();
+      }));
+    }
 
     var random_port = Math.floor((Math.random() * 10000) + 30000);
 
@@ -113,25 +150,31 @@ var start_local_server = function() {
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });
 
+    serverRunning = true;
+
+    console.log('===============> ' + subpy.pid);
+
     var stdout = '';
     var stderr = '';
 
     subpy.stdout.on('data', function (buf) {
-      console.log('[STR] stdout "%s"', String(buf));
+      // console.log('[STR] stdout "%s"', String(buf));
       stdout += buf;
       serverOut += buf;
     });
     subpy.stderr.on('data', function (buf) {
-      console.log('[STR] stderr "%s"', String(buf));
+      // console.log('[STR] stderr "%s"', String(buf));
       stderr += buf;
     });
     subpy.on('error', function (err) {
-      console.log('Python error %s', String(err));
+      // console.log('Python error %s', String(err));
     });
     subpy.on('close', function (code) {
-      console.log('exited with ' + code);
-      console.log('[END] stdout "%s"', stdout);
-      console.log('[END] stderr "%s"', stderr);
+      // console.log('exited with ' + code);
+      // console.log('[END] stdout "%s"', stdout);
+      // console.log('[END] stderr "%s"', stderr);
+      console.log('=================> I am CLOSED');
+      serverRunning = false;
     });
     subpy.unref();
   }
@@ -143,9 +186,17 @@ var start_local_server = function() {
 // Check if we need to kick off the python server-daemon (Desktop app)
 if(fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + path.sep + daemon)) {
   launched_from_installer = true;
-  console.log('Starting OpenBazaar Server');
-  start_local_server();
 }
+
+ipcMain.on('activeServerChange', function(event, server) {
+  if (launched_from_installer) {
+    if (server.server_ip === 'localhost') {
+      !serverRunning && start_local_server();
+    } else {
+      serverRunning && kill_local_server();
+    }
+  }
+});
 
 // Report crashes to our server.
 //require('crash-reporter').start();
@@ -261,9 +312,8 @@ app.on('window-all-closed', function() {
 app.on('before-quit', function (e) {
     // Handle menu-item or keyboard shortcut quit here
     console.log('Closing Application');
-    if(launched_from_installer) {
-      console.log('Shutting down server daemon');
-      subpy.kill();
+    if (launched_from_installer) {
+      kill_local_server();
     }
 });
 
@@ -440,14 +490,7 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
 
-    if(subpy) {
-      if(platform == "mac" || platform == "linux") {
-        subpy.kill('SIGINT');
-      } else {
-        require('child_process').spawn("taskkill", ["/pid", subpy.pid, '/f', '/t']);
-      }
-    }
-
+    if (launched_from_installer) kill_local_server();
   });
 
   mainWindow.on('close', function() {
