@@ -697,6 +697,7 @@ module.exports = baseVw.extend({
         fetchFollowersParameters;
 
     if(!ignoreTotal && this.followerFetchStart > 0 && this.followerFetchStart >= this.followerFetchTotal){
+      //don't fetch again if all of the followers have been fetched
       return;
     }
 
@@ -708,10 +709,10 @@ module.exports = baseVw.extend({
     
     this.followers.fetch({
       data: fetchFollowersParameters,
-      //timeout: 5000,
       success: (model)=> {
         var followerArray = model.get('followers');
-        this.followerFetchTotal = model.get('count') || followerArray.length;
+
+        this.followerFetchTotal = model.get('count') || followerArray.length; //the length is for older servers
         this.$('.js-userFollowerCount').html(this.followerFetchTotal);
 
         if (self.isRemoved()) return;
@@ -806,6 +807,7 @@ module.exports = baseVw.extend({
     "use strict";
 
     model = model || [];
+    //if view doesn't exist, create it
     if(!this.followerList) {
       this.followerList = new personListView({
         model: model,
@@ -825,6 +827,7 @@ module.exports = baseVw.extend({
     }
 
     if (model.length) {
+      //refresh search
       this.followersSearch = new window.List('searchFollowers', {
         valueNames: ['js-searchName', 'js-searchHandle'],
         page: 1000
