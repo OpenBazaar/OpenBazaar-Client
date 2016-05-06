@@ -184,6 +184,8 @@ module.exports = baseVw.extend({
     this.userID = options.userModel.get('guid');
     this.userProfileFetchParameters = {};
     this.followerFetchStart = 0;
+    this.followersFetchPer = 30;
+    this.followerFetchTotal = 0;
     this.itemFetchParameters = {};
     this.model = new Backbone.Model();
     this.globalUserProfile = options.userProfile;
@@ -690,30 +692,33 @@ module.exports = baseVw.extend({
     });
   },
 
-  fetchFollowers: function(){
+  fetchFollowers: function(ignoreTotal){
     var self = this,
         fetchFollowersParameters;
+
+    if(!ignoreTotal && this.followerFetchStart > 0 && this.followerFetchStart >= this.followerFetchTotal){
+      return;
+    }
 
     if(this.options.ownPage){
       fetchFollowersParameters = $.param({'start': this.followerFetchStart});
     } else {
       fetchFollowersParameters = $.param({'guid': this.pageID, 'start': this.followerFetchStart});
     }
-
-    console.log("fetchFollowers")
-
+    
     this.followers.fetch({
       data: fetchFollowersParameters,
       //timeout: 5000,
       success: (model)=> {
-        var followerArray = model.get('followers'),
-            followerCount = model.get('count') || followerArray.length;
-        this.$('.js-userFollowerCount').html(followerCount);
-        this.followerFetchStart += followerArray.length;
+        var followerArray = model.get('followers');
+        this.followerFetchTotal = model.get('count') || followerArray.length;
+        this.$('.js-userFollowerCount').html(this.followerFetchTotal);
 
         if (self.isRemoved()) return;
-
-        this.renderFollowers(followerArray, followerCount);
+        
+        if(followerArray.length){
+          this.renderFollowers(followerArray, this.followerFetchTotal);
+        }
       },
       error: function(model, response){
         if (self.isRemoved()) return;
@@ -726,6 +731,7 @@ module.exports = baseVw.extend({
         }
       }
     });
+    this.followerFetchStart += this.followersFetchPer;
   },
 
   getIsModerator: function () {
@@ -814,7 +820,7 @@ module.exports = baseVw.extend({
         followerCount: followerCount
       });
       this.registerChild(this.followerList);
-    }else{
+    }else if(model.length) {
       this.followerList.addUsers(model);
     }
 
@@ -832,7 +838,6 @@ module.exports = baseVw.extend({
     });
 
     this.listenTo(this.followerList, 'fetchMoreUsers', ()=>{
-      console.log("trigger fetch");
       this.fetchFollowers();
     });
   },

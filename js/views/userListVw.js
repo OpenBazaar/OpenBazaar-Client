@@ -31,12 +31,19 @@ module.exports = Backbone.View.extend({
     this.fetchedUsers = this.usersShort.length;
     this.totalUsers = this.options.followerCount;
     this.$container = $('#obContainer');
+    this.fetching = false;
 
     //listen to scrolling on container
     this.scrollHandler = __.bind(
         __.throttle(this.onScroll, 100), this
     );
     this.$container.on('scroll', this.scrollHandler);
+
+    this.listenTo(this.usersShort, 'add', (data)=>{
+      this.fetchedUsers = this.usersShort.length;
+      this.fetching = false;
+      this.renderUserSet(this.nextUserToShow, this.nextUserToShow + this.showPerScroll);
+    });
 
     this.render();
   },
@@ -60,8 +67,6 @@ module.exports = Backbone.View.extend({
           return (index >= start) && (index < end);
         });
 
-    this.fetchedUsers = this.usersShort.length;
-
     __.each(renderSet, function(user) {
       user.set('avatarURL', self.options.serverUrl+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
       if(self.options.ownFollowing.indexOf(user.get('guid')) != -1){
@@ -77,14 +82,11 @@ module.exports = Backbone.View.extend({
     }
 
     this.nextUserToShow = this.nextUserToShow >= this.fetchedUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
-    console.log("f: " + this.fetchedUsers)
-    console.log("t: " + this.totalUsers)
-    console.log("e: " + end)
-    console.log("fm: " + this.fetchMoreAfter)
-    if(this.fetchMoreAfter && end == this.fetchMoreAfter && this.fetchedUsers != this.totalUsers){
+
+    if(this.fetchMoreAfter && end == this.fetchMoreAfter && this.fetchedUsers < this.totalUsers && !this.fetching){
       this.fetchMoreAfter = this.fetchMoreAfter + this.options.perFetch;
       this.trigger('fetchMoreUsers');
-      console.log("fetch more from userlistvw")
+      this.fetching = true;
     }
   },
 
@@ -105,9 +107,7 @@ module.exports = Backbone.View.extend({
 
   addUsers: function(model) {
     //add more users to the collection
-    console.log("add users")
     this.usersShort.add(model);
-    this.renderUserSet(this.nextUserToShow, this.nextUserToShow + this.showPerScroll);
   },
 
   renderNoneFound: function(){
