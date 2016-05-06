@@ -107,19 +107,20 @@ var serverPath = __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + 
     startAfterClose;
 
 var kill_local_server = function() {
-  console.log('Shutting down server daemon');
-
   if (subpy) {
     if (pendingKill) {
-      console.log('removing deferred start');
       startAfterClose && pendingKill.removeListener('close', startAfterClose);
+      return;
+    } else if (!serverRunning) {
+      return;
     } else {
       pendingKill = subpy;
       pendingKill.once('close', () => {
-        console.log('pending kill is done');
         pendingKill = null;
       });
     }
+
+    console.log('Shutting down server daemon');
 
     if(platform == "mac" || platform == "linux") {
       subpy.kill('SIGINT');
@@ -130,18 +131,18 @@ var kill_local_server = function() {
 }
 
 var start_local_server = function() {
-  console.log('start local server called');
-  
   if(fs.existsSync(serverPath)) {
-    console.log('Starting OpenBazaar Server');
-
     if (pendingKill) {
-      console.log('Binding deferred start');
       pendingKill.once('close', (startAfterClose = () => {
-        console.log('Deferred Start....Go');
         start_local_server();
       }));
+
+      return;
     }
+
+    if (serverRunning) return;
+
+    console.log('Starting OpenBazaar Server');
 
     var random_port = Math.floor((Math.random() * 10000) + 30000);
 
@@ -152,28 +153,25 @@ var start_local_server = function() {
 
     serverRunning = true;
 
-    console.log('===============> ' + subpy.pid);
-
     var stdout = '';
     var stderr = '';
 
     subpy.stdout.on('data', function (buf) {
-      // console.log('[STR] stdout "%s"', String(buf));
+      console.log('[STR] stdout "%s"', String(buf));
       stdout += buf;
       serverOut += buf;
     });
     subpy.stderr.on('data', function (buf) {
-      // console.log('[STR] stderr "%s"', String(buf));
+      console.log('[STR] stderr "%s"', String(buf));
       stderr += buf;
     });
     subpy.on('error', function (err) {
-      // console.log('Python error %s', String(err));
+      console.log('Python error %s', String(err));
     });
     subpy.on('close', function (code) {
-      // console.log('exited with ' + code);
-      // console.log('[END] stdout "%s"', stdout);
-      // console.log('[END] stderr "%s"', stderr);
-      console.log('=================> I am CLOSED');
+      console.log('exited with ' + code);
+      console.log('[END] stdout "%s"', stdout);
+      console.log('[END] stderr "%s"', stderr);
       serverRunning = false;
     });
     subpy.unref();
@@ -185,15 +183,15 @@ var start_local_server = function() {
 
 // Check if we need to kick off the python server-daemon (Desktop app)
 if(fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + path.sep + daemon)) {
-  launched_from_installer = true;
+  global.launched_from_installer = launched_from_installer = true;
 }
 
 ipcMain.on('activeServerChange', function(event, server) {
   if (launched_from_installer) {
-    if (server.server_ip === 'localhost') {
-      !serverRunning && start_local_server();
+    if (server.default) {
+      start_local_server();
     } else {
-      serverRunning && kill_local_server();
+      kill_local_server();
     }
   }
 });
