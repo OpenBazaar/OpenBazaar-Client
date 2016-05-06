@@ -17,13 +17,15 @@ module.exports = Backbone.View.extend({
      options.serverUrl: server url to pass into each user view
      options.ownFollowing: array of guids this user is following
      options.hideFollow: boolean, hide follow button
-     options.reverse; should the list of users be reversed?
+     options.reverse: should the list of users be reversed?
+     options.perFetch: the number of users returned per fetch (optional, only applies to the get_followers api)
      */
     //the model must be passed in by the constructor
     this.usersShort = new usersShortCollection(this.model);
     this.options.reverse && this.usersShort.models.reverse();
     this.subViews = [];
     this.showPerScroll = 10;
+    this.fetchMoreAfter = options.perFetch;
     this.nextUserToShow = 0;
     this.totalUsers = this.usersShort.length;
     this.$container = $('#obContainer');
@@ -71,6 +73,9 @@ module.exports = Backbone.View.extend({
     }
 
     this.nextUserToShow = this.nextUserToShow >= this.totalUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
+    if(this.fetchMoreAfter && this.totalUsers == this.fetchMoreAfter){
+      this.trigger('fetch')
+    }
   },
 
   renderUser: function(item){

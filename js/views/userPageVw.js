@@ -183,6 +183,7 @@ module.exports = baseVw.extend({
     //set view's userID from the userModel;
     this.userID = options.userModel.get('guid');
     this.userProfileFetchParameters = {};
+    this.followerFetchStart = 0;
     this.itemFetchParameters = {};
     this.model = new Backbone.Model();
     this.globalUserProfile = options.userProfile;
@@ -280,7 +281,6 @@ module.exports = baseVw.extend({
     } else {
       this.options.ownPage = false;
       this.userProfileFetchParameters = $.param({'guid': this.pageID});
-      //this.userProfileFetchParameters = $.param({'guid': this.pageID, 'start': 0});
     }
 
     this.userProfileFetch = this.userProfile.fetch({
@@ -687,20 +687,29 @@ module.exports = baseVw.extend({
   },
 
   fetchFollowers: function(){
-    var self = this;
+    var self = this,
+        fetchFollowersParameters;
+
+    if(this.ownPage){
+      fetchFollowersParameters = $.param({'start': this.followerFetchStart});
+    } else {
+      fetchFollowersParameters = $.param({'guid': this.pageID, 'start': this.followerFetchStart});
+    }
 
     this.followers.fetch({
       data: self.userProfileFetchParameters,
       //timeout: 5000,
-      success: function(model){
+      success: (model)=> {
         var followerArray = model.get('followers');
+        this.$('.js-userFollowerCount').html(model.get('count'));
+        this.followerFetchStart += model.length;
 
         if (self.isRemoved()) return;
 
-        self.renderFollowers(followerArray);
+        this.renderFollowers(followerArray);
         //if this is not their page, see if they are being followed
-        if(self.options.ownPage === false){
-          self.toggleFollowButtons(Boolean(__.findWhere(followerArray, {guid: self.userID})));
+        if(this.options.ownPage === false){
+          this.toggleFollowButtons(Boolean(__.findWhere(followerArray, {guid: this.userID})));
         }
       },
       error: function(model, response){
@@ -796,11 +805,10 @@ module.exports = baseVw.extend({
       ownFollowing: this.ownFollowing,
       hideFollow: true,
       serverUrl: this.options.userModel.get('serverUrl'),
-      reverse: true
+      reverse: true,
+      perFetch: 30
     });
     this.registerChild(this.followerList);
-
-    this.$('.js-userFollowerCount').html(model.length);
 
     if (model.length) {
       this.followersSearch = new window.List('searchFollowers', {
