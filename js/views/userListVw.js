@@ -31,7 +31,6 @@ module.exports = Backbone.View.extend({
     this.fetchedUsers = this.usersShort.length;
     this.totalUsers = this.options.followerCount;
     this.$container = $('#obContainer');
-    this.fetching = false;
 
     //listen to scrolling on container
     this.scrollHandler = __.bind(
@@ -41,7 +40,6 @@ module.exports = Backbone.View.extend({
 
     this.listenTo(this.usersShort, 'add', (data)=>{
       this.fetchedUsers = this.usersShort.length;
-      this.fetching = false;
       this.renderUserSet(this.nextUserToShow, this.nextUserToShow + this.showPerScroll);
     });
 
@@ -83,10 +81,9 @@ module.exports = Backbone.View.extend({
 
     this.nextUserToShow = this.nextUserToShow >= this.fetchedUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
 
-    if(this.fetchMoreAfter && end == this.fetchMoreAfter && this.fetchedUsers < this.totalUsers && !this.fetching){
+    if(this.fetchMoreAfter && end == this.fetchMoreAfter && this.fetchedUsers < this.totalUsers){
       this.fetchMoreAfter = this.fetchMoreAfter + this.options.perFetch;
       this.trigger('fetchMoreUsers');
-      this.fetching = true;
     }
   },
 
