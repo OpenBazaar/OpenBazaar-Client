@@ -493,14 +493,14 @@ form {
   background: #252525;
   height: 14px; 
   width: 14px;
-  right: 40px;
+  right: 18px;
   padding: 10px; 
   position: absolute; 
   text-align: center; 
-  top: 222px;
+  top: 205px;
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
   border-radius: 32px;
-  opacity: .9;
+  opacity: .95;
 }
 
 .noPointerEvents {
@@ -567,7 +567,7 @@ form {
 
 .userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
 .homeView .gridItem:hover > .listingDoesNotShipToYou {
-  top: 204px;
+  top: 208px;
   opacity: 1;
 }
 
