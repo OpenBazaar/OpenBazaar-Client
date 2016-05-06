@@ -391,12 +391,15 @@ module.exports = Backbone.View.extend({
         vendorStatus = this.model.get('page').profile.vendor,
         fancyStatus = window.localStorage.getItem('notFancy');
 
+    smtp_notifications = (user.smtp_notifications == 1) ? true : false;
+
     this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
     this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
     this.$("#generalForm input[name=notifications][value=" + notifications + "]").prop('checked', true);
     this.$("#storeForm input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
     this.$("#advancedForm input[name=notFancy][value=" + fancyStatus + "]").prop('checked', true);
     this.$("#advancedForm input[name=additionalPaymentData][value=" + localStorage.getItem('AdditionalPaymentData') + "]").prop('checked', true);
+    this.$("#advancedForm input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
 
     currecyList = __.uniq(currecyList, function(item){return item.code;});
     currecyList = currecyList.sort(function(a,b){
@@ -452,6 +455,8 @@ module.exports = Backbone.View.extend({
 
     //set moderator status
     this.$('#moderatorForm input[name=moderator]').val([String(moderatorStatus)]);
+
+    this.$('#advancedForm input[name=smtp_mo]').val([String(moderatorStatus)]);
   },
 
   showModeratorFeeHolder: function(){
