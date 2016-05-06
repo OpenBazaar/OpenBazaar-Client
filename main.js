@@ -552,7 +552,7 @@ app.on('open-url', function(event, uri) {
   event.preventDefault();
 });
 
-// some cleanup when are app is exiting
+// some cleanup when our app is exiting
 process.on('exit', () => {
   kill_local_server();
 });
