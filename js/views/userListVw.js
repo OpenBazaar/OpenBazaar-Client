@@ -19,6 +19,7 @@ module.exports = Backbone.View.extend({
      options.hideFollow: boolean, hide follow button
      options.reverse: should the list of users be reversed?
      options.perFetch: the number of users returned per fetch (optional, only applies to the get_followers api)
+     options.followerCount: the total number of followers (optional, only applise to the get_followers api)
      */
     //the model must be passed in by the constructor
     this.usersShort = new usersShortCollection(this.model);
@@ -27,7 +28,8 @@ module.exports = Backbone.View.extend({
     this.showPerScroll = 10;
     this.fetchMoreAfter = options.perFetch;
     this.nextUserToShow = 0;
-    this.totalUsers = this.usersShort.length;
+    this.fetchedUsers = this.usersShort.length;
+    this.totalUsers = this.options.followerCount;
     this.$container = $('#obContainer');
 
     //listen to scrolling on container
@@ -58,6 +60,8 @@ module.exports = Backbone.View.extend({
           return (index >= start) && (index < end);
         });
 
+    this.fetchedUsers = this.usersShort.length;
+
     __.each(renderSet, function(user) {
       user.set('avatarURL', self.options.serverUrl+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
       if(self.options.ownFollowing.indexOf(user.get('guid')) != -1){
@@ -72,9 +76,15 @@ module.exports = Backbone.View.extend({
       this.trigger('usersAdded');
     }
 
-    this.nextUserToShow = this.nextUserToShow >= this.totalUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
-    if(this.fetchMoreAfter && this.totalUsers == this.fetchMoreAfter){
-      this.trigger('fetch')
+    this.nextUserToShow = this.nextUserToShow >= this.fetchedUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
+    console.log("f: " + this.fetchedUsers)
+    console.log("t: " + this.totalUsers)
+    console.log("e: " + end)
+    console.log("fm: " + this.fetchMoreAfter)
+    if(this.fetchMoreAfter && end == this.fetchMoreAfter && this.fetchedUsers != this.totalUsers){
+      this.fetchMoreAfter = this.fetchMoreAfter + this.options.perFetch;
+      this.trigger('fetchMoreUsers');
+      console.log("fetch more from userlistvw")
     }
   },
 
@@ -91,6 +101,13 @@ module.exports = Backbone.View.extend({
         this.listWrapper && this.listWrapper[0].hasChildNodes() && this.listWrapper.is(":visible")) {
       this.renderUserSet(this.nextUserToShow, this.nextUserToShow + this.showPerScroll);
     }
+  },
+
+  addUsers: function(model) {
+    //add more users to the collection
+    console.log("add users")
+    this.usersShort.add(model);
+    this.renderUserSet(this.nextUserToShow, this.nextUserToShow + this.showPerScroll);
   },
 
   renderNoneFound: function(){

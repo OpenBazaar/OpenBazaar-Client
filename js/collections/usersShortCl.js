@@ -6,8 +6,15 @@ module.exports = Backbone.Collection.extend({
   model: userShort,
 
   initialize: function(models, options){
-    this.fetchURL = options.fetchURL;
+
+    /*
+    if (!options.fetchURL) {
+      throw new Error('Please provide a collection.');
+    }
+    
+    this.fetchURL = options.fetchURL;*/
   },
+
 
   url: function() {
     return app.serverConfigs.getActive().getServerBaseUrl() + '/' + this.fetchURL;

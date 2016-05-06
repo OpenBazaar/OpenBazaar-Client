@@ -664,6 +664,10 @@ module.exports = baseVw.extend({
             if(self.options.ownPage === false && Boolean(__.findWhere(followingArray, {guid: self.userID}))){
               self.$('.js-followsMe').removeClass('hide')
             }
+            //mark whether page is being followed
+            if(self.options.ownPage === false){
+              self.toggleFollowButtons(Boolean(__.findWhere(followingArray, {guid: self.pageID})));
+            }
 
           }).fail(function(jqXHR, status, errorThrown){
             if (self.isRemoved()) return;
@@ -690,27 +694,26 @@ module.exports = baseVw.extend({
     var self = this,
         fetchFollowersParameters;
 
-    if(this.ownPage){
+    if(this.options.ownPage){
       fetchFollowersParameters = $.param({'start': this.followerFetchStart});
     } else {
       fetchFollowersParameters = $.param({'guid': this.pageID, 'start': this.followerFetchStart});
     }
 
+    console.log("fetchFollowers")
+
     this.followers.fetch({
-      data: self.userProfileFetchParameters,
+      data: fetchFollowersParameters,
       //timeout: 5000,
       success: (model)=> {
-        var followerArray = model.get('followers');
-        this.$('.js-userFollowerCount').html(model.get('count'));
-        this.followerFetchStart += model.length;
+        var followerArray = model.get('followers'),
+            followerCount = model.get('count') || followerArray.length;
+        this.$('.js-userFollowerCount').html(followerCount);
+        this.followerFetchStart += followerArray.length;
 
         if (self.isRemoved()) return;
 
-        this.renderFollowers(followerArray);
-        //if this is not their page, see if they are being followed
-        if(this.options.ownPage === false){
-          this.toggleFollowButtons(Boolean(__.findWhere(followerArray, {guid: this.userID})));
-        }
+        this.renderFollowers(followerArray, followerCount);
       },
       error: function(model, response){
         if (self.isRemoved()) return;
@@ -793,22 +796,27 @@ module.exports = baseVw.extend({
     }
   },
 
-  renderFollowers: function (model) {
+  renderFollowers: function (model, followerCount) {
     "use strict";
 
     model = model || [];
-    this.followerList = new personListView({
-      model: model,
-      el: '.js-list1',
-      title: window.polyglot.t('NoFollowers'),
-      message: "",
-      ownFollowing: this.ownFollowing,
-      hideFollow: true,
-      serverUrl: this.options.userModel.get('serverUrl'),
-      reverse: true,
-      perFetch: 30
-    });
-    this.registerChild(this.followerList);
+    if(!this.followerList) {
+      this.followerList = new personListView({
+        model: model,
+        el: '.js-list1',
+        title: window.polyglot.t('NoFollowers'),
+        message: "",
+        ownFollowing: this.ownFollowing,
+        hideFollow: true,
+        serverUrl: this.options.userModel.get('serverUrl'),
+        reverse: true,
+        perFetch: 30,
+        followerCount: followerCount
+      });
+      this.registerChild(this.followerList);
+    }else{
+      this.followerList.addUsers(model);
+    }
 
     if (model.length) {
       this.followersSearch = new window.List('searchFollowers', {
@@ -821,6 +829,11 @@ module.exports = baseVw.extend({
       var searchTerms = this.$('#inputFollowers').val();
       this.followersSearch.reIndex();
       searchTerms && this.followersSearch.search(searchTerms);
+    });
+
+    this.listenTo(this.followerList, 'fetchMoreUsers', ()=>{
+      console.log("trigger fetch");
+      this.fetchFollowers();
     });
   },
 
