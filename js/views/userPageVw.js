@@ -710,14 +710,15 @@ module.exports = baseVw.extend({
     this.followers.fetch({
       data: fetchFollowersParameters,
       success: (model)=> {
-        var followerArray = model.get('followers');
+        var followerArray = model.get('followers') || [];
 
         this.followerFetchTotal = model.get('count') || followerArray.length; //the length is for older servers
         this.$('.js-userFollowerCount').html(this.followerFetchTotal);
 
         if (self.isRemoved()) return;
-        
-        if(followerArray.length){
+
+        if(followerArray.length || this.followerFetchTotal == 0){
+          //always render the first time so the no followers message is shown for no followers
           this.renderFollowers(followerArray, this.followerFetchTotal);
         }
       },
