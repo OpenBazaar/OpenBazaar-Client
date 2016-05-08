@@ -668,7 +668,7 @@ module.exports = baseVw.extend({
             }
             //mark whether page is being followed
             if(self.options.ownPage === false){
-              self.toggleFollowButtons(Boolean(__.findWhere(followingArray, {guid: self.pageID})));
+              self.toggleFollowButtons(Boolean(__.findWhere(ownFollowingData.following, {guid: self.pageID})));
             }
 
           }).fail(function(jqXHR, status, errorThrown){
