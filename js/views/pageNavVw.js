@@ -630,6 +630,8 @@ module.exports = baseVw.extend({
   },
 
   mouseenterServerSubmenuTrigger: function(e) {
+    this.serverSubmenu.css('right', this.$('.popMenu-navBarSubMenu-pageNav').outerWidth());
+
     this.ServerSubmenuTimeout = setTimeout(() => {
       this.serverSubmenu.addClass('server-submenu-opened');
     }, 150);

@@ -40,7 +40,13 @@ module.exports = Backbone.Model.extend({
 
     moderators: [],
     moderator_guids: [], //list of moderator guids, created in the parse function
-    nsfw: '' //show nsfw work content, yes or no
+    nsfw: '', //show nsfw work content, yes or no
+    smtp_notifications: false, // turn on smtp notifications
+    smtp_server: '', // smtp server for notifications (e.g. smtp.gmail.com:587)
+    smtp_sender: '', // email address FROM:
+    smtp_recipient: '', // email address TO:
+    smtp_username: '', // smtp server username
+    smtp_password: '' // smtp server password or app password
   },
 
   parse: function(response) {

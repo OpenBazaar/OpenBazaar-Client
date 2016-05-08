@@ -490,16 +490,16 @@ form {
 }
 
 .listingDoesNotShipToYou {
-  background-color: rgba(37, 37, 37, 0.65); 
+  background-color: rgba(37, 37, 37, 0.65);
   /*border-radius: 20px;*/
-  height: 20px; 
+  height: 20px;
   left: 32px;
-  line-height: 20px; 
-  padding: 8px 4px; 
-  position: absolute; 
-  text-align: center; 
-  top: calc(50% - 32px); 
-  width: 242px; 
+  line-height: 20px;
+  padding: 8px 4px;
+  position: absolute;
+  text-align: center;
+  top: calc(50% - 32px);
+  width: 242px;
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -3413,6 +3413,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .popMenu-navBar {
   top: 50px;
   right: 10px;
+  width: 100%;
   transform: none;
   transition: none;
 }
@@ -3436,7 +3437,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   min-width: 230px;
   overflow: hidden;
   transform: translateY(-110%);
-  transition: transform 200ms;   
+  transition: transform 200ms;
+}
+
+.popMenu-navBarSubMenu-servers {
+    width: 230px;
 }
 
 .popMenu-opened .popMenu-navBarSubMenu-pageNav,
@@ -4059,7 +4064,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-style: solid;
   border-width: 10px 10px 0 10px;
   border-color: rgba(37,37,37,.95) transparent transparent transparent;
-  position: absolute; 
+  position: absolute;
   bottom: -10px;
   right: 48px;
 }
