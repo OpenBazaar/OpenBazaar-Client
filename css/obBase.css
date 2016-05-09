@@ -3415,6 +3415,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .popMenu-navBar {
   top: 50px;
   right: 10px;
+  width: 100%;
   transform: none;
   transition: none;
 }
@@ -3434,10 +3435,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: #fff;
   font-size: 13px;
   padding: 10px 0;
-  width: 230px;
+  width: auto;
+  min-width: 230px;
   overflow: hidden;
   transform: translateY(-110%);
-  transition: transform 200ms;   
+  transition: transform 200ms;
+}
+
+.popMenu-navBarSubMenu-servers {
+    width: 230px;
 }
 
 .popMenu-opened .popMenu-navBarSubMenu-pageNav,
@@ -4060,7 +4066,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-style: solid;
   border-width: 10px 10px 0 10px;
   border-color: rgba(37,37,37,.95) transparent transparent transparent;
-  position: absolute; 
+  position: absolute;
   bottom: -10px;
   right: 48px;
 }
