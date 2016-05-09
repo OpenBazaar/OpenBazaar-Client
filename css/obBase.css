@@ -4294,6 +4294,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 100%;
   transition: top 1s;
   transition-delay: 5s;
+  box-sizing: border-box;
   padding: 9px;
 }
 
