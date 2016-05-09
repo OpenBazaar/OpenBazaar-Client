@@ -80,7 +80,7 @@ module.exports = Backbone.View.extend({
 
     this.nextUserToShow = this.nextUserToShow >= this.fetchedUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
 
-    if(this.fetchedUsers < this.totalUsers){
+    if(this.fetchedUsers < this.totalUsers && this.$el.is(':visible')){
       this.trigger('fetchMoreUsers');
     }
   },
