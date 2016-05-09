@@ -4281,6 +4281,26 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 14;
 }
 
+#ov1 #loadingModal.hide {
+  height: 0; /* kludge to allow top bar to fade in. Transitions don't work if display is none */
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+
+#loadingModal #loadingModalTopBar {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  transition: top 1s;
+  transition-delay: 5s;
+  padding: 9px;
+}
+
+#loadingModal.hide #loadingModalTopBar {
+  top: -50px;
+}
+
 #ov1 .server-connect-modal {
   z-index: 15;
 }
@@ -4866,7 +4886,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
-#ov1  .textOpacity0 {
+#ov1  .textOpacity0,
+#ov1 .opacity0 {
   opacity: 0;
 }
 
@@ -5819,7 +5840,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 /* to fade out a visible element, add the fadeOut class */
 /* to fade in an element with opacity 0, add the fadeIn class */
-/* to fade in an element with no opacity, give it the fadeOut class, then add the fadeIn class */
 
 #ov1 .fadeOut {
   opacity: 0;
