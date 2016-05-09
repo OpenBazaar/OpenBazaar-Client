@@ -5141,6 +5141,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: 0;
 }
 
+#ov1  .marginLeft05 {
+  margin-left: 0.5px;
+}
+
 #ov1  .marginLeft1 {
   margin-left: 1px;
 }
