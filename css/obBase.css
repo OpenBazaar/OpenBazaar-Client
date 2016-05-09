@@ -491,13 +491,13 @@ form {
 
 .listingDoesNotShipToYou {
   background: #252525;
-  height: 14px; 
-  width: 14px;
-  right: 18px;
+  height: 18px; 
+  width: 18px;
+  right: 15px;
   padding: 10px; 
   position: absolute; 
   text-align: center; 
-  top: 205px;
+  top: 137px;
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
   border-radius: 32px;
   opacity: .95;
@@ -567,7 +567,7 @@ form {
 
 .userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
 .homeView .gridItem:hover > .listingDoesNotShipToYou {
-  top: 208px;
+  top: 140px;
   opacity: 1;
 }
 
