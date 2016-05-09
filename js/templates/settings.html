@@ -1160,7 +1160,7 @@
                 <% if(config.testnet) { %>
                 <div class="positionTopRight padding10">
                   <span class="btn btn-txt custCol-secondary">
-                    <%= polyglot.t('MustTestnetAddress') %> <!--remove this in production-->
+                    <%= polyglot.t('MustTestnetAddress') %>
                   </span>
                 </div>
                 <% } %>
@@ -1181,8 +1181,10 @@
                 <div class="fieldItem flexRow">
                   <div class="flexRow">
                     <div class="flexCol-4">
-                      <input type="radio" class="fieldItem" id="fancyStylesYes" name="notFancy" value="true" /><label for="fancyStylesYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                      <input type="radio" class="fieldItem" id="fancyStylesNo" name="notFancy" value="false" checked/><label for="fancyStylesNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                      <input type="radio" class="fieldItem" id="fancyStylesYes" name="notFancy" value="true" />
+                      <label for="fancyStylesYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                      <input type="radio" class="fieldItem" id="fancyStylesNo" name="notFancy" value="false" checked/>
+                      <label for="fancyStylesNo" class="radioLabel"><%= polyglot.t('No') %></label>
                     </div>
                     <div class="flexCol-8">
                       <div class="marginLeft10 textSize11px txt-fade"><%= polyglot.t('NoFancyStylesWarning') %></div>
@@ -1194,7 +1196,6 @@
             </div>
 
             <div class="flexRow">
-
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
                   <label>
@@ -1208,13 +1209,14 @@
                 <div class="fieldItem flexRow">
                   <div class="flexRow">
                     <div class="flexCol-4">
-                      <input type="radio" class="fieldItem" id="useTestnetYes" name="useTestnet" value="true" <% if(window.config.testnet){ %>checked<% } %> /><label for="useTestnetYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                      <input type="radio" class="fieldItem" id="useTestnetNo" name="useTestnet" value="false" <% if(!window.config.testnet){ %>checked<% } %> /><label for="useTestnetNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                      <input type="radio" class="fieldItem" id="useTestnetYes" name="useTestnet" value="true" <% if(window.config.testnet){ %>checked<% } %> />
+                      <label for="useTestnetYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                      <input type="radio" class="fieldItem" id="useTestnetNo" name="useTestnet" value="false" <% if(!window.config.testnet){ %>checked<% } %> />
+                      <label for="useTestnetNo" class="radioLabel"><%= polyglot.t('No') %></label>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
             
             <div class="flexRow">
@@ -1222,15 +1224,17 @@
                 <div class="fieldItem">
                   <label>
                     <%= polyglot.t('AdditionalPaymentData') %>
-                    <i class="ion-help-circled tooltip tooltip-box" data-tooltip="<%= polyglot.t('AdditionalPaymentDataInfo') %>"></i>
                   </label>
+                  <i class="ion-help-circled tooltip tooltip-box" data-tooltip="<%= polyglot.t('AdditionalPaymentDataInfo') %>"></i>
                 </div>
               </div>
 
               <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem">
-                  <input type="radio" class="fieldItem" id="additional_payment_data_yes" name="additionalPaymentData" value="true" checked /><label for="additional_payment_data_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                  <input type="radio" class="fieldItem" id="additional_payment_data_no" name="additionalPaymentData" value="false" /><label for="additional_payment_data_no" class="radioLabel"><%= polyglot.t('No') %></label>
+                  <input type="radio" class="fieldItem" id="additional_payment_data_yes" name="additionalPaymentData" value="true" checked />
+                  <label for="additional_payment_data_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="additional_payment_data_no" name="additionalPaymentData" value="false" />
+                  <label for="additional_payment_data_no" class="radioLabel"><%= polyglot.t('No') %></label>
                 </div>
               </div>
             </div>
@@ -1269,6 +1273,134 @@
                 </div>
               </div>
 
+            </div>
+
+            <div class="flexRow borderBottom custCol-border marginTop20">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('SMTPNotifications') %></h3>
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight custCol-border">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('SMTPNotifications') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <div class="fieldItem flexRow">
+                  <div class="flexRow">
+                    <div class="flexCol-4">
+                      <input type="radio" class="fieldItem" id="smtpNotificationsYes" name="smtp_notifications" value="true" /><label for="smtpNotificationsYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                      <input type="radio" class="fieldItem" id="smtpNotificationsNo" name="smtp_notifications" value="false" checked/><label for="smtpNotificationsNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                    </div>
+                    <div class="flexCol-8">
+                      <div class="marginLeft10 textSize11px txt-fade"><%= polyglot.t('SMTPNotificationsWarning') %></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight  custCol-border">
+                <div class="fieldItem">
+                  <label for="resolver">
+                    <%= polyglot.t('SMTPServer') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="smtp_server"
+                       id="smtpServer"
+                       type="text"
+                       placeholder="<%= polyglot.t('SMTPServerExample') %>"
+                       class="fieldItem"
+                       value="<%= ob.user.smtp_server %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight  custCol-border">
+                <div class="fieldItem">
+                  <label for="resolver">
+                    <%= polyglot.t('SMTPUsername') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="smtp_username"
+                       id="smtpUsername"
+                       type="text"
+                       class="fieldItem"
+                       value="<%= ob.user.smtp_username %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight  custCol-border">
+                <div class="fieldItem">
+                  <label for="resolver">
+                    <%= polyglot.t('SMTPPassword') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="smtp_password"
+                       id="smtpPassword"
+                       type="text"
+                       class="fieldItem"
+                       value="<%= ob.user.smtp_password %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight  custCol-border">
+                <div class="fieldItem">
+                  <label for="resolver">
+                    <%= polyglot.t('SMTPSender') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="smtp_sender"
+                       id="smtpSender"
+                       type="text"
+                       placeholder="<%= polyglot.t('SMTPSenderExample') %>"
+                       class="fieldItem"
+                       value="<%= ob.user.smtp_sender %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight  custCol-border">
+                <div class="fieldItem">
+                  <label for="resolver">
+                    <%= polyglot.t('SMTPRecipient') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="smtp_recipient"
+                       id="smtpRecipient"
+                       type="text"
+                       placeholder="<%= polyglot.t('SMTPRecipientExample') %>"
+                       class="fieldItem"
+                       value="<%= ob.user.smtp_recipient %>">
+              </div>
             </div>
 
             <a class="btn btn-large js-saveAdvanced custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary">

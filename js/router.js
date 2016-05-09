@@ -107,7 +107,7 @@ module.exports = Backbone.Router.extend({
         guidFetch;
 
     if (handle) {
-      guidFetch = app.getGuid(handle, this.userModel.get('resolver') + '/v2/users/')
+      guidFetch = app.getGuid(handle, this.userModel.get('resolver').replace(/\/+$/, "") + '/v2/users/')
         .done((guid) => {
           deferred.resolve(guid);
         }).fail(() => {
