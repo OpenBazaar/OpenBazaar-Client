@@ -489,18 +489,19 @@ form {
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.listingDoesNotShipToYou {
-  background-color: rgba(37, 37, 37, 0.65);
-  /*border-radius: 20px;*/
-  height: 20px;
-  left: 32px;
-  line-height: 20px;
-  padding: 8px 4px;
-  position: absolute;
-  text-align: center;
-  top: calc(50% - 32px);
-  width: 242px;
+.listingDoesNotShipToYou,
+.listingDoesNotShipToYou.tooltip {
+  background: #252525;
+  height: 18px; 
+  width: 18px;
+  right: 15px;
+  padding: 10px; 
+  position: absolute; 
+  text-align: center; 
+  top: 137px;
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+  border-radius: 32px;
+  opacity: .95;
 }
 
 .noPointerEvents {
@@ -567,7 +568,8 @@ form {
 
 .userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
 .homeView .gridItem:hover > .listingDoesNotShipToYou {
-  top: calc(50% - 46px);
+  top: 140px;
+  opacity: 1;
 }
 
 .userPage-subViews .gridItem:hover .gridItemControls,
@@ -5144,6 +5146,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginLeft0 {
   margin-left: 0;
+}
+
+#ov1  .marginLeft05 {
+  margin-left: 0.5px;
 }
 
 #ov1  .marginLeft1 {
