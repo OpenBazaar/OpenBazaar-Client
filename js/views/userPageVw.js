@@ -700,6 +700,13 @@ module.exports = baseVw.extend({
       //don't fetch again if all of the followers have been fetched
       return;
     }
+    
+    if(this.fetchingFollowers){
+      //don't cue up multiple calls
+      return;
+    }
+
+    this.fetchingFollowers = true;
 
     if(this.options.ownPage){
       fetchFollowersParameters = $.param({'start': this.followerFetchStart});
@@ -727,6 +734,7 @@ module.exports = baseVw.extend({
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
       },
       complete: function(xhr, textStatus) {
+        self.fetchingFollowers = false;
         if(textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
           throw new Error("The followers data returned from the API has a parsing error.");

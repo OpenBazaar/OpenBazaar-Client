@@ -25,8 +25,7 @@ module.exports = Backbone.View.extend({
     this.usersShort = new usersShortCollection(this.model);
     this.options.reverse && this.usersShort.models.reverse();
     this.subViews = [];
-    this.showPerScroll = 10;
-    this.fetchMoreAfter = options.perFetch;
+    this.showPerScroll = 30;
     this.nextUserToShow = 0;
     this.fetchedUsers = this.usersShort.length;
     this.totalUsers = this.options.followerCount;
@@ -81,8 +80,7 @@ module.exports = Backbone.View.extend({
 
     this.nextUserToShow = this.nextUserToShow >= this.fetchedUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
 
-    if(this.fetchMoreAfter && end == this.fetchMoreAfter && this.fetchedUsers < this.totalUsers){
-      this.fetchMoreAfter = this.fetchMoreAfter + this.options.perFetch;
+    if(this.fetchedUsers < this.totalUsers){
       this.trigger('fetchMoreUsers');
     }
   },
