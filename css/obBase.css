@@ -489,7 +489,8 @@ form {
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.listingDoesNotShipToYou {
+.listingDoesNotShipToYou,
+.listingDoesNotShipToYou.tooltip {
   background: #252525;
   height: 18px; 
   width: 18px;

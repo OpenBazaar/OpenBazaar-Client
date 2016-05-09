@@ -89,8 +89,8 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
   <% } %>
 
   <% if(!shipsToYou && ob.ships_to.length != 0){ %>
-    <div class="listingDoesNotShipToYou cursorDefault">
-      <span class="ion-minus-circled fontSize15 tooltip marginLeft05" style="color: #DCDCDC" data-tooltip="<%= polyglot.t('DoesNotShip') %>"></span>
+    <div class="listingDoesNotShipToYou cursorDefault tooltip" data-tooltip="<%= polyglot.t('DoesNotShip') %>">
+      <span class="ion-minus-circled fontSize15 marginLeft05 positionWrapper" style="color: #DCDCDC" ></span>
     </div>
   <% } %>
 
