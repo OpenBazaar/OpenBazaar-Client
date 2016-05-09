@@ -80,9 +80,9 @@
     <div class="spinner-with-logo fullCentered">
       <i class="ion-android-sync spinner fontSize30 spinner-with-logo-icon"></i>
     </div>
-    <div class="width100 positionTop">
-      <a class="btn btn-txt rowTop10 marginRight10 pull-right js-indexReload"><i class="ion-android-sync"></i> <span class="js-translate" data-translate="Reload"></span></a>
-      <a class="btn btn-txt rowTop10 marginRight10 pull-right" href="#home"><i class="ion-home"></i> <span class="js-translate" data-translate="LoadIndex"></span></a>
+    <div class="width100 positionTop custCol-primary">
+      <a class="btn btn-txt rowTop10 marginRight10 pull-right custCol-secondary custCol-text js-indexReload js-fadeIn fadeOut"><i class="ion-android-sync"></i> <span class="js-translate" data-translate="Reload"></span></a>
+      <a class="btn btn-txt rowTop10 marginRight10 pull-right custCol-secondary custCol-text js-fadeIn fadeOut" href="#home"><i class="ion-home"></i> <span class="js-translate" data-translate="LoadIndex"></span></a>
     </div>
   </div>
 
@@ -121,6 +121,9 @@
     $('.js-defaultServerIndexApp').on('click', function(){
       app.loadNewServer("http://localhost:18469/api/v1/");
     });
+    window.setTimeout(function(){
+      $('.js-fadeIn').addClass('fadeIn');
+    }, 2000)
   </script>
 </body>
 </html>

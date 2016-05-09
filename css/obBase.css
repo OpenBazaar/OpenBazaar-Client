@@ -5817,10 +5817,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
+/* to fade out a visible element, add the fadeOut class */
+/* to fade in an element with opacity 0, add the fadeIn class */
+/* to fade in an element with no opacity, give it the fadeOut class, then add the fadeIn class */
 
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+#ov1 .fadeIn {
+  opacity: 1;
+  pointer-events: auto;
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
