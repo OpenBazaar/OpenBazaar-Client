@@ -59,7 +59,7 @@ module.exports = Backbone.Model.extend({
     var matchedCountry = this.countryArray.filter(function(value){
       return value.dataName == response.country;
     });
-    response.displayCountry = matchedCountry[0] ? matchedCountry[0].name : "";
+    response.displayCountry = matchedCountry[0] ? polyglot.t(`countries.${matchedCountry[0].dataName}.name`) : "";
 
     //addresses come from the server as a string. Parse the string
     if(response.shipping_addresses && response.shipping_addresses.constructor === Array && response.shipping_addresses.length > 0){
