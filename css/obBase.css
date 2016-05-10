@@ -477,7 +477,8 @@ form {
   flex-grow: 1;
 }
 
-.listingType {
+.listingType,
+.listingType.tooltip {
   background-color: #252525;
   color: #ffffff;
   position: absolute;
@@ -4422,21 +4423,21 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transform: rotate(45deg);
 }
 
-.listingTypeDigital:before {
+.listingTypeDIGITAL:before {
   color: #EFEF4C;
   content: "\f137";
   font-family: Ionicons;
   font-size: 12px;
 }
 
-.listingTypePhysical:before {
+.listingTypePHYSICAL_GOOD:before {
   color: #805C17;
   content: "\f318";
   font-family: Ionicons;
   font-size: 12px;
 }
 
-.listingTypeService:before {
+.listingTypeSERVICE:before {
   color: #DEDEDE;
   content: "\f2ad";
   font-family: Ionicons;

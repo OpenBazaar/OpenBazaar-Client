@@ -190,7 +190,8 @@ module.exports = baseVw.extend({
     var self = this,
         blocked,
         addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country }),
-        userCountry = this.userModel.get('country');
+        userCountry = this.userModel.get('country'),
+        contract_type = item.contract_type;
 
     addressCountries.push(userCountry);
 
@@ -206,6 +207,7 @@ module.exports = baseVw.extend({
     item.discover = true;
     item.ownGuid = this.userModel.get('guid');
     item.userCountries = addressCountries;
+    item.contract_type = contract_type;
 
 
     item.ownFollowing = this.ownFollowing.indexOf(item.guid) != -1;
