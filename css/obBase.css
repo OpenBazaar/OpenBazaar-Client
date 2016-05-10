@@ -477,7 +477,8 @@ form {
   flex-grow: 1;
 }
 
-.listingType {
+.listingType,
+.listingType.tooltip {
   background-color: #252525;
   color: #ffffff;
   position: absolute;
