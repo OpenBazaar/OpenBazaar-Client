@@ -84,7 +84,15 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
 
   <% if(ob.contract_type){ %><!-- type is not yet implemented -->
     <div class="listingType borderRadius3 js-item textOpacity90">
-          <span class="<% print('listingType'+ob.contract_type) %>"></span>
+          <span class="<% print('listingType'+ob.contract_type) %>">
+            <% if(ob.contract_type == "PHYSICAL_GOOD"){ %>
+              <%= polyglot.t('Physical') %>
+            <% }else if(ob.contract_type == "DIGITAL_GOOD"){  %>
+              <%= polyglot.t('Digital') %>
+            <% }else{ %>
+              <%= polyglot.t('Service') %>
+            <% } %>
+          </span>
     </div>
   <% } %>
 
