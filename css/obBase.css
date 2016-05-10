@@ -4423,7 +4423,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transform: rotate(45deg);
 }
 
-.listingTypeDIGITAL:before {
+.listingTypeDIGITAL_GOOD:before {
   color: #EFEF4C;
   content: "\f137";
   font-family: Ionicons;
