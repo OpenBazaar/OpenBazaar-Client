@@ -1,61 +1,47 @@
 <div class="rowItem padding2015">
-  <div class="table custCol-text">
+  <div class="table custCol-text marginLeft15">
     <div>
-      <div class="marginLeft15 marginTop2">
-        <div class="marginLeft15 marginTop2">
-        </div>
-        <div class="marginLeft15 marginTop2">
-          <div class="clearfix">
-            <div class="pull-left">
-              <% print(ob.starsTmpl({ rating: ob.feedback })) %>
-              (<%= ob.feedback %>/5)
-            </div>
-            <% if(ob.address){ %>
-            <div class="pull-right">
-              <% if(config.testnet){ %>
-                <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.address %>" class="noWrap">
-              <% }else{ %>
-              <a href="https://live.blockcypher.com/btc/address/<%- ob.address %>" class="noWrap">
-                <% } %>
-                <div class="btn btn-txt floatRight custCol-secondary textOpacity1">
-                  <%= polyglot.t('transactions.ViewOnBlockchain') %>
-                  <span class="ion-android-open fontSize10"></span>
-                </div>
-              </a>
-            </div>
-            <% } %>
+      <div class="marginTop2">
+        <div class="clearfix">
+          <div class="pull-left">
+            <% print(ob.starsTmpl({ rating: ob.feedback })) %>
+            (<%= ob.feedback %>/5)
           </div>
-          <p class="fontSize14 textWeightNormal clamp4 marginTop9"><%= ob.review %></p>
+          <% if(ob.address){ %>
+          <div class="pull-right">
+            <% if(config.testnet){ %>
+              <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.address %>" class="noWrap">
+            <% }else{ %>
+            <a href="https://live.blockcypher.com/btc/address/<%- ob.address %>" class="noWrap btn btn-txt floatRight custCol-secondary textOpacity1">
+              <% } %>
+                <%= polyglot.t('transactions.ViewOnBlockchain') %>
+                <span class="ion-android-open fontSize10"></span>
+            </a>
+          </div>
+          <% } %>
         </div>
+        <p class="fontSize14 textWeightNormal clamp4 marginTop9"><%= ob.review %></p>
       </div>
       <div class="marginLeft15 pull-right">
-        <div class="floatLeft marginRight15" style="width: 200px">
-          <div class="fontSize14">
-            <div><%= polyglot.t('transactions.Quality') %> (<%= ob.quality %>/5)</div>
-            <div>
-              <% print(ob.starsTmpl({ rating: ob.quality })) %>
-            </div>
+        <div class="floatLeft marginRight15 fontSize14" style="width: 200px">
+          <div><%= polyglot.t('transactions.Quality') %> (<%= ob.quality %>/5)</div>
+          <div>
+            <% print(ob.starsTmpl({ rating: ob.quality })) %>
           </div>
-          <div class="fontSize14 marginTop9">
-            <div><%= polyglot.t('transactions.MatchedDescription') %> (<%= ob.description %>/5)</div>
-            <div>
-              <% print(ob.starsTmpl({ rating: ob.description })) %>
-            </div>
+          <div class="marginTop9"><%= polyglot.t('transactions.MatchedDescription') %> (<%= ob.description %>/5)</div>
+          <div>
+            <% print(ob.starsTmpl({ rating: ob.description })) %>
           </div>
         </div>
-        <div class="floatLeft" style="width: 200px">
-          <div class="fontSize14">
-            <div><%= polyglot.t('transactions.DeliverySpeed') %> (<%= ob.delivery_time %>/5)</div>
-            <div>
-              <% print(ob.starsTmpl({ rating: ob.delivery_time })) %>
-            </div>            
-          </div>
-          <div class="fontSize14 marginTop9">
-            <div><%= polyglot.t('transactions.CustomerService') %> (<%= ob.customer_service %>/5)</div>
-            <div>
-              <% print(ob.starsTmpl({ rating: ob.customer_service })) %>
-            </div>            
-          </div>        
+        <div class="floatLeft fontSize14" style="width: 200px">
+          <div><%= polyglot.t('transactions.DeliverySpeed') %> (<%= ob.delivery_time %>/5)</div>
+          <div>
+            <% print(ob.starsTmpl({ rating: ob.delivery_time })) %>
+          </div>            
+          <div class="marginTop9"><%= polyglot.t('transactions.CustomerService') %> (<%= ob.customer_service %>/5)</div>
+          <div>
+            <% print(ob.starsTmpl({ rating: ob.customer_service })) %>
+          </div>            
         </div>
       </div>
     </div>

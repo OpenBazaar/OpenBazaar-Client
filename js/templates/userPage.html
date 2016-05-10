@@ -258,6 +258,13 @@
       <span class="pill fontSize12 textOpacity75 marginLeft2 js-userFollowerCount">...</span>
     </a>
     <% if(ob.page.profile.vendor) { %>
+    <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab paddingRight18">
+      <span class="ion-android-star fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Reviews') %>
+      <span class="pill fontSize12 textOpacity75 marginLeft2 js-userReviewsCount">...</span>
+    </a>
+    <% } %>
+    <% if(ob.page.profile.vendor) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab paddingRight18">
       <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Store') %>
@@ -425,6 +432,13 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="flexContainer flex-border custCol-primary js-reviews js-tabTarg hide minHeight650" id="searchReviews">
+      <div class="flexRow js-list6">
+        <div class="padding10 width100 alignCenter js-loadingMsg borderBottom">
+          <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
         </div>
       </div>
     </div>
