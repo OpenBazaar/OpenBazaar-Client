@@ -91,7 +91,16 @@
 
   <script>
     var app = require('./js/main'),
-        remote = require('remote');
+        remote = require('remote'),
+        Menu = remote.require('menu'),
+        MenuItem = remote.require('menu-item'),
+        os = require('os'),
+        platform = os.platform();
+
+    switch(platform) {
+      case "darwin":
+        platform = "mac";
+    }
 
     window.translateIndex = function(){
       $('.js-translate').each(function() {
@@ -121,6 +130,109 @@
     $('.js-defaultServerIndexApp').on('click', function(){
       app.loadNewServer("http://localhost:18469/api/v1/");
     });
+
+    var appMenu = Menu.buildFromTemplate([
+      {
+        label: 'Edit',
+        submenu: [
+          {
+            label: 'Undo',
+            role: 'undo'
+          }, {
+            label: 'Redo',
+            role: 'redo'
+          }, {
+            type: 'separator'
+          }, {
+            label: 'Cut',
+            role: 'cut'
+          }, {
+            label: 'Copy',
+            role: 'copy'
+          }, {
+            label: 'Paste',
+            role: 'paste'
+          }, {
+            label: 'Paste and Match Style',
+            click: function() {
+              BrowserWindow.getFocusedWindow().webContents.pasteAndMatchStyle();
+            }
+          },
+          {
+            label: 'Select All',
+            role: 'selectall'
+          }
+        ]
+      },
+      {
+        label: 'View',
+        submenu: [
+          {
+            label: 'Reload',
+            accelerator: 'CmdOrCtrl+R',
+            click: function(item, focusedWindow) {
+              if (focusedWindow) {
+                focusedWindow.reload();
+              }
+            }
+          },
+          {
+            label: 'Toggle Developer Tools',
+            accelerator: (function() {
+              if (platform == 'mac') {
+                return 'Alt+Command+I';
+              } else {
+                return 'Ctrl+Shift+I';
+              }
+            })(),
+            click: function(item, focusedWindow) {
+              if (focusedWindow) {
+                focusedWindow.toggleDevTools();
+              }
+            }
+          },
+          {
+            label: 'Toggle Full Screen',
+            accelerator: (function() {
+              if (platform == 'mac') {
+                return 'Ctrl+Command+F';
+              } else {
+                return 'F11';
+              }
+            })(),
+            click: function(item, focusedWindow) {
+              var fullScreen;
+
+              if (mainWindow) {
+                fullScreen = !mainWindow.isFullScreen();
+                mainWindow.setFullScreen(fullScreen);
+
+                if (fullScreen) {
+                  mainWindow.webContents.send('fullscreen-enter');
+                } else {
+                  mainWindow.webContents.send('fullscreen-exit');
+                }
+              }
+            }
+          },
+        ]
+      },
+      {
+        label: 'Window',
+        submenu: [
+          {
+            label: 'Minimize',
+            selector: 'performMiniaturize:',
+            accelerator: 'Command+M'
+          }
+        ]
+      }
+    ]);
+
+    window.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      appMenu.popup(remote.getCurrentWindow());
+    }, false);
   </script>
 </body>
 </html>
