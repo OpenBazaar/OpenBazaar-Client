@@ -85,7 +85,10 @@ module.exports = window.Backbone.Model.extend({
         var matchedCountry = countryArray.filter(function (value) {
           return value.dataName == region;
         });
-        matchedCountry[0] && response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(matchedCountry[0].name);
+        matchedCountry[0] &&
+          response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(
+            polyglot.t(`countries.${matchedCountry[0].dataName}.name`)
+          );
       });
     } else {
       response.invalidData = true;
@@ -98,6 +101,7 @@ module.exports = window.Backbone.Model.extend({
           return value.dataName == response.buyer_order.order.shipping.country;
         });
         response.displayCountry = matchedCountry[0].name;
+        response.displayCountry = polyglot.t(`countries.${matchedCountry[0].dataName}.name`);
       } else {
         response.displayCountry = "";
       }

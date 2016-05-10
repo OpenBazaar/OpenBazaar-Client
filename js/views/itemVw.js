@@ -5,6 +5,7 @@ var __ = require('underscore'),
   loadTemplate = require('../utils/loadTemplate'),
   sanitizeHTML = require('sanitize-html'),
   RatingCl = require('../collections/ratingCl'),
+  CountriesMd = require('../models/countriesMd'),
   baseVw = require('./baseVw'),
   buyWizardVw = require('./buyWizardVw'),
   ReviewsVw = require('./reviewsVw');

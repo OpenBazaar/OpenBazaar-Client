@@ -126,16 +126,16 @@
           <h4><%= polyglot.t('CanBeShippedTo') %></h4>
         </div>
         <div class="marginBottom20  marginLeft7 row10">
-          <% var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'displayCountry'), ob.vendor_offer.listing.shipping.shipping_regionsDisplay));
+          <% var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'country'), ob.vendor_offer.listing.shipping.shipping_regions));
           if(matchedItemShippableCountries.length > 0){
             _.each(matchedItemShippableCountries, function(data){
-              print("<p>" + data + "</p>");
+              print("<p>" + polyglot.t(`countries.${data}.name`) + "</p>");
             });
           } else if(!ob.worldwide){
             print(polyglot.t('NoShippableAddress'));
           } else {
-            _.each(_.uniq(_.pluck(ob.userAddresses, 'displayCountry')), function(data){
-            print("<p>" + data + "</p>");
+            _.each(_.uniq(_.pluck(ob.userAddresses, 'country')), function(data){
+              print("<p>" + polyglot.t(`countries.${data}.name`) + "</p>");
             });
           }
           %>

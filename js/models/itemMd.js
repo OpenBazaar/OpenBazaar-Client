@@ -184,7 +184,9 @@ module.exports = window.Backbone.Model.extend({
           return value.dataName == region;
         });
         if(matchedCountry[0]){
-          response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(matchedCountry[0].name);
+          response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(
+            polyglot.t(`countries.${matchedCountry[0].dataName}.name`)
+          );
         }
 
       });
@@ -194,7 +196,7 @@ module.exports = window.Backbone.Model.extend({
         var matchedCountry = self.countryArray.filter(function (value) {
           return value.dataName == response.vendor_offer.listing.shipping.shipping_origin;
         });
-        response.displayShippingOrigin = matchedCountry[0] ? matchedCountry[0].name : "";
+        response.displayShippingOrigin = matchedCountry[0] ? polyglot.t(`countries.${matchedCountry[0].dataName}.name`) : "";
       }
 
       //unescape any html
