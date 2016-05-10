@@ -82,9 +82,9 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
     </div>
   </div>
 
-  <% if(ob.type){ %><!-- type is not yet implemented -->
-    <div class="listingType borderRadius3 js-item <% if(shipsToYou){ %>textOpacity90<% }else{ %>textOpacity25<% } %>">
-          <span class="<% print('listingType'+ob.type) %>"></span>
+  <% if(ob.contract_type){ %><!-- type is not yet implemented -->
+    <div class="listingType borderRadius3 js-item textOpacity90">
+          <span class="<% print('listingType'+ob.contract_type) %>"></span>
     </div>
   <% } %>
 
