@@ -154,8 +154,10 @@
             role: 'paste'
           }, {
             label: 'Paste and Match Style',
-            click: function() {
-              BrowserWindow.getFocusedWindow().webContents.pasteAndMatchStyle();
+            click: function(item, focusedWindow) {
+              if (focusedWindow) {
+                focusedWindow.webContents.pasteAndMatchStyle();
+              }
             }
           },
           {
@@ -169,7 +171,6 @@
         submenu: [
           {
             label: 'Reload',
-            accelerator: 'CmdOrCtrl+R',
             click: function(item, focusedWindow) {
               if (focusedWindow) {
                 focusedWindow.reload();
@@ -178,13 +179,6 @@
           },
           {
             label: 'Toggle Developer Tools',
-            accelerator: (function() {
-              if (platform == 'mac') {
-                return 'Alt+Command+I';
-              } else {
-                return 'Ctrl+Shift+I';
-              }
-            })(),
             click: function(item, focusedWindow) {
               if (focusedWindow) {
                 focusedWindow.toggleDevTools();
@@ -193,24 +187,17 @@
           },
           {
             label: 'Toggle Full Screen',
-            accelerator: (function() {
-              if (platform == 'mac') {
-                return 'Ctrl+Command+F';
-              } else {
-                return 'F11';
-              }
-            })(),
             click: function(item, focusedWindow) {
               var fullScreen;
 
-              if (mainWindow) {
-                fullScreen = !mainWindow.isFullScreen();
-                mainWindow.setFullScreen(fullScreen);
+              if (focusedWindow) {
+                fullScreen = !focusedWindow.isFullScreen();
+                focusedWindow.setFullScreen(fullScreen);
 
                 if (fullScreen) {
-                  mainWindow.webContents.send('fullscreen-enter');
+                  focusedWindow.webContents.send('fullscreen-enter');
                 } else {
-                  mainWindow.webContents.send('fullscreen-exit');
+                  focusedWindow.webContents.send('fullscreen-exit');
                 }
               }
             }
@@ -221,9 +208,28 @@
         label: 'Window',
         submenu: [
           {
+            label: 'Maximize',
+            click: function(item, focusedWindow) {
+              if (focusedWindow) {
+                focusedWindow.maximize();
+              }
+            }
+          },
+          {
+            label: 'Unmaximize',
+            click: function(item, focusedWindow) {
+              if (focusedWindow) {
+                focusedWindow.unmaximize();
+              }
+            }
+          },
+          {
             label: 'Minimize',
-            selector: 'performMiniaturize:',
-            accelerator: 'Command+M'
+            click: function(item, focusedWindow) {
+              if (focusedWindow) {
+                focusedWindow.minimize();
+              }
+            }
           }
         ]
       }
