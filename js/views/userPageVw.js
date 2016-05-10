@@ -8,6 +8,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
     cropit = require('../utils/jquery.cropit'),
+    ratingCl = require('../collections/ratingCl'),
     userProfileModel = require('../models/userProfileMd'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
@@ -15,6 +16,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
+    reviewsView = require('./reviewsVw'),
     itemVw = require('./itemVw'),
     itemEditVw = require('./itemEditVw'),
     messageModal = require('../utils/messageModal.js'),
@@ -122,6 +124,7 @@ module.exports = baseVw.extend({
 
   events: {
     'click .js-aboutTab': 'aboutClick',
+    'click .js-reviewsTab': 'reviewsClick',
     'click .js-followersTab': 'followersClick',
     'click .js-followingTab': 'followingClick',
     'click .js-storeTab': 'storeTabClick',
@@ -198,6 +201,7 @@ module.exports = baseVw.extend({
     this.followers.urlRoot = options.userModel.get('serverUrl') + "get_followers";
     this.following = new usersModel();
     this.following.urlRoot = options.userModel.get('serverUrl') + "get_following";
+    this.reviews = new ratingCl();
     //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
     this.ownFollowing = [];
     this.socketView = options.socketView;
@@ -367,6 +371,7 @@ module.exports = baseVw.extend({
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.fetchReviews();
       self.fetchFollowing();
       self.getIsModerator();
       self.fetchListings();
@@ -632,6 +637,28 @@ module.exports = baseVw.extend({
     });
   },
 
+  fetchReviews: function(){
+    var self = this;
+    this.reviews.fetch({
+      data: self.userProfileFetchParameters,
+      success: function(model){
+          if (self.isRemoved()) return;
+
+          self.renderReviews(model);
+      },
+      error: function (model, response) {
+        if (self.isRemoved()) return;
+        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Reviews'));
+      },
+      complete: function (xhr, textStatus) {
+        if (textStatus == 'parsererror') {
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The reviews data returned from the API has a parsing error.");
+        }
+      }
+    });
+  },
+
   fetchFollowing: function(){
     var self = this;
     this.following.fetch({
@@ -810,6 +837,17 @@ module.exports = baseVw.extend({
     if (model.length) {
       this.storeSearch = new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
     }
+  },
+
+  renderReviews: function (model) {
+    model = model || [];
+    this.reviewsVw = new reviewsView({
+      collection: model,
+    });
+    this.registerChild(this.reviewsVw);
+
+    this.$('.js-list6').html(this.reviewsVw.render().el);
+    this.$('.js-userReviewsCount').html(model.length);
   },
 
   renderFollowers: function (model, followerCount) {
@@ -1001,6 +1039,13 @@ module.exports = baseVw.extend({
     this.setState('about');
   },
 
+  reviewsClick: function(e){
+    "use strict";
+    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-reviews'));
+    this.addTabToHistory('reviews');
+    this.setState('reviews');
+  },
+
   followersClick: function(e){
     "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-followers'));
@@ -1042,9 +1087,9 @@ module.exports = baseVw.extend({
 
   tabClick: function(activeTab, showContent){
     "use strict";
-    this.$('.js-userPageTabs > .js-tab').removeClass('active');
+    this.$('.js-userPageTabs').find('.js-tab').removeClass('active');
+    this.$('.js-userPageSubViews').find('.js-tabTarg').addClass('hide');
     activeTab.addClass('active');
-    this.$('.js-userPageSubViews > .js-tabTarg').addClass('hide');
     showContent.removeClass('hide');
 
     this.customizing = false;
