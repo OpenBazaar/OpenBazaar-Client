@@ -170,34 +170,6 @@ module.exports = window.Backbone.Model.extend({
       response.vendor_offer.listing.item.image_hashes = response.vendor_offer.listing.item.image_hashes.filter(function(hash){
         return hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40;
       });
-      //add pretty country names to shipping regions
-      response.vendor_offer.listing.shipping.shipping_regionsDisplay = [];
-      __.each(response.vendor_offer.listing.shipping.shipping_regions, function(region, i){
-        if(region == "ALL"){
-          response.vendor_offer.listing.shipping.shipping_regionsDisplay = [window.polyglot.t('WorldwideShipping')];
-          response.worldwide = true;
-          return;
-        } else {
-          response.worldwide = false;
-        }
-        var matchedCountry = self.countryArray.filter(function(value){
-          return value.dataName == region;
-        });
-        if(matchedCountry[0]){
-          response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(
-            polyglot.t(`countries.${matchedCountry[0].dataName}.name`)
-          );
-        }
-
-      });
-
-      //find the human readable name for the country of origin
-      if(response.vendor_offer.listing.shipping && response.vendor_offer.listing.shipping.shipping_origin) {
-        var matchedCountry = self.countryArray.filter(function (value) {
-          return value.dataName == response.vendor_offer.listing.shipping.shipping_origin;
-        });
-        response.displayShippingOrigin = matchedCountry[0] ? polyglot.t(`countries.${matchedCountry[0].dataName}.name`) : "";
-      }
 
       //unescape any html
       response.vendor_offer.listing.item.description = __.unescape(response.vendor_offer.listing.item.description);

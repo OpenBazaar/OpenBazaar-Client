@@ -79,33 +79,11 @@ module.exports = window.Backbone.Model.extend({
       response.vendor_offer.listing.item.image_hashes = response.vendor_offer.listing.item.image_hashes.filter(function (hash) {
         return hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40;
       });
-      //add pretty country names to shipping regions
-      response.vendor_offer.listing.shipping.shipping_regionsDisplay = [];
-      __.each(response.vendor_offer.listing.shipping.shipping_regions, function (region, i) {
-        var matchedCountry = countryArray.filter(function (value) {
-          return value.dataName == region;
-        });
-        matchedCountry[0] &&
-          response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(
-            polyglot.t(`countries.${matchedCountry[0].dataName}.name`)
-          );
-      });
     } else {
       response.invalidData = true;
     }
 
     if (response.buyer_order && response.buyer_order.order) {
-      //add pretty country name for the country being shipped to
-      if (response.buyer_order.order.shipping) {
-        var matchedCountry      = countryArray.filter(function (value) {
-          return value.dataName == response.buyer_order.order.shipping.country;
-        });
-        response.displayCountry = matchedCountry[0].name;
-        response.displayCountry = polyglot.t(`countries.${matchedCountry[0].dataName}.name`);
-      } else {
-        response.displayCountry = "";
-      }
-
       //add moderator
       if (response.buyer_order.order.moderator) {
         var matchedModerator = response.vendor_offer.listing.moderators.filter(function (moderator) {
