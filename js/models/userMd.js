@@ -55,12 +55,6 @@ module.exports = Backbone.Model.extend({
     //make sure currency code is in all caps
     response.currency_code = response.currency_code ? response.currency_code.toUpperCase() : "BTC";
 
-    //find the human readable name for the country
-    var matchedCountry = this.countryArray.filter(function(value){
-      return value.dataName == response.country;
-    });
-    response.displayCountry = matchedCountry[0] ? polyglot.t(`countries.${matchedCountry[0].dataName}.name`) : "";
-
     //addresses come from the server as a string. Parse the string
     if(response.shipping_addresses && response.shipping_addresses.constructor === Array && response.shipping_addresses.length > 0){
       try{
