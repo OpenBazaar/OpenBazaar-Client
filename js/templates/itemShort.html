@@ -8,10 +8,10 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
 
 <div class="gridItem clearfix custCol-border">
 
-  <div class="itemImg row10 color-secondary custCol-secondary overflowHidden js-item <% if(!shipsToYou){ %>textOpacity25<% } %>" data-id="<%= ob.contract_hash %>">
+  <div class="itemImg row10 color-secondary custCol-secondary overflowHidden js-item" data-id="<%= ob.contract_hash %>">
     <div class="itemImg <% if(ob.cloak){ %> nsfw <% } %>" style="background-image: url(<%= ob.imageURL %>), url(imgs/defaultItem.png);"></div>
   </div>
-  <div class="table <% if(!shipsToYou){ %>textOpacity25<% } %>">
+  <div class="table">
     <div>
       <% if(ob.showAvatar) { %>
       <div class="thumbnail-small js-avatar tooltip" data-tooltip="<% if(ob.handle) { %><%= ob.handle %><% }else{ %><%= ob.guid %><% } %>" data-handle="<%= ob.handle %>"
@@ -84,21 +84,22 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
 
   <% if(ob.contract_type){ %><!-- type is not yet implemented -->
     <div class="listingType borderRadius3 js-item textOpacity90">
-          <span class="<% print('listingType'+ob.contract_type) %>">
-            <% if(ob.contract_type == "PHYSICAL_GOOD"){ %>
-              <%= polyglot.t('Physical') %>
-            <% }else if(ob.contract_type == "DIGITAL_GOOD"){  %>
-              <%= polyglot.t('Digital') %>
-            <% }else{ %>
-              <%= polyglot.t('Service') %>
-            <% } %>
-          </span>
+      <span class="<% print('listingType'+ob.contract_type) %>">
+        <% if(ob.contract_type == "PHYSICAL_GOOD"){ %>
+          <%= polyglot.t('Physical') %>
+        <% }else if(ob.contract_type == "DIGITAL_GOOD"){  %>
+          <%= polyglot.t('Digital') %>
+        <% }else{ %>
+          <%= polyglot.t('Service') %>
+        <% } %>
+      </span>
     </div>
   <% } %>
 
   <% if(!shipsToYou && ob.ships_to.length != 0){ %>
     <div class="listingDoesNotShipToYou cursorDefault tooltip" data-tooltip="<%= polyglot.t('DoesNotShip') %>">
-      <span class="ion-minus-circled fontSize15 marginLeft05 positionWrapper" style="color: #DCDCDC" ></span>
+      <span class="ion-cube fontSize14 marginLeft05 positionWrapper" style="color: #DCDCDC" ></span>
+      <span class="listingsDoesNotShipToYouSlash">/</span>
     </div>
   <% } %>
 
