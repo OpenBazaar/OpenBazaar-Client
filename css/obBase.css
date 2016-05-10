@@ -495,14 +495,23 @@ form {
   background: #252525;
   height: 18px; 
   width: 18px;
-  right: 15px;
+  right: 39px;
   padding: 10px; 
   position: absolute; 
   text-align: center; 
-  top: 137px;
+  top: 217px;
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
   border-radius: 32px;
-  opacity: .95;
+  opacity: 1;
+}
+
+.listingsDoesNotShipToYouSlash {
+  position: absolute; 
+  top: 3px; 
+  color: #DE2A14; 
+  font-size: 26px; 
+  left: 14px; 
+  font-weight: 700;
 }
 
 .noPointerEvents {
@@ -569,7 +578,7 @@ form {
 
 .userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
 .homeView .gridItem:hover > .listingDoesNotShipToYou {
-  top: 140px;
+  top: 203px;
   opacity: 1;
 }
 
