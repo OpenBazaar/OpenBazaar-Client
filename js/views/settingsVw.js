@@ -165,7 +165,10 @@ module.exports = Backbone.View.extend({
       self.blockedTabAccessed = false;
       self.setState(self.options.state);
 
-      $(".chosen").chosen({ width: '100%' });
+      $(".chosen").chosen({
+        width: '100%',
+        search_contains: true
+      });
       $('#settings-image-cropper').cropit({
         $preview: self.$('.js-settingsAvatarPreview'),
         $fileInput: self.$('#settingsAvatarInput'),
