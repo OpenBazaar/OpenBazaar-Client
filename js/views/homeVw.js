@@ -108,7 +108,7 @@ module.exports = baseVw.extend({
         if (self.searchItemsText) {
           self.$el.find('.js-loadingText').html(
             window.polyglot.t('discover.noTaggedResults')
-              .replace('${tag}', `<span class="btn-pill color-secondary">#${self.searchItemsText}</span>`)
+              .replace('%{tag}', `<span class="btn-pill color-secondary">#${self.searchItemsText}</span>`)
           );
         } else {
           self.$el.find('.js-loadingText')
@@ -484,7 +484,7 @@ module.exports = baseVw.extend({
       this.$el.find('.js-loadingText').html(
         this.$el.find('.js-loadingText')
           .data('searchingText')
-          .replace('${tag}', `<span class="btn-pill color-secondary">#${searchItemsText}</span>`)
+          .replace('%{tag}', `<span class="btn-pill color-secondary">#${searchItemsText}</span>`)
       );
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
       this.setState('products', searchItemsText);
