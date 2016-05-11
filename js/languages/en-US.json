@@ -554,9 +554,9 @@
   },
   "discover": {
     "searchDefaultText": "Scanning your network",
-    "searchingText": "Scanning your network for",
+    "searchingText": "Scanning your network for ${tag}",
     "noResults": "No listings found in your network",
-    "noTaggedResults": "No listings found in your network tagged with"
+    "noTaggedResults": "No listings found in your network tagged with ${tag}"
   },
   "filters": {
     "pagesAllTypes": "All types",

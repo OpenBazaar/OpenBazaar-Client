@@ -104,9 +104,16 @@ module.exports = baseVw.extend({
       if ($('.homeGridItems .gridItem').length === 0){
         self.$el.find('.js-loadingMessage').removeClass('fadeOut');
         self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
-        self.$el.find('.js-loadingText').html(
-          window.polyglot.t('discover.' + (self.searchItemsText ? 'noTaggedResults' : 'noResults'))
-        );
+        
+        if (self.searchItemsText) {
+          self.$el.find('.js-loadingText').html(
+            window.polyglot.t('discover.noTaggedResults')
+              .replace('${tag}', `<span class="btn-pill color-secondary">#${self.searchItemsText}</span>`)
+          );
+        } else {
+          self.$el.find('.js-loadingText')
+            .html(window.polyglot.t('discover.noResults'));
+        }
       }
     }, 10000);
   },
@@ -461,7 +468,7 @@ module.exports = baseVw.extend({
 
     // change loading text copy
     this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('defaultText'));
-    this.$el.find('.js-discoverSearchKeyword').addClass('hide');
+    // this.$el.find('.js-discoverSearchKeyword').addClass('hide');
 
   },
 
@@ -473,10 +480,12 @@ module.exports = baseVw.extend({
       this.socketSearchID = Math.random().toString(36).slice(2);
       this.socketView.search(this.socketSearchID, searchItemsText);
       this.setSocketTimeout();      
-      this.$el.find('.js-discoverSearchKeyword').html("#" + searchItemsText);
       this.$el.find('.js-discoverHeading').html("#" + searchItemsText);
-      this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('searchingText'));
-      this.$el.find('.js-discoverSearchKeyword').removeClass('hide');
+      this.$el.find('.js-loadingText').html(
+        this.$el.find('.js-loadingText')
+          .data('searchingText')
+          .replace('${tag}', `<span class="btn-pill color-secondary">#${searchItemsText}</span>`)
+      );
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
       this.setState('products', searchItemsText);
     }else{
