@@ -4298,18 +4298,30 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   display: block;
 }
 
-#loadingModal #loadingModalTopBar {
+#loadingModal #loadingModalContent {
   position: absolute;
-  top: 0px;
-  width: 100%;
-  transition: top 1s;
-  transition-delay: 5s;
+  right: 0;
+  left: 0;
+  top: 50%;
+  margin-top: 120px;
+  opacity: 1;
+  transition: opacity 1s 5s ease;
   box-sizing: border-box;
   padding: 9px;
+  text-align: center;
 }
 
-#loadingModal.hide #loadingModalTopBar {
-  top: -50px;
+#loadingModal #loadingModalBtns {
+  opacity: 1;
+  transition: opacity 1s 5s ease;
+  /* this seems redundant, but if you don't also have a transition on the button container, for some reason the normal
+  background color will be used instead of the background color from the custCol-secondary class until the parent
+  transition is complete on Win64 10. */
+}
+
+#loadingModal.hide #loadingModalContent,
+#loadingModal.hide #loadingModalBtns {
+  opacity: 0;
 }
 
 #ov1 .server-connect-modal {
@@ -4364,10 +4376,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 0;
   left: 0;
   bottom: 0;
-}
-
-#loadingModal .btn {
-  -webkit-app-region: no-drag;
 }
 
 .pill {
