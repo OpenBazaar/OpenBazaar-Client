@@ -3,7 +3,8 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
-    app = require('../App.js').getApp(),        
+    app = require('../App.js').getApp(),
+    remote = require('electron').remote,        
     ServerConfigMd = require('../models/serverConfigMd'),
     ServerConfigsCl = require('../collections/serverConfigsCl'),
     BaseModal = require('./baseModal'),
@@ -203,7 +204,15 @@ module.exports = BaseModal.extend({
   },
 
   connect: function(configMd) {
-    var connectAttempt;
+    var deferred = $.Deferred(),
+        promise = deferred.promise(),
+        attempt = 1,
+        maxAttempts = 5,
+        timeoutBetweenAttempts = 2 * 1000,
+        maxAttemptsTime = 20 * 1000,
+        startTime = Date.now(),
+        attemptConnection,
+        connectAttempt;
 
     configMd = configMd || this.serverConfigs.getActive();
 
@@ -232,18 +241,41 @@ module.exports = BaseModal.extend({
     this.setModalOptions({ showCloseButton: false });
     this.serverConfigs.setActive(configMd.id);
 
-    this._connectAttempt = this.attemptConnection().done(() => {
-      this.succeedConnection(configMd);
-    }).fail((reason) => {
-      this.failConnection(reason, configMd)
-    }).always(() => {
+    (attemptConnection = () => {
+      connectAttempt = this.attemptConnection().done(() => {
+        deferred.resolve();
+        this.succeedConnection(configMd);
+      }).fail((reason) => {
+        // If we're using the client launched from the installer
+        // and we're trying to connect to the default server, it will
+        // take some time for the server to launch, so we'll retry a few
+        // times.
+        if (
+          remote.getGlobal('launched_from_installer') && configMd.get('default') &&
+          attempt < maxAttempts && Date.now() < (startTime + maxAttemptsTime) &&
+          reason !== 'canceled'
+        ) {
+          attempt += 1;
+          attemptConnection();
+        } else {
+          deferred.reject(reason);
+          this.failConnection(reason, configMd)
+        }
+      });
+    })();
+
+    deferred.always(() => {
       this._connectAttempt = null;
     });
+    
+    promise.serverId = configMd.id;
+    promise.cancel = function() {
+      connectAttempt && connectAttempt.cancel();
+    };    
+    
+    this._connectAttempt = promise;
 
-    this._connectAttempt.serverId = configMd.id;
-    connectAttempt = this._connectAttempt;
-
-    return connectAttempt;
+    return promise;
   },
 
   attemptConnection: function(options) {

@@ -477,7 +477,8 @@ form {
   flex-grow: 1;
 }
 
-.listingType {
+.listingType,
+.listingType.tooltip {
   background-color: #252525;
   color: #ffffff;
   position: absolute;
@@ -494,14 +495,23 @@ form {
   background: #252525;
   height: 18px; 
   width: 18px;
-  right: 15px;
+  right: 39px;
   padding: 10px; 
   position: absolute; 
   text-align: center; 
-  top: 137px;
+  top: 217px;
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
   border-radius: 32px;
-  opacity: .95;
+  opacity: 1;
+}
+
+.listingsDoesNotShipToYouSlash {
+  position: absolute; 
+  top: 3px; 
+  color: #DE2A14; 
+  font-size: 26px; 
+  left: 14px; 
+  font-weight: 700;
 }
 
 .noPointerEvents {
@@ -568,7 +578,7 @@ form {
 
 .userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
 .homeView .gridItem:hover > .listingDoesNotShipToYou {
-  top: 140px;
+  top: 203px;
   opacity: 1;
 }
 
@@ -4434,21 +4444,21 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transform: rotate(45deg);
 }
 
-.listingTypeDigital:before {
+.listingTypeDIGITAL_GOOD:before {
   color: #EFEF4C;
   content: "\f137";
   font-family: Ionicons;
   font-size: 12px;
 }
 
-.listingTypePhysical:before {
+.listingTypePHYSICAL_GOOD:before {
   color: #805C17;
   content: "\f318";
   font-family: Ionicons;
   font-size: 12px;
 }
 
-.listingTypeService:before {
+.listingTypeSERVICE:before {
   color: #DEDEDE;
   content: "\f2ad";
   font-family: Ionicons;
@@ -5984,37 +5994,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy,
 #ov1.notFancy *,
-#ov1.notFancy * *,
-#ov1.notFancy * * *,
-#ov1.notFancy * * * *,
-#ov1.notFancy * * * * *,
-#ov1.notFancy * * * * * *,
-#ov1.notFancy * * * * * * *,
-#ov1.notFancy * * * * * * * *,
-#ov1.notFancy * * * * * * * * * ,
-#ov1.notFancy * * * * * * * * * *,
 #ov1.notFancy #userPage,
 #ov1.notFancy #userPage *,
-#ov1.notFancy #userPage * *,
-#ov1.notFancy #userPage * * *,
-#ov1.notFancy #userPage * * * *,
-#ov1.notFancy #userPage * * * * *,
-#ov1.notFancy #userPage * * * * * *,
-#ov1.notFancy #userPage * * * * * * *,
-#ov1.notFancy #userPage * * * * * * * *,
-#ov1.notFancy #userPage * * * * * * * * * ,
-#ov1.notFancy #userPage * * * * * * * * * *,
 #ov1.notFancy #obContainer,
 #ov1.notFancy #obContainer *,
-#ov1.notFancy #obContainer * *,
-#ov1.notFancy #obContainer * * *,
-#ov1.notFancy #obContainer * * * *,
-#ov1.notFancy #obContainer * * * * *,
-#ov1.notFancy #obContainer * * * * * *,
-#ov1.notFancy #obContainer * * * * * * *,
-#ov1.notFancy #obContainer * * * * * * * *,
-#ov1.notFancy #obContainer * * * * * * * * * ,
-#ov1.notFancy #obContainer * * * * * * * * * *,
 #ov1.notFancy #overlay,
 #ov1.notFancy #sideBar,
 #ov1.notFancy #pageNav,
