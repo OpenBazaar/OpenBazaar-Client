@@ -317,19 +317,20 @@ module.exports = baseVw.extend({
   },
 
   showAboutModal: function(e){
-
+    var $aboutModal = $('.js-aboutModal');
+    
     this.cleanNav();
 
     // display the modal
     $('.js-aboutModalHolder').fadeIn(300);
 
     // set the active tab
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    $aboutModal.find('.navBar').find('.btn.btn-bar').removeClass('active');
     $('.js-about-mainTab').addClass('active');
 
     // set the active section
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
+    $aboutModal.find('.modal-section').addClass('hide');
+    $aboutModal.find('.js-modalAboutMain').removeClass('hide');
 
     // blur the container for extra focus
     $('#obContainer').addClass('blur');
@@ -341,17 +342,19 @@ module.exports = baseVw.extend({
   },
 
   showSupportModal: function(e){
+    var $aboutModal = $('.js-aboutModal');
+    
     $('.js-aboutModalHolder').fadeIn(300);
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    $aboutModal.find('.navbar').find('.btn.btn-bar').removeClass('active');
     $('.js-about-donationsTab').addClass('active');
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
+    $aboutModal.find('modal-section').addClass('hide');
+    $aboutModal.find('js-modalAboutSupport').removeClass('hide');
     $('#obContainer').addClass('blur');
   },
 
   aboutModalTabClick: function(e){
     var tab = $(e.currentTarget).data('tab');
-    $('.js-aboutModal .btn-tab').removeClass('active');
+    $('.js-aboutModal').find('.btn-tab').removeClass('active');
     $(e.currentTarget).addClass('active');
 
     switch(tab) {

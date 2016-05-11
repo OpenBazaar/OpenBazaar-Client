@@ -228,7 +228,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-shippingRow input')
         .prop({disabled: false, require: true});
     //if chosen selector started hidden, it will be too narrow
-    $('.js-shippingRow .chosen-container').css({width: '100%'});
+    $('.js-shippingRow').find('.chosen-container').css({width: '100%'});
   },
 
   changeType: function(e) {

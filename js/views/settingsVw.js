@@ -454,9 +454,9 @@ module.exports = Backbone.View.extend({
     language.html(language_str);
 
     //set moderator status
-    this.$('#moderatorForm input[name=moderator]').val([String(moderatorStatus)]);
+    this.$('#moderatorForm').find('input[name=moderator]').val([String(moderatorStatus)]);
 
-    this.$('#advancedForm input[name=smtp_mo]').val([String(moderatorStatus)]);
+    this.$('#advancedForm').find('input[name=smtp_mo]').val([String(moderatorStatus)]);
   },
 
   showModeratorFeeHolder: function(){
@@ -822,10 +822,10 @@ module.exports = Backbone.View.extend({
     var self = this,
         form = this.$el.find("#storeForm"),
         settingsData = {},
-        moderatorsNew = this.$el.find('#storeForm .js-settingsNewMods .js-userShortView input:checked'),
+        moderatorsNew = this.$el.find('#storeForm').find('.js-settingsNewMods').find('.js-userShortView').find('input:checked'),
         moderatorList = this.userModel.get('moderator_guids'),
         manualModList,
-        moderatorsUnChecked = this.$('#storeForm .js-settingsCurrentMods .js-userShortView input:not(:checked)'),
+        moderatorsUnChecked = this.$('#storeForm').find('.js-settingsCurrentMods').find('.js-userShortView').find('input:not(:checked)'),
         onFail,
         $saveBtn = this.$('.js-saveStore');
 
@@ -972,7 +972,7 @@ module.exports = Backbone.View.extend({
 
     $saveBtn.addClass('loading');
 
-    localStorage.setItem('AdditionalPaymentData',  this.$('#advancedForm input[name=additionalPaymentData]:checked').val());
+    localStorage.setItem('AdditionalPaymentData',  this.$('#advancedForm').find('input[name=additionalPaymentData]:checked').val());
     
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       app.statusBar.pushMessage({
@@ -1033,7 +1033,7 @@ module.exports = Backbone.View.extend({
   },
 
   toggleFancyStyles: function(){
-    if($('#advancedForm input[name="notFancy"]').prop('checked')){
+    if($('#advancedForm').find('input[name="notFancy"]').prop('checked')){
       $('html').addClass('notFancy');
       localStorage.setItem('notFancy', "true");
     } else {
@@ -1043,7 +1043,7 @@ module.exports = Backbone.View.extend({
   },
 
   toggleTestnet: function(){
-    window.config.setTestnet($('#advancedForm input[name="useTestnet"]').prop('checked'));
+    window.config.setTestnet($('#advancedForm').find('input[name="useTestnet"]').prop('checked'));
     window.location.reload();
   },
 

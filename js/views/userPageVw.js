@@ -404,20 +404,22 @@ module.exports = baseVw.extend({
           console.log(errorMessage);
         }
       });
+      
+      var $userPageHeader = $('.user-page-header');
 
       $("#obContainer").scroll(function(){
         if ($(this).scrollTop() > 400 && self.slimVisible === false ) {
           self.slimVisible = true;
           $('.user-page-header-slim').addClass('textOpacity1').addClass('top70');
-          $('.user-page-header').removeClass('shadow-inner1').addClass('zIndex4');
-          $('.user-page-header .rowItem').hide();
+          $userPageHeader.removeClass('shadow-inner1').addClass('zIndex4');
+          $userPageHeader.find('.rowItem').hide();
           $('.user-page-navigation-buttons').addClass('positionFixed positionTop68');
         }
         if ($(this).scrollTop() < 400 && self.slimVisible === true ) {
           self.slimVisible = false;
           $('.user-page-header-slim').removeClass('top70');
-          $('.user-page-header').addClass('shadow-inner1').removeClass('zIndex4');
-          $('.user-page-header .rowItem').show();
+          $userPageHeader.addClass('shadow-inner1').removeClass('zIndex4');
+          $userPageHeader.find('.rowItem').show();
           $('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
         }
       });
@@ -1028,7 +1030,7 @@ module.exports = baseVw.extend({
 
   storeTabClick: function(e) {
     if (this.$el.find('.js-categories').val() != "all"){
-        $(".js-categories option[value='all']").attr("selected", "selected");
+        $(".js-categories").find("option[value='all']").attr("selected", "selected");
         this.categoryChanged();
     }
 
@@ -1105,26 +1107,29 @@ module.exports = baseVw.extend({
 
   displayCustomizePrimaryColor: function(e) {
     "use strict";
+    
+    var $customizePrimaryColorRecommendations = this.$el.find('.customizePrimaryColorRecommendations'),
+        $customColorChoice = $customizePrimaryColorRecommendations.find('.customColorChoice');
 
     $('#primary_color').colpickHide();
 
-    if(this.$el.find('.customizePrimaryColorRecommendations').hasClass('width270')){
-      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+    if($customizePrimaryColorRecommendations.hasClass('width270')){
+      $customizePrimaryColorRecommendations.removeClass('width270');
     }else{
       $('.seeTooltip').hide();
 
       // set recommendations
-      this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(2)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(3)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(4)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(5)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(6)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      $customColorChoice.css('background','#fff'); // reset to white to give a cool transition
+      $customColorChoice.first().css('background','transparent'); // set to transparent
+      
+      for (var i = 2; i <= 6; i++) {
+        $customColorChoice.eq(i).css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      }
+
+      $customColorChoice.last().css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
 
       // slide background_color recommendations out + hide others
-      this.$el.find('.customizePrimaryColorRecommendations').addClass('width270');
+      $customizePrimaryColorRecommendations.addClass('width270');
       this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
       this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
       this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
@@ -1133,26 +1138,29 @@ module.exports = baseVw.extend({
 
   displayCustomizeSecondaryColor: function(e) {
     "use strict";
-    var primaryColor = this.model.get('page').profile.primary_color;
+    var $customizeSecondaryColorRecommendations = this.$el.find('.customizeSecondaryColorRecommendations'),
+        $customColorChoice = $customizeSecondaryColorRecommendations.find('.customColorChoice'),
+        primaryColor = this.model.get('page').profile.primary_color,
+        shades = [-0.25, -0.15, -0.1, 0.1, 0.15];
 
     $('#secondary_color').colpickHide();
 
-    if(this.$el.find('.customizeSecondaryColorRecommendations').hasClass('width270')){
-      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+    if($customizeSecondaryColorRecommendations.hasClass('width270')){
+      $customizeSecondaryColorRecommendations.removeClass('width270');
     }else{
       // set recommendations
-      this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(primaryColor, -0.25)); // 20% lighter than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
+      $customColorChoice.css('background','#fff');  // reset to white to give a cool transition
+      $customColorChoice.first().css('background','transparent'); // set to transparent
+
+      for (var i = 2; i <= 6; i++) {
+        $customColorChoice.eq(i).css('background', shadeColor2(primaryColor, shades[i-2]));
+      }
+
+      $customColorChoice.last().css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
 
       // slide secondary_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeSecondaryColorRecommendations').addClass('width270');
+      $customizeSecondaryColorRecommendations.addClass('width270');
       this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
       this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
     }
@@ -1161,50 +1169,56 @@ module.exports = baseVw.extend({
 
   displayCustomizeBackgroundColor: function(e) {
     "use strict";
-    var secondaryColor = this.model.get('page').profile.secondary_color;
+    var $customizeBackgroundColorRecommendations = this.$el.find('.customizeBackgroundColorRecommendations'),
+        $customColorChoice = $customizeBackgroundColorRecommendations.find('.customColorChoice'),
+        secondaryColor = this.model.get('page').profile.secondary_color,
+        shades = [-0.70, -0.65, -0.55, -0.45, -0.35];
 
     $('#background_color').colpickHide();
 
-    if(this.$el.find('.customizeBackgroundColorRecommendations').hasClass('width270')){
-      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+    if($customizeBackgroundColorRecommendations.hasClass('width270')){
+      $customizeBackgroundColorRecommendations.removeClass('width270');
     }else{
       // set recommendations
-      this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:last').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
+      $customColorChoice.css('background','#fff'); // reset to white to give a cool transition
+      $customColorChoice.first().css('background','transparent'); // set to transparent
+      
+      for (var i = 2; i <= 6; i++) {
+        $customColorChoice.eq(i).css('background', shadeColor2(secondaryColor, shades[i-2])); // 70% darker than primary_color
+      }
+
+      $customColorChoice.last().css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
 
       // slide background_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
       this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeBackgroundColorRecommendations').addClass('width270');
+      $customizeBackgroundColorRecommendations.addClass('width270');
       this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
     }
   },
 
   displayCustomizeTextColor: function(e) {
     "use strict";
+    
+    var $customizeTextColorRecommendations = this.$el.find('.customizeTextColorRecommendations'),
+        $customColorChoice = $customizeTextColorRecommendations.find('.customColorChoice');
 
     $('#text_color').colpickHide();
 
-    if(this.$el.find('.customizeTextColorRecommendations').hasClass('width270')){
-      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    if($customizeTextColorRecommendations.hasClass('width270')){
+      $customizeTextColorRecommendations.removeClass('width270');
     }else{
       // set recommendations
-      this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:nth-child(2)').css('background', '#ffffff');
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:last').css('background', '#000000');
+      $customColorChoice.css('background','#fff');  // reset to white to give a cool transition
+      $customColorChoice.first().css('background','transparent'); // set to transparent
+      $customColorChoice.eq(2).css('background', '#ffffff');
+      $customColorChoice.last().css('background', '#000000');
 
       // slide background_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
       this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
       this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeTextColorRecommendations').addClass('width270');
+      $customizeTextColorRecommendations.addClass('width270');
     }
   },
 

@@ -101,9 +101,9 @@ module.exports = baseVw.extend({
 
     // after 8 seconds, if no listings are found, display the no results found message
     this.noResultsTimeout = window.setTimeout(function() {
-      if ($('.homeGridItems .gridItem').length === 0){
+      if ($('.homeGridItems').find('.gridItem').length === 0){
         self.$el.find('.js-loadingMessage').removeClass('fadeOut');
-        self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
+        self.$el.find('.js-loadingMessage').find('.spinner').addClass('fadeOut');
         self.$el.find('.js-loadingText').html(
           window.polyglot.t('discover.' + (self.searchItemsText ? 'noTaggedResults' : 'noResults'))
         );
@@ -506,7 +506,7 @@ module.exports = baseVw.extend({
       text = count + ' blocked item' + (count !== 1 ? 's' : '') + ' not shown';
     }
 
-    this.$listingsBlockedCount = this.$listingsBlockedCount || this.$('.homeGridItems .js-blocked-listings-count');
+    this.$listingsBlockedCount = this.$listingsBlockedCount || this.$('.homeGridItems').find('.js-blocked-listings-count');
     this.$listingsBlockedCount.text(text);
   },
 

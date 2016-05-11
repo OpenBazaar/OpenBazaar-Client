@@ -185,7 +185,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         profileForm = this.$el.find('#storeWizardForm'),
-        moderatorsChecked = $('.js-storeWizardModeratorList input:checked'),
+        moderatorsChecked = $('.js-storeWizardModeratorList').find('input:checked'),
         userProfile = this.model.get('page').profile,
         modList = [],
         wizData = {},
