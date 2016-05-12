@@ -3,8 +3,10 @@ var __ = require('underscore'),
   $ = require('jquery'),
   colorbox = require('jquery-colorbox'),
   loadTemplate = require('../utils/loadTemplate'),
+  localize = require('../utils/localize'),
   sanitizeHTML = require('sanitize-html'),
   RatingCl = require('../collections/ratingCl'),
+  CountriesMd = require('../models/countriesMd'),
   baseVw = require('./baseVw'),
   buyWizardVw = require('./buyWizardVw'),
   ReviewsVw = require('./reviewsVw');
@@ -89,6 +91,9 @@ module.exports = baseVw.extend({
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
       loadTemplate('./js/templates/ratingStars.html', function(starsTemplate) {
+        var shippingRegions = self.model.get('vendor_offer').listing.shipping.shipping_regions,
+            shippingOrigin = self.model.get('vendor_offer').listing.shipping.shipping_origin;
+
         self.$el.html(
           loadedTemplate(
             __.extend({}, self.model.toJSON(), {
@@ -97,7 +102,10 @@ module.exports = baseVw.extend({
               starsTemplate: starsTemplate,
               activeTab: self.activeTab,
               fetchingRatings: self.fetchingRatings,
-              userCountry: self.userModel.get('displayCountry')
+              userCountry: polyglot.t(`countries.${self.userModel.get('country')}.name`),
+              shippingRegionsDisplay: localize.localizeShippingRegions(shippingRegions),
+              worldwide: shippingRegions.length === 1 && shippingRegions[0] === 'ALL',
+              displayShippingOrigin: shippingOrigin && polyglot.t(`countries.${shippingOrigin}.name`)
             })
           )
         );

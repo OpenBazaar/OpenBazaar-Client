@@ -727,7 +727,7 @@
               <%- ob.buyer_order.order.shipping.ship_to %>, <br />
               <%- ob.buyer_order.order.shipping.address %><br />
               <%- ob.buyer_order.order.shipping.city %>, <%- ob.buyer_order.order.shipping.state %> <%- ob.buyer_order.order.shipping.postal_code %><br />
-              <%- ob.displayCountry %>
+              <%= polyglot.t('countries.' + ob.buyer_order.order.shipping.country + '.name') %>
             </div>
           </div>
         </div>
