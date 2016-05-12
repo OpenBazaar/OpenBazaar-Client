@@ -242,7 +242,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
     this.$el.find('#buyWizardNameInput').focus();
     //set chosen inputs
-    $('.chosen').chosen();
+    $('.chosen').chosen({ search_contains: true });
   },
 
   hideNewAddress: function(){

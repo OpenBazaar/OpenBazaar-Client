@@ -126,10 +126,18 @@ module.exports = baseVw.extend({
         
 
         //set chosen inputs
-        this.$('.chosen').chosen({width: '100%'}).change(function(e){
+        this.$('.chosen').chosen({
+          width: '100%',
+          search_contains: true
+        }).change(function(e){
           self.shipsToChange(e);
         });
-        this.$('.chosenRegions').chosen({width: '100%', disable_search: true});
+        
+        this.$('.chosenRegions').chosen({
+          width: '100%',
+          disable_search: true,
+          search_contains: true
+        });
       }, 0);
 
       self.setFormValues();
