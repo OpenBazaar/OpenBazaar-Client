@@ -180,7 +180,7 @@ module.exports = baseVw.extend({
     this.registerChild(this.buyWizardView);
     $('#modalHolder').html(this.buyWizardView.el).fadeIn(300); //add to DOM first, or accordion will have zero width when initialized
     this.buyWizardView.render();
-    $('#obContainer').addClass('overflowHidden blur');
+    $('#obContainer').addClass('blur');
   },
 
   clickItemRating: function(e) {

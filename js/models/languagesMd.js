@@ -15,6 +15,10 @@ module.exports = Backbone.Model.extend({
         langCode: "zh-CN"
       },
       {
+        langName: "Czech (Czech)",
+        langCode: "cs"
+      },
+      {
         langName: "Croatian (Croatian, Croatia)",
         langCode: "hr-HR"
       },

@@ -6,7 +6,7 @@
   "EnterMessage": "Enter message...",
   "Recommended": "Recommended",
   "Reload": "Reload",
-  "LoadIndex": "Load Index",
+  "LoadIndex": "Go To Discover",
   "You": "You",
   "Skip": "Skip",
   "Done": "Done",
@@ -77,6 +77,7 @@
   "GoToMyPage": "My Page",
   "Random": "Random",
   "ShowOnlyFollowerListings": "Personalized",
+  "DoesNotShip": "Does not ship to you",
   "TryRandom": "Try random mode to discover more",
   "ShowOnlyFollowerListingsTooltip": "View listings from stores I follow",
   "ShowAllListingsTooltip": "View random listings on the network",
@@ -531,7 +532,8 @@
     "badJSON": "The JSON data returned from the server was malformed",
     "refundAlreadySent": "The refund has already been successfully sent for this order",
     "serverTimeout": "No response was received from the server. It may be unreachable or taking a very long time to respond.",
-    "noData": "No data is available for the options you have selected."
+    "noData": "No data is available for the options you have selected.",
+    "loadingViewError": "Loading this page is taking longer than expected."
   },
   "pageConnectingMessages": {
     "listingConnect": "Connecting to listing ${listing}",

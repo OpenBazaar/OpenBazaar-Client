@@ -477,7 +477,8 @@ form {
   flex-grow: 1;
 }
 
-.listingType {
+.listingType,
+.listingType.tooltip {
   background-color: #252525;
   color: #ffffff;
   position: absolute;
@@ -489,18 +490,28 @@ form {
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.listingDoesNotShipToYou {
-  background-color: rgba(37, 37, 37, 0.65);
-  /*border-radius: 20px;*/
-  height: 20px;
-  left: 32px;
-  line-height: 20px;
-  padding: 8px 4px;
-  position: absolute;
-  text-align: center;
-  top: calc(50% - 32px);
-  width: 242px;
+.listingDoesNotShipToYou,
+.listingDoesNotShipToYou.tooltip {
+  background: #252525;
+  height: 18px; 
+  width: 18px;
+  right: 39px;
+  padding: 10px; 
+  position: absolute; 
+  text-align: center; 
+  top: 217px;
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+  border-radius: 32px;
+  opacity: 1;
+}
+
+.listingsDoesNotShipToYouSlash {
+  position: absolute; 
+  top: 3px; 
+  color: #DE2A14; 
+  font-size: 26px; 
+  left: 14px; 
+  font-weight: 700;
 }
 
 .noPointerEvents {
@@ -567,7 +578,8 @@ form {
 
 .userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
 .homeView .gridItem:hover > .listingDoesNotShipToYou {
-  top: calc(50% - 46px);
+  top: 203px;
+  opacity: 1;
 }
 
 .userPage-subViews .gridItem:hover .gridItemControls,
@@ -4279,6 +4291,39 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 14;
 }
 
+#ov1 #loadingModal.hide {
+  height: 0; /* kludge to allow top bar to fade in. Transitions don't work if display is none */
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+
+#loadingModal #loadingModalContent {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 50%;
+  margin-top: 120px;
+  opacity: 1;
+  transition: opacity 1s 5s ease;
+  box-sizing: border-box;
+  padding: 9px;
+  text-align: center;
+}
+
+#loadingModal #loadingModalBtns {
+  opacity: 1;
+  transition: opacity 1s 5s ease;
+  /* this seems redundant, but if you don't also have a transition on the button container, for some reason the normal
+  background color will be used instead of the background color from the custCol-secondary class until the parent
+  transition is complete on Win64 10. */
+}
+
+#loadingModal.hide #loadingModalContent,
+#loadingModal.hide #loadingModalBtns {
+  opacity: 0;
+}
+
 #ov1 .server-connect-modal {
   z-index: 15;
 }
@@ -4331,10 +4376,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 0;
   left: 0;
   bottom: 0;
-}
-
-#loadingModal .btn {
-  -webkit-app-region: no-drag;
 }
 
 .pill {
@@ -4411,21 +4452,21 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transform: rotate(45deg);
 }
 
-.listingTypeDigital:before {
+.listingTypeDIGITAL_GOOD:before {
   color: #EFEF4C;
   content: "\f137";
   font-family: Ionicons;
   font-size: 12px;
 }
 
-.listingTypePhysical:before {
+.listingTypePHYSICAL_GOOD:before {
   color: #805C17;
   content: "\f318";
   font-family: Ionicons;
   font-size: 12px;
 }
 
-.listingTypeService:before {
+.listingTypeSERVICE:before {
   color: #DEDEDE;
   content: "\f2ad";
   font-family: Ionicons;
@@ -4864,7 +4905,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
-#ov1  .textOpacity0 {
+#ov1  .textOpacity0,
+#ov1 .opacity0 {
   opacity: 0;
 }
 
@@ -5144,6 +5186,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginLeft0 {
   margin-left: 0;
+}
+
+#ov1  .marginLeft05 {
+  margin-left: 0.5px;
 }
 
 #ov1  .marginLeft1 {
@@ -5811,10 +5857,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
+/* to fade out a visible element, add the fadeOut class */
+/* to fade in an element with opacity 0, add the fadeIn class */
 
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+#ov1 .fadeIn {
+  opacity: 1;
+  pointer-events: auto;
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -5948,37 +6002,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy,
 #ov1.notFancy *,
-#ov1.notFancy * *,
-#ov1.notFancy * * *,
-#ov1.notFancy * * * *,
-#ov1.notFancy * * * * *,
-#ov1.notFancy * * * * * *,
-#ov1.notFancy * * * * * * *,
-#ov1.notFancy * * * * * * * *,
-#ov1.notFancy * * * * * * * * * ,
-#ov1.notFancy * * * * * * * * * *,
 #ov1.notFancy #userPage,
 #ov1.notFancy #userPage *,
-#ov1.notFancy #userPage * *,
-#ov1.notFancy #userPage * * *,
-#ov1.notFancy #userPage * * * *,
-#ov1.notFancy #userPage * * * * *,
-#ov1.notFancy #userPage * * * * * *,
-#ov1.notFancy #userPage * * * * * * *,
-#ov1.notFancy #userPage * * * * * * * *,
-#ov1.notFancy #userPage * * * * * * * * * ,
-#ov1.notFancy #userPage * * * * * * * * * *,
 #ov1.notFancy #obContainer,
 #ov1.notFancy #obContainer *,
-#ov1.notFancy #obContainer * *,
-#ov1.notFancy #obContainer * * *,
-#ov1.notFancy #obContainer * * * *,
-#ov1.notFancy #obContainer * * * * *,
-#ov1.notFancy #obContainer * * * * * *,
-#ov1.notFancy #obContainer * * * * * * *,
-#ov1.notFancy #obContainer * * * * * * * *,
-#ov1.notFancy #obContainer * * * * * * * * * ,
-#ov1.notFancy #obContainer * * * * * * * * * *,
 #ov1.notFancy #overlay,
 #ov1.notFancy #sideBar,
 #ov1.notFancy #pageNav,

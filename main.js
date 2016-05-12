@@ -100,11 +100,49 @@ if(platform == "mac" || platform == "linux") {
   daemon = "openbazaard";
 }
 
-var serverPath = __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep;
-var serverOut = '';
+var serverPath = __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep,
+    serverOut = '',
+    serverRunning = false,
+    pendingKill,
+    startAfterClose;
+
+var kill_local_server = function() {
+  if (subpy) {
+    if (pendingKill) {
+      startAfterClose && pendingKill.removeListener('close', startAfterClose);
+      return;
+    } else if (!serverRunning) {
+      return;
+    } else {
+      pendingKill = subpy;
+      pendingKill.once('close', () => {
+        pendingKill = null;
+      });
+    }
+
+    console.log('Shutting down server daemon');
+
+    if(platform == "mac" || platform == "linux") {
+      subpy.kill('SIGINT');
+    } else {
+      require('child_process').spawn("taskkill", ["/pid", subpy.pid, '/f', '/t']);
+    }
+  }
+}
 
 var start_local_server = function() {
   if(fs.existsSync(serverPath)) {
+    if (pendingKill) {
+      pendingKill.once('close', (startAfterClose = () => {
+        start_local_server();
+      }));
+
+      return;
+    }
+
+    if (serverRunning) return;
+
+    console.log('Starting OpenBazaar Server');
 
     var random_port = Math.floor((Math.random() * 10000) + 30000);
 
@@ -112,6 +150,8 @@ var start_local_server = function() {
       detach: false,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });
+
+    serverRunning = true;
 
     var stdout = '';
     var stderr = '';
@@ -132,6 +172,7 @@ var start_local_server = function() {
       console.log('exited with ' + code);
       console.log('[END] stdout "%s"', stdout);
       console.log('[END] stderr "%s"', stderr);
+      serverRunning = false;
     });
     subpy.unref();
   }
@@ -142,10 +183,18 @@ var start_local_server = function() {
 
 // Check if we need to kick off the python server-daemon (Desktop app)
 if(fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + path.sep + daemon)) {
-  launched_from_installer = true;
-  console.log('Starting OpenBazaar Server');
-  start_local_server();
+  global.launched_from_installer = launched_from_installer = true;
 }
+
+ipcMain.on('activeServerChange', function(event, server) {
+  if (launched_from_installer) {
+    if (server.default) {
+      start_local_server();
+    } else {
+      kill_local_server();
+    }
+  }
+});
 
 // Report crashes to our server.
 //require('crash-reporter').start();
@@ -261,9 +310,8 @@ app.on('window-all-closed', function() {
 app.on('before-quit', function (e) {
     // Handle menu-item or keyboard shortcut quit here
     console.log('Closing Application');
-    if(launched_from_installer) {
-      console.log('Shutting down server daemon');
-      subpy.kill();
+    if (launched_from_installer) {
+      kill_local_server();
     }
 });
 
@@ -440,14 +488,7 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
 
-    if(subpy) {
-      if(platform == "mac" || platform == "linux") {
-        subpy.kill('SIGINT');
-      } else {
-        require('child_process').spawn("taskkill", ["/pid", subpy.pid, '/f', '/t']);
-      }
-    }
-
+    if (launched_from_installer) kill_local_server();
   });
 
   mainWindow.on('close', function() {
@@ -509,4 +550,9 @@ function openURL(uri) {
 app.on('open-url', function(event, uri) {
   openURL(uri);
   event.preventDefault();
+});
+
+// some cleanup when our app is exiting
+process.on('exit', () => {
+  kill_local_server();
 });
