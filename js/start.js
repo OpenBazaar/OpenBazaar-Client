@@ -87,7 +87,6 @@ user.on('change:language', function(md, lang) {
   localStorage.setItem('lang', lang);
   //trigger translation function on index
   window.translateIndex();
-
 });
 
 app.serverConfigs = new ServerConfigsCl();
