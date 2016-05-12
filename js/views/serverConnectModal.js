@@ -66,22 +66,6 @@ module.exports = BaseModal.extend({
       showNew: true
     });
 
-    setTimeout(() => {
-      if (this.isOpen()) {
-        // for some reason, when launching the modal and immediatally
-        // opening the config, a subsequent close doesn't position it
-        // properly unless we force a redraw (at least on Mac chrome).
-        this.$jsConfigFormWrap.one('transitionend', () => {
-          disp = this.$jsConfigFormWrap[0].style.display;
-          this.$jsConfigFormWrap[0].style.display = 'none';
-      
-          setTimeout(() => {
-            this.$jsConfigFormWrap[0].style.display = disp;
-          }, 100);      
-        });
-      }
-    }, 0);
-
     return this;
   },  
 
