@@ -5,17 +5,21 @@
     </div>
     <div class="modal-hero js-buyWizardHero custCol-text shadow-inner1-light"
          style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %><%= ob.imageExtension %>), url(imgs/defaultBanner.png);">
-      <div class="js-buyWizardMapPlaceholder hide">
-        <div class="flexContainer">
+      <div class="js-buyWizardMapPlaceholder hide222" style="width: 525px;height: 290px;background-color: #ba4a3f;">
+<!--         <div class="flexContainer">
           <iframe
             width="525"
             height="290"
             frameborder="0" style="border:0;margin-top: -36px"
             src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=placeholder">
           </iframe>
+        </div> -->
+      </div>
+      <div class="js-buyWizardMap positionTop buyWizardMap">
+        <div class="flexContainer">
+          <iframe class="js-buyWizardMap" width="525" height="350" frameborder="0" style="border:0; margin-top: 0"></iframe>
         </div>
       </div>
-      <div class="js-buyWizardMap positionTop"></div>
       <div class="modal-hero modal-heroFullHeightNoButtons js-buyWizardSpinner hide background1 custCol-primary">
         <div class="width100 txt-center vCentered">
           <div class="txt-col1 ion-android-sync spinner spinner-slow icon-gigantic icon-circle-background1 rowTop50 row20"></div>

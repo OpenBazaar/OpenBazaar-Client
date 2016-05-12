@@ -223,14 +223,18 @@ module.exports = baseVw.extend({
 
   showMaps: function(){
     "use strict";
+    console.log('showin maps');
     this.$el.find('.js-buyWizardMap').removeClass('hide');
+    // this.$el.find('.js-buyWizardMap iframe').removeClass('fadeOut');
     this.$el.find('.js-buyWizardMapPlaceHolder').removeClass('hide');
     this.hideMap = false;
   },
 
   hideMaps: function(){
     "use strict";
+    console.log('hidin maps');
     this.$el.find('.js-buyWizardMap').addClass('hide');
+    // this.$el.find('.js-buyWizardMap iframe').addClass('fadeOut');
     this.$el.find('.js-buyWizardMapPlaceHolder').addClass('hide');
     this.hideMap = true;
   },
@@ -369,18 +373,54 @@ module.exports = baseVw.extend({
     });
   },
 
-  displayMap: function(address){
-    "use strict";
+  displayMap: function(address, transition){
+    console.log('displayin the mappers');
     var addressString = "";
+
+    transition = typeof transition === 'undefined' ? true : transition;
+
     //only create new map if address is valid
     if(address && address.street && address.city && address.state && address.postal_code) {
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
       addressString = encodeURIComponent(addressString);
       var hideClass = this.hideMap ? "hide" : "";
-      var newMap = '<div class="flexContainer"><iframe class="' + hideClass + ' js-buyWizardMap"' +
-          'width="525" height="350" frameborder="0" style="border:0; margin-top: 0"' +
-          'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe></div>';
-      this.$el.find('.js-buyWizardMap').html(newMap);
+      var $iFrame = $('<iframe class="js-buyWizardMap fadeOut" width="525" height="350" frameborder="0" style="border:0; margin-top: 0" />'),
+          $currentIframe = this.$el.find('.js-buyWizardMap iframe');
+
+      if (transition) {
+        this.$el.find('.js-buyWizardMap iframe').addClass('blurMore');
+      }
+
+      console.log('sugar');
+      window.sugar = $iFrame;
+
+      console.log('meatball');
+      window.meatball = $currentIframe;
+
+      $('body').append($iFrame);
+
+      $iFrame.on('load', () => {
+        console.log('done loaded');
+        $currentIframe.replaceWith($iFrame.fadeIn());
+
+        // $currentIframe
+        //   .fadeOut({
+        //     complete: () => {
+        //       console.log('done fadin out');
+        //       $currentIframe.replaceWith($iFrame);
+        //       $iFrame.fadeIn();
+        //     }
+        //   });
+      });
+
+      $iFrame.attr('src', 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString);
+
+      // var hideClass = this.hideMap ? "fadeOut buyWizardMap" : "buyWizardMap";
+      // var newMap = '<div class="flexContainer"><iframe class="' + hideClass + ' js-buyWizardMap"' +
+      //     'width="525" height="350" frameborder="0" style="border:0; margin-top: 0"' +
+      //     'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe></div>';
+      // this.$el.find('.js-buyWizardMap').html(newMap);
+      // this.$el.find('.js-buyWizardMap iframe').attr('src', 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString);
     }
   },
 
