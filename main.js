@@ -20,6 +20,7 @@ var ipcMain = require('ipc-main');
 var ini = require('ini');
 var dialog = require('electron').dialog;
 var ipcMain = require('electron').ipcMain;
+var remote = require('electron').remote;
 
 var launched_from_installer = false;
 var platform = os.platform();
@@ -316,6 +317,114 @@ app.on('before-quit', function (e) {
 });
 
 app.commandLine.appendSwitch('ignore-certificate-errors', true);
+
+var rightClickMenu = menu.buildFromTemplate([
+  {
+    label: 'Edit',
+    submenu: [
+      {
+        label: 'Undo',
+        role: 'undo'
+      }, {
+        label: 'Redo',
+        role: 'redo'
+      }, {
+        type: 'separator'
+      }, {
+        label: 'Cut',
+        role: 'cut'
+      }, {
+        label: 'Copy',
+        role: 'copy'
+      }, {
+        label: 'Paste',
+        role: 'paste'
+      }, {
+        label: 'Paste and Match Style',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.webContents.pasteAndMatchStyle();
+          }
+        }
+      },
+      {
+        label: 'Select All',
+        role: 'selectall'
+      }
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      {
+        label: 'Reload',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.reload();
+          }
+        }
+      },
+      {
+        label: 'Toggle Developer Tools',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.toggleDevTools();
+          }
+        }
+      },
+      {
+        label: 'Toggle Full Screen',
+        click: function(item, focusedWindow) {
+          var fullScreen;
+
+          if (focusedWindow) {
+            fullScreen = !focusedWindow.isFullScreen();
+            focusedWindow.setFullScreen(fullScreen);
+
+            if (fullScreen) {
+              focusedWindow.webContents.send('fullscreen-enter');
+            } else {
+              focusedWindow.webContents.send('fullscreen-exit');
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    label: 'Window',
+    submenu: [
+      {
+        label: 'Maximize',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.maximize();
+          }
+        }
+      },
+      {
+        label: 'Unmaximize',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.unmaximize();
+          }
+        }
+      },
+      {
+        label: 'Minimize',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.minimize();
+          }
+        }
+      }
+    ]
+  }
+]);
+
+ipcMain.on('contextmenu-click', function(event) {
+  rightClickMenu.popup();
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

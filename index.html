@@ -61,17 +61,7 @@
   <script src="js/utils/list.min.js"></script>
 
   <script>
-    var app = require('./js/start'),
-        remote = require('remote'),
-        Menu = remote.require('menu'),
-        MenuItem = remote.require('menu-item'),
-        os = require('os'),
-        platform = os.platform();
-
-    switch(platform) {
-      case "darwin":
-        platform = "mac";
-    }
+    var app = require('./js/start');
 
     window.translateIndex = function(){
       $('.js-translate').each(function() {
@@ -101,115 +91,6 @@
     $('.js-defaultServerIndexApp').on('click', function(){
       app.loadNewServer("http://localhost:18469/api/v1/");
     });
-
-    var appMenu = Menu.buildFromTemplate([
-      {
-        label: 'Edit',
-        submenu: [
-          {
-            label: 'Undo',
-            role: 'undo'
-          }, {
-            label: 'Redo',
-            role: 'redo'
-          }, {
-            type: 'separator'
-          }, {
-            label: 'Cut',
-            role: 'cut'
-          }, {
-            label: 'Copy',
-            role: 'copy'
-          }, {
-            label: 'Paste',
-            role: 'paste'
-          }, {
-            label: 'Paste and Match Style',
-            click: function(item, focusedWindow) {
-              if (focusedWindow) {
-                focusedWindow.webContents.pasteAndMatchStyle();
-              }
-            }
-          },
-          {
-            label: 'Select All',
-            role: 'selectall'
-          }
-        ]
-      },
-      {
-        label: 'View',
-        submenu: [
-          {
-            label: 'Reload',
-            click: function(item, focusedWindow) {
-              if (focusedWindow) {
-                focusedWindow.reload();
-              }
-            }
-          },
-          {
-            label: 'Toggle Developer Tools',
-            click: function(item, focusedWindow) {
-              if (focusedWindow) {
-                focusedWindow.toggleDevTools();
-              }
-            }
-          },
-          {
-            label: 'Toggle Full Screen',
-            click: function(item, focusedWindow) {
-              var fullScreen;
-
-              if (focusedWindow) {
-                fullScreen = !focusedWindow.isFullScreen();
-                focusedWindow.setFullScreen(fullScreen);
-
-                if (fullScreen) {
-                  focusedWindow.webContents.send('fullscreen-enter');
-                } else {
-                  focusedWindow.webContents.send('fullscreen-exit');
-                }
-              }
-            }
-          },
-        ]
-      },
-      {
-        label: 'Window',
-        submenu: [
-          {
-            label: 'Maximize',
-            click: function(item, focusedWindow) {
-              if (focusedWindow) {
-                focusedWindow.maximize();
-              }
-            }
-          },
-          {
-            label: 'Unmaximize',
-            click: function(item, focusedWindow) {
-              if (focusedWindow) {
-                focusedWindow.unmaximize();
-              }
-            }
-          },
-          {
-            label: 'Minimize',
-            click: function(item, focusedWindow) {
-              if (focusedWindow) {
-                focusedWindow.minimize();
-              }
-            }
-          }
-        ]
-      }
-    ]);
-
-    window.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-      appMenu.popup(remote.getCurrentWindow());
-    }, false);
   </script>
 </body>
 </html>
