@@ -120,22 +120,22 @@
         </div>
       </div>
       <% } %>
-      <% if(ob.vendor_offer.listing.shipping && ob.vendor_offer.listing.shipping.shipping_regionsDisplay && ob.vendor_offer.listing.shipping.shipping_regionsDisplay.length > 0){ %>
+      <% if(ob.vendor_offer.listing.shipping && ob.vendor_offer.listing.shipping.shipping_regions && ob.vendor_offer.listing.shipping.shipping_regions.length > 0){ %>
       <div class="flexRow width100">
         <div class="width100 fontSize15 marginLeft10 textOpacity75 row10">
           <h4><%= polyglot.t('CanBeShippedTo') %></h4>
         </div>
         <div class="marginBottom20  marginLeft7 row10">
-          <% var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'displayCountry'), ob.vendor_offer.listing.shipping.shipping_regionsDisplay));
+          <% var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'country'), ob.vendor_offer.listing.shipping.shipping_regions));
           if(matchedItemShippableCountries.length > 0){
             _.each(matchedItemShippableCountries, function(data){
-              print("<p>" + data + "</p>");
+              print("<p>" + polyglot.t(`countries.${data}.name`) + "</p>");
             });
           } else if(!ob.worldwide){
             print(polyglot.t('NoShippableAddress'));
           } else {
-            _.each(_.uniq(_.pluck(ob.userAddresses, 'displayCountry')), function(data){
-            print("<p>" + data + "</p>");
+            _.each(_.uniq(_.pluck(ob.userAddresses, 'country')), function(data){
+              print("<p>" + polyglot.t(`countries.${data}.name`) + "</p>");
             });
           }
           %>
@@ -223,9 +223,9 @@
           </div>
           <div class="flexCol-6">
             <div class="rowItem fontSize16 padding30 lineHeight24 fontWeight400">
-              <% if(ob.vendor_offer.listing.shipping && ob.vendor_offer.listing.shipping.shipping_regionsDisplay && ob.vendor_offer.listing.shipping.shipping_regionsDisplay[0]) { %>
+              <% if (ob.shippingRegionsDisplay) { %>
               <h3><%= polyglot.t('ShipsTo') %></h3>
-              <% _.each(ob.vendor_offer.listing.shipping.shipping_regionsDisplay, function(data, i) { %>
+              <% _.each(ob.shippingRegionsDisplay, function(data, i) { %>
               <div class="row5">
                 <%= data %>
               </div>
