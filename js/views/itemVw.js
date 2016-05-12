@@ -105,7 +105,8 @@ module.exports = baseVw.extend({
               userCountry: polyglot.t(`countries.${self.userModel.get('country')}.name`),
               shippingRegionsDisplay: localize.localizeShippingRegions(shippingRegions),
               worldwide: shippingRegions.length === 1 && shippingRegions[0] === 'ALL',
-              displayShippingOrigin: shippingOrigin && polyglot.t(`countries.${shippingOrigin}.name`)
+              displayShippingOrigin: shippingOrigin && polyglot.t(`countries.${shippingOrigin}.name`),
+              shippingOrigin: polyglot.t(`countries.${shippingOrigin}.name`)
             })
           )
         );
