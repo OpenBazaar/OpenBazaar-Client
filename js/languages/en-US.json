@@ -709,7 +709,8 @@
     "newConfigHeaderMsg": "Enter Server Details",
     "editConfigHeaderMsg": "Configuration Settings",
     "serverConfigsTitle": "Server Configurations",
-    "newConfigTitle": "New Configuration"
+    "newConfigTitle": "New Configuration",
+    "new": "New"
   },
   "timezones": {
     "-12": "(GMT -12:00) Eniwetok, Kwajalein",
