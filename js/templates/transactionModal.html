@@ -554,7 +554,7 @@
         <span class="ion-android-list fontSize12 marginRight2 textOpacity1"></span>
         <%= polyglot.t('Summary') %>
       </a>
-      <% if(ob.buyer_order.order.shipping || ob.vendor_order_confirmation) { %>
+      <% if(ob.status > 0 && ob.buyer_order.order.shipping || ob.vendor_order_confirmation) { %>
         <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-shippingTab" data-tab="shipping">
           <% if(ob.vendor_offer.listing.metadata.category == "digital good") { %>
             <span class="ion-android-attach fontSize12 marginRight2 textOpacity1"></span>
