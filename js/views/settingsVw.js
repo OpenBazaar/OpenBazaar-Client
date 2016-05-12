@@ -373,7 +373,7 @@ module.exports = Backbone.View.extend({
         timezones = new timezonesModel(),
         languages = new languagesModel(),
         countryList = countries.get('countries'),
-        currecyList = countries.get('countries'),
+        currencyList = countries.get('countries'),
         timezoneList = timezones.get('timezones'),
         languageList = languages.get('languages'),
         country = this.$el.find('#country'),
@@ -404,8 +404,8 @@ module.exports = Backbone.View.extend({
     this.$("#advancedForm input[name=additionalPaymentData][value=" + localStorage.getItem('AdditionalPaymentData') + "]").prop('checked', true);
     this.$("#advancedForm input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
 
-    currecyList = __.uniq(currecyList, function(item){return item.code;});
-    currecyList = currecyList.sort(function(a,b){
+    currencyList = __.uniq(currencyList, function(item){return item.code;});
+    currencyList = currencyList.sort(function(a,b){
       var cA = a.currency.toLowerCase(),
           cB = b.currency.toLowerCase();
         if (cA < cB){
@@ -417,11 +417,11 @@ module.exports = Backbone.View.extend({
       return 0;
     });
     //add BTC
-    currecyList.unshift({code: "BTC", currency:"Bitcoin", currencyUnits: "4"});
+    currencyList.unshift({code: "BTC", currency:"Bitcoin", currencyUnits: "4"});
 
     __.each(countryList, function(c, i){
-      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
-      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
+      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}.name`)+'</option>');
+      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}.name`)+'</option>');
       country_option.attr("selected",user.country == c.dataName);
       //if user has a country in their profile, preselect it in the new address section
       ship_country_option.attr("selected",user.country== c.dataName);
@@ -429,10 +429,11 @@ module.exports = Backbone.View.extend({
       country_str += country_option[0].outerHTML;
     });
 
-    __.each(currecyList, function(c, i){
+    __.each(currencyList, function(c, i){
       //only show currently available currencies
       if(self.availableCurrenciesList.indexOf(c.code) > -1 || c.code === "BTC"){
-        var currency_option = $('<option value="'+c.code+'">'+c.currency+'</option>');
+        var currency = c.code === 'BTC' ? c.currency : polyglot.t(`countries.${c.dataName}.currency`),
+            currency_option = $('<option value="'+c.code+'">'+currency+'</option>');
         currency_option.attr("selected",user.currency_code == c.code);
         currency_str += currency_option[0].outerHTML;
       }

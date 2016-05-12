@@ -4291,6 +4291,39 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 14;
 }
 
+#ov1 #loadingModal.hide {
+  height: 0; /* kludge to allow top bar to fade in. Transitions don't work if display is none */
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+
+#loadingModal #loadingModalContent {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 50%;
+  margin-top: 120px;
+  opacity: 1;
+  transition: opacity 1s 5s ease;
+  box-sizing: border-box;
+  padding: 9px;
+  text-align: center;
+}
+
+#loadingModal #loadingModalBtns {
+  opacity: 1;
+  transition: opacity 1s 5s ease;
+  /* this seems redundant, but if you don't also have a transition on the button container, for some reason the normal
+  background color will be used instead of the background color from the custCol-secondary class until the parent
+  transition is complete on Win64 10. */
+}
+
+#loadingModal.hide #loadingModalContent,
+#loadingModal.hide #loadingModalBtns {
+  opacity: 0;
+}
+
 #ov1 .server-connect-modal {
   z-index: 15;
 }
@@ -4343,10 +4376,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 0;
   left: 0;
   bottom: 0;
-}
-
-#loadingModal .btn {
-  -webkit-app-region: no-drag;
 }
 
 .pill {
@@ -4876,7 +4905,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
-#ov1  .textOpacity0 {
+#ov1  .textOpacity0,
+#ov1 .opacity0 {
   opacity: 0;
 }
 
@@ -5827,10 +5857,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
+/* to fade out a visible element, add the fadeOut class */
+/* to fade in an element with opacity 0, add the fadeIn class */
 
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+#ov1 .fadeIn {
+  opacity: 1;
+  pointer-events: auto;
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 

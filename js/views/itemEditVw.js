@@ -174,19 +174,23 @@ module.exports = baseVw.extend({
     var countries = new countriesModel();
     //make a copy of the countries array
     var countryList = countries.get('countries').slice(0);
-    countryList.unshift(
-        {
-          "name": window.polyglot.t('WorldwideShipping'),
-          "dataName": "ALL",
-          "code": "ALL",
-          "number": "1"
-        });
+    countryList.unshift({
+      "name": window.polyglot.t('WorldwideShipping'),
+      "dataName": "ALL",
+      "code": "ALL",
+      "number": "1"
+    });
     var shipsTo = this.$el.find('#shipsTo');
     __.each(countryList, function(countryFromList, i){
-      shipsTo.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
+      var content = !i ? countryFromList.name : polyglot.t(`countries.${countryFromList.dataName}.name`);
+
+      shipsTo.append(
+        `<option value="${countryFromList.dataName}">${content}</option>`
+      );
     });
 
     var shipsToValue = this.model.get('vendor_offer').listing.shipping.shipping_regions;
+
     //if shipsToValue is empty, set it to the user's country
     shipsToValue = shipsToValue.length > 0 ? shipsToValue : ["ALL"];
     shipsTo.val(shipsToValue);
