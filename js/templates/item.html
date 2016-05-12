@@ -70,7 +70,7 @@
               <%= ob.displayShippingOrigin %>
             </div>
             <div class="positionAbsolute width100 itemMetaValue zIndex1 tooltip"
-                 data-tooltip="<%= polyglot.t('CountryOfOrigin') %> <%= ob.displayShippingOrigin || ob.userCountry %>">
+                 data-tooltip="<%= polyglot.t('CountryOfOrigin') %> <%= ob.displayShippingOrigin %>">
             </div>
           </div>
         <% } %>
@@ -189,7 +189,7 @@
           <div class="flexCol-6">
             <div class="rowItem fontSize16 padding30 lineHeight24 fontWeight400">
               <% if(ob.displayShippingOrigin){ %>
-                <h3><%= polyglot.t('ShipsFrom2', {country: ob.shippingOrigin}) %></h3>
+                <h3><%= polyglot.t('ShipsFrom2', {country: ob.displayShippingOrigin}) %></h3>
                 <h3><% if(ob.worldwide){print(polyglot.t('Worldwide'));}else{print(polyglot.t('Local'));} %></h3>
                 <div>
                   <% if(ob.userCurrencyCode != "BTC"){ %>
