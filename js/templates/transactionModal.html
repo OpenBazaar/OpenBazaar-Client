@@ -43,13 +43,11 @@
           <img class="pull-left qrCode js-transactionPayQRCode" height="180" width="180" src="imgs/defaultItem.png"/>
           <div class="pull-left pad20Left txt-bright" style="width:255px;">
             <div class="txt-center row10 textSize16px">
-              <%= polyglot.t('buyFlow.SendBTCtoAddress', {amount: ob.buyer_order.order.payment.amount}) %>
-            </div>
-            <div class="txt-center row10">
-              <a class="textSize11px"
-                 href="bitcoin:<%= ob.buyer_order.order.payment.address %>?amount=<%= ob.buyer_order.order.payment.amount %>&message=<%= ob.vendor_offer.listing.item.title %>">
-                <%= ob.buyer_order.order.payment.address %>
-              </a>
+              <%= polyglot.t('buyFlow.SendBTCtoAddress', {
+                  amount: ob.buyer_order.order.payment.amount,
+                  recipient: '<a class="textSize11px" href="bitcoin:' + ob.buyer_order.order.payment.address + '?amount=' + ob.buyer_order.order.payment.amount + '&message=' + ob.vendor_offer.listing.item.title + '">' + ob.buyer_order.order.payment.address + '</a>'
+                })
+              %>
             </div>
             <div class="txt-center row10">
               <input type="checkbox" class="textSize11px fieldItem thin" id="BuyWizardQRDetailsInput">
@@ -556,7 +554,7 @@
         <span class="ion-android-list fontSize12 marginRight2 textOpacity1"></span>
         <%= polyglot.t('Summary') %>
       </a>
-      <% if(ob.buyer_order.order.shipping || ob.vendor_order_confirmation) { %>
+      <% if(ob.status > 0 && ob.buyer_order.order.shipping || ob.vendor_order_confirmation) { %>
         <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-shippingTab" data-tab="shipping">
           <% if(ob.vendor_offer.listing.metadata.category == "digital good") { %>
             <span class="ion-android-attach fontSize12 marginRight2 textOpacity1"></span>
@@ -729,7 +727,7 @@
               <%- ob.buyer_order.order.shipping.ship_to %>, <br />
               <%- ob.buyer_order.order.shipping.address %><br />
               <%- ob.buyer_order.order.shipping.city %>, <%- ob.buyer_order.order.shipping.state %> <%- ob.buyer_order.order.shipping.postal_code %><br />
-              <%- ob.displayCountry %>
+              <%= polyglot.t('countries.' + ob.buyer_order.order.shipping.country + '.name') %>
             </div>
           </div>
         </div>

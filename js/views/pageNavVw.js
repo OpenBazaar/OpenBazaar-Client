@@ -311,50 +311,48 @@ module.exports = baseVw.extend({
       if(self.showDiscIntro){
         self.showDiscoverIntro();
       }
+      self.$aboutModalHolder = $('.js-aboutModalHolder');
+      self.$aboutModal = self.$aboutModalHolder.find('.js-aboutModal');
     });
 
     return this;
   },
 
   showAboutModal: function(e){
-    var $aboutModal = $('.js-aboutModal');
-    
     this.cleanNav();
 
     // display the modal
-    $('.js-aboutModalHolder').fadeIn(300);
+    this.$aboutModalHolder.fadeIn(300);
 
     // set the active tab
-    $aboutModal.find('.navBar').find('.btn.btn-bar').removeClass('active');
+    this.$aboutModal.find('.navBar .btn.btn-bar').removeClass('active');
     $('.js-about-mainTab').addClass('active');
 
     // set the active section
-    $aboutModal.find('.modal-section').addClass('hide');
-    $aboutModal.find('.js-modalAboutMain').removeClass('hide');
+    this.$aboutModal.find('.modal-section').addClass('hide');
+    this.$aboutModal.find('.js-modalAboutMain').removeClass('hide');
 
     // blur the container for extra focus
     $('#obContainer').addClass('blur');
   },
 
   hideAboutModal: function(e){
-    $('.js-aboutModalHolder').fadeOut(300);
+    this.$aboutModalHolder.fadeOut(300);
     $('#obContainer').removeClass('blur');
   },
 
   showSupportModal: function(e){
-    var $aboutModal = $('.js-aboutModal');
-    
-    $('.js-aboutModalHolder').fadeIn(300);
-    $aboutModal.find('.navbar').find('.btn.btn-bar').removeClass('active');
+    this.$aboutModalHolder.fadeIn(300);
+    this.$aboutModal.find('.navbar .btn.btn-bar').removeClass('active');
     $('.js-about-donationsTab').addClass('active');
-    $aboutModal.find('modal-section').addClass('hide');
-    $aboutModal.find('js-modalAboutSupport').removeClass('hide');
+    this.$aboutModal.find('.modal-section').addClass('hide');
+    this.$aboutModal.find('.js-modalAboutSupport').removeClass('hide');
     $('#obContainer').addClass('blur');
   },
 
   aboutModalTabClick: function(e){
     var tab = $(e.currentTarget).data('tab');
-    $('.js-aboutModal').find('.btn-tab').removeClass('active');
+    this.$aboutModal.find('.btn-tab').removeClass('active');
     $(e.currentTarget).addClass('active');
 
     switch(tab) {
