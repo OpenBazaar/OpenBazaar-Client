@@ -122,7 +122,7 @@ module.exports = Backbone.View.extend({
   lockForm: function(){
     "use strict";
     this.$('.js-buyWizardQuantity').prop('disabled', true);
-    this.$('#buyWizardQuantity .numberSpinnerUp, #buyWizardQuantity .numberSpinnerDown').addClass('hide');
+    this.$('#buyWizardQuantity').find('.numberSpinnerUp,.numberSpinnerDown').addClass('hide');
   },
 
   goToPurchases: function(){

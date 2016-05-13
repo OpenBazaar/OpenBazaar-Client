@@ -1056,7 +1056,7 @@ label.fieldItem {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 7;
+  z-index: 1;
 }
 
 .modal-child {
@@ -4010,6 +4010,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: width .35s cubic-bezier(0, 0, 0.2, 1);
 }
 
+.customizePrimaryColorRecommendations.show,
+.customizeSecondaryColorRecommendations.show,
+.customizeBackgroundColorRecommendations.show,
+.customizeTextColorRecommendations.show {
+  width: 273px;
+}
+
 .customColorChoice {
   background: #fff;
   display: inline-block;
@@ -5746,9 +5753,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 260px;
 }
 
-#ov1 .width270 {
-  width: 270px;
-}
 #ov1 .width380 {
   width: 380px;
 }

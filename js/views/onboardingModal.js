@@ -389,7 +389,7 @@ module.exports = baseModal.extend({
       avatarUpload.resolve();
     }
 
-    this.$('.js-followHandles [data-handle]:checked').each(function(e) {
+    this.$('.js-followHandles').find('[data-handle]:checked').each(function(e) {
       followHandles.push($(this).data('handle'));
     });
 
