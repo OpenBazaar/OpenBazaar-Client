@@ -5831,7 +5831,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
-/*  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);*/
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 #ov1 .foldIn {

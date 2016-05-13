@@ -224,16 +224,10 @@ module.exports = baseVw.extend({
 
   showMaps: function(){
     this.$el.find('.js-buyWizardMap').removeClass('hide');
-    // this.$el.find('.js-buyWizardMap iframe').removeClass('fadeOut');
-    // this.$el.find('.js-buyWizardMapPlaceHolder').removeClass('hide');
-    // this.hideMap = false;
   },
 
   hideMaps: function(){
     this.$el.find('.js-buyWizardMap').addClass('hide');
-    // this.$el.find('.js-buyWizardMap iframe').addClass('fadeOut');
-    // this.$el.find('.js-buyWizardMapPlaceHolder').addClass('hide');
-    // this.hideMap = true;
   },
 
   createNewAddress: function(){
