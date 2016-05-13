@@ -13,7 +13,7 @@ module.exports = baseVw.extend({
   events: {
   },
 
-  VIEWS_PER_BATCH: 25,
+  VIEWS_PER_BATCH: 10,
 
   MAX_VIEWS: 1500,
 
