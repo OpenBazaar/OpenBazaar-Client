@@ -5960,10 +5960,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   }
 }
 
-.buyWizardMap {
-  transition: opacity 3s cubic-bezier(0, 0, 0.2, 1);  
-}
-
 /* turn off animations and transitions with this style */
 
 #ov1.notFancy,

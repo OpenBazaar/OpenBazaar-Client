@@ -56,7 +56,6 @@ module.exports = baseVw.extend({
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
     'click input[name="radioPaymentType"]': 'changePaymentType',
-    'blur .js-buyWizardPostalInput': 'updateMap',
     'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
     'blur input': 'validateInput'
   },
@@ -177,6 +176,8 @@ module.exports = baseVw.extend({
 
       self.listenTo(self.buyAddressesView, 'setAddress', self.addressSelected);
 
+      self.$buyWizardMap = self.$('.js-buyWizardMap');
+
       //init the accordion
       self.initAccordion('.js-buyWizardAccordion');
 
@@ -222,41 +223,41 @@ module.exports = baseVw.extend({
   },
 
   showMaps: function(){
-    "use strict";
-    console.log('showin maps');
     this.$el.find('.js-buyWizardMap').removeClass('hide');
     // this.$el.find('.js-buyWizardMap iframe').removeClass('fadeOut');
-    this.$el.find('.js-buyWizardMapPlaceHolder').removeClass('hide');
-    this.hideMap = false;
+    // this.$el.find('.js-buyWizardMapPlaceHolder').removeClass('hide');
+    // this.hideMap = false;
   },
 
   hideMaps: function(){
-    "use strict";
-    console.log('hidin maps');
     this.$el.find('.js-buyWizardMap').addClass('hide');
     // this.$el.find('.js-buyWizardMap iframe').addClass('fadeOut');
-    this.$el.find('.js-buyWizardMapPlaceHolder').addClass('hide');
-    this.hideMap = true;
+    // this.$el.find('.js-buyWizardMapPlaceHolder').addClass('hide');
+    // this.hideMap = true;
   },
 
   createNewAddress: function(){
-    "use strict";
     var self = this;
     this.$el.find('.js-buyWizardAddress').addClass('hide');
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
     this.$el.find('#buyWizardNameInput').focus();
+    this.$buyWizardMap.find('iframe').addClass('blurMore');
+
     //set chosen inputs
     $('.chosen').chosen();
   },
 
-  hideNewAddress: function(){
+  hideNewAddress: function(e){
     "use strict";
     this.$el.find('.js-buyWizardAddress').removeClass('hide');
     this.$el.find('.js-buyWizardNewAddress').addClass('hide');
+    
+    if (e && $(e.target).hasClass('js-buyWizardNewAddressCancel')) {
+      this.$buyWizardMap.find('iframe').removeClass('blurMore');
+    }
   },
 
   addressSelected: function(selectedAddress){
-    "use strict";
     this.model.set('selectedAddress', selectedAddress);
     this.displayMap(selectedAddress);
     this.$el.find('.js-buyWizardAddressNext').removeClass('disabled');
@@ -373,65 +374,44 @@ module.exports = baseVw.extend({
     });
   },
 
-  displayMap: function(address, transition){
-    console.log('displayin the mappers');
-    var addressString = "";
+  displayMap: function(address){
+    var addressString = "",
+        $currentIframe;
 
-    transition = typeof transition === 'undefined' ? true : transition;
+    this.$buyWizardMap.find('iframe.js-iframe-pending, iframe.js-iframe-leaving')
+      .remove();
+    $currentIframe = this.$buyWizardMap.find('iframe');
+    $currentIframe.addClass('blurMore');
 
-    //only create new map if address is valid
     if(address && address.street && address.city && address.state && address.postal_code) {
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
-      addressString = encodeURIComponent(addressString);
-      var hideClass = this.hideMap ? "hide" : "";
-      var $iFrame = $('<iframe class="js-buyWizardMap fadeOut" width="525" height="350" frameborder="0" style="border:0; margin-top: 0" />'),
-          $currentIframe = this.$el.find('.js-buyWizardMap iframe');
-
-      if (transition) {
-        this.$el.find('.js-buyWizardMap iframe').addClass('blurMore');
-      }
-
-      console.log('sugar');
-      window.sugar = $iFrame;
-
-      console.log('meatball');
-      window.meatball = $currentIframe;
-
-      $('body').append($iFrame);
-
-      $iFrame.on('load', () => {
-        console.log('done loaded');
-        $currentIframe.replaceWith($iFrame.fadeIn());
-
-        // $currentIframe
-        //   .fadeOut({
-        //     complete: () => {
-        //       console.log('done fadin out');
-        //       $currentIframe.replaceWith($iFrame);
-        //       $iFrame.fadeIn();
-        //     }
-        //   });
-      });
-
-      $iFrame.attr('src', 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString);
-
-      // var hideClass = this.hideMap ? "fadeOut buyWizardMap" : "buyWizardMap";
-      // var newMap = '<div class="flexContainer"><iframe class="' + hideClass + ' js-buyWizardMap"' +
-      //     'width="525" height="350" frameborder="0" style="border:0; margin-top: 0"' +
-      //     'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe></div>';
-      // this.$el.find('.js-buyWizardMap').html(newMap);
-      // this.$el.find('.js-buyWizardMap iframe').attr('src', 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString);
+    } else {
+      // if address is invalid, we'll create a dummy address for which google maps will show a map of the world
+      addressString = "123 Street" + ", " + "City" + ", " + "State" + " " + "12345" + " " + "Country";      
     }
-  },
 
-  updateMap: function(){
-    var address = [];
-    address.street = $('#buyWizardStreetInput').val();
-    address.city = $('#buyWizardCityInput').val();
-    address.state = $('#buyWizardStateInput').val();
-    address.postal_code = $('#buyWizardPostalInput').val();
+    addressString = encodeURIComponent(addressString);
+    $iFrame = $('<iframe class="js-buyWizardMap js-iframe-pending positionTop" width="525" height="350" frameborder="0" style="border:0; margin-top: 0; height: 262px" />');
+       
+    if ($currentIframe.length) {
+      $iFrame.insertBefore($currentIframe);
+    } else {
+      this.$buyWizardMap.find('.flexContainer')
+        .prepend($iFrame);
+    }
+    
+    $iFrame.on('load', () => {
+      $currentIframe.addClass('js-iframe-leaving')
+        .fadeOut({
+          duration: 'slow',
+          complete: function() {
+            $currentIframe.remove();
+          }
+        });
+      $iFrame.removeClass('js-iframe-pending');
+    });
 
-    this.displayMap(address);
+    $iFrame.attr('src', 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString);
   },
 
   returnNext: function(){
