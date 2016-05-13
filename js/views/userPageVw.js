@@ -1158,7 +1158,6 @@ module.exports = baseVw.extend({
       $customColorChoice.first().css('background','transparent'); // set to transparent
       
       for (var i = 2; i <= 6; i++) {
-        console.log($customColorChoice.eq(i));
         $customColorChoice.eq(i).css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
       }
 

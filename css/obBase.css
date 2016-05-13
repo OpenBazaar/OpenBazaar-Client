@@ -4012,9 +4012,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .customizePrimaryColorRecommendations.show,
 .customizeSecondaryColorRecommendations.show,
-.customizeBackgroundColorRecommendations.show,
-.customizeTextColorRecommendations.show {
+.customizeBackgroundColorRecommendations.show  {
   width: 273px;
+}
+
+.customizeTextColorRecommendations.show {
+  width: 121px;
 }
 
 .customColorChoice {
