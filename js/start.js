@@ -25,6 +25,7 @@ window.onblur = function() {
 
 var Polyglot = require('node-polyglot'),
     ipcRenderer = require('ipc-renderer'),
+    remote = require('electron').remote,
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
     userModel = require('./models/userMd'),
@@ -46,8 +47,6 @@ var Polyglot = require('node-polyglot'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
     PageConnectModal = require('./views/pageConnectModal'), 
-    serverConfigMd = app.serverConfig,
-    heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
     startUpConnectMaxRetries = 2,
     startUpConnectRetryDelay = 2 * 1000,
@@ -88,7 +87,6 @@ user.on('change:language', function(md, lang) {
   localStorage.setItem('lang', lang);
   //trigger translation function on index
   window.translateIndex();
-
 });
 
 app.serverConfigs = new ServerConfigsCl();
@@ -140,6 +138,12 @@ app.serverConfigs.fetch().done(() => {
     }
   }  
 });
+
+ipcRenderer.send('activeServerChange', app.serverConfigs.getActive().toJSON());
+
+app.serverConfigs.on('activeServerChange', (server) => {
+  ipcRenderer.send('activeServerChange', server.toJSON());
+});  
 
 //keep user and profile urls synced with the active server configuration
 (setServerUrl = function() {
@@ -360,7 +364,7 @@ var loadProfile = function(landingRoute, onboarded) {
 
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function() {
-              newSocketView = new socketView({model: serverConfigMd});
+              newSocketView = new socketView();
 
               newPageNavView = new pageNavView({
                 model: user,
@@ -425,7 +429,6 @@ launchOnboarding = function(guidCreating) {
   onboardingModal = new OnboardingModal({
     model: user,
     userProfile: userProfile,
-    serverConfig: serverConfigMd,
     guidCreationPromise: guidCreating
   });
   onboardingModal.render().open();
@@ -465,7 +468,7 @@ app.connectHeartbeatSocket();
 app.serverConnectModal = new ServerConnectModal().render();
 app.serverConnectModal.on('connected', () => {
   if (profileLoaded) {
-    // If we've already called loadProfile() and then, we connect
+    // If we've already loaded called loadProfile() and then, we connect
     // to a new server (or reconnect to the same server) we'll reload the
     // app since some of the "global" components (Router, PageNav,
     // SocketView...) were not designed to handle a new connection.

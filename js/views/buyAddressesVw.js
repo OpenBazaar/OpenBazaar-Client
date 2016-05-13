@@ -1,7 +1,8 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate');
+    loadTemplate = require('../utils/loadTemplate'),
+    localize = require('../utils/localize');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
@@ -18,7 +19,11 @@ module.exports = Backbone.View.extend({
     this.userModel = options.userModel;
     //don't render on init, let parent trigger the render
     //add list of countries the vendor ships to
-    this.model.set('shipsToList', (this.model.get('vendor_offer').listing.shipping.shipping_regionsDisplay).join(", "));
+    this.model.set('shipsToList',
+      localize.localizeShippingRegions(
+        this.model.get('vendor_offer').listing.shipping.shipping_regions || []
+      ).join(", ")
+    );
   },
 
   render: function(selected){

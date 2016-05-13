@@ -2,9 +2,9 @@
 <div class="flexRow">
   <div class="flexRow custCol-border borderBottom hide js-buyWizardOrderSummary">
     <div class="rowItem padding2015">
-      <%= polyglot.t('buyFlow.summaryMsg1', {recipient: ob.recipient}) %>.
-      <%= polyglot.t('buyFlow.summaryMsg2') %> <%= ob.vendor_offer.listing.item.process_time %>. <%= polyglot.t('buyFlow.summaryMsg3') %>
-      <a class="js-goToPurchases"><%= polyglot.t('buyFlow.purchasesPage') %>.</a>
+      <% ob.purchasesPageLink = '<a class="js-goToPurchases">' + polyglot.t('buyFlow.purchasesPage') + '</a>' %>
+      <%= polyglot.t('buyFlow.summaryMsg1', { recipient: ob.recipient }) %>.
+      <%= polyglot.t('buyFlow.summaryMsg2', { time: ob.vendor_offer.listing.item.process_time }) %>. <% print(polyglot.t('buyFlow.summaryMsg3', { purchasesPageLink: ob.purchasesPageLink })) %>.
     </div>
   </div>
   <div class="flexRow custCol-border borderBottom">
