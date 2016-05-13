@@ -231,7 +231,7 @@ module.exports = baseVw.extend({
         tabTarget = tab.data("tab");
 
     this.filterBy = tab.val();
-    this.$('.js-'+tabTarget).find('.search').val("");
+    this.$('.js-'+tabTarget+' .search').val("");
     switch(tabTarget){
       case "purchases":
         this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper);
