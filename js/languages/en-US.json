@@ -332,7 +332,7 @@
   "LoadingBitcoinPrices": "Loading Bitcoin Prices...",
   "ThisUserIsBlocked": "This user is hidden because they are on your blocked list",
   "ThisUserIsNSFW": "This user is hidden because their page is listed as NSFW",
-  "ShowBlockedUser": "Show this user's page except for NSFW listings",
+  "ShowBlockedUser": "Show this user's page.",
   "ShowNSFWContent": "Show this user's page, and all NSFW listings",
   "NoShipping": "Digital or Remote (No Shipping)",
   "WorldwideShipping": "Worldwide",
@@ -1696,7 +1696,7 @@
       "currency": "Bolivar"
     },
     "VIETNAM": {
-      "name": "VietNam",
+      "name": "Vietnam",
       "currency": "Dong"
     },
     "VIRGIN_ISLANDS_BRITISH": {
