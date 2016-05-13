@@ -787,14 +787,14 @@ module.exports = baseVw.extend({
         arrayItem.cloak = false;
       }
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
-      arrayItem.serverUrl = self.options.userModel.get('serverUrl');
-      arrayItem.showAvatar = false;
-      arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
-      arrayItem.handle = self.model.get('page').profile.handle;
-      arrayItem.userID = self.pageID;
-      arrayItem.ownPage = self.options.ownPage;
-      arrayItem.onUserPage = true;
-      arrayItem.userCountries = addressCountries;
+      arrayItem.serverUrl        = self.options.userModel.get('serverUrl');
+      arrayItem.showAvatar       = false;
+      arrayItem.avatar_hash      = self.model.get('page').profile.avatar_hash;
+      arrayItem.handle           = self.model.get('page').profile.handle;
+      arrayItem.userID           = self.pageID;
+      arrayItem.ownPage          = self.options.ownPage;
+      arrayItem.onUserPage       = true;
+      arrayItem.userCountries    = addressCountries;
       arrayItem.skipNSFWmodal = skipNSFWmodal;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         selectOptions[arrayItem.category] = true;

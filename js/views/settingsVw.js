@@ -228,7 +228,7 @@ module.exports = Backbone.View.extend({
           text: ''
         },
         toolbar: {
-          imageDragging: false,
+          imageDragging: false
         },
         paste: {
           cleanPastedHTML: false,

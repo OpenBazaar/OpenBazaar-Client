@@ -18,7 +18,7 @@ function App() {
   // TODO: rather than attach the serverConfigs CL
   // in main.js, pass in the instance here so the
   // dependency is more explicit.
-};
+}
 
 App.prototype.connectHeartbeatSocket = function() {
   var activeServer = this.serverConfigs.getActive();

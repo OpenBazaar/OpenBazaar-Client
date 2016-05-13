@@ -289,7 +289,7 @@ module.exports = BaseModal.extend({
       } else {
         setTimeout(_conclude, startTime + minAttemptTime - Date.now());
       }
-    }
+    };
 
     login = function() {
       // check authentication

@@ -20,4 +20,4 @@ function localizeShippingRegions(regions) {
 
 module.exports = {
   localizeShippingRegions: localizeShippingRegions
-}
+};

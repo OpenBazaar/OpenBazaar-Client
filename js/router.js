@@ -55,13 +55,13 @@ module.exports = Backbone.Router.extend({
     history.back = function() {
         self.historyAction = 'back';
         return originalHistoryBack(arguments);
-    }
+    };
 
     var originalHistoryForward = history.forward;
     history.forward = function() {
         self.historyAction = 'forward';
         return originalHistoryForward(arguments);
-    }
+    };
     
     this.historySize = -1;
     this.historyPosition = -1;
