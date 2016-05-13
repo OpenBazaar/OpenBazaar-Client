@@ -155,7 +155,7 @@ module.exports = baseVw.extend({
   },
 
   reviewsClick: function(e){
-    this.setTab('itemreviews');
+    this.setTab('itemReviews');
   },
 
   shippingClick: function(e){
@@ -184,7 +184,7 @@ module.exports = baseVw.extend({
   },
 
   clickItemRating: function(e) {
-    this.setTab('itemreviews');
+    this.setTab('itemReviews');
     $('#obContainer').animate({
       scrollTop: this.$('.js-reviewsContainer').offset().top
     }, 200);

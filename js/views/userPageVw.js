@@ -643,18 +643,11 @@ module.exports = baseVw.extend({
       data: self.userProfileFetchParameters,
       success: function(model){
           if (self.isRemoved()) return;
-
           self.renderReviews(model);
       },
       error: function (model, response) {
         if (self.isRemoved()) return;
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Reviews'));
-      },
-      complete: function (xhr, textStatus) {
-        if (textStatus == 'parsererror') {
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
-          throw new Error("The reviews data returned from the API has a parsing error.");
-        }
       }
     });
   },
@@ -841,8 +834,10 @@ module.exports = baseVw.extend({
 
   renderReviews: function (model) {
     model = model || [];
+
+    this.reviewsVw && this.reviewsVw.remove();
     this.reviewsVw = new reviewsView({
-      collection: model,
+      collection: model
     });
     this.registerChild(this.reviewsVw);
 
@@ -1087,8 +1082,8 @@ module.exports = baseVw.extend({
 
   tabClick: function(activeTab, showContent){
     "use strict";
-    this.$('.js-userPageTabs').find('.js-tab').removeClass('active');
-    this.$('.js-userPageSubViews').find('.js-tabTarg').addClass('hide');
+    this.$('.js-userPageTabs > .js-tab').removeClass('active');
+    this.$('.js-userPageSubViews > .js-tabTarg').addClass('hide');
     activeTab.addClass('active');
     showContent.removeClass('hide');
 
