@@ -89,6 +89,11 @@ user.on('change:language', function(md, lang) {
   window.translateIndex();
 });
 
+window.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  ipcRenderer.send('contextmenu-click', e);
+}, false);
+
 app.serverConfigs = new ServerConfigsCl();
 app.serverConfigs.fetch().done(() => {
   var oldConfig,
