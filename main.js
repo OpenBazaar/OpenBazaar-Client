@@ -636,7 +636,7 @@ app.on('ready', function() {
 
   // Check for updates every hour
   autoUpdater.checkForUpdates();
-  setTimeout(function () {
+  setInterval(function () {
       autoUpdater.checkForUpdates();
   }, 3600000);
 
