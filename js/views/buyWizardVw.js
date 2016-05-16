@@ -45,7 +45,7 @@ module.exports = baseVw.extend({
     'click .js-buyWizardWalletNext': 'walletNowClick',
     'click .js-buyWizardHasWallet': 'hasWalletClick',
     'click .js-buyWizardDoesntHaveWallet': 'doesntHaveWallet',
-    'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
+    'click .js-buyWizardNewAddressCancel': 'onAddressCancel',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
     'click .js-buyWizardSendPurchase': 'sendPurchase',
     'click .js-buyWizardPurchaseBack': 'backPurchase',
@@ -235,20 +235,22 @@ module.exports = baseVw.extend({
     this.$el.find('.js-buyWizardAddress').addClass('hide');
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
     this.$el.find('#buyWizardNameInput').focus();
+    this.$el.addClass('addressFormOpened');
     this.$buyWizardMap.find('iframe').addClass('blurMore');
 
     //set chosen inputs
     $('.chosen').chosen();
   },
 
+  onAddressCancel: function(e) {
+    this.$buyWizardMap.find('iframe').removeClass('blurMore');
+    this.hideNewAddress();
+  },
+
   hideNewAddress: function(e){
-    "use strict";
     this.$el.find('.js-buyWizardAddress').removeClass('hide');
     this.$el.find('.js-buyWizardNewAddress').addClass('hide');
-    
-    if (e && $(e.target).hasClass('js-buyWizardNewAddressCancel')) {
-      this.$buyWizardMap.find('iframe').removeClass('blurMore');
-    }
+    this.$el.removeClass('addressFormOpened');
   },
 
   addressSelected: function(selectedAddress){
@@ -372,7 +374,7 @@ module.exports = baseVw.extend({
     var addressString = "",
         $currentIframe;
 
-    this.$buyWizardMap.find('iframe.js-iframe-pending, iframe.js-iframe-leaving')
+    this.$buyWizardMap.find('.js-iframe-pending, .js-iframe-leaving')
       .remove();
     $currentIframe = this.$buyWizardMap.find('iframe');
     $currentIframe.addClass('blurMore');
@@ -385,10 +387,10 @@ module.exports = baseVw.extend({
     }
 
     addressString = encodeURIComponent(addressString);
-    $iFrame = $('<iframe class="js-buyWizardMap js-iframe-pending positionTop" width="525" height="350" frameborder="0" style="border:0; margin-top: 0; height: 262px" />');
+    $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="350" frameborder="0" style="border:0; margin-top: 0; height: 262px" />');
        
     if ($currentIframe.length) {
-      this.$buyWizardMap.find('.spinner').removeClass('hide');
+      this.$buyWizardMap.find('.js-mapSpinner').removeClass('hide');
       $iFrame.insertBefore($currentIframe);
     } else {
       this.$buyWizardMap.find('.flexContainer')
@@ -396,7 +398,7 @@ module.exports = baseVw.extend({
     }
     
     $iFrame.on('load', () => {
-      this.$buyWizardMap.find('.spinner').addClass('hide');
+      this.$buyWizardMap.find('.js-mapSpinner').addClass('hide');
       
       $currentIframe.addClass('js-iframe-leaving')
         .fadeOut({

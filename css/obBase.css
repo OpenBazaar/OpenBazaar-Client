@@ -6118,3 +6118,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .TODO.TODO.TODO.TODO.TODO {
   display: none; /* hide in production */
 }
+
+#ov1.notFancy .addressFormOpened .buyWizardMap .blurMore {
+  display: none;
+}
