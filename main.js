@@ -633,7 +633,12 @@ app.on('ready', function() {
   var feedURL = 'http://updates.openbazaar.org:5000/update/' + platform + '/' + version;
   autoUpdater.setFeedURL(feedURL);
   mainWindow.webContents.executeJavaScript("console.log('Checking for new versions at " + feedURL + " ...')");
+
+  // Check for updates every hour
   autoUpdater.checkForUpdates();
+  setInterval(function () {
+      autoUpdater.checkForUpdates();
+  }, 3600000);
 
 });
 
