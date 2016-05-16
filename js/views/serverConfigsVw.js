@@ -28,9 +28,9 @@ module.exports = BaseVw.extend({
 
     __.every(this.configRowViews, (vw) => {
       index++;
-      if (vw.model === md) return false;
+      return vw.model !== md;
 
-      return true;
+      
     });
 
     if (index > -1) this.configRowViews.splice(index, 1);

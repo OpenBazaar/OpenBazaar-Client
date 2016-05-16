@@ -351,25 +351,26 @@ module.exports = baseVw.extend({
   },
 
   aboutModalTabClick: function(e){
-    var tab = $(e.currentTarget).data('tab');
+    var tab = $(e.currentTarget).data('tab'),
+        $aboutSection = $('.modal-about-section');
     this.$aboutModal.find('.btn-tab').removeClass('active');
     $(e.currentTarget).addClass('active');
 
     switch(tab) {
       case "about":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutMain').removeClass('hide');
         break;
       case "support":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutSupport').removeClass('hide');
         break;
       case "contributors":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutContributors').removeClass('hide');
         break;
       case "licensing":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutLicensing').removeClass('hide');
         break;
     }

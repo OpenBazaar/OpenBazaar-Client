@@ -459,7 +459,7 @@ launchOnboarding = function(guidCreating) {
         polyglot.t('serverConnectModal.connectingTo', { serverName: activeServer.get('name') })
     }
   });
-})()
+})();
 
 pageConnectModal.on('cancel', () => {
   removeStartupRetry();
@@ -565,7 +565,7 @@ app.getHeartbeatSocket().on('message', function(e) {
               $.getJSON(app.serverConfigs.getActive().getServerBaseUrl() + '/profile')
                   .done(function(profile, textStatus) {
                     if (textStatus == 'parsererror') {
-                      alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+                      alert(window.polyglot.t('errorMessages.serverError') +"\n\n"+ window.polyglot.t('errorMessages.badJSON'));
                       app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
                         .open();
                       return;

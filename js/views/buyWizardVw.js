@@ -531,7 +531,6 @@ module.exports = baseVw.extend({
 
     if(!data) {
       throw new Error('Data must be provided to the showPayAddress function');
-      return;
     }
 
     var totalBTCPrice = 0,

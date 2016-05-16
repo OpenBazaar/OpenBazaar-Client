@@ -97,8 +97,8 @@ module.exports = baseVw.extend({
 
       self.$photosModule = self.$('.js-photosModule');
 
-      this.sortableImages && this.sortableImages.destroy();
-      this.sortableImages = Sortable.create(self.$('.js-subImageWrap')[0], {
+      self.sortableImages && self.sortableImages.destroy();
+      self.sortableImages = Sortable.create(self.$('.js-subImageWrap')[0], {
         onUpdate: function(e) {
           var imagesArr = self.model.get('imageHashesToUpload');
 
