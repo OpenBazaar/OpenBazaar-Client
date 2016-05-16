@@ -102,10 +102,10 @@ module.exports = baseVw.extend({
               starsTemplate: starsTemplate,
               activeTab: self.activeTab,
               fetchingRatings: self.fetchingRatings,
-              userCountry: polyglot.t(`countries.${self.userModel.get('country')}.name`),
+              userCountry: polyglot.t(`countries.${self.userModel.get('country')}`),
               shippingRegionsDisplay: localize.localizeShippingRegions(shippingRegions),
               worldwide: shippingRegions.length === 1 && shippingRegions[0] === 'ALL',
-              displayShippingOrigin: shippingOrigin && polyglot.t(`countries.${shippingOrigin}.name`)
+              displayShippingOrigin: shippingOrigin && polyglot.t(`countries.${shippingOrigin}`)
             })
           )
         );

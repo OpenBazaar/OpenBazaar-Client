@@ -11,7 +11,7 @@ function localizeShippingRegions(regions) {
     if (region === 'ALL') {
       localized.push(polyglot.t('WorldwideShipping'));
     } else {
-      localized.push(polyglot.t(`countries.${region}.name`));
+      localized.push(polyglot.t(`countries.${region}`));
     }
   });
 

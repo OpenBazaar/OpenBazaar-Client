@@ -90,7 +90,7 @@ module.exports = baseVw.extend({
         this.listContents.push('checked="checked"');
       }
       this.listContents.push('>');
-      this.listContents.push('<label class="homeModal-currency radioLabel" for="currency-'+ itemJSON.dataName +'">'+ polyglot.t(`countries.${itemJSON.dataName}.currency`) +'</label>');
+      this.listContents.push('<label class="homeModal-currency radioLabel" for="currency-'+ itemJSON.dataName +'">'+ polyglot.t(`currencies.${itemJSON.code}`) +'</label>');
       this.listContents.push('</div></li>');
     }
   }
