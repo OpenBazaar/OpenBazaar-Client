@@ -1478,6 +1478,10 @@ h5 {
   top: 50px;
 }
 
+.modal-cover-fullscreen.modal.modal-navOffset .modal-childMain {
+  top: 0;
+}
+
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
