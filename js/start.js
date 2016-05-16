@@ -385,6 +385,8 @@ var loadProfile = function(landingRoute, onboarded) {
 
               $('#sideBar').html(app.chatVw.render().el);
 
+              $('html').addClass('chatLoaded navBarLoaded');
+
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 
               if (externalRoute) {

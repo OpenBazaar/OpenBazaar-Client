@@ -1039,11 +1039,18 @@ label.fieldItem {
   height: 100%;
   top: 0;
   left: 0;
-  right: 0;
-  /* use fadeIn and fadeOut to change opacity */
-  transition: opacity .05s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .05s cubic-bezier(0, 0, 0.2, 1),
+              width 0.5s ease;
   padding-top: 25px;
   z-index: 1;
+}
+
+#ov1.chatLoaded .modal:not(.modal-cover-fullscreen) {
+  width: calc(100% - 45px);
+}
+
+#ov1.chatOpen .modal:not(.modal-cover-fullscreen) {
+  width: calc(100% - 230px);
 }
 
 .modal.modal-navOffset {
@@ -1072,11 +1079,6 @@ label.fieldItem {
 .modal-opaque .modal-child {
   height: 574px;
 }
-
-#ov1.chatOpen .modal-child {
-  right: 230px;
-}
-
 
 .modal.modal-navOffset .modal-child {
   margin-top: 25px;
