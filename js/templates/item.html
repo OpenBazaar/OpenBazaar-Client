@@ -1,9 +1,9 @@
 <div class="flexRow border0">
-  <div class="flexRow bar pad20 height30 marginTop9">
-    <a class="js-returnToStore textOpacity50 underline fontSize13"><%= polyglot.t('AllListings') %></a>
+  <div class="flexRow bar pad20 height30 marginTop9 noFlexWrap">
+    <a class="js-returnToStore textOpacity50 underline fontSize13 noWrap"><%= polyglot.t('AllListings') %></a>
     <% if(ob.vendor_offer.listing.item.category) { %>
       <span class="ion-ios-arrow-forward breadCrumbArrow"></span>
-      <a class="js-returnToStoreCategory textOpacity50 underline fontSize13"><%= ob.vendor_offer.listing.item.category %></a>
+      <a class="js-returnToStoreCategory textOpacity50 underline fontSize13 noOverflow"><%= ob.vendor_offer.listing.item.category %></a>
     <% } %>
   </div>
   <div class="floatRight">

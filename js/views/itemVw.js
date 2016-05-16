@@ -62,6 +62,10 @@ module.exports = baseVw.extend({
       reset: true
     });
 
+    this.shippingRegions = this.model.get('vendor_offer').listing.shipping.shipping_regions;
+    this.shippingOrigin = this.model.get('vendor_offer').listing.shipping.shipping_origin;
+    this.worldwide = this.shippingRegions.length === 1 && this.shippingRegions[0] === 'ALL';
+
     this.render();
   },
 
@@ -91,8 +95,6 @@ module.exports = baseVw.extend({
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
       loadTemplate('./js/templates/ratingStars.html', function(starsTemplate) {
-        var shippingRegions = self.model.get('vendor_offer').listing.shipping.shipping_regions,
-            shippingOrigin = self.model.get('vendor_offer').listing.shipping.shipping_origin;
 
         self.$el.html(
           loadedTemplate(
@@ -103,9 +105,9 @@ module.exports = baseVw.extend({
               activeTab: self.activeTab,
               fetchingRatings: self.fetchingRatings,
               userCountry: polyglot.t(`countries.${self.userModel.get('country')}`),
-              shippingRegionsDisplay: localize.localizeShippingRegions(shippingRegions),
-              worldwide: shippingRegions.length === 1 && shippingRegions[0] === 'ALL',
-              displayShippingOrigin: shippingOrigin && polyglot.t(`countries.${shippingOrigin}`)
+              shippingRegionsDisplay: localize.localizeShippingRegions(self.shippingRegions),
+              worldwide: self.worldwide,
+              displayShippingOrigin: self.shippingOrigin && polyglot.t(`countries.${self.shippingOrigin}`)
             })
           )
         );
@@ -176,7 +178,7 @@ module.exports = baseVw.extend({
     "use strict";
     var self = this;
     this.buyWizardView && this.buyWizardView.remove();
-    this.buyWizardView = new buyWizardVw({model:this.model, userModel: this.options.userModel});
+    this.buyWizardView = new buyWizardVw({model:this.model, userModel: this.options.userModel, worldwide: this.worldwide, shippingRegions: this.shippingRegions});
     this.registerChild(this.buyWizardView);
     $('#modalHolder').html(this.buyWizardView.el).fadeIn(300); //add to DOM first, or accordion will have zero width when initialized
     this.buyWizardView.render();
