@@ -202,13 +202,32 @@ form {
   width: calc(100% - 230px);
 }
 
-#pageNav {
+#appBar {
   position: fixed;
-  top: 0;
-  -webkit-app-region: drag;
+  width: 100%;
   z-index: 13;
+  background-color: #327EB8;
+  padding: 10px 8px;
+  box-sizing: border-box;
+  -webkit-app-region: drag;
 }
 
+#appBar .windowControls {
+  float: left;
+}
+
+.platform-win #appBar .windowControls {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
+#pageNav {
+  position: fixed;
+  top: 25px;
+  -webkit-app-region: no-drag;
+  z-index: 13;
+}
 
 .pageNavContainer {
   width: 100%;
@@ -240,7 +259,7 @@ form {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 50px;
+  top: 75px;
   width:230px;
   background-color: #252525;
   border-left: 0;
@@ -2002,7 +2021,39 @@ margin: auto;
 .btn.btn-win.btn-winMax {
   background-color: #B8E986;
   position: relative;
+}
 
+.platform-win .btn.btn-win {
+  background-color: transparent;
+  border-radius: 0;
+  width: 19px;
+  height: 19px;
+  box-shadow: none;
+}
+
+.platform-win .btn.btn-winClose {
+  float: right;
+  margin-left: 6px;
+}
+
+.platform-win .btn.btn-win .btn-win-icon {
+  display: block;
+  top: -3px;
+  font-size: 21px;
+  color: #fff;  
+}
+
+.platform-win .btn.btn-winMax {
+  float: right;
+  margin-left: 6px;
+  border: 1px solid #fff;
+  width: 13px;
+  height: 13px;
+  top: 3px;  
+}
+
+.platform-win .btn.btn-winMax .btn-win-icon {
+  display: none;
 }
 
 .btn.btn-bar {
@@ -4561,7 +4612,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
   -webkit-app-region: no-drag;
   position: relative;
-  top: 50px;
+  top: 85px;
   box-sizing: border-box;
 }
 
