@@ -406,6 +406,7 @@ var loadProfile = function(landingRoute, onboarded) {
               });
 
               $('#sideBar').html(app.chatVw.render().el);
+              $('html').addClass('chatLoaded');
 
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 

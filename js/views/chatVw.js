@@ -204,7 +204,6 @@ module.exports = baseVw.extend({
     this.slideOut();
 
     // mark as read
-    // $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_chat_message_as_read', { guid: model.get('guid') });
     this.markConvoAsRead(model.get('guid'));
 
     // mark as read on chat head
