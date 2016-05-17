@@ -393,7 +393,7 @@ module.exports = baseVw.extend({
       this.$buyWizardMap.find('.js-mapSpinner').removeClass('hide');
       $iFrame.insertBefore($currentIframe);
     } else {
-      this.$buyWizardMap.find('.flexContainer')
+      this.$buyWizardMap.find('.mapWrap')
         .prepend($iFrame);
     }
     

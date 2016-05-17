@@ -6122,3 +6122,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.notFancy .addressFormOpened .buyWizardMap .blurMore {
   display: none;
 }
+
+.buyWizardMap .mapWrap {
+  background-color: #eeeae1;
+  height: 100%;  
+}
