@@ -79,8 +79,7 @@ if (process.platform === 'darwin') {
   platformClass = `platform-${process.platform}`
 }
 
-// $html.addClass(platformClass);
-$html.addClass('platform-win');
+$html.addClass(platformClass);
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 //retrieve the stored value, since user is a blank model at this point

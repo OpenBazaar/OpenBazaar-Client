@@ -205,7 +205,7 @@ form {
 #appBar {
   position: fixed;
   width: 100%;
-  z-index: 13;
+  z-index: 14;
   background-color: #327EB8;
   padding: 10px 8px;
   box-sizing: border-box;
@@ -224,7 +224,7 @@ form {
 
 #pageNav {
   position: fixed;
-  top: 25px;
+  top: 26px;
   -webkit-app-region: no-drag;
   z-index: 13;
 }
@@ -259,7 +259,7 @@ form {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 75px;
+  top: 76px;
   width:230px;
   background-color: #252525;
   border-left: 0;
@@ -1056,7 +1056,7 @@ label.fieldItem {
   display: block;
   width: 100%;
   height: 100%;
-  top: 0;
+  top: 35px;
   left: 0;
   transition: opacity .05s cubic-bezier(0, 0, 0.2, 1),
               width 0.5s ease;
@@ -1064,7 +1064,7 @@ label.fieldItem {
   z-index: 1;
 }
 
-#ov1.chatLoaded .modal:not(.modal-cover-fullscreen) {
+.modal:not(.modal-cover-fullscreen) {
   width: calc(100% - 45px);
 }
 
@@ -1072,8 +1072,16 @@ label.fieldItem {
   width: calc(100% - 230px);
 }
 
+/*#ov1.chatLoaded .modal:not(.modal-cover-fullscreen) {
+  width: calc(100% - 45px);
+}
+
+#ov1.chatOpen .modal:not(.modal-cover-fullscreen) {
+  width: calc(100% - 230px);
+}*/
+
 .modal.modal-navOffset {
-  top: 50px;
+  top: 76px;
 }
 
 .modalHolder {
@@ -1474,31 +1482,31 @@ h5 {
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 50px;
+  top: 76px;;
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 50px;
+  top: 76px;
 }
 
 .modal-opaque.modal-navBlock {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 85px, rgba(7,65,97,1) 86px);
   top: 0;
-  padding-top: 70px;
+  padding-top: 100px;
 }
 
 .modal-cover-fullscreen {
-  top: 0;
+  top: 26px;
 }
 
 .modal-cover-fullscreen .modal-childMain {
-  top: 50px;
+  top: 76px;
 }
 
 .modal-cover-fullscreen.modal.modal-navOffset .modal-childMain {
-  top: 0;
+  top: 35px;
 }
 
 .modal-childMain {
@@ -4350,8 +4358,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 9;
 }
 
+#loadingModal {
+  padding-top: 0;
+}
+
 #loadingModal, .page-connect-modal.server-connect {
-  z-index: 14;
+  z-index: 13;
+}
+
+#loadingModal .spinner-with-logo, .page-connect-modal .spinner-with-logo {
+  margin-top: -37px;
 }
 
 #ov1 #loadingModal.hide {
@@ -4366,7 +4382,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   right: 0;
   left: 0;
   top: 50%;
-  margin-top: 120px;
+  margin-top: 81px;
   opacity: 1;
   transition: opacity 1s 5s ease;
   box-sizing: border-box;
@@ -4614,7 +4630,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
   -webkit-app-region: no-drag;
   position: relative;
-  top: 85px;
+  top: 76px;
   box-sizing: border-box;
 }
 
@@ -4662,15 +4678,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .page-connect-modal .modal-child {
   width: 100%;
   height: 100%;
-}
-
-.page-connect-modal .spinner-with-logo {
-  /*
-    so it lines up with the loading modal,
-    otherwise there's a jump when this guy loads
-    right after the loading one.
-  */
-  margin-top: -37px;
 }
 
 .page-connect-modal .spinner-with-logo .icon-no-connection {
