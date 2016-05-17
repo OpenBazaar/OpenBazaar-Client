@@ -45,7 +45,7 @@ module.exports = baseVw.extend({
     'click .js-buyWizardWalletNext': 'walletNowClick',
     'click .js-buyWizardHasWallet': 'hasWalletClick',
     'click .js-buyWizardDoesntHaveWallet': 'doesntHaveWallet',
-    'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
+    'click .js-buyWizardNewAddressCancel': 'onAddressCancel',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
     'click .js-buyWizardSendPurchase': 'sendPurchase',
     'click .js-buyWizardPurchaseBack': 'backPurchase',
@@ -56,7 +56,6 @@ module.exports = baseVw.extend({
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
     'click input[name="radioPaymentType"]': 'changePaymentType',
-    'blur .js-buyWizardPostalInput': 'updateMap',
     'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
     'blur input': 'validateInput'
   },
@@ -181,6 +180,8 @@ module.exports = baseVw.extend({
 
       self.listenTo(self.buyAddressesView, 'setAddress', self.addressSelected);
 
+      self.$buyWizardMap = self.$('.js-buyWizardMap');
+
       //init the accordion
       self.initAccordion('.js-buyWizardAccordion');
 
@@ -226,37 +227,37 @@ module.exports = baseVw.extend({
   },
 
   showMaps: function(){
-    "use strict";
     this.$el.find('.js-buyWizardMap').removeClass('hide');
-    this.$el.find('.js-buyWizardMapPlaceHolder').removeClass('hide');
-    this.hideMap = false;
   },
 
   hideMaps: function(){
-    "use strict";
     this.$el.find('.js-buyWizardMap').addClass('hide');
-    this.$el.find('.js-buyWizardMapPlaceHolder').addClass('hide');
-    this.hideMap = true;
   },
 
   createNewAddress: function(){
-    "use strict";
     var self = this;
     this.$el.find('.js-buyWizardAddress').addClass('hide');
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
     this.$el.find('#buyWizardNameInput').focus();
+    this.$el.addClass('addressFormOpened');
+    this.$buyWizardMap.find('iframe').addClass('blurMore');
+
     //set chosen inputs
     $('.chosen').chosen({ search_contains: true });
   },
 
-  hideNewAddress: function(){
-    "use strict";
+  onAddressCancel: function(e) {
+    this.$buyWizardMap.find('iframe').removeClass('blurMore');
+    this.hideNewAddress();
+  },
+
+  hideNewAddress: function(e){
     this.$el.find('.js-buyWizardAddress').removeClass('hide');
     this.$el.find('.js-buyWizardNewAddress').addClass('hide');
+    this.$el.removeClass('addressFormOpened');
   },
 
   addressSelected: function(selectedAddress){
-    "use strict";
     this.model.set('selectedAddress', selectedAddress);
     this.displayMap(selectedAddress);
     this.$el.find('.js-buyWizardAddressNext').removeClass('disabled');
@@ -374,28 +375,46 @@ module.exports = baseVw.extend({
   },
 
   displayMap: function(address){
-    "use strict";
-    var addressString = "";
-    //only create new map if address is valid
+    var addressString = "",
+        $currentIframe;
+
+    this.$buyWizardMap.find('.js-iframe-pending, .js-iframe-leaving')
+      .remove();
+    $currentIframe = this.$buyWizardMap.find('iframe');
+    $currentIframe.addClass('blurMore');
+
     if(address && address.street && address.city && address.state && address.postal_code) {
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
-      addressString = encodeURIComponent(addressString);
-      var hideClass = this.hideMap ? "hide" : "";
-      var newMap = '<div class="flexContainer"><iframe class="' + hideClass + ' js-buyWizardMap"' +
-          'width="525" height="350" frameborder="0" style="border:0; margin-top: 0"' +
-          'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe></div>';
-      this.$el.find('.js-buyWizardMap').html(newMap);
+    } else {
+      // if address is invalid, we'll create a dummy address for which google maps will show a map of the world
+      addressString = "123 Street" + ", " + "City" + ", " + "State" + " " + "12345" + " " + "Country";      
     }
-  },
 
-  updateMap: function(){
-    var address = [];
-    address.street = $('#buyWizardStreetInput').val();
-    address.city = $('#buyWizardCityInput').val();
-    address.state = $('#buyWizardStateInput').val();
-    address.postal_code = $('#buyWizardPostalInput').val();
+    addressString = encodeURIComponent(addressString);
+    $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="350" frameborder="0" style="border:0; margin-top: 0; height: 262px" />');
+       
+    if ($currentIframe.length) {
+      this.$buyWizardMap.find('.js-mapSpinner').removeClass('hide');
+      $iFrame.insertBefore($currentIframe);
+    } else {
+      this.$buyWizardMap.find('.mapWrap')
+        .prepend($iFrame);
+    }
+    
+    $iFrame.on('load', () => {
+      this.$buyWizardMap.find('.js-mapSpinner').addClass('hide');
+      
+      $currentIframe.addClass('js-iframe-leaving')
+        .fadeOut({
+          duration: 'slow',
+          complete: () => {
+            $currentIframe.remove();
+          }
+        });
+      $iFrame.removeClass('js-iframe-pending');
+    });
 
-    this.displayMap(address);
+    $iFrame.attr('src', 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString);
   },
 
   returnNext: function(){
