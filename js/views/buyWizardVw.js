@@ -84,7 +84,7 @@ module.exports = baseVw.extend({
     this.countryList = countries.get('countries');
     this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput" required></select>');
     __.each(this.countryList, function(countryFromList, i){
-      var countryOption = $('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+polyglot.t(`countries.${countryFromList.dataName}.name`)+'</option>');
+      var countryOption = $('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+polyglot.t(`countries.${countryFromList.dataName}`)+'</option>');
       countryOption.attr("selected",self.options.userModel.get('country') == countryFromList.dataName);
       self.countriesSelect.append(countryOption);
     });

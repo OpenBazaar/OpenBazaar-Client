@@ -422,8 +422,8 @@ module.exports = Backbone.View.extend({
     currencyList.unshift({code: "BTC", currency:"Bitcoin", currencyUnits: "4"});
 
     __.each(countryList, function(c, i){
-      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}.name`)+'</option>');
-      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}.name`)+'</option>');
+      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}`)+'</option>');
+      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}`)+'</option>');
       country_option.attr("selected",user.country == c.dataName);
       //if user has a country in their profile, preselect it in the new address section
       ship_country_option.attr("selected",user.country== c.dataName);
@@ -434,8 +434,7 @@ module.exports = Backbone.View.extend({
     __.each(currencyList, function(c, i){
       //only show currently available currencies
       if(self.availableCurrenciesList.indexOf(c.code) > -1 || c.code === "BTC"){
-        var currency = c.code === 'BTC' ? c.currency : polyglot.t(`countries.${c.dataName}.currency`),
-            currency_option = $('<option value="'+c.code+'">'+currency+'</option>');
+        var currency_option = $('<option value="'+c.code+'">'+ polyglot.t(`currencies.${c.code}`) +'</option>');
         currency_option.attr("selected",user.currency_code == c.code);
         currency_str += currency_option[0].outerHTML;
       }
