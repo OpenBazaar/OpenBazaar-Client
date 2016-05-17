@@ -165,7 +165,10 @@ module.exports = Backbone.View.extend({
       self.blockedTabAccessed = false;
       self.setState(self.options.state);
 
-      $(".chosen").chosen({ width: '100%' });
+      $(".chosen").chosen({
+        width: '100%',
+        search_contains: true
+      });
       $('#settings-image-cropper').cropit({
         $preview: self.$('.js-settingsAvatarPreview'),
         $fileInput: self.$('#settingsAvatarInput'),
@@ -186,8 +189,10 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
-      self.moderatorFeeInput = self.$('#moderatorFeeInput');
-      self.moderatorFeeHolder = self.$('.js-settingsModeratorFee');
+      //cache elements used more than once
+      self.$moderatorFeeInput = self.$('#moderatorFeeInput');
+      self.$moderatorFeeHolder = self.$('.js-settingsModeratorFee');
+
       if(self.model.get('page').profile.avatar_hash){
         $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
         self.newAvatar = false;
@@ -202,10 +207,10 @@ module.exports = Backbone.View.extend({
         onFileReaderError: function(data){console.log(data);},
         onImageLoading: function(){
           self.newBanner = true;
-          self.$el.find('.js-bannerLoading').removeClass('fadeOut');
+          self.$('.js-bannerLoading').removeClass('fadeOut');
         },
         onImageLoaded: function(){
-          self.$el.find('.js-bannerLoading').addClass('fadeOut');
+          self.$('.js-bannerLoading').addClass('fadeOut');
         },
         onImageError: function(errorObject, errorCode, errorMessage){
           console.log(errorObject);
@@ -223,7 +228,7 @@ module.exports = Backbone.View.extend({
           text: ''
         },
         toolbar: {
-          imageDragging: false,
+          imageDragging: false
         },
         paste: {
           cleanPastedHTML: false,
@@ -370,14 +375,14 @@ module.exports = Backbone.View.extend({
         timezones = new timezonesModel(),
         languages = new languagesModel(),
         countryList = countries.get('countries'),
-        currecyList = countries.get('countries'),
+        currencyList = countries.get('countries'),
         timezoneList = timezones.get('timezones'),
         languageList = languages.get('languages'),
-        country = this.$el.find('#country'),
-        ship_country = this.$el.find('#settingsShipToCountry'),
-        currency = this.$el.find('#currency_code'),
-        timezone = this.$el.find('#time_zone'),
-        language = this.$el.find('#language'),
+        country = this.$('#country'),
+        ship_country = this.$('#settingsShipToCountry'),
+        currency = this.$('#currency_code'),
+        timezone = this.$('#time_zone'),
+        language = this.$('#language'),
         user = this.model.get('user'),
         avatar = user.avatar_hash,
         ship_country_str = "",
@@ -393,7 +398,7 @@ module.exports = Backbone.View.extend({
 
     smtp_notifications = (user.smtp_notifications == 1) ? true : false;
 
-    this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
+    this.$('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
     this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
     this.$("#generalForm input[name=notifications][value=" + notifications + "]").prop('checked', true);
     this.$("#storeForm input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
@@ -401,8 +406,8 @@ module.exports = Backbone.View.extend({
     this.$("#advancedForm input[name=additionalPaymentData][value=" + localStorage.getItem('AdditionalPaymentData') + "]").prop('checked', true);
     this.$("#advancedForm input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
 
-    currecyList = __.uniq(currecyList, function(item){return item.code;});
-    currecyList = currecyList.sort(function(a,b){
+    currencyList = __.uniq(currencyList, function(item){return item.code;});
+    currencyList = currencyList.sort(function(a,b){
       var cA = a.currency.toLowerCase(),
           cB = b.currency.toLowerCase();
         if (cA < cB){
@@ -414,11 +419,11 @@ module.exports = Backbone.View.extend({
       return 0;
     });
     //add BTC
-    currecyList.unshift({code: "BTC", currency:"Bitcoin", currencyUnits: "4"});
+    currencyList.unshift({code: "BTC", currency:"Bitcoin", currencyUnits: "4"});
 
     __.each(countryList, function(c, i){
-      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
-      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
+      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}.name`)+'</option>');
+      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}.name`)+'</option>');
       country_option.attr("selected",user.country == c.dataName);
       //if user has a country in their profile, preselect it in the new address section
       ship_country_option.attr("selected",user.country== c.dataName);
@@ -426,10 +431,11 @@ module.exports = Backbone.View.extend({
       country_str += country_option[0].outerHTML;
     });
 
-    __.each(currecyList, function(c, i){
+    __.each(currencyList, function(c, i){
       //only show currently available currencies
       if(self.availableCurrenciesList.indexOf(c.code) > -1 || c.code === "BTC"){
-        var currency_option = $('<option value="'+c.code+'">'+c.currency+'</option>');
+        var currency = c.code === 'BTC' ? c.currency : polyglot.t(`countries.${c.dataName}.currency`),
+            currency_option = $('<option value="'+c.code+'">'+currency+'</option>');
         currency_option.attr("selected",user.currency_code == c.code);
         currency_str += currency_option[0].outerHTML;
       }
@@ -454,22 +460,22 @@ module.exports = Backbone.View.extend({
     language.html(language_str);
 
     //set moderator status
-    this.$('#moderatorForm input[name=moderator]').val([String(moderatorStatus)]);
+    this.$('#moderatorForm').find('input[name=moderator]').val([String(moderatorStatus)]);
 
-    this.$('#advancedForm input[name=smtp_mo]').val([String(moderatorStatus)]);
+    this.$('#advancedForm').find('input[name=smtp_mo]').val([String(moderatorStatus)]);
   },
 
   showModeratorFeeHolder: function(){
     "use strict";
-    this.moderatorFeeHolder.removeClass('hide');
-    this.moderatorFeeInput.val(this.oldFeeValue);
+    this.$moderatorFeeHolder.removeClass('hide');
+    this.$moderatorFeeInput.val(this.oldFeeValue);
   },
 
   hideModeratorFeeHolder: function(){
     "use strict";
-    this.moderatorFeeHolder.addClass('hide');
-    this.oldFeeValue = this.moderatorFeeInput.val();
-    this.moderatorFeeInput.val(0);
+    this.$moderatorFeeHolder.addClass('hide');
+    this.oldFeeValue = this.$moderatorFeeInput.val();
+    this.$moderatorFeeInput.val(0);
   },
 
   handleSocketMessage: function(response) {
@@ -506,7 +512,7 @@ module.exports = Backbone.View.extend({
       if (isExistingMod){
         //don't add unless it comes from the model
         if(moderator.fromModel){
-          this.$el.find('.js-settingsCurrentMods').append(modShort.el);
+          this.$('.js-settingsCurrentMods').append(modShort.el);
           if(!this.$('.js-loadingMsgOld').hasClass('foldIn')){
             //hide spinners after a while
             setTimeout(()=> {
@@ -515,7 +521,7 @@ module.exports = Backbone.View.extend({
           }
         }
       }else{
-        this.$el.find('.js-settingsNewMods').append(modShort.el);
+        this.$('.js-settingsNewMods').append(modShort.el);
         if(!this.$('.js-loadingMsgNew').hasClass('foldIn')){
           //hide spinners after a while
           setTimeout(()=> {
@@ -549,16 +555,16 @@ module.exports = Backbone.View.extend({
   },
 
   setTab: function(activeTab, showContent){
-    this.$el.find('.js-tab').removeClass('active');
+    this.$('.js-tab').removeClass('active');
     activeTab.addClass('active');
-    this.$el.find('.js-tabTarg').addClass('hide');
+    this.$('.js-tabTarg').addClass('hide');
     showContent.removeClass('hide');
   },
 
   setState: function(state){
     if(state){
       this._state = state;
-      this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
+      this.setTab(this.$('.js-' + state + 'Tab'), this.$('.js-' + state));
      
       if (state == "store") {
         if (this.firstLoadModerators) {
@@ -589,7 +595,7 @@ module.exports = Backbone.View.extend({
       }
     } else {
       this._state = "general";
-      this.setTab(this.$el.find('.js-generalTab'), this.$el.find('.js-general'));
+      this.setTab(this.$('.js-generalTab'), this.$('.js-general'));
     }
   },
 
@@ -656,7 +662,7 @@ module.exports = Backbone.View.extend({
 
   saveGeneral: function() {
     var self = this,
-        form = this.$el.find("#generalForm"),
+        form = this.$("#generalForm"),
         cCode = this.$('#currency_code').val(),
         $saveBtn = this.$('.js-saveGeneral');
         
@@ -686,19 +692,19 @@ module.exports = Backbone.View.extend({
   savePage: function(){
     "use strict";
     var self = this,
-        form = this.$el.find("#pageForm"),
-        avatarCrop = this.$el.find('#settings-image-cropper'),
+        form = this.$("#pageForm"),
+        avatarCrop = this.$('#settings-image-cropper'),
         imageURI,
         bannerURI,
         img64Data = {},
         banner64Data = {},
         pageData = {},
         socialInputCount = 0,
-        socialInputs = self.$el.find('#settingsFacebookInput, #settingsTwitterInput, #settingsInstagramInput, #settingsSnapchatInput'),
-        pColor = self.$el.find('#primaryColor'),
-        sColor = self.$el.find('#secondaryColor'),
-        bColor = self.$el.find('#backgroundColor'),
-        tColor = self.$el.find('#textColor'),
+        socialInputs = self.$('#settingsFacebookInput, #settingsTwitterInput, #settingsInstagramInput, #settingsSnapchatInput'),
+        pColor = self.$('#primaryColor'),
+        sColor = self.$('#secondaryColor'),
+        bColor = self.$('#backgroundColor'),
+        tColor = self.$('#textColor'),
         pColorVal = pColor.val(),
         bColorVal = bColor.val(),
         sColorVal = sColor.val(),
@@ -762,7 +768,7 @@ module.exports = Backbone.View.extend({
     };
 
     var checkBanner = function(){
-      var bannerCrop = self.$el.find('#settings-image-cropperBanner');
+      var bannerCrop = self.$('#settings-image-cropperBanner');
       if(self.newBanner && bannerCrop.cropit('imageSrc')){
         bannerURI = bannerCrop.cropit('export', {
           type: 'image/jpeg',
@@ -810,22 +816,22 @@ module.exports = Backbone.View.extend({
 
   keypressFeeInput: function(){
     "use strict";
-    var fee = $('#moderatorFeeInput').val();
+    var fee = this.$moderatorFeeInput.val();
 
     if (fee.indexOf('.') > 0 && fee.split('.')[1].length > 2) {
       fee = fee.substr(0, fee.length-1);
-      $('#moderatorFeeInput').val(fee);
+      this.$moderatorFeeInput.val(fee);
     }
   },
 
   saveStore: function(){
     var self = this,
-        form = this.$el.find("#storeForm"),
+        form = this.$("#storeForm"),
         settingsData = {},
-        moderatorsNew = this.$el.find('#storeForm .js-settingsNewMods .js-userShortView input:checked'),
+        moderatorsNew = form.find('.js-settingsNewMods .js-userShortView input:checked'),
         moderatorList = this.userModel.get('moderator_guids'),
         manualModList,
-        moderatorsUnChecked = this.$('#storeForm .js-settingsCurrentMods .js-userShortView input:not(:checked)'),
+        moderatorsUnChecked = form.find('.js-settingsCurrentMods .js-userShortView input:not(:checked)'),
         onFail,
         $saveBtn = this.$('.js-saveStore');
 
@@ -879,7 +885,7 @@ module.exports = Backbone.View.extend({
   saveAddress: function(){
     "use strict";
     var self = this,
-        form = this.$el.find("#addressesForm"),
+        form = this.$("#addressesForm"),
         newAddress = {},
         newAddresses = [],
         addressData = {},
@@ -887,13 +893,13 @@ module.exports = Backbone.View.extend({
 
     $saveBtn.addClass('loading');
     
-    newAddress.name = this.$el.find('#settingsShipToName').val();
-    newAddress.street = this.$el.find('#settingsShipToStreet').val();
-    newAddress.city = this.$el.find('#settingsShipToCity').val();
-    newAddress.state = this.$el.find('#settingsShipToState').val();
-    newAddress.postal_code = this.$el.find('#settingsShipToPostalCode').val();
-    newAddress.country = this.$el.find('#settingsShipToCountry').val();
-    newAddress.displayCountry = this.$el.find('#settingsShipToCountry option:selected').data('name');
+    newAddress.name = this.$('#settingsShipToName').val();
+    newAddress.street = this.$('#settingsShipToStreet').val();
+    newAddress.city = this.$('#settingsShipToCity').val();
+    newAddress.state = this.$('#settingsShipToState').val();
+    newAddress.postal_code = this.$('#settingsShipToPostalCode').val();
+    newAddress.country = this.$('#settingsShipToCountry').val();
+    newAddress.displayCountry = this.$('#settingsShipToCountry option:selected').data('name');
 
     //if form is partially filled out throw error
     if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
@@ -908,7 +914,7 @@ module.exports = Backbone.View.extend({
       newAddresses.push(JSON.stringify(newAddress));
     }
 
-    this.$el.find('.js-settingsAddress:not(:checked)').each(function(){
+    this.$('.js-settingsAddress:not(:checked)').each(function(){
       newAddresses.push(JSON.stringify(self.model.get('user').shipping_addresses[$(this).val()]));
     });
 
@@ -930,7 +936,7 @@ module.exports = Backbone.View.extend({
   saveModerator: function(){
     "use strict";
     var self = this,
-        form = this.$el.find("#moderatorForm"),
+        form = this.$("#moderatorForm"),
         moderatorData = {},
         moderatorStatus = this.$('#moderatorYes').is(':checked'),
         makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator",
@@ -967,12 +973,12 @@ module.exports = Backbone.View.extend({
 
   saveAdvanced: function(){
     var self = this,
-        form = this.$el.find("#advancedForm"),
+        form = this.$("#advancedForm"),
         $saveBtn = this.$('.js-saveAdvanced');
 
     $saveBtn.addClass('loading');
 
-    localStorage.setItem('AdditionalPaymentData',  this.$('#advancedForm input[name=additionalPaymentData]:checked').val());
+    localStorage.setItem('AdditionalPaymentData',  form.find('input[name=additionalPaymentData]:checked').val());
     
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       app.statusBar.pushMessage({
@@ -1033,7 +1039,7 @@ module.exports = Backbone.View.extend({
   },
 
   toggleFancyStyles: function(){
-    if($('#advancedForm input[name="notFancy"]').prop('checked')){
+    if($('#advancedForm').find('input[name="notFancy"]').prop('checked')){
       $('html').addClass('notFancy');
       localStorage.setItem('notFancy', "true");
     } else {
@@ -1043,7 +1049,7 @@ module.exports = Backbone.View.extend({
   },
 
   toggleTestnet: function(){
-    window.config.setTestnet($('#advancedForm input[name="useTestnet"]').prop('checked'));
+    window.config.setTestnet($('#advancedForm').find('input[name="useTestnet"]').prop('checked'));
     window.location.reload();
   },
 

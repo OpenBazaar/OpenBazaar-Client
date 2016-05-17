@@ -3,8 +3,10 @@ var __ = require('underscore'),
   $ = require('jquery'),
   colorbox = require('jquery-colorbox'),
   loadTemplate = require('../utils/loadTemplate'),
+  localize = require('../utils/localize'),
   sanitizeHTML = require('sanitize-html'),
   RatingCl = require('../collections/ratingCl'),
+  CountriesMd = require('../models/countriesMd'),
   baseVw = require('./baseVw'),
   buyWizardVw = require('./buyWizardVw'),
   ReviewsVw = require('./reviewsVw');
@@ -13,7 +15,7 @@ module.exports = baseVw.extend({
 
   events: {
     'click .js-descriptionTab': 'descriptionClick',
-    'click .js-reviewsTab': 'reviewsClick',
+    'click .js-itemReviewsTab': 'reviewsClick',
     'click .js-shippingTab': 'shippingClick',
     'click .js-buyButton': 'buyClick',
     'click .js-photoGallery': 'photoGalleryClick',
@@ -60,6 +62,10 @@ module.exports = baseVw.extend({
       reset: true
     });
 
+    this.shippingRegions = this.model.get('vendor_offer').listing.shipping.shipping_regions;
+    this.shippingOrigin = this.model.get('vendor_offer').listing.shipping.shipping_origin;
+    this.worldwide = this.shippingRegions.length === 1 && this.shippingRegions[0] === 'ALL';
+
     this.render();
   },
 
@@ -89,6 +95,7 @@ module.exports = baseVw.extend({
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
       loadTemplate('./js/templates/ratingStars.html', function(starsTemplate) {
+
         self.$el.html(
           loadedTemplate(
             __.extend({}, self.model.toJSON(), {
@@ -97,7 +104,10 @@ module.exports = baseVw.extend({
               starsTemplate: starsTemplate,
               activeTab: self.activeTab,
               fetchingRatings: self.fetchingRatings,
-              userCountry: self.userModel.get('displayCountry')
+              userCountry: polyglot.t(`countries.${self.userModel.get('country')}.name`),
+              shippingRegionsDisplay: localize.localizeShippingRegions(self.shippingRegions),
+              worldwide: self.worldwide,
+              displayShippingOrigin: self.shippingOrigin && polyglot.t(`countries.${self.shippingOrigin}.name`)
             })
           )
         );
@@ -147,7 +157,7 @@ module.exports = baseVw.extend({
   },
 
   reviewsClick: function(e){
-    this.setTab('reviews');
+    this.setTab('itemReviews');
   },
 
   shippingClick: function(e){
@@ -168,7 +178,7 @@ module.exports = baseVw.extend({
     "use strict";
     var self = this;
     this.buyWizardView && this.buyWizardView.remove();
-    this.buyWizardView = new buyWizardVw({model:this.model, userModel: this.options.userModel});
+    this.buyWizardView = new buyWizardVw({model:this.model, userModel: this.options.userModel, worldwide: this.worldwide, shippingRegions: this.shippingRegions});
     this.registerChild(this.buyWizardView);
     $('#modalHolder').html(this.buyWizardView.el).fadeIn(300); //add to DOM first, or accordion will have zero width when initialized
     this.buyWizardView.render();
@@ -176,7 +186,7 @@ module.exports = baseVw.extend({
   },
 
   clickItemRating: function(e) {
-    this.setTab('reviews');
+    this.setTab('itemReviews');
     $('#obContainer').animate({
       scrollTop: this.$('.js-reviewsContainer').offset().top
     }, 200);

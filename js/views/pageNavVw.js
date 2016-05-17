@@ -311,64 +311,66 @@ module.exports = baseVw.extend({
       if(self.showDiscIntro){
         self.showDiscoverIntro();
       }
+      self.$aboutModalHolder = $('.js-aboutModalHolder');
+      self.$aboutModal = self.$aboutModalHolder.find('.js-aboutModal');
     });
 
     return this;
   },
 
   showAboutModal: function(e){
-
     this.cleanNav();
 
     // display the modal
-    $('.js-aboutModalHolder').fadeIn(300);
+    this.$aboutModalHolder.fadeIn(300);
 
     // set the active tab
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    this.$aboutModal.find('.navBar .btn.btn-bar').removeClass('active');
     $('.js-about-mainTab').addClass('active');
 
     // set the active section
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
+    this.$aboutModal.find('.modal-section').addClass('hide');
+    this.$aboutModal.find('.js-modalAboutMain').removeClass('hide');
 
     // blur the container for extra focus
     $('#obContainer').addClass('blur');
   },
 
   hideAboutModal: function(e){
-    $('.js-aboutModalHolder').fadeOut(300);
+    this.$aboutModalHolder.fadeOut(300);
     $('#obContainer').removeClass('blur');
   },
 
   showSupportModal: function(e){
-    $('.js-aboutModalHolder').fadeIn(300);
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    this.$aboutModalHolder.fadeIn(300);
+    this.$aboutModal.find('.navbar .btn.btn-bar').removeClass('active');
     $('.js-about-donationsTab').addClass('active');
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
+    this.$aboutModal.find('.modal-section').addClass('hide');
+    this.$aboutModal.find('.js-modalAboutSupport').removeClass('hide');
     $('#obContainer').addClass('blur');
   },
 
   aboutModalTabClick: function(e){
-    var tab = $(e.currentTarget).data('tab');
-    $('.js-aboutModal .btn-tab').removeClass('active');
+    var tab = $(e.currentTarget).data('tab'),
+        $aboutSection = $('.modal-about-section');
+    this.$aboutModal.find('.btn-tab').removeClass('active');
     $(e.currentTarget).addClass('active');
 
     switch(tab) {
       case "about":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutMain').removeClass('hide');
         break;
       case "support":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutSupport').removeClass('hide');
         break;
       case "contributors":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutContributors').removeClass('hide');
         break;
       case "licensing":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutLicensing').removeClass('hide');
         break;
     }

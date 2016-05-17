@@ -4,22 +4,20 @@
 var safestart = require('safestart');
 safestart(__dirname);
 
-var fs = require('fs');
-var path = require('path');
-var argv = require('yargs').argv;
-
-var app = require('app');  // Module to control application life.
-var electron = require('electron');
-var BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
-var request = require('request');
-var os = require('os');
-var autoUpdater = require('auto-updater');
-var menu = require('menu');
-var tray = require('tray');
-var ipcMain = require('ipc-main');
-var ini = require('ini');
-var dialog = require('electron').dialog;
-var ipcMain = require('electron').ipcMain;
+var fs = require('fs'),
+    path = require('path'),
+    argv = require('yargs').argv,
+    app = require('app'),
+    electron = require('electron'),
+    browserWindow = require('browser-window'),
+    request = require('request'),
+    os = require('os'),
+    autoUpdater = require('auto-updater'),
+    menu = require('menu'),
+    tray = require('tray'),
+    ini = require('ini'),
+    dialog = require('dialog'),
+    ipcMain = require('ipc-main');
 
 var launched_from_installer = false;
 var platform = os.platform();
@@ -54,24 +52,23 @@ var handleStartupEvent = function() {
     child.on('close', function() {
        cb();
     });
-  };
+  }
 
   function install(cb) {
       var target = path.basename(process.execPath);
       exeSquirrelCommand(["--createShortcut", target], cb);
-  };
+  }
 
   function uninstall(cb) {
       var target = path.basename(process.execPath);
       exeSquirrelCommand(["--removeShortcut", target], cb);
-  };
+  }
 
   switch (squirrelCommand) {
     case '--squirrel-install':
           install(app.quit);
 
     case '--squirrel-updated':
-
       // Always quit when done
       app.quit();
       return true;
@@ -79,8 +76,8 @@ var handleStartupEvent = function() {
     case '--squirrel-uninstall':
       // Always quit when done
       uninstall(app.quit);
-
       return true;
+    
     case '--squirrel-obsolete':
       // This is called on the outgoing version of your app before
       // we update to the new version - it's the opposite of
@@ -128,7 +125,7 @@ var kill_local_server = function() {
       require('child_process').spawn("taskkill", ["/pid", subpy.pid, '/f', '/t']);
     }
   }
-}
+};
 
 var start_local_server = function() {
   if(fs.existsSync(serverPath)) {
@@ -238,39 +235,39 @@ function initWin32() {
     var protocolKey = new Registry({
       hive: Registry.HKCU, // HKEY_CURRENT_USER
       key: '\\Software\\Classes\\' + protocol
-    })
+    });
 
-    setProtocol()
+    setProtocol();
 
     function setProtocol (err) {
-      if (err) log.error(err.message)
+      if (err) log.error(err.message);
       console.log(protocolKey);
       protocolKey.set('', Registry.REG_SZ, name, setURLProtocol)
     }
 
     function setURLProtocol (err) {
-      if (err) log.error(err.message)
+      if (err) log.error(err.message);
       console.log(protocolKey);
       protocolKey.set('URL Protocol', Registry.REG_SZ, '', setIcon)
     }
 
     function setIcon (err) {
-      if (err) log.error(err.message)
+      if (err) log.error(err.message);
 
       var iconKey = new Registry({
         hive: Registry.HKCU,
         key: '\\Software\\Classes\\' + protocol + '\\DefaultIcon'
-      })
+      });
       iconKey.set('', Registry.REG_SZ, icon, setCommand)
     }
 
     function setCommand (err) {
-      if (err) log.error(err.message)
+      if (err) log.error(err.message);
 
       var commandKey = new Registry({
         hive: Registry.HKCU,
         key: '\\Software\\Classes\\' + protocol + '\\shell\\open\\command'
-      })
+      });
       commandKey.set('', Registry.REG_SZ, '"' + command + '" "%1"', done)
     }
 
@@ -307,7 +304,7 @@ app.on('window-all-closed', function() {
 });
 
 // You can use 'before-quit' instead of (or with) the close event
-app.on('before-quit', function (e) {
+app.on('before-quit', function () {
     // Handle menu-item or keyboard shortcut quit here
     console.log('Closing Application');
     if (launched_from_installer) {
@@ -316,6 +313,114 @@ app.on('before-quit', function (e) {
 });
 
 app.commandLine.appendSwitch('ignore-certificate-errors', true);
+
+var rightClickMenu = menu.buildFromTemplate([
+  {
+    label: 'Edit',
+    submenu: [
+      {
+        label: 'Undo',
+        role: 'undo'
+      }, {
+        label: 'Redo',
+        role: 'redo'
+      }, {
+        type: 'separator'
+      }, {
+        label: 'Cut',
+        role: 'cut'
+      }, {
+        label: 'Copy',
+        role: 'copy'
+      }, {
+        label: 'Paste',
+        role: 'paste'
+      }, {
+        label: 'Paste and Match Style',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.webContents.pasteAndMatchStyle();
+          }
+        }
+      },
+      {
+        label: 'Select All',
+        role: 'selectall'
+      }
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      {
+        label: 'Reload',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.reload();
+          }
+        }
+      },
+      {
+        label: 'Toggle Developer Tools',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.toggleDevTools();
+          }
+        }
+      },
+      {
+        label: 'Toggle Full Screen',
+        click: function(item, focusedWindow) {
+          var fullScreen;
+
+          if (focusedWindow) {
+            fullScreen = !focusedWindow.isFullScreen();
+            focusedWindow.setFullScreen(fullScreen);
+
+            if (fullScreen) {
+              focusedWindow.webContents.send('fullscreen-enter');
+            } else {
+              focusedWindow.webContents.send('fullscreen-exit');
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    label: 'Window',
+    submenu: [
+      {
+        label: 'Maximize',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.maximize();
+          }
+        }
+      },
+      {
+        label: 'Unmaximize',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.unmaximize();
+          }
+        }
+      },
+      {
+        label: 'Minimize',
+        click: function(item, focusedWindow) {
+          if (focusedWindow) {
+            focusedWindow.minimize();
+          }
+        }
+      }
+    ]
+  }
+]);
+
+ipcMain.on('contextmenu-click', function() {
+  rightClickMenu.popup();
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -383,7 +488,7 @@ app.on('ready', function() {
               return 'F11';
             }
           })(),
-          click: function(item, focusedWindow) {
+          click: function() {
             var fullScreen;
 
             if (mainWindow) {
@@ -397,7 +502,7 @@ app.on('ready', function() {
               }
             }
           }
-        },        
+        }    
       ]
     },
     {
@@ -425,14 +530,14 @@ app.on('ready', function() {
     },
     {
       label: 'Shutdown Local Server', type: 'normal', click: function () {
-      request('http://localhost:18469/api/v1/shutdown', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-          console.log('Shutting down server');
-        } else {
-          console.log('Server does not seem to be running.');
-        }
-      });
-    }
+        request('http://localhost:18469/api/v1/shutdown', function (error, response) {
+          if (!error && response.statusCode == 200) {
+            console.log('Shutting down server');
+          } else {
+            console.log('Server does not seem to be running.');
+          }
+        });
+      }
     },
     {type: 'separator'},
     {label: 'View Debug Log', type: 'normal', click: function() {
@@ -458,7 +563,7 @@ app.on('ready', function() {
   trayMenu.setContextMenu(contextMenu);
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({
+  mainWindow = new browserWindow({
     "width": 1200,
     "height": 720,
     "minWidth": 1024,
@@ -516,7 +621,7 @@ app.on('ready', function() {
     mainWindow.webContents.executeJavaScript('$(".js-softwareUpdate").removeClass("softwareUpdateHidden");');
   });
 
-  ipcMain.on('installUpdate', function(event) {
+  ipcMain.on('installUpdate', function() {
     console.log('Installing Update');
     autoUpdater.quitAndInstall();
   });
@@ -524,7 +629,12 @@ app.on('ready', function() {
   var feedURL = 'http://updates.openbazaar.org:5000/update/' + platform + '/' + version;
   autoUpdater.setFeedURL(feedURL);
   mainWindow.webContents.executeJavaScript("console.log('Checking for new versions at " + feedURL + " ...')");
+
+  // Check for updates every hour
   autoUpdater.checkForUpdates();
+  setInterval(function () {
+      autoUpdater.checkForUpdates();
+  }, 3600000);
 
 });
 

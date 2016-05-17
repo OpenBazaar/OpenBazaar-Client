@@ -69,8 +69,12 @@ module.exports = baseVw.extend({
     /* expected options are:
     userModel: this is set by main.js, then by a call to the settings API.
     socketView: this is a reference to the socketView
+    worldwide: does this ship worldwide
+    shippingRegions: countries this item ships to
      */
     this.userModel = this.options.userModel;
+    this.worldwide = this.options.worldwide;
+    this.shippingRegions = this.options.shippingRegions;
     this.hideMap = true;
     this.orderID = "";
     this.model.set('selectedModerator', "");
@@ -81,7 +85,7 @@ module.exports = baseVw.extend({
     this.countryList = countries.get('countries');
     this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput" required></select>');
     __.each(this.countryList, function(countryFromList, i){
-      var countryOption = $('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+countryFromList.name+'</option>');
+      var countryOption = $('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+polyglot.t(`countries.${countryFromList.dataName}.name`)+'</option>');
       countryOption.attr("selected",self.options.userModel.get('country') == countryFromList.dataName);
       self.countriesSelect.append(countryOption);
     });
@@ -172,7 +176,7 @@ module.exports = baseVw.extend({
       self.registerChild(self.buyDetailsView);
 
       self.buyAddressesView && self.buyAddressesView.remove();
-      self.buyAddressesView = new buyAddressesVw({model: self.model, userModel: self.userModel});
+      self.buyAddressesView = new buyAddressesVw({model: self.model, userModel: self.userModel, worldwide: self.worldwide, shippingRegions: self.shippingRegions});
       self.registerChild(self.buyAddressesView);
 
       self.listenTo(self.buyAddressesView, 'setAddress', self.addressSelected);
@@ -242,7 +246,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
     this.$el.find('#buyWizardNameInput').focus();
     //set chosen inputs
-    $('.chosen').chosen();
+    $('.chosen').chosen({ search_contains: true });
   },
 
   hideNewAddress: function(){
@@ -527,7 +531,6 @@ module.exports = baseVw.extend({
 
     if(!data) {
       throw new Error('Data must be provided to the showPayAddress function');
-      return;
     }
 
     var totalBTCPrice = 0,

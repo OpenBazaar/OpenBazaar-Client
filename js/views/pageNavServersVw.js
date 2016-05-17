@@ -40,7 +40,7 @@ module.exports = BaseVw.extend({
         serverConfig = app.serverConfigs.get($target.data('server-config-id'));
 
     // launch page connect modal
-    this.pageConnectModal && this.pageConnectModal.remove()
+    this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = new PageConnectModal({
       className: 'server-connect top0',
       initialState: {

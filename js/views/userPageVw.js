@@ -8,6 +8,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
     cropit = require('../utils/jquery.cropit'),
+    ratingCl = require('../collections/ratingCl'),
     userProfileModel = require('../models/userProfileMd'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
@@ -15,6 +16,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
+    reviewsView = require('./reviewsVw'),
     itemVw = require('./itemVw'),
     itemEditVw = require('./itemEditVw'),
     messageModal = require('../utils/messageModal.js'),
@@ -122,6 +124,7 @@ module.exports = baseVw.extend({
 
   events: {
     'click .js-aboutTab': 'aboutClick',
+    'click .js-reviewsTab': 'reviewsClick',
     'click .js-followersTab': 'followersClick',
     'click .js-followingTab': 'followingClick',
     'click .js-storeTab': 'storeTabClick',
@@ -145,9 +148,6 @@ module.exports = baseVw.extend({
     'click .js-moreButtonsNotOwnPage': 'moreButtonsNotOwnPageClick',
     'click .js-message': 'sendMessage',
     'click .js-moderatorSettings': 'showModeratorModal',
-    'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
-    'click .js-customizePrimaryColor': 'displayCustomizePrimaryColor',
-    'click .js-customizeBackgroundColor': 'displayCustomizeBackgroundColor',
     'click .js-customColorChoicePicker': 'customizeColorClick',
     'mouseenter .js-customColorChoice': 'clickCustomColorChoice',
     'click .js-customizePrimaryColor .js-customizeColor': 'displayCustomizePrimaryColor',
@@ -198,6 +198,7 @@ module.exports = baseVw.extend({
     this.followers.urlRoot = options.userModel.get('serverUrl') + "get_followers";
     this.following = new usersModel();
     this.following.urlRoot = options.userModel.get('serverUrl') + "get_following";
+    this.reviews = new ratingCl();
     //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
     this.ownFollowing = [];
     this.socketView = options.socketView;
@@ -367,6 +368,7 @@ module.exports = baseVw.extend({
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.fetchReviews();
       self.fetchFollowing();
       self.getIsModerator();
       self.fetchListings();
@@ -404,20 +406,22 @@ module.exports = baseVw.extend({
           console.log(errorMessage);
         }
       });
+      
+      var $userPageHeader = $('.user-page-header');
 
       $("#obContainer").scroll(function(){
         if ($(this).scrollTop() > 400 && self.slimVisible === false ) {
           self.slimVisible = true;
           $('.user-page-header-slim').addClass('textOpacity1').addClass('top70');
-          $('.user-page-header').removeClass('shadow-inner1').addClass('zIndex4');
-          $('.user-page-header .rowItem').hide();
+          $userPageHeader.removeClass('shadow-inner1').addClass('zIndex4');
+          $userPageHeader.find('.rowItem').hide();
           $('.user-page-navigation-buttons').addClass('positionFixed positionTop68');
         }
         if ($(this).scrollTop() < 400 && self.slimVisible === true ) {
           self.slimVisible = false;
           $('.user-page-header-slim').removeClass('top70');
-          $('.user-page-header').addClass('shadow-inner1').removeClass('zIndex4');
-          $('.user-page-header .rowItem').show();
+          $userPageHeader.addClass('shadow-inner1').removeClass('zIndex4');
+          $userPageHeader.find('.rowItem').show();
           $('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
         }
       });
@@ -632,6 +636,21 @@ module.exports = baseVw.extend({
     });
   },
 
+  fetchReviews: function(){
+    var self = this;
+    this.reviews.fetch({
+      data: self.userProfileFetchParameters,
+      success: function(model){
+          if (self.isRemoved()) return;
+          self.renderReviews(model);
+      },
+      error: function (model, response) {
+        if (self.isRemoved()) return;
+        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Reviews'));
+      }
+    });
+  },
+
   fetchFollowing: function(){
     var self = this;
     this.following.fetch({
@@ -768,14 +787,14 @@ module.exports = baseVw.extend({
         arrayItem.cloak = false;
       }
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
-      arrayItem.serverUrl = self.options.userModel.get('serverUrl');
-      arrayItem.showAvatar = false;
-      arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
-      arrayItem.handle = self.model.get('page').profile.handle;
-      arrayItem.userID = self.pageID;
-      arrayItem.ownPage = self.options.ownPage;
-      arrayItem.onUserPage = true;
-      arrayItem.userCountries = addressCountries;
+      arrayItem.serverUrl        = self.options.userModel.get('serverUrl');
+      arrayItem.showAvatar       = false;
+      arrayItem.avatar_hash      = self.model.get('page').profile.avatar_hash;
+      arrayItem.handle           = self.model.get('page').profile.handle;
+      arrayItem.userID           = self.pageID;
+      arrayItem.ownPage          = self.options.ownPage;
+      arrayItem.onUserPage       = true;
+      arrayItem.userCountries    = addressCountries;
       arrayItem.skipNSFWmodal = skipNSFWmodal;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         selectOptions[arrayItem.category] = true;
@@ -810,6 +829,19 @@ module.exports = baseVw.extend({
     if (model.length) {
       this.storeSearch = new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
     }
+  },
+
+  renderReviews: function (model) {
+    model = model || [];
+
+    this.reviewsVw && this.reviewsVw.remove();
+    this.reviewsVw = new reviewsView({
+      collection: model
+    });
+    this.registerChild(this.reviewsVw);
+
+    this.$('.js-list6').html(this.reviewsVw.render().el);
+    this.$('.js-userReviewsCount').html(model.length);
   },
 
   renderFollowers: function (model, followerCount) {
@@ -1001,6 +1033,13 @@ module.exports = baseVw.extend({
     this.setState('about');
   },
 
+  reviewsClick: function(e){
+    "use strict";
+    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-reviews'));
+    this.addTabToHistory('reviews');
+    this.setState('reviews');
+  },
+
   followersClick: function(e){
     "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-followers'));
@@ -1043,8 +1082,8 @@ module.exports = baseVw.extend({
   tabClick: function(activeTab, showContent){
     "use strict";
     this.$('.js-userPageTabs > .js-tab').removeClass('active');
-    activeTab.addClass('active');
     this.$('.js-userPageSubViews > .js-tabTarg').addClass('hide');
+    activeTab.addClass('active');
     showContent.removeClass('hide');
 
     this.customizing = false;
@@ -1074,7 +1113,7 @@ module.exports = baseVw.extend({
 
   hideColorRecommendations: function(e) {
     "use strict";
-    $('.js-customizeColorRecommendations').removeClass('width270');
+    $('.js-customizeColorRecommendations').removeClass('show');
   },
 
   clickCustomColorChoice: function(e) {
@@ -1093,7 +1132,6 @@ module.exports = baseVw.extend({
   },
 
   customizeSelectColor: function(e) {
-    "use strict";
     e.preventDefault();
     e.stopPropagation();
 
@@ -1103,108 +1141,113 @@ module.exports = baseVw.extend({
     }
   },
 
+
   displayCustomizePrimaryColor: function(e) {
-    "use strict";
+    var $customizePrimaryColorRecommendations = this.$el.find('.customizePrimaryColorRecommendations'),
+        $customColorChoice = $customizePrimaryColorRecommendations.find('.customColorChoice');
 
     $('#primary_color').colpickHide();
 
-    if(this.$el.find('.customizePrimaryColorRecommendations').hasClass('width270')){
-      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+    if($customizePrimaryColorRecommendations.hasClass('show')){
+      $customizePrimaryColorRecommendations.removeClass('show');
     }else{
       $('.seeTooltip').hide();
 
       // set recommendations
-      this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(2)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(3)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(4)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(5)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(6)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      $customColorChoice.css('background','#fff'); // reset to white to give a cool transition
+      $customColorChoice.first().css('background','transparent'); // set to transparent
+      
+      for (var i = 2; i <= 6; i++) {
+        $customColorChoice.eq(i).css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      }
 
       // slide background_color recommendations out + hide others
-      this.$el.find('.customizePrimaryColorRecommendations').addClass('width270');
-      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+      $customizePrimaryColorRecommendations.addClass('show');
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('show');
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('show');
+      this.$el.find('.customizeTextColorRecommendations').removeClass('show');
     }
   },
 
   displayCustomizeSecondaryColor: function(e) {
     "use strict";
-    var primaryColor = this.model.get('page').profile.primary_color;
+    var $customizeSecondaryColorRecommendations = this.$el.find('.customizeSecondaryColorRecommendations'),
+        $customColorChoice = $customizeSecondaryColorRecommendations.find('.customColorChoice'),
+        primaryColor = this.model.get('page').profile.primary_color,
+        shades = [-0.25, -0.15, -0.1, 0.1, 0.15];
 
     $('#secondary_color').colpickHide();
 
-    if(this.$el.find('.customizeSecondaryColorRecommendations').hasClass('width270')){
-      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+    if($customizeSecondaryColorRecommendations.hasClass('show')){
+      $customizeSecondaryColorRecommendations.removeClass('show');
     }else{
       // set recommendations
-      this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(primaryColor, -0.25)); // 20% lighter than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
+      $customColorChoice.css('background','#fff');  // reset to white to give a cool transition
+      $customColorChoice.first().css('background','transparent'); // set to transparent
+
+      for (var i = 2; i <= 6; i++) {
+        $customColorChoice.eq(i).css('background', shadeColor2(primaryColor, shades[i-2]));
+      }
 
       // slide secondary_color recommendations out + hide others
-      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeSecondaryColorRecommendations').addClass('width270');
-      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('show');
+      $customizeSecondaryColorRecommendations.addClass('show');
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('show');
+      this.$el.find('.customizeTextColorRecommendations').removeClass('show');
     }
 
   },
 
   displayCustomizeBackgroundColor: function(e) {
     "use strict";
-    var secondaryColor = this.model.get('page').profile.secondary_color;
+    var $customizeBackgroundColorRecommendations = this.$el.find('.customizeBackgroundColorRecommendations'),
+        $customColorChoice = $customizeBackgroundColorRecommendations.find('.customColorChoice'),
+        secondaryColor = this.model.get('page').profile.secondary_color,
+        shades = [-0.70, -0.65, -0.55, -0.45, -0.35];
 
     $('#background_color').colpickHide();
 
-    if(this.$el.find('.customizeBackgroundColorRecommendations').hasClass('width270')){
-      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+    if($customizeBackgroundColorRecommendations.hasClass('show')){
+      $customizeBackgroundColorRecommendations.removeClass('show');
     }else{
       // set recommendations
-      this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:last').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
+      $customColorChoice.css('background','#fff'); // reset to white to give a cool transition
+      $customColorChoice.first().css('background','transparent'); // set to transparent
+      
+      for (var i = 2; i <= 6; i++) {
+        $customColorChoice.eq(i).css('background', shadeColor2(secondaryColor, shades[i-2])); // 70% darker than primary_color
+      }
 
       // slide background_color recommendations out + hide others
-      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeBackgroundColorRecommendations').addClass('width270');
-      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('show');
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('show');
+      $customizeBackgroundColorRecommendations.addClass('show');
+      this.$el.find('.customizeTextColorRecommendations').removeClass('show');
     }
   },
 
   displayCustomizeTextColor: function(e) {
     "use strict";
+    
+    var $customizeTextColorRecommendations = this.$el.find('.customizeTextColorRecommendations'),
+        $customColorChoice = $customizeTextColorRecommendations.find('.customColorChoice');
 
     $('#text_color').colpickHide();
 
-    if(this.$el.find('.customizeTextColorRecommendations').hasClass('width270')){
-      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    if($customizeTextColorRecommendations.hasClass('show')){
+      $customizeTextColorRecommendations.removeClass('show');
     }else{
       // set recommendations
-      this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:nth-child(2)').css('background', '#ffffff');
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:last').css('background', '#000000');
+      $customColorChoice.css('background','#fff');  // reset to white to give a cool transition
+      $customColorChoice.first().css('background','transparent'); // set to transparent
+      $customColorChoice.eq(2).css('background', '#ffffff');
+      $customColorChoice.last().css('background', '#000000');
 
       // slide background_color recommendations out + hide others
-      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
-      this.$el.find('.customizeTextColorRecommendations').addClass('width270');
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('show');
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('show');
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('show');
+      $customizeTextColorRecommendations.addClass('show');
     }
   },
 
@@ -1215,7 +1258,7 @@ module.exports = baseVw.extend({
         colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
         colorKey = colorInput.attr('id'),
         newColor = this.model.get('page').profile[colorKey].slice(1),
-        parent = $('.js-customizeColorRecommendations.width270'),
+        parent = $('.js-customizeColorRecommendations.show'),
         parentHeight = parent.height(),
         topPosition = parent.offset().top + parentHeight + 2;
 

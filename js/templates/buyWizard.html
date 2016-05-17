@@ -28,10 +28,12 @@
         </div>
         <div class="txt-bright pad20">
           <div class="txt-center row10 textSize20px custCol-text">
-            <%= polyglot.t('buyFlow.SendBTCtoAddress', {amount: '<span class="js-buyWizardDetailsTotalBTC"></span>'}) %>
-          </div>
-          <div class="txt-center row10">
-            <a class="textSize16px js-buyWizardPayLink custCol-text"><span class="js-buyWizardPayURL"></span></a>
+            <%=
+              polyglot.t('buyFlow.SendBTCtoAddress', {
+                amount: '<span class="js-buyWizardDetailsTotalBTC"></span>',
+                recipient: '<a class="textSize16px js-buyWizardPayLink custCol-text"><span class="js-buyWizardPayURL"></span></a>'
+              })
+            %>
           </div>
           <div class="txt-center row10">
             <input type="checkbox" class="textSize11px fieldItem thin" id="BuyWizardQRDetailsInput">
