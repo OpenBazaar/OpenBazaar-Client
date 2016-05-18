@@ -368,7 +368,18 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 };
 
 var profileLoaded;
+var moo;
 var loadProfile = function(landingRoute, onboarded) {
+  if (!moo) {
+    moo = 'shoo';
+  
+    setTimeout(() => {
+      loadProfile();
+    }, 2000);
+
+    return;
+  }
+
   var externalRoute = remote.getGlobal('externalRoute');
 
   landingRoute = landingRoute && landingRoute != undefined ? landingRoute : '#';
@@ -474,7 +485,7 @@ launchOnboarding = function(guidCreating) {
   var activeServer = app.serverConfigs.getActive();
 
   pageConnectModal = new PageConnectModal({
-    className: 'server-connect top0',
+    className: 'server-connect modal-fullscreen',
     initialState: {
       statusText: activeServer && activeServer.get('default') ?
         polyglot.t('serverConnectModal.connectingToDefault') :

@@ -213,18 +213,27 @@ form {
 }
 
 #appBar .windowControls {
-  float: left;
+  position: absolute;
+  left: 8px;
+  top: 8px;  
 }
 
 .platform-win #appBar .windowControls {
-  position: absolute;
+  left: auto;
   right: 8px;
   top: 8px;
 }
 
+#appBar .title {
+  /* since the loading spinners are centered in a manner
+     where chat is excluded from the width, we'll follow
+     suit here so our title is centered with the spinners */
+  width: calc(100% -45px);
+}
+
 #pageNav {
   position: fixed;
-  top: 26px;
+  top: 35px;
   -webkit-app-region: no-drag;
   z-index: 13;
 }
@@ -259,7 +268,7 @@ form {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 76px;
+  top: 85px;
   width:230px;
   background-color: #252525;
   border-left: 0;
@@ -1064,24 +1073,16 @@ label.fieldItem {
   z-index: 1;
 }
 
-.modal:not(.modal-cover-fullscreen) {
+.modal:not(.modal-fullscreen) {
   width: calc(100% - 45px);
 }
 
-#ov1.chatOpen .modal:not(.modal-cover-fullscreen) {
+#ov1.chatOpen .modal:not(.modal-fullscreen) {
   width: calc(100% - 230px);
 }
-
-/*#ov1.chatLoaded .modal:not(.modal-cover-fullscreen) {
-  width: calc(100% - 45px);
-}
-
-#ov1.chatOpen .modal:not(.modal-cover-fullscreen) {
-  width: calc(100% - 230px);
-}*/
 
 .modal.modal-navOffset {
-  top: 76px;
+  top: 85px;
 }
 
 .modalHolder {
@@ -1482,13 +1483,13 @@ h5 {
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 76px;;
+  top: 85px;;
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 76px;
+  top: 85px;
 }
 
 .modal-opaque.modal-navBlock {
@@ -1497,18 +1498,22 @@ h5 {
   padding-top: 100px;
 }
 
-.modal-cover-fullscreen {
-  top: 26px;
-}
-
-.modal-cover-fullscreen .modal-childMain {
-  top: 76px;
-}
-
-.modal-cover-fullscreen.modal.modal-navOffset .modal-childMain {
+/*
+  will cover entire screen aside from the #appBar,
+  which should never be covered.
+*/
+.modal-fullscreen {
   top: 35px;
 }
 
+/*.modal-fullscreen .modal-childMain {
+  top: 76px;
+}
+
+.modal-fullscreen.modal.modal-navOffset .modal-childMain {
+  top: 35px;
+}
+*/
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
@@ -2066,7 +2071,8 @@ margin: auto;
   top: 3px;  
 }
 
-.platform-win .btn.btn-winMax .btn-win-icon {
+.platform-win .btn.btn-winMax .btn-win-icon,
+.platform-win .btn.btn-win.btn-winMax:hover .btn-win-icon {
   display: none;
 }
 
@@ -4366,8 +4372,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 13;
 }
 
-#loadingModal .spinner-with-logo, .page-connect-modal .spinner-with-logo {
-  margin-top: -37px;
+/*
+   Different types of modals (e.g. loading, page-connect-modal, server-connect) have
+   different dimensions (e.g. some cover chat, some cover nav bar...). We'll be 
+   fudging the position of loading spinners and content so that if these modals
+   are shown in succession, there is no "jump" of the spinner / content.
+*/
+#loadingModal .spinner-with-logo, .page-connect-modal.server-connect .spinner-with-logo {
+  margin-top: 6px;
+  margin-left: -20px;
+}
+
+.page-connect-modal .spinner-with-logo {
+  margin-top: -45px;
 }
 
 #ov1 #loadingModal.hide {
@@ -4382,7 +4399,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   right: 0;
   left: 0;
   top: 50%;
-  margin-top: 81px;
+  margin-top: 117px;
+  margin-left: -40px;
   opacity: 1;
   transition: opacity 1s 5s ease;
   box-sizing: border-box;
@@ -4413,7 +4431,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .server-connect-modal .message-bar {
-  top: 50px;
+  top: 59px;
   left: 25px;
   right: 25px;
   z-index: 1;
@@ -4630,7 +4648,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
   -webkit-app-region: no-drag;
   position: relative;
-  top: 76px;
+  top: 85px;
   box-sizing: border-box;
 }
 
@@ -4691,11 +4709,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 0;
   top: 50%;
   max-width: 600px;
-  margin-top: 90px;
+  margin-top: 75px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   transition: transform 0.5s ease;
+}
+
+.page-connect-modal.server-connect .content {
+  transform: translate(-20px, 51px);
 }
 
 .page-connect-modal .content .btn {

@@ -13,7 +13,7 @@ var __ = require('underscore'),
     ServerConfigsVw = require('./serverConfigsVw');
 
 module.exports = BaseModal.extend({
-  className: 'server-connect-modal modal-cover-fullscreen',
+  className: 'server-connect-modal modal-fullscreen',
 
   events: {
     'click .js-close': 'closeConfigForm',
