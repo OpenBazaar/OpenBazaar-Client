@@ -97,8 +97,8 @@ module.exports = baseVw.extend({
 
       self.$photosModule = self.$('.js-photosModule');
 
-      this.sortableImages && this.sortableImages.destroy();
-      this.sortableImages = Sortable.create(self.$('.js-subImageWrap')[0], {
+      self.sortableImages && self.sortableImages.destroy();
+      self.sortableImages = Sortable.create(self.$('.js-subImageWrap')[0], {
         onUpdate: function(e) {
           var imagesArr = self.model.get('imageHashesToUpload');
 
@@ -126,10 +126,18 @@ module.exports = baseVw.extend({
         
 
         //set chosen inputs
-        this.$('.chosen').chosen({width: '100%'}).change(function(e){
+        this.$('.chosen').chosen({
+          width: '100%',
+          search_contains: true
+        }).change(function(e){
           self.shipsToChange(e);
         });
-        this.$('.chosenRegions').chosen({width: '100%', disable_search: true});
+        
+        this.$('.chosenRegions').chosen({
+          width: '100%',
+          disable_search: true,
+          search_contains: true
+        });
       }, 0);
 
       self.setFormValues();
@@ -166,19 +174,23 @@ module.exports = baseVw.extend({
     var countries = new countriesModel();
     //make a copy of the countries array
     var countryList = countries.get('countries').slice(0);
-    countryList.unshift(
-        {
-          "name": window.polyglot.t('WorldwideShipping'),
-          "dataName": "ALL",
-          "code": "ALL",
-          "number": "1"
-        });
+    countryList.unshift({
+      "name": window.polyglot.t('WorldwideShipping'),
+      "dataName": "ALL",
+      "code": "ALL",
+      "number": "1"
+    });
     var shipsTo = this.$el.find('#shipsTo');
     __.each(countryList, function(countryFromList, i){
-      shipsTo.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
+      var content = !i ? countryFromList.name : polyglot.t(`countries.${countryFromList.dataName}`);
+
+      shipsTo.append(
+        `<option value="${countryFromList.dataName}">${content}</option>`
+      );
     });
 
     var shipsToValue = this.model.get('vendor_offer').listing.shipping.shipping_regions;
+
     //if shipsToValue is empty, set it to the user's country
     shipsToValue = shipsToValue.length > 0 ? shipsToValue : ["ALL"];
     shipsTo.val(shipsToValue);
@@ -193,7 +205,8 @@ module.exports = baseVw.extend({
       self.inputKeyword = new Taggle('inputKeyword', {
         tags: keywordTags,
         preserveCase: true,
-        saveOnBlur: true
+        saveOnBlur: true,
+        placeholder: polyglot.t('KeywordsPlaceholder')
       });
     },0);
 
@@ -330,8 +343,8 @@ module.exports = baseVw.extend({
     var self = this,
         $imageInput = this.$el.find('.js-itemImageUpload'),
         curImages = this.model.get('combinedImagesArray'),
-        maxH = 800,
-        maxW = 800,
+        maxH = 944,
+        maxW = 1028,
         imageList = [],
         loaded = 0,
         imageCount;
@@ -382,7 +395,7 @@ module.exports = baseVw.extend({
         canvas.height = imgH;
         ctx = canvas.getContext('2d');
         ctx.drawImage(newImage, 0, 0, imgW, imgH);
-        dataURI = canvas.toDataURL('image/jpeg', 0.45);
+        dataURI = canvas.toDataURL('image/jpeg', 0.7);
         dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
         imageList.push(dataURI);
 

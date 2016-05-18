@@ -4,7 +4,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     messageModal = require('../utils/messageModal.js'),
     setTheme = require('../utils/setTheme.js'),
-    chosen = require('../utils/chosen.jquery.min.js'),
+    Papa = require('papaparse'),
     transactionsCl = require('../collections/transactionsCl'),
     baseVw = require('./baseVw'),
     orderShortVw = require('./orderShortVw'),
@@ -22,7 +22,8 @@ module.exports = baseVw.extend({
     'click .js-casesTab': 'tabHandler',
     'change .js-transactionFilter': 'transactionFilter',
     'keyup .search': 'searchKeyup',
-    'click .js-transactionsSearchClear': 'searchClear'
+    'click .js-transactionsSearchClear': 'searchClear',
+    'click .js-downloadCSV': 'clickDownloadCSV'
   },
 
   initialize: function(options){
@@ -55,6 +56,7 @@ module.exports = baseVw.extend({
     });
     this.searchTransactions;
     this.filterBy; //used for filtering the collections
+    this.currentExportData = []; //used for export to CSV data
 
     this.countries = new countriesMd();
     this.countriesArray = this.countries.get('countries');
@@ -195,6 +197,7 @@ module.exports = baseVw.extend({
   setState: function(state, orderID){
     var addID = orderID ? "/" + orderID : "";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
+    this.state = state;
     //add action to history
     Backbone.history.navigate("#transactions/" + state + addID);
   },
@@ -279,6 +282,126 @@ module.exports = baseVw.extend({
     });
     this.registerChild(orderShort);
     tabWrapper.append(orderShort.render().el);
+  },
+
+  clickDownloadCSV: function(e){
+    var targBtn = $(e.target);
+    targBtn.closest('.btn').addClass('loading');
+    this.downloadCSV().always(()=> {
+      targBtn && targBtn.removeClass('loading');
+    });
+  },
+
+  downloadCSV: function(){
+    var rawData = [],
+        calls = [],
+        exportData = function(data){
+          var dataCSV = Papa.unparse(data),
+              dataBlob = new Blob([dataCSV], {'type':'application\/octet-stream'}),
+              tempAnchor = document.createElement('a'),
+              saveDate = new Date();
+
+          tempAnchor.href = window.URL.createObjectURL(dataBlob);
+          tempAnchor.download = ('export_'+saveDate.toLocaleString(window.lang)+'.csv').replace(/,/g , '_');
+          tempAnchor.click();
+        };
+
+    //clear existing data
+    this.currentExportData = [];
+
+    switch(this.state){
+      case "purchases":
+        rawData = this.purchasesCol.toJSON();
+        break;
+      case "sales":
+        rawData = this.salesCol.toJSON();
+        break;
+      case "cases":
+        rawData = this.casesCol.toJSON();
+        break;
+    }
+
+    $.each(rawData,(i, transaction)=> {
+      //if filter is active, don't process transactions of a different type
+      if(Number.isInteger(Number(this.filterBy)) && transaction.status != this.filterBy) return;
+
+      transaction.status = polyglot.t('transactions.OrderStatus'+transaction.status);
+      transaction.timestamp = new Date(transaction.timestamp * 1000);
+      transaction.currency_code = transaction.cCode;
+      transaction.fiat_price = transaction.displayPrice;
+      transaction = __.omit(transaction, "thumbnail_hash", "btAve", "imageUrl", "order_date", "cCode", "displayPrice", "vendor", "transactionType");
+      calls.push(this.getTransactionData(transaction.order_id, transaction));
+    });
+
+    return $.when.apply(null, calls)
+        .fail(function(){
+          messageModal.show(polyglot.t('errorMessages.getError'), polyglot.t('errorMessages.serverError') + "\n\n<i>" + errorThrown + "</i>");
+          calls.forEach((call => {
+            call.abort();
+          }));
+        })
+        .done(()=>{
+          if(calls.length > 0){
+            exportData(this.currentExportData);
+          } else {
+            messageModal.show(polyglot.t('errorMessages.noData'));
+          }
+        });
+  },
+
+  getTransactionData: function(orderID, dataObject){
+    dataObject = dataObject || {};
+
+    var getCall = $.getJSON(this.serverUrl + 'get_order',{'order_id': orderID}, (data)=> {
+      //add blank data so first object has all the columns
+      dataObject.quantity = '';
+      dataObject.shipping_address = '';
+      dataObject.payment_amount = '';
+      dataObject.payment_address = '';
+      dataObject.refund_tx_fee = '';
+      dataObject.chaincode = '';
+      dataObject.redeem_script = '';
+      dataObject.refund_address = '';
+      dataObject.moderator_name = '';
+      dataObject.moderator_guid = '';
+      dataObject.moderator_fee = '';
+      dataObject.return_policy = '';
+
+      //format and add flat data to the object
+      if(data.buyer_order){
+        var dPayment = data.buyer_order.order.payment;
+
+        dataObject.quantity = data.buyer_order.order.quantity;
+        if(data.buyer_order.order.shipping){
+          var dShipping = data.buyer_order.order.shipping;
+          dataObject.shipping_address = dShipping.ship_to + " " + dShipping.address +", " + dShipping.city + ", " + dShipping.state + ", " + dShipping.postal_code + ", " + dShipping.country;
+        }
+        dataObject.payment_amount = dPayment.amount;
+        dataObject.payment_address = dPayment.address;
+        dataObject.refund_tx_fee = dPayment.refund_tx_fee || "";
+        dataObject.chaincode = dPayment.chaincode || "";
+        dataObject.redeem_script = dPayment.redeem_script || "";
+        dataObject.refund_address = data.buyer_order.order.refund_address;
+
+        if (data.buyer_order.order.moderator) {
+          var matchedModerator = data.vendor_offer.listing.moderators.filter(function (moderator) {
+            return moderator.guid == data.buyer_order.order.moderator;
+          });
+          dataObject.moderator_name = matchedModerator[0].name;
+          dataObject.moderator_guid = matchedModerator[0].guid;
+          dataObject.moderator_fee = matchedModerator[0].fee;
+        }
+
+      }
+
+      if(data.vendor_offer.policy){
+        dataObject.return_policy = data.vendor_offer.policy.returns;
+      }
+      
+      this.currentExportData.push(dataObject);
+    });
+
+    return getCall;
   },
 
   openOrderModal: function(options){

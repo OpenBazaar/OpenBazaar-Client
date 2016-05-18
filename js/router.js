@@ -13,6 +13,8 @@ var ipcRenderer = require('ipc-renderer'),
 
 module.exports = Backbone.Router.extend({
   initialize: function(options){
+    var self = this;
+      
     var routes;
 
     this.options = options || {};
@@ -48,22 +50,40 @@ module.exports = Backbone.Router.extend({
         this.navigate(translatedRoute, { trigger: true });
       });
     });
+    
+    var originalHistoryBack = history.back;
+    history.back = function() {
+        self.historyAction = 'back';
+        return originalHistoryBack(arguments);
+    };
+
+    var originalHistoryForward = history.forward;
+    history.forward = function() {
+        self.historyAction = 'forward';
+        return originalHistoryForward(arguments);
+    };
+    
+    this.historySize = -1;
+    this.historyPosition = -1;
+    this.historyAction = 'default';
   },
 
   translateRoute: function(route) {
+    if(!route) throw new Error('You must provide a route');
+    
     var guid = "",
         handle = "",
         state = "",
         itemHash = "",
         routeArray = route.replace("ob://","").replace(/ /g, "").split("/"),
         deferred = $.Deferred();
-
+    
     state = routeArray[1] ? "/" + routeArray[1] : "";
     itemHash = routeArray[2] ? "/" + routeArray[2] : "";
 
     if(routeArray[0].charAt(0) == "@"){
       // user entered a handle
-      deferred.resolve(route);
+      deferred.resolve(routeArray[0] + state + itemHash);
     } else if(!routeArray[0].length){
       // user trying to go back to discover
       deferred.resolve('#home');
@@ -87,7 +107,7 @@ module.exports = Backbone.Router.extend({
         guidFetch;
 
     if (handle) {
-      guidFetch = app.getGuid(handle, this.userModel.get('resolver') + '/v2/users/')
+      guidFetch = app.getGuid(handle, this.userModel.get('resolver').replace(/\/+$/, "") + '/v2/users/')
         .done((guid) => {
           deferred.resolve(guid);
         }).fail(() => {
@@ -102,6 +122,32 @@ module.exports = Backbone.Router.extend({
     };
 
     return deferred.promise();
+  },
+  
+  execute: function(callback, args, name) {
+    if (this.historyAction == 'default') {
+      this.historyPosition += 1;
+      this.historySize = this.historyPosition;
+    } else if (this.historyAction == 'back') {
+      this.historyPosition -= 1;
+    } else if(this.historyAction == 'forward' && this.previousName != name && name != "index") {
+      //don't increment if the same state is navigated to twice
+      //don't increment on index since that isn't a real state
+      this.historyPosition += 1;
+    }
+    this.historyAction = 'default';
+
+    if (this.historyPosition == this.historySize)
+        $('.js-navFwd').addClass('disabled-icon');
+    else
+        $('.js-navFwd').removeClass('disabled-icon');
+    
+    if (this.historyPosition == 1)
+        $('.js-navBack').addClass('disabled-icon');
+    else
+        $('.js-navBack').removeClass('disabled-icon');
+    
+    if (callback) callback.apply(this, args);
   },
 
   cleanup: function(){
@@ -145,6 +191,11 @@ module.exports = Backbone.Router.extend({
   },
 
   launchPageConnectModal: function(config) {
+    var defaults = {
+      connectText: 'Connecting...',
+      failedText: 'Unable to Connect.'
+    };
+
     if (!(
         config &&
         config.promise &&
@@ -153,11 +204,7 @@ module.exports = Backbone.Router.extend({
       throw new Error('At a minimum, the config must contain a config.promise.');
     }
 
-    var defaults = {
-      connectText: 'Connecting...',
-      failedText: 'Unable to Connect.'
-    };
-
+    $('#loadingModal').addClass('hide');
     config = __.extend({}, defaults, config);
 
     this.pageConnectModal && this.pageConnectModal.remove();

@@ -1,8 +1,8 @@
-var app = require('../App.js').getApp(),
+var app = require('../App').getApp(),
     moment = require('moment');
 
 function cssImageUrl(hash, guid, fallback) {
-  var base = app.serverConfig.getServerBaseUrl() + '/',
+  var base = app.serverConfigs.getActive().getServerBaseUrl() + '/',
       url = '',
       localURL = localStorage.getItem('userAvatar-'+guid);
 
@@ -24,7 +24,12 @@ function cssImageUrl(hash, guid, fallback) {
   return url;
 }
 
+function intlNumFormat(numberToFormat, maxDigits){
+  return app.intlNumFormat(numberToFormat, maxDigits);
+}
+
 module.exports = {
   cssImageUrl: cssImageUrl,
+  intlNumFormat: intlNumFormat,
   moment: moment
 };

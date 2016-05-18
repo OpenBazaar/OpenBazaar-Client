@@ -104,9 +104,16 @@ module.exports = baseVw.extend({
       if ($('.homeGridItems .gridItem').length === 0){
         self.$el.find('.js-loadingMessage').removeClass('fadeOut');
         self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
-        self.$el.find('.js-loadingText').html(
-          window.polyglot.t('discover.' + (self.searchItemsText ? 'noTaggedResults' : 'noResults'))
-        );
+        
+        if (self.searchItemsText) {
+          self.$el.find('.js-loadingText').html(
+            window.polyglot.t('discover.noTaggedResults')
+              .replace('%{tag}', `<span class="btn-pill color-secondary">#${self.searchItemsText}</span>`)
+          );
+        } else {
+          self.$el.find('.js-loadingText')
+            .html(window.polyglot.t('discover.noResults'));
+        }
       }
     }, 10000);
   },
@@ -188,7 +195,12 @@ module.exports = baseVw.extend({
 
   renderItem: function(item){
     var self = this,
-        blocked;
+        blocked,
+        addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country }),
+        userCountry = this.userModel.get('country'),
+        contract_type = item.contract_type;
+
+    addressCountries.push(userCountry);
 
     //don't show if NSFW and filter is set to false
     if(item.listing.nsfw && !this.showNSFW) return;
@@ -201,6 +213,8 @@ module.exports = baseVw.extend({
     item.userID = item.guid;
     item.discover = true;
     item.ownGuid = this.userModel.get('guid');
+    item.userCountries = addressCountries;
+    item.contract_type = contract_type;
 
 
     item.ownFollowing = this.ownFollowing.indexOf(item.guid) != -1;
@@ -290,10 +304,10 @@ module.exports = baseVw.extend({
       this.searchItemsText = searchItemsText;
 
       //add action to history
-      Backbone.history.navigate("#home/" + state + "/" + searchItemsText.replace(/ /g, ""));
+      Backbone.history.navigate("#home/" + state + "/" + searchItemsText.replace(/ /g, ""), { replace: true });
     } else {
       //add action to history
-      Backbone.history.navigate("#home/" + state);
+      Backbone.history.navigate("#home/" + state, { replace: true });
     }
 
     this.state = state;
@@ -436,10 +450,10 @@ module.exports = baseVw.extend({
       addressText = addressText ? "#" + addressText.replace(/\s+/g, '') : "";
       target.val(addressText);
       window.obEventBus.trigger("setAddressBar", {'addressText': addressText});
-    }
-
-    if(target.val() == ""){
-      this.searchItemsClear();
+    } else if(e.keyCode == 8 || e.keyCode == 46) {
+      if(target.val() == "") {
+        this.searchItemsClear();
+      }
     }
   },
 
@@ -451,11 +465,10 @@ module.exports = baseVw.extend({
     window.obEventBus.trigger("setAddressBar", {'addressText': ""});
     
     this.$el.find('.js-discoverHeading').html(window.polyglot.t('Discover'));
-    this.$el.find('.js-homeListingToggle').removeClass('hide');
 
     // change loading text copy
     this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('defaultText'));
-    this.$el.find('.js-discoverSearchKeyword').addClass('hide');
+    // this.$el.find('.js-discoverSearchKeyword').addClass('hide');
 
   },
 
@@ -467,10 +480,12 @@ module.exports = baseVw.extend({
       this.socketSearchID = Math.random().toString(36).slice(2);
       this.socketView.search(this.socketSearchID, searchItemsText);
       this.setSocketTimeout();      
-      this.$el.find('.js-discoverSearchKeyword').html("#" + searchItemsText);
       this.$el.find('.js-discoverHeading').html("#" + searchItemsText);
-      this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('searchingText'));
-      this.$el.find('.js-discoverSearchKeyword').removeClass('hide');
+      this.$el.find('.js-loadingText').html(
+        this.$el.find('.js-loadingText')
+          .data('searchingText')
+          .replace('%{tag}', `<span class="btn-pill color-secondary">#${searchItemsText}</span>`)
+      );
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
       this.setState('products', searchItemsText);
     }else{

@@ -111,7 +111,7 @@
               >
             </div>
             <div class="flexCol-4">
-              <span class="fieldItem txt-placeholder"><%= polyglot.t('MinimumIs') %> <%= ob.userCurrencyCode == "BTC" ? 0.0015 :  (window.currentBitcoin * 0.002).toFixed(2) %> <span class="ion-help-circled fontSize12 tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>"></span></span>
+              <span class="fieldItem txt-placeholder"><%= polyglot.t('MinimumIs', { amount: ob.userCurrencyCode == "BTC" ? 0.0015 : (window.currentBitcoin * 0.002).toFixed(2) }) %> <span class="ion-help-circled fontSize12 tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>"></span></span>
             </div>
           </div>
           <div class="flexRow custCol-border js-shippingRow">

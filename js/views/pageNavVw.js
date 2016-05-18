@@ -11,6 +11,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
+    PageNavServersVw = require('../views/pageNavServersVw'),
     remote = require('remote'),
     pjson = require('../../package.json');
 
@@ -44,7 +45,11 @@ module.exports = baseVw.extend({
     'click .js-navInstallUpdate': 'sendInstallUpdate',
     'click .js-navDismisslUpdate': 'dismissUpdate',
     'click [data-popmenu]': 'onPopMenuNavClick',
-    'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro'
+    'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro',
+    'mouseenter .js-serverSubmenuTrigger': 'mouseenterServerSubmenuTrigger',
+    'mouseleave .js-serverSubmenuTrigger': 'mouseleaveServerSubmenuTrigger',
+    'mouseenter .js-serverSubmenu': 'mouseenterServerSubmenu',
+    'mouseleave .js-serverSubmenu': 'mouseleaveServerSubmenu'
   },
 
   initialize: function(options){
@@ -155,6 +160,7 @@ module.exports = baseVw.extend({
     var data = JSON.parse(response.data),
         username,
         avatar,
+        avatarHash,
         notif,
         message,
         notifStamp;
@@ -162,9 +168,9 @@ module.exports = baseVw.extend({
     if (data.hasOwnProperty('notification') || data.hasOwnProperty('message') && data.message.subject) {
       notif = data.notification || data.message;
       username = notif.handle ? notif.handle : notif.guid.substring(0,10) + '...';
-      avatar = notif.image_hash || notif.avatar_hash;
-      avatar = avatar ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
-        avatar + '&guid=' + notif.guid : 'imgs/defaultUser.png';
+      avatarHash = notif.image_hash || notif.avatar_hash;
+      avatar = avatarHash ? app.serverConfigs.getActive().getServerBaseUrl + '/get_image?hash=' +
+        avatarHash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
       notif.type = notif.type || notif.message_type;
       notifStamp = Date.now();
       
@@ -266,7 +272,11 @@ module.exports = baseVw.extend({
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     this.model.set('version', pjson.version);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      var connectedServer = app.serverConnectModal.getConnectedServer();
+
+      self.$el.html(loadedTemplate(
+        __.extend(self.model.toJSON(), { connectedServer: connectedServer && connectedServer.toJSON() })
+      ));
 
       self.$notifMenu = self.$('.js-navNotificationsMenu');
       self.$navNotif = self.$('.js-navNotifications');
@@ -285,7 +295,15 @@ module.exports = baseVw.extend({
       self.$notifMenu.find('#notificationsPanel')
           .html(self.notificationsVw.render().el);
 
-      self.setNotificationCount(self.getUnreadNotifCount());          
+      self.setNotificationCount(self.getUnreadNotifCount());
+
+      self.pageNavServersVw && self.pageNavServersVw.remove();
+      self.pageNavServersVw = new PageNavServersVw({
+        collection: app.serverConfigs
+      });
+      self.$('.js-serverSubmenu').html(
+        self.pageNavServersVw.render().el
+      );
 
       //add the admin panel
       /*
@@ -296,6 +314,9 @@ module.exports = baseVw.extend({
 
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
+      self.serverSubmenu = self.$('.js-serverSubmenu');
+      self.serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
+
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
@@ -306,64 +327,66 @@ module.exports = baseVw.extend({
       if(self.showDiscIntro){
         self.showDiscoverIntro();
       }
+      self.$aboutModalHolder = $('.js-aboutModalHolder');
+      self.$aboutModal = self.$aboutModalHolder.find('.js-aboutModal');
     });
 
     return this;
   },
 
   showAboutModal: function(e){
-
     this.cleanNav();
 
     // display the modal
-    $('.js-aboutModalHolder').fadeIn(300);
+    this.$aboutModalHolder.fadeIn(300);
 
     // set the active tab
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    this.$aboutModal.find('.navBar .btn.btn-bar').removeClass('active');
     $('.js-about-mainTab').addClass('active');
 
     // set the active section
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
+    this.$aboutModal.find('.modal-section').addClass('hide');
+    this.$aboutModal.find('.js-modalAboutMain').removeClass('hide');
 
     // blur the container for extra focus
     $('#obContainer').addClass('blur');
   },
 
   hideAboutModal: function(e){
-    $('.js-aboutModalHolder').fadeOut(300);
+    this.$aboutModalHolder.fadeOut(300);
     $('#obContainer').removeClass('blur');
   },
 
   showSupportModal: function(e){
-    $('.js-aboutModalHolder').fadeIn(300);
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    this.$aboutModalHolder.fadeIn(300);
+    this.$aboutModal.find('.navbar .btn.btn-bar').removeClass('active');
     $('.js-about-donationsTab').addClass('active');
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
+    this.$aboutModal.find('.modal-section').addClass('hide');
+    this.$aboutModal.find('.js-modalAboutSupport').removeClass('hide');
     $('#obContainer').addClass('blur');
   },
 
   aboutModalTabClick: function(e){
-    var tab = $(e.currentTarget).data('tab');
-    $('.js-aboutModal .btn-tab').removeClass('active');
+    var tab = $(e.currentTarget).data('tab'),
+        $aboutSection = $('.modal-about-section');
+    this.$aboutModal.find('.btn-tab').removeClass('active');
     $(e.currentTarget).addClass('active');
 
     switch(tab) {
       case "about":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutMain').removeClass('hide');
         break;
       case "support":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutSupport').removeClass('hide');
         break;
       case "contributors":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutContributors').removeClass('hide');
         break;
       case "licensing":
-        $('.modal-about-section').addClass('hide');
+        $aboutSection.addClass('hide');
         $('.js-modalAboutLicensing').removeClass('hide');
         break;
     }
@@ -423,7 +446,7 @@ module.exports = baseVw.extend({
       });
 
       $.ajax({
-        url: app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read',
+        url: app.serverConfigs.getActive().getServerBaseUrl() + '/mark_notification_as_read',
         type: 'POST',
         contentType: false,
         processData: false,
@@ -487,9 +510,21 @@ module.exports = baseVw.extend({
     }
   },
 
-  closeNav: function() {
+  closeNav: function(e) {
+    if (
+      e &&
+      (
+        e.target === this.serverSubmenuTrigger[0] ||
+        $(e.target).parents('.js-serverSubmenuTrigger').length
+      )
+    ) {
+      return;
+    }    
+
     app.hideOverlay();
-    self.$('.js-navProfileMenu').removeClass('popMenu-opened');    
+    self.$('.js-navProfileMenu').removeClass('popMenu-opened');
+    clearTimeout(this.ServerSubmenuTimeout);
+    this.serverSubmenu.removeClass('server-submenu-opened');    
   },
 
   navCloseClick: function(){
@@ -516,11 +551,11 @@ module.exports = baseVw.extend({
   },
 
   navBackClick: function(){
-    window.history.back();
+    history.back();
   },
 
   navFwdClick: function(){
-    window.history.forward();
+    history.forward();
   },
 
   navRefreshClick: function(){
@@ -611,6 +646,34 @@ module.exports = baseVw.extend({
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
+
+  mouseenterServerSubmenuTrigger: function(e) {
+    this.serverSubmenu.css('right', this.$('.popMenu-navBarSubMenu-pageNav').outerWidth());
+
+    this.ServerSubmenuTimeout = setTimeout(() => {
+      this.serverSubmenu.addClass('server-submenu-opened');
+    }, 150);
+  },
+
+  mouseleaveServerSubmenuTrigger: function(e) {
+    clearTimeout(this.ServerSubmenuTimeout);
+
+    setTimeout(() => {
+      if (!this.overServerSubmenu) {
+        this.serverSubmenu.removeClass('server-submenu-opened');
+      }
+    }, 100);
+  },
+
+  mouseenterServerSubmenu: function(e) {
+    this.overServerSubmenu = true;
+  },
+
+  mouseleaveServerSubmenu: function(e) {
+    this.overServerSubmenu = false;
+    clearTimeout(this.ServerSubmenuTimeout);
+    this.serverSubmenu.removeClass('server-submenu-opened');
+  },  
 
   remove: function() {
     $(document).off('click', this.onDocumentClick);

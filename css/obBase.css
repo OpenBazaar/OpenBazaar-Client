@@ -477,6 +477,43 @@ form {
   flex-grow: 1;
 }
 
+.listingType,
+.listingType.tooltip {
+  background-color: #252525;
+  color: #ffffff;
+  position: absolute;
+  padding: 6px;
+  top: 40px;
+  right: 40px;
+  font-size: 11px;
+  font-weight: 500;
+  transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.listingDoesNotShipToYou,
+.listingDoesNotShipToYou.tooltip {
+  background: #252525;
+  height: 18px; 
+  width: 18px;
+  right: 39px;
+  padding: 10px; 
+  position: absolute; 
+  text-align: center; 
+  top: 217px;
+  transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+  border-radius: 32px;
+  opacity: 1;
+}
+
+.listingsDoesNotShipToYouSlash {
+  position: absolute; 
+  top: 3px; 
+  color: #DE2A14; 
+  font-size: 26px; 
+  left: 14px; 
+  font-weight: 700;
+}
+
 .noPointerEvents {
   pointer-events: none;
 }
@@ -533,6 +570,18 @@ form {
   padding-top: 20px;
 }
 
+.userPage-subViews .gridItem:hover > .listingType,
+.homeView .gridItem:hover > .listingType {
+  opacity: 1;
+  top: 26px;
+}
+
+.userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
+.homeView .gridItem:hover > .listingDoesNotShipToYou {
+  top: 203px;
+  opacity: 1;
+}
+
 .userPage-subViews .gridItem:hover .gridItemControls,
 .homeView .gridItem:hover .gridItemControls{
   opacity: 1;
@@ -587,20 +636,21 @@ form {
   position: relative;
   background-position: center;
   background-size: cover;
-  border-radius: 3px;
+  background-repeat: no-repeat;
+  border-radius: 2px;
   height: 230px;
   width: 250px;
 }
 
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
-  height: 380px;
-  width: 100%;
+  height: 472px;
+  width: 514px;
   border-radius: 0;
 }
 
 .itemImg.itemImg-small {
-  height: 82px;
+  height: 111px;
   width: 121px;
   margin: 0 10px 10px 0;
   border-radius: 1px;
@@ -706,7 +756,7 @@ label.fieldItem {
 }
 
 [class |= "flexCol"] > .fieldItem {
-  margin: 0 -1px -1px 0;
+  margin: 0 -2px -2px 0; /* prevent collum overflows */
 }
 
 .table {
@@ -989,11 +1039,18 @@ label.fieldItem {
   height: 100%;
   top: 0;
   left: 0;
-  right: 0;
-  /* use fadeIn and fadeOut to change opacity */
-  transition: opacity .05s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .05s cubic-bezier(0, 0, 0.2, 1),
+              width 0.5s ease;
   padding-top: 25px;
   z-index: 1;
+}
+
+#ov1.chatLoaded .modal:not(.modal-cover-fullscreen) {
+  width: calc(100% - 45px);
+}
+
+#ov1.chatOpen .modal:not(.modal-cover-fullscreen) {
+  width: calc(100% - 230px);
 }
 
 .modal.modal-navOffset {
@@ -1006,7 +1063,7 @@ label.fieldItem {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 7;
+  z-index: 1;
 }
 
 .modal-child {
@@ -1022,11 +1079,6 @@ label.fieldItem {
 .modal-opaque .modal-child {
   height: 574px;
 }
-
-#ov1.chatOpen .modal-child {
-  right: 230px;
-}
-
 
 .modal.modal-navOffset .modal-child {
   margin-top: 25px;
@@ -1416,6 +1468,18 @@ h5 {
   background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
   top: 0;
   padding-top: 70px;
+}
+
+.modal-cover-fullscreen {
+  top: 0;
+}
+
+.modal-cover-fullscreen .modal-childMain {
+  top: 50px;
+}
+
+.modal-cover-fullscreen.modal.modal-navOffset .modal-childMain {
+  top: 0;
 }
 
 .modal-childMain {
@@ -2369,7 +2433,6 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMessageTimestamp {
   font-size: 11px;
-  color: #fff;
   opacity: .35;
   font-weight: 500;
   letter-spacing: 0;
@@ -2581,11 +2644,6 @@ div.chatSearchOut .chatSearchIcon {
 .btn.btn-flushTop {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-.btn.btn-back:before,
-.btn.btn-fwd:before {
-  opacity: 0.3;
 }
 
 .btn.btn-back.active:before,
@@ -3373,6 +3431,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .popMenu-navBar {
   top: 50px;
   right: 10px;
+  width: 100%;
+  transform: none;
+  transition: none;
+}
+
+.popMenu-navBar.popMenu-opened {
+  transform: none;
+}
+
+.popMenu-navBarSubMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
   background-color: #252525;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
   border-bottom-left-radius: 4px;
@@ -3380,13 +3451,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: #fff;
   font-size: 13px;
   padding: 10px 0;
-  width: 230px;
+  width: auto;
+  min-width: 230px;
   overflow: hidden;
-  transform: translateY(-330px);
+  transform: translateY(-110%);
   transition: transform 200ms;
 }
 
-.popMenu-navBar.popMenu-opened {
+.popMenu-navBarSubMenu-servers {
+    width: 230px;
+}
+
+.popMenu-opened .popMenu-navBarSubMenu-pageNav,
+.popMenu-navBarSubMenu-servers.server-submenu-opened {
   transform: translateY(0);
 }
 
@@ -3396,6 +3473,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   line-height: 26px;
   padding: 0 16px;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.popMenu-navBar .popMenu-navBarSubMenu-servers a {
+  padding: 0;
 }
 
 .popMenu-navBar a:hover {
@@ -3712,10 +3793,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 1px;
 }
 
-#ov1.chatOpen .spinner-with-logo {
-  left: calc(50% - 115.5px);
-}
-
 .spinnerWrapper {
   transition: opacity 1s;
 }
@@ -3742,7 +3819,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .modal .homeModal-heroText {
   position: absolute;
   bottom: 0px;
-  top: 210px;
+  top: 200px;
   color: #fff;
   font-size: 20px;
   line-height: 22px;
@@ -3935,6 +4012,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: width .35s cubic-bezier(0, 0, 0.2, 1);
 }
 
+.customizePrimaryColorRecommendations.show,
+.customizeSecondaryColorRecommendations.show,
+.customizeBackgroundColorRecommendations.show  {
+  width: 273px;
+}
+
+.customizeTextColorRecommendations.show {
+  width: 121px;
+}
+
 .customColorChoice {
   background: #fff;
   display: inline-block;
@@ -4001,7 +4088,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-style: solid;
   border-width: 10px 10px 0 10px;
   border-color: rgba(37,37,37,.95) transparent transparent transparent;
-  position: absolute; 
+  position: absolute;
   bottom: -10px;
   right: 48px;
 }
@@ -4044,6 +4131,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .tooltip.tooltip-box:hover:after {
   height: auto;
   width: 400px;
+  white-space: normal;
+  bottom: auto;
+  top: 100%;
+}
+
+.tooltip.tooltip-box2:hover:after {
+  height: auto;
+  width: 200px;
   white-space: normal;
   bottom: auto;
   top: 100%;
@@ -4204,16 +4299,95 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 9;
 }
 
-#loadingModal {
+#loadingModal, .page-connect-modal.server-connect {
   z-index: 14;
 }
 
-.server-connect-modal {
+#ov1 #loadingModal.hide {
+  height: 0; /* kludge to allow top bar to fade in. Transitions don't work if display is none */
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+
+#loadingModal #loadingModalContent {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 50%;
+  margin-top: 120px;
+  opacity: 1;
+  transition: opacity 1s 5s ease;
+  box-sizing: border-box;
+  padding: 9px;
+  text-align: center;
+}
+
+#loadingModal #loadingModalBtns {
+  opacity: 1;
+  transition: opacity 1s 5s ease;
+  /* this seems redundant, but if you don't also have a transition on the button container, for some reason the normal
+  background color will be used instead of the background color from the custCol-secondary class until the parent
+  transition is complete on Win64 10. */
+}
+
+#loadingModal.hide #loadingModalContent,
+#loadingModal.hide #loadingModalBtns {
+  opacity: 0;
+}
+
+#ov1 .server-connect-modal {
   z-index: 15;
 }
 
-#loadingModal .btn {
-  -webkit-app-region: no-drag;
+#ov1 .server-connect-modal .modal-child {
+  height: 625px;
+  overflow: hidden;
+}
+
+#ov1 .server-connect-modal .message-bar {
+  top: 50px;
+  left: 25px;
+  right: 25px;
+  z-index: 1;
+  transition: top .2s, opacity .2s;
+}
+
+#ov1 .server-connect-modal .message-bar > div {
+  background-color: #C62D2D;
+  padding: 8px 20px;
+  line-height: 2.2;
+  display: inline-block;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#ov1 .server-connect-modal .message-bar .message-bar-close {
+  top: -12px;
+  right: -3px;
+}
+
+#ov1 .server-connect-modal .message-bar.slide-out {
+  top: -45px;
+  opacity: 0;
+}
+
+#ov1 .server-config-form:not(.no-transition) {
+  transition: top 250ms;
+}
+
+#ov1 .server-config-form.slide-out {
+  top: 372px;
+}
+
+#ov1 .server-config-row .connection-failed::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: #C62D2D;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .pill {
@@ -4265,7 +4439,53 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 }
 
-/* protect customize controls from custom page styles */
+.violatorTR {
+  /* sets triangle to be in the top right corner */
+  /* must be given equal height and width properties */
+  /* text or icons inside the violator should have positionTopRight and a right and top margin or padding based on the violator size */
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-clip-path: polygon(50% 0, 100% 0, 100% 50%);
+  z-index: 1; /* this shouldn't need to be higher. Make it the last element in its container */
+  text-align: center;
+}
+
+.violator1 {
+  width: 50px;
+  height: 50px;
+  background: #215175; /* this should be overridden with a color class */
+  color: #fff;
+}
+
+.violatorTxt{
+  /* use on content of a violator to rotate it to match the violator */
+  display: block;
+  transform: rotate(45deg);
+}
+
+.listingTypeDIGITAL_GOOD:before {
+  color: #EFEF4C;
+  content: "\f137";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+.listingTypePHYSICAL_GOOD:before {
+  color: #805C17;
+  content: "\f318";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+.listingTypeSERVICE:before {
+  color: #DEDEDE;
+  content: "\f2ad";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+  /* protect customize controls from custom page styles */
 #ov1 #customizeControls .labelWrap {
   height: 40px;
   border-radius: 0;
@@ -4317,6 +4537,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: #B5B5B5;
   font-weight: 400;
   border-color: #616161;
+}
+
+#ov1 .medium-editor-toolbar {
+  background: #353443;
 }
 
 #ov1::-webkit-scrollbar {
@@ -4416,10 +4640,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: transform 0.5s ease;
 }
 
-#ov1.chatOpen .page-connect-modal .content {
-  transform: translateX(-115.5px);
-}
-
 .page-connect-modal .content .btn {
   float: none;
 }
@@ -4517,11 +4737,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .positionBottom {
   position: absolute;
   bottom: 0;
+  right: 0;
 }
 
 #ov1 .positionTop {
   position: absolute;
   top: 0;
+  left: 0;
 }
 
 #ov1 .positionTopRight {
@@ -4572,6 +4794,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   overflow-x: hidden;
 }
 
+#ov1 .autoOverflowYHideX {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+#ov1 .vertAlignMid {
+  vertical-align: middle;
+}
 
 #ov1 .vCentered {
   /* must be inside a relatively positioned containing element */
@@ -4660,10 +4891,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1  .borderRadiusTop {
-  border-radius: 3px;
-}
-
-#ov1  .borderRadiusTop {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -4686,7 +4913,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
-#ov1  .textOpacity0 {
+#ov1  .textOpacity0,
+#ov1 .opacity0 {
   opacity: 0;
 }
 
@@ -4968,6 +5196,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: 0;
 }
 
+#ov1  .marginLeft05 {
+  margin-left: 0.5px;
+}
+
 #ov1  .marginLeft1 {
   margin-left: 1px;
 }
@@ -5196,8 +5428,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 46px;
 }
 
-
-
 #ov1  .height30 {
   height: 30px;
   line-height: 30px;
@@ -5346,6 +5576,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 40px;
 }
 
+#ov1  .padding010 {
+  padding: 0px 10px;
+}
 #ov1  .padding015 {
   padding: 0px 15px;
 }
@@ -5521,9 +5754,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 260px;
 }
 
-#ov1 .width270 {
-  width: 270px;
-}
 #ov1 .width380 {
   width: 380px;
 }
@@ -5603,6 +5833,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0.7;
 }
 
+#ov1 .disabled-icon {
+  pointer-events: none;
+}
+
+#ov1 .disabled-icon:before,
+#ov1 .disabled [class *= "ion-"]:before {
+  opacity: 0.2;
+}
+
 #ov1 .overflowVisible {
   overflow: visible;
 }
@@ -5623,10 +5862,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
+/* to fade out a visible element, add the fadeOut class */
+/* to fade in an element with opacity 0, add the fadeIn class */
 
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+#ov1 .fadeIn {
+  opacity: 1;
+  pointer-events: auto;
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -5678,6 +5925,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: auto;
   display: block;
 }
+
+#ov1 .marginCenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 
 #ov1 .heightAuto {
   height: auto;
@@ -5753,37 +6007,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy,
 #ov1.notFancy *,
-#ov1.notFancy * *,
-#ov1.notFancy * * *,
-#ov1.notFancy * * * *,
-#ov1.notFancy * * * * *,
-#ov1.notFancy * * * * * *,
-#ov1.notFancy * * * * * * *,
-#ov1.notFancy * * * * * * * *,
-#ov1.notFancy * * * * * * * * * ,
-#ov1.notFancy * * * * * * * * * *,
 #ov1.notFancy #userPage,
 #ov1.notFancy #userPage *,
-#ov1.notFancy #userPage * *,
-#ov1.notFancy #userPage * * *,
-#ov1.notFancy #userPage * * * *,
-#ov1.notFancy #userPage * * * * *,
-#ov1.notFancy #userPage * * * * * *,
-#ov1.notFancy #userPage * * * * * * *,
-#ov1.notFancy #userPage * * * * * * * *,
-#ov1.notFancy #userPage * * * * * * * * * ,
-#ov1.notFancy #userPage * * * * * * * * * *,
 #ov1.notFancy #obContainer,
 #ov1.notFancy #obContainer *,
-#ov1.notFancy #obContainer * *,
-#ov1.notFancy #obContainer * * *,
-#ov1.notFancy #obContainer * * * *,
-#ov1.notFancy #obContainer * * * * *,
-#ov1.notFancy #obContainer * * * * * *,
-#ov1.notFancy #obContainer * * * * * * *,
-#ov1.notFancy #obContainer * * * * * * * *,
-#ov1.notFancy #obContainer * * * * * * * * * ,
-#ov1.notFancy #obContainer * * * * * * * * * *,
 #ov1.notFancy #overlay,
 #ov1.notFancy #sideBar,
 #ov1.notFancy #pageNav,
@@ -5872,9 +6099,57 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy .notFancyDarkBackground,
 #ov1.notFancy #obContainer .notFancyDarkBackground {
-  background: #262626;
+  background: #262626 !important;
 }
 
+#ov1.notFancy .disabled,
+#ov1.notFancy #userPage .disabled,
+#ov1.notFancy #obContainer .disabled,
+#ov1.notFancy #overlay .disabled,
+#ov1.notFancy #sideBar .disabled,
+#ov1.notFancy #pageNav .disabled,
+#ov1.notFancy #modalHolder .disabled,
+#ov1.notFancy #messageModal .disabled,
+#ov1.notFancy #statusBar .disabled {
+  opacity: 0.2 !important;
+}
+
+#ov1.notFancy .disabled2,
+#ov1.notFancy #userPage .disabled2,
+#ov1.notFancy #obContainer .disabled2,
+#ov1.notFancy #overlay .disabled2,
+#ov1.notFancy #sideBar .disabled2,
+#ov1.notFancy #pageNav .disabled2,
+#ov1.notFancy #modalHolder .disabled2,
+#ov1.notFancy #messageModal .disabled2,
+#ov1.notFancy #statusBar .disabled2 {
+  opacity: 0.7 !important;
+}
+
+/* add a shadow and a glow, so modal close buttons are still barely visible if the user picks a bad color */
+#ov1 .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #userPage .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #obContainer .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #messageModal .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #userPage .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #obContainer .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #messageModal .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 .js-modal-close [class *= "ion-"]:before,
+#ov1 #userPage .js-modal-close [class *= "ion-"]:before,
+#ov1 #obContainer .js-modal-close [class *= "ion-"]:before,
+#ov1 #modalHolder .js-modal-close [class *= "ion-"]:before,
+#ov1 #messageModal .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy #userPage .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy #obContainer .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy #modalHolder .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy #messageModal .js-modal-close [class *= "ion-"]:before,
+#ov1 #modalHolder .js-closeBuyWizardModal [class *= "ion-"]:before {
+  text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
+}
 
 /* hide unfinished elements */
 
@@ -5886,4 +6161,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
   display: none; /* hide in production */
+}
+
+#ov1.notFancy .addressFormOpened .buyWizardMap .blurMore {
+  display: none;
+}
+
+.buyWizardMap .mapWrap {
+  background-color: #eeeae1;
+  height: 100%;  
 }

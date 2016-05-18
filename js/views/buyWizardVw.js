@@ -10,6 +10,7 @@ var __ = require('underscore'),
     saveToAPI = require('../utils/saveToAPI'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
+    app = require('../App').getApp(),
     clipboard = require('clipboard');
 Backbone.$ = $;
 
@@ -36,7 +37,7 @@ module.exports = baseVw.extend({
     'click .js-closeBuyWizardModal': 'closeWizard',
     'click .js-buyWizardNewAddressBtn': 'createNewAddress',
     'click .js-buyWizardModeratorRadio': 'modSelected',
-    'click .js-buyWizardModNext': 'accNext',
+    'click .js-buyWizardModNext': 'modNext',
     'click .js-buyWizardModBack': 'modBack',
     'click .js-buyWizardReturnNext': 'returnNext',
     'click .js-buyWizardAddressBack': 'addressPrev',
@@ -44,7 +45,7 @@ module.exports = baseVw.extend({
     'click .js-buyWizardWalletNext': 'walletNowClick',
     'click .js-buyWizardHasWallet': 'hasWalletClick',
     'click .js-buyWizardDoesntHaveWallet': 'doesntHaveWallet',
-    'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
+    'click .js-buyWizardNewAddressCancel': 'onAddressCancel',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
     'click .js-buyWizardSendPurchase': 'sendPurchase',
     'click .js-buyWizardPurchaseBack': 'backPurchase',
@@ -55,7 +56,6 @@ module.exports = baseVw.extend({
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
     'click input[name="radioPaymentType"]': 'changePaymentType',
-    'blur .js-buyWizardPostalInput': 'updateMap',
     'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
     'blur input': 'validateInput'
   },
@@ -68,8 +68,12 @@ module.exports = baseVw.extend({
     /* expected options are:
     userModel: this is set by main.js, then by a call to the settings API.
     socketView: this is a reference to the socketView
+    worldwide: does this ship worldwide
+    shippingRegions: countries this item ships to
      */
     this.userModel = this.options.userModel;
+    this.worldwide = this.options.worldwide;
+    this.shippingRegions = this.options.shippingRegions;
     this.hideMap = true;
     this.orderID = "";
     this.model.set('selectedModerator', "");
@@ -80,7 +84,7 @@ module.exports = baseVw.extend({
     this.countryList = countries.get('countries');
     this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput" required></select>');
     __.each(this.countryList, function(countryFromList, i){
-      var countryOption = $('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+countryFromList.name+'</option>');
+      var countryOption = $('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+polyglot.t(`countries.${countryFromList.dataName}`)+'</option>');
       countryOption.attr("selected",self.options.userModel.get('country') == countryFromList.dataName);
       self.countriesSelect.append(countryOption);
     });
@@ -171,10 +175,12 @@ module.exports = baseVw.extend({
       self.registerChild(self.buyDetailsView);
 
       self.buyAddressesView && self.buyAddressesView.remove();
-      self.buyAddressesView = new buyAddressesVw({model: self.model, userModel: self.userModel});
+      self.buyAddressesView = new buyAddressesVw({model: self.model, userModel: self.userModel, worldwide: self.worldwide, shippingRegions: self.shippingRegions});
       self.registerChild(self.buyAddressesView);
 
       self.listenTo(self.buyAddressesView, 'setAddress', self.addressSelected);
+
+      self.$buyWizardMap = self.$('.js-buyWizardMap');
 
       //init the accordion
       self.initAccordion('.js-buyWizardAccordion');
@@ -221,37 +227,37 @@ module.exports = baseVw.extend({
   },
 
   showMaps: function(){
-    "use strict";
     this.$el.find('.js-buyWizardMap').removeClass('hide');
-    this.$el.find('.js-buyWizardMapPlaceHolder').removeClass('hide');
-    this.hideMap = false;
   },
 
   hideMaps: function(){
-    "use strict";
     this.$el.find('.js-buyWizardMap').addClass('hide');
-    this.$el.find('.js-buyWizardMapPlaceHolder').addClass('hide');
-    this.hideMap = true;
   },
 
   createNewAddress: function(){
-    "use strict";
     var self = this;
     this.$el.find('.js-buyWizardAddress').addClass('hide');
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
     this.$el.find('#buyWizardNameInput').focus();
+    this.$el.addClass('addressFormOpened');
+    this.$buyWizardMap.find('iframe').addClass('blurMore');
+
     //set chosen inputs
-    $('.chosen').chosen();
+    $('.chosen').chosen({ search_contains: true });
   },
 
-  hideNewAddress: function(){
-    "use strict";
+  onAddressCancel: function(e) {
+    this.$buyWizardMap.find('iframe').removeClass('blurMore');
+    this.hideNewAddress();
+  },
+
+  hideNewAddress: function(e){
     this.$el.find('.js-buyWizardAddress').removeClass('hide');
     this.$el.find('.js-buyWizardNewAddress').addClass('hide');
+    this.$el.removeClass('addressFormOpened');
   },
 
   addressSelected: function(selectedAddress){
-    "use strict";
     this.model.set('selectedAddress', selectedAddress);
     this.displayMap(selectedAddress);
     this.$el.find('.js-buyWizardAddressNext').removeClass('disabled');
@@ -263,6 +269,11 @@ module.exports = baseVw.extend({
 
   walletNowClick: function(){
     this.accGoToID("#BuyWizardPaymentType");
+  },
+
+  modNext: function(){
+    this.accNext();
+    this.setTotalPrice(); //in case it isn't set yet
   },
 
   modBack: function(){
@@ -364,28 +375,46 @@ module.exports = baseVw.extend({
   },
 
   displayMap: function(address){
-    "use strict";
-    var addressString = "";
-    //only create new map if address is valid
+    var addressString = "",
+        $currentIframe;
+
+    this.$buyWizardMap.find('.js-iframe-pending, .js-iframe-leaving')
+      .remove();
+    $currentIframe = this.$buyWizardMap.find('iframe');
+    $currentIframe.addClass('blurMore');
+
     if(address && address.street && address.city && address.state && address.postal_code) {
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
-      addressString = encodeURIComponent(addressString);
-      var hideClass = this.hideMap ? "hide" : "";
-      var newMap = '<div class="flexContainer"><iframe class="' + hideClass + ' js-buyWizardMap"' +
-          'width="525" height="350" frameborder="0" style="border:0; margin-top: 0"' +
-          'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe></div>';
-      this.$el.find('.js-buyWizardMap').html(newMap);
+    } else {
+      // if address is invalid, we'll create a dummy address for which google maps will show a map of the world
+      addressString = "123 Street" + ", " + "City" + ", " + "State" + " " + "12345" + " " + "Country";      
     }
-  },
 
-  updateMap: function(){
-    var address = [];
-    address.street = $('#buyWizardStreetInput').val();
-    address.city = $('#buyWizardCityInput').val();
-    address.state = $('#buyWizardStateInput').val();
-    address.postal_code = $('#buyWizardPostalInput').val();
+    addressString = encodeURIComponent(addressString);
+    $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="350" frameborder="0" style="border:0; margin-top: 0; height: 262px" />');
+       
+    if ($currentIframe.length) {
+      this.$buyWizardMap.find('.js-mapSpinner').removeClass('hide');
+      $iFrame.insertBefore($currentIframe);
+    } else {
+      this.$buyWizardMap.find('.mapWrap')
+        .prepend($iFrame);
+    }
+    
+    $iFrame.on('load', () => {
+      this.$buyWizardMap.find('.js-mapSpinner').addClass('hide');
+      
+      $currentIframe.addClass('js-iframe-leaving')
+        .fadeOut({
+          duration: 'slow',
+          complete: () => {
+            $currentIframe.remove();
+          }
+        });
+      $iFrame.removeClass('js-iframe-pending');
+    });
 
-    this.displayMap(address);
+    $iFrame.attr('src', 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString);
   },
 
   returnNext: function(){
@@ -445,16 +474,16 @@ module.exports = baseVw.extend({
         formData = new FormData(),
         moderatorID = this.model.get('selectedModerator').guid || "",
         selectedAddress = this.model.get('selectedAddress'),
-        bitCoinReturnAddr = this.$el.find('#buyWizardBitcoinAddressInput').val();
+        bitCoinReturnAddr = this.$('#buyWizardBitcoinAddressInput').val();
 
-    if (!this.$el.find('#buyWizardQuantity')[0].checkValidity()){
+    if (!this.$('#buyWizardQuantity')[0].checkValidity()){
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
       return;
     }
 
-    this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
-    this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
-    this.$el.find('.js-buyWizardPurchaseBack').addClass('disabled');
+    this.$('.js-buyWizardSendPurchase').addClass('hide');
+    this.$('.js-buyWizardPendingMsg').removeClass('hide');
+    this.$('.js-buyWizardPurchaseBack').addClass('disabled');
 
     formData.append("id", this.model.get('id'));
 
@@ -472,7 +501,7 @@ module.exports = baseVw.extend({
       formData.append("moderator", moderatorID);
     }
 
-    this.$el.find('.js-buyWizardSpinner').removeClass('hide');
+    this.$('.js-buyWizardSpinner').removeClass('hide');
 
     formData.append("refund_address", bitCoinReturnAddr);
 
@@ -494,7 +523,11 @@ module.exports = baseVw.extend({
         } else {
           messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " +
               window.polyglot.t('errorMessages.checkPurchaseData') + "\n\n Reason: " + data.reason);
-          self.$el.find('.js-buyWizardSpinner').addClass('hide');
+          self.$('.js-buyWizardSpinner').addClass('hide');
+          //re-enable form so they can try again
+          self.$('.js-buyWizardSendPurchase').removeClass('hide');
+          self.$('.js-buyWizardPendingMsg').addClass('hide');
+          self.$('.js-buyWizardPurchaseBack').removeClass('disabled');
         }
       },
       error: function (jqXHR, status, errorThrown) {
@@ -517,7 +550,6 @@ module.exports = baseVw.extend({
 
     if(!data) {
       throw new Error('Data must be provided to the showPayAddress function');
-      return;
     }
 
     var totalBTCPrice = 0,
@@ -531,7 +563,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
     
-    payHREF = "bitcoin://"+ data.payment_address+"?amount="+totalBTCPrice;
+    payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;
     if(localStorage.getItem('AdditionalPaymentData') != "false") {
         payHREF += "&label="+storeName+"&message="+message;
     }
@@ -556,14 +588,14 @@ module.exports = baseVw.extend({
     var totalPrice = this.model.get('totalPrice'),
         totalBTCPrice = this.model.get('totalBTCDisplayPrice'),
         userCurrency = this.model.get('userCurrencyCode'),
-        totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
+        totalDisplayPrice = (userCurrency == "BTC") ? app.intlNumFormat(totalPrice, 8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalPrice);
-    this.$el.find('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
-    this.$el.find('.js-buyWizardDetailsBTCTotal').text(totalBTCPrice.toFixed(8));
+    this.$('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
+    this.$('.js-buyWizardDetailsBTCTotal').text(app.intlNumFormat(totalBTCPrice, 8));
   },
 
   copyPayAddress: function(){

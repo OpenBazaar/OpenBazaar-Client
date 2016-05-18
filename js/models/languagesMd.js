@@ -11,6 +11,18 @@ module.exports = Backbone.Model.extend({
         langCode: "en-US"
       },
       {
+        langName: "中文 (Chinese, S)",
+        langCode: "zh-CN"
+      },
+      {
+        langName: "Czech (Czech)",
+        langCode: "cs"
+      },
+      {
+        langName: "Croatian (Croatian, Croatia)",
+        langCode: "hr-HR"
+      },
+      {
         langName: "Dansk (Danish)",
         langCode: "da"
       },
@@ -28,7 +40,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "Espa&ntilde;ol (Spanish)",
-        langCode: "sp"
+        langCode: "es"
       },
       {
         langName: "Italiano (Italian)",
@@ -45,6 +57,14 @@ module.exports = Backbone.Model.extend({
       {
         langName: "Greek (Greek)",
         langCode: "el"
+      },
+      {
+        langName: "日本語 (Japanese, Japan)",
+        langCode: "ja-JP"
+      },
+      {
+        langName: "한국어 (Korean)",
+        langCode: "ko"
       },
       {
         langName: "Polski (Polish)",
@@ -71,24 +91,12 @@ module.exports = Backbone.Model.extend({
         langCode: "tr"
       },
       {
-        langName: "Uzbek (Uzbek)",
-        langCode: "uz"
-      },
-      {
-        langName: "中文 (Chinese, S)",
-        langCode: "zh-CN"
-      },
-      {
-        langName: "한국어 (Korean)",
-        langCode: "ko"
-      },
-      {
-        langName: "日本語 (Japanese, Japan)",
-        langCode: "ja-JP"
-      },
-      {
         langName: "Українська (Ukrainian)",
         langCode: "uk"
+      },
+      {
+        langName: "Uzbek (Uzbek)",
+        langCode: "uz"
       },
       {
         langName: "Klingon (Klingon)",

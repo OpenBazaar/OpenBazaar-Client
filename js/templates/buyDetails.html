@@ -2,9 +2,9 @@
 <div class="flexRow">
   <div class="flexRow custCol-border borderBottom hide js-buyWizardOrderSummary">
     <div class="rowItem padding2015">
-      <%= polyglot.t('buyFlow.summaryMsg1', {recipient: ob.recipient}) %>.
-      <%= polyglot.t('buyFlow.summaryMsg2') %> <%= ob.vendor_offer.listing.item.process_time %>. <%= polyglot.t('buyFlow.summaryMsg3') %>
-      <a class="js-goToPurchases"><%= polyglot.t('buyFlow.purchasesPage') %>.</a>
+      <% ob.purchasesPageLink = '<a class="js-goToPurchases">' + polyglot.t('buyFlow.purchasesPage') + '</a>' %>
+      <%= polyglot.t('buyFlow.summaryMsg1', { recipient: ob.recipient }) %>.
+      <%= polyglot.t('buyFlow.summaryMsg2', { time: ob.vendor_offer.listing.item.process_time }) %>. <% print(polyglot.t('buyFlow.summaryMsg3', { purchasesPageLink: ob.purchasesPageLink })) %>.
     </div>
   </div>
   <div class="flexRow custCol-border borderBottom">
@@ -38,11 +38,9 @@
         </form>
       </div>
     </div>
-    <div class="flexCol-4">
+    <div class="flexCol-4 overflowHidden">
       <div class="rowItem padding2015 alignRight marginTop20">
-        <span class="noOverflow fontSize13 js-buyWizardBTCPrice">
-          <%= ob.vendorBTCPrice.toFixed(4) %> BTC
-        </span>
+        <span class="noOverflow fontSize13 js-buyWizardBTCPrice"></span>
         <span class="noOverflow textOpacity75 fontSize13 js-buyWizardPrice">
           <% if(ob.userCurrencyCode != 'BTC'){ %>
             (<%= ob.displayPrice %>)
@@ -84,9 +82,9 @@
         <% } else { %>
           <span class="noOverflow fontSize13 js-buyWizardBTCShippingPrice">
             <% if(ob.shippingType === "domestic") { %>
-              <%= ob.domesticShippingBTC.toFixed(8) %> BTC
+              <%= ob.intlNumFormat(ob.domesticShippingBTC, 8) %> BTC
             <% }else{ %>
-              <%= ob.internationalShippingBTC.toFixed(8) %> BTC
+              <%= ob.intlNumFormat(ob.internationalShippingBTC, 8) %> BTC
             <% } %>
           </span>
           <span class="noOverflow js-buyWizardShippingPrice textOpacity75 fontSize13">
