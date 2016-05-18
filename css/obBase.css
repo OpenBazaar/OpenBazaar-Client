@@ -1506,14 +1506,6 @@ h5 {
   top: 35px;
 }
 
-/*.modal-fullscreen .modal-childMain {
-  top: 76px;
-}
-
-.modal-fullscreen.modal.modal-navOffset .modal-childMain {
-  top: 35px;
-}
-*/
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
@@ -4373,7 +4365,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 /*
-   Different types of modals (e.g. loading, page-connect-modal, server-connect) have
+   Different types of modals (e.g. loading, page-connect-modal, server-connect...) have
    different dimensions (e.g. some cover chat, some cover nav bar...). We'll be 
    fudging the position of loading spinners and content so that if these modals
    are shown in succession, there is no "jump" of the spinner / content.

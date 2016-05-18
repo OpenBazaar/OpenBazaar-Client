@@ -67,7 +67,6 @@ var Polyglot = require('node-polyglot'),
     setServerUrl,
     guidCreating,
     platformClass;
-    // appBar;
 
 if (process.platform === 'darwin') {
   platformClass = 'platform-mac';
@@ -368,18 +367,7 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 };
 
 var profileLoaded;
-var moo;
 var loadProfile = function(landingRoute, onboarded) {
-  if (!moo) {
-    moo = 'shoo';
-  
-    setTimeout(() => {
-      loadProfile();
-    }, 2000);
-
-    return;
-  }
-
   var externalRoute = remote.getGlobal('externalRoute');
 
   landingRoute = landingRoute && landingRoute != undefined ? landingRoute : '#';
