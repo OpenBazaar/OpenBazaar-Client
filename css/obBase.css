@@ -228,7 +228,7 @@ form {
   /* since the loading spinners are centered in a manner
      where chat is excluded from the width, we'll follow
      suit here so our title is centered with the spinners */
-  width: calc(100% -45px);
+  width: calc(100% - 45px);
 }
 
 #pageNav {
