@@ -182,7 +182,7 @@ module.exports = baseVw.extend({
     });
     var shipsTo = this.$el.find('#shipsTo');
     __.each(countryList, function(countryFromList, i){
-      var content = !i ? countryFromList.name : polyglot.t(`countries.${countryFromList.dataName}.name`);
+      var content = !i ? countryFromList.name : polyglot.t(`countries.${countryFromList.dataName}`);
 
       shipsTo.append(
         `<option value="${countryFromList.dataName}">${content}</option>`
