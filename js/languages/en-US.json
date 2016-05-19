@@ -187,6 +187,8 @@
   "SMTPRecipient": "Recipient Email Address",
   "SMTPSenderExample": "sender@gmail.com",
   "SMTPSender": "Sender Email Address",
+  "TestSMTPButton": "Test SMTP Server",
+  "TestSMTPButtonTooltip": "Test connection to the SMTP server",
   "ServerIPPort": "Server IP:Port",
   "All": "All",
   "Name": "Name",
@@ -531,7 +533,12 @@
     "refundAlreadySent": "The refund has already been successfully sent for this order",
     "serverTimeout": "No response was received from the server. It may be unreachable or taking a very long time to respond.",
     "noData": "No data is available for the options you have selected.",
-    "loadingViewError": "Loading this page is taking longer than expected."
+    "loadingViewError": "Loading this page is taking longer than expected.",
+    "smtpServerError": "SMTP Connection Error",
+    "smtpServerSuccess": "SMTP Connection Success",
+    "noSMTPConnection": "The connection to the SMTP server failed.",
+    "badSMTPAuthentication": "The username/password combination used failed.",
+    "goodSMTPAuthentication": "You have successfully connected to the SMTP server."
   },
   "pageConnectingMessages": {
     "listingConnect": "Connecting to listing ${listing}",
