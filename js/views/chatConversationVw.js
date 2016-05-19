@@ -82,6 +82,18 @@ module.exports = baseVw.extend({
     this.scrollHandler = __.bind(
         __.throttle(this.onScroll, 100), this
     );    
+
+      
+    $(document).on('click', this.onDocumentClick.bind(this));
+  },
+
+  onDocumentClick: function(e) {
+    if (
+      e.target !== this.$settingsMenu[0] &&
+      !$(e.target).parents('.js-chatSettingsMenu').length
+    ) {
+      this.closeConvoSettings();
+    }
   },
 
   onScroll: function(e) {
@@ -148,11 +160,13 @@ module.exports = baseVw.extend({
   },
 
   closeConvoSettings: function() {
-    this.$('.chatConversationMenu').addClass('hide');
+    this.$settingsMenu.addClass('hide');
   },
 
   toggleConvoSettings: function() {
-    this.$('.chatConversationMenu').toggleClass('hide');
+    this.$settingsMenu.toggleClass('hide');
+
+    return false;
   },
 
   onBlockClick: function() {
@@ -232,6 +246,7 @@ module.exports = baseVw.extend({
       this.$loadingSpinner = this.$messagesScrollContainer.find('.js-loadingSpinner');
       this.$messagesContainer = this.$messagesScrollContainer.find('.js-messagesContainer');
       this.$msgTextArea = this.$('textarea');
+      this.$settingsMenu = this.$('.js-chatSettingsMenu');
 
       if (this.collection.length) {
         this.collection.forEach((md) => {
@@ -252,6 +267,7 @@ module.exports = baseVw.extend({
 
   remove: function() {
     this.$scrollContainer && this.$scrollContainer.off('scroll', this.scrollHandler);
+    $(document).off('click', this.onDocumentClick);
 
     baseVw.prototype.remove.apply(this, arguments);    
   }  
