@@ -2494,6 +2494,8 @@ div.chatSearchOut .chatSearchIcon {
 .backToTop {
   background-color: #252525;
   bottom: 0; 
+  left: 10px;
+  border-top-left-radius: 4px; 
   border-top-right-radius: 4px; 
   cursor: pointer;
   opacity: .85;
