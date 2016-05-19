@@ -578,7 +578,7 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new browserWindow({
     "width": 1200,
-    "height": 720,
+    "height": 760,
     "minWidth": 1024,
     "minHeight": 700,
     "center": true,
