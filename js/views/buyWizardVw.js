@@ -391,7 +391,7 @@ module.exports = baseVw.extend({
     }
 
     addressString = encodeURIComponent(addressString);
-    $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="350" frameborder="0" style="border:0; margin-top: 0; height: 262px" />');
+    $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="250" frameborder="0" style="border:0; margin-top: 0; height: 250px; clip: rect(0,0,0,0)" />');
        
     if ($currentIframe.length) {
       this.$buyWizardMap.find('.js-mapSpinner').removeClass('hide');

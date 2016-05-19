@@ -207,7 +207,7 @@ form {
   width: 100%;
   z-index: 14;
   background-color: #327EB8;
-  padding: 10px 8px;
+  padding: 7px 8px 6px;
   box-sizing: border-box;
   -webkit-app-region: drag;
 }
@@ -215,13 +215,17 @@ form {
 #appBar .windowControls {
   position: absolute;
   left: 8px;
-  top: 8px;  
+  top: 6px;  
 }
 
 html:not(.platform-mac) #appBar .windowControls {
   left: auto;
   right: 8px;
-  top: 8px;
+  top: 5px;
+}
+
+#appBar .btn {
+  -webkit-app-region: no-drag;
 }
 
 #appBar .title {
@@ -233,7 +237,7 @@ html:not(.platform-mac) #appBar .windowControls {
 
 #pageNav {
   position: fixed;
-  top: 35px;
+  top: 28px;
   -webkit-app-region: no-drag;
   z-index: 13;
 }
@@ -248,7 +252,7 @@ html:not(.platform-mac) #appBar .windowControls {
 }
 
 #pageNav .navBar.bar {
-  padding: 10px 8px;
+  padding: 0 8px 10px;
 }
 
 #pageNav .modal-about .navBar.bar {
@@ -268,7 +272,7 @@ html:not(.platform-mac) #appBar .windowControls {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 85px;
+  top: 68px;
   width:230px;
   background-color: #252525;
   border-left: 0;
@@ -1065,7 +1069,7 @@ label.fieldItem {
   display: block;
   width: 100%;
   height: 100%;
-  top: 35px;
+  top: 28px;
   left: 0;
   transition: opacity .05s cubic-bezier(0, 0, 0.2, 1),
               width 0.5s ease;
@@ -1082,7 +1086,7 @@ label.fieldItem {
 }
 
 .modal.modal-navOffset {
-  top: 85px;
+  top: 68px;
 }
 
 .modalHolder {
@@ -1483,17 +1487,17 @@ h5 {
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 85px;;
+  top: 68px;;
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 85px;
+  top: 68px;
 }
 
 .modal-opaque.modal-navBlock {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 85px, rgba(7,65,97,1) 86px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 68px, rgba(7,65,97,1) 69px);
   top: 0;
   padding-top: 100px;
 }
@@ -1503,7 +1507,7 @@ h5 {
   which should never be covered.
 */
 .modal-fullscreen {
-  top: 35px;
+  top: 28px;
 }
 
 .modal-childMain {
@@ -4640,7 +4644,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
   -webkit-app-region: no-drag;
   position: relative;
-  top: 85px;
+  top: 68px;
   box-sizing: border-box;
 }
 
