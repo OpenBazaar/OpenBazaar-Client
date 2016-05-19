@@ -82,7 +82,6 @@ module.exports = baseVw.extend({
     this.scrollHandler = __.bind(
         __.throttle(this.onScroll, 100), this
     );    
-
       
     $(document).on('click', this.onDocumentClick.bind(this));
   },

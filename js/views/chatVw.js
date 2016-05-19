@@ -428,7 +428,6 @@ module.exports = baseVw.extend({
   },
 
   closeConversation: function() {
-    console.log('close convo yo');
     this.$('.chatConversationHeads').removeClass('chatConversationHeadsCompressed textOpacity50');
     this.$('.chatSearch').removeClass('textOpacity50');
     this.$convoContainer.addClass('chatConversationContainerHide');
