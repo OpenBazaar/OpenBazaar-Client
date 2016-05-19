@@ -272,7 +272,7 @@ html:not(.platform-mac) #appBar .windowControls {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 68px;
+  top: 78px;
   width:230px;
   background-color: #252525;
   border-left: 0;
@@ -1086,7 +1086,7 @@ label.fieldItem {
 }
 
 .modal.modal-navOffset {
-  top: 68px;
+  top: 78px;
 }
 
 .modalHolder {
@@ -1487,17 +1487,17 @@ h5 {
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 68px;;
+  top: 78px;;
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 68px;
+  top: 78px;
 }
 
 .modal-opaque.modal-navBlock {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 68px, rgba(7,65,97,1) 69px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 78px, rgba(7,65,97,1) 79px);
   top: 0;
   padding-top: 100px;
 }
@@ -4644,7 +4644,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
   -webkit-app-region: no-drag;
   position: relative;
-  top: 68px;
+  top: 78px;
   box-sizing: border-box;
 }
 
