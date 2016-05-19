@@ -1,10 +1,10 @@
 'use strict';
 
 var __ = require('underscore'),
+    $ = require('jquery'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var loadTemplate = require('../utils/loadTemplate'),
+    velocity = require('velocity-animate'),
+    loadTemplate = require('../utils/loadTemplate'),
     baseVw = require('./baseVw'),
     itemShortView = require('./itemShortVw'),
     itemShortModel = require('../models/itemShortMd'),
@@ -27,7 +27,8 @@ module.exports = baseVw.extend({
     'focus .js-homeSearchItems': 'searchItemsFocus',
     'blur .js-homeSearchItems': 'searchItemsBlur',
     'click .js-homeListingsFollowed': 'clickListingsFollowed',
-    'click .js-homeListingsAll': 'clickListingsAll'
+    'click .js-homeListingsAll': 'clickListingsAll',
+    'click .backToTop': 'clickBackToTop'
   },
 
   initialize: function(options){
@@ -150,46 +151,50 @@ module.exports = baseVw.extend({
   render: function(){
     var self = this;
     $('#content').html(this.$el);
-    loadTemplate('./js/templates/home.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate());
-      self.setState(self.state, self.searchItemsText);
-      if(self.model.get('page').profile.vendor == true) {
-        self.$el.find('.js-homeCreateStore').addClass('hide');
-        self.$el.find('.js-homeMyPage').addClass('show');
-        self.$el.find('.js-homeCreateListing').addClass('show');
-      }else{
-        self.$el.find('.js-homeCreateStore').addClass('show');
-        self.$el.find('.js-homeCreateListing').addClass('hide');
-      }
+    loadTemplate('./js/templates/backToTop.html', function(backToTopTmpl) {
+      loadTemplate('./js/templates/home.html', function(loadedTemplate) {
+        self.$el.html(loadedTemplate({
+          backToTopTmpl: backToTopTmpl
+        }));
 
-      //get vendors and items
-      self.loadingVendors = true;
-      self.socketView.getVendors(self.socketUsersID);
-      //set the filter
-      if(localStorage.getItem('homeShowAll') == "yes"){
-        self.setListingsAll();
-        self.loadAllItems();
-      } else {
-        self.setListingsFollowed();
-        self.loadFollowedItems();
-      }
+        self.setState(self.state, self.searchItemsText);
+        if(self.model.get('page').profile.vendor == true) {
+          self.$el.find('.js-homeCreateStore').addClass('hide');
+          self.$el.find('.js-homeMyPage').addClass('show');
+          self.$el.find('.js-homeCreateListing').addClass('show');
+        }else{
+          self.$el.find('.js-homeCreateStore').addClass('show');
+          self.$el.find('.js-homeCreateListing').addClass('hide');
+        }
 
-      //listen to scrolling on container
-      self.scrollHandler = __.bind(
-        __.throttle(self.onScroll, 100),
-        self
-      );
-      self.obContainer.on('scroll', self.scrollHandler);
+        //get vendors and items
+        self.loadingVendors = true;
+        self.socketView.getVendors(self.socketUsersID);
+        //set the filter
+        if(localStorage.getItem('homeShowAll') == "yes"){
+          self.setListingsAll();
+          self.loadAllItems();
+        } else {
+          self.setListingsFollowed();
+          self.loadFollowedItems();
+        }
 
-      //populate search field
-      if(self.searchItemsText){
-        self.$el.find('.js-homeSearchItems').val("#" + self.searchItemsText);
-        self.$el.find('.js-homeListingToggle').addClass('hide');
-        $('#obContainer').scrollTop(0);
-      }
+        //listen to scrolling on container
+        self.scrollHandler = __.bind(
+          __.throttle(self.onScroll, 100),
+          self
+        );
+        self.obContainer.on('scroll', self.scrollHandler);
 
+        //populate search field
+        if(self.searchItemsText){
+          self.$el.find('.js-homeSearchItems').val("#" + self.searchItemsText);
+          self.$el.find('.js-homeListingToggle').addClass('hide');
+          $('#obContainer').scrollTop(0);
+        }
 
-
+        self.$backToTop = self.$('.backToTop');
+      });
     });
   },
 
@@ -397,7 +402,16 @@ module.exports = baseVw.extend({
 
   unblockUserClick: function(e) {
     this.userModel.unblockUser(e.view.model.get('guid'));
-  },  
+  },
+
+  clickBackToTop: function() {
+    this.obContainer.velocity('scroll', {
+      offset: 0,
+      complete: () => {
+        this.$backToTop.removeClass('slideUp');
+      }
+    });
+  },
 
   onScroll: function(){
     if(this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight && !this.searchItemsText){
@@ -410,6 +424,15 @@ module.exports = baseVw.extend({
         this.loadingVendors = true;
         this.socketView.getVendors(this.socketUsersID);
       }
+    }
+
+    if (
+      this.state === "products" && this.obContainer[0].scrollTop > 180 ||
+      this.state === "vendors" && this.obContainer[0].scrollTop > 140
+    ) {
+      this.$backToTop.addClass('slideUp');
+    } else {
+      this.$backToTop.removeClass('slideUp');
     }
   },
 

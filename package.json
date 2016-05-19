@@ -41,6 +41,7 @@
     "sortablejs": "^1.4.2",
     "taggle": "1.6.1",
     "underscore": "1.8.3",
+    "velocity-animate": "^1.2.3",
     "winreg": "^1.1.1",
     "yargs": "^4.1.0"
   },
