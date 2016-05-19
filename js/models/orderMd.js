@@ -104,10 +104,10 @@ module.exports = window.Backbone.Model.extend({
       response.dispute_resolution.resolution.vendor_payout = response.dispute_resolution.resolution.vendor_payout || 0;
     }
 
-    response.serverUrl = this.serverUrl;
-    response.bitcoinValidationRegex = config.bitcoinValidationRegex;
-    response.transactionType = this.transactionType;
-    response.userGuid = this.userGuid;
+    //response.serverUrl = this.serverUrl;
+    //response.bitcoinValidationRegex = config.bitcoinValidationRegex;
+    //response.transactionType = this.transactionType;
+    //response.userGuid = this.userGuid;
 
     response.vendorAvatarURL = localStorage.getItem('userAvatar-'+response.vendor_offer.listing.id.guid);
     response.buyerAvatarURL = localStorage.getItem('userAvatar-'+response.buyer_order.order.id.guid);
@@ -203,12 +203,12 @@ module.exports = window.Backbone.Model.extend({
   initialize: function(options){
     this.userCurrencyCode = options.cCode;
     this.userBTCAve = options.btAve;
-    this.serverUrl = options.serverUrl;
-    this.transactionType = options.transactionType;
+    //this.serverUrl = options.serverUrl;
+    //this.transactionType = options.transactionType;
     //this.countries = new countriesMd();
     //this.countryArray = this.countries.get('countries');
-    this.avatarURL = options.avatarURL;
-    this.userGuid = options.userGuid;
+    //this.avatarURL = options.avatarURL;
+    //this.userGuid = options.userGuid;
   }
 
 });

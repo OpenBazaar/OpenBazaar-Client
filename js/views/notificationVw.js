@@ -46,7 +46,7 @@ module.exports = baseVw.extend({
         Backbone.history.navigate('#transactions/sales/' + this.model.get('order_id'), {trigger: true});
         break;
       case "ORDER":
-        Backbone.history.navigate('#transactions/sales/' + this.model.get('subject'), {trigger: true});
+        Backbone.history.navigate('#transactions/sales/' + this.model.get('subject') +'/discussion', {trigger: true});
         break;
     }
 

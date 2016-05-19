@@ -569,10 +569,11 @@
         <span class="ion-social-bitcoin fontSize12 marginRight2 textOpacity1"></span>
         <%= polyglot.t('Funds') %>
       </a>
-      <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-discussionTab paddingRight18" data-tab="discussion">
+      <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-discussionTab paddingRight18 positionWrapper" data-tab="discussion">
         <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('Discussion') %>
         <span class="pill fontSize12 textOpacity75 marginLeft2 js-discussionCount">0</span>
+        <div class="badge js-unreadBadge" data-count="<%= ob.unread || 0 %>"></div>
       </a>
     </div>
 

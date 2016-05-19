@@ -167,7 +167,7 @@ module.exports = baseVw.extend({
 
     if (data.hasOwnProperty('notification') || data.hasOwnProperty('message') && data.message.subject) {
       notif = data.notification || data.message;
-      username = notif.handle ? notif.handle : notif.guid.substring(0,10) + '...';
+      username = notif.handle ? notif.handle : notif.sender.substring(0,10) + '...';
       avatarHash = notif.image_hash || notif.avatar_hash;
       avatar = avatarHash ? app.serverConfigs.getActive().getServerBaseUrl + '/get_image?hash=' +
         avatarHash + '&guid=' + notif.guid : 'imgs/defaultUser.png';

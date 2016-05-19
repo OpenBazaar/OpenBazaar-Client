@@ -42,6 +42,7 @@ module.exports = baseVw.extend({
     this.options = options;
     this.state = options.state || "purchases";
     this.orderID = options.orderID;
+    this.tabState = options.tabState;
     this.userModel = options.userModel;
     this.userProfile = options.userProfile;
     this.model = new Backbone.Model();
@@ -51,8 +52,8 @@ module.exports = baseVw.extend({
     setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     this.serverUrl = options.userModel.get('serverUrl');
     this.cCode = options.userModel.get('currency_code');
-    this.listenTo(window.obEventBus, "openOrderModal", function(orderID){
-      self.openOrderModal(orderID);
+    this.listenTo(window.obEventBus, "openOrderModal", function(options){
+      self.openOrderModal(options);
     });
     this.searchTransactions;
     this.filterBy; //used for filtering the collections
@@ -140,7 +141,8 @@ module.exports = baseVw.extend({
                   self.openOrderModal({
                     'orderID': self.orderID,
                     'status': orderModel.get('status'),
-                    'transactionType': tType
+                    'transactionType': tType,
+                    'tabState': self.tabState
                   });
                 }
               }
@@ -163,10 +165,38 @@ module.exports = baseVw.extend({
     });
   },
 
+  findOrderByID: function(orderID){
+    var orderModelP = this.purchasesCol.findWhere({ order_id: this.orderID}),
+        orderModelS = this.salesCol.findWhere({ order_id: this.orderID}),
+        orderModelC = this.casesCol.findWhere({ order_id: this.orderID}),
+        orderModel = orderModelP || orderModelS || orderModelC;
+
+    if(orderModelP){
+      tType = "purchases";
+      self.setState('purchases', self.orderID)
+    } else if(orderModelS){
+      tType = "sales";
+      self.setState('sales', self.orderID)
+    } else if(orderModelC){
+      tType = "cases";
+      self.setState('cases', self.orderID)
+    }
+    
+    //don't forget to make this part work to get the model when the socket message comes in
+    return orderModel;
+  },
+
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
     if(data.notification && data.notification.order_id){
       this.getData();
+    } else if(data.message && data.message.subject){
+      //increment the unread count of the order with the message
+      var orderShortDiscBtn = this.$('.js-orderShortDiscusson[data-order="'+ data.message.subject +'"]');
+      var orderShortDiscBtnBadge = orderShortDiscBtn.find('.js-unreadBadge');
+      orderShortDiscBtn.removeClass('hide');
+      var newCount = Number(orderShortDiscBtnBadge.attr('data-count')) +1;
+      orderShortDiscBtnBadge.attr('data-count', newCount);
     }
   },
 
@@ -423,7 +453,8 @@ module.exports = baseVw.extend({
       transactionType: options.transactionType,
       userModel: this.userModel,
       userProfile: this.userProfile,
-      socketView: this.socketView
+      socketView: this.socketView,
+      unread: options.unread
     });
     this.registerChild(orderModalView);
   }
