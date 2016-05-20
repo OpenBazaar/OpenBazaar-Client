@@ -41,6 +41,7 @@ module.exports = baseVw.extend({
     'click .js-copyOutgoingTx': 'copyTx',
     'click .js-closeOrderForm': 'closeOrderForm',
     'click .js-showFundOrder': 'showFundOrder',
+    'click .js-transactionPayCopy': 'copyTransactionPay',
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
     'click .js-startDisputeResend': 'confirmDisputeResend',
@@ -424,6 +425,11 @@ module.exports = baseVw.extend({
         completeData).always(() => {
            targBtn.removeClass('loading');
         });
+  },
+
+  copyTransactionPay: function(e){
+    "use strict";
+    clipboard.writeText($(e.target).data('url'));
   },
 
   checkPayment: function(){

@@ -53,7 +53,9 @@
               <input type="checkbox" class="textSize11px fieldItem thin" id="BuyWizardQRDetailsInput">
               <label for="BuyWizardQRDetailsInput" class="textSize11px"> <%= polyglot.t('AdditionalPaymentDataInfo') %></label>
             </div>
-            <a class="btn btn-txt btn-wide row10 js-transactionPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
+            <a class="btn btn-txt btn-wide row10 js-transactionPayCopy" data-url="<%= ob.buyer_order.order.payment.address %>">
+              <i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %>
+            </a>
             <a class="btn btn-txt btn-wide row10 js-externalLink"
                href="bitcoin:<%= ob.buyer_order.order.payment.address %>?amount=<%= ob.buyer_order.order.payment.amount %>&message=<%= ob.vendor_offer.listing.item.title %>">
               <i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %>
