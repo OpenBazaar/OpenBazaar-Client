@@ -541,7 +541,7 @@ app.on('ready', function() {
     },
     {type: 'separator'},
     {label: 'View Debug Log', type: 'normal', click: function() {
-      var debugPath = serverPath + path.sep + 'debug.txt';
+      var debugPath = serverPath + 'debug.txt';
 
       fs.writeFile(debugPath, serverOut, (err) => {
         if (err) {
@@ -551,6 +551,19 @@ app.on('ready', function() {
         
         require('open')(debugPath);
       });
+    }},
+    {label: 'Send Debug Package', type: 'normal', click: function() {
+      var body = 'OpenBazaar Debug Report\n\n';
+      body += 'OS: ' + os.platform() + ' ' + os.release() + '\n';
+      body += 'Architecture: ' + os.arch() + '\n';
+      body += 'CPUs: ' + JSON.stringify(os.cpus(), null, 2) + '\n';
+      body += 'Free Memory: ' + os.freemem() + '\n';
+      body += 'Total Memory: ' + os.totalmem() + '\n\n';
+      body += 'Debug Log:\n';
+      body += serverOut;
+
+      require('open')('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
+
     }},
     {type: 'separator'},
     {
@@ -565,7 +578,7 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new browserWindow({
     "width": 1200,
-    "height": 720,
+    "height": 760,
     "minWidth": 1024,
     "minHeight": 700,
     "center": true,

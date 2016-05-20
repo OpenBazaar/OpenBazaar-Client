@@ -202,13 +202,45 @@ form {
   width: calc(100% - 230px);
 }
 
-#pageNav {
+#appBar {
   position: fixed;
-  top: 0;
+  width: 100%;
+  z-index: 14;
+  background-color: #327EB8;
+  padding: 7px 8px 6px;
+  box-sizing: border-box;
   -webkit-app-region: drag;
-  z-index: 13;
 }
 
+#appBar .windowControls {
+  position: absolute;
+  left: 8px;
+  top: 6px;  
+}
+
+html:not(.platform-mac) #appBar .windowControls {
+  left: auto;
+  right: 8px;
+  top: 5px;
+}
+
+#appBar .btn {
+  -webkit-app-region: no-drag;
+}
+
+#appBar .title {
+  /* since the loading spinners are centered in a manner
+     where chat is excluded from the width, we'll follow
+     suit here so our title is centered with the spinners */
+  width: calc(100% - 45px);
+}
+
+#pageNav {
+  position: fixed;
+  top: 28px;
+  -webkit-app-region: no-drag;
+  z-index: 13;
+}
 
 .pageNavContainer {
   width: 100%;
@@ -220,7 +252,7 @@ form {
 }
 
 #pageNav .navBar.bar {
-  padding: 10px 8px;
+  padding: 0 8px 10px;
 }
 
 #pageNav .modal-about .navBar.bar {
@@ -240,7 +272,7 @@ form {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 50px;
+  top: 78px;
   width:230px;
   background-color: #252525;
   border-left: 0;
@@ -1037,7 +1069,7 @@ label.fieldItem {
   display: block;
   width: 100%;
   height: 100%;
-  top: 0;
+  top: 28px;
   left: 0;
   transition: opacity .05s cubic-bezier(0, 0, 0.2, 1),
               width 0.5s ease;
@@ -1045,16 +1077,16 @@ label.fieldItem {
   z-index: 1;
 }
 
-#ov1.chatLoaded .modal:not(.modal-cover-fullscreen) {
+.modal:not(.modal-fullscreen) {
   width: calc(100% - 45px);
 }
 
-#ov1.chatOpen .modal:not(.modal-cover-fullscreen) {
+#ov1.chatOpen .modal:not(.modal-fullscreen) {
   width: calc(100% - 230px);
 }
 
 .modal.modal-navOffset {
-  top: 50px;
+  top: 78px;
 }
 
 .modalHolder {
@@ -1455,31 +1487,27 @@ h5 {
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 50px;
+  top: 78px;;
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 50px;
+  top: 78px;
 }
 
 .modal-opaque.modal-navBlock {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 78px, rgba(7,65,97,1) 79px);
   top: 0;
-  padding-top: 70px;
+  padding-top: 100px;
 }
 
-.modal-cover-fullscreen {
-  top: 0;
-}
-
-.modal-cover-fullscreen .modal-childMain {
-  top: 50px;
-}
-
-.modal-cover-fullscreen.modal.modal-navOffset .modal-childMain {
-  top: 0;
+/*
+  will cover entire screen aside from the #appBar,
+  which should never be covered.
+*/
+.modal-fullscreen {
+  top: 28px;
 }
 
 .modal-childMain {
@@ -2013,7 +2041,40 @@ margin: auto;
 .btn.btn-win.btn-winMax {
   background-color: #B8E986;
   position: relative;
+}
 
+html:not(.platform-mac) .btn.btn-win {
+  background-color: transparent;
+  border-radius: 0;
+  width: 19px;
+  height: 19px;
+  box-shadow: none;
+}
+
+html:not(.platform-mac) .btn.btn-winClose {
+  float: right;
+  margin-left: 6px;
+}
+
+html:not(.platform-mac) .btn.btn-win .btn-win-icon {
+  display: block;
+  top: -3px;
+  font-size: 21px;
+  color: #fff;  
+}
+
+html:not(.platform-mac) .btn.btn-winMax {
+  float: right;
+  margin-left: 6px;
+  border: 1px solid #fff;
+  width: 13px;
+  height: 13px;
+  top: 3px;  
+}
+
+html:not(.platform-mac) .btn.btn-winMax .btn-win-icon,
+html:not(.platform-mac) .btn.btn-win.btn-winMax:hover .btn-win-icon {
+  display: none;
 }
 
 .btn.btn-bar {
@@ -4297,8 +4358,27 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 9;
 }
 
+#loadingModal {
+  padding-top: 0;
+}
+
 #loadingModal, .page-connect-modal.server-connect {
-  z-index: 14;
+  z-index: 13;
+}
+
+/*
+   Different types of modals (e.g. loading, page-connect-modal, server-connect...) have
+   different dimensions (e.g. some cover chat, some cover nav bar...). We'll be 
+   fudging the position of loading spinners and content so that if these modals
+   are shown in succession, there is no "jump" of the spinner / content.
+*/
+#loadingModal .spinner-with-logo, .page-connect-modal.server-connect .spinner-with-logo {
+  margin-top: 6px;
+  margin-left: -20px;
+}
+
+.page-connect-modal .spinner-with-logo {
+  margin-top: -45px;
 }
 
 #ov1 #loadingModal.hide {
@@ -4313,7 +4393,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   right: 0;
   left: 0;
   top: 50%;
-  margin-top: 120px;
+  margin-top: 117px;
+  margin-left: -40px;
   opacity: 1;
   transition: opacity 1s 5s ease;
   box-sizing: border-box;
@@ -4344,7 +4425,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .server-connect-modal .message-bar {
-  top: 50px;
+  top: 59px;
   left: 25px;
   right: 25px;
   z-index: 1;
@@ -4575,7 +4656,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
   -webkit-app-region: no-drag;
   position: relative;
-  top: 50px;
+  top: 78px;
   box-sizing: border-box;
 }
 
@@ -4625,15 +4706,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 100%;
 }
 
-.page-connect-modal .spinner-with-logo {
-  /*
-    so it lines up with the loading modal,
-    otherwise there's a jump when this guy loads
-    right after the loading one.
-  */
-  margin-top: -37px;
-}
-
 .page-connect-modal .spinner-with-logo .icon-no-connection {
   top: 18px;
   left: 22px;
@@ -4645,11 +4717,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 0;
   top: 50%;
   max-width: 600px;
-  margin-top: 90px;
+  margin-top: 75px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   transition: transform 0.5s ease;
+}
+
+.page-connect-modal.server-connect .content {
+  transform: translate(-20px, 51px);
 }
 
 .page-connect-modal .content .btn {

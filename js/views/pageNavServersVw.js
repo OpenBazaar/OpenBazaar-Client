@@ -42,7 +42,7 @@ module.exports = BaseVw.extend({
     // launch page connect modal
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = new PageConnectModal({
-      className: 'server-connect top0',
+      className: 'server-connect modal-fullscreen',
       initialState: {
         statusText: serverConfig.get('default') ?
           polyglot.t('serverConnectModal.connectingToDefault') :
