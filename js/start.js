@@ -37,11 +37,13 @@ var Polyglot = require('node-polyglot'),
     pageNavView = require('./views/pageNavVw'),
     ChatVw = require('./views/chatVw'),
     StatusBarView = require('./views/statusBarVw'),
+    AppBarVw = require('./views/appBarVw'),
     user = new userModel(),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
     socketView = require('./views/socketVw'),
     cCode = "",
+    $html = $('html'),
     $loadingModal = $('.js-loadingModal'),
     ServerConfigsCl = require('./collections/serverConfigsCl'),
     ServerConnectModal = require('./views/serverConnectModal'),
@@ -63,7 +65,20 @@ var Polyglot = require('node-polyglot'),
     pageConnectModal,
     launchOnboarding,
     setServerUrl,
-    guidCreating;
+    guidCreating,
+    platformClass;
+
+if (process.platform === 'darwin') {
+  platformClass = 'platform-mac';
+} else if (process.platform === 'win32') {
+  platformClass = 'platform-win';
+} else {
+  // http://stackoverflow.com/a/8684009
+  // could be linux, sunos or freebsd
+  platformClass = `platform-${process.platform}`
+}
+
+$html.addClass(platformClass);
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 //retrieve the stored value, since user is a blank model at this point
@@ -88,6 +103,11 @@ user.on('change:language', function(md, lang) {
   //trigger translation function on index
   window.translateIndex();
 });
+
+// add in our app bar
+app.appBar = new AppBarVw({
+  el: '#appBar'
+}).render();
 
 window.addEventListener('contextmenu', (e) => {
   e.preventDefault();
@@ -231,7 +251,7 @@ $(window).bind('hashchange', function(){
 
 //set fancy styles class
 if(localStorage.getItem('notFancy') == "true"){
-  $('html').addClass('notFancy')
+  $html.addClass('notFancy')
 }
 
 //prevent dragging a file to the window from loading that file
@@ -453,7 +473,7 @@ launchOnboarding = function(guidCreating) {
   var activeServer = app.serverConfigs.getActive();
 
   pageConnectModal = new PageConnectModal({
-    className: 'server-connect top0',
+    className: 'server-connect modal-fullscreen',
     initialState: {
       statusText: activeServer && activeServer.get('default') ?
         polyglot.t('serverConnectModal.connectingToDefault') :

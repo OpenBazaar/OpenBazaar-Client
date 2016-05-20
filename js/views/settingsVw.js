@@ -16,6 +16,7 @@ var __ = require('underscore'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
     saveToAPI = require('../utils/saveToAPI'),
+    SMTPConnection = require('smtp-connection'),
     MediumEditor = require('medium-editor'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
     getBTPrice = require('../utils/getBitcoinPrice');
@@ -44,6 +45,7 @@ module.exports = Backbone.View.extend({
     'click .js-saveModerator': 'saveModeratorClick',
     'click .js-cancelAdvanced': 'cancelView',
     'click .js-saveAdvanced': 'saveAdvancedClick',
+    'click .js-testSMTP': 'testSMTPClick',
     'click .js-changeServerSettings': 'launchServerConfig',
     'change .js-settingsThemeSelection': 'themeClick',
     'click .js-settingsAddressDelete': 'addressDelete',
@@ -659,6 +661,10 @@ module.exports = Backbone.View.extend({
     this.saveAdvanced();
   },
 
+  testSMTPClick: function() {
+    this.testSMTP();
+  },
+
   saveGeneral: function() {
     var self = this,
         form = this.$("#generalForm"),
@@ -968,6 +974,51 @@ module.exports = Backbone.View.extend({
         messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessaes.serverError') + "</i>");
       }
     });
+  },
+
+  testSMTP: function(){
+    var hostport = $('#advancedForm').find('input[name="smtp_server"]').val();
+    hostport = hostport.split(':');
+
+    $('#testSMTPButton').addClass('loading');
+
+    var connection = new SMTPConnection({
+      host: hostport[0],
+      port: hostport[1]
+    });
+
+    connection.on('error', function(){
+        $('#testSMTPButton').removeClass('loading');
+        messageModal.show(
+            window.polyglot.t('errorMessages.smtpServerError'),
+            window.polyglot.t('errorMessages.noSMTPConnection')
+        );
+      }
+    );
+
+    connection.connect(function() {
+
+      var username = $('#advancedForm').find('input[name="smtp_username"]').val();
+      var password = $('#advancedForm').find('input[name="smtp_password"]').val();
+
+      connection.login({
+        user: username,
+        pass: password
+      }, function(err) {
+        if(err) {
+          messageModal.show(
+            window.polyglot.t('errorMessages.smtpServerError'),
+            window.polyglot.t('errorMessages.badSMTPAuthentication')
+          );
+        } else {
+          messageModal.show(
+            window.polyglot.t('errorMessages.smtpServerSuccess'),
+            window.polyglot.t('errorMessages.goodSMTPAuthentication')
+          );
+        }
+        $('#testSMTPButton').removeClass('loading');
+      })
+    })
   },
 
   saveAdvanced: function(){

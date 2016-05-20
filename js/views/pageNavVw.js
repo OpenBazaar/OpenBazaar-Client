@@ -12,7 +12,6 @@ var __ = require('underscore'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
     PageNavServersVw = require('../views/pageNavServersVw'),
-    remote = require('remote'),
     pjson = require('../../package.json');
 
 var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
@@ -22,9 +21,6 @@ module.exports = baseVw.extend({
   el: '#pageNav',
 
   events: {
-    'click .js-navClose': 'navCloseClick',
-    'click .js-navMin': 'navMinClick',
-    'click .js-navMax': 'navMaxClick',
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
     'click .js-showAboutModal': 'showAboutModal',
@@ -63,8 +59,6 @@ module.exports = baseVw.extend({
     this.languages = new languagesModel();
     this.showDiscIntro = options.showDiscIntro;
     this.notificationsRecord = {}; //store notification timestamps to prevent too many from the same user
-
-    this.currentWindow = remote.getCurrentWindow();
 
     this.listenTo(window.obEventBus, "updateProfile", function(response){
       this.refreshProfile();
@@ -525,29 +519,6 @@ module.exports = baseVw.extend({
     self.$('.js-navProfileMenu').removeClass('popMenu-opened');
     clearTimeout(this.ServerSubmenuTimeout);
     this.serverSubmenu.removeClass('server-submenu-opened');    
-  },
-
-  navCloseClick: function(){
-    var process = remote.process;
-    if (process.platform != 'darwin') {
-      this.currentWindow.close();
-    } else {
-      this.currentWindow.hide();
-    }
-  },
-
-  navMinClick: function(){
-    this.currentWindow.minimize();
-  },
-
-  navMaxClick: function(){
-    if(this.currentWindow.isMaximized()){
-      this.currentWindow.unmaximize();
-      $('.js-navMax').attr('data-tooltip', window.polyglot.t('Maximize'));
-    } else {
-      this.currentWindow.maximize();
-      $('.js-navMax').attr('data-tooltip', window.polyglot.t('Restore'));
-    }
   },
 
   navBackClick: function(){

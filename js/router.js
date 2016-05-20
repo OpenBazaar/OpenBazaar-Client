@@ -267,6 +267,7 @@ module.exports = Backbone.Router.extend({
 
     // hide the discover onboarding callout
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
+    app.appBar.setTitle(polyglot.t('Discover'));
   },
 
   userPage: function(userID, state, itemHash, skipNSFWmodal, handle){
@@ -283,6 +284,7 @@ module.exports = Backbone.Router.extend({
     if (handle) options.handle = handle;
 
     this.newView(new userPageView(options),"userPage",'','onPage');
+    app.appBar.setTitle(handle ? handle : options.userId || this.userModel.get('guid'));
   },
 
   userPageViaHandle: function(handle, subPath) {
@@ -325,6 +327,7 @@ module.exports = Backbone.Router.extend({
       orderID: orderID,
       tabState: tabState //opens a tab in the order modal
     }),"userPage");
+    app.appBar.setTitle(polyglot.t('Transactions'));
   },
 
   settings: function(state){
@@ -336,5 +339,6 @@ module.exports = Backbone.Router.extend({
       state: state,
       socketView: this.socketView
     }), "userPage");
+    app.appBar.setTitle(polyglot.t('Settings'));
   }
 });
