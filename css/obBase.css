@@ -6250,14 +6250,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .backToTop {
   position: fixed;
-  bottom: 0;
+  bottom: 15px;
   right: 73px;
   padding: 10px;
   background-color: #086A9E;
   transform: translateY(100%);
-  transition: transform 300ms ease;
+  opacity: 0;
+  transition: all 300ms ease;
 }
 
 .backToTop.slideUp {
+  opacity: 1;
   transform: translateY(0);
 }

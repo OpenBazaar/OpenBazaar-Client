@@ -3,7 +3,6 @@
 var __ = require('underscore'),
     $ = require('jquery'),
     Backbone = require('backbone'),
-    velocity = require('velocity-animate'),
     loadTemplate = require('../utils/loadTemplate'),
     baseVw = require('./baseVw'),
     itemShortView = require('./itemShortVw'),
@@ -405,8 +404,7 @@ module.exports = baseVw.extend({
   },
 
   clickBackToTop: function() {
-    this.obContainer.velocity('scroll', {
-      offset: 0,
+    this.obContainer.animate({ scrollTop: 0 }, {
       complete: () => {
         this.$backToTop.removeClass('slideUp');
       }

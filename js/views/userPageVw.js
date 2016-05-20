@@ -162,7 +162,8 @@ module.exports = baseVw.extend({
     'click .js-unblock': 'unblockUserClick',
     'click .js-showBlockedUser': 'showBlockedUser',
     'change .js-categories': 'categoryChanged',
-    'click .js-showNSFWContent': 'clickShowNSFWContent'
+    'click .js-showNSFWContent': 'clickShowNSFWContent',
+    'click .backToTop': 'clickBackToTop'
   },
 
   initialize: function (options) {
@@ -213,6 +214,7 @@ module.exports = baseVw.extend({
     this.showNSFW = options.skipNSFWmodal ? options.skipNSFWmodal : JSON.parse(localStorage.getItem('NSFWFilter'));
     this.showNSFWContent = this.showNSFW;
     this.currentItemHash = options.itemHash;
+    this.$obContainer = $('#obContainer');
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -365,70 +367,96 @@ module.exports = baseVw.extend({
     //make sure container is cleared
     $('#content').html(this.$el);
 
-    loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
-      self.setCustomStyles();
-      self.$el.html(loadedTemplate(self.model.toJSON()));
-      self.fetchReviews();
-      self.fetchFollowing();
-      self.getIsModerator();
-      self.fetchListings();
-      //save state of the page
-      self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
-      self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
-      self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
-      self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
-      self.setCustomStyles();
-      self.setState(self.state, self.currentItemHash, { replaceHistory: true });
+    loadTemplate('./js/templates/backToTop.html', function(backToTopTmpl) {
+      loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
+        self.setCustomStyles();
+        self.$el.html(loadedTemplate(
+          __.extend(self.model.toJSON(), {
+            backToTopTmpl: backToTopTmpl
+          })
+        ));
+        self.fetchReviews();
+        self.fetchFollowing();
+        self.getIsModerator();
+        self.fetchListings();
+        //save state of the page
+        self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
+        self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
+        self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
+        self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
+        self.setCustomStyles();
+        self.setState(self.state, self.currentItemHash, { replaceHistory: true });
+        self.$backToTop = self.$('.backToTop');
 
-      //check if user is blocked
-      if(!self.options.ownPage && isBlocked) {
-        self.hideThisUser("blocked");
-      }
+        //check if user is blocked
+        if(!self.options.ownPage && isBlocked) {
+          self.hideThisUser("blocked");
+        }
 
-      if(!self.options.ownPage && !self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
-          self.hideThisUser("nsfw");
-      }
+        if(!self.options.ownPage && !self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
+            self.hideThisUser("nsfw");
+        }
 
-      self.$el.find('#image-cropper').cropit({
-        smallImage: "stretch",
-        maxZoom: 5,
-        onFileReaderError: function(data){console.log(data);},
-        onFileChange: function(){
-          $('.js-headerLoading').removeClass('fadeOut');
-          if(self.$el.find('#image-cropper').cropit('isZoomable')){
-            $('.js-bannerRangeInput').removeClass('hide');
+        self.$el.find('#image-cropper').cropit({
+          smallImage: "stretch",
+          maxZoom: 5,
+          onFileReaderError: function(data){console.log(data);},
+          onFileChange: function(){
+            $('.js-headerLoading').removeClass('fadeOut');
+            if(self.$el.find('#image-cropper').cropit('isZoomable')){
+              $('.js-bannerRangeInput').removeClass('hide');
+            }
+          },
+          onImageLoaded: function(){$('.js-headerLoading').addClass('fadeOut');},
+          onImageError: function(errorObject, errorCode, errorMessage){
+            console.log(errorObject);
+            console.log(errorCode);
+            console.log(errorMessage);
           }
-        },
-        onImageLoaded: function(){$('.js-headerLoading').addClass('fadeOut');},
-        onImageError: function(errorObject, errorCode, errorMessage){
-          console.log(errorObject);
-          console.log(errorCode);
-          console.log(errorMessage);
-        }
-      });
-      
-      var $userPageHeader = $('.user-page-header');
+        });
+        
+        self.scrollHandler = __.bind(
+          __.throttle(self.onScroll, 100),
+          self
+        );
 
-      $("#obContainer").scroll(function(){
-        if ($(this).scrollTop() > 400 && self.slimVisible === false ) {
-          self.slimVisible = true;
-          $('.user-page-header-slim').addClass('textOpacity1').addClass('top70');
-          $userPageHeader.removeClass('shadow-inner1').addClass('zIndex4');
-          $userPageHeader.find('.rowItem').hide();
-          $('.user-page-navigation-buttons').addClass('positionFixed positionTop68');
-        }
-        if ($(this).scrollTop() < 400 && self.slimVisible === true ) {
-          self.slimVisible = false;
-          $('.user-page-header-slim').removeClass('top70');
-          $userPageHeader.addClass('shadow-inner1').removeClass('zIndex4');
-          $userPageHeader.find('.rowItem').show();
-          $('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
-        }
+        self.$obContainer.off('scroll', self.scrollHandler);
+        self.$obContainer.on('scroll', self.scrollHandler);
       });
     });
 
     return this;
   },
+
+  onScroll: function() {
+    if (this.$obContainer.scrollTop() > 400 && this.slimVisible === false ) {
+      this.slimVisible = true;
+      this.$('.user-page-header-slim').addClass('textOpacity1 top70');
+      this.$('.user-page-header').removeClass('shadow-inner1')
+        .addClass('zIndex4')
+        .find('.rowItem')
+        .hide();
+      this.$('.user-page-navigation-buttons').addClass('positionFixed positionTop68');
+      this.$backToTop.addClass('slideUp');
+    } else if (this.$obContainer.scrollTop() < 400 && this.slimVisible === true ) {
+      this.slimVisible = false;
+      this.$('.user-page-header-slim').removeClass('top70');
+      this.$('.user-page-header').addClass('shadow-inner1')
+        .removeClass('zIndex4')
+        .find('.rowItem')
+        .show();
+      this.$('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
+      this.$backToTop.removeClass('slideUp');
+    }    
+  },
+
+  clickBackToTop: function() {
+    this.$obContainer.animate({ scrollTop: 0 }, {
+      complete: () => {
+        this.$backToTop.removeClass('slideUp');
+      }
+    });
+  },  
 
   setCustomStyles: function() {
     "use strict";
@@ -460,13 +488,13 @@ module.exports = baseVw.extend({
       //clear old templates
       this.$el.find('.js-list4').html("");
       this.renderItem(hash);
-      $('#obContainer').scrollTop(352);
+      this.$obContainer.scrollTop(352);
     }else if(state === "listingOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
-      $('#obContainer').scrollTop(352);
+      this.$obContainer.scrollTop(352);
     }else if(state === "listingNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
-      $('#obContainer').scrollTop(352);
+      this.$obContainer.scrollTop(352);
       this.addTabToHistory('listingNew', options.replaceHistory);
       this.sellItem();
     } else if(state === "createStore") {
@@ -536,9 +564,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-unfollow').removeClass('confirm');
     this.$el.find('.js-removemoderator').removeClass('confirm');
     this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
-    document.getElementById('obContainer').classList.remove("box-borderDashed");
-    document.getElementById('obContainer').classList.remove("noScrollBar");
-    document.getElementById('obContainer').classList.remove("overflowHidden");
+    this.$obContainer[0].classList.remove("box-borderDashed", "noScrollBar", "overflowHidden");
     //unhide the ones that are needed
     if(this.options.ownPage === true) {
       if(state === "listing" || state === "listingOld") {
@@ -549,9 +575,7 @@ module.exports = baseVw.extend({
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
         this.$el.find('.user-page-header-slim-bg-cover').addClass('user-page-header-slim-bg-cover-customize');
-        document.getElementById('obContainer').classList.add("box-borderDashed");
-        document.getElementById('obContainer').classList.add("noScrollBar");
-        document.getElementById('obContainer').classList.add("overflowHidden");
+        this.$obContainer[0].classList.add("box-borderDashed", "noScrollBar", "overflowHidden");
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
       }
@@ -1108,7 +1132,7 @@ module.exports = baseVw.extend({
     this.setControls('customize');
     $('.user-page-content').addClass('pull-up4');
     $('.user-page-header').addClass('shadow-inner1-strong');
-    $('#obContainer').animate({ scrollTop: "0" });
+    this.$obContainer.animate({ scrollTop: "0" });
   },
 
   hideColorRecommendations: function(e) {
@@ -1435,7 +1459,7 @@ module.exports = baseVw.extend({
     "use strict";
 
     this.setState(this.lastTab);
-    $('#obContainer').animate({ scrollTop: 0 });
+    this.$obContainer.animate({ scrollTop: 0 });
 
     this.editing = false;
   },
