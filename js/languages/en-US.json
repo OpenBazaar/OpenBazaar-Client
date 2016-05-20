@@ -510,7 +510,9 @@
     "UpdateComplete": "Your transaction update is complete",
     "UpdateFailed": "Your transaction update did not complete. Open the transaction and try again",
     "UpdateInvalid": "Your transaction update returned invalid data. Open the transaction and try again",
-    "ExportCSV": "Export to CSV"
+    "ExportCSV": "Export to CSV",
+    "ShowUnpaid": "Show Unfunded",
+    "HideUnpaid": "Hide Unfunded"
   },
   "errorMessages": {
     "saveError": "Data could not be saved.",

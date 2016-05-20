@@ -1659,7 +1659,8 @@ removed because I don't think we're using the trick to hide the borders any more
   width: 100%;
 }
 
-.txtFieldWrapper:before {
+.txtFieldWrapper:before,
+.searchWrapper:before {
   color: #fff;
   font-family: Ionicons;
   font-size: 18px;
@@ -1822,6 +1823,10 @@ input[type="text"].txtField-bar {
 .btn.btn-txt {
   /* button with text */
   padding: 0 12px;
+}
+
+.btn.btn-txt .pill {
+  margin-right: -6px;
 }
 
 .btn.btn-txtHalf {
@@ -3214,13 +3219,6 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 input[type="checkbox"] + label .togLabelOn,
-input[type="checkbox"].fieldItem + label .togLabelOn,
-input[type="checkbox"] + label .togLabelOff,
-input[type="checkbox"].fieldItem + label .togLabelOff {
-  padding: 0 16px;
-}
-
-input[type="checkbox"] + label .togLabelOn,
 input[type="checkbox"].fieldItem + label .togLabelOn {
   display: none;
 }
@@ -4414,6 +4412,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
   width: 156px;
   text-align: right;
+  position: relative;
 }
 
 .selectPill select {
@@ -4425,7 +4424,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 12px;
   margin-left: 10px;
   letter-spacing: .4px;
-  padding: 6px;
+  line-height: 32px;
+  height: 32px;
   width: 148px;
   z-index: 2;
   -webkit-user-select: none;
