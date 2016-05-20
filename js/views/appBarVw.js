@@ -23,7 +23,7 @@ module.exports = BaseVw.extend({
     this.title = this.titlePrefix;
     
     if (!style || ['mac', 'win'].indexOf(style) === -1) {
-      style = remote.process.platform === 'win32' ? 'win' : 'mac';
+      style = remote.process.platform === 'darwin' ? 'mac' : 'win';
     }
 
     this.setStyle(style);    
