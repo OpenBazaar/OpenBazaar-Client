@@ -95,7 +95,6 @@ module.exports = baseVw.extend({
 
     this.purchasesCol.fetch({
       success: function(models){
-        //self.renderPurchases();
         self.renderTab("purchases", self.purchasesCol, self.purchasesWrapper);
         models.length && self.setSearchList('transactionsPurchases');
         self.salesCol.fetch({
@@ -106,7 +105,6 @@ module.exports = baseVw.extend({
             }
             self.casesCol.fetch({
               success: function(models) {
-                //self.renderCases();
                 self.renderTab("cases", self.casesCol, self.casesWrapper);
                 models.length && self.setSearchList('transactionsCases');
               },
@@ -165,38 +163,12 @@ module.exports = baseVw.extend({
     });
   },
 
-  findOrderByID: function(orderID){
-    var orderModelP = this.purchasesCol.findWhere({ order_id: this.orderID}),
-        orderModelS = this.salesCol.findWhere({ order_id: this.orderID}),
-        orderModelC = this.casesCol.findWhere({ order_id: this.orderID}),
-        orderModel = orderModelP || orderModelS || orderModelC;
-
-    if(orderModelP){
-      tType = "purchases";
-      self.setState('purchases', self.orderID)
-    } else if(orderModelS){
-      tType = "sales";
-      self.setState('sales', self.orderID)
-    } else if(orderModelC){
-      tType = "cases";
-      self.setState('cases', self.orderID)
-    }
-    
-    //don't forget to make this part work to get the model when the socket message comes in
-    return orderModel;
-  },
-
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
     if(data.notification && data.notification.order_id){
       this.getData();
     } else if(data.message && data.message.subject){
-      //increment the unread count of the order with the message
-      var orderShortDiscBtn = this.$('.js-orderShortDiscusson[data-order="'+ data.message.subject +'"]');
-      var orderShortDiscBtnBadge = orderShortDiscBtn.find('.js-unreadBadge');
-      orderShortDiscBtn.removeClass('hide');
-      var newCount = Number(orderShortDiscBtnBadge.attr('data-count')) +1;
-      orderShortDiscBtnBadge.attr('data-count', newCount);
+      this.getData();
     }
   },
 
@@ -280,7 +252,14 @@ module.exports = baseVw.extend({
     var self = this;
     filterBy = filterBy || this.filterBy;
     tabWrapper.html('');
-    if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
+    if(!filterBy || filterBy == "all"){
+      tabCollection.comparator = function(model) {
+        //add 1 so unread:zero doesn't get dropped from the front of the string when it's changed to a number by the -
+        return -(String(model.get("unread")+1) + String(model.get("timestamp")));
+      };
+      tabCollection.sort();
+    }
+    if(filterBy == "dateNewest"){
       tabCollection.comparator = function(model) {
         return -model.get("timestamp");
       };

@@ -281,6 +281,7 @@ module.exports = baseVw.extend({
     
     if(state == "discussion"){
       $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_discussion_as_read', {id: this.orderID});
+      this.$('.js-unreadBadge').addClass('hide');
     }
 
     if(state == "discussion" && this.discussionScroller){

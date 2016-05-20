@@ -1,10 +1,9 @@
 <div class="rowItem js-notification padding10 clickable positionRelative">
     <% if (!ob.read) { %>
-        <div class="notificationUnreadIndicator"></div>
+        <div class="highlightRow"></div>
     <% } %>
     <div class="table">
         <div>
-            <% console.log(ob.type) %>
             <div class="thumbnail clickable custcol-border"
                  style="background-image: <%= ob.cssImageUrl(ob.image_hash, ob.guid, 'imgs/defaultUser.png') %>; height: 50px; width: 50px"></div>
             <div class="txt-lowleading">

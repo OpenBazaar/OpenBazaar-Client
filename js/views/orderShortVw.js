@@ -35,7 +35,6 @@ module.exports = baseVw.extend({
   },
 
   openOrderModal: function(tabState){
-    console.log("open")
     window.obEventBus.trigger("openOrderModal", {
       'orderID': this.model.get('order_id'),
       'status': this.model.get('status'),
@@ -43,6 +42,7 @@ module.exports = baseVw.extend({
       'unread': this.model.get('unread'),
       'tabState': tabState
     });
+    this.$('.js-unreadBadge').addClass('hide');
   },
 
   orderSummary: function(e){
