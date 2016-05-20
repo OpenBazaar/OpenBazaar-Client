@@ -182,7 +182,6 @@ module.exports = baseVw.extend({
   },
 
   setSearchList: function(targetID){
-
     this.searchTransactions = new window.List(targetID, {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
   },
 
@@ -239,7 +238,6 @@ module.exports = baseVw.extend({
   },
 
   transactionFilter: function(e){
-    console.log("transaction filter")
     var tab = $(e.target),
         tabTarget = tab.data("tab");
 
@@ -301,7 +299,6 @@ module.exports = baseVw.extend({
       };
       tabCollection.sort();
     }
-    console.log(localStorage.getItem('showUnpaid_'+tabName))
     tabCollection.each(function(model, i){
       if(model.get('status') > 0 || localStorage.getItem('showUnpaid_'+tabName) == "true") {
         if (!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest") {
