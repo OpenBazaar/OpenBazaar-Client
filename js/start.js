@@ -43,7 +43,6 @@ var Polyglot = require('node-polyglot'),
     languages = new languagesModel(),
     socketView = require('./views/socketVw'),
     cCode = "",
-    $html = $('html'),
     $loadingModal = $('.js-loadingModal'),
     ServerConfigsCl = require('./collections/serverConfigsCl'),
     ServerConnectModal = require('./views/serverConnectModal'),
@@ -65,20 +64,7 @@ var Polyglot = require('node-polyglot'),
     pageConnectModal,
     launchOnboarding,
     setServerUrl,
-    guidCreating,
-    platformClass;
-
-if (process.platform === 'darwin') {
-  platformClass = 'platform-mac';
-} else if (process.platform === 'win32') {
-  platformClass = 'platform-win';
-} else {
-  // http://stackoverflow.com/a/8684009
-  // could be linux, sunos or freebsd
-  platformClass = `platform-${process.platform}`
-}
-
-$html.addClass(platformClass);
+    guidCreating;
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 //retrieve the stored value, since user is a blank model at this point
@@ -251,7 +237,7 @@ $(window).bind('hashchange', function(){
 
 //set fancy styles class
 if(localStorage.getItem('notFancy') == "true"){
-  $html.addClass('notFancy')
+  $('html').addClass('notFancy')
 }
 
 //prevent dragging a file to the window from loading that file

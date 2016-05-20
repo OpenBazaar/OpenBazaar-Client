@@ -56,6 +56,7 @@ module.exports = Backbone.View.extend({
     'keyup #moderatorFeeInput': 'keypressFeeInput',
     'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
     'click #advancedForm input[name="useTestnet"]': 'toggleTestnet',
+    'change #advancedForm input[name="appBarStyle"]': 'changeAppBarStyle',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'change #handle': 'handleChange',
@@ -385,6 +386,8 @@ module.exports = Backbone.View.extend({
         currency = this.$('#currency_code'),
         timezone = this.$('#time_zone'),
         language = this.$('#language'),
+        generalForm = this.$('#generalForm'),
+        advancedForm = this.$('#advancedForm'),
         user = this.model.get('user'),
         avatar = user.avatar_hash,
         ship_country_str = "",
@@ -400,13 +403,15 @@ module.exports = Backbone.View.extend({
 
     smtp_notifications = (user.smtp_notifications == 1) ? true : false;
 
-    this.$('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
-    this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
-    this.$("#generalForm input[name=notifications][value=" + notifications + "]").prop('checked', true);
-    this.$("#storeForm input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
-    this.$("#advancedForm input[name=notFancy][value=" + fancyStatus + "]").prop('checked', true);
-    this.$("#advancedForm input[name=additionalPaymentData][value=" + localStorage.getItem('AdditionalPaymentData') + "]").prop('checked', true);
-    this.$("#advancedForm input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
+    this.$("#pageForm").find("input[name=nsfw]").val([String(pageNSFW)]);
+    generalForm.find("input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
+    generalForm.find("input[name=notifications][value=" + notifications + "]").prop('checked', true);
+    this.$("#storeForm").find("input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
+    advancedForm.find("input[name=notFancy][value=" + fancyStatus + "]").prop('checked', true);
+    advancedForm.find("input[name=additionalPaymentData][value=" + localStorage.getItem('AdditionalPaymentData') + "]").prop('checked', true);
+    advancedForm.find("input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
+    advancedForm.find("input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
+    advancedForm.find("input[name=appBarStyle][value=" + app.appBar.getStyle() + "]").prop('checked', true);
 
     currencyList = __.uniq(currencyList, function(item){return item.code;});
     currencyList = currencyList.sort(function(a,b){
@@ -462,8 +467,7 @@ module.exports = Backbone.View.extend({
 
     //set moderator status
     this.$('#moderatorForm').find('input[name=moderator]').val([String(moderatorStatus)]);
-
-    this.$('#advancedForm').find('input[name=smtp_mo]').val([String(moderatorStatus)]);
+    advancedForm.find('input[name=smtp_mo]').val([String(moderatorStatus)]);
   },
 
   showModeratorFeeHolder: function(){
@@ -1089,11 +1093,13 @@ module.exports = Backbone.View.extend({
   },
 
   toggleFancyStyles: function(){
+    var $html = $('html');
+    
     if($('#advancedForm').find('input[name="notFancy"]').prop('checked')){
-      $('html').addClass('notFancy');
+      $html.addClass('notFancy');
       localStorage.setItem('notFancy', "true");
     } else {
-      $('html').removeClass('notFancy');
+      $html.removeClass('notFancy');
       localStorage.setItem('notFancy', "false");
     }
   },
@@ -1101,6 +1107,10 @@ module.exports = Backbone.View.extend({
   toggleTestnet: function(){
     window.config.setTestnet($('#advancedForm').find('input[name="useTestnet"]').prop('checked'));
     window.location.reload();
+  },
+
+  changeAppBarStyle: function(e) {
+    app.appBar.setStyle($(e.target).val());
   },
 
   close: function(){

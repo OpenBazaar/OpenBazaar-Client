@@ -1,11 +1,11 @@
 <div class="windowControls ctrlGroup">
-  <a class="btn btn-win btn-winClose js-navClose tooltip <% ob.platform !== 'darwin' && print('tooltip-left') %>" data-tooltip="<% print(polyglot.t(ob.launchedFromInstaller ? 'ClosingOpenBazaar' : 'ClosingOpenBazaarNonInstaller')) %>">
+  <a class="btn btn-win btn-winClose js-navClose tooltip <% ob.style !== 'mac' && print('tooltip-left') %>" data-tooltip="<% print(polyglot.t(ob.launchedFromInstaller ? 'ClosingOpenBazaar' : 'ClosingOpenBazaarNonInstaller')) %>">
     <div class="btn-win-icon ion-ios-close-empty"></div>
   </a>
-  <a class="btn btn-win btn-winMin js-navMin tooltip <% ob.platform !== 'darwin' && print('tooltip-left') %>" data-tooltip="<%= polyglot.t('Minimize') %>">
+  <a class="btn btn-win btn-winMin js-navMin tooltip <% ob.style !== 'mac' && print('tooltip-left') %>" data-tooltip="<%= polyglot.t('Minimize') %>">
     <div class="btn-win-icon ion-ios-minus-empty"></div>
   </a>
-  <a class="btn btn-win btn-winMax js-navMax tooltip <% ob.platform !== 'darwin' && print('tooltip-left') %>" data-tooltip="<%= polyglot.t('Maximize') %>">
+  <a class="btn btn-win btn-winMax js-navMax tooltip <% ob.style !== 'mac' && print('tooltip-left') %>" data-tooltip="<%= polyglot.t('Maximize') %>">
     <div class="btn-win-icon ion-ios-plus-empty"></div>
   </a>      
 </div>

@@ -218,7 +218,7 @@ form {
   top: 6px;  
 }
 
-html:not(.platform-mac) #appBar .windowControls {
+#appBar.style-win .windowControls {
   left: auto;
   right: 8px;
   top: 5px;
@@ -2038,7 +2038,7 @@ margin: auto;
   position: relative;
 }
 
-html:not(.platform-mac) .btn.btn-win {
+#appBar.style-win .btn.btn-win {
   background-color: transparent;
   border-radius: 0;
   width: 19px;
@@ -2046,19 +2046,19 @@ html:not(.platform-mac) .btn.btn-win {
   box-shadow: none;
 }
 
-html:not(.platform-mac) .btn.btn-winClose {
+#appBar.style-win .btn.btn-winClose {
   float: right;
   margin-left: 6px;
 }
 
-html:not(.platform-mac) .btn.btn-win .btn-win-icon {
+#appBar.style-win .btn.btn-win .btn-win-icon {
   display: block;
   top: -3px;
   font-size: 21px;
   color: #fff;  
 }
 
-html:not(.platform-mac) .btn.btn-winMax {
+#appBar.style-win .btn.btn-winMax {
   float: right;
   margin-left: 6px;
   border: 1px solid #fff;
@@ -2067,8 +2067,8 @@ html:not(.platform-mac) .btn.btn-winMax {
   top: 3px;  
 }
 
-html:not(.platform-mac) .btn.btn-winMax .btn-win-icon,
-html:not(.platform-mac) .btn.btn-win.btn-winMax:hover .btn-win-icon {
+#appBar.style-win .btn.btn-winMax .btn-win-icon,
+#appBar.style-win .btn.btn-win.btn-winMax:hover .btn-win-icon {
   display: none;
 }
 

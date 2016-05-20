@@ -16,9 +16,32 @@ module.exports = BaseVw.extend({
   },
 
   initialize: function(options) {
+    var style = localStorage.appBarStyle;
+
     this.options = options || {};
     this.currentWindow = remote.getCurrentWindow();
     this.title = this.titlePrefix;
+    
+    if (!style || ['mac', 'win'].indexOf(style) === -1) {
+      style = remote.process.platform === 'win32' ? 'win' : 'mac';
+    }
+
+    this.setStyle(style);    
+  },
+
+  setStyle: function(style) {
+    if (!style || ['mac', 'win'].indexOf(style) === -1) {
+      throw new Error(`Please provide a style ('mac' or 'win')`);      
+    }
+
+    this.$el.removeClass('style-mac style-win');
+    this.$el.addClass(`style-${style}`);
+    localStorage.appBarStyle = style;
+    this.render();
+  },
+
+  getStyle: function() {
+    return localStorage.appBarStyle;
   },
 
   navCloseClick: function() {
@@ -62,7 +85,7 @@ module.exports = BaseVw.extend({
   render: function() {
     loadTemplate('./js/templates/appBar.html', (t) => {
       this.$el.html(t({
-        platform: remote.process.platform,
+        style: this.getStyle(),
         title: this.title
       }));
     });
