@@ -1773,11 +1773,12 @@ module.exports = baseVw.extend({
   },
 
   remove: function(){
-    baseVw.prototype.remove.apply(this, arguments);
-
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     $.colorbox.close();
     messageModal.$el.off('click', this.modalCloseHandler);
+    this.scrollHandler && this.$obContainer.off('scroll', this.scrollHandler);
+
+    baseVw.prototype.remove.apply(this, arguments);
   }
 
 });
