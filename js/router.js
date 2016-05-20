@@ -29,7 +29,7 @@ module.exports = Backbone.Router.extend({
       [/^@([^\/]+)(.*)$/, "userPageViaHandle"],
       ["userPageViaHandle", "userPageViaHandle"],
       ["transactions", "transactions"],
-      ["transactions/:state(/:orderID)", "transactions"],
+      ["transactions/:state(/:orderID)(/:tabState)", "transactions"],
       ["settings", "settings"],
       ["settings/:state", "settings"]
     ];
@@ -317,14 +317,15 @@ module.exports = Backbone.Router.extend({
     });
   },
 
-  transactions: function(state, orderID){
+  transactions: function(state, orderID, tabState){
     "use strict";
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
       state: state,
-      orderID: orderID
+      orderID: orderID,
+      tabState: tabState //opens a tab in the order modal
     }),"userPage");
     app.appBar.setTitle(polyglot.t('Transactions'));
   },

@@ -42,6 +42,7 @@ module.exports = baseVw.extend({
     this.options = options;
     this.state = options.state || "purchases";
     this.orderID = options.orderID;
+    this.tabState = options.tabState;
     this.userModel = options.userModel;
     this.userProfile = options.userProfile;
     this.model = new Backbone.Model();
@@ -51,8 +52,8 @@ module.exports = baseVw.extend({
     setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     this.serverUrl = options.userModel.get('serverUrl');
     this.cCode = options.userModel.get('currency_code');
-    this.listenTo(window.obEventBus, "openOrderModal", function(orderID){
-      self.openOrderModal(orderID);
+    this.listenTo(window.obEventBus, "openOrderModal", function(options){
+      self.openOrderModal(options);
     });
     this.searchTransactions;
     this.filterBy; //used for filtering the collections
@@ -94,7 +95,6 @@ module.exports = baseVw.extend({
 
     this.purchasesCol.fetch({
       success: function(models){
-        //self.renderPurchases();
         self.renderTab("purchases", self.purchasesCol, self.purchasesWrapper);
         models.length && self.setSearchList('transactionsPurchases');
         self.salesCol.fetch({
@@ -105,7 +105,6 @@ module.exports = baseVw.extend({
             }
             self.casesCol.fetch({
               success: function(models) {
-                //self.renderCases();
                 self.renderTab("cases", self.casesCol, self.casesWrapper);
                 models.length && self.setSearchList('transactionsCases');
               },
@@ -140,7 +139,8 @@ module.exports = baseVw.extend({
                   self.openOrderModal({
                     'orderID': self.orderID,
                     'status': orderModel.get('status'),
-                    'transactionType': tType
+                    'transactionType': tType,
+                    'tabState': self.tabState
                   });
                 }
               }
@@ -166,6 +166,8 @@ module.exports = baseVw.extend({
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
     if(data.notification && data.notification.order_id){
+      this.getData();
+    } else if(data.message && data.message.subject){
       this.getData();
     }
   },
@@ -250,7 +252,14 @@ module.exports = baseVw.extend({
     var self = this;
     filterBy = filterBy || this.filterBy;
     tabWrapper.html('');
-    if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
+    if(!filterBy || filterBy == "all"){
+      tabCollection.comparator = function(model) {
+        //add 1 so unread:zero doesn't get dropped from the front of the string when it's changed to a number by the -
+        return -(String(model.get("unread")+1) + String(model.get("timestamp")));
+      };
+      tabCollection.sort();
+    }
+    if(filterBy == "dateNewest"){
       tabCollection.comparator = function(model) {
         return -model.get("timestamp");
       };
@@ -423,7 +432,8 @@ module.exports = baseVw.extend({
       transactionType: options.transactionType,
       userModel: this.userModel,
       userProfile: this.userProfile,
-      socketView: this.socketView
+      socketView: this.socketView,
+      unread: options.unread
     });
     this.registerChild(orderModalView);
   }

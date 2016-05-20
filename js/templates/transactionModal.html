@@ -53,7 +53,9 @@
               <input type="checkbox" class="textSize11px fieldItem thin" id="BuyWizardQRDetailsInput">
               <label for="BuyWizardQRDetailsInput" class="textSize11px"> <%= polyglot.t('AdditionalPaymentDataInfo') %></label>
             </div>
-            <a class="btn btn-txt btn-wide row10 js-transactionPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
+            <a class="btn btn-txt btn-wide row10 js-transactionPayCopy" data-url="<%= ob.buyer_order.order.payment.address %>">
+              <i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %>
+            </a>
             <a class="btn btn-txt btn-wide row10 js-externalLink"
                href="bitcoin:<%= ob.buyer_order.order.payment.address %>?amount=<%= ob.buyer_order.order.payment.amount %>&message=<%= ob.vendor_offer.listing.item.title %>">
               <i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %>
@@ -569,10 +571,13 @@
         <span class="ion-social-bitcoin fontSize12 marginRight2 textOpacity1"></span>
         <%= polyglot.t('Funds') %>
       </a>
-      <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-discussionTab paddingRight18" data-tab="discussion">
+      <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-discussionTab paddingRight18 positionWrapper" data-tab="discussion">
         <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('Discussion') %>
-        <span class="pill fontSize12 textOpacity75 marginLeft2 js-discussionCount">0</span>
+        <div class="pill fontSize12 textOpacity75 marginLeft2 tabPill">
+          <div class="badge js-unreadBadge <% if(!ob.unread){%>hide<%}%>" data-count="<%= ob.unread || 0 %>"></div>
+          <span class="js-discussionCount">0</span>
+        </div>
       </a>
     </div>
 

@@ -3442,7 +3442,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 1;
 }
 
-.notificationUnreadIndicator {
+.highlightRow {
     position: absolute;
     left: 0;
     top: 0;
@@ -4476,6 +4476,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 5px 7px;
   min-width: 100px;
   background: red;
+}
+
+.pill.tabPill {
+  position: relative;
+  display: inline-block;
+  min-width: 0;
+  line-height: normal;
+}
+
+.pill.tabPill .badge:after {
+  right: -12px;
+  top: -8px;
 }
 
 .selectPill {

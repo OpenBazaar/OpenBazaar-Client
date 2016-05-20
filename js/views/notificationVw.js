@@ -45,6 +45,9 @@ module.exports = baseVw.extend({
       case "rating received":
         Backbone.history.navigate('#transactions/sales/' + this.model.get('order_id'), {trigger: true});
         break;
+      case "ORDER":
+        Backbone.history.navigate('#transactions/sales/' + this.model.get('subject') +'/discussion', {trigger: true});
+        break;
     }
 
     this.trigger('notification-click', { view: this });
