@@ -163,7 +163,8 @@ module.exports = baseVw.extend({
         bitcoinValidationRegex: config.bitcoinValidationRegex,
         transactionType: self.transactionType,
         userGuid: self.userModel.get('guid'),
-        status: self.status
+        status: self.status,
+        orderID: self.orderID
         })
       ));
       // add blur to container

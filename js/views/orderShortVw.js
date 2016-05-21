@@ -52,12 +52,12 @@ module.exports = baseVw.extend({
 
   orderConfirm: function(e){
     e.stopPropagation();
-    this.openOrderModal("confirm");
+    this.openOrderModal("summary");
   },
 
   orderComplete: function(e){
     e.stopPropagation();
-    this.openOrderModal("complete");
+    this.openOrderModal("summary");
   },
 
   orderDiscussion: function(e){
