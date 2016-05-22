@@ -68,6 +68,8 @@ a {
   opacity: .85;
   transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   cursor: pointer;
+  -webkit-user-drag: none;
+  user-drag: none;
 }
 
 a:hover,
