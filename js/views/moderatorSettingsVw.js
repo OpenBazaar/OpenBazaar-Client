@@ -40,7 +40,7 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
       //append the view to the passed in parent
-      self.parentEl.append(self.$el);
+      self.parentEl.append(self.$el).fadeIn(300);
       self.moderatorFeeInput = self.$('#moderatorSettingsModalFeeInput');
     });
     return this;
