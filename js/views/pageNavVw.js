@@ -110,10 +110,6 @@ module.exports = baseVw.extend({
       this.handleSocketMessage(response);
     });
 
-    this.listenTo(window.obEventBus, "onboarding-complete", function(){
-      this.showDiscoverIntro();
-    });
-
     this.listenTo(window.obEventBus, "cleanNav", function(){
       this.cleanNav();
     });
@@ -128,6 +124,7 @@ module.exports = baseVw.extend({
 
   showDiscoverIntro: function(){
     this.$('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
+    this.showDiscIntro = false;
   },
 
   hideDiscoverIntro: function(){
