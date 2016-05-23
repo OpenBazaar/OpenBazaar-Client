@@ -70,5 +70,7 @@ module.exports = Backbone.View.extend({
 
     isRemoved: function() {
       return this._removed;
-    }
+    },
+
+    expires: 1000 * 60 * 1,
 });

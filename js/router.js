@@ -79,8 +79,6 @@ module.exports = Backbone.Router.extend({
   },
 
   cacheReplacedRoutes: function(fragment, options) {
-    console.log('moo shoo: ' + fragment);
-
     // ensure replace routes update the cache (i.e. since some views
     // correspond to multiple routes, ensure a cached view is
     // keyed by all it's routes that have been navigated to)
@@ -197,8 +195,6 @@ module.exports = Backbone.Router.extend({
         cached = this.viewCache[Backbone.history.getFragment()],
         loadingConfig;
 
-    console.log(`check it: ${Backbone.history.getFragment()}`);
-
     options = __.extend({
       // viewArgs can be an array of args to pass into the view or a single
       // arg (most likely an object)
@@ -221,10 +217,6 @@ module.exports = Backbone.Router.extend({
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
 
-    if (this.view) {
-      this.view.close ? this.view.close() : this.view.remove();
-    }
-
     if (false && cached && (now - cached.__cachedAt < cached.expires)) {
       // we have an un-expired cached view, let's reattach it
       $('#content').html(cached.view.$el);
@@ -233,6 +225,7 @@ module.exports = Backbone.Router.extend({
       // this.view = Object.create(View.prototype);
       // View.apply(this.view, options.viewArgs);
 
+      this.view && (this.view.close ? this.view.close() : this.view.remove());
       this.view = new View(options.viewArgs[0]);
       this.view.expires && this.cacheView(this.view);
 

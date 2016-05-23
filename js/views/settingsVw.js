@@ -548,8 +548,6 @@ module.exports = Backbone.View.extend({
     val && val.charAt(0) !== '@' && $field.val('@' + val);
   },
 
-  expires: 100 * 60 * 1,
-
   addTabToHistory: function(state){
     //add action to history
     Backbone.history.navigate("#settings/" + state, { replace: true });

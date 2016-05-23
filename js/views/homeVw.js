@@ -124,8 +124,8 @@ module.exports = baseVw.extend({
   },
 
   hideList: function(){
-    $('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
-    $('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
+    this.$('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
+    this.$('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
   },
 
   resetLookingCount: function(){
@@ -186,9 +186,6 @@ module.exports = baseVw.extend({
         self.$el.find('.js-homeListingToggle').addClass('hide');
         $('#obContainer').scrollTop(0);
       }
-
-
-
     });
   },
 
