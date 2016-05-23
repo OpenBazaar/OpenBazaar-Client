@@ -13,8 +13,6 @@
   "scripts": {
     "start": "electron main.js",
     "test": "echo \"Error: I SHOULD FAIL LOLOLOLOLOL \" && exit 1",
-    "foo": "echo \"fooo\" && exit 0",
-    "bar": "echo \"bar\" && exit 0",
     "lint": "eslint .",
     "valiquire": "valiquire --redirect valiquire-redirect.js .",
     "startwithserver": "electron main.js"
@@ -49,15 +47,6 @@
   "devDependencies": {
     "electron-prebuilt": "0.37.6",
     "eslint": "1.9.0",
-    "pre-commit": "^1.1.3",
     "valiquire": "0.3.0"
-  },
-  "pre-commit": [
-    "foo",
-    "bar",
-    "test",
-    "valiquire",
-    "lint",
-    "test"
-  ]
+  }
 }
