@@ -252,7 +252,7 @@ html:not(.platform-mac) #appBar .windowControls {
 }
 
 #pageNav .navBar.bar {
-  padding: 0 8px 10px;
+  padding: 0 8px 0px;
 }
 
 #pageNav .modal-about .navBar.bar {
@@ -272,7 +272,7 @@ html:not(.platform-mac) #appBar .windowControls {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 78px;
+  top: 70px;
   width:230px;
   background-color: #252525;
   border-left: 0;
@@ -322,7 +322,7 @@ html:not(.platform-mac) #appBar .windowControls {
 }
 
 .bar {
-  height: 50px;
+  height: 42px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -1086,7 +1086,7 @@ label.fieldItem {
 }
 
 .modal.modal-navOffset {
-  top: 78px;
+  top: 70px;
 }
 
 .modalHolder {
@@ -1487,13 +1487,13 @@ h5 {
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 78px;;
+  top: 70px;
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 78px;
+  top: 70px;
 }
 
 .modal-opaque.modal-navBlock {
@@ -3404,7 +3404,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-notifications {
-  top: 50px;
+  top: 42px;
   right: 45px;
   background-color: #252525;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
@@ -3488,7 +3488,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-navBar {
-  top: 50px;
+  top: 42px;
   right: 10px;
   width: 100%;
   transform: none;
@@ -4656,7 +4656,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
   -webkit-app-region: no-drag;
   position: relative;
-  top: 78px;
+  top: 70px;
   box-sizing: border-box;
 }
 
