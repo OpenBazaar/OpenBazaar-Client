@@ -18,7 +18,7 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
         style="background-image: <% if(ob.avatar_hash && ob.avatarURL) { %> url(<%= ob.avatarURL %>), <% } %>url(imgs/defaultUser.png);"></div>
       <% } %>
       <div class="js-item pad8Left <% if(ob.title.length >= 30) { %>tooltip<% } %>"
-      <% if(ob.title.length >= 30) { %>data-tooltip="<%= ob.title.substring(0, 40) %>"<% } %> data-id="<%= ob.contract_hash %>">
+      <% if(ob.title.length >= 30) { %>data-tooltip="<%= ob.title %>"<% } %> data-id="<%= ob.contract_hash %>">
         <div class="textSize14px noOverflow textOpacity1 js-searchTitle">
           <%= ob.title %>
         </div>
