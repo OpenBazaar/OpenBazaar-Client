@@ -91,6 +91,8 @@ module.exports = baseVw.extend({
       this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
     }
 
+    this.avatar_hash = this.userProfile.get('avatar_hash');
+
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
 
     this.listenTo(this.discussionCol, "add", this.addDiscussionMessage);
@@ -98,10 +100,10 @@ module.exports = baseVw.extend({
     this.model = new orderModel({
       cCode: this.cCode,
       btAve: this.btAve,
+      avatar_hash: this.avatar_hash,
       //serverUrl: this.serverUrl,
       //transactionType: this.transactionType,
       //avatarURL: this.avatarURL,
-      //avatar_hash: this.userProfile.get('avatar_hash'),
       //orderID: this.orderID,
       //userGuid: this.userModel.get('guid')
     });
@@ -164,6 +166,8 @@ module.exports = baseVw.extend({
         transactionType: self.transactionType,
         userGuid: self.userModel.get('guid'),
         status: self.status,
+        avatarURL: self.avatarURL,
+        avatar_hash: self.avatar_hash,
         orderID: self.orderID
         })
       ));
@@ -549,7 +553,7 @@ module.exports = baseVw.extend({
         messageText = messageInput.val(),
         self = this,
         socketMessageId = Math.random().toString(36).slice(2),
-        avatar_hash = this.model.get('avatar_hash');
+        avatar_hash = this.avatar_hash
 
     __.each(messages, function(msg){
       if (messageText) {
