@@ -12,7 +12,9 @@
   "license": "MIT",
   "scripts": {
     "start": "electron main.js",
-    "test": "echo \"Error: I SHOULD FAIL \" && exit 1",
+    "test": "echo \"Error: I SHOULD FAIL LOLOLOLOLOL \" && exit 1",
+    "foo": "echo \"fooo\" && exit 0",
+    "bar": "echo \"bar\" && exit 0",
     "lint": "eslint .",
     "valiquire": "valiquire --redirect valiquire-redirect.js .",
     "startwithserver": "electron main.js"
@@ -51,6 +53,9 @@
     "valiquire": "0.3.0"
   },
   "pre-commit": [
+    "foo",
+    "bar",
+    "test",
     "valiquire",
     "lint",
     "test"
