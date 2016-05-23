@@ -187,7 +187,6 @@ module.exports = baseVw.extend({
 
   render: function(){
     var self = this;
-    $('#content').html(self.$el);
     loadTemplate('./js/templates/transactions.html', function(loadedTemplate) {
       self.$el.html(
           loadedTemplate(

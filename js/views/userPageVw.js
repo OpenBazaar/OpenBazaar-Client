@@ -355,15 +355,11 @@ module.exports = baseVw.extend({
   },
 
   render: function(){
-    "use strict";
     var self = this,
         blocked = this.options.userModel.get('blocked_guids') || [],
         isBlocked = blocked.indexOf(this.pageID) !== -1;
 
     this.model.set('isBlocked', isBlocked); //add blocked status to model
-
-    //make sure container is cleared
-    $('#content').html(this.$el);
 
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();

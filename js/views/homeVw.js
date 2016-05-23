@@ -149,7 +149,6 @@ module.exports = baseVw.extend({
 
   render: function(){
     var self = this;
-    $('#content').html(this.$el);
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
       self.setState(self.state, self.searchItemsText);

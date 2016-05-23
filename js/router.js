@@ -13,9 +13,11 @@ var ipcRenderer = require('ipc-renderer'),
 
 module.exports = Backbone.Router.extend({
   initialize: function(options){
-    var self = this;
-      
-    var routes;
+    var self = this,
+        routes,
+        originalHistoryBack,
+        originalHistoryBack,
+        origBackboneNavigate;
 
     this.options = options || {};
 
@@ -51,21 +53,44 @@ module.exports = Backbone.Router.extend({
       });
     });
     
-    var originalHistoryBack = history.back;
+    originalHistoryBack = history.back;
     history.back = function() {
-        self.historyAction = 'back';
-        return originalHistoryBack(arguments);
+      self.historyAction = 'back';
+      return originalHistoryBack.apply(this, arguments);
     };
 
-    var originalHistoryForward = history.forward;
+    originalHistoryForward = history.forward;
     history.forward = function() {
-        self.historyAction = 'forward';
-        return originalHistoryForward(arguments);
+      self.historyAction = 'forward';
+      return originalHistoryForward.apply(this, arguments);
     };
     
     this.historySize = -1;
     this.historyPosition = -1;
     this.historyAction = 'default';
+
+    origBackboneNavigate = Backbone.history.navigate;
+    Backbone.history.navigate = function() {
+      self.cacheReplacedRoutes.apply(self, arguments);
+      return origBackboneNavigate.apply(this, arguments);
+    };
+
+    this.viewCache = {};
+  },
+
+  cacheReplacedRoutes: function(fragment, options) {
+    console.log('moo shoo: ' + fragment);
+
+    // ensure replace routes update the cache (i.e. since some views
+    // correspond to multiple routes, ensure a cached view is
+    // keyed by all it's routes that have been navigated to)
+    options && options.replace && this.view &&
+      this.view.expires && this.cacheView(this.view, fragment);
+  },
+
+  navigate: function() {
+    this.cacheReplacedRoutes.apply(this, arguments);
+    Backbone.Router.prototype.navigate.apply(this, arguments);
   },
 
   translateRoute: function(route) {
@@ -151,43 +176,77 @@ module.exports = Backbone.Router.extend({
   },
 
   cleanup: function(){
-    "use strict";
     $('#loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    $('#obContainer').removeClass('overflowHidden blur');
     obEventBus.trigger('cleanNav');
   },
 
-  newView: function(view, bodyID, addressBarText, bodyClass){
-    var loadingConfig;
+  cacheView: function(view, fragment) {
+    fragment = fragment || Backbone.history.getFragment();
+    console.log(`smashing caching: ${fragment}`);    
+    
+    this.viewCache[Backbone.history.getFragment()] = {
+      cachedAt: Date.now(),
+      view: this.view
+    }
+  },
+
+  newView: function(View, options) {
+    var now = Date.now(),
+        cached = this.viewCache[Backbone.history.getFragment()],
+        loadingConfig;
+
+    console.log(`check it: ${Backbone.history.getFragment()}`);
+
+    options = __.extend({
+      // viewArgs can be an array of args to pass into the view or a single
+      // arg (most likely an object)
+      viewArgs: [{}],
+      addressBarText: '',
+      bodyID: '',
+      bodyClass: ''
+    }, options || {});
+
+    options.viewArgs = options.viewArgs.length ? options.viewArgs : [options.viewArgs];
 
     this.cleanup();
     //clear address bar. This will be replaced on the user page
-    addressBarText = addressBarText || "";
-    window.obEventBus.trigger("setAddressBar", addressBarText);
+    window.obEventBus.trigger('setAddressBar', options.addressBarText);
 
-    if($('body').attr('id') != bodyID){
-      $('body').attr("id", bodyID || "");
-    }
-    if(bodyClass){
-      $('body').attr('class', bodyClass);
-    }
-    $('#obContainer').removeClass("box-borderDashed noScrollBar overflowHidden"); //remove customization styling if present
+    $('body').attr('id', options.bodyID);
+    $('body').attr('class', options.bodyClass);
+    $('#obContainer').removeClass('box-borderDashed noScrollBar overflowHidden'); //remove customization styling if present
     
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
 
+    if (this.view) {
+      this.view.close ? this.view.close() : this.view.remove();
+    }
+
+    if (false && cached && (now - cached.__cachedAt < cached.expires)) {
+      // we have an un-expired cached view, let's reattach it
+      $('#content').html(cached.view.$el);
+      this.view = cached.view;
+    } else {
+      // this.view = Object.create(View.prototype);
+      // View.apply(this.view, options.viewArgs);
+
+      this.view = new View(options.viewArgs[0]);
+      this.view.expires && this.cacheView(this.view);
+
+      $('#content').html(this.view.$el);
+    }
+
+    $('#obContainer')[0].scrollTop = 0;
+
     if (
-      (loadingConfig = __.result(view, 'loadingConfig')) &&
+      (loadingConfig = __.result(this.view, 'loadingConfig')) &&
       loadingConfig.promise &&
       typeof loadingConfig.promise.then === 'function') {
       this.launchPageConnectModal(loadingConfig);
-    }
-    
-    this.view && (this.view.close ? this.view.close() : this.view.remove());
-    this.view = view;
-
-    $('#obContainer')[0].scrollTop = 0;
+    }    
   },
 
   launchPageConnectModal: function(config) {
@@ -245,7 +304,6 @@ module.exports = Backbone.Router.extend({
   },
 
   index: function(){
-    "use strict";
     if(localStorage.getItem("route")){
       this.navigate('#' + localStorage.getItem("route"), {trigger: true});
     } else if(this.userProfile.get('profile').beenSet == true){
@@ -256,17 +314,28 @@ module.exports = Backbone.Router.extend({
   },
 
   home: function(state, searchText){
-    "use strict";
-    this.newView(new homeView({
-      userModel: this.userModel,
-      userProfile: this.userProfile,
-      socketView: this.socketView,
-      state: state,
-      searchItemsText: searchText
-    }),'',{'addressText': searchText ? "#" + searchText : ""});
+    this.newView(homeView, {
+      viewArgs: {
+        userModel: this.userModel,
+        userProfile: this.userProfile,
+        socketView: this.socketView,
+        state: state,
+        searchItemsText: searchText
+      }
+    });
+
+    // this.newView(new homeView({
+    //   userModel: this.userModel,
+    //   userProfile: this.userProfile,
+    //   socketView: this.socketView,
+    //   state: state,
+    //   searchItemsText: searchText
+    // }),'',{'addressText': searchText ? "#" + searchText : ""});    
 
     // hide the discover onboarding callout
-    $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
+    this.$discoverHolder = this.$discoverHolder || $('.js-OnboardingIntroDiscoverHolder');
+    this.$discoverHolder.addClass('hide');
+
     app.appBar.setTitle(polyglot.t('Discover'));
   },
 
@@ -283,7 +352,7 @@ module.exports = Backbone.Router.extend({
 
     if (handle) options.handle = handle;
 
-    this.newView(new userPageView(options),"userPage",'','onPage');
+    this.newView(new userPageView(options),'userPage','','onPage');
     app.appBar.setTitle(handle ? handle : options.userId || this.userModel.get('guid'));
   },
 
@@ -331,14 +400,24 @@ module.exports = Backbone.Router.extend({
   },
 
   settings: function(state){
-    "use strict";
     $('.js-loadingModal').addClass('show');
-    this.newView(new settingsView({
-      userModel: this.userModel,
-      userProfile: this.userProfile,
-      state: state,
-      socketView: this.socketView
-    }), "userPage");
+
+    // this.newView(new settingsView({
+    //   userModel: this.userModel,
+    //   userProfile: this.userProfile,
+    //   state: state,
+    //   socketView: this.socketView
+    // }), "userPage");
+
+    this.newView(settingsView, {
+      viewArgs: {
+        userModel: this.userModel,
+        userProfile: this.userProfile,
+        state: state,
+        socketView: this.socketView
+      }
+    });
+
     app.appBar.setTitle(polyglot.t('Settings'));
   }
 });
