@@ -70,10 +70,10 @@ module.exports = baseVw.extend({
 
     //set local variables if they are not set
     if(localStorage.getItem('showUnpaid_purchases') !== "true"){
-      localStorage.setItem('showUnpaid_purchases', "false")
+      localStorage.setItem('showUnpaid_purchases', "false");
     }
     if(localStorage.getItem('showUnpaid_sales') !== "true"){
-      localStorage.setItem('showUnpaid_sales', "false")
+      localStorage.setItem('showUnpaid_sales', "false");
     }
 
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
@@ -135,13 +135,13 @@ module.exports = baseVw.extend({
 
                 if(orderModelP){
                   tType = "purchases";
-                  self.setState('purchases', self.orderID)
+                  self.setState('purchases', self.orderID);
                 } else if(orderModelS){
                   tType = "sales";
-                  self.setState('sales', self.orderID)
+                  self.setState('sales', self.orderID);
                 } else if(orderModelC){
                   tType = "cases";
-                  self.setState('cases', self.orderID)
+                  self.setState('cases', self.orderID);
                 }
 
                 if(orderModel){
@@ -261,9 +261,9 @@ module.exports = baseVw.extend({
         tabTarget = unpaidBtn.data("tab");
 
     if(localStorage.getItem('showUnpaid_'+tabTarget) == "true"){
-      localStorage.setItem('showUnpaid_'+tabTarget, "false")
+      localStorage.setItem('showUnpaid_'+tabTarget, "false");
     } else {
-      localStorage.setItem('showUnpaid_'+tabTarget, "true")
+      localStorage.setItem('showUnpaid_'+tabTarget, "true");
     }
     switch(tabTarget){
       case "purchases":
@@ -366,7 +366,7 @@ module.exports = baseVw.extend({
       //if filter is active, don't process transactions of a different type
       if(Number.isInteger(Number(this.filterBy)) && transaction.status != this.filterBy) return;
 
-      transaction.status = polyglot.t('transactions.OrderStatus'+transaction.status);
+      transaction.status = window.polyglot.t('transactions.OrderStatus'+transaction.status);
       transaction.timestamp = new Date(transaction.timestamp * 1000);
       transaction.currency_code = transaction.cCode;
       transaction.fiat_price = transaction.displayPrice;
@@ -376,7 +376,7 @@ module.exports = baseVw.extend({
 
     return $.when.apply(null, calls)
         .fail(function(){
-          messageModal.show(polyglot.t('errorMessages.getError'), polyglot.t('errorMessages.serverError') + "\n\n<i>" + errorThrown + "</i>");
+          messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.serverError'));
           calls.forEach((call => {
             call.abort();
           }));
@@ -385,7 +385,7 @@ module.exports = baseVw.extend({
           if(calls.length > 0){
             exportData(this.currentExportData);
           } else {
-            messageModal.show(polyglot.t('errorMessages.noData'));
+            messageModal.show(window.polyglot.t('errorMessages.noData'));
           }
         });
   },

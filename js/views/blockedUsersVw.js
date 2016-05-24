@@ -34,7 +34,7 @@ module.exports = baseVw.extend({
       var self = this,
           view;
 
-      if (view = __.find(this.subViews, function(subView) {
+      if (view == __.find(this.subViews, function(subView) {
         return subView.model.get('guid') === md.get('guid');
       })) {
         self.removeSubView(view);
@@ -76,7 +76,7 @@ module.exports = baseVw.extend({
 
   checkIfEmpty: function() {
     if(this.collection.length == 0) {
-      var noBlockSnippet = $('<div class="padding20 txt-center js-noblocked">' + polyglot.t('NoBlockedList') + '</div>');
+      var noBlockSnippet = $('<div class="padding20 txt-center js-noblocked">' + window.polyglot.t('NoBlockedList') + '</div>');
       this.$el.html(noBlockSnippet);
     }
   },

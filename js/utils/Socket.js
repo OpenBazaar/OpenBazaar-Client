@@ -38,7 +38,7 @@ Socket.prototype.connect = function(url) {
     }
 
     self.trigger.apply(self, ['message'].concat(Array.apply(null, args)));
-  }
+  };
 };
 
 Socket.prototype._proxyEvent = function(event) {

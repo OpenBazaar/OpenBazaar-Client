@@ -1,4 +1,5 @@
 var Backbone = require('backbone'),
+    __ = require('underscore'),
   $ = require('jquery'),
   loadTemplate = require('../utils/loadTemplate'),
   baseVw = require('./baseVw'),

@@ -182,7 +182,7 @@ module.exports = baseVw.extend({
     });
     var shipsTo = this.$el.find('#shipsTo');
     __.each(countryList, function(countryFromList, i){
-      var content = !i ? countryFromList.name : polyglot.t(`countries.${countryFromList.dataName}`);
+      var content = !i ? countryFromList.name : window.polyglot.t(`countries.${countryFromList.dataName}`);
 
       shipsTo.append(
         `<option value="${countryFromList.dataName}">${content}</option>`
@@ -206,7 +206,7 @@ module.exports = baseVw.extend({
         tags: keywordTags,
         preserveCase: true,
         saveOnBlur: true,
-        placeholder: polyglot.t('KeywordsPlaceholder')
+        placeholder: window.polyglot.t('KeywordsPlaceholder')
       });
     },0);
 
@@ -269,7 +269,7 @@ module.exports = baseVw.extend({
 
     if(setCountries) {
       if (wwIndex > -1) {
-        oldVal.splice(wwIndex, 1)
+        oldVal.splice(wwIndex, 1);
       }
       newVal = __.union(oldVal, setCountries);
       this.$('#shipsTo').val(newVal);
@@ -536,7 +536,7 @@ module.exports = baseVw.extend({
 
     if(keywordsArray.length < 1){
       this.$('#inputKeyword').closest('.flexRow').addClass('invalid');
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ polyglot.t('Tags')+"</i>");
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ window.polyglot.t('Tags')+"</i>");
       return $.Deferred().reject('failed form validation').promise();
     } else {
       this.$('#inputKeyword').closest('.flexRow').removeClass('invalid');

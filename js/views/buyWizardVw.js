@@ -84,7 +84,7 @@ module.exports = baseVw.extend({
     this.countryList = countries.get('countries');
     this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput" required></select>');
     __.each(this.countryList, function(countryFromList, i){
-      var countryOption = $('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+polyglot.t(`countries.${countryFromList.dataName}`)+'</option>');
+      var countryOption = $('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+window.polyglot.t(`countries.${countryFromList.dataName}`)+'</option>');
       countryOption.attr("selected",self.options.userModel.get('country') == countryFromList.dataName);
       self.countriesSelect.append(countryOption);
     });
@@ -391,7 +391,7 @@ module.exports = baseVw.extend({
     }
 
     addressString = encodeURIComponent(addressString);
-    $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="250" frameborder="0" style="border:0; margin-top: 0; height: 250px; clip: rect(0,0,0,0)" />');
+    var $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="250" frameborder="0" style="border:0; margin-top: 0; height: 250px; clip: rect(0,0,0,0)" />');
        
     if ($currentIframe.length) {
       this.$buyWizardMap.find('.js-mapSpinner').removeClass('hide');

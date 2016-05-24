@@ -35,7 +35,7 @@ module.exports = Backbone.Router.extend({
     ];
 
     routes.forEach((route) => {
-      this.route.apply(this, route)
+      this.route.apply(this, route);
     });  
 
     /*
@@ -137,15 +137,17 @@ module.exports = Backbone.Router.extend({
     }
     this.historyAction = 'default';
 
-    if (this.historyPosition == this.historySize)
-        $('.js-navFwd').addClass('disabled-icon');
-    else
-        $('.js-navFwd').removeClass('disabled-icon');
+    if (this.historyPosition == this.historySize) {
+      $('.js-navFwd').addClass('disabled-icon');
+    } else {
+      $('.js-navFwd').removeClass('disabled-icon');
+    }
     
-    if (this.historyPosition == 1)
-        $('.js-navBack').addClass('disabled-icon');
-    else
-        $('.js-navBack').removeClass('disabled-icon');
+    if (this.historyPosition == 1) {
+      $('.js-navBack').addClass('disabled-icon');
+    } else {
+      $('.js-navBack').removeClass('disabled-icon');
+    }
     
     if (callback) callback.apply(this, args);
   },
@@ -155,7 +157,7 @@ module.exports = Backbone.Router.extend({
     $('#loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
-    obEventBus.trigger('cleanNav');
+    window.obEventBus.trigger('cleanNav');
   },
 
   newView: function(view, bodyID, addressBarText, bodyClass){
@@ -267,7 +269,7 @@ module.exports = Backbone.Router.extend({
 
     // hide the discover onboarding callout
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
-    app.appBar.setTitle(polyglot.t('Discover'));
+    app.appBar.setTitle(window.polyglot.t('Discover'));
   },
 
   userPage: function(userID, state, itemHash, skipNSFWmodal, handle){
@@ -327,7 +329,7 @@ module.exports = Backbone.Router.extend({
       orderID: orderID,
       tabState: tabState //opens a tab in the order modal
     }),"userPage");
-    app.appBar.setTitle(polyglot.t('Transactions'));
+    app.appBar.setTitle(window.polyglot.t('Transactions'));
   },
 
   settings: function(state){
@@ -339,6 +341,6 @@ module.exports = Backbone.Router.extend({
       state: state,
       socketView: this.socketView
     }), "userPage");
-    app.appBar.setTitle(polyglot.t('Settings'));
+    app.appBar.setTitle(window.polyglot.t('Settings'));
   }
 });

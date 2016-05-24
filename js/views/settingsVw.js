@@ -299,7 +299,7 @@ module.exports = Backbone.View.extend({
 
     function getBlockedGuids() {
       return self.userModel.get('blocked_guids').map(function(guid) {
-        return { guid: guid }
+        return { guid: guid };
       });
     }
 
@@ -363,7 +363,7 @@ module.exports = Backbone.View.extend({
 
         self.patchAndFetchBlockedUsers(
             blockedUsersCl.slice(colLen, colLen + modelsPerBatch)
-        )
+        );
       }
     }, 200);
 
@@ -436,14 +436,14 @@ module.exports = Backbone.View.extend({
     __.each(currencyList, function(c, i){
       //only show currently available currencies
       if(self.availableCurrenciesList.indexOf(c.code) > -1 || c.code === "BTC"){
-        var currency_option = $('<option value="'+c.code+'">'+ polyglot.t(`currencies.${c.code}`) +'</option>');
+        var currency_option = $('<option value="'+c.code+'">'+ window.polyglot.t(`currencies.${c.code}`) +'</option>');
         currency_option.attr("selected",user.currency_code == c.code);
         currency_str += currency_option[0].outerHTML;
       }
     });
 
     __.each(timezoneList, function(t, i){
-      var timezone_option = $('<option value="'+t.offset+'">'+ polyglot.t('timezones.' + t.offset) + '</option>');
+      var timezone_option = $('<option value="'+t.offset+'">'+ window.polyglot.t('timezones.' + t.offset) + '</option>');
       timezone_option.attr("selected",user.time_zone == t.offset);
       timezone_str += timezone_option[0].outerHTML;
     });

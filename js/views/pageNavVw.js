@@ -144,7 +144,7 @@ module.exports = baseVw.extend({
     this.hideAboutModal();
     this.closeNav();
     this.closeStatusBar();
-    obEventBus.trigger('closeBuyWizard');
+    window.obEventBus.trigger('closeBuyWizard');
   },
 
   handleSocketMessage: function(response) {

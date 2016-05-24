@@ -1,6 +1,7 @@
 'use strict';
 
-var BaseVw = require('./baseVw'),
+var __ = require('underscore'),
+    BaseVw = require('./baseVw'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = BaseVw.extend({

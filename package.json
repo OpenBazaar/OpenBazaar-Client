@@ -12,10 +12,10 @@
   "license": "MIT",
   "scripts": {
     "start": "electron main.js",
-    "test": "echo \"Error: I SHOULD FAIL LOLOLOLOLOL \" && exit 1",
     "lint": "eslint .",
     "valiquire": "valiquire --redirect valiquire-redirect.js .",
-    "startwithserver": "electron main.js"
+    "startwithserver": "electron main.js",
+    "validate": "npm ls"
   },
   "dependencies": {
     "autolinker": "^0.22.0",
@@ -45,13 +45,14 @@
     "yargs": "^4.1.0"
   },
   "devDependencies": {
+    "babel-eslint": "^5.0.4",
     "electron-prebuilt": "0.37.6",
-    "eslint": "1.9.0",
-    "pre-commit": "^1.1.3",
+    "eslint": "^1.10.3",
+    "precommit-hook": "3.0.0",
     "valiquire": "0.3.0"
   },
   "pre-commit": [
-
-    "test"
+    //"lint",
+    "valiquire"
   ]
 }

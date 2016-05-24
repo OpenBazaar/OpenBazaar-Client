@@ -72,7 +72,7 @@ module.exports = baseVw.extend({
 
     if (typeof msg === 'string') msg = { msg: msg };
 
-    if (errs = md.validate(msg)) {
+    if (errs == md.validate(msg)) {
       for (var err in errs) {
         throw new Error(errs[err]);
       }
@@ -102,7 +102,7 @@ module.exports = baseVw.extend({
         this.collection.remove(md);
       },
       updateMessage: updateMessage
-    }
+    };
   },
 
   remove: function() {

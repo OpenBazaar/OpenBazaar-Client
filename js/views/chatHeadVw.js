@@ -1,4 +1,5 @@
 var Backbone = require('backbone'),
+    __ = require('underscore'),
   $ = require('jquery'),
   app = require('../App.js').getApp(),
   loadTemplate = require('../utils/loadTemplate'),

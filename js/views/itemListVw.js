@@ -1,9 +1,9 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate'),
+    //$ = require('jquery'),
+    //loadTemplate = require('../utils/loadTemplate'),
     itemsShortCollection = require('../collections/itemsShortCl'),
-    itemShortView = require('./itemShortVw');
+    itemShortView = require('./itemShortVw'),
     simpleMessageView = require('./simpleMessageVw');
 
 module.exports = Backbone.View.extend({

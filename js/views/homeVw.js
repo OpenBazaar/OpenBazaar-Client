@@ -196,7 +196,7 @@ module.exports = baseVw.extend({
   renderItem: function(item){
     var self = this,
         blocked,
-        addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country }),
+        addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country; }),
         userCountry = this.userModel.get('country'),
         contract_type = item.contract_type;
 
@@ -568,14 +568,14 @@ module.exports = baseVw.extend({
       this.loadItemsOrSearch();
     } else {
       messageModal.show(
-          polyglot.t('ViewUnfilteredListings'),
-          polyglot.t('AllListingsWarning'),
+          window.polyglot.t('ViewUnfilteredListings'),
+          window.polyglot.t('AllListingsWarning'),
           'modal-hero bg-dark-blue iconBackground',
           'modal-msg custCol-secondary',
           function(){
             messageModal.hide();
           },
-          polyglot.t('Cancel'),
+          window.polyglot.t('Cancel'),
           'txt-center',
           function(){
             localStorage.setItem('safeListingsWarningDissmissed', true);
@@ -584,7 +584,7 @@ module.exports = baseVw.extend({
             messageModal.hide();
             self.setListingsAll();
           },
-          polyglot.t('ShowUnlfilteredListings'),
+          window.polyglot.t('ShowUnlfilteredListings'),
           'txt-center'
       );
     }

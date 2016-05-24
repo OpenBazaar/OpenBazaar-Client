@@ -162,7 +162,7 @@ module.exports = baseVw.extend({
       self.$el.html(loadedTemplate(__.extend({}, self.model.toJSON(), {
         unread: self.unread,
         serverUrl: self.serverUrl,
-        bitcoinValidationRegex: config.bitcoinValidationRegex,
+        bitcoinValidationRegex: window.config.bitcoinValidationRegex,
         transactionType: self.transactionType,
         userGuid: self.userModel.get('guid'),
         status: self.status,

@@ -57,7 +57,7 @@ module.exports = baseVw.extend({
           }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          console.log(APIname + " request failed: ");
+          console.log("BitcoinAverage request failed: ");
           console.log(jqXHR);
           console.log(textStatus);
           console.log(errorThrown);
@@ -90,7 +90,7 @@ module.exports = baseVw.extend({
         this.listContents.push('checked="checked"');
       }
       this.listContents.push('>');
-      this.listContents.push('<label class="homeModal-currency radioLabel" for="currency-'+ itemJSON.dataName +'">'+ polyglot.t(`currencies.${itemJSON.code}`) +'</label>');
+      this.listContents.push('<label class="homeModal-currency radioLabel" for="currency-'+ itemJSON.dataName +'">'+ window.polyglot.t(`currencies.${itemJSON.code}`) +'</label>');
       this.listContents.push('</div></li>');
     }
   }

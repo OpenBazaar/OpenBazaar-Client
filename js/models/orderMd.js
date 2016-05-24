@@ -142,7 +142,7 @@ module.exports = window.Backbone.Model.extend({
 
       var convertShipping = function (btAve) {
         if (self.get('buyer_order').order.shipping.country == self.get('vendor_offer').listing.shipping.shipping_origin) {
-          newAttributes.shippingType = polyglot.t('DomesticShippingPrice');
+          newAttributes.shippingType = window.polyglot.t('DomesticShippingPrice');
           if (self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.domestic) {
             convertToUserCurrency(self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.domestic,
                 btAve,
@@ -159,7 +159,7 @@ module.exports = window.Backbone.Model.extend({
             convertTotal();
           }
         } else {
-          newAttributes.shippingType = polyglot.t('InternationalShippingPrice');
+          newAttributes.shippingType = window.polyglot.t('InternationalShippingPrice');
           if (self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international) {
             convertToUserCurrency(self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international,
                 btAve,

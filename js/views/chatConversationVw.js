@@ -1,10 +1,11 @@
-var Backbone = require('backbone'),
-  $ = require('jquery'),
-  moment = require('moment'),
-  app = require('../App.js').getApp(),
-  loadTemplate = require('../utils/loadTemplate'),
-  baseVw = require('./baseVw'),
-  ChatMessageVw = require('./chatMessageVw');
+var __ = require('underscore'),
+    Backbone = require('backbone'),
+    $ = require('jquery'),
+    moment = require('moment'),
+    app = require('../App.js').getApp(),
+    loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw'),
+    ChatMessageVw = require('./chatMessageVw');
 
 module.exports = baseVw.extend({
   className: 'chatConversation',
@@ -178,7 +179,7 @@ module.exports = baseVw.extend({
     formData.append('guid', this.model.get('guid'));
 
     $.ajax({
-      url: app.serverConfigs.getActive().getServerBaseUrl() + '/chat_conversation?guid=' + this.model.get('guid'),
+      url: app.serverConfigs.getActive().getServerBaseUrl() + '/chat_conversation?guid=' +this.model.get('guid'),
       type: 'DELETE'
     });
 

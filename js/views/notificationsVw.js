@@ -12,7 +12,6 @@ module.exports = baseVw.extend({
   NOTIF_PER_FETCH: 10,
 
   initialize: function(options) {
-    var options = options || {};
 
     if (!options.collection) {
       throw new Error('Please provide a collection.');

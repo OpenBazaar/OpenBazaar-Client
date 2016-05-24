@@ -45,8 +45,8 @@ module.exports = BaseVw.extend({
       className: 'server-connect modal-fullscreen',
       initialState: {
         statusText: serverConfig.get('default') ?
-          polyglot.t('serverConnectModal.connectingToDefault') :
-          polyglot.t('serverConnectModal.connectingTo', { serverName: serverConfig.get('name') })
+          window.polyglot.t('serverConnectModal.connectingToDefault') :
+          window.polyglot.t('serverConnectModal.connectingTo', { serverName: serverConfig.get('name') })
       }
     }).on('cancel', () => {
       this.pageConnectModal.remove();

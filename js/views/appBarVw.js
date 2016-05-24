@@ -48,7 +48,7 @@ module.exports = BaseVw.extend({
 
     if (!text) {
       this.title = this.titlePrefix;
-    } else {}
+    }
 
     this.title = text ?
       `${this.titlePrefix} &mdash; ${text}` :

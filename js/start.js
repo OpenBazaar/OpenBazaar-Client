@@ -75,7 +75,7 @@ if (process.platform === 'darwin') {
 } else {
   // http://stackoverflow.com/a/8684009
   // could be linux, sunos or freebsd
-  platformClass = `platform-${process.platform}`
+  platformClass = `platform-${process.platform}`;
 }
 
 $html.addClass(platformClass);
@@ -121,13 +121,13 @@ app.serverConfigs.fetch().done(() => {
 
   if (!app.serverConfigs.getActive()) {
     defaultConfig = app.serverConfigs.create({
-      name: polyglot.t('serverConnectModal.defaultServerName'),
+      name: window.polyglot.t('serverConnectModal.defaultServerName'),
       default: true
     });
 
     // migrate any existing connection from the
     // old single config set-up (_serverConfig-1)
-    if (oldConfig = localStorage['_serverConfig-1']) {
+    if (oldConfig == localStorage['_serverConfig-1']) {
       oldConfig = JSON.parse(oldConfig);
       
       // don't create a ported connection if it's the same as the default one
@@ -146,7 +146,7 @@ app.serverConfigs.fetch().done(() => {
             __.extend(
               {},
               __.omit(oldConfig, ['local_username', 'local_password', 'id']),
-              { name: polyglot.t('serverConnectModal.portedConnectionName') }
+              { name: window.polyglot.t('serverConnectModal.portedConnectionName') }
             )
           ).id          
         );
@@ -251,7 +251,7 @@ $(window).bind('hashchange', function(){
 
 //set fancy styles class
 if(localStorage.getItem('notFancy') == "true"){
-  $html.addClass('notFancy')
+  $html.addClass('notFancy');
 }
 
 //prevent dragging a file to the window from loading that file
@@ -283,47 +283,47 @@ $(window).bind('keydown', function(e) {
 
   if (ctrl) {
     switch (char) {
-      case config.keyShortcuts.undo:
+      case window.config.keyShortcuts.undo:
         e.preventDefault();
         //run undo programmatically to avoid crash
         document.execCommand('undo');
         break;
-      case config.keyShortcuts.discover:
+      case window.config.keyShortcuts.discover:
         route = 'home';
         break;
-      case config.keyShortcuts.myPage:
+      case window.config.keyShortcuts.myPage:
         route = 'userPage';
         break;
-      case config.keyShortcuts.customizePage:
+      case window.config.keyShortcuts.customizePage:
         route = 'userPage/' + user.get('guid') + '/customize';
         break;
-      case config.keyShortcuts.create:
+      case window.config.keyShortcuts.create:
         route = 'userPage/' + user.get('guid') + '/listingNew';
         break;
-      case config.keyShortcuts.purchases:
+      case window.config.keyShortcuts.purchases:
         route = 'transactions/purchases';
         break;
-      case config.keyShortcuts.sales:
+      case window.config.keyShortcuts.sales:
         route = 'transactions/sales';
         break;
-      case config.keyShortcuts.cases:
+      case window.config.keyShortcuts.cases:
         route = 'transactions/cases';
         break;
-      case config.keyShortcuts.settings:
+      case window.config.keyShortcuts.settings:
         route = 'settings';
         break;
-      case config.keyShortcuts.addressBar:
+      case window.config.keyShortcuts.addressBar:
         // Select all text in address bar
         $('.js-navAddressBar').select();
         break;
-      case config.keyShortcuts.save:
+      case window.config.keyShortcuts.save:
         window.obEventBus.trigger('saveCurrentForm');
         break;
-      case config.keyShortcuts.refresh:
+      case window.config.keyShortcuts.refresh:
         e.preventDefault();
         Backbone.history.loadUrl();
         break;
-      case config.keyShortcuts.restart:
+      case window.config.keyShortcuts.restart:
         location.reload();
         break;
     }
@@ -476,8 +476,8 @@ launchOnboarding = function(guidCreating) {
     className: 'server-connect modal-fullscreen',
     initialState: {
       statusText: activeServer && activeServer.get('default') ?
-        polyglot.t('serverConnectModal.connectingToDefault') :
-        polyglot.t('serverConnectModal.connectingTo', { serverName: activeServer.get('name') })
+        window.polyglot.t('serverConnectModal.connectingToDefault') :
+        window.polyglot.t('serverConnectModal.connectingTo', { serverName: activeServer.get('name') })
     }
   });
 })();
