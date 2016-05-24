@@ -73,4 +73,14 @@ module.exports = Backbone.View.extend({
     },
 
     expires: 1000 * 60 * 1,
+
+    getCacheIndex: function(fragment) {
+      if (!fragment) {
+        throw new Error('The fragment is empty. If you want your view to support being' +
+          'indexed by an empty fragment, please override this method in your view' +
+          'and return a hard-coded string identifier if an empty fragment is passed in.');
+      }
+
+      return fragment.split('/')[0];
+    }
 });

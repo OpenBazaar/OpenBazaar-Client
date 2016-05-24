@@ -69,6 +69,21 @@ module.exports = baseVw.extend({
     });
 
     this.fetchOwnFollowing(this.render());
+
+    this.listenTo(window.obEventBus, 'cache-detach', this.onCacheDetach);
+    this.listenTo(window.obEventBus, 'cache-reattach', this.onCacheReattach);
+  },
+
+  onCacheReattach: function(e) {
+    if (e.view !== this) return;
+
+    this.obContainer.on('scroll', this.scrollHandler);
+  },
+
+  onCacheDetach: function(e) {
+    if (e.view !== this) return;
+
+    this.obContainer.off('scroll', this.scrollHandler);
   },
 
   fetchOwnFollowing: function(callback){

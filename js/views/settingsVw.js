@@ -2,6 +2,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw'),
     domUtils = require('../utils/dom'),
     app = require('../App.js').getApp(),
     timezonesModel = require('../models/timezonesMd'),
@@ -21,7 +22,7 @@ var __ = require('underscore'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   className: "settingsView",
 
@@ -531,6 +532,7 @@ module.exports = Backbone.View.extend({
       }
       this.moderatorCount++;
       this.subViews.push(modShort);
+      this.registerChild(modShort);
     }
   },
 
@@ -1102,20 +1104,7 @@ module.exports = Backbone.View.extend({
     window.location.reload();
   },
 
-  close: function(){
-    "use strict";
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-
+  remove: function() {
     this.blockedUsersVw && this.blockedUsersVw.remove();
 
     if (this.blockedUsersScrollHandler && this.$obContainer.length) {
@@ -1123,13 +1112,6 @@ module.exports = Backbone.View.extend({
     }
 
     this.serverConnectSyncHandler &&
-    app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);
-
-    this.model.off();
-    this.off();
-    this.remove();
-    delete this.$el;
-    delete this.el;
+      app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);    
   }
-
 });

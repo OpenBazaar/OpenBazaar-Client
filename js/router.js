@@ -15,9 +15,8 @@ module.exports = Backbone.Router.extend({
   initialize: function(options){
     var self = this,
         routes,
-        originalHistoryBack,
-        originalHistoryBack,
-        origBackboneNavigate;
+        originalHistoryBack;
+        // origBackboneNavigate;
 
     this.options = options || {};
 
@@ -25,11 +24,11 @@ module.exports = Backbone.Router.extend({
       ["", "index"],
       ["home", "home"],
       ["home/:state(/:searchText)", "home"],
-      ["myPage", "userPage"],
+      // ["myPage", "userPage"],
       ["userPage", "userPage"],
       ["userPage/:userID(/:state)(/:itemHash)(/:skipNSFWmodal)", "userPage"],
       [/^@([^\/]+)(.*)$/, "userPageViaHandle"],
-      ["userPageViaHandle", "userPageViaHandle"],
+      // ["userPageViaHandle", "userPageViaHandle"],
       ["transactions", "transactions"],
       ["transactions/:state(/:orderID)(/:tabState)", "transactions"],
       ["settings", "settings"],
@@ -69,27 +68,25 @@ module.exports = Backbone.Router.extend({
     this.historyPosition = -1;
     this.historyAction = 'default';
 
-    origBackboneNavigate = Backbone.history.navigate;
-    Backbone.history.navigate = function() {
-      self.cacheReplacedRoutes.apply(self, arguments);
-      return origBackboneNavigate.apply(this, arguments);
-    };
+    // origBackboneNavigate = Backbone.history.navigate;
+    // Backbone.history.navigate = function(fragment, options) {
+    //   options && options.replace && !options.trigger &&
+    //     self.cacheReplacedRoutes.apply(self, arguments);
+    //   return origBackboneNavigate.apply(this, arguments);
+    // };
 
     this.viewCache = {};
+    window.moo = this.viewCache;
   },
 
-  cacheReplacedRoutes: function(fragment, options) {
-    // ensure replace routes update the cache (i.e. since some views
-    // correspond to multiple routes, ensure a cached view is
-    // keyed by all it's routes that have been navigated to)
-    options && options.replace && this.view &&
-      this.view.expires && this.cacheView(this.view, fragment);
-  },
+  // cacheReplacedRoutes: function(fragment) {
+  //   console.log(`replacin the state with ${fragment}`);
 
-  navigate: function() {
-    this.cacheReplacedRoutes.apply(this, arguments);
-    Backbone.Router.prototype.navigate.apply(this, arguments);
-  },
+  //   // ensure replaced routes update the cache (i.e. since some views
+  //   // correspond to multiple routes, ensure a cached view is
+  //   // keyed by all it's routes that have been navigated to)
+  //   this.view && this.view.expires && this.cacheView(this.view, fragment);
+  // },
 
   translateRoute: function(route) {
     if(!route) throw new Error('You must provide a route');
@@ -148,6 +145,8 @@ module.exports = Backbone.Router.extend({
   },
   
   execute: function(callback, args, name) {
+    console.log(`routing to ${Backbone.history.getFragment()}`);
+
     if (this.historyAction == 'default') {
       this.historyPosition += 1;
       this.historySize = this.historyPosition;
@@ -181,10 +180,13 @@ module.exports = Backbone.Router.extend({
   },
 
   cacheView: function(view, fragment) {
+    var index = view.getCacheIndex(Backbone.history.getFragment());
+
+    // console.log(`fragment is ${fragment}`);
     fragment = fragment || Backbone.history.getFragment();
-    console.log(`smashing caching: ${fragment}`);    
+    // console.log(`smashing caching: ${fragment}`);    
     
-    this.viewCache[Backbone.history.getFragment()] = {
+    this.viewCache[index] = {
       cachedAt: Date.now(),
       view: this.view
     }
@@ -192,7 +194,7 @@ module.exports = Backbone.Router.extend({
 
   newView: function(View, options) {
     var now = Date.now(),
-        cached = this.viewCache[Backbone.history.getFragment()],
+        cached = this.view && this.viewCache[this.view.getCacheIndex(Backbone.history.getFragment())],
         loadingConfig;
 
     options = __.extend({
@@ -217,29 +219,38 @@ module.exports = Backbone.Router.extend({
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
 
-    if (false && cached && (now - cached.__cachedAt < cached.expires)) {
+    if (cached && (now - cached.cachedAt < cached.view.expires)) {
       // we have an un-expired cached view, let's reattach it
+      console.log('using cached');
       $('#content').html(cached.view.$el);
+      cached.view.delegateEvents();
       this.view = cached.view;
+      obEventBus.trigger('cache-reattach', { view: this.view });
     } else {
-      // this.view = Object.create(View.prototype);
-      // View.apply(this.view, options.viewArgs);
+      console.log('using brand spanking new');
+      if (this.view) {
+        if (this.view.expires) {
+          this.view.$el.detach();
+          obEventBus.trigger('cache-detach', { view: this.view });
+        } else {
+          this.view.close ? this.view.close() : this.view.remove()          
+        }
+      }
 
-      this.view && (this.view.close ? this.view.close() : this.view.remove());
-      this.view = new View(options.viewArgs[0]);
+      this.view = new (Function.prototype.bind.apply(View, [null].concat(options.viewArgs)));
       this.view.expires && this.cacheView(this.view);
 
       $('#content').html(this.view.$el);
+
+      if (
+        (loadingConfig = __.result(this.view, 'loadingConfig')) &&
+        loadingConfig.promise &&
+        typeof loadingConfig.promise.then === 'function') {
+        this.launchPageConnectModal(loadingConfig);
+      }      
     }
 
     $('#obContainer')[0].scrollTop = 0;
-
-    if (
-      (loadingConfig = __.result(this.view, 'loadingConfig')) &&
-      loadingConfig.promise &&
-      typeof loadingConfig.promise.then === 'function') {
-      this.launchPageConnectModal(loadingConfig);
-    }    
   },
 
   launchPageConnectModal: function(config) {
@@ -299,10 +310,8 @@ module.exports = Backbone.Router.extend({
   index: function(){
     if(localStorage.getItem("route")){
       this.navigate('#' + localStorage.getItem("route"), {trigger: true});
-    } else if(this.userProfile.get('profile').beenSet == true){
-      this.home();
     } else {
-      this.userPage();
+      this.home();
     }
   },
 
@@ -345,7 +354,12 @@ module.exports = Backbone.Router.extend({
 
     if (handle) options.handle = handle;
 
-    this.newView(new userPageView(options),'userPage','','onPage');
+    this.newView(userPageView, {
+      viewArgs: options,
+      bodyID: 'userPage',
+      bodyClass: 'onPage'
+    });
+
     app.appBar.setTitle(handle ? handle : options.userId || this.userModel.get('guid'));
   },
 
