@@ -100,7 +100,7 @@ module.exports = baseVw.extend({
     this.model = new orderModel({
       cCode: this.cCode,
       btAve: this.btAve,
-      avatar_hash: this.avatar_hash,
+      avatar_hash: this.avatar_hash
       //serverUrl: this.serverUrl,
       //transactionType: this.transactionType,
       //avatarURL: this.avatarURL,
@@ -183,7 +183,7 @@ module.exports = baseVw.extend({
       self.discussionScroller = self.$('.js-discussionScroller');
       self.moderatorPercentage = self.model.get('displayModerator').feeDecimal;
       //set the QR details checkbox
-      var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false" ? true : false;
+      var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false";
       self.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
     });
   },
@@ -553,7 +553,7 @@ module.exports = baseVw.extend({
         messageText = messageInput.val(),
         self = this,
         socketMessageId = Math.random().toString(36).slice(2),
-        avatar_hash = this.avatar_hash
+        avatar_hash = this.avatar_hash;
 
     __.each(messages, function(msg){
       if (messageText) {

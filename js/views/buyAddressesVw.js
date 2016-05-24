@@ -31,7 +31,7 @@ module.exports = Backbone.View.extend({
               __.extend({}, self.model.toJSON(), {
                 worldwide: self.worldwide,
                 selected: selected,
-                shipsToList: localize.localizeShippingRegions(self.shippingRegions),
+                shipsToList: localize.localizeShippingRegions(self.shippingRegions)
               })
           )
       );

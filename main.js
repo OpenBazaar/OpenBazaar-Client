@@ -67,6 +67,7 @@ var handleStartupEvent = function() {
   switch (squirrelCommand) {
     case '--squirrel-install':
           install(app.quit);
+          break;
 
     case '--squirrel-updated':
       // Always quit when done
@@ -77,7 +78,7 @@ var handleStartupEvent = function() {
       // Always quit when done
       uninstall(app.quit);
       return true;
-    
+
     case '--squirrel-obsolete':
       // This is called on the outgoing version of your app before
       // we update to the new version - it's the opposite of
@@ -240,39 +241,39 @@ function initWin32() {
     setProtocol();
 
     function setProtocol (err) {
-      if (err) log.error(err.message);
+      if (err) console.log.error(err.message);
       console.log(protocolKey);
-      protocolKey.set('', Registry.REG_SZ, name, setURLProtocol)
+      protocolKey.set('', Registry.REG_SZ, name, setURLProtocol);
     }
 
     function setURLProtocol (err) {
-      if (err) log.error(err.message);
+      if (err) console.log.error(err.message);
       console.log(protocolKey);
-      protocolKey.set('URL Protocol', Registry.REG_SZ, '', setIcon)
+      protocolKey.set('URL Protocol', Registry.REG_SZ, '', setIcon);
     }
 
     function setIcon (err) {
-      if (err) log.error(err.message);
+      if (err) console.log.error(err.message);
 
       var iconKey = new Registry({
         hive: Registry.HKCU,
         key: '\\Software\\Classes\\' + protocol + '\\DefaultIcon'
       });
-      iconKey.set('', Registry.REG_SZ, icon, setCommand)
+      iconKey.set('', Registry.REG_SZ, icon, setCommand);
     }
 
     function setCommand (err) {
-      if (err) log.error(err.message);
+      if (err) console.log.error(err.message);
 
       var commandKey = new Registry({
         hive: Registry.HKCU,
         key: '\\Software\\Classes\\' + protocol + '\\shell\\open\\command'
       });
-      commandKey.set('', Registry.REG_SZ, '"' + command + '" "%1"', done)
+      commandKey.set('', Registry.REG_SZ, '"' + command + '" "%1"', done);
     }
 
     function done (err) {
-      if (err) log.error(err.message)
+      if (err) console.log.error(err.message);
     }
   }
 }

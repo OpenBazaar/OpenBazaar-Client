@@ -683,7 +683,7 @@ module.exports = baseVw.extend({
             self.fetchFollowers();
             //mark whether page is following you
             if(self.options.ownPage === false && Boolean(__.findWhere(followingArray, {guid: self.userID}))){
-              self.$('.js-followsMe').removeClass('hide')
+              self.$('.js-followsMe').removeClass('hide');
             }
             //mark whether page is being followed
             if(self.options.ownPage === false){
@@ -773,7 +773,7 @@ module.exports = baseVw.extend({
     var self = this,
         select = this.$el.find('.js-categories'),
         selectOptions = [],
-        addressCountries = self.options.userModel.get('shipping_addresses').map(function(address){ return address.country }),
+        addressCountries = self.options.userModel.get('shipping_addresses').map(function(address){ return address.country; }),
         userCountry = self.options.userModel.get('country');
 
     addressCountries.push(userCountry);
@@ -1546,7 +1546,7 @@ module.exports = baseVw.extend({
     if($targ.hasClass('confirm')){
       $targ.addClass('loading').removeClass('confirm');
       this.unfollowUser({'guid': this.pageID}).fail(() => {
-        $(e.target).removeClass('loading')
+        $(e.target).removeClass('loading');
       });
     } else {
       $targ.addClass('confirm');

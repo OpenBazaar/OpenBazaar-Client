@@ -11,6 +11,7 @@ var __ = require('underscore'),
     ServerConnectHeaderVw = require('./serverConnectHeaderVw'),
     ServerConfigFormVw = require('./serverConfigFormVw'),
     ServerConfigsVw = require('./serverConfigsVw');
+import * as $ from "jquery";
 
 module.exports = BaseModal.extend({
   className: 'server-connect-modal modal-fullscreen',

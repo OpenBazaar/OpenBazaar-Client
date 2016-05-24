@@ -206,7 +206,7 @@ module.exports = baseVw.extend({
       }
 
       //set the QR details checkbox
-      var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false" ? true : false;
+      var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false";
       self.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
     });
     return this;

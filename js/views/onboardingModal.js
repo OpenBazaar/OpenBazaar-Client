@@ -1,6 +1,7 @@
 'use strict';
 
 var Backbone = require('backbone'),
+    __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     moment = require('moment'),
     cropit = require('../utils/jquery.cropit'),
@@ -438,10 +439,7 @@ module.exports = baseModal.extend({
           if (failed + succeeded === followers.length) {
             failed ? deferred.reject() : deferred.resolve();
           }
-
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
+          
         }).done(function(data) {
           if (data.success) {
             succeeded++;
@@ -489,7 +487,7 @@ module.exports = baseModal.extend({
         var img_hash = data.image_hashes[0];
 
         if(data.success === true && img_hash !== 'b472a266d0bd89c13706a4132ccfb16f7c3b9fcb' && img_hash.length == 40) {
-          deferred.resolve(img_hash)
+          deferred.resolve(img_hash);
         } else {
           deferred.reject();
         }
@@ -551,7 +549,7 @@ module.exports = baseModal.extend({
         });
       };
       
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(file);
     };
 
     xhr.onerror = function (e) {
@@ -582,11 +580,12 @@ module.exports = baseModal.extend({
       baseModal.prototype.render.apply(self, arguments);
 
       // pre-select timezone
-      var timeZoneOffset = new Date().getTimezoneOffset();
-      timeZoneOffset = parseInt(Math.abs(timeZoneOffset/60));
-      timeZoneOffset = moment().isDST() ? timeZoneOffset + 1 : timeZoneOffset;      
-      timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + timeZoneOffset + ':00)';
-      var selectedTimeZone = self.$("[id*='" + timeZoneOffset + "']");
+      var timeZoneOffset1 = new Date().getTimezoneOffset(),
+          timeZoneOffset2 = parseInt(Math.abs(timeZoneOffset1/60)),
+          timeZoneOffset3 = moment().isDST() ? timeZoneOffset2 + 1 : timeZoneOffset2,      
+          timeZoneOffset4 = '(GMT ' + (timeZoneOffset3 < 0 ? '+' : '-') + timeZoneOffset3 + ':00)',
+          selectedTimeZone = self.$("[id*='" + timeZoneOffset4 + "']");
+      
       selectedTimeZone.prop('checked', true);
       self.model.set('time_zone', selectedTimeZone.val());
 

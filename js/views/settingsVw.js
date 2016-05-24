@@ -396,9 +396,8 @@ module.exports = Backbone.View.extend({
         notifications = user.notifications,
         moderatorStatus = this.model.get('page').profile.moderator,
         vendorStatus = this.model.get('page').profile.vendor,
-        fancyStatus = window.localStorage.getItem('notFancy');
-
-    smtp_notifications = (user.smtp_notifications == 1) ? true : false;
+        fancyStatus = window.localStorage.getItem('notFancy'),
+        smtp_notifications = (user.smtp_notifications == 1) ? true : false;
 
     this.$('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
     this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
@@ -424,8 +423,8 @@ module.exports = Backbone.View.extend({
     currencyList.unshift({code: "BTC", currency:"Bitcoin", currencyUnits: "4"});
 
     __.each(countryList, function(c, i){
-      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}`)+'</option>');
-      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+polyglot.t(`countries.${c.dataName}`)+'</option>');
+      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+window.polyglot.t(`countries.${c.dataName}`)+'</option>');
+      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+window.polyglot.t(`countries.${c.dataName}`)+'</option>');
       country_option.attr("selected",user.country == c.dataName);
       //if user has a country in their profile, preselect it in the new address section
       ship_country_option.attr("selected",user.country== c.dataName);
@@ -1017,8 +1016,8 @@ module.exports = Backbone.View.extend({
           );
         }
         $('#testSMTPButton').removeClass('loading');
-      })
-    })
+      });
+    });
   },
 
   saveAdvanced: function(){

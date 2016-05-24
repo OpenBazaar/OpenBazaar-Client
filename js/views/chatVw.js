@@ -335,7 +335,8 @@ module.exports = baseVw.extend({
   handleSocketMessage: function(response) {
     var msg = JSON.parse(response.data).message,
         openlyChatting = false,
-        conversationMd;
+        conversationMd,
+        avatar;
 
     if (!msg) return;
 
@@ -418,7 +419,7 @@ module.exports = baseVw.extend({
     if (document.hasFocus() && chatHead && chatHead.get('unread')) {
       $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_chat_message_as_read', {guid: guid});
       chatHead.set('unread', 0);
-      this.setAggregateUnreadCount()
+      this.setAggregateUnreadCount();
     }
   },
 

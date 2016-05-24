@@ -52,7 +52,7 @@
     "valiquire": "0.3.0"
   },
   "pre-commit": [
-    //"lint",
+    "lint",
     "valiquire"
   ]
 }
