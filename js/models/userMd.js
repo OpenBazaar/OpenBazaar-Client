@@ -1,6 +1,7 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    Polyglot = require('node-polyglot'),
     languagesModel = require('../models/languagesMd'),
     countriesMd = require('./countriesMd'),
     saveToAPI = require('../utils/saveToAPI');
@@ -50,14 +51,12 @@ module.exports = Backbone.Model.extend({
   },
 
   parse: function(response) {
-    "use strict";
-
     //make sure currency code is in all caps
     response.currency_code = response.currency_code ? response.currency_code.toUpperCase() : "BTC";
 
     //addresses come from the server as a string. Parse the string
-    if(response.shipping_addresses && response.shipping_addresses.constructor === Array && response.shipping_addresses.length > 0){
-      try{
+    if (response.shipping_addresses && response.shipping_addresses.constructor === Array && response.shipping_addresses.length > 0){
+      try {
         var tempAddresses = [];
         __.each(response.shipping_addresses, function (address) {
           if (address){
@@ -68,7 +67,7 @@ module.exports = Backbone.Model.extend({
           }
         });
         response.shipping_addresses = tempAddresses;
-      } catch(e) {
+      } catch (e) {
         //server may set a malformed shipping_address value
         console.log("Error in shipping_addresses:");
         console.log(e);
@@ -121,7 +120,7 @@ module.exports = Backbone.Model.extend({
 
 
     //take no action if this is user's own guid
-    if(guid == this.get('guid')){
+    if (guid == this.get('guid')){
       return;
     }
 

@@ -12,10 +12,10 @@
   "license": "MIT",
   "scripts": {
     "start": "electron main.js",
-    "test": "exit 0",
     "lint": "eslint .",
     "valiquire": "valiquire --redirect valiquire-redirect.js .",
-    "startwithserver": "electron main.js"
+    "startwithserver": "electron main.js",
+    "validate": "npm ls"
   },
   "dependencies": {
     "autolinker": "^0.22.0",
@@ -46,13 +46,12 @@
   },
   "devDependencies": {
     "electron-prebuilt": "0.37.6",
-    "eslint": "1.9.0",
-    "pre-commit": "^1.1.2",
+    "eslint": "^2.10.2",
+    "precommit-hook": "3.0.0",
     "valiquire": "0.3.0"
   },
   "pre-commit": [
-    "valiquire",
     "lint",
-    "test"
+    "valiquire"
   ]
 }

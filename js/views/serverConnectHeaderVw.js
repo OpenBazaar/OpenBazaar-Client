@@ -1,6 +1,7 @@
 'use strict';
 
-var BaseVw = require('./baseVw'),
+var __ = require('underscore'),
+    BaseVw = require('./baseVw'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = BaseVw.extend({
@@ -14,7 +15,7 @@ module.exports = BaseVw.extend({
   setState: function(state) {
     var newState;
     
-    newState =  __.extend({}, this._state, state);
+    newState = __.extend({}, this._state, state);
 
     if (!__.isEqual(this._state, newState)) {
       this._state = newState;

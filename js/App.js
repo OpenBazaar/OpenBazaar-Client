@@ -1,5 +1,6 @@
+'use strict';
+
 var ipcRenderer = require('ipc-renderer'),
-    __ = require('underscore'),
     $ = require('jquery'),
     Socket = require('./utils/Socket'),
     _app;
@@ -10,7 +11,7 @@ function App() {
   // ensure we're a singleton
   if (_app) return _app;
 
-  _app = this;
+  _app = self;
   this._awayCounts = null;
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
@@ -77,7 +78,7 @@ App.prototype.getGuid = function(handle, resolver) {
     } else {
       deferred.reject();
     }
-  }).fail(function(jqXHR, status, errorThrown){
+  }).fail(function(){
     deferred.reject();
   });
 

@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -23,8 +25,7 @@ module.exports = Backbone.View.extend({
     'click .js-adminClearLocalStorage': 'clearStorage'
   },
 
-  initialize: function (options) {
-    "use strict";
+  initialize: function () {
     this.avatarHash = "";
     this.serverUrl = this.model.get('serverUrl');
     this.userSettings = new userSettingsModel();
@@ -34,7 +35,6 @@ module.exports = Backbone.View.extend({
   },
 
   render: function () {
-    "use strict";
     var self = this;
     loadTemplate('./js/templates/adminPanel.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
@@ -44,14 +44,12 @@ module.exports = Backbone.View.extend({
   },
 
   blockClicks: function(e) {
-    "use strict";
-    if(!$(e.target).hasClass('js-externalLink')){
+    if (!$(e.target).hasClass('js-externalLink')){
       e.stopPropagation();
     }
   },
 
   updatePage: function() {
-    "use strict";
     var self = this;
     this.userProfile.urlRoot = this.model.get('serverUrl')+ "profile";
     this.userSettings.urlRoot = this.model.get('serverUrl') + "settings";
@@ -60,7 +58,7 @@ module.exports = Backbone.View.extend({
         var modelJSON = model.toJSON();
         __.each(self.$el.find('#adminPanelProfile input'), function(inputTarget){
           __.each(modelJSON.profile, function(modelValue, modelName) {
-            if(inputTarget.name == modelName && inputTarget.type != "radio"){
+            if (inputTarget.name == modelName && inputTarget.type != "radio"){
               $(inputTarget).val(modelValue);
             }
           });
@@ -121,9 +119,7 @@ module.exports = Backbone.View.extend({
   },
 
   setServer: function() {
-    "use strict";
-    var self = this,
-        newServer = this.$el.find('#adminServerInput').val();
+    var newServer = this.$el.find('#adminServerInput').val();
 
     //change model so everything else points at new server before REST call
     this.model.set({serverUrl: newServer});
@@ -132,7 +128,6 @@ module.exports = Backbone.View.extend({
   },
 
   updateProfile: function() {
-    "use strict";
     var self = this,
         targetForm = this.$el.find('#adminPanelProfile'),
         formData = new FormData(targetForm[0]);
@@ -140,9 +135,9 @@ module.exports = Backbone.View.extend({
     //add location data in case this is a new profile
     formData.append("location", this.userProfile.get("profile").location);
 
-    if(targetForm[0].checkValidity()){
+    if (targetForm[0].checkValidity()){
       this.postData(formData, "profile",
-          function (data) {
+          function () {
             self.updatePage();
           },
           function (data) {
@@ -153,11 +148,10 @@ module.exports = Backbone.View.extend({
   },
 
   modelToFormData: function(modelJSON, formData, existingKeys) {
-    "use strict";
     //only works with flat JSON objects. Use toJSON on models before passing them in
     var newFormData = formData || new FormData();
     __.each(modelJSON, function(value, key) {
-      if(!__.has(existingKeys, key)) {
+      if (!__.has(existingKeys, key)) {
         newFormData.append(key, value);
       }
     });
@@ -165,9 +159,7 @@ module.exports = Backbone.View.extend({
   },
 
   postData: function(formData, endPoint, onSucceed, onFail) {
-    "use strict";
-    var self = this,
-        errorModal = $('.js-messageModal');
+    var self = this;
     $.ajax({
       type: "POST",
       url: self.model.get('serverUrl') + endPoint,
@@ -178,7 +170,7 @@ module.exports = Backbone.View.extend({
       success: function(data) {
         if (data.success === true){
           onSucceed(data);
-        }else if (data.success === false){
+        } else if (data.success === false){
           onFail(data);
         }
       },
@@ -191,13 +183,11 @@ module.exports = Backbone.View.extend({
   },
 
   validateInput: function(e) {
-    "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   shutdown: function(e){
-    "use strict";
     var self = this,
         targetButton = $(e.target);
     $.ajax({
@@ -210,7 +200,6 @@ module.exports = Backbone.View.extend({
   },
 
   closeApp: function(){
-    "use strict";
     var win = remote.getCurrentWindow();
     var process = remote.process;
     if (process.platform != 'darwin') {
@@ -221,16 +210,15 @@ module.exports = Backbone.View.extend({
   },
 
   clearStorage: function(){
-    "use strict";
     this.$el.find('.js-adminClearLocalMsg').text("Local Storage Cleared");
     localStorage.clear();
   },
 
   close: function(){
     __.each(this.subViews, function(subView) {
-      if(subView.close){
+      if (subView.close){
         subView.close();
-      }else{
+      } else {
         subView.unbind();
         subView.remove();
       }

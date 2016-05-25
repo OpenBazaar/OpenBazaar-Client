@@ -1,14 +1,12 @@
-var Backbone = require('backbone'),
-  $ = require('jquery'),
-  loadTemplate = require('../utils/loadTemplate'),
-  app = require('../App').getApp(),
-  StatusMessageMd = require('../models/statusMessageMd'),
-  StatusMessageCl = require('../collections/statusMessagesCl'),
-  baseVw = require('./baseVw'),
-  StatusMessageVw = require('./statusMessageVw');
+'use strict';
+
+var StatusMessageMd = require('../models/statusMessageMd'),
+    StatusMessageCl = require('../collections/statusMessagesCl'),
+    baseVw = require('./baseVw'),
+    StatusMessageVw = require('./statusMessageVw');
 
 module.exports = baseVw.extend({
-  initialize: function(options) {
+  initialize: function() {
     this.collection = new StatusMessageCl();
     this.vwRemoveTimeouts = [];
     this.mdRemoveTimeouts = [];
@@ -32,7 +30,7 @@ module.exports = baseVw.extend({
     this.vwRemoveTimeouts.push(timeout);
   },
 
-  onAddMessage: function(md, cl, opts) {
+  onAddMessage: function(md, cl) {
     var vw = new StatusMessageVw({ model: md }),
         duration = md.get('duration'),
         timeout;
@@ -47,7 +45,7 @@ module.exports = baseVw.extend({
     }, 100);
 
     if (duration) {
-      timeout  = setTimeout(() => {
+      timeout = setTimeout(() => {
         cl.remove(md);
         this.mdRemoveTimeouts.splice(timeout, 1);
       }, duration);
@@ -72,9 +70,11 @@ module.exports = baseVw.extend({
 
     if (typeof msg === 'string') msg = { msg: msg };
 
-    if (errs = md.validate(msg)) {
+    if (errs == md.validate(msg)) {
       for (var err in errs) {
-        throw new Error(errs[err]);
+        if (errs.hasOwnProperty(err)){
+          throw new Error(errs[err]);
+        }
       }
     }
 
@@ -102,7 +102,7 @@ module.exports = baseVw.extend({
         this.collection.remove(md);
       },
       updateMessage: updateMessage
-    }
+    };
   },
 
   remove: function() {

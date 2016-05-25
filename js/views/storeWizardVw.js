@@ -1,7 +1,7 @@
-var __ = require('underscore'),
-    Backbone = require('backbone'),
+'use strict';
+
+var Backbone = require('backbone'),
     $ = require('jquery'),
-    is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),
@@ -24,11 +24,10 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(options) {
-    "use strict";
     this.options = options || {};
     this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
-    if(this.model.get('page').profile.header_hash){
+    if (this.model.get('page').profile.header_hash){
       this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
     }
 
@@ -41,7 +40,6 @@ module.exports = Backbone.View.extend({
   },
 
   initAccordion: function(targ){
-    "use strict";
     var acc = $(targ),
         accWidth = acc.width(),
         accHeight = acc.height(),
@@ -49,13 +47,15 @@ module.exports = Backbone.View.extend({
         accNum = accChildren.length,
         accWin = acc.find('.accordion-window');
 
-    accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
-    accChildren.css({'width':accWidth, 'height':accHeight});
+    accWin.css({'left': 0, 'width': function(){
+      return accWidth * accNum;
+    }});
+    accChildren.css({'width': accWidth, 'height': accHeight});
 
     acc.find('.js-accordionNext').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
+      var oldPos = accWin.css('left').replace("px", "");
 
-      if($('#storeWizardForm')[0].checkValidity()) {
+      if ($('#storeWizardForm')[0].checkValidity()) {
         if (oldPos > (accWidth * accNum * -1 + accWidth)) {
           accWin.css('left', function () {
             return parseInt(accWin.css('left').replace("px", "")) - accWidth;
@@ -72,10 +72,10 @@ module.exports = Backbone.View.extend({
     });
 
     acc.find('.js-accordionPrev').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
-      if(oldPos < (0)){
+      var oldPos = accWin.css('left').replace("px", "");
+      if (oldPos < (0)){
         accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) + accWidth;
+          return parseInt(accWin.css('left').replace("px", "")) + accWidth;
         });
         // switch active tab
         var curActive = acc.find('.accordion-active');
@@ -89,7 +89,6 @@ module.exports = Backbone.View.extend({
   },
 
   render: function() {
-    "use strict";
     var self = this;
 
     loadTemplate('./js/templates/storeWizard.html', function(loadedTemplate) {
@@ -122,13 +121,11 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  validateDescription: function(e) {
+  validateDescription: function() {
     validateMediumEditor.checkVal($('#aboutInput'));
   },
 
   setValues: function() {
-    "use strict";
-    var self = this;
     this.$el.find('#locationSelect').val(this.model.get('user').country);
     //activate tags plugin
     this.categoriesInput = new Taggle('categoriesInput', {
@@ -139,17 +136,13 @@ module.exports = Backbone.View.extend({
   },
 
   handleSocketMessage: function(response) {
-    "use strict";
     var data = JSON.parse(response.data);
-    if(data.id == this.socketModeratorID && data.moderator.guid != this.model.get('user').guid && this.model.get('user').blocked_guids.indexOf(data.moderator.guid) == -1){
+    if (data.id == this.socketModeratorID && data.moderator.guid != this.model.get('user').guid && this.model.get('user').blocked_guids.indexOf(data.moderator.guid) == -1){
       this.renderModerator(data.moderator);
     }
   },
 
   renderModerator: function(moderator){
-    "use strict";
-    var self = this;
-
     moderator.serverUrl = this.model.get('user').serverUrl;
     moderator.userID = moderator.guid;
     moderator.avatarURL = this.model.get('user').serverUrl + "get_image?hash=" + moderator.avatar_hash + "&guid=" + moderator.guid;
@@ -164,25 +157,21 @@ module.exports = Backbone.View.extend({
   },
   
   blockClicks: function(e) {
-    "use strict";
-    if(!$(e.target).hasClass('js-externalLink')){
+    if (!$(e.target).hasClass('js-externalLink')){
       e.stopPropagation();
     }
   },
 
   closeWizard: function() {
-    "use strict";
     this.close();
   },
 
   validateInput: function(e) {
-    "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   saveWizard: function() {
-    "use strict";
     var self = this,
         profileForm = this.$el.find('#storeWizardForm'),
         moderatorsChecked = $('.js-storeWizardModeratorList input:checked'),

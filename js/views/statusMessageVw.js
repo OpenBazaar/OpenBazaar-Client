@@ -1,13 +1,12 @@
-var Backbone = require('backbone'),
-  $ = require('jquery'),
-  loadTemplate = require('../utils/loadTemplate'),
-  app = require('../App').getApp(),
-  baseVw = require('./baseVw');
+'use strict';
+
+var loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
   className: 'statusMessageWrap',
 
-  initialize: function(options) {
+  initialize: function() {
     this.listenTo(this.model, 'change', this.render);
   },
 

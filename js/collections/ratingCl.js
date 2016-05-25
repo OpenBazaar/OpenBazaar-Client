@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     app = require('../App.js').getApp(),
@@ -9,9 +11,6 @@ module.exports = Backbone.Collection.extend({
   },
 
   model: RatingMd,
-
-  initialize: function(options) {
-  },
 
   parse: function(response) {
     if (!response || __.isEmpty(response)) {

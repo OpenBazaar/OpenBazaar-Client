@@ -1,8 +1,9 @@
-var Backbone = require('backbone'),
-  $ = require('jquery'),
-  app = require('../App.js').getApp(),
-  loadTemplate = require('../utils/loadTemplate'),
-  baseVw = require('./baseVw');
+'use strict';
+
+var __ = require('underscore'),
+    app = require('../App.js').getApp(),
+    loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
 

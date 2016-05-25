@@ -1,10 +1,11 @@
-var Backbone = require('backbone'),
-  $ = require('jquery'),
-  moment = require('moment'),
-  app = require('../App.js').getApp(),
-  loadTemplate = require('../utils/loadTemplate'),
-  baseVw = require('./baseVw'),
-  ChatMessageVw = require('./chatMessageVw');
+'use strict';
+
+var __ = require('underscore'),
+    $ = require('jquery'),
+    app = require('../App.js').getApp(),
+    loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw'),
+    ChatMessageVw = require('./chatMessageVw');
 
 module.exports = baseVw.extend({
   className: 'chatConversation',
@@ -43,8 +44,7 @@ module.exports = baseVw.extend({
 
     this.listenTo(this.collection, 'reset', this.render);
 
-    this.listenTo(this.collection, 'request', (cl, xhr, options) => {
-      var clLen = cl.length;
+    this.listenTo(this.collection, 'request', (cl, xhr) => {
 
       this.fetch = xhr;
       this.$loadingSpinner.removeClass('hide');
@@ -52,9 +52,8 @@ module.exports = baseVw.extend({
       xhr.done(() => this.$loadingSpinner.addClass('hide'));
     });        
 
-    this.listenTo(this.collection, 'update', (cl, options) => {
-      var $msgPage = $('<div />'),
-          md;
+    this.listenTo(this.collection, 'update', (cl) => {
+      var $msgPage = $('<div />');
 
       if (!cl.at(0).viewCreated) {
         // new page of messages
@@ -95,7 +94,7 @@ module.exports = baseVw.extend({
     }
   },
 
-  onScroll: function(e) {
+  onScroll: function() {
     var startId;
 
     if (!this.collection.length) return;
@@ -178,7 +177,7 @@ module.exports = baseVw.extend({
     formData.append('guid', this.model.get('guid'));
 
     $.ajax({
-      url: app.serverConfigs.getActive().getServerBaseUrl() + '/chat_conversation?guid=' + this.model.get('guid'),
+      url: app.serverConfigs.getActive().getServerBaseUrl() + '/chat_conversation?guid=' +this.model.get('guid'),
       type: 'DELETE'
     });
 
@@ -225,7 +224,7 @@ module.exports = baseVw.extend({
       var $msgWrap = $('<div />');
 
       if (this.msgViews) {
-        this.msgViews.forEach((vw, index) => {
+        this.msgViews.forEach((vw) => {
           vw.remove();
         });
       }

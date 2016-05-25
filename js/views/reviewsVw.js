@@ -1,5 +1,6 @@
+'use strict';
+
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     RatingCl = require('../collections/ratingCl'),
@@ -18,7 +19,6 @@ module.exports = baseVw.extend({
   MAX_VIEWS: 1500,
 
   initialize: function(options) {
-    var self = this;
 
     this.options = options || {};
 

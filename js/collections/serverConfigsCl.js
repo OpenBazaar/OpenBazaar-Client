@@ -1,3 +1,5 @@
+'use strict';
+
 var Backbone = require('backbone'),
     localStorageSync = require('../utils/backboneLocalStorage'),
     ServerConfigMd = require('../models/serverConfigMd');
@@ -23,7 +25,7 @@ module.exports = Backbone.Collection.extend({
 
     if (!(md = this.get(id))) {
       throw new Error(`Unable to set the active server config. It must be an id of one of the available
-          server configs stored in this collection.`)
+          server configs stored in this collection.`);
     }
 
     if (this._active !== id) {
