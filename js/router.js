@@ -1,3 +1,5 @@
+'use strict';
+
 var ipcRenderer = require('ipc-renderer'),
     __ = require('underscore'),
     Backbone = require('backbone'),
@@ -15,7 +17,8 @@ module.exports = Backbone.Router.extend({
   initialize: function(options){
     var self = this,
         routes,
-        originalHistoryBack;
+        originalHistoryBack,
+        originalHistoryForward;
 
     this.options = options || {};
 
@@ -74,8 +77,6 @@ module.exports = Backbone.Router.extend({
 
       for (var key in this.viewCache) {
         cached = this.viewCache[key];
-        // if (cached && (now - cached.cachedAt < cached.view.cacheExpires)) {
-
         if (Date.now() - cached.cachedAt >= cached.view.cacheExpires) {
           delete this.viewCache[key].view.__cachedScrollPos
           delete this.viewCache[key];
@@ -89,9 +90,8 @@ module.exports = Backbone.Router.extend({
 
   refresh: function() {
     if (this.view) {
-      // clear any cache for the view, so a fresh
-      // view is created
-      delete this.viewCache[this.view.getCacheIndex(Backbone.history.getFragment())];
+      // clear any cache for the view, so a fresh view is created
+      delete this.viewCache[this.view.constructor.getCacheIndex(Backbone.history.getFragment())];
     }
     
     Backbone.history.loadUrl();
@@ -187,9 +187,10 @@ module.exports = Backbone.Router.extend({
   },
 
   cacheView: function(view, fragment) {
-    var index = view.getCacheIndex(Backbone.history.getFragment());
+    var index;
 
     fragment = fragment || Backbone.history.getFragment();
+    index = view.constructor.getCacheIndex(fragment);
     
     this.viewCache[index] = {
       cachedAt: Date.now(),
@@ -199,12 +200,12 @@ module.exports = Backbone.Router.extend({
 
   newView: function(View, options) {
     var now = Date.now(),
-        cached = this.view && this.viewCache[this.view.getCacheIndex(Backbone.history.getFragment())],
+        cached = this.viewCache[View.getCacheIndex(Backbone.history.getFragment())],
         loadingConfig;
 
     options = __.extend({
       // viewArgs can be an array of args to pass into the view or a single
-      // arg (most likely an object)
+      // arg (most likely an options object)
       viewArgs: [{}],
       addressBarText: '',
       bodyID: '',
@@ -224,12 +225,17 @@ module.exports = Backbone.Router.extend({
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
 
-    // let's update the cache of our existing cache-able view so cachedAt is
-    // updated and the user has up until the view's 'cacheExpires' amount of
+    // let's update the cache of our existing view (if it's cached && not expired) so
+    // cachedAt is updated and the user has up until the view's 'cacheExpires' amount of
     // time to come back to it in it's current state.
     for (var key in this.viewCache) {
-      if (this.viewCache[key].view === this.view) {
-        this.viewCache[key].cachedAt = Date.now();
+      let cached = this.viewCache[key];
+
+      if (
+          cached.view === this.view &&
+          (Date.now() - cached.cachedAt < cached.view.cacheExpires)
+        ) {
+        cached.cachedAt = Date.now();
       }
     }
 
@@ -260,8 +266,6 @@ module.exports = Backbone.Router.extend({
     } else {
       console.log('using brand spanking new');
       this.view = new (Function.prototype.bind.apply(View, [null].concat(options.viewArgs)));
-      this.view.cacheExpires && this.cacheView(this.view);
-
       $('#content').html(this.view.$el);
       this.$obContainer[0].scrollTop = 0;
 
@@ -269,7 +273,11 @@ module.exports = Backbone.Router.extend({
         (loadingConfig = __.result(this.view, 'loadingConfig')) &&
         loadingConfig.promise &&
         typeof loadingConfig.promise.then === 'function') {
-        this.launchPageConnectModal(loadingConfig);
+        this.launchPageConnectModal(loadingConfig).done(() => {
+          this.view.cacheExpires && this.cacheView(this.view);
+        });
+      } else {
+        this.view.cacheExpires && this.cacheView(this.view);
       }      
     }
 
@@ -277,9 +285,10 @@ module.exports = Backbone.Router.extend({
 
   launchPageConnectModal: function(config) {
     var defaults = {
-      connectText: 'Connecting...',
-      failedText: 'Unable to Connect.'
-    };
+        connectText: 'Connecting...',
+        failedText: 'Unable to Connect.'
+      },
+      deferred = $.Deferred();
 
     if (!(
         config &&
@@ -302,6 +311,7 @@ module.exports = Backbone.Router.extend({
 
     this.pageConnectModal.on('back', () => {
       history.back();
+      deferred.reject();
     });
 
     this.pageConnectModal.on('retry', () => {
@@ -314,19 +324,24 @@ module.exports = Backbone.Router.extend({
 
     this.pageConnectModal.on('cancel', () => {
       typeof config.promise.cancel === 'function' && config.promise.cancel();
+      deferred.reject();
       history.back();
     });
 
     config.promise.done(() => {
       this.pageConnectModal && this.pageConnectModal.remove();
       this.pageConnectModal = null;
+      deferred.resolve();
     }).fail(() => {
       this.pageConnectModal.setState({
         statusText: config.failedText,
         mode: 'failed-connect',
         tooltip: config.failedTooltip
       });
+      deferred.reject();
     });
+
+    return deferred.promise();
   },
 
   index: function(){
@@ -368,6 +383,10 @@ module.exports = Backbone.Router.extend({
 
     if (handle) options.handle = handle;
 
+    if (!userID) {
+      this.navigate(`userPage/${this.userModel.get('guid')}`, { replace: true });
+    }
+
     this.newView(userPageView, {
       viewArgs: options,
       bodyID: 'userPage',
@@ -393,6 +412,7 @@ module.exports = Backbone.Router.extend({
       // we want this to happen after the launchPageConnectModal processes
       // the resolution of the promise, hence the timeout.
       setTimeout(() => {
+        this.navigate(`userPage/${guid}${subPath ? '/' + subPath : ''}`, { replace: true });
         this.userPage(guid, state, itemHash, skipNSFWmodal, '@' + handle);
       }, 0);
     });

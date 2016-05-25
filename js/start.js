@@ -321,7 +321,7 @@ $(window).bind('keydown', function(e) {
         break;
       case config.keyShortcuts.refresh:
         e.preventDefault();
-        Backbone.history.loadUrl();
+        app.router.refresh();
         break;
       case config.keyShortcuts.restart:
         location.reload();

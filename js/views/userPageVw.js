@@ -24,7 +24,8 @@ var __ = require('underscore'),
     sanitizeHTML = require('sanitize-html'),
     storeWizardVw = require('./storeWizardVw'),
     saveToAPI = require('../utils/saveToAPI'),
-    moderatorSettingsVw = require('./moderatorSettingsVw');
+    moderatorSettingsVw = require('./moderatorSettingsVw'),
+    UserPageVw;
 
 var defaultItem = {
   "vendor_offer": {
@@ -118,7 +119,7 @@ function rgb2hex(rgb) {
     return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }
 
-module.exports = pageVw.extend({
+UserPageVw = pageVw.extend({
 
   classname: "userView",
 
@@ -1745,7 +1746,7 @@ module.exports = pageVw.extend({
   },
 
   remove: function(){
-    baseVw.prototype.remove.apply(this, arguments);
+    pageVw.prototype.remove.apply(this, arguments);
 
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     $.colorbox.close();
@@ -1753,3 +1754,19 @@ module.exports = pageVw.extend({
   }
 
 });
+
+UserPageVw.getCacheIndex = function(fragment) {
+  var splitFrag;
+
+  fragment = fragment || '';
+  splitFrag = fragment.split('/');
+
+  if (splitFrag.length > 1) {
+    return `userPage/${splitFrag[1]}`;
+  } else {
+    throw Error('The expectation is that the user page will be routed ' +
+      'with a minimum fragment of \'userPage\'/<guid>');
+  }
+};
+
+module.exports = UserPageVw;

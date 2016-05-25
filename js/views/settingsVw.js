@@ -1112,6 +1112,8 @@ module.exports = pageVw.extend({
     }
 
     this.serverConnectSyncHandler &&
-      app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);    
+      app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);
+
+    pageVw.prototype.remove.apply(this, arguments);
   }
 });

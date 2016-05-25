@@ -635,6 +635,6 @@ module.exports = pageVw.extend({
   remove: function() {
     this.clearSocketTimeout();
     this.scrollHandler && this.obContainer.off('scroll', this.scrollHandler);
-    baseVw.prototype.remove.apply(this, arguments);
+    pageVw.prototype.remove.apply(this, arguments);
   }
 });

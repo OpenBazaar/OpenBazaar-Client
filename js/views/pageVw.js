@@ -1,20 +1,26 @@
 'use strict';
 
-var BaseVw = require('./baseVw');
+var BaseVw = require('./baseVw'),
+    PageVw;
 
-module.exports = BaseVw.extend({
+PageVw = BaseVw.extend({
   // todo: make into function and increase to 20 min
-  cacheExpires: 1000 * 10 * 1,
+  cacheExpires: 1000 * 60 * 1,
 
-  restoreScrollPosition: true,
-
-  getCacheIndex: function(fragment) {
-    if (!fragment) {
-      throw new Error('The fragment is empty. If you want your view to support being' +
-        'indexed by an empty fragment, please override this method in your view' +
-        'and return a hard-coded string identifier if an empty fragment is passed in.');
-    }
-
-    return fragment.split('/')[0];
-  }  
+  restoreScrollPosition: true
 });
+
+// this must be a "static" method and overridden as such (if you
+// are overriding), since the router doesn't have an instance
+// when it's deciding whether to create a new one or use a cached one.
+PageVw.getCacheIndex = function(fragment) {
+  if (!fragment) {
+    throw new Error('The fragment is empty. If you want your view to support being ' +
+      'indexed by an empty fragment, please override this method in your view ' +
+      'and return a hard-coded string identifier if an empty fragment is passed in.');
+  }
+
+  return fragment.split('/')[0];
+};  
+
+module.exports = PageVw;
