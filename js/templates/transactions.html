@@ -48,66 +48,94 @@
 
 <div class="flexContainer color-primary custCol-primary minHeight650">
 
-      <div class="flexRow flex-border js-tabTarg js-purchases" id="transactionsPurchases">
-        <div class="positionWrapper width100">
-          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
-            <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
-            <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
-          </div>
-          <div class="selectPill positionTop rowTop10">
-            <select class="custCol-secondary custCol-text js-transactionFilter" data-tab="purchases">
-              <option value="all"><%= polyglot.t('transactions.sortByStatusAll') %></option>
-              <option value="0"><%= polyglot.t('transactions.sortByStatus0') %></option>
-              <option value="1"><%= polyglot.t('transactions.sortByStatus1') %></option>
-              <option value="2"><%= polyglot.t('transactions.sortByStatus2') %></option>
-              <option value="3"><%= polyglot.t('transactions.sortByStatus3') %></option>
-              <option value="4"><%= polyglot.t('transactions.sortByStatus4') %></option>
-              <option value="5"><%= polyglot.t('transactions.sortByStatus5') %></option>
-              <option value="6"><%= polyglot.t('transactions.sortByStatus6') %></option>
-              <option value="7"><%= polyglot.t('transactions.sortByStatus7') %></option>
-              <option value="dateNewest"><%= polyglot.t('transactions.sortByDateNewest') %></option>
-              <option value="dateOldest"><%= polyglot.t('transactions.sortByDateOldest') %></option>
-            </select>
-          </div>
+      <div class="flexRow flex-border positionWrapper js-tabTarg js-purchases" id="transactionsPurchases">
+        <div class="selectPill rowTop10">
+          <select class="custCol-secondary custCol-text js-transactionFilter" data-tab="purchases">
+            <option value="all"><%= polyglot.t('transactions.sortByStatusAll') %></option>
+            <option value="0"><%= polyglot.t('transactions.sortByStatus0') %></option>
+            <option value="1"><%= polyglot.t('transactions.sortByStatus1') %></option>
+            <option value="2"><%= polyglot.t('transactions.sortByStatus2') %></option>
+            <option value="3"><%= polyglot.t('transactions.sortByStatus3') %></option>
+            <option value="4"><%= polyglot.t('transactions.sortByStatus4') %></option>
+            <option value="5"><%= polyglot.t('transactions.sortByStatus5') %></option>
+            <option value="6"><%= polyglot.t('transactions.sortByStatus6') %></option>
+            <option value="7"><%= polyglot.t('transactions.sortByStatus7') %></option>
+            <option value="dateNewest"><%= polyglot.t('transactions.sortByDateNewest') %></option>
+            <option value="dateOldest"><%= polyglot.t('transactions.sortByDateOldest') %></option>
+          </select>
+        </div>
+        <div class="pad10 rowTop10">
+          <input type="checkbox"
+                 class="hide js-toggleUnpaid"
+                 id="toggleUnpaidPurchases"
+                 data-tab="purchases"
+                 <% if(ob.showUnpaid_purchases === 'true'){ %> checked <% } %>
+                 value="<%= ob.showUnpaid_purchases || 'false' %>">
+          <label for="toggleUnpaidPurchases" class="btn btn-txt custCol-secondary clickable">
+            <span class="fontSize12 clickable togLabelOff">
+              <%= polyglot.t('transactions.ShowUnpaid') %>
+            </span>
+            <span class="fontSize12 clickable togLabelOn">
+              <%= polyglot.t('transactions.HideUnpaid') %>
+            </span>
+            (<span class="js-unpaidCount"></span>)
+          </label>
+        </div>
+        <div class="positionWrapper searchWrapper borderBottom custCol-border flexExpand">
+          <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
+          <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
         </div>
       </div>
 
       <div class="flexRow flex-border positionWrapper js-tabTarg js-sales hide" id="transactionsSales">
-        <div class="positionWrapper width100">
-          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
-            <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
-            <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
-          </div>
-          <div class="selectPill positionTop rowTop10">
-            <select class="custCol-secondary custCol-text js-transactionFilter" data-tab="sales">
-              <option value="all"><%= polyglot.t('transactions.sortByStatusAll') %></option>
-              <option value="0"><%= polyglot.t('transactions.sortByStatus0') %></option>
-              <option value="1"><%= polyglot.t('transactions.sortByStatus1') %></option>
-              <option value="2"><%= polyglot.t('transactions.sortByStatus2') %></option>
-              <option value="3"><%= polyglot.t('transactions.sortByStatus3') %></option>
-              <option value="4"><%= polyglot.t('transactions.sortByStatus4') %></option>
-              <option value="5"><%= polyglot.t('transactions.sortByStatus5') %></option>
-              <option value="6"><%= polyglot.t('transactions.sortByStatus6') %></option>
-              <option value="7"><%= polyglot.t('transactions.sortByStatus7') %></option>
-              <option value="dateNewest"><%= polyglot.t('transactions.sortByDateNewest') %></option>
-              <option value="dateOldest"><%= polyglot.t('transactions.sortByDateOldest') %></option>
-            </select>
-          </div>
+        <div class="selectPill rowTop10">
+          <select class="custCol-secondary custCol-text js-transactionFilter" data-tab="sales">
+            <option value="all"><%= polyglot.t('transactions.sortByStatusAll') %></option>
+            <option value="0"><%= polyglot.t('transactions.sortByStatus0') %></option>
+            <option value="1"><%= polyglot.t('transactions.sortByStatus1') %></option>
+            <option value="2"><%= polyglot.t('transactions.sortByStatus2') %></option>
+            <option value="3"><%= polyglot.t('transactions.sortByStatus3') %></option>
+            <option value="4"><%= polyglot.t('transactions.sortByStatus4') %></option>
+            <option value="5"><%= polyglot.t('transactions.sortByStatus5') %></option>
+            <option value="6"><%= polyglot.t('transactions.sortByStatus6') %></option>
+            <option value="7"><%= polyglot.t('transactions.sortByStatus7') %></option>
+            <option value="dateNewest"><%= polyglot.t('transactions.sortByDateNewest') %></option>
+            <option value="dateOldest"><%= polyglot.t('transactions.sortByDateOldest') %></option>
+          </select>
+        </div>
+        <div class="pad10 rowTop10">
+          <input type="checkbox"
+                 class="hide js-toggleUnpaid"
+                 id="toggleUnpaidSales"
+                 data-tab="sales"
+                 <% if(ob.showUnpaid_sales === 'true'){ %> checked <% } %>
+                 value="<%= ob.showUnpaid_sales || 'false' %>">
+          <label for="toggleUnpaidSales" class="btn btn-txt custCol-secondary clickable">
+            <span class="fontSize12 togLabelOff">
+              <%= polyglot.t('transactions.ShowUnpaid') %>
+            </span>
+            <span class="fontSize12 togLabelOn">
+              <%= polyglot.t('transactions.HideUnpaid') %>
+            </span>
+            (<span class="js-unpaidCount"></span>)
+          </label>
+        </div>
+        <div class="positionWrapper searchWrapper borderBottom custCol-border flexExpand">
+          <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
+          <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
         </div>
       </div>
 
       <div class="flexRow flex-border positionWrapper hide js-tabTarg js-cases" id="transactionsCases">
-        <div class="positionWrapper width100">
-          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
-            <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
-            <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
-          </div>
-          <div class="selectPill positionTop rowTop10">
-            <select class="custCol-secondary custCol-text js-transactionFilter" data-tab="cases">
-              <option value="dateNewest"><%= polyglot.t('transactions.sortByDateNewest') %></option>
-              <option value="dateOldest"><%= polyglot.t('transactions.sortByDateOldest') %></option>
-            </select>
-          </div>
+        <div class="selectPill rowTop10">
+          <select class="custCol-secondary custCol-text js-transactionFilter" data-tab="cases">
+            <option value="dateNewest"><%= polyglot.t('transactions.sortByDateNewest') %></option>
+            <option value="dateOldest"><%= polyglot.t('transactions.sortByDateOldest') %></option>
+          </select>
+        </div>
+        <div class="positionWrapper searchWrapper borderBottom custCol-border flexExpand">
+          <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
+          <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
         </div>
       </div>
 

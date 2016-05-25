@@ -272,7 +272,7 @@ form {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 68px;
+  top: 78px;
   width:230px;
   background-color: #252525;
   border-left: 0;
@@ -1086,7 +1086,7 @@ label.fieldItem {
 }
 
 .modal.modal-navOffset {
-  top: 68px;
+  top: 78px;
 }
 
 .modalHolder {
@@ -1487,17 +1487,17 @@ h5 {
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 68px;;
+  top: 78px;;
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 68px;
+  top: 78px;
 }
 
 .modal-opaque.modal-navBlock {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 68px, rgba(7,65,97,1) 69px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 78px, rgba(7,65,97,1) 79px);
   top: 0;
   padding-top: 100px;
 }
@@ -1687,7 +1687,8 @@ removed because I don't think we're using the trick to hide the borders any more
   width: 100%;
 }
 
-.txtFieldWrapper:before {
+.txtFieldWrapper:before,
+.searchWrapper:before {
   color: #fff;
   font-family: Ionicons;
   font-size: 18px;
@@ -1850,6 +1851,10 @@ input[type="text"].txtField-bar {
 .btn.btn-txt {
   /* button with text */
   padding: 0 12px;
+}
+
+.btn.btn-txt .pill {
+  margin-right: -6px;
 }
 
 .btn.btn-txtHalf {
@@ -3275,13 +3280,6 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 input[type="checkbox"] + label .togLabelOn,
-input[type="checkbox"].fieldItem + label .togLabelOn,
-input[type="checkbox"] + label .togLabelOff,
-input[type="checkbox"].fieldItem + label .togLabelOff {
-  padding: 0 16px;
-}
-
-input[type="checkbox"] + label .togLabelOn,
 input[type="checkbox"].fieldItem + label .togLabelOn {
   display: none;
 }
@@ -3442,7 +3440,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 1;
 }
 
-.notificationUnreadIndicator {
+.highlightRow {
     position: absolute;
     left: 0;
     top: 0;
@@ -4478,11 +4476,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: red;
 }
 
+.pill.tabPill {
+  position: relative;
+  display: inline-block;
+  min-width: 0;
+  line-height: normal;
+}
+
+.pill.tabPill .badge:after {
+  right: -12px;
+  top: -8px;
+}
+
 .selectPill {
   opacity: .75;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
   width: 156px;
   text-align: right;
+  position: relative;
 }
 
 .selectPill select {
@@ -4494,7 +4505,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 12px;
   margin-left: 10px;
   letter-spacing: .4px;
-  padding: 6px;
+  line-height: 32px;
+  height: 32px;
   width: 148px;
   z-index: 2;
   -webkit-user-select: none;
@@ -4644,7 +4656,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
   -webkit-app-region: no-drag;
   position: relative;
-  top: 68px;
+  top: 78px;
   box-sizing: border-box;
 }
 

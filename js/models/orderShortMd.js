@@ -27,6 +27,8 @@ module.exports = window.Backbone.Model.extend({
         currency: response.cCode
       }).format(response.btc_total*response.btAve);
     }
+
+    response.unread = response.unread || 0;
     return response;
   }
 });

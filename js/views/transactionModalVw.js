@@ -41,6 +41,7 @@ module.exports = baseVw.extend({
     'click .js-copyOutgoingTx': 'copyTx',
     'click .js-closeOrderForm': 'closeOrderForm',
     'click .js-showFundOrder': 'showFundOrder',
+    'click .js-transactionPayCopy': 'copyTransactionPay',
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
     'click .js-startDisputeResend': 'confirmDisputeResend',
@@ -70,6 +71,7 @@ module.exports = baseVw.extend({
     this.orderID = options.orderID;
     this.status = options.status;
     this.transactionType = options.transactionType;
+    this.unread = options.unread;
     this.parentEl = options.parentEl;
     this.countriesArray = options.countriesArray;
     this.cCode = options.cCode;
@@ -89,6 +91,8 @@ module.exports = baseVw.extend({
       this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
     }
 
+    this.avatar_hash = this.userProfile.get('avatar_hash');
+
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
 
     this.listenTo(this.discussionCol, "add", this.addDiscussionMessage);
@@ -96,12 +100,12 @@ module.exports = baseVw.extend({
     this.model = new orderModel({
       cCode: this.cCode,
       btAve: this.btAve,
-      serverUrl: this.serverUrl,
-      transactionType: this.transactionType,
-      avatarURL: this.avatarURL,
-      avatar_hash: this.userProfile.get('avatar_hash'),
-      orderID: this.orderID,
-      userGuid: this.userModel.get('guid')
+      avatar_hash: this.avatar_hash,
+      //serverUrl: this.serverUrl,
+      //transactionType: this.transactionType,
+      //avatarURL: this.avatarURL,
+      //orderID: this.orderID,
+      //userGuid: this.userModel.get('guid')
     });
     this.model.urlRoot = options.serverUrl + "get_order";
     this.listenTo(this.model, 'change:priceSet', this.render);
@@ -145,7 +149,7 @@ module.exports = baseVw.extend({
   render: function () {
     var self = this;
     $('.js-loadingModal').addClass("hide");
-    this.model.set('status', this.status);
+    //this.model.set('status', this.status);
     //makde sure data is valid
     if(this.model.get('invalidData')){
       messageModal.show(window.polyglot.t('errorMessages.serverError', self.model.get('error')));
@@ -155,7 +159,18 @@ module.exports = baseVw.extend({
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
       self.parentEl.html(self.$el);
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.html(loadedTemplate(__.extend({}, self.model.toJSON(), {
+        unread: self.unread,
+        serverUrl: self.serverUrl,
+        bitcoinValidationRegex: config.bitcoinValidationRegex,
+        transactionType: self.transactionType,
+        userGuid: self.userModel.get('guid'),
+        status: self.status,
+        avatarURL: self.avatarURL,
+        avatar_hash: self.avatar_hash,
+        orderID: self.orderID
+        })
+      ));
       // add blur to container
       $('#obContainer').addClass('blur');
       self.delegateEvents(); //reapply events if this is a second render
@@ -269,6 +284,11 @@ module.exports = baseVw.extend({
     this.$el.find('.js-tab').removeClass('active');
     this.$el.find('.js-' + state).removeClass('hide');
     this.$el.find('.js-' + state + 'Tab').addClass('active').removeClass('hide');
+    
+    if(state == "discussion"){
+      $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_discussion_as_read', {id: this.orderID});
+      this.$('.js-unreadBadge').addClass('hide');
+    }
 
     if(state == "discussion" && this.discussionScroller){
       this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
@@ -412,6 +432,11 @@ module.exports = baseVw.extend({
         });
   },
 
+  copyTransactionPay: function(e){
+    "use strict";
+    clipboard.writeText($(e.target).data('url'));
+  },
+
   checkPayment: function(){
     var self = this,
         formData = new FormData();
@@ -528,7 +553,7 @@ module.exports = baseVw.extend({
         messageText = messageInput.val(),
         self = this,
         socketMessageId = Math.random().toString(36).slice(2),
-        avatar_hash = this.model.get('avatar_hash');
+        avatar_hash = this.avatar_hash
 
     __.each(messages, function(msg){
       if (messageText) {

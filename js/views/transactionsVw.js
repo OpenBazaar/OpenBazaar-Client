@@ -1,3 +1,5 @@
+"use strict";
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -23,11 +25,11 @@ module.exports = baseVw.extend({
     'change .js-transactionFilter': 'transactionFilter',
     'keyup .search': 'searchKeyup',
     'click .js-transactionsSearchClear': 'searchClear',
-    'click .js-downloadCSV': 'clickDownloadCSV'
+    'click .js-downloadCSV': 'clickDownloadCSV',
+    'change .js-toggleUnpaid': 'toggleUnpaid'
   },
 
   initialize: function(options){
-    "use strict";
     /* expected options:
        userModel
        userProfile
@@ -42,6 +44,7 @@ module.exports = baseVw.extend({
     this.options = options;
     this.state = options.state || "purchases";
     this.orderID = options.orderID;
+    this.tabState = options.tabState;
     this.userModel = options.userModel;
     this.userProfile = options.userProfile;
     this.model = new Backbone.Model();
@@ -51,8 +54,8 @@ module.exports = baseVw.extend({
     setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     this.serverUrl = options.userModel.get('serverUrl');
     this.cCode = options.userModel.get('currency_code');
-    this.listenTo(window.obEventBus, "openOrderModal", function(orderID){
-      self.openOrderModal(orderID);
+    this.listenTo(window.obEventBus, "openOrderModal", function(options){
+      self.openOrderModal(options);
     });
     this.searchTransactions;
     this.filterBy; //used for filtering the collections
@@ -64,6 +67,14 @@ module.exports = baseVw.extend({
     this.purchasesWrapper = $(wrapper);
     this.salesWrapper = $(wrapper);
     this.casesWrapper = $(wrapper);
+
+    //set local variables if they are not set
+    if(localStorage.getItem('showUnpaid_purchases') !== "true"){
+      localStorage.setItem('showUnpaid_purchases', "false")
+    }
+    if(localStorage.getItem('showUnpaid_sales') !== "true"){
+      localStorage.setItem('showUnpaid_sales', "false")
+    }
 
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
     this.listenTo(window.obEventBus, "orderModalClosed", function(){
@@ -89,12 +100,10 @@ module.exports = baseVw.extend({
   },
 
   getData: function(){
-    "use strict";
     var self = this;
 
     this.purchasesCol.fetch({
       success: function(models){
-        //self.renderPurchases();
         self.renderTab("purchases", self.purchasesCol, self.purchasesWrapper);
         models.length && self.setSearchList('transactionsPurchases');
         self.salesCol.fetch({
@@ -105,7 +114,6 @@ module.exports = baseVw.extend({
             }
             self.casesCol.fetch({
               success: function(models) {
-                //self.renderCases();
                 self.renderTab("cases", self.casesCol, self.casesWrapper);
                 models.length && self.setSearchList('transactionsCases');
               },
@@ -140,7 +148,8 @@ module.exports = baseVw.extend({
                   self.openOrderModal({
                     'orderID': self.orderID,
                     'status': orderModel.get('status'),
-                    'transactionType': tType
+                    'transactionType': tType,
+                    'tabState': self.tabState
                   });
                 }
               }
@@ -167,27 +176,33 @@ module.exports = baseVw.extend({
     var data = JSON.parse(response.data);
     if(data.notification && data.notification.order_id){
       this.getData();
+    } else if(data.message && data.message.subject){
+      this.getData();
     }
   },
 
   setSearchList: function(targetID){
-    "use strict";
     this.searchTransactions = new window.List(targetID, {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
   },
 
   render: function(){
-    "use strict";
     var self = this;
     $('#content').html(self.$el);
     loadTemplate('./js/templates/transactions.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.html(
+          loadedTemplate(
+            __.extend({},self.model.toJSON(), {
+              showUnpaid_purchases: localStorage.getItem('showUnpaid_purchases'),
+              showUnpaid_sales: localStorage.getItem('showUnpaid_sales')
+            })
+        )
+      );
       self.setState(self.state);
       self.getData();
     });
   },
 
   setTab: function(activeTab, showContent){
-    "use strict";
     this.$el.find('.js-tab').removeClass('active');
     activeTab.addClass('active');
     this.$el.find('.js-tabTarg').addClass('hide');
@@ -203,7 +218,6 @@ module.exports = baseVw.extend({
   },
 
   tabHandler: function(e){
-    "use strict";
     var tab = $(e.target).closest('.js-tab'),
         tabID = tab.data("tab"),
         showContent = this.$el.find('.js-'+tabID);
@@ -214,19 +228,16 @@ module.exports = baseVw.extend({
   },
 
   searchKeyup: function(e){
-    "use strict";
     this.$('.js-transactionsSearchClear').removeClass('hide');
   },
 
   searchClear: function(){
-    "use strict";
     this.$('.search').val("");
     this.$('.js-transactionsSearchClear').addClass('hide');
     this.renderPurchases();
   },
 
   transactionFilter: function(e){
-    "use strict";
     var tab = $(e.target),
         tabTarget = tab.data("tab");
 
@@ -245,12 +256,38 @@ module.exports = baseVw.extend({
     }
   },
 
+  toggleUnpaid: function(e){
+    var unpaidBtn = $(e.target),
+        tabTarget = unpaidBtn.data("tab");
+
+    if(localStorage.getItem('showUnpaid_'+tabTarget) == "true"){
+      localStorage.setItem('showUnpaid_'+tabTarget, "false")
+    } else {
+      localStorage.setItem('showUnpaid_'+tabTarget, "true")
+    }
+    switch(tabTarget){
+      case "purchases":
+        this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper);
+        break;
+      case "sales":
+        this.renderTab("sales", this.salesCol, this.salesWrapper);
+        break;
+    }
+  },
+
   renderTab: function(tabName, tabCollection, tabWrapper, filterBy){
-    "use strict";
+
     var self = this;
     filterBy = filterBy || this.filterBy;
     tabWrapper.html('');
-    if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
+    if(!filterBy || filterBy == "all"){
+      tabCollection.comparator = function(model) {
+        //add 1 so unread:zero doesn't get dropped from the front of the string when it's changed to a number by the -
+        return -(String(model.get("unread")+1) + String(model.get("timestamp")));
+      };
+      tabCollection.sort();
+    }
+    if(filterBy == "dateNewest"){
       tabCollection.comparator = function(model) {
         return -model.get("timestamp");
       };
@@ -263,15 +300,19 @@ module.exports = baseVw.extend({
       tabCollection.sort();
     }
     tabCollection.each(function(model, i){
-      if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
-        self.addTransaction(model, tabWrapper, tabName);
-      } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
-        self.addTransaction(model, tabWrapper, tabName);
+      if(model.get('status') > 0 || localStorage.getItem('showUnpaid_'+tabName) == "true") {
+        if (!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest") {
+          self.addTransaction(model, tabWrapper, tabName);
+        } else if (filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
+          self.addTransaction(model, tabWrapper, tabName);
+        }
       }
     });
 
     this.$el.find('.js-'+tabName+'Count').html(tabCollection.length);
-    this.$el.find('.js-'+tabName).append(tabWrapper);
+    this.$el.find('.js-'+tabName)
+        .append(tabWrapper)
+        .find('.js-unpaidCount').html(tabCollection.where({status: 0}).length);
   },
 
   addTransaction: function(model, tabWrapper, type){
@@ -405,7 +446,6 @@ module.exports = baseVw.extend({
   },
 
   openOrderModal: function(options){
-    "use strict";
     $('.js-loadingModal').removeClass("hide");
     if(options.status == "open"){
       options.status = 4;
@@ -423,7 +463,8 @@ module.exports = baseVw.extend({
       transactionType: options.transactionType,
       userModel: this.userModel,
       userProfile: this.userProfile,
-      socketView: this.socketView
+      socketView: this.socketView,
+      unread: options.unread
     });
     this.registerChild(orderModalView);
   }
