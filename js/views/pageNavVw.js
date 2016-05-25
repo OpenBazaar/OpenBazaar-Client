@@ -531,7 +531,7 @@ module.exports = baseVw.extend({
   },
 
   navRefreshClick: function(){
-    Backbone.history.loadUrl();
+    app.router.refresh();
   },
   
   navRestartClick: function(){

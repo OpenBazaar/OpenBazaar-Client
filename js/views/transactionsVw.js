@@ -8,13 +8,13 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     Papa = require('papaparse'),
     transactionsCl = require('../collections/transactionsCl'),
-    baseVw = require('./baseVw'),
+    pageVw = require('./pageVw'),
     orderShortVw = require('./orderShortVw'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     transactionModalVw = require('./transactionModalVw'),
     countriesMd = require('../models/countriesMd');
 
-module.exports = baseVw.extend({
+module.exports = pageVw.extend({
 
   className: "transactionsView",
 
@@ -28,6 +28,8 @@ module.exports = baseVw.extend({
     'click .js-downloadCSV': 'clickDownloadCSV',
     'change .js-toggleUnpaid': 'toggleUnpaid'
   },
+
+  cacheExpires: 0,
 
   initialize: function(options){
     /* expected options:
@@ -213,7 +215,7 @@ module.exports = baseVw.extend({
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
     this.state = state;
     //add action to history
-    Backbone.history.navigate("#transactions/" + state + addID);
+    Backbone.history.navigate("#transactions/" + state + addID, { replace: true });
   },
 
   tabHandler: function(e){

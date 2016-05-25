@@ -2,7 +2,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    baseVw = require('./baseVw'),
+    pageVw = require('./pageVw'),
     domUtils = require('../utils/dom'),
     app = require('../App.js').getApp(),
     timezonesModel = require('../models/timezonesMd'),
@@ -22,7 +22,7 @@ var __ = require('underscore'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
-module.exports = baseVw.extend({
+module.exports = pageVw.extend({
 
   className: "settingsView",
 

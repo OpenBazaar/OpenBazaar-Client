@@ -13,7 +13,7 @@ var __ = require('underscore'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
     itemModel = require('../models/itemMd'),
-    baseVw = require('./baseVw'),
+    pageVw = require('./pageVw'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
     reviewsView = require('./reviewsVw'),
@@ -118,7 +118,7 @@ function rgb2hex(rgb) {
     return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }
 
-module.exports = baseVw.extend({
+module.exports = pageVw.extend({
 
   classname: "userView",
 

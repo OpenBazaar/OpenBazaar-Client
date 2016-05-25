@@ -5,14 +5,14 @@ var __ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
-    baseVw = require('./baseVw'),
+    pageVw = require('./pageVw'),
     itemShortView = require('./itemShortVw'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     messageModal = require('../utils/messageModal.js');
 
-module.exports = baseVw.extend({
+module.exports = pageVw.extend({
 
   className:"homeView",
 

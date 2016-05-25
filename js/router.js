@@ -16,7 +16,6 @@ module.exports = Backbone.Router.extend({
     var self = this,
         routes,
         originalHistoryBack;
-        // origBackboneNavigate;
 
     this.options = options || {};
 
@@ -24,11 +23,9 @@ module.exports = Backbone.Router.extend({
       ["", "index"],
       ["home", "home"],
       ["home/:state(/:searchText)", "home"],
-      // ["myPage", "userPage"],
       ["userPage", "userPage"],
       ["userPage/:userID(/:state)(/:itemHash)(/:skipNSFWmodal)", "userPage"],
       [/^@([^\/]+)(.*)$/, "userPageViaHandle"],
-      // ["userPageViaHandle", "userPageViaHandle"],
       ["transactions", "transactions"],
       ["transactions/:state(/:orderID)(/:tabState)", "transactions"],
       ["settings", "settings"],
@@ -68,25 +65,37 @@ module.exports = Backbone.Router.extend({
     this.historyPosition = -1;
     this.historyAction = 'default';
 
-    // origBackboneNavigate = Backbone.history.navigate;
-    // Backbone.history.navigate = function(fragment, options) {
-    //   options && options.replace && !options.trigger &&
-    //     self.cacheReplacedRoutes.apply(self, arguments);
-    //   return origBackboneNavigate.apply(this, arguments);
-    // };
-
+    this.$obContainer = $('#obContainer');
     this.viewCache = {};
     window.moo = this.viewCache;
+
+    window.setInterval(() => {
+      var cached;
+
+      for (var key in this.viewCache) {
+        cached = this.viewCache[key];
+        // if (cached && (now - cached.cachedAt < cached.view.cacheExpires)) {
+
+        if (Date.now() - cached.cachedAt >= cached.view.cacheExpires) {
+          delete this.viewCache[key].view.__cachedScrollPos
+          delete this.viewCache[key];
+        }
+      }      
+    }, this.cleanCacheInterval);
   },
 
-  // cacheReplacedRoutes: function(fragment) {
-  //   console.log(`replacin the state with ${fragment}`);
+  // how often to clean out expired cached views
+  cleanCacheInterval: 1 * 60 * 1000,
 
-  //   // ensure replaced routes update the cache (i.e. since some views
-  //   // correspond to multiple routes, ensure a cached view is
-  //   // keyed by all it's routes that have been navigated to)
-  //   this.view && this.view.expires && this.cacheView(this.view, fragment);
-  // },
+  refresh: function() {
+    if (this.view) {
+      // clear any cache for the view, so a fresh
+      // view is created
+      delete this.viewCache[this.view.getCacheIndex(Backbone.history.getFragment())];
+    }
+    
+    Backbone.history.loadUrl();
+  },
 
   translateRoute: function(route) {
     if(!route) throw new Error('You must provide a route');
@@ -145,8 +154,6 @@ module.exports = Backbone.Router.extend({
   },
   
   execute: function(callback, args, name) {
-    console.log(`routing to ${Backbone.history.getFragment()}`);
-
     if (this.historyAction == 'default') {
       this.historyPosition += 1;
       this.historySize = this.historyPosition;
@@ -182,9 +189,7 @@ module.exports = Backbone.Router.extend({
   cacheView: function(view, fragment) {
     var index = view.getCacheIndex(Backbone.history.getFragment());
 
-    // console.log(`fragment is ${fragment}`);
     fragment = fragment || Backbone.history.getFragment();
-    // console.log(`smashing caching: ${fragment}`);    
     
     this.viewCache[index] = {
       cachedAt: Date.now(),
@@ -219,28 +224,46 @@ module.exports = Backbone.Router.extend({
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
 
-    if (cached && (now - cached.cachedAt < cached.view.expires)) {
+    // let's update the cache of our existing cache-able view so cachedAt is
+    // updated and the user has up until the view's 'cacheExpires' amount of
+    // time to come back to it in it's current state.
+    for (var key in this.viewCache) {
+      if (this.viewCache[key].view === this.view) {
+        this.viewCache[key].cachedAt = Date.now();
+      }
+    }
+
+    // remove / detach any existing view
+    if (this.view) {
+      if (this.view.cacheExpires) {
+        this.view.__cachedScrollPos = this.$obContainer[0].scrollTop;
+        this.view.$el.detach();
+        obEventBus.trigger('cache-detach', { view: this.view });
+      } else {
+        this.view.close ? this.view.close() : this.view.remove()          
+      }
+    }
+
+    if (cached && (now - cached.cachedAt < cached.view.cacheExpires)) {
       // we have an un-expired cached view, let's reattach it
       console.log('using cached');
+      this.view = cached.view;
+
       $('#content').html(cached.view.$el);
       cached.view.delegateEvents();
-      this.view = cached.view;
+
+      if (this.view.restoreScrollPosition) {
+        this.$obContainer[0].scrollTop = this.view.__cachedScrollPos || 0;
+      }      
+
       obEventBus.trigger('cache-reattach', { view: this.view });
     } else {
       console.log('using brand spanking new');
-      if (this.view) {
-        if (this.view.expires) {
-          this.view.$el.detach();
-          obEventBus.trigger('cache-detach', { view: this.view });
-        } else {
-          this.view.close ? this.view.close() : this.view.remove()          
-        }
-      }
-
       this.view = new (Function.prototype.bind.apply(View, [null].concat(options.viewArgs)));
-      this.view.expires && this.cacheView(this.view);
+      this.view.cacheExpires && this.cacheView(this.view);
 
       $('#content').html(this.view.$el);
+      this.$obContainer[0].scrollTop = 0;
 
       if (
         (loadingConfig = __.result(this.view, 'loadingConfig')) &&
@@ -250,7 +273,6 @@ module.exports = Backbone.Router.extend({
       }      
     }
 
-    $('#obContainer')[0].scrollTop = 0;
   },
 
   launchPageConnectModal: function(config) {
@@ -326,14 +348,6 @@ module.exports = Backbone.Router.extend({
       }
     });
 
-    // this.newView(new homeView({
-    //   userModel: this.userModel,
-    //   userProfile: this.userProfile,
-    //   socketView: this.socketView,
-    //   state: state,
-    //   searchItemsText: searchText
-    // }),'',{'addressText': searchText ? "#" + searchText : ""});    
-
     // hide the discover onboarding callout
     this.$discoverHolder = this.$discoverHolder || $('.js-OnboardingIntroDiscoverHolder');
     this.$discoverHolder.addClass('hide');
@@ -394,27 +408,23 @@ module.exports = Backbone.Router.extend({
   },
 
   transactions: function(state, orderID, tabState){
-    "use strict";
-    this.newView(new transactionsView({
-      userModel: this.userModel,
-      userProfile: this.userProfile,
-      socketView: this.socketView,
-      state: state,
-      orderID: orderID,
-      tabState: tabState //opens a tab in the order modal
-    }),"userPage");
+    this.newView(transactionsView, {
+      viewArgs: {
+        userModel: this.userModel,
+        userProfile: this.userProfile,
+        socketView: this.socketView,
+        state: state,
+        orderID: orderID,
+        tabState: tabState //opens a tab in the order modal
+      },
+      bodyID: 'transactionsPage'
+    });
+
     app.appBar.setTitle(polyglot.t('Transactions'));
   },
 
   settings: function(state){
     $('.js-loadingModal').addClass('show');
-
-    // this.newView(new settingsView({
-    //   userModel: this.userModel,
-    //   userProfile: this.userProfile,
-    //   state: state,
-    //   socketView: this.socketView
-    // }), "userPage");
 
     this.newView(settingsView, {
       viewArgs: {
