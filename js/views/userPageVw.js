@@ -909,8 +909,10 @@ module.exports = baseVw.extend({
 
     this.listenTo(this.followerList, 'usersAdded', ()=>{
       var searchTerms = this.$('#inputFollowing').val();
-      this.followingSearch.reIndex();
-      searchTerms && this.followingSearch.search(searchTerms);
+      if(this.followingSearch){
+        this.followingSearch.reIndex();
+        searchTerms && this.followingSearch.search(searchTerms);
+      }
     });
   },
 
@@ -1716,7 +1718,7 @@ module.exports = baseVw.extend({
     baseVw.prototype.remove.apply(this, arguments);
 
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
-    $.colorbox.close();
+    //$.colorbox.close();
     messageModal.$el.off('click', this.modalCloseHandler);
   }
 

@@ -163,11 +163,17 @@ module.exports = baseVw.extend({
         avatarHash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
       notif.type = notif.type || notif.message_type;
       notifStamp = Date.now();
+      notif.guid = notif.guid || notif.sender;
       
       this.unreadNotifsViaSocket++;
 
       this.notificationsCl.add(
-          __.extend({}, notif, { read: false })
+          __.extend({}, notif, { 
+            read: false,
+            username: username,
+            image_hash: avatarHash,
+            notifStamp: notifStamp,
+          })
       );
 
       //prevent message spamming from one user
