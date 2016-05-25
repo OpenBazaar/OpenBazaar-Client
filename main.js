@@ -22,7 +22,7 @@ var fs = require('fs'),
 
 var launched_from_installer = false;
 var platform = os.platform();
-switch(platform) {
+switch (platform) {
   case "darwin":
     platform = "mac";
 }
