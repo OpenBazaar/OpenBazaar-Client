@@ -1,6 +1,6 @@
 'use strict';
 
-var Backbone = require('backbone'),
+var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     moment = require('moment'),
     cropit = require('../utils/jquery.cropit'),
@@ -50,8 +50,8 @@ module.exports = baseModal.extend({
     var localLanguage = window.navigator.language;
     var localLanguageFound = false;
     var languageList = this.languages.get('languages');
-    for(var i in languageList) {
-      if(languageList[i].langCode == localLanguage) {
+    for (var i in languageList) {
+      if (languageList[i].langCode == localLanguage) {
         localLanguageFound = true;
         break;
       }
@@ -129,25 +129,22 @@ module.exports = baseModal.extend({
     this.model.set('time_zone', tz);
   },
 
-  accordionReady: function(listReady) {
-    var countryList,
-        currencyList,
-        timeList,
-        languageList,
+  accordionReady: function() {
+    /* eslint-disable */
+    var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000}),
+        currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000}),
+        timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000}),
+        languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000}),
+        /* eslint-enable */
         self = this;
 
     this._accordianReady = true;
     this.loadingOff();
 
-    countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
-    currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
-    timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
-    languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
-    
     this.initAccordion('.js-profileAccordion');
     
     // Scroll selected options to the top
-    var checkedInput = this.$('.js-homeModal-listParent').find('input:checked').each(function(){
+    this.$('.js-homeModal-listParent').find('input:checked').each(function(){
       var checkedInputScrollParent = $(this).closest('ul');
       var checkedInputPosition = $(this).closest('li').position().top;
       var checkedInputOffset = checkedInputScrollParent.position().top;
@@ -167,7 +164,9 @@ module.exports = baseModal.extend({
       onImageLoaded: function(){
         self.$el.find('.js-avatarLoading').addClass('fadeOut');
       },
-      onFileReaderError: function(data){console.log(data);},
+      onFileReaderError: function(data){
+        console.log(data);
+      },
       onImageError: function(errorObject, errorCode, errorMessage) {
         console.log(errorObject);
         console.log(errorCode);
@@ -194,11 +193,10 @@ module.exports = baseModal.extend({
   },  
 
   accNext: function(advanceBy){
-    var self = this,
-        oldPos = parseInt(this.accWin.css('left').replace("px","")),
+    var oldPos = parseInt(this.accWin.css('left').replace("px", "")),
         moveBy = parseInt(advanceBy) ? this.accWidth * advanceBy : this.accWidth;
 
-    if(oldPos > (this.accWidth * (this.accNum -1) * -1)){
+    if (oldPos > (this.accWidth * (this.accNum -1) * -1)){
       this.accWin.css('left', function(){
         return oldPos - moveBy;
       });
@@ -213,11 +211,10 @@ module.exports = baseModal.extend({
   },
 
   accPrev: function(rewindBy){
-    var self = this,
-        oldPos = parseInt(this.accWin.css('left').replace("px","")),
+    var oldPos = parseInt(this.accWin.css('left').replace("px", "")),
         moveBy = parseInt(rewindBy) ? this.accWidth * rewindBy : this.accWidth;
 
-    if(oldPos < (0)){
+    if (oldPos < (0)){
       this.accWin.css('left', function(){
         return oldPos + moveBy;
       });
@@ -233,10 +230,10 @@ module.exports = baseModal.extend({
 
   triggerOnEnterSpace: function(e, cb) {
     switch (e.which) {
-      case 32: // space
-      case 13: // return
-        event.stopPropagation();
-        return cb(e);
+    case 32: // space
+    case 13: // return
+      event.stopPropagation();
+      return cb(e);
     }
     return true;
   },
@@ -270,34 +267,36 @@ module.exports = baseModal.extend({
     });
   },
 
-  _settingsDone: function(e){
+  _settingsDone: function(){
     var self = this,
         server = this.model.get('serverUrl'),
         profileFormData = new FormData(),
         settingsFormData = new FormData(),
         bannerUpload = $.Deferred(),
         avatarUpload = $.Deferred(),
-        followHandles = [];
+        followHandles = [],
+        header;
 
 
-    if(this.$('textarea#aboutInput').val() != ""){
-        self.model.set('short_description', this.$('textarea#aboutInput').val());
+    if (this.$('textarea#aboutInput').val() != ""){
+      self.model.set('short_description', this.$('textarea#aboutInput').val());
     }
 
-    if(this.$('#storeNameInput').val() != ""){
-        self.model.set('name', this.$('#storeNameInput').val());
-    }else if (self.model.get('name') == undefined){
+    if (this.$('#storeNameInput').val() != ""){
+      self.model.set('name', this.$('#storeNameInput').val());
+    } else if (self.model.get('name') == undefined){
         //otherwise error since the profile api needs the name parameter and as of now it is not set in the userMd.js
-        self.model.set('name', "ob" + Math.random().toString(36).slice(2));
+      self.model.set('name', "ob" + Math.random().toString(36).slice(2));
     }
 
     var themeId = this.$('input[name=theme-selection]:checked');
-    if(themeId.length > 0){
-      var header = themeId.data('header');
-      var primaryColor = parseInt(themeId.data('primary-color').slice(1), 16);
-      var secondaryColor = parseInt(themeId.data('secondary-color').slice(1), 16);
-      var backgroundColor = parseInt(themeId.data('background-color').slice(1), 16);
-      var textColor = parseInt(themeId.data('text-color').slice(1), 16);
+    if (themeId.length > 0){
+      var primaryColor = parseInt(themeId.data('primary-color').slice(1), 16),
+          secondaryColor = parseInt(themeId.data('secondary-color').slice(1), 16),
+          backgroundColor = parseInt(themeId.data('background-color').slice(1), 16),
+          textColor = parseInt(themeId.data('text-color').slice(1), 16);
+      
+      header = themeId.data('header');
 
       self.model.set('primary_color', primaryColor);
       self.model.set('secondary_color', secondaryColor);
@@ -307,18 +306,18 @@ module.exports = baseModal.extend({
 
     var nsfwVal = this.$("input[name='nsfw']:checked").val();
     this.model.set('nsfw', nsfwVal);
-    localStorage.setItem('NSFWFilter',  nsfwVal); //the server ignores the nsfw value currently
+    localStorage.setItem('NSFWFilter', nsfwVal); //the server ignores the nsfw value currently
 
     $.each(this.model.attributes,
-        function(i,el) {
-            if(i == "country") {
-                profileFormData.append("location",el);
-            }
-            if(i == "name" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
-                profileFormData.append(i,""+el);
-            } else {
-                settingsFormData.append(i,el);
-            }
+        function(i, el) {
+          if (i == "country") {
+            profileFormData.append("location", el);
+          }
+          if (i == "name" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
+            profileFormData.append(i, ""+el);
+          } else {
+            settingsFormData.append(i, el);
+          }
         }
     );
 
@@ -331,7 +330,7 @@ module.exports = baseModal.extend({
         data: settingsFormData,
         dataType: "json",
         success: function(data) {
-          if(data.success) {
+          if (data.success) {
             $.ajax({
               type: "POST",
               url: server + "profile",
@@ -342,7 +341,7 @@ module.exports = baseModal.extend({
               success: function(data) {
                 var profile = self.options.userProfile;
 
-                if(data.success == true) {
+                if (data.success == true) {
                   profile.fetch()
                     .done(function() {
                       self.trigger('onboarding-complete', profile.get('profile').guid);
@@ -389,7 +388,7 @@ module.exports = baseModal.extend({
       avatarUpload.resolve();
     }
 
-    this.$('.js-followHandles').find('[data-handle]:checked').each(function(e) {
+    this.$('.js-followHandles').find('[data-handle]:checked').each(function() {
       followHandles.push($(this).data('handle'));
     });
 
@@ -423,7 +422,7 @@ module.exports = baseModal.extend({
       throw new Error('Please provide a followers array with at least on handle to follow.');
     }
 
-    followers.forEach((follower, index) => {
+    followers.forEach((follower) => {
       app.getGuid(follower).done((guid) => {
         $.ajax({
           url: this.model.get('serverUrl') + 'follow',
@@ -438,10 +437,7 @@ module.exports = baseModal.extend({
           if (failed + succeeded === followers.length) {
             failed ? deferred.reject() : deferred.resolve();
           }
-
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
+          
         }).done(function(data) {
           if (data.success) {
             succeeded++;
@@ -454,7 +450,7 @@ module.exports = baseModal.extend({
             failed ? deferred.reject() : deferred.resolve();
           }          
         });
-      }).fail((jqXHR, status, errorThrown) => {
+      }).fail(() => {
         failed++;
 
         if (failed + succeeded === followers.length) {
@@ -488,8 +484,8 @@ module.exports = baseModal.extend({
       success: function(data) {
         var img_hash = data.image_hashes[0];
 
-        if(data.success === true && img_hash !== 'b472a266d0bd89c13706a4132ccfb16f7c3b9fcb' && img_hash.length == 40) {
-          deferred.resolve(img_hash)
+        if (data.success === true && img_hash !== 'b472a266d0bd89c13706a4132ccfb16f7c3b9fcb' && img_hash.length == 40) {
+          deferred.resolve(img_hash);
         } else {
           deferred.reject();
         }
@@ -516,7 +512,7 @@ module.exports = baseModal.extend({
     xhr.open('GET', bannerPath, true); 
     xhr.responseType = 'blob';
     
-    xhr.onload = function (e) {
+    xhr.onload = function () {
       var reader = new FileReader(),
           file = this.response;
       
@@ -536,7 +532,7 @@ module.exports = baseModal.extend({
           success: function(data) {
             var img_hash = data.image_hashes[0];
 
-            if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
+            if (data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
               deferred.resolve(img_hash);
             } else {
               deferred.reject();
@@ -551,7 +547,7 @@ module.exports = baseModal.extend({
         });
       };
       
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(file);
     };
 
     xhr.onerror = function (e) {
@@ -572,8 +568,7 @@ module.exports = baseModal.extend({
     var self = this;
 
     loadTemplate('./js/templates/onboardingModal.html', function(t) {
-      var timeZoneOffset,
-          $themeInputs;
+      var $themeInputs;
 
       self.$el.html(t({
         timezones: self.timezones.toJSON().timezones
@@ -582,11 +577,12 @@ module.exports = baseModal.extend({
       baseModal.prototype.render.apply(self, arguments);
 
       // pre-select timezone
-      var timeZoneOffset = new Date().getTimezoneOffset();
-      timeZoneOffset = parseInt(Math.abs(timeZoneOffset/60));
-      timeZoneOffset = moment().isDST() ? timeZoneOffset + 1 : timeZoneOffset;      
-      timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + timeZoneOffset + ':00)';
-      var selectedTimeZone = self.$("[id*='" + timeZoneOffset + "']");
+      var timeZoneOffset1 = new Date().getTimezoneOffset(),
+          timeZoneOffset2 = parseInt(Math.abs(timeZoneOffset1/60)),
+          timeZoneOffset3 = moment().isDST() ? timeZoneOffset2 + 1 : timeZoneOffset2,      
+          timeZoneOffset4 = '(GMT ' + (timeZoneOffset3 < 0 ? '+' : '-') + timeZoneOffset3 + ':00)',
+          selectedTimeZone = self.$("[id*='" + timeZoneOffset4 + "']");
+      
       selectedTimeZone.prop('checked', true);
       self.model.set('time_zone', selectedTimeZone.val());
 

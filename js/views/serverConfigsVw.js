@@ -23,7 +23,7 @@ module.exports = BaseVw.extend({
     this.listenTo(this.collection, 'remove', this.onRemoveConfig);
   },
 
-  onRemoveConfig: function(md, cl, opts) {
+  onRemoveConfig: function(md) {
     var index = -1;
 
     __.every(this.configRowViews, (vw) => {

@@ -1,7 +1,9 @@
-var __ = require('underscore'),
-    Backbone = require('backbone'),
+'use strict';
+
+var Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
+
 var loadTemplate = require('../utils/loadTemplate'),
     baseVw = require('./baseVw');
 
@@ -16,8 +18,6 @@ module.exports = baseVw.extend({
   },
 
   initialize: function() {
-    "use strict";
-
     this.listenTo(window.obEventBus, "blockingUser", function(e){
       if (e.guid == this.model.get('guid')) {
         this.model.set('isBlocked', true);
@@ -38,7 +38,6 @@ module.exports = baseVw.extend({
   },
 
   render: function(){
-    "use strict";
     var self = this;
     loadTemplate('./js/templates/userShort.html', function(loadedTemplate) {
       self.$el.append(loadedTemplate(self.model.toJSON()));
@@ -46,13 +45,11 @@ module.exports = baseVw.extend({
     return this;
   },
 
-  userClick: function(e){
-    "use strict";
+  userClick: function(){
     Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
   },
 
   followUser: function(e){
-    "use strict";
     window.obEventBus.trigger('followUser', {'guid': this.model.get('guid'), 'target': $(e.target)});
     this.$el.addClass('div-fade');
     this.$el.find('.js-userShortUnfollow').removeClass('hide');
@@ -60,7 +57,6 @@ module.exports = baseVw.extend({
   },
 
   unfollowUser: function(e){
-    "use strict";
     window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target)});
     this.$el.addClass('div-fade');
     this.$el.find('.js-userShortUnfollow').addClass('hide');

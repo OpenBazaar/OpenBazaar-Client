@@ -1,7 +1,6 @@
+'use strict';
+
 var __ = require('underscore'),
-    Backbone = require('backbone'),
-    $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate'),
     languagesModel = require('../models/languagesMd'),
     chooseLanguagesCollection = require('../collections/chooseLanguageCl'),
     baseVw = require('./baseVw');
@@ -21,7 +20,7 @@ module.exports = baseVw.extend({
 
     __.each(this.chooseLanguages.models, function(item){
       self.renderItem(item);
-    },this);
+    }, this);
 
     this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">'+ this.listContents.join('') +'</ul>');
 
@@ -34,7 +33,7 @@ module.exports = baseVw.extend({
     this.listContents.push('<li class="flexRow custCol-border">');
     this.listContents.push('<div class="rowItem js-homeModal-languageSelect paddingLeft6" data-code="'+ itemJSON.langCode +'">');
     this.listContents.push('<input type="radio" class="fieldItem" id="'+ itemJSON.langCode +'" name="'+ itemJSON.langCode +'"');
-    if(itemJSON.selected == itemJSON.langCode){
+    if (itemJSON.selected == itemJSON.langCode){
       this.listContents.push('checked="checked"');
     }
     this.listContents.push('>');
