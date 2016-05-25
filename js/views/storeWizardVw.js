@@ -94,11 +94,11 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/storeWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       //append the view to the passed in parent
-      self.parentEl.append(self.$el);
+      self.parentEl.append(self.$el).fadeIn(300);
       self.initAccordion('.js-storeWizardAccordion');
       self.setValues();
       // add blur to container
-      $('#obContainer').addClass('blur');
+      $('#obContainer').addClass('modalOpen');
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
@@ -210,7 +210,7 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    $('#obContainer').removeClass('blur');
+    $('#obContainer').removeClass('modalOpen');
     $('#modalHolder').fadeOut(300, ()=> {
       this.remove();
     });

@@ -14,7 +14,7 @@ var loadTemplate = require('../utils/loadTemplate'),
 
 module.exports = baseVw.extend({
 
-  className: "homeView",
+  className: "homeView contentWrapper",
 
   events: {
     'click .js-productsTab': function(){this.setState("products");},

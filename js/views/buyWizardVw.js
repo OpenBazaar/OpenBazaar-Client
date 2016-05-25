@@ -648,7 +648,7 @@ module.exports = baseVw.extend({
   },
 
   closeWizard: function() {
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    $('#obContainer').removeClass('modalOpen');
     if (this.buyRequest){
       this.buyRequest.abort();
     }
