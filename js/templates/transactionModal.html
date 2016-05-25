@@ -775,6 +775,11 @@
               </div>
               <% } %>
               <% if( ob.vendor_order_confirmation.invoice.content_source) { %>
+                <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
+                  URL: <a href="<%= ob.vendor_order_confirmation.invoice.content_source.url %>">
+                    <%= ob.vendor_order_confirmation.invoice.content_source.url %>
+                  </a>
+                </div>
                 <% if( ob.vendor_order_confirmation.invoice.content_source.password) { %>
                 <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
                   <%= polyglot.t('transactions.Password') %>
