@@ -909,7 +909,7 @@ module.exports = baseVw.extend({
 
     this.listenTo(this.followerList, 'usersAdded', ()=>{
       var searchTerms = this.$('#inputFollowing').val();
-      if(this.followingSearch){
+      if (this.followingSearch){
         this.followingSearch.reIndex();
         searchTerms && this.followingSearch.search(searchTerms);
       }

@@ -406,7 +406,9 @@ module.exports = Backbone.View.extend({
     this.$("#advancedForm input[name=additionalPaymentData][value=" + localStorage.getItem('AdditionalPaymentData') + "]").prop('checked', true);
     this.$("#advancedForm input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
 
-    currencyList = __.uniq(currencyList, function(item){return item.code;});
+    currencyList = __.uniq(currencyList, function(item){
+      return item.code;
+    });
     currencyList = currencyList.sort(function(a, b){
       var cA = a.currency.toLowerCase(),
           cB = b.currency.toLowerCase();
