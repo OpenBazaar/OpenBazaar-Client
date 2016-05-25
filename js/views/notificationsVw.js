@@ -1,5 +1,6 @@
+'use strict';
+
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     baseVw = require('./baseVw'),
@@ -31,7 +32,7 @@ module.exports = baseVw.extend({
       // we're assuming the only additions will either be a batch of
       // models at the bottom (lazy loaded via scroll) -or- a new
       // model at the top (new notification via socket) 
-      cl.forEach((md, index) => {
+      cl.forEach((md) => {
         if (!md.notifCreated) {
           if (cl.indexOf(md) === 0) {
             // new notif via socket
@@ -53,7 +54,7 @@ module.exports = baseVw.extend({
 
     this.listenTo(this.collection, 'reset', this.render);
 
-    this.listenTo(this.collection, 'request', (cl, xhr, options) => {
+    this.listenTo(this.collection, 'request', (cl, xhr) => {
       this.fetch = xhr;
       this.$pageSpinner.removeClass('hide');
       xhr.done(() => this.$pageSpinner.addClass('hide'));
@@ -72,7 +73,7 @@ module.exports = baseVw.extend({
     if (this.$scrollContainer) this.$scrollContainer[0].scrollTop = 0;
   },
 
-  onScroll: function(e) {
+  onScroll: function() {
     var startId = this.collection.at(this.collection.length - 1).id;
 
     if (
@@ -123,8 +124,7 @@ module.exports = baseVw.extend({
   },
 
   render: function() {
-    var prevScroll = {},
-        isFetching = this.fetch && this.fetch.state() === 'pending';
+    var isFetching = this.fetch && this.fetch.state() === 'pending';
 
     this.notifications = this.notifications || [];
     this.notifications.forEach((vw) => {

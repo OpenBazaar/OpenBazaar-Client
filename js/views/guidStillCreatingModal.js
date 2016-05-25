@@ -1,17 +1,12 @@
 'use strict';
 
-var __ = require('underscore'),
-    Backbone = require('backbone'),
-    loadTemplate = require('../utils/loadTemplate'),
+var loadTemplate = require('../utils/loadTemplate'),
     baseModal = require('./baseModal');
 
 module.exports = baseModal.extend({
   className: 'guid-still-creating-modal',
 
   events: {
-  },
-
-  initialize: function(options) {
   },
 
   render: function() {

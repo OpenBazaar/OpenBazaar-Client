@@ -1,9 +1,7 @@
 'use strict';
 
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
-    app = require('../App.js').getApp(),        
     baseModal = require('./baseModal');
 
 module.exports = baseModal.extend({
@@ -26,8 +24,7 @@ module.exports = baseModal.extend({
   },
 
   setState: function(state) {
-    var modes = ['connecting', 'failed-connect'],
-        newState;
+    var newState;
 
     if (!state) return;
 

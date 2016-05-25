@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore');
 
 function localizeShippingRegions(regions) {

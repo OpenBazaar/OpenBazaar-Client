@@ -1,3 +1,5 @@
+'use strict';
+
 var ipcRenderer = require('ipc-renderer'),
     __ = require('underscore'),
     Backbone = require('backbone'),
@@ -6,7 +8,6 @@ var ipcRenderer = require('ipc-renderer'),
     messageModal = require('./utils/messageModal.js'),
     homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
-    donateView = require('./views/donateVw'),
     settingsView = require('./views/settingsVw'),
     transactionsView = require('./views/transactionsVw'),
     PageConnectModal = require('./views/pageConnectModal');
@@ -53,14 +54,14 @@ module.exports = Backbone.Router.extend({
     
     var originalHistoryBack = history.back;
     history.back = function() {
-        self.historyAction = 'back';
-        return originalHistoryBack(arguments);
+      self.historyAction = 'back';
+      return originalHistoryBack(arguments);
     };
 
     var originalHistoryForward = history.forward;
     history.forward = function() {
-        self.historyAction = 'forward';
-        return originalHistoryForward(arguments);
+      self.historyAction = 'forward';
+      return originalHistoryForward(arguments);
     };
     
     this.historySize = -1;
@@ -69,29 +70,28 @@ module.exports = Backbone.Router.extend({
   },
 
   translateRoute: function(route) {
-    if(!route) throw new Error('You must provide a route');
+    if (!route) throw new Error('You must provide a route');
     
     var guid = "",
-        handle = "",
         state = "",
         itemHash = "",
-        routeArray = route.replace("ob://","").replace(/ /g, "").split("/"),
+        routeArray = route.replace("ob://", "").replace(/ /g, "").split("/"),
         deferred = $.Deferred();
     
     state = routeArray[1] ? "/" + routeArray[1] : "";
     itemHash = routeArray[2] ? "/" + routeArray[2] : "";
 
-    if(routeArray[0].charAt(0) == "@"){
+    if (routeArray[0].charAt(0) == "@"){
       // user entered a handle
       deferred.resolve(routeArray[0] + state + itemHash);
-    } else if(!routeArray[0].length){
+    } else if (!routeArray[0].length){
       // user trying to go back to discover
       deferred.resolve('#home');
-    } else if(routeArray[0].length === 40){
+    } else if (routeArray[0].length === 40){
       // user entered a guid
       guid = routeArray[0];
       deferred.resolve('#userPage/' + guid + state + itemHash);
-    } else if(routeArray[0].charAt(0) == "#"){
+    } else if (routeArray[0].charAt(0) == "#"){
       // user entered a search term
       deferred.resolve('#home/products/' + routeArray[0].replace('#', ''));
     } else {
@@ -102,7 +102,7 @@ module.exports = Backbone.Router.extend({
     return deferred.promise();
   },
 
-  processHandle: function(handle, state, itemHash) {
+  processHandle: function(handle) {
     var deferred = $.Deferred(),
         guidFetch;
 
@@ -130,7 +130,7 @@ module.exports = Backbone.Router.extend({
       this.historySize = this.historyPosition;
     } else if (this.historyAction == 'back') {
       this.historyPosition -= 1;
-    } else if(this.historyAction == 'forward' && this.previousName != name && name != "index") {
+    } else if (this.historyAction == 'forward' && this.previousName != name && name != "index") {
       //don't increment if the same state is navigated to twice
       //don't increment on index since that isn't a real state
       this.historyPosition += 1;
@@ -153,7 +153,6 @@ module.exports = Backbone.Router.extend({
   },
 
   cleanup: function(){
-    "use strict";
     $('#loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
@@ -168,10 +167,10 @@ module.exports = Backbone.Router.extend({
     addressBarText = addressBarText || "";
     window.obEventBus.trigger("setAddressBar", addressBarText);
 
-    if($('body').attr('id') != bodyID){
+    if ($('body').attr('id') != bodyID){
       $('body').attr("id", bodyID || "");
     }
-    if(bodyClass){
+    if (bodyClass){
       $('body').attr('class', bodyClass);
     }
     $('#obContainer').removeClass("box-borderDashed noScrollBar overflowHidden"); //remove customization styling if present
@@ -247,10 +246,9 @@ module.exports = Backbone.Router.extend({
   },
 
   index: function(){
-    "use strict";
-    if(localStorage.getItem("route")){
+    if (localStorage.getItem("route")){
       this.navigate('#' + localStorage.getItem("route"), {trigger: true});
-    } else if(this.userProfile.get('profile').beenSet == true){
+    } else if (this.userProfile.get('profile').beenSet == true){
       this.home();
     } else {
       this.userPage();
@@ -258,14 +256,13 @@ module.exports = Backbone.Router.extend({
   },
 
   home: function(state, searchText){
-    "use strict";
     this.newView(new homeView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
       state: state,
       searchItemsText: searchText
-    }),'',{'addressText': searchText ? "#" + searchText : ""});
+    }), '', {'addressText': searchText ? "#" + searchText : ""});
 
     // hide the discover onboarding callout
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
@@ -285,7 +282,7 @@ module.exports = Backbone.Router.extend({
 
     if (handle) options.handle = handle;
 
-    this.newView(new userPageView(options),"userPage",'','onPage');
+    this.newView(new userPageView(options), "userPage", '', 'onPage');
     app.appBar.setTitle(handle ? handle : options.userId || this.userModel.get('guid'));
   },
 
@@ -320,7 +317,6 @@ module.exports = Backbone.Router.extend({
   },
 
   transactions: function(state, orderID, tabState){
-    "use strict";
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
@@ -328,12 +324,11 @@ module.exports = Backbone.Router.extend({
       state: state,
       orderID: orderID,
       tabState: tabState //opens a tab in the order modal
-    }),"userPage");
+    }), "userPage");
     app.appBar.setTitle(window.polyglot.t('Transactions'));
   },
 
   settings: function(state){
-    "use strict";
     $('.js-loadingModal').addClass('show');
     this.newView(new settingsView({
       userModel: this.userModel,

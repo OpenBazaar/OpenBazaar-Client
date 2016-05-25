@@ -1,3 +1,5 @@
+'use strict';
+
 /* this reuses the country model */
 
 var Backbone = require('backbone'),

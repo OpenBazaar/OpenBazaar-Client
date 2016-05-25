@@ -1,3 +1,5 @@
+'use strict';
+
 var Backbone = require('backbone'),
     localStorageSync = require('../utils/backboneLocalStorage'),
     is = require('is_js');
@@ -23,7 +25,7 @@ module.exports = Backbone.Model.extend({
   },
 
 
-  validate: function(attrs, options) {
+  validate: function(attrs) {
     var err = {},
         models;
 

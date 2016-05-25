@@ -1,12 +1,10 @@
+'use strict';
+
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     chooseCurrenciesCollection = require('../collections/chooseCurrencyCl'),
-    baseVw = require('./baseVw'),
-    chooseCurrencyView = require('../views/chooseCurrencyVw'),
-    getBTPrice = require('../utils/getBitcoinPrice');
+    baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
 
@@ -17,8 +15,10 @@ module.exports = baseVw.extend({
 
     this.countries = new countriesModel();
     //create a list of currencies from the country list, so we can maintain a single set of data
-    var uniqueCurrencies = __.uniq(this.countries.get('countries'), function(item){return item.code;});
-    var orderedCurrencies = uniqueCurrencies.sort(function(a,b){
+    var uniqueCurrencies = __.uniq(this.countries.get('countries'), function(item){
+      return item.code;
+    });
+    var orderedCurrencies = uniqueCurrencies.sort(function(a, b){
       var cA = a.currency.toLowerCase(),
           cB = b.currency.toLowerCase();
       if (cA < cB){
@@ -45,11 +45,10 @@ module.exports = baseVw.extend({
      */
 
     $.ajax({
-          method: "GET",
-          url: "https://api.bitcoinaverage.com/ticker/global/all"
-        })
+      method: "GET",
+      url: "https://api.bitcoinaverage.com/ticker/global/all"
+    })
         .done(function (response) {
-          var BitcoinAvgCurrencies = {};
           for (var bcaCurrency in response) {
             if (response[bcaCurrency].last) {
               self.availableCurrenciesList.push(bcaCurrency);
@@ -74,19 +73,19 @@ module.exports = baseVw.extend({
     this.listContents = [];
     __.each(this.chooseCurrencies.models, function(item){
       self.renderItem(item);
-    },this);
+    }, this);
 
     this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">'+ this.listContents.join('') +'</ul>');
   },
 
   renderItem: function(item){
-    if(this.availableCurrenciesList.indexOf(item.get('code')) > -1 || item.get('code') === "BTC"){
+    if (this.availableCurrenciesList.indexOf(item.get('code')) > -1 || item.get('code') === "BTC"){
       var itemJSON = item.toJSON();
       itemJSON.selected = this.options.selected;
       this.listContents.push('<li class="flexRow custCol-border">');
       this.listContents.push('<div class="rowItem js-homeModal-currencySelect paddingLeft6" data-code="'+ itemJSON.code +'" data-name="'+ itemJSON.dataName +'">');
       this.listContents.push('<input type="radio" class="fieldItem" id="currency-'+ itemJSON.dataName +'" name="'+ itemJSON.code +'"');
-      if(itemJSON.selected == itemJSON.code){
+      if (itemJSON.selected == itemJSON.code){
         this.listContents.push('checked="checked"');
       }
       this.listContents.push('>');

@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone');
 
@@ -44,7 +46,7 @@ Socket.prototype.connect = function(url) {
 Socket.prototype._proxyEvent = function(event) {
   var self = this;
 
-  this._socket[event] = function(e) {
+  this._socket[event] = function() {
     self.trigger.apply(self, [event.slice(2)].concat(Array.apply(null, arguments)));
   };
 };

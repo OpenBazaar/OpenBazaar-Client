@@ -1,6 +1,7 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
@@ -24,9 +25,9 @@ module.exports = Backbone.View.extend({
 
   close: function(){
     __.each(this.subViews, function(subView) {
-      if(subView.close){
+      if (subView.close){
         subView.close();
-      }else{
+      } else {
         subView.unbind();
         subView.remove();
       }

@@ -45,9 +45,8 @@
     "yargs": "^4.1.0"
   },
   "devDependencies": {
-    "babel-eslint": "^5.0.4",
     "electron-prebuilt": "0.37.6",
-    "eslint": "^1.10.3",
+    "eslint": "^2.10.2",
     "precommit-hook": "3.0.0",
     "valiquire": "0.3.0"
   },

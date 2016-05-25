@@ -1,6 +1,4 @@
-var __ = require('underscore'),
-    Backbone = require('backbone'),
-    app = require('../App').getApp();
+'use strict';
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
@@ -18,8 +16,7 @@ module.exports = window.Backbone.Model.extend({
   },
 
   parse: function(response){
-    "use strict";
-    if(response.cCode != 'BTC'){
+    if (response.cCode != 'BTC'){
       response.displayPrice = new Intl.NumberFormat(window.lang, {
         style: 'currency',
         minimumFractionDigits: 2,

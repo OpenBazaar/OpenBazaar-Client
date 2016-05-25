@@ -1,3 +1,5 @@
+'use strict';
+
 var Backbone = require('backbone'),
     StoreShort = require('../models/userShortMd');
 

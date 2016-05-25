@@ -1,3 +1,5 @@
+'use strict';
+
 var sanitizeHTML = require('sanitize-html');
 
 function decodeHtml(html) {
@@ -19,7 +21,7 @@ function checkVal($field) {
   fVal = decodeHtml(fVal);
 
   fVal = sanitizeHTML(fVal, {
-    allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote', 'span' ],
+    allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'u', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote', 'span' ],
     allowedAttributes: {
       'a': [ 'href', 'title', 'alt' ],
       'img': [ 'src', 'style']

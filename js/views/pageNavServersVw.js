@@ -1,7 +1,6 @@
 'use strict';
 
-var __ = require('underscore'),
-    loadTemplate = require('../utils/loadTemplate'),
+var loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
     BaseVw = require('./baseVw'),
     PageConnectModal = require('./pageConnectModal');
@@ -25,12 +24,12 @@ module.exports = BaseVw.extend({
     this.listenTo(this.collection, 'update', this.render);
   },
 
-  onClickNewServer: function(e) {
+  onClickNewServer: function() {
     app.serverConnectModal.showConfigForm()
       .open();
   },
 
-  onClickManageServers: function(e) {
+  onClickManageServers: function() {
     app.serverConnectModal.open();
   },
 

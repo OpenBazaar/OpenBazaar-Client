@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -15,7 +17,6 @@ module.exports = Backbone.View.extend({
   className: "flexRow",
 
   initialize: function(options) {
-    "use strict";
     this.userModel = options.userModel;
     this.worldwide = options.worldwide;
     this.shippingRegions = options.shippingRegions || [];
@@ -43,20 +44,17 @@ module.exports = Backbone.View.extend({
   },
 
   selectAddressAndAdvance: function(){
-    "use strict";
     $(".js-buyWizardAddressNext").trigger( "click" );
   },
 
   selectAddress: function(){
-    "use strict";
     var index = this.$el.find('.js-buyWizardAddressRadio:checked').val();
     this.setAddress(index);
   },
 
   setAddress: function(index){
-    "use strict";
     var selectedAddress = this.model.get('user').shipping_addresses[index];
-    if(selectedAddress){
+    if (selectedAddress){
       this.trigger("setAddress", selectedAddress);
     }
   }

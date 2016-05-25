@@ -1,3 +1,5 @@
+'use strict';
+
 // App specific configuration
 var testnet = localStorage.getItem('testnet') == 'true',
     bitcoinValidationRegexMainnet = "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$",

@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
@@ -37,16 +39,13 @@ module.exports = baseVw.extend({
     var self=this,
         hashArray = this.model.get('vendor_offer').listing.item.image_hashes,
         nowDate = new Date(),
-        nowMonth = nowDate.getMonth()+ 1,
-        noShipping = false;
+        nowMonth = nowDate.getMonth()+ 1;
 
     function padTime(val){
-      "use strict";
-      if(val >= 10){
+      if (val >= 10){
         return val;
-      } else {
-        return "0" + val;
       }
+      return "0" + val;
     }
 
     var countryList = new countriesModel().get('countries'), allRegions = [];
@@ -153,7 +152,7 @@ module.exports = baseVw.extend({
     this.$el.find('input[name=free_shipping]').val([String(this.model.get('vendor_offer').listing.shipping.free)]);
     this.$el.find('#inputType').val(typeValue);
     //hide or unhide shipping based on product type
-    if(typeValue === "physical good") {
+    if (typeValue === "physical good") {
       this.enableShipping();
       this.noShipping = false;
     } else {
@@ -161,13 +160,13 @@ module.exports = baseVw.extend({
       this.noShipping = true;
     }
     //hide or unhide shipping based on free shipping
-    if(this.model.get('vendor_offer').listing.shipping.free == true){
+    if (this.model.get('vendor_offer').listing.shipping.free == true){
       this.disableShippingPrice();
     } else {
       this.enableShippingPrice();
     }
     //if item has a condition, set it
-    if(this.model.get('vendor_offer').listing.item.condition){
+    if (this.model.get('vendor_offer').listing.item.condition){
       this.$el.find('#inputCondition').val(String(this.model.get('vendor_offer').listing.item.condition));
     }
     //add all countries to the Ships To select list
@@ -208,7 +207,7 @@ module.exports = baseVw.extend({
         saveOnBlur: true,
         placeholder: window.polyglot.t('KeywordsPlaceholder')
       });
-    },0);
+    }, 0);
 
     //focus main input
     this.$el.find('input[name=title]').focus();
@@ -245,10 +244,10 @@ module.exports = baseVw.extend({
 
   changeType: function(e) {
     var newTyleValue = $(e.target).val();
-    if(newTyleValue === "physical good") {
+    if (newTyleValue === "physical good") {
       this.enableShipping();
       //only show shipping prices if free shipping is not true
-      if(this.$el.find('input[name=free_shipping]').val() == "false") {
+      if (this.$el.find('input[name=free_shipping]').val() == "false") {
         this.enableShippingPrice();
       }
       this.noShipping = false;
@@ -259,7 +258,7 @@ module.exports = baseVw.extend({
     }
   },
 
-  selectRegions: function(e){
+  selectRegions: function(){
     var targ = this.$('#shipsToRegions'),
         setCountries = this.regions[targ.val()],
         shipsTo = this.$('#shipsTo'),
@@ -267,7 +266,7 @@ module.exports = baseVw.extend({
         wwIndex = oldVal.indexOf('ALL'),
         newVal;
 
-    if(setCountries) {
+    if (setCountries) {
       if (wwIndex > -1) {
         oldVal.splice(wwIndex, 1);
       }
@@ -281,11 +280,10 @@ module.exports = baseVw.extend({
     this.$('.chosenRegions').trigger('chosen:updated');
   },
 
-  addDefaultTime: function(e){
-    "use strict";
+  addDefaultTime: function(){
     var timeInput = this.$el.find('#inputExpirationDate'),
         currentValue = timeInput.val();
-    if(!currentValue){
+    if (!currentValue){
       timeInput.val(this.defaultDate);
     }
     this.$el.find('.js-itemEditClearDateWrapper').removeClass('hide');
@@ -297,9 +295,9 @@ module.exports = baseVw.extend({
         wwNewIndex = newVal.indexOf('ALL');
 
     //is the new value different from ALL?
-    if(newSelection[0] != "ALL"){
+    if (newSelection[0] != "ALL"){
       //if ALL was selected, remove it
-      if(wwNewIndex > -1){
+      if (wwNewIndex > -1){
         newVal.splice(wwNewIndex, 1);
       }
     } else {
@@ -313,7 +311,6 @@ module.exports = baseVw.extend({
   },
 
   clearDate: function(){
-    "use strict";
     this.$el.find('#inputExpirationDate').val('');
   },
 
@@ -335,7 +332,7 @@ module.exports = baseVw.extend({
     e.preventDefault();
   },
 
-  onImageFileChange: function(e) {
+  onImageFileChange: function() {
     this.resizeImage();
   },
 
@@ -367,7 +364,7 @@ module.exports = baseVw.extend({
 
     imageCount = imageFiles.length;
 
-    __.each(imageFiles, function(imageFile, i){
+    __.each(imageFiles, function(imageFile){
       var newImage = document.createElement("img"),
           ctx;
 
@@ -386,7 +383,7 @@ module.exports = baseVw.extend({
           //if image width is smaller than height, set width to max
           imgH *= maxW/imgW;
           imgW = maxW;
-        }else{
+        } else {
           imgW *= maxH/imgH;
           imgH = maxH;
         }
@@ -399,7 +396,7 @@ module.exports = baseVw.extend({
         dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
         imageList.push(dataURI);
 
-        if(loaded === imageCount) {
+        if (loaded === imageCount) {
           self.uploadImage(imageList);
         }
       };
@@ -407,7 +404,7 @@ module.exports = baseVw.extend({
       newImage.onerror = function() {
         loaded += 1;
 
-        if(loaded === imageCount) {
+        if (loaded === imageCount) {
           self.uploadImage(imageList);
         }        
       };
@@ -419,7 +416,6 @@ module.exports = baseVw.extend({
         formData = new FormData();
     
     __.each(imageList, function(dataURL){
-      "use strict";
       formData.append('image', dataURL);
     });
 
@@ -443,7 +439,7 @@ module.exports = baseVw.extend({
           imageArray = __.clone(self.model.get("combinedImagesArray"));
           hashArray = __.clone(self.model.get("imageHashesToUpload"));
           __.each(data.image_hashes, function (hash) {
-            if(hash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40){
+            if (hash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40){
               imageArray.push(self.model.get('serverUrl') + "get_image?hash=" + hash);
               hashArray.push(hash);
             }
@@ -452,7 +448,7 @@ module.exports = baseVw.extend({
           self.model.set("imageHashesToUpload", hashArray);
           self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
-        }else if (data.success === false){
+        } else if (data.success === false){
           messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
         }
       },
@@ -473,11 +469,11 @@ module.exports = baseVw.extend({
     //remove extra subImage divs
     subImageDivs.slice(imageArray.length).remove();
 
-    if(imageArray.length > 0){
+    if (imageArray.length > 0){
       __.each(imageArray, function (imageURL, i) {
         if (i < subImageDivs.length){
           $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
-        }else{
+        } else {
           $('<div class="itemImg itemImg-small js-editItemSubImage floatLeft" style="background-image: url(' + imageURL + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
               .appendTo(self.$('.js-subImageWrap'));
         }
@@ -519,28 +515,27 @@ module.exports = baseVw.extend({
     targ.closest('.flexRow').addClass('formChecked');
   },
 
-  validateDescription: function(e) {
+  validateDescription: function() {
     validateMediumEditor.checkVal(this.$('#inputDescription'));
   },  
 
-  saveChanges: function(e){
+  saveChanges: function(){
     var self = this,
         formData,
-        //deleteThisItem,
         cCode = this.model.get('userCurrencyCode'),
         submitForm = this.$el.find('#contractForm')[0],
         keywordsArray = this.inputKeyword.getTagValues(),
-        shipsToInput = this.$('#shipsTo');
+        shipsToInput = this.$('#shipsTo'),
+        invalidInputList = "";
 
     validateMediumEditor.checkVal(this.$('#inputDescription'));
 
-    if(keywordsArray.length < 1){
+    if (keywordsArray.length < 1){
       this.$('#inputKeyword').closest('.flexRow').addClass('invalid');
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ window.polyglot.t('Tags')+"</i>");
       return $.Deferred().reject('failed form validation').promise();
-    } else {
-      this.$('#inputKeyword').closest('.flexRow').removeClass('invalid');
     }
+    this.$('#inputKeyword').closest('.flexRow').removeClass('invalid');
 
     keywordsArray = keywordsArray.map(function(tag){
       var re = /#/g;
@@ -557,28 +552,27 @@ module.exports = baseVw.extend({
 
     formData = new FormData(submitForm);
 
-    if(this.noShipping){
+    if (this.noShipping){
       formData.append('ships_to', 'NA');
     }
 
     //make sure a ships to value is entered
-    if(!shipsToInput.val() && !this.noShipping){
+    if (!shipsToInput.val() && !this.noShipping){
       this.$('.js-shipToWrapper').addClass('invalid');
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
       return $.Deferred().reject('failed form validation').promise();
     }
 
     //add old and new image hashes
     __.each(this.model.get('imageHashesToUpload'), function(imHash){
       //make sure all hashes are valid
-      if(imHash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imHash.length === 40){
+      if (imHash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imHash.length === 40){
         formData.append('images', imHash);
       }
     });
 
-    if(keywordsArray.length > 0){
+    if (keywordsArray.length > 0){
       __.each(keywordsArray, function(keyword){
-        "use strict";
         formData.append('keywords', keyword);
       });
     } else {
@@ -592,7 +586,7 @@ module.exports = baseVw.extend({
     }
 
     //if condition is disabled, insert default value
-    if($('#inputCondition:disabled').length > 0){
+    if ($('#inputCondition:disabled').length > 0){
       formData.append('condition', 'New');
     }
 
@@ -604,7 +598,7 @@ module.exports = baseVw.extend({
     //add formChecked class to form so invalid fields are styled as invalid
     this.$el.find('#contractForm').addClass('formChecked');
 
-    if(this.checkFormValidity()){
+    if (this.checkFormValidity()){
       return $.ajax({
         type: "POST",
         url: self.model.get('serverUrl') + "contracts",
@@ -625,17 +619,15 @@ module.exports = baseVw.extend({
           console.log(errorThrown);
         }
       });
-    }else{
-      var invalidInputList = "";
-      $(submitForm).find('input, textarea').each(function() {
-        if($(this).is(":invalid")){
-          var inputName = $("label[for='"+$(this).attr('id')+"']").text() || $(this).attr('id');
-          invalidInputList += "<br/>"+inputName;
-        }
-      });
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
-      return $.Deferred().reject('failed form validation').promise();
     }
+    $(submitForm).find('input, textarea').each(function() {
+      if ($(this).is(":invalid")){
+        var inputName = $("label[for='"+$(this).attr('id')+"']").text() || $(this).attr('id');
+        invalidInputList += "<br/>"+inputName;
+      }
+    });
+    messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
+    return $.Deferred().reject('failed form validation').promise();
   },
 
   checkFormValidity: function() {

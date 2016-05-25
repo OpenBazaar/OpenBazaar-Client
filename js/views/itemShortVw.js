@@ -1,5 +1,6 @@
-var __ = require('underscore'),
-    Backbone = require('backbone'),
+'use strict';
+
+var Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     baseVw = require('./baseVw');
@@ -23,12 +24,10 @@ module.exports = baseVw.extend({
 
   initialize: function(options){
     //pre-load image
-    var self=this;
     this.parentEl = $(options.parentEl);
     this.listenTo(this.model, 'change', this.render);
-    //this.userID = this.model.get('guid');
     //if price has already been set, render
-    if(this.model.get('priceSet') !== 0){
+    if (this.model.get('priceSet') !== 0){
       this.render();
     }
 
@@ -76,8 +75,7 @@ module.exports = baseVw.extend({
     return this;
   },
 
-  itemClick: function(e){
-    var self = this;
+  itemClick: function(){
     var skipNSFWmodal = this.model.get('skipNSFWmodal') ? "/" + this.model.get('skipNSFWmodal') : "";
     Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/listing/'+this.model.get('contract_hash') + skipNSFWmodal, {trigger: true});
   },
@@ -103,7 +101,7 @@ module.exports = baseVw.extend({
   },
 
   followUser: function(e) {
-    if(this.model.get('guid') !== this.model.get('ownGuid')){
+    if (this.model.get('guid') !== this.model.get('ownGuid')){
       window.obEventBus.trigger('followUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
       this.$el.find('.js-userShortUnfollow').removeClass('hide');
       this.$el.find('.js-userShortFollow').addClass('hide');
@@ -111,7 +109,7 @@ module.exports = baseVw.extend({
   },
 
   unfollowUser: function(e){
-    if(this.model.get('guid') !== this.model.get('ownGuid')) {
+    if (this.model.get('guid') !== this.model.get('ownGuid')) {
       window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
       this.$el.find('.js-userShortUnfollow').addClass('hide');
       this.$el.find('.js-userShortFollow').removeClass('hide');

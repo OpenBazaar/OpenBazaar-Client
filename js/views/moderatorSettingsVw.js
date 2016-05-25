@@ -1,5 +1,6 @@
-var __ = require('underscore'),
-    Backbone = require('backbone'),
+'use strict';
+
+var Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     messageModal = require('../utils/messageModal.js'),
@@ -21,12 +22,11 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(options){
-    var self = this;
     this.parentEl = $(options.parentEl);
     this.moderatorFeeInput;
     this.moderatorStatus = true;
     this.oldFeeValue = 0;
-    if(this.model.get('page').profile.header_hash){
+    if (this.model.get('page').profile.header_hash){
       this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
     }
 
@@ -46,21 +46,18 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
- keypressFeeInput: function(){
-    "use strict";
+  keypressFeeInput: function(){
     var fee = this.moderatorFeeInput.val();
 
     if (fee.indexOf('.') > 0 && fee.split('.')[1].length > 2) {
       fee = fee.substr(0, fee.length-1);
       this.moderatorFeeInput.val(fee);
     }
- },
+  },
 
   saveModeratorSettings: function(){
-    "use strict";
     var self = this,
         targetForm = this.$el.find('#moderatorSettingsForm'),
-        formData = new FormData(),
         moderatorFee = this.moderatorFeeInput.val(),
         moderatorData = {},
         makeModeratorUrl = this.moderatorStatus ? this.model.get('user').serverUrl + "make_moderator" : this.model.get('user').serverUrl + "unmake_moderator";
@@ -87,14 +84,12 @@ module.exports = Backbone.View.extend({
   },
 
   showModeratorFeeHolder: function(){
-    "use strict";
     this.$('.js-moderatorSettingsFeeHolder').removeClass('hide');
     this.moderatorFeeInput.val(this.oldFeeValue);
     this.moderatorStatus = true;
   },
 
   hideModeratorFeeHolder: function(){
-    "use strict";
     this.$('.js-moderatorSettingsFeeHolder').addClass('hide');
     this.oldFeeValue = this.moderatorFeeInput.val();
     this.moderatorFeeInput.val(0);
@@ -102,20 +97,17 @@ module.exports = Backbone.View.extend({
   },
 
   blockClicks: function(e) {
-    "use strict";
-    if(!$(e.target).hasClass('js-externalLink')){
+    if (!$(e.target).hasClass('js-externalLink')){
       e.stopPropagation();
     }
   },
 
   validateInput: function(e) {
-    "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   closeModeratorSettings: function() {
-    "use strict";
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
     this.close();
   },

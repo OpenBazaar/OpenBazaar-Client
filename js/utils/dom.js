@@ -1,3 +1,5 @@
+'use strict';
+
 // tweaked version of:
 // http://stackoverflow.com/a/22480938
 function isScrolledIntoView(el, scrollContainer) {
@@ -12,7 +14,7 @@ function isScrolledIntoView(el, scrollContainer) {
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Node/contains
 function isInPage(node) {
-  return (node === document.body) ? false : document.body.contains(node);
+  return node === document.body ? false : document.body.contains(node);
 }
 
 module.exports = {

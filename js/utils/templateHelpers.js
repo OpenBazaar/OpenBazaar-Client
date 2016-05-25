@@ -1,3 +1,5 @@
+'use strict';
+
 var app = require('../App').getApp(),
     moment = require('moment'),
     remote = require('electron').remote;
@@ -10,12 +12,12 @@ function cssImageUrl(hash, guid, fallback) {
   if (hash) {
     url = `url(${base}get_image?hash=${hash}`;
     if (guid) url += `&guid=${guid})`;
-    if (fallback) url +=  ', ';
+    if (fallback) url += ', ';
   }
 
   if (!hash && localURL) {
     url = `url(${localURL})`;
-    if (url && fallback) url +=  ', ';
+    if (url && fallback) url += ', ';
   }
 
   if (fallback) {

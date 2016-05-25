@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     //$ = require('jquery'),
@@ -9,7 +11,6 @@ var __ = require('underscore'),
 module.exports = Backbone.View.extend({
 
   initialize: function(options){
-    var self = this;
     this.options = options || {};
     this.category = options.category || "all";
     //the model must be passed in by the constructor
@@ -25,14 +26,13 @@ module.exports = Backbone.View.extend({
     var self = this;
     //clear the list
     this.$el.empty();
-    if(this.itemsShort.models.length > 0)
-    {
+    if (this.itemsShort.models.length > 0) {
       __.each(this.itemsShort.models, function(item){
         if (item.toJSON().category == self.category || self.category == "all") {
           self.renderContract(item);
         }
-      },this);
-    }else{
+      }, this);
+    } else {
       self.renderNoneFound();
     }
   },
@@ -52,9 +52,9 @@ module.exports = Backbone.View.extend({
 
   close: function(){
     __.each(this.subViews, function(subView) {
-      if(subView.close){
+      if (subView.close){
         subView.close();
-      }else{
+      } else {
         subView.unbind();
         subView.remove();
       }

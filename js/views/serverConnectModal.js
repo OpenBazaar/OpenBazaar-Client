@@ -1,17 +1,13 @@
 'use strict';
 
-var __ = require('underscore'),
-    Backbone = require('backbone'),
-    loadTemplate = require('../utils/loadTemplate'),
+var loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
     remote = require('electron').remote,        
     ServerConfigMd = require('../models/serverConfigMd'),
-    ServerConfigsCl = require('../collections/serverConfigsCl'),
     BaseModal = require('./baseModal'),
     ServerConnectHeaderVw = require('./serverConnectHeaderVw'),
     ServerConfigFormVw = require('./serverConfigFormVw'),
     ServerConfigsVw = require('./serverConfigsVw');
-import * as $ from "jquery";
 
 module.exports = BaseModal.extend({
   className: 'server-connect-modal modal-fullscreen',
@@ -56,8 +52,6 @@ module.exports = BaseModal.extend({
   },  
 
   closeConfigForm: function() {
-    var disp;
-
     if (!this.$jsConfigFormWrap) return;
     
     this.$jsConfigFormWrap.addClass('slide-out');
@@ -127,7 +121,7 @@ module.exports = BaseModal.extend({
     this.showConfigForm(e.model);
   },
 
-  onCancelClick: function(e) {
+  onCancelClick: function() {
     this._connectAttempt && this._connectAttempt.cancel();
   },  
 
@@ -193,7 +187,6 @@ module.exports = BaseModal.extend({
         promise = deferred.promise(),
         attempt = 1,
         maxAttempts = 5,
-        timeoutBetweenAttempts = 2 * 1000,
         maxAttemptsTime = 20 * 1000,
         startTime = Date.now(),
         attemptConnection,
@@ -263,17 +256,15 @@ module.exports = BaseModal.extend({
     return promise;
   },
 
-  attemptConnection: function(options) {
+  attemptConnection: function() {
     var self = this,
         deferred = $.Deferred(),
         promise = deferred.promise(),
         startTime = Date.now(),
         minAttemptTime = 1000,
-        loginRequest,
-        timesup,
+        //timesup,
         conclude,
-        login,
-        onClose;
+        login;
 
     conclude = function(reject) {
       // Sometimes the connection attempt concludes so fast that the UI doesn't
@@ -294,7 +285,7 @@ module.exports = BaseModal.extend({
 
     login = function() {
       // check authentication
-      loginRequest = app.login().done(function(data) {
+      app.login().done(function(data) {
         if (data.success) {
           conclude(false, data);
           self.trigger('connected');
@@ -316,14 +307,6 @@ module.exports = BaseModal.extend({
 
     app.connectHeartbeatSocket();
 
-    promise.cleanup = function() {
-      clearTimeout(timesup);
-      clearTimeout(conclude);
-      loginRequest && loginRequest.abort();
-      app.getHeartbeatSocket().off(null, login);
-      app.getHeartbeatSocket().off(null, onClose);
-    };
-
     promise.cancel = function() {
       conclude(true, 'canceled');
     };
@@ -334,20 +317,22 @@ module.exports = BaseModal.extend({
 
     app.getHeartbeatSocket().on('open', login);
 
-    app.getHeartbeatSocket().on('close', (onClose = function() {
+    app.getHeartbeatSocket().on('close', function() {
       // On local servers the close event on a down server is
       // almost instantaneous and the UI can't even show the
       // user we're attempting to connect. So we'll put up a bit
       // of a facade.
       conclude(true);
-    }));    
+    });
 
+    /*
     timesup = setTimeout(function() {
       // not timeing out our connections for now, due to
       // server issue where valid connections may take
       // 1 min. +
-      // conclude(true, 'timedout');
+      conclude(true, 'timedout');
     }, 10000);
+    */
 
     return promise;
   },

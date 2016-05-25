@@ -1,8 +1,9 @@
+'use strict';
+
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     $ = require('jquery'),
     baseVw = require('./baseVw'),
-    blockedUserVw =  require('./blockedUserVw');
+    blockedUserVw = require('./blockedUserVw');
 
 module.exports = baseVw.extend({
 
@@ -18,8 +19,6 @@ module.exports = baseVw.extend({
     this.subViews = [];
 
     this.listenTo(this.collection, 'update', function(collection, options) {
-      var self = this;
-
       if (options.add) {
         __.each(collection.models.slice(self.subViews.length), function(user) {
           self.renderNewUserView(user);
@@ -30,9 +29,8 @@ module.exports = baseVw.extend({
       this.checkIfEmpty();
     });
 
-    this.listenTo(this.collection, 'remove', function(md, cl, options) {
-      var self = this,
-          view;
+    this.listenTo(this.collection, 'remove', function(md) {
+      var view;
 
       if (view == __.find(this.subViews, function(subView) {
         return subView.model.get('guid') === md.get('guid');
@@ -75,7 +73,7 @@ module.exports = baseVw.extend({
   },
 
   checkIfEmpty: function() {
-    if(this.collection.length == 0) {
+    if (this.collection.length == 0) {
       var noBlockSnippet = $('<div class="padding20 txt-center js-noblocked">' + window.polyglot.t('NoBlockedList') + '</div>');
       this.$el.html(noBlockSnippet);
     }

@@ -1,3 +1,5 @@
+'use strict';
+
 var Backbone = require('backbone'),
     localStorageSync = require('../utils/backboneLocalStorage'),
     ServerConfigMd = require('../models/serverConfigMd');

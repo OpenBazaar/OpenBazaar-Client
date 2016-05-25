@@ -1,8 +1,6 @@
 'use strict';
 
-var __ = require('underscore'),
-    Backbone = require('backbone'),
-    loadTemplate = require('../utils/loadTemplate'),
+var loadTemplate = require('../utils/loadTemplate'),
     remote = require('electron').remote,        
     BaseVw = require('./baseVw');
 
@@ -34,7 +32,7 @@ module.exports = BaseVw.extend({
   },
 
   navMaxClick: function() {
-    if(this.currentWindow.isMaximized()) {
+    if (this.currentWindow.isMaximized()) {
       this.currentWindow.unmaximize();
       this.$('.js-navMax').attr('data-tooltip', window.polyglot.t('Maximize'));
     } else {

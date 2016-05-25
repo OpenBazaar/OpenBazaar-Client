@@ -69,10 +69,10 @@ module.exports = baseVw.extend({
     this.casesWrapper = $(wrapper);
 
     //set local variables if they are not set
-    if(localStorage.getItem('showUnpaid_purchases') !== "true"){
+    if (localStorage.getItem('showUnpaid_purchases') !== "true"){
       localStorage.setItem('showUnpaid_purchases', "false");
     }
-    if(localStorage.getItem('showUnpaid_sales') !== "true"){
+    if (localStorage.getItem('showUnpaid_sales') !== "true"){
       localStorage.setItem('showUnpaid_sales', "false");
     }
 
@@ -108,7 +108,7 @@ module.exports = baseVw.extend({
         models.length && self.setSearchList('transactionsPurchases');
         self.salesCol.fetch({
           success: function(models){
-            if(self.model.get('page').vendor) {
+            if (self.model.get('page').vendor) {
               self.renderTab("sales", self.salesCol, self.salesWrapper);
               models.length && self.setSearchList('transactionsSales');
             }
@@ -126,25 +126,25 @@ module.exports = baseVw.extend({
             }).always(function(){
               //if page was opened with an orderID, open that tab and open the order modal
               //find the order
-              if(self.orderID){
+              if (self.orderID){
                 var tType = '';
                 var orderModelP = self.purchasesCol.findWhere({ order_id: self.orderID});
                 var orderModelS = self.salesCol.findWhere({ order_id: self.orderID});
                 var orderModelC = self.casesCol.findWhere({ order_id: self.orderID});
                 var orderModel = orderModelP || orderModelS || orderModelC;
 
-                if(orderModelP){
+                if (orderModelP){
                   tType = "purchases";
                   self.setState('purchases', self.orderID);
-                } else if(orderModelS){
+                } else if (orderModelS){
                   tType = "sales";
                   self.setState('sales', self.orderID);
-                } else if(orderModelC){
+                } else if (orderModelC){
                   tType = "cases";
                   self.setState('cases', self.orderID);
                 }
 
-                if(orderModel){
+                if (orderModel){
                   self.openOrderModal({
                     'orderID': self.orderID,
                     'status': orderModel.get('status'),
@@ -174,9 +174,9 @@ module.exports = baseVw.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.notification && data.notification.order_id){
+    if (data.notification && data.notification.order_id){
       this.getData();
-    } else if(data.message && data.message.subject){
+    } else if (data.message && data.message.subject){
       this.getData();
     }
   },
@@ -191,7 +191,7 @@ module.exports = baseVw.extend({
     loadTemplate('./js/templates/transactions.html', function(loadedTemplate) {
       self.$el.html(
           loadedTemplate(
-            __.extend({},self.model.toJSON(), {
+            __.extend({}, self.model.toJSON(), {
               showUnpaid_purchases: localStorage.getItem('showUnpaid_purchases'),
               showUnpaid_sales: localStorage.getItem('showUnpaid_sales')
             })
@@ -227,7 +227,7 @@ module.exports = baseVw.extend({
     this.setState(tabID);
   },
 
-  searchKeyup: function(e){
+  searchKeyup: function(){
     this.$('.js-transactionsSearchClear').removeClass('hide');
   },
 
@@ -243,16 +243,16 @@ module.exports = baseVw.extend({
 
     this.filterBy = tab.val();
     this.$('.js-'+tabTarget+' .search').val("");
-    switch(tabTarget){
-      case "purchases":
-        this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper);
-        break;
-      case "sales":
-        this.renderTab("sales", this.salesCol, this.salesWrapper);
-        break;
-      case "cases":
-        this.renderTab("cases", this.casesCol, this.casesWrapper);
-        break;
+    switch (tabTarget){
+    case "purchases":
+      this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper);
+      break;
+    case "sales":
+      this.renderTab("sales", this.salesCol, this.salesWrapper);
+      break;
+    case "cases":
+      this.renderTab("cases", this.casesCol, this.casesWrapper);
+      break;
     }
   },
 
@@ -260,18 +260,18 @@ module.exports = baseVw.extend({
     var unpaidBtn = $(e.target),
         tabTarget = unpaidBtn.data("tab");
 
-    if(localStorage.getItem('showUnpaid_'+tabTarget) == "true"){
+    if (localStorage.getItem('showUnpaid_'+tabTarget) == "true"){
       localStorage.setItem('showUnpaid_'+tabTarget, "false");
     } else {
       localStorage.setItem('showUnpaid_'+tabTarget, "true");
     }
-    switch(tabTarget){
-      case "purchases":
-        this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper);
-        break;
-      case "sales":
-        this.renderTab("sales", this.salesCol, this.salesWrapper);
-        break;
+    switch (tabTarget){
+    case "purchases":
+      this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper);
+      break;
+    case "sales":
+      this.renderTab("sales", this.salesCol, this.salesWrapper);
+      break;
     }
   },
 
@@ -280,27 +280,27 @@ module.exports = baseVw.extend({
     var self = this;
     filterBy = filterBy || this.filterBy;
     tabWrapper.html('');
-    if(!filterBy || filterBy == "all"){
+    if (!filterBy || filterBy == "all"){
       tabCollection.comparator = function(model) {
         //add 1 so unread:zero doesn't get dropped from the front of the string when it's changed to a number by the -
         return -(String(model.get("unread")+1) + String(model.get("timestamp")));
       };
       tabCollection.sort();
     }
-    if(filterBy == "dateNewest"){
+    if (filterBy == "dateNewest"){
       tabCollection.comparator = function(model) {
         return -model.get("timestamp");
       };
       tabCollection.sort();
     }
-    if(filterBy == "dateOldest"){
+    if (filterBy == "dateOldest"){
       tabCollection.comparator = function(model) {
         return model.get("timestamp");
       };
       tabCollection.sort();
     }
-    tabCollection.each(function(model, i){
-      if(model.get('status') > 0 || localStorage.getItem('showUnpaid_'+tabName) == "true") {
+    tabCollection.each(function(model){
+      if (model.get('status') > 0 || localStorage.getItem('showUnpaid_'+tabName) == "true") {
         if (!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest") {
           self.addTransaction(model, tabWrapper, tabName);
         } else if (filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
@@ -338,33 +338,33 @@ module.exports = baseVw.extend({
         calls = [],
         exportData = function(data){
           var dataCSV = Papa.unparse(data),
-              dataBlob = new Blob([dataCSV], {'type':'application\/octet-stream'}),
+              dataBlob = new Blob([dataCSV], {'type': 'application\/octet-stream'}), // eslint-disable-line
               tempAnchor = document.createElement('a'),
               saveDate = new Date();
 
           tempAnchor.href = window.URL.createObjectURL(dataBlob);
-          tempAnchor.download = ('export_'+saveDate.toLocaleString(window.lang)+'.csv').replace(/,/g , '_');
+          tempAnchor.download = ('export_'+saveDate.toLocaleString(window.lang)+'.csv').replace(/,/g, '_');
           tempAnchor.click();
         };
 
     //clear existing data
     this.currentExportData = [];
 
-    switch(this.state){
-      case "purchases":
-        rawData = this.purchasesCol.toJSON();
-        break;
-      case "sales":
-        rawData = this.salesCol.toJSON();
-        break;
-      case "cases":
-        rawData = this.casesCol.toJSON();
-        break;
+    switch (this.state){
+    case "purchases":
+      rawData = this.purchasesCol.toJSON();
+      break;
+    case "sales":
+      rawData = this.salesCol.toJSON();
+      break;
+    case "cases":
+      rawData = this.casesCol.toJSON();
+      break;
     }
 
-    $.each(rawData,(i, transaction)=> {
+    $.each(rawData, (i, transaction)=> {
       //if filter is active, don't process transactions of a different type
-      if(Number.isInteger(Number(this.filterBy)) && transaction.status != this.filterBy) return;
+      if (Number.isInteger(Number(this.filterBy)) && transaction.status != this.filterBy) return;
 
       transaction.status = window.polyglot.t('transactions.OrderStatus'+transaction.status);
       transaction.timestamp = new Date(transaction.timestamp * 1000);
@@ -377,12 +377,12 @@ module.exports = baseVw.extend({
     return $.when.apply(null, calls)
         .fail(function(){
           messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.serverError'));
-          calls.forEach((call => {
+          calls.forEach(call => {
             call.abort();
-          }));
+          });
         })
         .done(()=>{
-          if(calls.length > 0){
+          if (calls.length > 0){
             exportData(this.currentExportData);
           } else {
             messageModal.show(window.polyglot.t('errorMessages.noData'));
@@ -393,7 +393,7 @@ module.exports = baseVw.extend({
   getTransactionData: function(orderID, dataObject){
     dataObject = dataObject || {};
 
-    var getCall = $.getJSON(this.serverUrl + 'get_order',{'order_id': orderID}, (data)=> {
+    var getCall = $.getJSON(this.serverUrl + 'get_order', {'order_id': orderID}, (data)=> {
       //add blank data so first object has all the columns
       dataObject.quantity = '';
       dataObject.shipping_address = '';
@@ -409,11 +409,11 @@ module.exports = baseVw.extend({
       dataObject.return_policy = '';
 
       //format and add flat data to the object
-      if(data.buyer_order){
+      if (data.buyer_order){
         var dPayment = data.buyer_order.order.payment;
 
         dataObject.quantity = data.buyer_order.order.quantity;
-        if(data.buyer_order.order.shipping){
+        if (data.buyer_order.order.shipping){
           var dShipping = data.buyer_order.order.shipping;
           dataObject.shipping_address = dShipping.ship_to + " " + dShipping.address +", " + dShipping.city + ", " + dShipping.state + ", " + dShipping.postal_code + ", " + dShipping.country;
         }
@@ -435,7 +435,7 @@ module.exports = baseVw.extend({
 
       }
 
-      if(data.vendor_offer.policy){
+      if (data.vendor_offer.policy){
         dataObject.return_policy = data.vendor_offer.policy.returns;
       }
       
@@ -447,7 +447,7 @@ module.exports = baseVw.extend({
 
   openOrderModal: function(options){
     $('.js-loadingModal').removeClass("hide");
-    if(options.status == "open"){
+    if (options.status == "open"){
       options.status = 4;
     }
     var orderModalView = new transactionModalVw({

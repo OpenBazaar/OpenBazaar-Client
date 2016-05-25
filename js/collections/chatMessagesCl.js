@@ -1,3 +1,5 @@
+'use strict';
+
 var Backbone = require('backbone'),
     app = require('../App.js').getApp(),
     ChatMessageMd = require('../models/chatMessageMd');
@@ -11,8 +13,5 @@ module.exports = Backbone.Collection.extend({
 
   comparator: function(msg) {
     return msg.get('timestamp');
-  },  
-
-  initialize: function(options) {
   }
 });

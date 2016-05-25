@@ -1,13 +1,14 @@
-var Backbone = require('backbone'),
-  $ = require('jquery'),
-  loadTemplate = require('../utils/loadTemplate'),
-  app = require('../App').getApp(),
-  ChatConversationsCl = require('../collections/chatConversationsCl'),
-  ChatMessagesCl = require('../collections/chatMessagesCl'),
-  baseVw = require('./baseVw'),
-  ChatHeadsVw = require('./chatHeadsVw'),
-  autolinker = require( '../utils/customLinker'),
-  ChatConversationVw = require('./chatConversationVw');
+'use strict';
+
+var $ = require('jquery'),
+    loadTemplate = require('../utils/loadTemplate'),
+    app = require('../App').getApp(),
+    ChatConversationsCl = require('../collections/chatConversationsCl'),
+    ChatMessagesCl = require('../collections/chatMessagesCl'),
+    baseVw = require('./baseVw'),
+    ChatHeadsVw = require('./chatHeadsVw'),
+    autolinker = require( '../utils/customLinker'),
+    ChatConversationVw = require('./chatConversationVw');
 
 module.exports = baseVw.extend({
 
@@ -66,7 +67,7 @@ module.exports = baseVw.extend({
       this.setAggregateUnreadCount();
     });
     
-    this.listenTo(this.chatConversationsCl, 'sort', (cl) => {
+    this.listenTo(this.chatConversationsCl, 'sort', () => {
       if (this.chatHeadsVw) {
         this.chatHeadsVw.setCollection(
           this.chatConversationsCl
@@ -102,7 +103,7 @@ module.exports = baseVw.extend({
       }
     });    
 
-    this.listenTo(window.obEventBus, 'unblockingUser', (e) => {
+    this.listenTo(window.obEventBus, 'unblockingUser', () => {
       this.setAggregateUnreadCount();
       this.filterChatHeads();
     });
@@ -155,9 +156,8 @@ module.exports = baseVw.extend({
         
         if (searchText) {
           return !this.model.isBlocked(guid) && guid.startsWith(searchText);
-        } else {
-          return !this.model.isBlocked(guid);
         }
+        return !this.model.isBlocked(guid);
       })
     );
 
@@ -216,22 +216,21 @@ module.exports = baseVw.extend({
       if (this.chatConversationVw.model.get('guid') === model.get('guid') && !refresh) {
         this.$convoContainer.removeClass('chatConversationContainerHide');
         return;
-      } else {
-        // Before removing an existing convo, if they are not scrolled
-        // at or near the bottom, we'll store the scroll position
-        // so we can re-store if they return to the convo.
-        if (
-          this.chatConversationVw.getScrollContainer().scrollTop <=
-          this.chatConversationVw.getScrollContainer().scrollHeight -
-          this.chatConversationVw.getScrollContainer().clientHeight - 10
-        ) {
-          this.chatMessagesCache[this.chatConversationVw.model.get('guid')].scrollPos =
-            this.chatConversationVw.getScrollContainer().scrollTop;
-        }
-
-        this.chatConversationVw.remove();
       }
-    }    
+      // Before removing an existing convo, if they are not scrolled
+      // at or near the bottom, we'll store the scroll position
+      // so we can re-store if they return to the convo.
+      if (
+        this.chatConversationVw.getScrollContainer().scrollTop <=
+        this.chatConversationVw.getScrollContainer().scrollHeight -
+        this.chatConversationVw.getScrollContainer().clientHeight - 10
+      ) {
+        this.chatMessagesCache[this.chatConversationVw.model.get('guid')].scrollPos =
+          this.chatConversationVw.getScrollContainer().scrollTop;
+      }
+
+      this.chatConversationVw.remove();
+    }
 
     cachedMessagesObj = this.chatMessagesCache[model.get('guid')];
     msgCl = cachedMessagesObj && cachedMessagesObj.collection;
@@ -335,8 +334,7 @@ module.exports = baseVw.extend({
   handleSocketMessage: function(response) {
     var msg = JSON.parse(response.data).message,
         openlyChatting = false,
-        conversationMd,
-        avatar;
+        conversationMd;
 
     if (!msg) return;
 
@@ -389,10 +387,10 @@ module.exports = baseVw.extend({
         });
       }
 
-      if ((!window.focused || !openlyChatting) && !this.model.isBlocked(msg.sender))  {
+      if ((!window.focused || !openlyChatting) && !this.model.isBlocked(msg.sender)) {
         new Notification(msg.handle || msg.sender + ':', {
           body: msg.message,
-          icon: avatar = msg.avatar_hash ? app.serverConfigs.getActive().getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
+          icon: msg.avatar_hash ? app.serverConfigs.getActive().getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
             '&guid=' + msg.sender : '/imgs/defaultUser.png',
           silent: true
         });
@@ -402,7 +400,7 @@ module.exports = baseVw.extend({
     } else if (msg.message_type === 'ORDER' || msg.message_type === 'DISPUTE_OPEN' || msg.message_type === 'DISPUTE_CLOSE') {
       new Notification(msg.handle || msg.sender + ':', {
         body: msg.message,
-        icon: avatar = msg.avatar_hash ? app.serverConfigs.getActive().getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
+        icon: msg.avatar_hash ? app.serverConfigs.getActive().getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
         '&guid=' + msg.sender : '/imgs/defaultUser.png',
         silent: true
       });
@@ -435,7 +433,7 @@ module.exports = baseVw.extend({
     if (this.chatConversationVw) {
       this.chatConversationVw.closeConvoSettings();
     }
-    if(this.chatHeadsVw){
+    if (this.chatHeadsVw){
       this.chatHeadsVw.chatHeadsRemoveSelectStyle();
     }
   },
@@ -463,7 +461,7 @@ module.exports = baseVw.extend({
         .addClass('hide');
 
     //remove any existing selected state
-    if(this.chatHeadsVw){
+    if (this.chatHeadsVw){
       this.chatHeadsVw.chatHeadsRemoveSelectStyle();
     }
   },      
@@ -482,7 +480,7 @@ module.exports = baseVw.extend({
       this.$convoContainer = this.$('.chatConversationContainer');
       this.$searchField = this.$('#chatSearchField');
       
-      if(refreshConversations){
+      if (refreshConversations){
         //re-render the conversations
         this.$chatHeadsContainer.html(
             this.chatHeadsVw.render().el
