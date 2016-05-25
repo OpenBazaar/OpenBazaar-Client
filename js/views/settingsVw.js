@@ -1078,7 +1078,7 @@ module.exports = Backbone.View.extend({
   toggleFancyStyles: function(){
     var $html = $('html');
     
-    if($('#advancedForm').find('input[name="notFancy"]').prop('checked')){
+    if ($('#advancedForm').find('input[name="notFancy"]').prop('checked')){
       $html.addClass('notFancy');
       localStorage.setItem('notFancy', "true");
     } else {
