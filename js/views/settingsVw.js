@@ -25,7 +25,7 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
-  className: "settingsView",
+  className: "settingsView contentWrapper",
 
   events: {
     'click .js-generalTab': 'tabClick',

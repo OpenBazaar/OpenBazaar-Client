@@ -108,7 +108,7 @@ module.exports = Backbone.View.extend({
   },
 
   closeModeratorSettings: function() {
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    $('#obContainer').removeClass('modalOpen');
     this.close();
   },
 

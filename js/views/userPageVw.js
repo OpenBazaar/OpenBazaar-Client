@@ -119,7 +119,7 @@ function rgb2hex(rgb) {
 
 module.exports = baseVw.extend({
 
-  classname: "userView",
+  className: "userView contentWrapper",
 
   events: {
     'click .js-aboutTab': 'aboutClick',
@@ -407,19 +407,20 @@ module.exports = baseVw.extend({
         }
       });
       
-      var $userPageHeader = $('.user-page-header');
+      var $userPageHeader = self.$('.js-userPageHeader');
+      var $userPageHeaderSlim = self.$('.js-userPageHeaderSlim');
 
       $("#obContainer").scroll(function(){
         if ($(this).scrollTop() > 400 && self.slimVisible === false ) {
           self.slimVisible = true;
-          $('.user-page-header-slim').addClass('textOpacity1').addClass('top70');
+          $userPageHeaderSlim.addClass('scrolledIntoView');
           $userPageHeader.removeClass('shadow-inner1').addClass('zIndex4');
           $userPageHeader.find('.rowItem').hide();
           $('.user-page-navigation-buttons').addClass('positionFixed positionTop68');
         }
         if ($(this).scrollTop() < 400 && self.slimVisible === true ) {
           self.slimVisible = false;
-          $('.user-page-header-slim').removeClass('top70');
+          $userPageHeaderSlim.removeClass('scrolledIntoView');
           $userPageHeader.addClass('shadow-inner1').removeClass('zIndex4');
           $userPageHeader.find('.rowItem').show();
           $('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
@@ -533,10 +534,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-deleteItem').removeClass('confirm');
     this.$el.find('.js-unfollow').removeClass('confirm');
     this.$el.find('.js-removemoderator').removeClass('confirm');
-    this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
-    document.getElementById('obContainer').classList.remove("box-borderDashed");
-    document.getElementById('obContainer').classList.remove("noScrollBar");
-    document.getElementById('obContainer').classList.remove("overflowHidden");
+    document.getElementById('obContainer').classList.remove("customizeUserPage");
     //unhide the ones that are needed
     if (this.options.ownPage === true) {
       if (state === "listing" || state === "listingOld") {
@@ -546,10 +544,7 @@ module.exports = baseVw.extend({
       } else if (state === "customize") {
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
-        this.$el.find('.user-page-header-slim-bg-cover').addClass('user-page-header-slim-bg-cover-customize');
-        document.getElementById('obContainer').classList.add("box-borderDashed");
-        document.getElementById('obContainer').classList.add("noScrollBar");
-        document.getElementById('obContainer').classList.add("overflowHidden");
+        document.getElementById('obContainer').classList.add("customizeUserPage");
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
       }
@@ -1527,6 +1522,7 @@ module.exports = baseVw.extend({
     var $targ = $(e.target).closest('.js-addmoderator'),
         self = this,
         modList = {};
+    console.log($targ)
 
     $targ.addClass('loading');
 
@@ -1689,6 +1685,7 @@ module.exports = baseVw.extend({
 
   hideThisUser: function(reason){
     this.$('.js-blockedWarning').fadeIn(100);
+    $('#obContainer').addClass('innerModalOpen').scrollTop(0);
     this.$('.js-mainContainer').addClass('blurMore');
     if (reason == "blocked"){
       this.$('.js-reasonBlocked').removeClass('hide');
@@ -1711,6 +1708,7 @@ module.exports = baseVw.extend({
 
   showBlockedUser: function(){
     this.$('.js-blockedWarning').fadeOut(300);
+    $('#obContainer').removeClass('innerModalOpen');
     this.$('.js-mainContainer').removeClass('blurMore');
   },
 

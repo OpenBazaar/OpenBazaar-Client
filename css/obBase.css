@@ -52,12 +52,12 @@ body {
   overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
-  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   /*-webkit-font-smoothing: subpixel-antialiased;*/
-  letter-spacing: .4px;
+  letter-spacing: 0.4px;
   line-height: 1.2;
   margin: 0;
 }
@@ -69,7 +69,6 @@ a {
   transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   cursor: pointer;
   -webkit-user-drag: none;
-  user-drag: none;
 }
 
 a:hover,
@@ -130,7 +129,7 @@ textarea {
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
   font-size: 14px;
   font-weight: 500;
-  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 input[type=range]{
@@ -166,7 +165,6 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 textarea {
   background: none;
   outline: none;
-  appearance: none;
   -webkit-appearance: none;
   width: 100%;
   resize: none;
@@ -187,17 +185,75 @@ form {
 
 /*========== structure classes ==========*/
 
-#content {
-  margin: auto;
+#appFrame {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+#contentFrame {
+  height: 100%;
+  width: 100%;
   position: relative;
-  width: 950px;
+}
+
+#pageNav {
+  position: relative;
+  -webkit-app-region: no-drag;
+}
+
+#pageNavBar {
+  position: relative;
+  padding: 0 8px;
+  height: 46px;
   z-index: 1;
 }
 
 #obContainer {
   transition: width 0.5s ease;
   width: calc(100% - 47px);
-  transition: width 0.5s ease;
+  height: calc(100% - 50px);
+  overflow-y: scroll;
+  padding-top: 20px;
+  -webkit-app-region: no-drag;
+  position: relative;
+  z-index: 0;
+  box-sizing: border-box;
+}
+
+#obContainer.modalOpen,
+#obContainer.innerModalOpen {
+  overflow: hidden;
+  /* obContainer must also be set to scrollTop(0), otherwise the modal may be scrolled out of place */
+}
+
+#obContainer.modalOpen #content {
+  -webkit-filter: blur(1px);
+}
+
+#obContainer.customizeUserPage {
+  overflow: hidden;
+  border: 5px dashed #fff;
+  height: 100%;
+  animation: borderDashedFade .35s normal linear;
+}
+
+#obContainer.customizeUserPage::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+#content {
+  position: relative;
+  z-index: 0;
+}
+
+.contentWrapper {
+  margin: auto;
+  width: 950px;
+}
+
+.userView {
+  margin-top: -20px; /*negate the 20px padding in obContainer */
 }
 
 #ov1.chatOpen #obContainer {
@@ -205,9 +261,6 @@ form {
 }
 
 #appBar {
-  position: fixed;
-  width: 100%;
-  z-index: 14;
   background-color: #327EB8;
   padding: 7px 8px 6px;
   box-sizing: border-box;
@@ -237,24 +290,12 @@ form {
   width: calc(100% - 45px);
 }
 
-#pageNav {
-  position: fixed;
-  top: 28px;
-  -webkit-app-region: no-drag;
-  z-index: 13;
-}
-
-.pageNavContainer {
-  width: 100%;
-  z-index: 3;
-}
-
 #pageNav .btn {
   -webkit-app-region: no-drag;
 }
 
 #pageNav .navBar.bar {
-  padding: 0 8px 0px;
+  padding: 0 8px 10px;
 }
 
 #pageNav .modal-about .navBar.bar {
@@ -274,12 +315,12 @@ form {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 70px;
+  top: 78px;
   width:230px;
   background-color: #252525;
   border-left: 0;
   height: calc(100% - 50px);
-  z-index: 5;
+  z-index: 0;
   transition: right 0.5s ease;
   color: #DDD;
   -webkit-app-region: no-drag;
@@ -287,7 +328,7 @@ form {
 }
 
 .chatOpen #sideBar {
-  right: 0px;
+  right: 0;
 }
 
 #sideBar input::-webkit-input-placeholder {
@@ -313,8 +354,8 @@ form {
   margin-bottom: 50px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  z-index: 1;
-  box-shadow: 0px 10px 20px #05283C;
+  z-index: 0;
+  box-shadow: 0 10px 20px #05283C;
 }
 
 .img-rsp {
@@ -324,7 +365,7 @@ form {
 }
 
 .bar {
-  height: 42px;
+  height: 50px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -360,13 +401,13 @@ form {
 
 #overlay,
 .overlay {
-  position: fixed;
-  top: 50px;
+  position: absolute;
+  top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   background-color: rgba(25,25,25,0.85);
-  z-index: 4;
+  z-index: 0;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
 
@@ -593,13 +634,12 @@ form {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
   opacity: .9;
-  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
-  transition: padding-top .3s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1), padding-top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
-  box-shadow: 0px 0px 37px -17px rgb(0, 0, 0);
+  box-shadow: 0 0 37px -17px rgb(0, 0, 0);
   opacity: 1;
   padding-top: 20px;
 }
@@ -623,7 +663,7 @@ form {
 
 .userPage-subViews .gridItem:hover .itemImg,
 .homeView .gridItem:hover .itemImg {
-    box-shadow: 0px 0px 37px -10px rgb(0, 0, 0);
+    box-shadow: 0 0 37px -10px rgb(0, 0, 0);
 }
 
 /* if itemImg is nested, do not show box shadow */
@@ -634,7 +674,7 @@ form {
 
 .userPage-subViews .gridItem .itemImg:active,
 .homeView .gridItem .itemImg:active {
-    box-shadow: 0px 0px 67px -10px rgb(0, 0, 0);
+    box-shadow: 0 0 67px -10px rgb(0, 0, 0);
     opacity: .75;
 }
 
@@ -869,7 +909,7 @@ label.fieldItem {
 }
 
 .btn-corner.btn-flushTop {
-  top: 0px;
+  top: 0;
 }
 
 .btn-corner.btn-cornerTL {
@@ -1067,37 +1107,20 @@ label.fieldItem {
 }
 
 .modal {
-  position: fixed;
+  position: absolute;
+  top: 0;
   display: block;
   width: 100%;
   height: 100%;
-  top: 28px;
-  left: 0;
   transition: opacity .05s cubic-bezier(0, 0, 0.2, 1),
               width 0.5s ease;
   padding-top: 25px;
   z-index: 1;
+  pointer-events: all;
 }
 
-.modal:not(.modal-fullscreen) {
-  width: calc(100% - 45px);
-}
-
-#ov1.chatOpen .modal:not(.modal-fullscreen) {
-  width: calc(100% - 230px);
-}
-
-.modal.modal-navOffset {
-  top: 70px;
-}
-
-.modalHolder {
-  /* use to contain modals inside views */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
+.modal.noNav {
+  padding-top: 85px
 }
 
 .modal-child {
@@ -1112,10 +1135,6 @@ label.fieldItem {
 
 .modal-opaque .modal-child {
   height: 574px;
-}
-
-.modal.modal-navOffset .modal-child {
-  margin-top: 25px;
 }
 
 .accordion {
@@ -1252,7 +1271,6 @@ label.fieldItem {
   margin-top: 20px;
   transition: margin 0.5s ease;
   position: fixed;
-  transition: margin-left 0.5s ease;
 }
 
 #ov1.chatOpen #colorbox {
@@ -1307,7 +1325,7 @@ h5 {
 }
 
 .fieldItem-textarea h2:first-child, .fieldItem-textarea h3:first-child, .editableContent h2:first-child, .editableContent h3:first-child {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .note {
@@ -1488,14 +1506,12 @@ h5 {
 
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
-  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 70px;
+  box-shadow: inset 0 -70px 112px -62px rgba(37,37,37,.9);
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
-  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 70px;
+  box-shadow: inset 0 -70px 112px -62px rgba(37,37,37,.9);
 }
 
 .modal-opaque.modal-navBlock {
@@ -1515,7 +1531,7 @@ h5 {
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
-  box-shadow: 0px 0px 10px #383838;
+  box-shadow: 0 0 10px #383838;
 }
 
 .modal-hero {
@@ -1649,24 +1665,13 @@ removed because I don't think we're using the trick to hide the borders any more
 }
 
 .box-borderBright:hover {
-  border: 1px solid rbga(255,255,255,1);
+  border: 1px solid rgba(255,255,255,1);
 
-}
-
-.box-borderDashed {
-  border: 5px dashed #fff;
-  box-sizing: border-box;
-  height: calc(100% - 50px) !important;
-  animation: borderDashedFade .35s normal linear;
 }
 
 @-webkit-keyframes borderDashedFade {
     0%   {opacity: 0;}
     100% {opacity: 1;}
-}
-
-#obContainer.box-borderDashed {
-  padding-top: 16px;
 }
 
 .box-dashed {
@@ -1798,9 +1803,8 @@ input[type="text"].txtField-bar {
 }
 
 .btn-enter {
-  margin: 15px;
+  margin: 12px 15px 15px 15px;
   border-radius: 3px;
-  margin-top: 12px;
   font-size: 14px;
   cursor: pointer;
   width: 90%;
@@ -1965,7 +1969,7 @@ margin: auto;
 .btn.btn-c1.active,
 .btn.btn-c2:active,
 .btn.btn-c2.active {
-  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.4), inset 0px 0px 12px 0px rgba(255,255,255,0.1);
+  box-shadow: inset 0 0 6px 0 rgba(0,0,0,0.4), inset 0 0 12px 0 rgba(255,255,255,0.1);
 }
 
 .btn.btn-c1:active,
@@ -2205,7 +2209,7 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationContainer {
   width: calc(100% - 1px);
   height: 360px;
-  bottom: 0px;
+  bottom: 0;
   position: absolute;
   transition: bottom 0.35s ease;
   background-color: #2B2B2B;
@@ -2238,8 +2242,7 @@ div.chatSearchOut .chatSearchIcon {
   height: calc(100% - 405px);
   overflow-x: hidden;
   overflow-y: auto;
-  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
-  transition: height 1s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1), height 1s cubic-bezier(0, 0, 0.2, 1);
   -webkit-filter: blur(.25px);
 }
 
@@ -2284,7 +2287,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationContent {
-  height: calc(100% - 155px);
+  height: calc(100% - 138px);
   border: 1px solid #565656;
   border-top: 0;
   overflow: auto;
@@ -2358,7 +2361,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationAvatar:hover {
-  -webkit-box-shadow: inset 0px 0px 15px 0px rgb(50, 50, 50);
+  -webkit-box-shadow: inset 0 0 15px 0 rgb(50, 50, 50);
 }
 
 .chatConversationMenu {
@@ -2368,7 +2371,7 @@ div.chatSearchOut .chatSearchIcon {
   padding: 10px;
   position: absolute;
   top: 45px;
-  right: 0px;
+  right: 0;
   background: #252525;
   z-index: 5;
   font-weight: 400;
@@ -2390,7 +2393,7 @@ div.chatSearchOut .chatSearchIcon {
   background-color: unset;
   width: 100%;
   font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .chatConversationMessageLine {
@@ -2477,7 +2480,6 @@ div.chatSearchOut .chatSearchIcon {
   border-radius: 3px;
   font-size: 12px;
   padding: 6px 8px;
-  word-break: break-word;
   display: inline-block;
   font-weight: 500;
   letter-spacing: 0.2px;
@@ -2594,7 +2596,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn.btn-bar.btn-tab:first-child {
-  border-top-left-radius: 0px;
+  border-top-left-radius: 0;
 }
 
 .btn.btn-bar.btn-tab:active{
@@ -2736,7 +2738,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-square:active {
-  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
+  -webkit-box-shadow: inset 0 0 6px 0 rgb(13, 84, 123);
   opacity: .75;
 }
 
@@ -2919,7 +2921,6 @@ input[type="number"].fieldItem::-webkit-outer-spin-button,
 input[type="number"].fieldItem::-webkit-inner-spin-button,
 .noNumberSpinner {
   -webkit-appearance: none;
-  appearance: none;
   margin: 0;
 }
 
@@ -2995,7 +2996,6 @@ input[type="number"].fieldItem.fieldItem-withButton {
   border: 1px solid transparent;
   outline: none;
   box-sizing: border-box;
-  appearance: none;
   -webkit-appearance: none;
   color: #fff;
 }
@@ -3110,7 +3110,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
 select {
   border: 2px solid transparent;
   border-radius: 0;
-  font-family: "Helvetica Neue", Helvetica, "Open Sans";
+  font-family: "Helvetica Neue", Helvetica, "Open Sans", sans-serif;
   padding: 0 15px;
   -webkit-appearance: none;
 }
@@ -3406,18 +3406,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-notifications {
-  top: 42px;
+  top: 100%;
   right: 45px;
-  background-color: #252525;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  color: #fff;
-  font-size: 15px;
-  padding: 0;
   width: 390px;
-  transform: translateY(-440px);
-  transition: transform 200ms;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .popMenu-notificationsHeader {
@@ -3430,8 +3423,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 0 15px;
 }
 
-.popMenu-notifications.popMenu-opened {
+.popMenu-notifications.popMenu-opened #notificationsPanel {
   transform: translateY(0);
+  pointer-events: all;
 }
 
 .notification .rowItem {
@@ -3454,7 +3448,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .onboardingIntroDiscover {
   position: absolute;
   cursor: pointer;
-  top: 50px;
+  top: 43px;
   right: 80px;
   width: 233px;
   background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 100%;
@@ -3462,7 +3456,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   text-align: center;
-  -webkit-box-shadow: 0px 1px 2px 0px rgb(37, 37, 37);
+  -webkit-box-shadow: 0 1px 2px 0 rgb(37, 37, 37);
+  z-index: 1;
 }
 
 .onboardingIntroDiscover:before {
@@ -3474,7 +3469,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   top: -41px;
   z-index: 10;
-  right: 0px;
+  right: 0;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -3490,21 +3485,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-navBar {
-  top: 42px;
+  top: 100%;
   right: 10px;
   width: 100%;
-  transform: none;
-  transition: none;
-}
-
-.popMenu-navBar.popMenu-opened {
-  transform: none;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .popMenu-navBarSubMenu {
-  position: absolute;
-  top: 0;
-  right: 0;
+  float: right;
   background-color: #252525;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
   border-bottom-left-radius: 4px;
@@ -3526,6 +3515,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .popMenu-opened .popMenu-navBarSubMenu-pageNav,
 .popMenu-navBarSubMenu-servers.server-submenu-opened {
   transform: translateY(0);
+  pointer-events: all;
 }
 
 .popMenu-navBar a {
@@ -3558,8 +3548,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom-right-radius: 0;
   background: 50% 50% / cover no-repeat;
   height: 400px;
-  position: fixed;
-  top: 70px;
+  position: absolute;
+  top: 0;
   width: 950px;
   padding: 0;
   z-index: 0;
@@ -3572,13 +3562,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .user-page-content {
-  position: relative;
+  position: fixed;
   width: 950px;
-  z-index: 3;
+  z-index: 2;
 }
 
 #noNotifications {
   padding-top: 10px;
+}
+
+#notificationsPanel {
+  background-color: #252525;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: #fff;
+  font-size: 15px;
+  transform: translateY(-110%);
+  transition: transform 200ms;
 }
 
 #notificationsPanel .popMenu-notificationsContent {
@@ -3605,23 +3606,23 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .shadow-inner1-ultra-light {
-  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.35);
+  box-shadow: inset 0 -130px 112px -52px rgba(25,25,25,.35);
 }
 
 .shadow-inner1-light {
-  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.65);
+  box-shadow: inset 0 -130px 112px -52px rgba(25,25,25,.65);
 }
 
 .modal-shadow-inner1 {
-  box-shadow: inset 0px -20px 50px 0px rgba(25,25,25,.35);
+  box-shadow: inset 0 -20px 50px 0 rgba(25,25,25,.35);
 }
 .shadow-inner1 {
   /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(75%,rgba(0,0,0,.75)));*/
-  box-shadow: inset 0px -350px 222px -282px rgba(25,25,25,.75);
+  box-shadow: inset 0 -350px 222px -282px rgba(25,25,25,.75);
 }
 
 .shadow-inner1-strong {
-  box-shadow: inset 0px -240px 92px -162px rgba(25,25,25,.55);
+  box-shadow: inset 0 -240px 92px -162px rgba(25,25,25,.55);
 }
 
 .icon-centered {
@@ -3663,24 +3664,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 136px;
 }
 
-.home-page-navigation-slim {
-  position: fixed;
-  top: 135px;
-  z-index: 3;
-  box-shadow: 0px 10px 43px -10px rgba(0,0,0,0.20);
-}
-
 .user-page-navigation {
   width: 950px;
   position: relative;
   z-index: 1;
-}
-
-.user-page-navigation-slim {
-  position: fixed;
-  top: 102px;
-  z-index: 5;
-  box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
 }
 
 .user-page-header {
@@ -3690,8 +3677,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .user-page-header-slim {
-  position: fixed;
-  top: -10px;
+  position: absolute;
+  top: 0;
   border-top-left-radius: 1px;
   border-top-right-radius: 1px;
   height: 50px;
@@ -3701,7 +3688,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: transparent;
   z-index: 5;
   padding: 0;
-  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1), top .4s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1), transform .4s cubic-bezier(0, 0, 0.2, 1);
+  transform: translateY(-110%);
+}
+
+.user-page-header-slim.scrolledIntoView {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .user-page-header-slim-bg {
@@ -3722,25 +3715,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .user-page-header-slim-tint {
-  box-shadow: inset 0px -160px 112px -52px rgba(25,25,25,.9);
-}
-
-
-.user-page-header-slim-bg-cover {
-  position: fixed;
-  top: 50px;
-  height: 20px;
-  z-index: 4;
-  width: 963px;
-  margin-left: -6px;
-  background: transparent;
-}
-.user-page-header-slim-bg-cover-customize {
-  position: fixed;
-  top: 55px;
-  height: 15px;
-  z-index: 4;
-  width: 950px;
+  box-shadow: inset 0 -160px 112px -52px rgba(25,25,25,.9);
 }
 
 .userPage-subViews {
@@ -3879,7 +3854,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .modal .homeModal-heroText {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   top: 200px;
   color: #fff;
   font-size: 20px;
@@ -4027,11 +4002,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #customizeControls {
-  position: fixed;
+  position: absolute;
   left: 30px;
-  top: 80px;
-  width: 40px;
-  z-index: 100;
+  top: 30px;
+  z-index: 1;
 }
 
 #customizeControls .js-customizePrimaryColor .btn-square {
@@ -4045,7 +4019,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #customizeControls .btn-square {
-  box-shadow: 0px 1px 2px #898989;
+  box-shadow: 0 1px 2px #898989;
   margin-bottom: 0;
   width: 40px;
   height: 40px;
@@ -4350,10 +4324,22 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
 }
 
-#modalHolder {
-  position: fixed;
-  z-index: 9;
+#modalHolder,
+.modalHolder {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   -webkit-app-region: no-drag;
+  pointer-events: none;
+}
+
+#pageNav .modalHolder {
+  /* patch for the about modal. It should be moved to the baseModal view */
+  position: fixed;
+  z-index: 1;
+  top: 74px;
 }
 
 #messageModal {
@@ -4652,16 +4638,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   max-height: 180px;
 }
 
-#obContainer {
-  height: calc(100% - 50px);
-  overflow-y: scroll;
-  padding-top: 0px;
-  -webkit-app-region: no-drag;
-  position: relative;
-  top: 70px;
-  box-sizing: border-box;
-}
-
 .chatConversationMessageLine .chatConversationMessageBody a {
   text-decoration: underline;
 }
@@ -4674,7 +4650,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #statusBar .statusMessageWrap {
-  height: 0px;
+  height: 0;
   overflow: hidden;
   transition: opacity 1.5s, height 1s;
 }
@@ -5121,7 +5097,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .textShadow {
-  text-shadow: 0px 1px 5px #000;
+  text-shadow: 0 1px 5px #000;
 }
 
 #ov1 .textShadow2 {
@@ -5473,10 +5449,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 11px;
 }
 
-#ov1  .top70 {
-  top: 70px;
-}
-
 #ov1 .bottomNeg250 {
   bottom: -250px;
 }
@@ -5667,13 +5639,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1  .padding010 {
-  padding: 0px 10px;
+  padding: 0 10px;
 }
 #ov1  .padding015 {
-  padding: 0px 15px;
+  padding: 0 15px;
 }
 #ov1  .padding025 {
-  padding: 0px 25px;
+  padding: 0 25px;
 }
 #ov1  .padding515 {
   padding: 5px 15px;
@@ -6002,7 +5974,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 13px;
   border-radius: 50%;
   color: white;
-  background-opacity: .75;
   background-color: #FFA41C;
 }
 

@@ -48,7 +48,7 @@ module.exports = baseVw.extend({
 
   open: function() {
     if (!domUtils.isInPage(this.el)) {
-      document.body.appendChild(this.el);
+      document.getElementById('appFrame').appendChild(this.el);
 
       this._open = true;
       this.trigger('open');
@@ -60,7 +60,7 @@ module.exports = baseVw.extend({
 
   close: function() {
     if (domUtils.isInPage(this.el)) {
-      document.body.removeChild(this.el);
+      document.getElementById('appFrame').removeChild(this.el);
 
       this._open = false;
       this.trigger('close');

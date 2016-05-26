@@ -167,7 +167,7 @@ module.exports = baseVw.extend({
       })
       ));
       // add blur to container
-      $('#obContainer').addClass('blur');
+      $('#obContainer').addClass('modalOpen').scrollTop(0);
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
       self.setState(self.tabState);
@@ -766,7 +766,7 @@ module.exports = baseVw.extend({
   closeModal: function(){
     window.obEventBus.trigger("orderModalClosed");
     this.$el.parent().fadeOut(300);
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    $('#obContainer').removeClass('modalOpen');
     this.confirmStatus && this.confirmStatus.remove();
     this.remove();
   }

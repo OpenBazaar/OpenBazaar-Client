@@ -142,10 +142,10 @@ module.exports = baseVw.extend({
         // we need to append colorbox to obContainer to prevent it from covering the header
         $("#colorbox").appendTo("#obContainer");
         $("#cboxOverlay").appendTo("#obContainer");
-        $('#content').addClass('blur');
+        $('#obContainer').addClass('modalOpen').scrollTop(0);
       },
       onClosed: function(){
-        $('#content').removeClass('blur');
+        $('#obContainer').removeClass('modalOpen');
       }
     });
   },
@@ -178,7 +178,7 @@ module.exports = baseVw.extend({
     this.registerChild(this.buyWizardView);
     $('#modalHolder').html(this.buyWizardView.el).fadeIn(300); //add to DOM first, or accordion will have zero width when initialized
     this.buyWizardView.render();
-    $('#obContainer').addClass('blur');
+    $('#obContainer').addClass('modalOpen').scrollTop(0);
   },
 
   clickItemRating: function() {
@@ -189,7 +189,7 @@ module.exports = baseVw.extend({
   },
 
   remove: function() {
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    $('#obContainer').removeClass('modalOpen');
 
     baseVw.prototype.remove.apply(this, arguments);
   }

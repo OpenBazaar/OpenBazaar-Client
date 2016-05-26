@@ -16,7 +16,7 @@ var __ = require('underscore'),
 
 module.exports = baseVw.extend({
 
-  className: "transactionsView",
+  className: "transactionsView contentWrapper",
 
   events: {
     'click .js-purchasesTab': 'tabHandler',

@@ -155,7 +155,7 @@ module.exports = Backbone.Router.extend({
   cleanup: function(){
     $('#loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    $('#obContainer').removeClass('modalOpen innerModalOpen');
     window.obEventBus.trigger('cleanNav');
   },
 
@@ -173,7 +173,7 @@ module.exports = Backbone.Router.extend({
     if (bodyClass){
       $('body').attr('class', bodyClass);
     }
-    $('#obContainer').removeClass("box-borderDashed noScrollBar overflowHidden"); //remove customization styling if present
+    $('#obContainer').removeClass("customizeUserPage"); //remove customization styling if present
     
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
