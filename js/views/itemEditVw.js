@@ -392,8 +392,8 @@ module.exports = baseVw.extend({
         canvas.height = imgH;
         ctx = canvas.getContext('2d');
         ctx.drawImage(newImage, 0, 0, imgW, imgH);
-        dataURI = canvas.toDataURL('image/jpeg', 0.7);
-        dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+        dataURI = canvas.toDataURL('image/webp', 0.7);
+        dataURI = dataURI.replace(/^data:image\/(png|jpeg|webp);base64,/, "");
         imageList.push(dataURI);
 
         if (loaded === imageCount) {

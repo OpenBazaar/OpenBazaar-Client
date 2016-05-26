@@ -771,11 +771,11 @@ module.exports = Backbone.View.extend({
       var bannerCrop = self.$('#settings-image-cropperBanner');
       if (self.newBanner && bannerCrop.cropit('imageSrc')){
         bannerURI = bannerCrop.cropit('export', {
-          type: 'image/jpeg',
+          type: 'image/webp',
           quality: 0.75,
           originalSize: false
         });
-        bannerURI = bannerURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+        bannerURI = bannerURI.replace(/^data:image\/(png|jpeg|webp);base64,/, "");
         banner64Data.image = bannerURI;
 
         saveToAPI('', '', self.serverUrl + "upload_image", function (data) {
@@ -793,11 +793,11 @@ module.exports = Backbone.View.extend({
     //if an avatar has been set, upload it first and get the hash
     if (self.newAvatar && avatarCrop.cropit('imageSrc')){
       imageURI = avatarCrop.cropit('export', {
-        type: 'image/jpeg',
+        type: 'image/webp',
         quality: 0.75,
         originalSize: false
       });
-      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+      imageURI = imageURI.replace(/^data:image\/(png|jpeg|webp);base64,/, "");
       img64Data.image = imageURI;
 
       saveToAPI('', '', self.serverUrl + "upload_image", function (data) {

@@ -4,6 +4,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     localize = require('../utils/localize'),
+    colorbox = require('jquery-colorbox'), // eslint-disable-line
     RatingCl = require('../collections/ratingCl'),
     baseVw = require('./baseVw'),
     buyWizardVw = require('./buyWizardVw'),

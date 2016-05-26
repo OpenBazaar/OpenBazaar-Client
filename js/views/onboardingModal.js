@@ -365,7 +365,7 @@ module.exports = baseModal.extend({
     };
    
     var imageURI = this.$('#image-cropper').cropit('export', {
-      type: 'image/jpeg',
+      type: 'image/webp',
       quality: 0.75,
       originalSize: false
     });
@@ -379,7 +379,7 @@ module.exports = baseModal.extend({
     }
     
     if (imageURI) {
-      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, '');
+      imageURI = imageURI.replace(/^data:image\/(png|jpeg|webp);base64,/, '');
 
       this.avatarUpload(imageURI).done((imgHash) => {
         profileFormData.append('avatar', imgHash);
@@ -520,7 +520,7 @@ module.exports = baseModal.extend({
         var res = event.target.result,
             bannerFormData = new FormData();
 
-        bannerFormData.append('image', res.replace(/^data:image\/(png|jpeg);base64,/, ''));
+        bannerFormData.append('image', res.replace(/^data:image\/(png|jpeg|webp);base64,/, ''));
 
         $.ajax({
           type: 'POST',
