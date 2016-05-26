@@ -167,7 +167,7 @@ module.exports = baseVw.extend({
       })
       ));
       // add blur to container
-      $('#obContainer').addClass('modalOpen');
+      $('#obContainer').addClass('modalOpen').scrollTop(0);
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
       self.setState(self.tabState);

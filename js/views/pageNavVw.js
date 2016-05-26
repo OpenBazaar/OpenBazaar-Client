@@ -345,7 +345,7 @@ module.exports = baseVw.extend({
     this.$aboutModal.find('.js-modalAboutMain').removeClass('hide');
 
     // blur the container for extra focus
-    $('#obContainer').addClass('modalOpen');
+    $('#obContainer').addClass('modalOpen').scrollTop(0);
   },
 
   hideAboutModal: function(){
@@ -359,7 +359,7 @@ module.exports = baseVw.extend({
     $('.js-about-donationsTab').addClass('active');
     this.$aboutModal.find('.modal-section').addClass('hide');
     this.$aboutModal.find('.js-modalAboutSupport').removeClass('hide');
-    $('#obContainer').addClass('modalOpen');
+    $('#obContainer').addClass('modalOpen').scrollTop(0);
   },
 
   aboutModalTabClick: function(e){

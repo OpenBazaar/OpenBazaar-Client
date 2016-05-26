@@ -98,7 +98,7 @@ module.exports = Backbone.View.extend({
       self.initAccordion('.js-storeWizardAccordion');
       self.setValues();
       // add blur to container
-      $('#obContainer').addClass('modalOpen');
+      $('#obContainer').addClass('modalOpen').scrollTop(0);
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
