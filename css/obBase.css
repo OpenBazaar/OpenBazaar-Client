@@ -2284,7 +2284,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationContent {
-  height: calc(100% - 138px);
+  height: calc(100% - 155px);
   border: 1px solid #565656;
   border-top: 0;
   overflow: auto;
@@ -4655,7 +4655,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #obContainer {
   height: calc(100% - 50px);
   overflow-y: scroll;
-  padding-top: 20px;
+  padding-top: 0px;
   -webkit-app-region: no-drag;
   position: relative;
   top: 70px;
