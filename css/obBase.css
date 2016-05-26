@@ -232,7 +232,8 @@ form {
   box-sizing: border-box;
 }
 
-#obContainer.modalOpen {
+#obContainer.modalOpen,
+#obContainer.innerModalOpen {
   overflow: hidden;
 }
 
@@ -363,7 +364,7 @@ form {
   margin-bottom: 50px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  z-index: 1;
+  z-index: 0;
   box-shadow: 0px 10px 20px #05283C;
 }
 
@@ -1118,6 +1119,7 @@ label.fieldItem {
 
 .modal {
   position: absolute;
+  top: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -1128,17 +1130,8 @@ label.fieldItem {
   pointer-events: all;
 }
 
-.modal.modal-navOffset {
-  top: 78px;
-}
-
-.modalHolder {
-  /* use to contain modals inside views */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
+.modal.noNav {
+  padding-top: 85px
 }
 
 .modal-child {
@@ -1153,10 +1146,6 @@ label.fieldItem {
 
 .modal-opaque .modal-child {
   height: 574px;
-}
-
-.modal.modal-navOffset .modal-child {
-  margin-top: 25px;
 }
 
 .accordion {
@@ -3482,7 +3471,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .onboardingIntroDiscover {
   position: absolute;
   cursor: pointer;
-  top: 50px;
+  top: 43px;
   right: 80px;
   width: 233px;
   background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 100%;
@@ -3491,6 +3480,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom-right-radius: 3px;
   text-align: center;
   -webkit-box-shadow: 0px 1px 2px 0px rgb(37, 37, 37);
+  z-index: 1;
 }
 
 .onboardingIntroDiscover:before {
@@ -3600,9 +3590,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .user-page-content {
-  position: relative;
+  position: fixed;
   width: 950px;
-  z-index: 3;
+  z-index: 2;
 }
 
 #noNotifications {
@@ -4383,7 +4373,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
 }
 
-#modalHolder {
+#modalHolder,
+.modalHolder {
   position: absolute;
   z-index: 0;
   top: 0;

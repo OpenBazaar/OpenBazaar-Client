@@ -155,7 +155,7 @@ module.exports = Backbone.Router.extend({
   cleanup: function(){
     $('#loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
-    $('#obContainer').removeClass('modalOpen');
+    $('#obContainer').removeClass('modalOpen innerModalOpen');
     window.obEventBus.trigger('cleanNav');
   },
 

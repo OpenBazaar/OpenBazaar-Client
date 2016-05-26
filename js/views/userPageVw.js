@@ -414,8 +414,6 @@ module.exports = baseVw.extend({
         if ($(this).scrollTop() > 400 && self.slimVisible === false ) {
           self.slimVisible = true;
           $userPageHeaderSlim.addClass('scrolledIntoView');
-          console.log($userPageHeaderSlim.length)
-          console.log("foo")
           $userPageHeader.removeClass('shadow-inner1').addClass('zIndex4');
           $userPageHeader.find('.rowItem').hide();
           $('.user-page-navigation-buttons').addClass('positionFixed positionTop68');
@@ -1526,6 +1524,7 @@ module.exports = baseVw.extend({
     var $targ = $(e.target).closest('.js-addmoderator'),
         self = this,
         modList = {};
+    console.log($targ)
 
     $targ.addClass('loading');
 
@@ -1688,6 +1687,8 @@ module.exports = baseVw.extend({
 
   hideThisUser: function(reason){
     this.$('.js-blockedWarning').fadeIn(100);
+    $('#obContainer').scrollTop(0);
+    $('#obContainer').addClass('innerModalOpen');
     this.$('.js-mainContainer').addClass('blurMore');
     if (reason == "blocked"){
       this.$('.js-reasonBlocked').removeClass('hide');
@@ -1710,6 +1711,7 @@ module.exports = baseVw.extend({
 
   showBlockedUser: function(){
     this.$('.js-blockedWarning').fadeOut(300);
+    $('#obContainer').removeClass('innerModalOpen');
     this.$('.js-mainContainer').removeClass('blurMore');
   },
 

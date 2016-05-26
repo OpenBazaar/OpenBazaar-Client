@@ -125,14 +125,14 @@ module.exports = baseVw.extend({
         
 
         //set chosen inputs
-        this.$('.chosen').chosen({
+        self.$('.chosen').chosen({
           width: '100%',
           search_contains: true
         }).change(function(e){
           self.shipsToChange(e);
         });
         
-        this.$('.chosenRegions').chosen({
+        self.$('.chosenRegions').chosen({
           width: '100%',
           disable_search: true,
           search_contains: true
