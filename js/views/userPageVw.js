@@ -1687,8 +1687,7 @@ module.exports = baseVw.extend({
 
   hideThisUser: function(reason){
     this.$('.js-blockedWarning').fadeIn(100);
-    $('#obContainer').scrollTop(0);
-    $('#obContainer').addClass('innerModalOpen');
+    $('#obContainer').addClass('innerModalOpen').scrollTop(0);
     this.$('.js-mainContainer').addClass('blurMore');
     if (reason == "blocked"){
       this.$('.js-reasonBlocked').removeClass('hide');
