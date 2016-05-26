@@ -288,6 +288,7 @@
                         </div>
                         <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
                           <% if(moderator.guid != ob.user.guid){ %>
+                            <% moderator.numFee = moderator.fee.replace(/[^\d.-]/g, ''); %>
                             <div class="flexRow">
                               <div class="">
                                 <label for="buyWizardModeratorRadio<%= i %>" class="textOpacity1 clickable">
@@ -312,7 +313,7 @@
                                             <% if(moderator.handle){ %><%= moderator.handle %><% } else { %><%= moderator.guid %><% } %>
                                             </div>
                                           </div>
-                                          <div class="floatRight textOpacity75"><%= moderator.fee %></div>
+                                          <div class="floatRight textOpacity75"><%= ob.intlNumFormat(moderator.numFee) %></div>
                                         </div>
                                       </div>
                                     </div>
