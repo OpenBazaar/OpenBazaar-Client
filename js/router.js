@@ -349,7 +349,7 @@ module.exports = Backbone.Router.extend({
       this.pageConnectModal = null;
       deferred.resolve();
     }).fail(() => {
-      this.pageConnectModal.setState({
+      this.pageConnectModal && this.pageConnectModal.setState({
         statusText: config.failedText,
         mode: 'failed-connect',
         tooltip: config.failedTooltip
@@ -444,7 +444,6 @@ module.exports = Backbone.Router.extend({
   },
 
   transactions: function(state, orderID, tabState){
-<<<<<<< HEAD
     this.newView(transactionsView, {
       viewArgs: {
         userModel: this.userModel,
@@ -457,23 +456,11 @@ module.exports = Backbone.Router.extend({
       bodyID: 'transactionsPage'
     });
 
-    app.appBar.setTitle(polyglot.t('Transactions'));
-=======
-    this.newView(new transactionsView({
-      userModel: this.userModel,
-      userProfile: this.userProfile,
-      socketView: this.socketView,
-      state: state,
-      orderID: orderID,
-      tabState: tabState //opens a tab in the order modal
-    }), "userPage");
     app.appBar.setTitle(window.polyglot.t('Transactions'));
->>>>>>> master
   },
 
   settings: function(state){
     $('.js-loadingModal').addClass('show');
-<<<<<<< HEAD
 
     this.newView(settingsView, {
       viewArgs: {
@@ -484,15 +471,6 @@ module.exports = Backbone.Router.extend({
       }
     });
 
-    app.appBar.setTitle(polyglot.t('Settings'));
-=======
-    this.newView(new settingsView({
-      userModel: this.userModel,
-      userProfile: this.userProfile,
-      state: state,
-      socketView: this.socketView
-    }), "userPage");
     app.appBar.setTitle(window.polyglot.t('Settings'));
->>>>>>> master
   }
 });
