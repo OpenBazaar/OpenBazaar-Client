@@ -5,6 +5,7 @@ var __ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
+    app = require('../App.js').getApp(),
     pageVw = require('./pageVw'),
     itemShortView = require('./itemShortVw'),
     itemShortModel = require('../models/itemShortMd'),
@@ -70,12 +71,25 @@ module.exports = pageVw.extend({
 
     this.fetchOwnFollowing(this.render());
 
-    this.listenTo(window.obEventBus, 'cache-detach', this.onCacheDetach);
-    this.listenTo(window.obEventBus, 'cache-reattach', this.onCacheReattach);
+    this.listenTo(app.router, 'cache-detach', this.onCacheDetach);
+    this.listenTo(app.router, 'cache-reattach', this.onCacheReattach);
   },
 
   onCacheReattach: function(e) {
+    var splitRoute = e.requestedRoute.split('/'),
+        searchText;
+
     if (e.view !== this) return;
+
+    // alert('ive been reattached to the route of ' + e.requestedRoute + ' --- ' + this.state);
+    // window.obEventBus.trigger('setAddressBar', {'addressText': addressText});
+
+    if (splitRoute.length > 2 && (searchText = splitRoute[2]) !== this.searchItemsText) {
+      // our view is cached to a search term different than the one the
+      // user is searching for
+      this.searchItems(searchText);
+      this.obContainer[0].scrollTop = 0;
+    }
 
     this.obContainer.on('scroll', this.scrollHandler);
   },
@@ -498,6 +512,7 @@ module.exports = pageVw.extend({
           .replace('%{tag}', `<span class="btn-pill color-secondary">#${searchItemsText}</span>`)
       );
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
+      this.$el.find('.js-homeSearchItems').val("#" + searchItemsText)
       this.setState('products', searchItemsText);
     }else{
       this.searchItemsClear();

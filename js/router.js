@@ -78,11 +78,24 @@ module.exports = Backbone.Router.extend({
       for (var key in this.viewCache) {
         cached = this.viewCache[key];
         if (Date.now() - cached.cachedAt >= cached.view.cacheExpires) {
-          delete this.viewCache[key].view.__cachedScrollPos
+          delete this.viewCache[key].view.__cachedScrollPos;
+          delete this.viewCache[key].view.__cachedAddressBarText;
           delete this.viewCache[key];
         }
       }      
     }, this.cleanCacheInterval);
+
+    // $(window).on('hashchange', () => {
+    //   // track hashchange so that we can restore the hash of
+    //   // a cached view when it's re-attached.
+    //   this._curRoute = location.hash.slice(1);
+    // });
+
+    this.listenTo(window.obEventBus, 'addressBarTextSet', (text) => {
+      if (this.view) {
+        this.view.__cachedAddressBarText = text;
+      }
+    });    
   },
 
   // how often to clean out expired cached views
@@ -201,6 +214,7 @@ module.exports = Backbone.Router.extend({
   newView: function(View, options) {
     var now = Date.now(),
         cached = this.viewCache[View.getCacheIndex(Backbone.history.getFragment())],
+        requestedRoute = Backbone.history.getFragment(),
         loadingConfig;
 
     options = __.extend({
@@ -215,8 +229,6 @@ module.exports = Backbone.Router.extend({
     options.viewArgs = options.viewArgs.length ? options.viewArgs : [options.viewArgs];
 
     this.cleanup();
-    //clear address bar. This will be replaced on the user page
-    window.obEventBus.trigger('setAddressBar', options.addressBarText);
 
     $('body').attr('id', options.bodyID);
     $('body').attr('class', options.bodyClass);
@@ -229,13 +241,15 @@ module.exports = Backbone.Router.extend({
     // cachedAt is updated and the user has up until the view's 'cacheExpires' amount of
     // time to come back to it in it's current state.
     for (var key in this.viewCache) {
-      let cached = this.viewCache[key];
+      let cached = this.viewCache[key],
+          curHash = location.hash.slice(1);
 
       if (
           cached.view === this.view &&
           (Date.now() - cached.cachedAt < cached.view.cacheExpires)
         ) {
         cached.cachedAt = Date.now();
+        // if (this._curRoute) cached.route = this._curRoute;
       }
     }
 
@@ -244,7 +258,7 @@ module.exports = Backbone.Router.extend({
       if (this.view.cacheExpires) {
         this.view.__cachedScrollPos = this.$obContainer[0].scrollTop;
         this.view.$el.detach();
-        obEventBus.trigger('cache-detach', { view: this.view });
+        this.trigger('cache-detach', { view: this.view });
       } else {
         this.view.close ? this.view.close() : this.view.remove()          
       }
@@ -252,20 +266,35 @@ module.exports = Backbone.Router.extend({
 
     if (cached && (now - cached.cachedAt < cached.view.cacheExpires)) {
       // we have an un-expired cached view, let's reattach it
-      console.log('using cached');
       this.view = cached.view;
+      console.log('using cached: ' + this.view.__cachedAddressBarText);
 
-      $('#content').html(cached.view.$el);
-      cached.view.delegateEvents();
+      $('#content').html(this.view.$el);
+      this.view.delegateEvents();
 
       if (this.view.restoreScrollPosition) {
         this.$obContainer[0].scrollTop = this.view.__cachedScrollPos || 0;
-      }      
+      }
 
-      obEventBus.trigger('cache-reattach', { view: this.view });
+      // cached.route && this.navigate(cached.route, { replace: true });
+
+      if (this.view.__cachedAddressBarText) {
+        // ensure our address bar text reflects the state of the cached view
+        window.obEventBus.trigger('setAddressBar', {'addressText': this.view.__cachedAddressBarText});
+      } else {
+        window.obEventBus.trigger('setAddressBar', options.addressBarText);
+      }
+
+      this.trigger('cache-reattach', {
+        view: this.view,
+        requestedRoute: requestedRoute,
+        cachedRoute: Backbone.history.getFragment()
+      });
     } else {
       console.log('using brand spanking new');
       this.view = new (Function.prototype.bind.apply(View, [null].concat(options.viewArgs)));
+      // clear address bar. Must happen after we set out view above.
+      window.obEventBus.trigger('setAddressBar', options.addressBarText);
       $('#content').html(this.view.$el);
       this.$obContainer[0].scrollTop = 0;
 
@@ -280,7 +309,6 @@ module.exports = Backbone.Router.extend({
         this.view.cacheExpires && this.cacheView(this.view);
       }      
     }
-
   },
 
   launchPageConnectModal: function(config) {
@@ -348,7 +376,7 @@ module.exports = Backbone.Router.extend({
     if(localStorage.getItem("route")){
       this.navigate('#' + localStorage.getItem("route"), {trigger: true});
     } else {
-      this.home();
+      this.navigate('#home', {trigger: true});
     }
   },
 

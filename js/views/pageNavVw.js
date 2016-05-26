@@ -313,11 +313,12 @@ module.exports = baseVw.extend({
       self.serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
 
       //listen for address bar set events
-      self.listenTo(window.obEventBus, "setAddressBar", function(options){
+      self.listenTo(window.obEventBus, 'setAddressBar', function(options){
         var text = options.handle || options.addressText;
         self._lastSetAddressBarText = text;
         self.addressInput.val(text);
         self.closeStatusBar();
+        window.obEventBus.trigger('addressBarTextSet', text);
       });
       if(self.showDiscIntro){
         self.showDiscoverIntro();
@@ -538,6 +539,10 @@ module.exports = baseVw.extend({
     location.reload();
   },
 
+  getAddressBarText: function() {
+    return this.addressInput.val();
+  },
+
   trimAddressBar: function() {
     this.addressInput.val(function (i, value) {
       return value.replace('ob://', '');
@@ -586,7 +591,10 @@ module.exports = baseVw.extend({
   },
 
   addressBarProcess: function(addressBarText){
+    console.log(`processing ${addressBarText}`);
     app.router.translateRoute(addressBarText).done((route) => {
+      console.log(`routing to ${route}`);
+      console.log(`frag yo: ${Backbone.history.getFragment()}`);
       Backbone.history.navigate(route, {trigger:true});
     });
   },

@@ -391,7 +391,7 @@ var loadProfile = function(landingRoute, onboarded) {
             setCurrentBitCoin(cCode, user, function() {
               newSocketView = new socketView();
 
-              newPageNavView = new pageNavView({
+              app.pageNav = newPageNavView = new pageNavView({
                 model: user,
                 socketView: newSocketView,
                 userProfile: userProfile,
