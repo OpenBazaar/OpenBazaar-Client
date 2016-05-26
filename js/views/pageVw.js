@@ -4,9 +4,7 @@ var BaseVw = require('./baseVw'),
     PageVw;
 
 PageVw = BaseVw.extend({
-  // todo: make into function and increase to 20 min
-  cacheExpires: 1000 * 60 * 1,
-
+  cacheExpires: 1000 * 60 * 20,
   restoreScrollPosition: true
 });
 
