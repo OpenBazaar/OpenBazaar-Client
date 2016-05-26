@@ -206,7 +206,7 @@ module.exports = baseVw.extend({
     this.markConvoAsRead(model.get('guid'));
 
     // mark as read on chat head
-    if (convoMd == this.chatConversationsCl.get(model.get('guid'))) {
+    if (convoMd = this.chatConversationsCl.get(model.get('guid'))) { // eslint-disable-line no-cond-assign
       convoMd.set('unread', 0);
     }
 
