@@ -534,7 +534,6 @@ module.exports = baseVw.extend({
     this.$el.find('.js-deleteItem').removeClass('confirm');
     this.$el.find('.js-unfollow').removeClass('confirm');
     this.$el.find('.js-removemoderator').removeClass('confirm');
-    this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
     document.getElementById('obContainer').classList.remove("customizeUserPage");
     //unhide the ones that are needed
     if (this.options.ownPage === true) {
@@ -545,7 +544,6 @@ module.exports = baseVw.extend({
       } else if (state === "customize") {
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
-        this.$el.find('.user-page-header-slim-bg-cover').addClass('user-page-header-slim-bg-cover-customize');
         document.getElementById('obContainer').classList.add("customizeUserPage");
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');

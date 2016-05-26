@@ -52,12 +52,12 @@ body {
   overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
-  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   /*-webkit-font-smoothing: subpixel-antialiased;*/
-  letter-spacing: .4px;
+  letter-spacing: 0.4px;
   line-height: 1.2;
   margin: 0;
 }
@@ -69,7 +69,6 @@ a {
   transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   cursor: pointer;
   -webkit-user-drag: none;
-  user-drag: none;
 }
 
 a:hover,
@@ -130,7 +129,7 @@ textarea {
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
   font-size: 14px;
   font-weight: 500;
-  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 input[type=range]{
@@ -166,7 +165,6 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 textarea {
   background: none;
   outline: none;
-  appearance: none;
   -webkit-appearance: none;
   width: 100%;
   resize: none;
@@ -200,10 +198,6 @@ form {
   position: relative;
 }
 
-#navArea {
-
-}
-
 #pageNav {
   position: relative;
   -webkit-app-region: no-drag;
@@ -214,10 +208,6 @@ form {
   padding: 0 8px;
   height: 46px;
   z-index: 1;
-}
-
-#contentArea {
-
 }
 
 #obContainer {
@@ -338,7 +328,7 @@ form {
 }
 
 .chatOpen #sideBar {
-  right: 0px;
+  right: 0;
 }
 
 #sideBar input::-webkit-input-placeholder {
@@ -365,7 +355,7 @@ form {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   z-index: 0;
-  box-shadow: 0px 10px 20px #05283C;
+  box-shadow: 0 10px 20px #05283C;
 }
 
 .img-rsp {
@@ -644,13 +634,12 @@ form {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
   opacity: .9;
-  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
-  transition: padding-top .3s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1), padding-top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
-  box-shadow: 0px 0px 37px -17px rgb(0, 0, 0);
+  box-shadow: 0 0 37px -17px rgb(0, 0, 0);
   opacity: 1;
   padding-top: 20px;
 }
@@ -674,7 +663,7 @@ form {
 
 .userPage-subViews .gridItem:hover .itemImg,
 .homeView .gridItem:hover .itemImg {
-    box-shadow: 0px 0px 37px -10px rgb(0, 0, 0);
+    box-shadow: 0 0 37px -10px rgb(0, 0, 0);
 }
 
 /* if itemImg is nested, do not show box shadow */
@@ -685,7 +674,7 @@ form {
 
 .userPage-subViews .gridItem .itemImg:active,
 .homeView .gridItem .itemImg:active {
-    box-shadow: 0px 0px 67px -10px rgb(0, 0, 0);
+    box-shadow: 0 0 67px -10px rgb(0, 0, 0);
     opacity: .75;
 }
 
@@ -920,7 +909,7 @@ label.fieldItem {
 }
 
 .btn-corner.btn-flushTop {
-  top: 0px;
+  top: 0;
 }
 
 .btn-corner.btn-cornerTL {
@@ -1282,7 +1271,6 @@ label.fieldItem {
   margin-top: 20px;
   transition: margin 0.5s ease;
   position: fixed;
-  transition: margin-left 0.5s ease;
 }
 
 #ov1.chatOpen #colorbox {
@@ -1337,7 +1325,7 @@ h5 {
 }
 
 .fieldItem-textarea h2:first-child, .fieldItem-textarea h3:first-child, .editableContent h2:first-child, .editableContent h3:first-child {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .note {
@@ -1518,12 +1506,12 @@ h5 {
 
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
-  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+  box-shadow: inset 0 -70px 112px -62px rgba(37,37,37,.9);
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
-  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+  box-shadow: inset 0 -70px 112px -62px rgba(37,37,37,.9);
 }
 
 .modal-opaque.modal-navBlock {
@@ -1543,7 +1531,7 @@ h5 {
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
-  box-shadow: 0px 0px 10px #383838;
+  box-shadow: 0 0 10px #383838;
 }
 
 .modal-hero {
@@ -1815,9 +1803,8 @@ input[type="text"].txtField-bar {
 }
 
 .btn-enter {
-  margin: 15px;
+  margin: 12px 15px 15px 15px;
   border-radius: 3px;
-  margin-top: 12px;
   font-size: 14px;
   cursor: pointer;
   width: 90%;
@@ -1982,7 +1969,7 @@ margin: auto;
 .btn.btn-c1.active,
 .btn.btn-c2:active,
 .btn.btn-c2.active {
-  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.4), inset 0px 0px 12px 0px rgba(255,255,255,0.1);
+  box-shadow: inset 0 0 6px 0 rgba(0,0,0,0.4), inset 0 0 12px 0 rgba(255,255,255,0.1);
 }
 
 .btn.btn-c1:active,
@@ -2222,7 +2209,7 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationContainer {
   width: calc(100% - 1px);
   height: 360px;
-  bottom: 0px;
+  bottom: 0;
   position: absolute;
   transition: bottom 0.35s ease;
   background-color: #2B2B2B;
@@ -2255,8 +2242,7 @@ div.chatSearchOut .chatSearchIcon {
   height: calc(100% - 405px);
   overflow-x: hidden;
   overflow-y: auto;
-  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
-  transition: height 1s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1), height 1s cubic-bezier(0, 0, 0.2, 1);
   -webkit-filter: blur(.25px);
 }
 
@@ -2375,7 +2361,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationAvatar:hover {
-  -webkit-box-shadow: inset 0px 0px 15px 0px rgb(50, 50, 50);
+  -webkit-box-shadow: inset 0 0 15px 0 rgb(50, 50, 50);
 }
 
 .chatConversationMenu {
@@ -2385,7 +2371,7 @@ div.chatSearchOut .chatSearchIcon {
   padding: 10px;
   position: absolute;
   top: 45px;
-  right: 0px;
+  right: 0;
   background: #252525;
   z-index: 5;
   font-weight: 400;
@@ -2407,7 +2393,7 @@ div.chatSearchOut .chatSearchIcon {
   background-color: unset;
   width: 100%;
   font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .chatConversationMessageLine {
@@ -2610,7 +2596,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn.btn-bar.btn-tab:first-child {
-  border-top-left-radius: 0px;
+  border-top-left-radius: 0;
 }
 
 .btn.btn-bar.btn-tab:active{
@@ -2752,7 +2738,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-square:active {
-  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
+  -webkit-box-shadow: inset 0 0 6px 0 rgb(13, 84, 123);
   opacity: .75;
 }
 
@@ -2935,7 +2921,6 @@ input[type="number"].fieldItem::-webkit-outer-spin-button,
 input[type="number"].fieldItem::-webkit-inner-spin-button,
 .noNumberSpinner {
   -webkit-appearance: none;
-  appearance: none;
   margin: 0;
 }
 
@@ -3011,7 +2996,6 @@ input[type="number"].fieldItem.fieldItem-withButton {
   border: 1px solid transparent;
   outline: none;
   box-sizing: border-box;
-  appearance: none;
   -webkit-appearance: none;
   color: #fff;
 }
@@ -3126,7 +3110,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
 select {
   border: 2px solid transparent;
   border-radius: 0;
-  font-family: "Helvetica Neue", Helvetica, "Open Sans";
+  font-family: "Helvetica Neue", Helvetica, "Open Sans", sans-serif;
   padding: 0 15px;
   -webkit-appearance: none;
 }
@@ -3478,7 +3462,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   text-align: center;
-  -webkit-box-shadow: 0px 1px 2px 0px rgb(37, 37, 37);
+  -webkit-box-shadow: 0 1px 2px 0 rgb(37, 37, 37);
   z-index: 1;
 }
 
@@ -3491,7 +3475,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   top: -41px;
   z-index: 10;
-  right: 0px;
+  right: 0;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -3507,7 +3491,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-navBar {
-  bottom: 0px;
+  bottom: 0;
   right: 10px;
   width: 100%;
   transform: none;
@@ -3622,23 +3606,23 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .shadow-inner1-ultra-light {
-  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.35);
+  box-shadow: inset 0 -130px 112px -52px rgba(25,25,25,.35);
 }
 
 .shadow-inner1-light {
-  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.65);
+  box-shadow: inset 0 -130px 112px -52px rgba(25,25,25,.65);
 }
 
 .modal-shadow-inner1 {
-  box-shadow: inset 0px -20px 50px 0px rgba(25,25,25,.35);
+  box-shadow: inset 0 -20px 50px 0 rgba(25,25,25,.35);
 }
 .shadow-inner1 {
   /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(75%,rgba(0,0,0,.75)));*/
-  box-shadow: inset 0px -350px 222px -282px rgba(25,25,25,.75);
+  box-shadow: inset 0 -350px 222px -282px rgba(25,25,25,.75);
 }
 
 .shadow-inner1-strong {
-  box-shadow: inset 0px -240px 92px -162px rgba(25,25,25,.55);
+  box-shadow: inset 0 -240px 92px -162px rgba(25,25,25,.55);
 }
 
 .icon-centered {
@@ -3731,25 +3715,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .user-page-header-slim-tint {
-  box-shadow: inset 0px -160px 112px -52px rgba(25,25,25,.9);
-}
-
-
-.user-page-header-slim-bg-cover {
-  position: fixed;
-  top: 50px;
-  height: 20px;
-  z-index: 4;
-  width: 963px;
-  margin-left: -6px;
-  background: transparent;
-}
-.user-page-header-slim-bg-cover-customize {
-  position: fixed;
-  top: 55px;
-  height: 15px;
-  z-index: 4;
-  width: 950px;
+  box-shadow: inset 0 -160px 112px -52px rgba(25,25,25,.9);
 }
 
 .userPage-subViews {
@@ -3888,7 +3854,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .modal .homeModal-heroText {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   top: 200px;
   color: #fff;
   font-size: 20px;
@@ -4053,7 +4019,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #customizeControls .btn-square {
-  box-shadow: 0px 1px 2px #898989;
+  box-shadow: 0 1px 2px #898989;
   margin-bottom: 0;
   width: 40px;
   height: 40px;
@@ -4677,7 +4643,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #statusBar .statusMessageWrap {
-  height: 0px;
+  height: 0;
   overflow: hidden;
   transition: opacity 1.5s, height 1s;
 }
@@ -5124,7 +5090,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .textShadow {
-  text-shadow: 0px 1px 5px #000;
+  text-shadow: 0 1px 5px #000;
 }
 
 #ov1 .textShadow2 {
@@ -5666,13 +5632,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1  .padding010 {
-  padding: 0px 10px;
+  padding: 0 10px;
 }
 #ov1  .padding015 {
-  padding: 0px 15px;
+  padding: 0 15px;
 }
 #ov1  .padding025 {
-  padding: 0px 25px;
+  padding: 0 25px;
 }
 #ov1  .padding515 {
   padding: 5px 15px;
@@ -6001,7 +5967,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 13px;
   border-radius: 50%;
   color: white;
-  background-opacity: .75;
   background-color: #FFA41C;
 }
 
