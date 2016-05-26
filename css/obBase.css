@@ -1677,7 +1677,7 @@ removed because I don't think we're using the trick to hide the borders any more
 }
 
 .box-borderBright:hover {
-  border: 1px solid rbga(255,255,255,1);
+  border: 1px solid rgba(255,255,255,1);
 
 }
 
@@ -2494,7 +2494,6 @@ div.chatSearchOut .chatSearchIcon {
   border-radius: 3px;
   font-size: 12px;
   padding: 6px 8px;
-  word-break: break-word;
   display: inline-block;
   font-weight: 500;
   letter-spacing: 0.2px;
@@ -3508,7 +3507,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-navBar {
-  top: 50px;
+  bottom: 0px;
   right: 10px;
   width: 100%;
   transform: none;
@@ -3681,24 +3680,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 136px;
 }
 
-.home-page-navigation-slim {
-  position: fixed;
-  top: 135px;
-  z-index: 3;
-  box-shadow: 0px 10px 43px -10px rgba(0,0,0,0.20);
-}
-
 .user-page-navigation {
   width: 950px;
   position: relative;
   z-index: 1;
-}
-
-.user-page-navigation-slim {
-  position: fixed;
-  top: 102px;
-  z-index: 5;
-  box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
 }
 
 .user-page-header {
