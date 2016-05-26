@@ -539,10 +539,6 @@ module.exports = baseVw.extend({
     location.reload();
   },
 
-  getAddressBarText: function() {
-    return this.addressInput.val();
-  },
-
   trimAddressBar: function() {
     this.addressInput.val(function (i, value) {
       return value.replace('ob://', '');
@@ -591,10 +587,7 @@ module.exports = baseVw.extend({
   },
 
   addressBarProcess: function(addressBarText){
-    console.log(`processing ${addressBarText}`);
     app.router.translateRoute(addressBarText).done((route) => {
-      console.log(`routing to ${route}`);
-      console.log(`frag yo: ${Backbone.history.getFragment()}`);
       Backbone.history.navigate(route, {trigger:true});
     });
   },

@@ -70,7 +70,6 @@ module.exports = Backbone.Router.extend({
 
     this.$obContainer = $('#obContainer');
     this.viewCache = {};
-    window.moo = this.viewCache;
 
     window.setInterval(() => {
       var cached;
