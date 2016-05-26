@@ -44,7 +44,7 @@
           <div class="pull-left pad20Left txt-bright" style="width:255px;">
             <div class="txt-center row10 textSize16px">
               <%= polyglot.t('buyFlow.SendBTCtoAddress', {
-                  amount: ob.buyer_order.order.payment.amount,
+                  amount: ob.intlNumFormat(ob.orderDue, 20),
                   recipient: '<a class="textSize11px" href="bitcoin:' + ob.buyer_order.order.payment.address + '?amount=' + ob.buyer_order.order.payment.amount + '&message=' + ob.vendor_offer.listing.item.title + '">' + ob.buyer_order.order.payment.address + '</a>'
                 })
               %>
@@ -585,6 +585,11 @@
       <div style="height: 264px;" class="scrollOverflowY customThemeScrollbar">
 
         <div class="flexRow custCol-border borderBottom">
+          <% if(ob.status == 0 && ob.transactionType == "purchases"){ %>
+          <div class="flexRow rowItem padding15">
+            You have paid <%= ob.intlNumFormat(ob.orderPaid, 8) %> out of <%= ob.intlNumFormat(ob.orderPrice, 8) %>
+          </div>
+          <% } %>
           <div class="flexRow rowItem padding15">
             <div class="flexCol-7 overflowHidden">
               <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">

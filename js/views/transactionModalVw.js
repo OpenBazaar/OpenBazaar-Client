@@ -142,14 +142,24 @@ module.exports = baseVw.extend({
   },
 
   render: function () {
-    var self = this;
+    var self = this,
+        orderPrice = 0,
+        orderPaid = 0,
+        orderDue = 0;
+
     $('.js-loadingModal').addClass("hide");
-    //this.model.set('status', this.status);
     //makde sure data is valid
     if (this.model.get('invalidData')){
       messageModal.show(window.polyglot.t('errorMessages.serverError', self.model.get('error')));
       return;
     }
+
+    //calculate how much has been paid
+    orderPrice = this.model.get("buyer_order").order.payment.amount;
+    __.each(this.model.get("bitcoin_txs"), function(payment){
+      orderPaid += payment.value;
+    });
+    orderDue = orderPrice - orderPaid;
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
@@ -163,7 +173,10 @@ module.exports = baseVw.extend({
         status: self.status,
         avatarURL: self.avatarURL,
         avatar_hash: self.avatar_hash,
-        orderID: self.orderID
+        orderID: self.orderID,
+        orderPrice: orderPrice,
+        orderPaid: orderPaid,
+        orderDue: orderDue
       })
       ));
       // add blur to container
@@ -193,6 +206,10 @@ module.exports = baseVw.extend({
         break;
       case "order confirmation":
         this.status = 2;
+        this.tabState = "summary";
+        break;
+      case "partial payment":
+        this.status = 0;
         this.tabState = "summary";
         break;
         /* //this notification is not sent yet by the server
