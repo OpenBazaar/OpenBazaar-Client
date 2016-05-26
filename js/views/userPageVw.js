@@ -1281,13 +1281,13 @@ module.exports = baseVw.extend({
     //var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
     var serverUrl = self.options.userModel.get('serverUrl'),
         imageURI = self.$el.find('#image-cropper').cropit('export', {
-          type: 'image/jpeg',
+          type: 'image/webp',
           quality: 0.75,
           originalSize: false
         });
 
     if (imageURI){
-      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+      imageURI = imageURI.replace(/^data:image\/(png|jpeg|webp);base64,/, "");
       var formData = new FormData();
       formData.append('image', imageURI);
       $.ajax({
