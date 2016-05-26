@@ -81,9 +81,6 @@ module.exports = pageVw.extend({
 
     if (e.view !== this) return;
 
-    // alert('ive been reattached to the route of ' + e.requestedRoute + ' --- ' + this.state);
-    // window.obEventBus.trigger('setAddressBar', {'addressText': addressText});
-
     if (splitRoute.length > 2 && (searchText = splitRoute[2]) !== this.searchItemsText) {
       // our view is cached to a search term different than the one the
       // user is searching for

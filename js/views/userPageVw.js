@@ -328,7 +328,24 @@ UserPageVw = pageVw.extend({
         }
       }
     });
+
+    this.listenTo(app.router, 'cache-detach', this.onCacheDetach);
+    this.listenTo(app.router, 'cache-reattach', this.onCacheReattach);
   },
+
+  onCacheReattach: function(e) {
+    if (e.view !== this) return;
+
+    // todo: cache the million dom queries for #obContainer
+    // use in this view
+    $('#obContainer').on('scroll', this.onScroll);
+  },
+
+  onCacheDetach: function(e) {
+    if (e.view !== this) return;
+
+    $('#obContainer').off('scroll', this.onScroll);
+  },  
 
   loadingConfig: function() {
     var config = {
@@ -406,7 +423,7 @@ UserPageVw = pageVw.extend({
       
       var $userPageHeader = $('.user-page-header');
 
-      $("#obContainer").scroll(function(){
+      $("#obContainer").scroll((self.onScroll = function(){
         if ($(this).scrollTop() > 400 && self.slimVisible === false ) {
           self.slimVisible = true;
           $('.user-page-header-slim').addClass('textOpacity1').addClass('top70');
@@ -421,7 +438,7 @@ UserPageVw = pageVw.extend({
           $userPageHeader.find('.rowItem').show();
           $('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
         }
-      });
+      }));
     });
 
     return this;
@@ -1746,11 +1763,12 @@ UserPageVw = pageVw.extend({
   },
 
   remove: function(){
-    pageVw.prototype.remove.apply(this, arguments);
-
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     $.colorbox.close();
     messageModal.$el.off('click', this.modalCloseHandler);
+    $('#obContainer').off('scroll', this.onScroll);
+
+    pageVw.prototype.remove.apply(this, arguments);
   }
 
 });

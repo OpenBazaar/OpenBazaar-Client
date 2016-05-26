@@ -85,12 +85,6 @@ module.exports = Backbone.Router.extend({
       }      
     }, this.cleanCacheInterval);
 
-    // $(window).on('hashchange', () => {
-    //   // track hashchange so that we can restore the hash of
-    //   // a cached view when it's re-attached.
-    //   this._curRoute = location.hash.slice(1);
-    // });
-
     this.listenTo(window.obEventBus, 'addressBarTextSet', (text) => {
       if (this.view) {
         this.view.__cachedAddressBarText = text;
@@ -249,7 +243,6 @@ module.exports = Backbone.Router.extend({
           (Date.now() - cached.cachedAt < cached.view.cacheExpires)
         ) {
         cached.cachedAt = Date.now();
-        // if (this._curRoute) cached.route = this._curRoute;
       }
     }
 
@@ -267,7 +260,6 @@ module.exports = Backbone.Router.extend({
     if (cached && (now - cached.cachedAt < cached.view.cacheExpires)) {
       // we have an un-expired cached view, let's reattach it
       this.view = cached.view;
-      console.log('using cached: ' + this.view.__cachedAddressBarText);
 
       $('#content').html(this.view.$el);
       this.view.delegateEvents();
@@ -275,8 +267,6 @@ module.exports = Backbone.Router.extend({
       if (this.view.restoreScrollPosition) {
         this.$obContainer[0].scrollTop = this.view.__cachedScrollPos || 0;
       }
-
-      // cached.route && this.navigate(cached.route, { replace: true });
 
       if (this.view.__cachedAddressBarText) {
         // ensure our address bar text reflects the state of the cached view
@@ -291,7 +281,6 @@ module.exports = Backbone.Router.extend({
         cachedRoute: Backbone.history.getFragment()
       });
     } else {
-      console.log('using brand spanking new');
       this.view = new (Function.prototype.bind.apply(View, [null].concat(options.viewArgs)));
       // clear address bar. Must happen after we set out view above.
       window.obEventBus.trigger('setAddressBar', options.addressBarText);
