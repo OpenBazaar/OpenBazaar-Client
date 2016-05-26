@@ -206,7 +206,7 @@ module.exports = baseVw.extend({
     this.markConvoAsRead(model.get('guid'));
 
     // mark as read on chat head
-    if (convoMd == this.chatConversationsCl.get(model.get('guid'))) {
+    if (convoMd = this.chatConversationsCl.get(model.get('guid'))) { // eslint-disable-line no-cond-assign
       convoMd.set('unread', 0);
     }
 
@@ -281,7 +281,7 @@ module.exports = baseVw.extend({
       });
 
       // update chat head
-      if (chatHeadMd == this.chatConversationsCl.findWhere({ guid: convoMd.get('guid') })) {
+      if (chatHeadMd = this.chatConversationsCl.findWhere({ guid: convoMd.get('guid') })) { // eslint-disable-line no-cond-assign
         chatHeadMd.set({
           last_message: msg,
           unread: 0,
@@ -364,7 +364,7 @@ module.exports = baseVw.extend({
       }
 
       // update chat head
-      if (conversationMd == this.chatConversationsCl.get(msg.sender)) {
+      if (conversationMd = this.chatConversationsCl.get(msg.sender)) { // eslint-disable-line no-cond-assign
         conversationMd.set({
           last_message: msg.message,
           unread: openlyChatting && document.hasFocus() ? 0 : conversationMd.get('unread') + 1,

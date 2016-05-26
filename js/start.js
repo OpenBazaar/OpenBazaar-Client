@@ -129,7 +129,7 @@ app.serverConfigs.fetch().done(() => {
 
     // migrate any existing connection from the
     // old single config set-up (_serverConfig-1)
-    if (oldConfig == localStorage['_serverConfig-1']) {
+    if (oldConfig = localStorage['_serverConfig-1']) { // eslint-disable-line no-cond-assign
       oldConfig = JSON.parse(oldConfig);
       
       // don't create a ported connection if it's the same as the default one

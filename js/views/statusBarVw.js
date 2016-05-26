@@ -70,7 +70,7 @@ module.exports = baseVw.extend({
 
     if (typeof msg === 'string') msg = { msg: msg };
 
-    if (errs == md.validate(msg)) {
+    if (errs = md.validate(msg)) { // eslint-disable-line no-cond-assign
       for (var err in errs) {
         if (errs.hasOwnProperty(err)){
           throw new Error(errs[err]);
