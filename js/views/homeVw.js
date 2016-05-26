@@ -15,7 +15,7 @@ var loadTemplate = require('../utils/loadTemplate'),
 
 module.exports = pageVw.extend({
 
-  className:"homeView",
+  className: "homeView contentWrapper",
 
   events: {
     'click .js-productsTab': function(){this.setState("products");},
@@ -122,7 +122,7 @@ module.exports = pageVw.extend({
     this.$el.find('.js-loadingMessage .spinner').removeClass('fadeOut');
     this.$el.find('.js-loadingMessage').removeClass('fadeOut');
     this.socketTimeout = window.setTimeout(function(){
-        self.$el.find('.js-loadingMessage').addClass('fadeOut');
+      self.$el.find('.js-loadingMessage').addClass('fadeOut');
     }, 8000);
 
     // after 8 seconds, if no listings are found, display the no results found message
@@ -160,12 +160,12 @@ module.exports = pageVw.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.id == this.socketSearchID) {
+    if (data.id == this.socketSearchID) {
       this.renderItem(data);
-    } else if(data.id == this.socketItemsID){
+    } else if (data.id == this.socketItemsID){
       this.loadingProducts = false;
       this.renderItem(data);
-    } else if(data.id == this.socketUsersID) {
+    } else if (data.id == this.socketUsersID) {
       this.loadingVendors = false;
       this.renderUser(data.vendor);
     }
@@ -178,11 +178,11 @@ module.exports = pageVw.extend({
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
       self.setState(self.state, self.searchItemsText);
-      if(self.model.get('page').profile.vendor == true) {
+      if (self.model.get('page').profile.vendor == true) {
         self.$el.find('.js-homeCreateStore').addClass('hide');
         self.$el.find('.js-homeMyPage').addClass('show');
         self.$el.find('.js-homeCreateListing').addClass('show');
-      }else{
+      } else {
         self.$el.find('.js-homeCreateStore').addClass('show');
         self.$el.find('.js-homeCreateListing').addClass('hide');
       }
@@ -191,7 +191,7 @@ module.exports = pageVw.extend({
       self.loadingVendors = true;
       self.socketView.getVendors(self.socketUsersID);
       //set the filter
-      if(localStorage.getItem('homeShowAll') == "yes"){
+      if (localStorage.getItem('homeShowAll') == "yes"){
         self.setListingsAll();
         self.loadAllItems();
       } else {
@@ -207,7 +207,7 @@ module.exports = pageVw.extend({
       self.obContainer.on('scroll', self.scrollHandler);
 
       //populate search field
-      if(self.searchItemsText){
+      if (self.searchItemsText){
         self.$el.find('.js-homeSearchItems').val("#" + self.searchItemsText);
         self.$el.find('.js-homeListingToggle').addClass('hide');
         $('#obContainer').scrollTop(0);
@@ -218,14 +218,14 @@ module.exports = pageVw.extend({
   renderItem: function(item){
     var self = this,
         blocked,
-        addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country }),
+        addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country; }),
         userCountry = this.userModel.get('country'),
         contract_type = item.contract_type;
 
     addressCountries.push(userCountry);
 
     //don't show if NSFW and filter is set to false
-    if(item.listing.nsfw && !this.showNSFW) return;
+    if (item.listing.nsfw && !this.showNSFW) return;
     //get data from inside the listing object
     item = item.listing;
     item.userCurrencyCode = this.userModel.get('currency_code');
@@ -256,7 +256,7 @@ module.exports = pageVw.extend({
       newItemModel = new itemShortModel(item);
       itemShort = new itemShortView({model: newItemModel});
 
-      self.listenTo(newItemModel, 'change:isBlocked', function(model, isBlocked, options) {
+      self.listenTo(newItemModel, 'change:isBlocked', function(model, isBlocked) {
         if (isBlocked) {
           self.removeItemView(itemShort);
           self.setListingsBlockedCount(self.getListingsBlockedCount() + 1);
@@ -272,8 +272,8 @@ module.exports = pageVw.extend({
       self.itemViews.push(itemShort);
     };
 
-    if(this.onlyFollowing){
-      if(item.ownFollowing){
+    if (this.onlyFollowing){
+      if (item.ownFollowing){
         newItem();
       }
     } else {
@@ -283,38 +283,40 @@ module.exports = pageVw.extend({
 
   renderUser: function(user){
     var self = this,
-        blocked = this.userModel.get('blocked_guids') || [];
+        blocked = this.userModel.get('blocked_guids') || [],
+        newUserModel,
+        storeShort;
 
     if (blocked.indexOf(user.guid) !== -1) return;
 
-    if(user.nsfw && !this.showNSFW) return;
+    if (user.nsfw && !this.showNSFW) return;
 
-    if(!user.name) return; //if user has no name, they probably don't have a profile
+    if (!user.name) return; //if user has no name, they probably don't have a profile
 
     user.serverUrl = this.userModel.get('serverUrl');
     user.userID = user.guid;
     user.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
     
-    if(this.ownFollowing.indexOf(user.guid) != -1){
+    if (this.ownFollowing.indexOf(user.guid) != -1){
       user.ownFollowing = true;
     }
 
-    var newUserModel = new userShortModel(user);
+    newUserModel = new userShortModel(user);
+    storeShort = new userShortView({model: newUserModel});
 
-    this.listenTo(newUserModel, 'change:isBlocked', function(model, isBlocked, options) {
+    this.listenTo(newUserModel, 'change:isBlocked', function(model, isBlocked) {
       if (isBlocked) {
         self.removeUserView(storeShort);
       }
     });
-
-    var storeShort = new userShortView({model: newUserModel});
+    
     this.$el.find('.js-vendors .js-loadingSpinner').before(storeShort.el);
     this.registerChild(storeShort);
     this.userViews.push(storeShort);
   },
 
   setState: function(state, searchItemsText){
-    if(!state){
+    if (!state){
       state = "products";
     }
     this.hideList();
@@ -322,7 +324,7 @@ module.exports = pageVw.extend({
     this.$el.find('.js-' + state + 'Tab').addClass('active');
     this.$el.find('.js-' + state + 'Search').removeClass('hide');
 
-    if(searchItemsText){
+    if (searchItemsText){
       this.searchItemsText = searchItemsText;
 
       //add action to history
@@ -366,7 +368,7 @@ module.exports = pageVw.extend({
     }
 
     //don't follow if this is the user's own guid
-    if(options.guid == this.options.userModel.get('guid')){
+    if (options.guid == this.options.userModel.get('guid')){
       return;
     }
 
@@ -375,7 +377,7 @@ module.exports = pageVw.extend({
       data: {'guid': options.guid},
       dataType: 'json',
       url: this.options.userModel.get('serverUrl') + (follow ? "follow" : "unfollow"),
-      success: function(data) {
+      success: function() {
         options.target.closest('.js-userShortView').removeClass('div-fade');
         follow ? self.addFollower(options.guid) : self.removeFollower(options.guid);
 
@@ -386,15 +388,12 @@ module.exports = pageVw.extend({
           // filter, let's remove all the views for the guid
           // that we've just unfollowed.
           if (!follow && self.onlyFollowing) {
-            __.each(self.itemViews, function(item, i) {
+            __.each(self.itemViews, function(item) {
               if (item.model.get('guid') === options.guid) {
                 self.removeItemView(item);
               }
             });
           }
-        } else if (self.state == 'vendors') {
-          //self.loadItemsOrSearch();
-          //do nothing, stay on page
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -422,12 +421,12 @@ module.exports = pageVw.extend({
   },  
 
   onScroll: function(){
-    if(this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight && !this.searchItemsText){
-      if(this.state == "products" && !this.loadingProducts){
+    if (this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight && !this.searchItemsText){
+      if (this.state == "products" && !this.loadingProducts){
         this.setSocketTimeout();
         this.loadingProducts = true;
         this.socketView.getItems(this.socketItemsID, this.onlyFollowing);
-      } else if(this.state == "vendors" && !this.loadingVendors){
+      } else if (this.state == "vendors" && !this.loadingVendors){
         this.setSocketTimeout();
         this.loadingVendors = true;
         this.socketView.getVendors(this.socketUsersID);
@@ -452,28 +451,28 @@ module.exports = pageVw.extend({
     this.userViews = [];
   },
 
-  searchItemsFocus: function(e){
+  searchItemsFocus: function(){
     this.$('.js-homeListingToggle').addClass('hide');
   },
 
-  searchItemsBlur: function(e){
-    if(!this.searchItemsText){
+  searchItemsBlur: function(){
+    if (!this.searchItemsText){
       this.$('.js-homeListingToggle').removeClass('hide');
     }
   },
 
   searchItemsKeyup: function(e){
     var target = $(e.target),
-        targetText = target.val().replace("#",'').replace(/ /g, ""),
+        targetText = target.val().replace("#", '').replace(/ /g, ""),
         addressText = targetText;
 
-    if(e.keyCode == 13){
+    if (e.keyCode == 13){
       this.searchItems(targetText);
       addressText = addressText ? "#" + addressText.replace(/\s+/g, '') : "";
       target.val(addressText);
       window.obEventBus.trigger("setAddressBar", {'addressText': addressText});
-    } else if(e.keyCode == 8 || e.keyCode == 46) {
-      if(target.val() == "") {
+    } else if (e.keyCode == 8 || e.keyCode == 46) {
+      if (target.val() == "") {
         this.searchItemsClear();
       }
     }
@@ -495,7 +494,7 @@ module.exports = pageVw.extend({
   },
 
   searchItems: function(searchItemsText){
-    if(searchItemsText){
+    if (searchItemsText){
       this.searchItemsText = searchItemsText;
       this.clearItems();
       this.socketItemsID = "";
@@ -511,7 +510,7 @@ module.exports = pageVw.extend({
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
       this.$el.find('.js-homeSearchItems').val("#" + searchItemsText)
       this.setState('products', searchItemsText);
-    }else{
+    } else {
       this.searchItemsClear();
     }
   },
@@ -571,7 +570,7 @@ module.exports = pageVw.extend({
   },
 
   setListingsAll: function(){
-    if(localStorage.getItem('safeListingsWarningDissmissed')) {
+    if (localStorage.getItem('safeListingsWarningDissmissed')) {
       this.$('.js-homeListingsAll').addClass('active');
       this.$('.js-homeListingsFollowed').removeClass('active');
     }
@@ -586,19 +585,19 @@ module.exports = pageVw.extend({
 
   loadAllItems: function(){
     var self = this;
-    if(localStorage.getItem('safeListingsWarningDissmissed')){
+    if (localStorage.getItem('safeListingsWarningDissmissed')){
       this.onlyFollowing = false;
       this.loadItemsOrSearch();
     } else {
       messageModal.show(
-          polyglot.t('ViewUnfilteredListings'),
-          polyglot.t('AllListingsWarning'),
+          window.polyglot.t('ViewUnfilteredListings'),
+          window.polyglot.t('AllListingsWarning'),
           'modal-hero bg-dark-blue iconBackground',
           'modal-msg custCol-secondary',
           function(){
             messageModal.hide();
           },
-          polyglot.t('Cancel'),
+          window.polyglot.t('Cancel'),
           'txt-center',
           function(){
             localStorage.setItem('safeListingsWarningDissmissed', true);
@@ -607,14 +606,14 @@ module.exports = pageVw.extend({
             messageModal.hide();
             self.setListingsAll();
           },
-          polyglot.t('ShowUnlfilteredListings'),
+          window.polyglot.t('ShowUnlfilteredListings'),
           'txt-center'
       );
     }
   },
 
   loadItemsOrSearch: function(){
-    if(this.searchItemsText){
+    if (this.searchItemsText){
       this.searchItems(this.searchItemsText);
     } else {
       this.loadItems();

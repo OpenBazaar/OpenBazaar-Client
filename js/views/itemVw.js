@@ -1,15 +1,14 @@
+'use strict';
+
 var __ = require('underscore'),
-  Backbone = require('backbone'),
-  $ = require('jquery'),
-  colorbox = require('jquery-colorbox'),
-  loadTemplate = require('../utils/loadTemplate'),
-  localize = require('../utils/localize'),
-  sanitizeHTML = require('sanitize-html'),
-  RatingCl = require('../collections/ratingCl'),
-  CountriesMd = require('../models/countriesMd'),
-  baseVw = require('./baseVw'),
-  buyWizardVw = require('./buyWizardVw'),
-  ReviewsVw = require('./reviewsVw');
+    $ = require('jquery'),
+    loadTemplate = require('../utils/loadTemplate'),
+    localize = require('../utils/localize'),
+    colorbox = require('jquery-colorbox'), // eslint-disable-line
+    RatingCl = require('../collections/ratingCl'),
+    baseVw = require('./baseVw'),
+    buyWizardVw = require('./buyWizardVw'),
+    ReviewsVw = require('./reviewsVw');
 
 module.exports = baseVw.extend({
 
@@ -23,8 +22,6 @@ module.exports = baseVw.extend({
   },
 
   initialize: function(options){
-    var self = this;
-
     this.options = options || {};
     /* expected options are:
     userModel: this is set by main.js, then by a call to the settings API.
@@ -87,10 +84,11 @@ module.exports = baseVw.extend({
 
   render: function(){
     var self = this;
-    __.each(self.model.get('vendor_offer').listing.item.image_hashes, function(imageHash, i){
-      "use strict";
+    /*
+    __.each(self.model.get('vendor_offer').listing.item.image_hashes, function(){
       var imageExtension = self.model.get('imageExtension') || "";
     });
+    */
     
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
@@ -104,10 +102,10 @@ module.exports = baseVw.extend({
               starsTemplate: starsTemplate,
               activeTab: self.activeTab,
               fetchingRatings: self.fetchingRatings,
-              userCountry: polyglot.t(`countries.${self.userModel.get('country')}`),
+              userCountry: window.polyglot.t(`countries.${self.userModel.get('country')}`),
               shippingRegionsDisplay: localize.localizeShippingRegions(self.shippingRegions),
               worldwide: self.worldwide,
-              displayShippingOrigin: self.shippingOrigin && polyglot.t(`countries.${self.shippingOrigin}`)
+              displayShippingOrigin: self.shippingOrigin && window.polyglot.t(`countries.${self.shippingOrigin}`)
             })
           )
         );
@@ -127,7 +125,7 @@ module.exports = baseVw.extend({
     return this;
   },
 
-  photoGalleryClick: function(e){
+  photoGalleryClick: function(){
     $('.js-photoGallery').colorbox({
       'transition': 'fade',
       'rel': 'js-photoGallery', 
@@ -140,27 +138,27 @@ module.exports = baseVw.extend({
       'maxHeight': '620px',
       'opacity': '.95',
       'speed': 50,
-      onOpen:function(){
+      onOpen: function(){
         // we need to append colorbox to obContainer to prevent it from covering the header
         $("#colorbox").appendTo("#obContainer");
         $("#cboxOverlay").appendTo("#obContainer");
-        $('#content').addClass('blur');
+        $('#obContainer').addClass('modalOpen').scrollTop(0);
       },
-      onClosed:function(){
-        $('#content').removeClass('blur');
+      onClosed: function(){
+        $('#obContainer').removeClass('modalOpen');
       }
     });
   },
 
-  descriptionClick: function(e){
+  descriptionClick: function(){
     this.setTab('description');
   },
 
-  reviewsClick: function(e){
+  reviewsClick: function(){
     this.setTab('itemReviews');
   },
 
-  shippingClick: function(e){
+  shippingClick: function(){
     this.setTab('shipping');
   },
 
@@ -175,17 +173,15 @@ module.exports = baseVw.extend({
   },
 
   buyClick: function(){
-    "use strict";
-    var self = this;
     this.buyWizardView && this.buyWizardView.remove();
-    this.buyWizardView = new buyWizardVw({model:this.model, userModel: this.options.userModel, worldwide: this.worldwide, shippingRegions: this.shippingRegions});
+    this.buyWizardView = new buyWizardVw({model: this.model, userModel: this.options.userModel, worldwide: this.worldwide, shippingRegions: this.shippingRegions});
     this.registerChild(this.buyWizardView);
     $('#modalHolder').html(this.buyWizardView.el).fadeIn(300); //add to DOM first, or accordion will have zero width when initialized
     this.buyWizardView.render();
-    $('#obContainer').addClass('blur');
+    $('#obContainer').addClass('modalOpen').scrollTop(0);
   },
 
-  clickItemRating: function(e) {
+  clickItemRating: function() {
     this.setTab('itemReviews');
     $('#obContainer').animate({
       scrollTop: this.$('.js-reviewsContainer').offset().top
@@ -193,7 +189,7 @@ module.exports = baseVw.extend({
   },
 
   remove: function() {
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    $('#obContainer').removeClass('modalOpen');
 
     baseVw.prototype.remove.apply(this, arguments);
   }

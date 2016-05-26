@@ -13,7 +13,7 @@
       <div class="pad20 rowTop20 width100"><h2 class="txt-center"><% polyglot.t('LoadingImage') %></h2></div>
     </div>
     <input type="range" class="cropit-image-zoom-input hCentered rowTop20 js-bannerRangeInput hide" />
-    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce btn-upload-cover-photo custCol-primary">
+    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons btn-upload-cover-photo custCol-primary">
       <span class="ion-qr-scanner fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('UploadCoverPhoto') %> (950px x 400px)
     </label>
@@ -34,8 +34,7 @@
   </div>
 
   <div class="user-page-content">
-    <div class="user-page-header-slim-bg-cover custCol-background"></div>
-    <div class="user-page-header-slim borderBottom2 custCol-border-secondary user-page-header-slim-tint">
+    <div class="user-page-header-slim borderBottom2 custCol-border-secondary user-page-header-slim-tint js-userPageHeaderSlim">
       <div class="user-page-header-slim-bg"
         <% if(ob.page.profile.header_hash){ %>
         style="background-image: url(<%= ob.page.headerURL %>), url(imgs/defaultBanner.png); background-position: center; ">
@@ -62,7 +61,7 @@
     </div>
   </div>
 
-  <div class="shadow-inner1 user-page-header">
+  <div class="shadow-inner1 user-page-header js-userPageHeader">
     <div class="rowItem positionBottom width100 padding0 paddingLeft20 notFancyDarkBackground">
       <div class="table">
         <div>
@@ -591,7 +590,7 @@
 
 <div class="overlay overlayObscurring hide js-blockedWarning">
   <div class="modalHolder">
-    <div class="modal modal-navOffset">
+    <div class="modal">
       <div class="modal-child">
         <div class="modal-small padding15 txt-center custCol-secondary">
           <h3 class="rowTop30 custCol-text">

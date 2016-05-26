@@ -775,6 +775,11 @@
               </div>
               <% } %>
               <% if( ob.vendor_order_confirmation.invoice.content_source) { %>
+                <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
+                  URL: <a href="<%= ob.vendor_order_confirmation.invoice.content_source.url %>">
+                    <%= ob.vendor_order_confirmation.invoice.content_source.url %>
+                  </a>
+                </div>
                 <% if( ob.vendor_order_confirmation.invoice.content_source.password) { %>
                 <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
                   <%= polyglot.t('transactions.Password') %>
@@ -812,18 +817,18 @@
               <% if( ob.displayModerator) { %>
                 <%= polyglot.t('transactions.ModeratedTransaction') %>
                 <% if(ob.displayTotalPrice){ %>
-                <strong><span class="noWrap"><%= ob.buyer_order.order.payment.amount %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+                <strong><span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
                 <% } else if(ob.buyer_order.order.payment.amount){ %>
-                <strong><%= ob.buyer_order.order.payment.amount %> BTC</strong>
+                <strong><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
                 <% } else { %>
                 <strong><%= polyglot.t('Free') %></strong>
                 <% } %>
               <% } else { %>
                 <%= polyglot.t('transactions.DirectTransaction') %>
                 <% if(ob.displayTotalPrice){ %>
-                <strong><span class="noWrap"><%= ob.buyer_order.order.payment.amount %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+                <strong><span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
                 <% } else if(ob.buyer_order.order.payment.amount){ %>
-                <strong><%= ob.buyer_order.order.payment.amount %> BTC</strong>
+                <strong><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
                 <% } else { %>
                 <strong><%= polyglot.t('Free') %></strong>
                 <% } %>
@@ -880,9 +885,9 @@
               </div>
               <div class="fontSize13 noOverflow textOpacity75">
                 <% if(ob.displayTotalPrice){ %>
-                <strong>+<span class="noWrap"><%= ob.buyer_order.order.payment.amount %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+                <strong>+<span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
                 <% } else if(ob.buyer_order.order.payment.amount){ %>
-                <strong>+<%= ob.buyer_order.order.payment.amount %> BTC</strong>
+                <strong>+<%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
                 <% } else { %>
                 <strong><%= polyglot.t('Free') %></strong>
                 <% } %>
@@ -914,9 +919,9 @@
               </div>
               <div class="fontSize13 noOverflow textOpacity75">
                 <% if(ob.displayTotalPrice){ %>
-                <strong>-<span class="noWrap"><%= ob.buyer_order.order.payment.amount %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+                <strong>-<span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
                 <% } else if(ob.buyer_order.order.payment.amount){ %>
-                <strong>-<%= ob.buyer_order.order.payment.amount %> BTC</strong>
+                <strong>-<%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
                 <% } else { %>
                 <strong><%= polyglot.t('Free') %></strong>
                 <% } %>

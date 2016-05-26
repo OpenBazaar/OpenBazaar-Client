@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     fs = require('fs'),
     path = require('path'),

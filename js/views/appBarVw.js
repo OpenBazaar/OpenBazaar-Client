@@ -1,8 +1,6 @@
 'use strict';
 
-var __ = require('underscore'),
-    Backbone = require('backbone'),
-    loadTemplate = require('../utils/loadTemplate'),
+var loadTemplate = require('../utils/loadTemplate'),
     remote = require('electron').remote,        
     BaseVw = require('./baseVw');
 
@@ -16,9 +14,32 @@ module.exports = BaseVw.extend({
   },
 
   initialize: function(options) {
+    var style = localStorage.appBarStyle;
+
     this.options = options || {};
     this.currentWindow = remote.getCurrentWindow();
     this.title = this.titlePrefix;
+    
+    if (!style || ['mac', 'win'].indexOf(style) === -1) {
+      style = remote.process.platform === 'darwin' ? 'mac' : 'win';
+    }
+
+    this.setStyle(style);    
+  },
+
+  setStyle: function(style) {
+    if (!style || ['mac', 'win'].indexOf(style) === -1) {
+      throw new Error(`Please provide a style ('mac' or 'win')`);      
+    }
+
+    this.$el.removeClass('style-mac style-win');
+    this.$el.addClass(`style-${style}`);
+    localStorage.appBarStyle = style;
+    this.render();
+  },
+
+  getStyle: function() {
+    return localStorage.appBarStyle;
   },
 
   navCloseClick: function() {
@@ -34,7 +55,7 @@ module.exports = BaseVw.extend({
   },
 
   navMaxClick: function() {
-    if(this.currentWindow.isMaximized()) {
+    if (this.currentWindow.isMaximized()) {
       this.currentWindow.unmaximize();
       this.$('.js-navMax').attr('data-tooltip', window.polyglot.t('Maximize'));
     } else {
@@ -48,7 +69,7 @@ module.exports = BaseVw.extend({
 
     if (!text) {
       this.title = this.titlePrefix;
-    } else {}
+    }
 
     this.title = text ?
       `${this.titlePrefix} &mdash; ${text}` :
@@ -62,7 +83,7 @@ module.exports = BaseVw.extend({
   render: function() {
     loadTemplate('./js/templates/appBar.html', (t) => {
       this.$el.html(t({
-        platform: remote.process.platform,
+        style: this.getStyle(),
         title: this.title
       }));
     });

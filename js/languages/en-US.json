@@ -348,6 +348,10 @@
   "Avatar": "Avatar",
   "AdditionalPaymentData": "Additional payment data",
   "AdditionalPaymentDataInfo": "Include name of purchase and order number in payment QR code?",
+  "AppBarStyle": "Application Top Bar Style",
+  "AppBarStyleInfo": "How should the top bar of the application be styled?",
+  "OSWindows": "Windows",
+  "OSMac": "Mac",
   "ShippableHelp": "This product can be shipped to one of your currently saved addresses. Add more addresses in the Settings/Addresses section to be able to purchase more listings.",
   "firewall": {
     "Open": "Open",

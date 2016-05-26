@@ -1,6 +1,6 @@
-var __ = require('underscore'),
-    Backbone = require('backbone'),
-    autolinker = require( '../utils/customLinker');
+'use strict';
+
+var autolinker = require( '../utils/customLinker');
 
 module.exports = window.Backbone.Model.extend({
   defaults: {

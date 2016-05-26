@@ -5,7 +5,6 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
-    Polyglot = require('node-polyglot'),
     NotificationsCl = require('../collections/notificationsCl.js'),
     languagesModel = require('../models/languagesMd'),
     baseVw = require('./baseVw'),
@@ -35,7 +34,6 @@ module.exports = baseVw.extend({
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'blur .js-navAddressBar': 'addressBarBlur',
     'click .js-closeStatus': 'closeStatusBar',
-    'click .js-homeModal-themeSelected': 'setSelectedTheme',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'click .js-navInstallUpdate': 'sendInstallUpdate',
@@ -49,7 +47,6 @@ module.exports = baseVw.extend({
   },
 
   initialize: function(options){
-    var self = this;
     this.options = options || {};
     /* recieves socketView and userProfile from main.js */
     this.socketView = options.socketView;
@@ -60,23 +57,25 @@ module.exports = baseVw.extend({
     this.showDiscIntro = options.showDiscIntro;
     this.notificationsRecord = {}; //store notification timestamps to prevent too many from the same user
 
-    this.listenTo(window.obEventBus, "updateProfile", function(response){
+    this.listenTo(window.obEventBus, "updateProfile", function(){
       this.refreshProfile();
     });
-    this.listenTo(window.obEventBus, "updateUserModel", function(response){
+    this.listenTo(window.obEventBus, "updateUserModel", function(){
       this.model.fetch();
     });
 
+    /*
     // pre-select lauguage.
     var localLanguage = window.navigator.language;
     var localLanguageFound = false;
     var languageList = this.languages.get('languages');
-    for(var i in languageList) {
-      if(languageList[i].langCode == localLanguage) {
+    for (var i in languageList) {
+      if (languageList[i].langCode == localLanguage) {
         localLanguageFound = true;
         break;
       }
     }
+    */
 
     this.notificationsCl = new NotificationsCl();
     this.notificationsCl.comparator = function(notif) {
@@ -110,10 +109,6 @@ module.exports = baseVw.extend({
       this.handleSocketMessage(response);
     });
 
-    this.listenTo(window.obEventBus, "onboarding-complete", function(){
-      this.showDiscoverIntro();
-    });
-
     this.listenTo(window.obEventBus, "cleanNav", function(){
       this.cleanNav();
     });
@@ -128,6 +123,7 @@ module.exports = baseVw.extend({
 
   showDiscoverIntro: function(){
     this.$('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
+    this.showDiscIntro = false;
   },
 
   hideDiscoverIntro: function(){
@@ -147,7 +143,7 @@ module.exports = baseVw.extend({
     this.hideAboutModal();
     this.closeNav();
     this.closeStatusBar();
-    obEventBus.trigger('closeBuyWizard');
+    window.obEventBus.trigger('closeBuyWizard');
   },
 
   handleSocketMessage: function(response) {
@@ -156,7 +152,6 @@ module.exports = baseVw.extend({
         avatar,
         avatarHash,
         notif,
-        message,
         notifStamp;
 
     if (data.hasOwnProperty('notification') || data.hasOwnProperty('message') && data.message.subject) {
@@ -168,71 +163,77 @@ module.exports = baseVw.extend({
         avatarHash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
       notif.type = notif.type || notif.message_type;
       notifStamp = Date.now();
+      notif.guid = notif.guid || notif.sender;
       
       this.unreadNotifsViaSocket++;
 
       this.notificationsCl.add(
-          __.extend({}, notif, { read: false })
+          __.extend({}, notif, { 
+            read: false,
+            username: username,
+            image_hash: avatarHash,
+            notifStamp: notifStamp,
+          })
       );
 
       //prevent message spamming from one user
-      if(!this.notificationsRecord[username]){
+      if (!this.notificationsRecord[username]){
         this.notificationsRecord[username] = {};
       }
-      if(this.notificationsRecord[username].notifStamp && notifStamp - this.notificationsRecord[username].notifStamp < 30000){
+      if (this.notificationsRecord[username].notifStamp && notifStamp - this.notificationsRecord[username].notifStamp < 30000){
         return;
       }
       this.notificationsRecord[username].notifStamp = notifStamp;
 
-      switch(notif.type) {
-        case "follow":
-          new Notification(window.polyglot.t('NotificationFollow', {name: username}), {
-            icon: avatar,
-            silent: true
-          });
-          break;
-        case "dispute_open":
-          new Notification(window.polyglot.t('NotificationDispute', {name: username}), {
-            icon: avatar,
-            silent: true
-          });
-          break;
-        case "dispute_close":
-          new Notification(window.polyglot.t('NotificationDisputeClosed', {name: username}), {
-            icon: avatar,
-            silent: true
-          });
-          break;
-        case "new order":
-          new Notification(window.polyglot.t('NotificationNewOrder', {name: username}), {
-            icon: avatar,
-            silent: true
-          });
-          break;
-        case "payment received":
-          new Notification(window.polyglot.t('NotificationPaymentReceived', {name: username}), {
-            icon: avatar,
-            silent: true
-          });
-          break;
-        case "order confirmation":
-          new Notification(window.polyglot.t('NotificationOrderConfirmed', {name: username}), {
-            icon: avatar,
-            silent: true
-          });
-          break;
-        case "rating received":
-          new Notification(window.polyglot.t('NotificationRatingRecieved', {name: username}), {
-            icon: avatar,
-            silent: true
-          });
-          break;
-        case "ORDER":
-          new Notification(window.polyglot.t('NotificationNewTransactionMessage', {name: username}), {
-            icon: avatar,
-            silent: true
-          });
-          break;
+      switch (notif.type) {
+      case "follow":
+        new Notification(window.polyglot.t('NotificationFollow', {name: username}), {
+          icon: avatar,
+          silent: true
+        });
+        break;
+      case "dispute_open":
+        new Notification(window.polyglot.t('NotificationDispute', {name: username}), {
+          icon: avatar,
+          silent: true
+        });
+        break;
+      case "dispute_close":
+        new Notification(window.polyglot.t('NotificationDisputeClosed', {name: username}), {
+          icon: avatar,
+          silent: true
+        });
+        break;
+      case "new order":
+        new Notification(window.polyglot.t('NotificationNewOrder', {name: username}), {
+          icon: avatar,
+          silent: true
+        });
+        break;
+      case "payment received":
+        new Notification(window.polyglot.t('NotificationPaymentReceived', {name: username}), {
+          icon: avatar,
+          silent: true
+        });
+        break;
+      case "order confirmation":
+        new Notification(window.polyglot.t('NotificationOrderConfirmed', {name: username}), {
+          icon: avatar,
+          silent: true
+        });
+        break;
+      case "rating received":
+        new Notification(window.polyglot.t('NotificationRatingRecieved', {name: username}), {
+          icon: avatar,
+          silent: true
+        });
+        break;
+      case "ORDER":
+        new Notification(window.polyglot.t('NotificationNewTransactionMessage', {name: username}), {
+          icon: avatar,
+          silent: true
+        });
+        break;
       }
 
       app.playNotificationSound();
@@ -251,7 +252,7 @@ module.exports = baseVw.extend({
     });
   },
 
-  notificationClick: function(e) {
+  notificationClick: function() {
     this.closeNotificationsMenu();
   },
 
@@ -320,7 +321,7 @@ module.exports = baseVw.extend({
         self.closeStatusBar();
         window.obEventBus.trigger('addressBarTextSet', text);
       });
-      if(self.showDiscIntro){
+      if (self.showDiscIntro){
         self.showDiscoverIntro();
       }
       self.$aboutModalHolder = $('.js-aboutModalHolder');
@@ -330,7 +331,7 @@ module.exports = baseVw.extend({
     return this;
   },
 
-  showAboutModal: function(e){
+  showAboutModal: function(){
     this.cleanNav();
 
     // display the modal
@@ -345,21 +346,21 @@ module.exports = baseVw.extend({
     this.$aboutModal.find('.js-modalAboutMain').removeClass('hide');
 
     // blur the container for extra focus
-    $('#obContainer').addClass('blur');
+    $('#obContainer').addClass('modalOpen').scrollTop(0);
   },
 
-  hideAboutModal: function(e){
+  hideAboutModal: function(){
     this.$aboutModalHolder.fadeOut(300);
-    $('#obContainer').removeClass('blur');
+    $('#obContainer').removeClass('modalOpen');
   },
 
-  showSupportModal: function(e){
+  showSupportModal: function(){
     this.$aboutModalHolder.fadeIn(300);
     this.$aboutModal.find('.navbar .btn.btn-bar').removeClass('active');
     $('.js-about-donationsTab').addClass('active');
     this.$aboutModal.find('.modal-section').addClass('hide');
     this.$aboutModal.find('.js-modalAboutSupport').removeClass('hide');
-    $('#obContainer').addClass('blur');
+    $('#obContainer').addClass('modalOpen').scrollTop(0);
   },
 
   aboutModalTabClick: function(e){
@@ -368,23 +369,23 @@ module.exports = baseVw.extend({
     this.$aboutModal.find('.btn-tab').removeClass('active');
     $(e.currentTarget).addClass('active');
 
-    switch(tab) {
-      case "about":
-        $aboutSection.addClass('hide');
-        $('.js-modalAboutMain').removeClass('hide');
-        break;
-      case "support":
-        $aboutSection.addClass('hide');
-        $('.js-modalAboutSupport').removeClass('hide');
-        break;
-      case "contributors":
-        $aboutSection.addClass('hide');
-        $('.js-modalAboutContributors').removeClass('hide');
-        break;
-      case "licensing":
-        $aboutSection.addClass('hide');
-        $('.js-modalAboutLicensing').removeClass('hide');
-        break;
+    switch (tab) {
+    case "about":
+      $aboutSection.addClass('hide');
+      $('.js-modalAboutMain').removeClass('hide');
+      break;
+    case "support":
+      $aboutSection.addClass('hide');
+      $('.js-modalAboutSupport').removeClass('hide');
+      break;
+    case "contributors":
+      $aboutSection.addClass('hide');
+      $('.js-modalAboutContributors').removeClass('hide');
+      break;
+    case "licensing":
+      $aboutSection.addClass('hide');
+      $('.js-modalAboutLicensing').removeClass('hide');
+      break;
     }
   },
 
@@ -547,7 +548,7 @@ module.exports = baseVw.extend({
 
   untrimAddressBar: function(){
     this.addressInput.val(function (i, value) {
-      if(value) {
+      if (value) {
         value = value.startsWith('ob://') ? value : 'ob://' + value;
       }
       return value;
@@ -565,7 +566,7 @@ module.exports = baseVw.extend({
     });
   },
 
-  addressBarBlur: function(e){
+  addressBarBlur: function(){
     this.trimAddressBar();
   },
 
@@ -588,7 +589,7 @@ module.exports = baseVw.extend({
 
   addressBarProcess: function(addressBarText){
     app.router.translateRoute(addressBarText).done((route) => {
-      Backbone.history.navigate(route, {trigger:true});
+      Backbone.history.navigate(route, {trigger: true});
     });
   },
 
@@ -606,12 +607,8 @@ module.exports = baseVw.extend({
     this.adminPanel.updatePage();
   },
 
-  setSelectedTheme: function(e){
-    // Needs to save to the object and update the dom
-  },
-
   shadeColor2: function shadeColor2(color, percent) {
-    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+    var f=parseInt(color.slice(1), 16), t=percent<0?0:255, p=percent<0?percent*-1:percent, R=f>>16, G=f>>8&0x00FF, B=f&0x0000FF;
     return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
   },
 
@@ -620,7 +617,7 @@ module.exports = baseVw.extend({
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
-  mouseenterServerSubmenuTrigger: function(e) {
+  mouseenterServerSubmenuTrigger: function() {
     this.serverSubmenu.css('right', this.$('.popMenu-navBarSubMenu-pageNav').outerWidth());
 
     this.ServerSubmenuTimeout = setTimeout(() => {
@@ -628,7 +625,7 @@ module.exports = baseVw.extend({
     }, 150);
   },
 
-  mouseleaveServerSubmenuTrigger: function(e) {
+  mouseleaveServerSubmenuTrigger: function() {
     clearTimeout(this.ServerSubmenuTimeout);
 
     setTimeout(() => {
@@ -638,11 +635,11 @@ module.exports = baseVw.extend({
     }, 100);
   },
 
-  mouseenterServerSubmenu: function(e) {
+  mouseenterServerSubmenu: function() {
     this.overServerSubmenu = true;
   },
 
-  mouseleaveServerSubmenu: function(e) {
+  mouseleaveServerSubmenu: function() {
     this.overServerSubmenu = false;
     clearTimeout(this.ServerSubmenuTimeout);
     this.serverSubmenu.removeClass('server-submenu-opened');

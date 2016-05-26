@@ -1,5 +1,6 @@
+'use strict';
+
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     app = require('../App').getApp(),
     countriesMd = require('./countriesMd'),
@@ -40,12 +41,12 @@ module.exports = window.Backbone.Model.extend({
           },
           "shipping_origin": "",
           "flat_fee": {
-              "fiat": {
-                  "price": {
-                    "international": 0,
-                    "domestic": 0
-                  }
+            "fiat": {
+              "price": {
+                "international": 0,
+                "domestic": 0
               }
+            }
           },
           "free": false
         },
@@ -106,39 +107,37 @@ module.exports = window.Backbone.Model.extend({
   },
 
   parse: function(response) {
-    "use strict";
-    var self = this;
     //when vendor currency code is in bitcoins, the json returned is different. Put the value in the expected place so the templates don't break.
     //check to make sure a blank result wasn't returned from the server
-    if(response.vendor_offer){
-      if(response.vendor_offer.listing.item.price_per_unit.bitcoin){
+    if (response.vendor_offer){
+      if (response.vendor_offer.listing.item.price_per_unit.bitcoin){
         response.vendor_offer.listing.item.price_per_unit.fiat = {
           "price": response.vendor_offer.listing.item.price_per_unit.bitcoin,
           "currency_code": "BTC"
         };
       }
       //if the shipping section is not returned it breaks the edit template. Restore it here
-      if(!response.vendor_offer.listing.shipping){
+      if (!response.vendor_offer.listing.shipping){
         response.vendor_offer.listing.shipping = {
           "shipping_regions": [],
-              "est_delivery": {
+          "est_delivery": {
             "international": "",
-                "domestic": ""
+            "domestic": ""
           },
           "shipping_origin": "",
-            "flat_fee": {
-              "fiat": {
-                "price": {
-                  "international": "",
-                  "domestic": ""
-                }
+          "flat_fee": {
+            "fiat": {
+              "price": {
+                "international": "",
+                "domestic": ""
               }
-            },
-            "free": true
-          };
-        }
+            }
+          },
+          "free": true
+        };
+      }
       //if the shipping flat_fee  section is not returned it breaks the edit template. Restore it here
-      if(!response.vendor_offer.listing.shipping.flat_fee){
+      if (!response.vendor_offer.listing.shipping.flat_fee){
         response.vendor_offer.listing.shipping.flat_fee = {
           "fiat": {
             "price": {
@@ -148,7 +147,7 @@ module.exports = window.Backbone.Model.extend({
           }
         };
       }
-      if(!response.vendor_offer.listing.shipping.free == true && response.vendor_offer.listing.shipping.flat_fee){
+      if (!response.vendor_offer.listing.shipping.free == true && response.vendor_offer.listing.shipping.flat_fee){
         if (response.vendor_offer.listing.shipping.flat_fee.bitcoin){
           response.vendor_offer.listing.shipping.flat_fee.fiat = {
             price: {
@@ -160,7 +159,7 @@ module.exports = window.Backbone.Model.extend({
         }
       }
       //make sure policy exists
-      if(!response.vendor_offer.listing.policy){
+      if (!response.vendor_offer.listing.policy){
         response.vendor_offer.listing.policy = {
           "terms_conditions": "",
           "returns": ""
@@ -203,24 +202,24 @@ module.exports = window.Backbone.Model.extend({
         vendToUserBTCRatio = 0,
         newAttributes = {};
 
-    if(this.get('vendor_offer').listing.shipping) {
+    if (this.get('vendor_offer').listing.shipping) {
       vendorDomesticShipping = this.get('vendor_offer').listing.shipping.flat_fee.fiat.price.domestic;
       vendorInternationalShipping = this.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international;
     }
 
-    if(userCCode) {
+    if (userCCode) {
       getBTPrice(vendorCCode, function(btAve){
         vendorCurrencyInBitcoin = btAve;
         vendorPriceInBitCoin = Number(vendorPrice / btAve);
         vendorDomesticShippingInBitCoin = Number(vendorDomesticShipping / btAve);
         vendorInternationalShippingInBitCoin = Number(vendorInternationalShipping / btAve);
         //if vendor and user currency codes are the same, multiply by one to avoid rounding errors
-        vendToUserBTCRatio = (userCCode == vendorCCode) ? 1 : window.currentBitcoin/vendorCurrencyInBitcoin;
+        vendToUserBTCRatio = userCCode == vendorCCode ? 1 : window.currentBitcoin/vendorCurrencyInBitcoin;
         newAttributes.vendorBTCPrice = vendorPriceInBitCoin;
         newAttributes.domesticShippingBTC = vendorDomesticShippingInBitCoin;
         newAttributes.internationalShippingBTC = vendorInternationalShippingInBitCoin;
 
-        if(userCCode != 'BTC'){
+        if (userCCode != 'BTC'){
           newAttributes.price = vendorPrice*vendToUserBTCRatio;
           newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
             style: 'currency',
@@ -255,7 +254,7 @@ module.exports = window.Backbone.Model.extend({
         self.set(newAttributes);
         typeof callback == 'function' && callback();
       });
-    }else{
+    } else {
       this.set({displayPrice: "Price Unavailable"});
     }
   }

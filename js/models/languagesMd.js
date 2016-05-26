@@ -1,3 +1,5 @@
+'use strict';
+
 var Backbone = require('backbone');
 
 /* use BCP 47 language tags as the key for each language http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry */

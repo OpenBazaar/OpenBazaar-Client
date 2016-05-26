@@ -11,51 +11,72 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
-  <div class="container custCol-background custCol-text" id="obContainer">
-    <div id="content"></div>
-    <div id="customizePreviewDashedBorder" class="hide"></div>
-  </div>
-  <div id="overlay" class="hide"></div>
-  <div id="sideBar"></div>
-  <div id="modalHolder">
-    <!-- container for modal views -->
-  </div>
-  <div id="messageModal" class="modal modal-opaque js-messageModal hide">
-    <!-- modal for messages -->
-    <div class="modal-child modal-childMain color-primary custCol-secondary padding20 custCol-text">
-      <div class="txt-center row10 js-messageModalTitleWrapper">
-        <h1 class="js-messageModal-title"></h1>
+
+  <div id="appFrame">
+
+    <div id="appBar" class="top0 alignCenter custCol-secondary"></div>
+
+    <div id="contentFrame">
+
+      <div id="navArea">
+        <div id="pageNav" class="custCol-secondary"></div>
       </div>
-      <div class="txt-center row10 js-messageModalMsgWrapper">
-        <p class="fontSize14 js-messageModal-message"></p>
-        <div class="bar barFlush bottomBar js-messageModal-btnBar hide">
-          <a class="btn btn-bar btn-half borderRight custCol-border textOpacity90 custCol-primary js-messageModal-btn1">
-          </a>
-          <a class="btn btn-bar btn-half textOpacity90 custCol-primary js-messageModal-btn2">
-          </a>
+
+      <div id="contentArea">
+        <div class="container custCol-background custCol-text" id="obContainer">
+          <div id="content"></div>
+          <div id="modalHolder">
+            <!-- container for modal views -->
+          </div>
         </div>
-      </div>
-      <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeIndexModal">
-        <h2 class="ion-android-close custCol-text clickable"></h2>
-      </div>
-    </div>
-  </div>
-  <div id="statusBar"></div>
-  <div id="pageNav" class="bar navBar navBar-main custCol-secondary padding0"></div>
-  <div id="appBar" class="top0 alignCenter custCol-secondary"></div>  
-  <div id="loadingModal" class="modal modal-opaque modal-fullscreen js-loadingModal hide">
-    <div class="spinner-with-logo fullCentered">
-      <i class="ion-android-sync spinner fontSize30 spinner-with-logo-icon"></i>
-    </div>
-    <div id="loadingModalContent">
-      <p class="fontSize16 js-translate" data-translate="errorMessages.loadingViewError"></p>
-      <div id="loadingModalBtns">
-        <a class="btn btn-large marginRight10 custCol-secondary custCol-text js-indexReload"><i class="ion-android-sync"></i> <span class="js-translate" data-translate="Reload"></span></a>
-        <a class="btn btn-large custCol-secondary custCol-text" href="#home"><i class="ion-eye"></i> <span class="js-translate" data-translate="LoadIndex"></span></a>
+
+        <div id="sideBar"></div>
+
+        <div id="messageModal" class="modal modal-opaque js-messageModal hide">
+          <!-- modal for messages -->
+          <div class="modal-child modal-childMain color-primary custCol-secondary padding20 custCol-text">
+            <div class="txt-center row10 js-messageModalTitleWrapper">
+              <h1 class="js-messageModal-title"></h1>
+            </div>
+            <div class="txt-center row10 js-messageModalMsgWrapper">
+              <p class="fontSize14 js-messageModal-message"></p>
+              <div class="bar barFlush bottomBar js-messageModal-btnBar hide">
+                <a class="btn btn-bar btn-half borderRight custCol-border textOpacity90 custCol-primary js-messageModal-btn1">
+                </a>
+                <a class="btn btn-bar btn-half textOpacity90 custCol-primary js-messageModal-btn2">
+                </a>
+              </div>
+            </div>
+            <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeIndexModal">
+              <h2 class="ion-android-close custCol-text clickable"></h2>
+            </div>
+          </div>
+        </div>
+
+        <div id="overlay" class="hide"></div>
+        <div id="statusBar"></div>
+
       </div>
 
     </div>
+
+    <div id="loadingModal" class="modal modal-opaque modal-fullscreen js-loadingModal hide">
+      <div class="spinner-with-logo fullCentered">
+        <i class="ion-android-sync spinner fontSize30 spinner-with-logo-icon"></i>
+      </div>
+      <div id="loadingModalContent">
+        <p class="fontSize16 js-translate" data-translate="errorMessages.loadingViewError"></p>
+        <div id="loadingModalBtns">
+          <a class="btn btn-large marginRight10 custCol-secondary custCol-text js-indexReload"><i class="ion-android-sync"></i> <span class="js-translate" data-translate="Reload"></span></a>
+          <a class="btn btn-large custCol-secondary custCol-text" href="#home"><i class="ion-eye"></i> <span class="js-translate" data-translate="LoadIndex"></span></a>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+
+
 
   <!--TODO: modularize non-modular scripts -->
   <script src="js/utils/list.min.js"></script>

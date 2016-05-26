@@ -8,8 +8,10 @@
 // Backbone.LocalStorage.sync. You also still need to set the localStorage attribute,
 // as described in the docs.
 
+'use strict';
+
 var Backbone = require('backbone'),
-    localStorageSync = require('backbone.localstorage');
+    localStorageSync = require('backbone.localstorage'); // eslint-disable-line
 
 Backbone.sync = Backbone.ajaxSync;
 delete Backbone.ajaxSync;

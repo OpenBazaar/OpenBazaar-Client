@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore');
 
 function localizeShippingRegions(regions) {
@@ -9,9 +11,9 @@ function localizeShippingRegions(regions) {
 
   regions.forEach((region) => {
     if (region === 'ALL') {
-      localized.push(polyglot.t('WorldwideShipping'));
+      localized.push(window.polyglot.t('WorldwideShipping'));
     } else {
-      localized.push(polyglot.t(`countries.${region}`));
+      localized.push(window.polyglot.t(`countries.${region}`));
     }
   });
 
