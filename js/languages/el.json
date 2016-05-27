@@ -346,6 +346,7 @@
     "AdditionalPaymentData": "Πρόσθετα στοιχεία πληρωμής",
     "AdditionalPaymentDataInfo": "Include name of purchase and order number in payment QR code?",
     "ShippableHelp": "This product can be shipped to one of your currently saved addresses. Add more addresses in the Settings/Addresses section to be able to purchase more listings.",
+    "Size": "Size",
     "firewall": {
         "Open": "Ανοιχτό",
         "Restricted": "Περιορισμένος",
