@@ -53,6 +53,7 @@ module.exports = window.Backbone.Model.extend({
         "item": {
           "category": "",
           "sku": "",
+          "size": "",
           "description": "",
           "price_per_unit": {
             "fiat": {
