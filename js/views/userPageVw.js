@@ -307,6 +307,11 @@ module.exports = baseVw.extend({
           self.model.set({ownPage: self.options.ownPage});
           self.render();
           !self.currentItemHash && self.loadingDeferred.resolve();
+          
+          // Handle was requested
+          if (profile.handle) {
+            window.obEventBus.trigger('handleObtained', profile);
+          }
         } else {
           //model was returned as a blank object
           self.loadingDeferred.reject();

@@ -470,17 +470,21 @@ module.exports = baseVw.extend({
 
   searchItems: function(searchItemsText){
     if (searchItemsText){
+      var hashedItem = "#" + searchItemsText;
+      
+      window.obEventBus.trigger('searchingText', hashedItem);
+      
       this.searchItemsText = searchItemsText;
       this.clearItems();
       this.socketItemsID = "";
       this.socketSearchID = Math.random().toString(36).slice(2);
       this.socketView.search(this.socketSearchID, searchItemsText);
       this.setSocketTimeout();      
-      this.$el.find('.js-discoverHeading').html("#" + searchItemsText);
+      this.$el.find('.js-discoverHeading').html(hashedItem);
       this.$el.find('.js-loadingText').html(
         this.$el.find('.js-loadingText')
           .data('searchingText')
-          .replace('%{tag}', `<span class="btn-pill color-secondary">#${searchItemsText}</span>`)
+          .replace('%{tag}', `<span class="btn-pill color-secondary">${hashedItem}</span>`)
       );
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
       this.setState('products', searchItemsText);
