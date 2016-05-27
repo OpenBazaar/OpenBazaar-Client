@@ -117,7 +117,7 @@ module.exports = baseVw.extend({
 
   showPartialPaymentMsg: function(data){
     var payMsg = "";
-    this.partialPaymentAmount = data.amount_funded / 100000000; //amount is sent in satoshis
+    this.partialPaymentAmount = data.amount_funded;
     payMsg = window.polyglot.t('transactions.BuyerPaidMessage', {
       paidAmount: templateHelpers.intlNumFormat(this.partialPaymentAmount, 8),
       totalAmount: templateHelpers.intlNumFormat(this.model.get('totalBTCDisplayPrice'), 8)
@@ -126,7 +126,7 @@ module.exports = baseVw.extend({
     this.$('.js-partialPaymentMsg')
         .addClass('fadeIn')
         .find('.js-partialPaymentTxt').text(payMsg);
-    
+
     this.showPayAddress();
   },
 
