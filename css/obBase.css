@@ -197,6 +197,10 @@ form {
   position: relative;
 }
 
+#contentFrame.modalOpen #pageNav .badge {
+  display: none;
+}
+
 #pageNav {
   position: relative;
   -webkit-app-region: no-drag;
@@ -1520,18 +1524,9 @@ h5 {
   padding-top: 100px;
 }
 
-/*
-  will cover entire screen aside from the #appBar,
-  which should never be covered.
-*/
-.modal-fullscreen {
-  top: 28px;
-}
-
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
-  box-shadow: 0 0 10px #383838;
 }
 
 .modal-hero {
@@ -4350,21 +4345,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 0;
 }
 
-#loadingModal, .page-connect-modal.server-connect {
-  z-index: 13;
-}
-
-/*
-   Different types of modals (e.g. loading, page-connect-modal, server-connect...) have
-   different dimensions (e.g. some cover chat, some cover nav bar...). We'll be 
-   fudging the position of loading spinners and content so that if these modals
-   are shown in succession, there is no "jump" of the spinner / content.
-*/
-#loadingModal .spinner-with-logo, .page-connect-modal.server-connect .spinner-with-logo {
-  margin-top: 6px;
-  margin-left: -20px;
-}
-
 .page-connect-modal .spinner-with-logo {
   margin-top: -45px;
 }
@@ -4401,10 +4381,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #loadingModal.hide #loadingModalContent,
 #loadingModal.hide #loadingModalBtns {
   opacity: 0;
-}
-
-#ov1 .server-connect-modal {
-  z-index: 15;
 }
 
 #ov1 .server-connect-modal .modal-child {
@@ -4700,10 +4676,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: auto;
   text-align: center;
   transition: transform 0.5s ease;
-}
-
-.page-connect-modal.server-connect .content {
-  transform: translate(-20px, 51px);
 }
 
 .page-connect-modal .content .btn {

@@ -48,7 +48,9 @@ module.exports = baseVw.extend({
 
   open: function() {
     if (!domUtils.isInPage(this.el)) {
-      document.getElementById('appFrame').appendChild(this.el);
+      var container = document.getElementById('contentFrame');
+      container.classList.add("modalOpen");
+      container.appendChild(this.el);
 
       this._open = true;
       this.trigger('open');
@@ -60,7 +62,9 @@ module.exports = baseVw.extend({
 
   close: function() {
     if (domUtils.isInPage(this.el)) {
-      document.getElementById('appFrame').removeChild(this.el);
+      var container = document.getElementById('contentFrame');
+      container.classList.remove("modalOpen");
+      container.removeChild(this.el);
 
       this._open = false;
       this.trigger('close');
