@@ -336,6 +336,7 @@ UserPageVw = pageVw.extend({
     // todo: cache the million dom queries for #obContainer
     // use in this view
     $('#obContainer').on('scroll', this.onScroll);
+    this.setCustomStyles();
   },
 
   onCacheDetach: function(e) {
