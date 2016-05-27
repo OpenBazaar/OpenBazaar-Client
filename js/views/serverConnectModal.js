@@ -262,9 +262,11 @@ module.exports = BaseModal.extend({
         promise = deferred.promise(),
         startTime = Date.now(),
         minAttemptTime = 1000,
-        //timesup,
+        loginRequest,
+        timesup,
         conclude,
-        login;
+        login,
+        onClose;
 
     conclude = function(reject) {
       // Sometimes the connection attempt concludes so fast that the UI doesn't
@@ -285,7 +287,7 @@ module.exports = BaseModal.extend({
 
     login = function() {
       // check authentication
-      app.login().done(function(data) {
+      loginRequest = app.login().done(function(data) {
         if (data.success) {
           conclude(false, data);
           self.trigger('connected');
@@ -307,6 +309,14 @@ module.exports = BaseModal.extend({
 
     app.connectHeartbeatSocket();
 
+    promise.cleanup = function() {
+      clearTimeout(timesup);
+      clearTimeout(conclude);
+      loginRequest && loginRequest.abort();
+      app.getHeartbeatSocket().off(null, login);
+      app.getHeartbeatSocket().off(null, onClose);
+    };
+
     promise.cancel = function() {
       conclude(true, 'canceled');
     };
@@ -317,7 +327,7 @@ module.exports = BaseModal.extend({
 
     app.getHeartbeatSocket().on('open', login);
 
-    app.getHeartbeatSocket().on('close', function() {
+    app.getHeartbeatSocket().on('close', onClose = function() {
       // On local servers the close event on a down server is
       // almost instantaneous and the UI can't even show the
       // user we're attempting to connect. So we'll put up a bit
@@ -325,14 +335,13 @@ module.exports = BaseModal.extend({
       conclude(true);
     });
 
-    /*
     timesup = setTimeout(function() {
       // not timeing out our connections for now, due to
       // server issue where valid connections may take
       // 1 min. +
-      conclude(true, 'timedout');
+      // conclude(true, 'timedout');
+      console.log("connection timeout"); 
     }, 10000);
-    */
 
     return promise;
   },
