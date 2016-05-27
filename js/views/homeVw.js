@@ -5,14 +5,15 @@ var __ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
-    baseVw = require('./baseVw'),
+    app = require('../App.js').getApp(),
+    pageVw = require('./pageVw'),
     itemShortView = require('./itemShortVw'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     messageModal = require('../utils/messageModal.js');
 
-module.exports = baseVw.extend({
+module.exports = pageVw.extend({
 
   className: "homeView contentWrapper",
 
@@ -69,6 +70,44 @@ module.exports = baseVw.extend({
     });
 
     this.fetchOwnFollowing(this.render());
+
+    this.listenTo(app.router, 'cache-detach', this.onCacheDetach);
+    this.listenTo(app.router, 'cache-reattach', this.onCacheReattach);
+  },
+
+  restoreScrollPosition: function(opts) {
+    var splitRoute = opts.route.split('/'),
+        routeSearchText = splitRoute[2] || '',
+        cachedSearchText = this.searchItemsText || '';
+
+    if (splitRoute[1] === this.state) {
+      return true;
+    }
+  },  
+
+  onCacheReattach: function(e) {
+    var splitRoute = e.route.split('/'),
+        state;
+
+    if (e.view !== this) return;
+
+    if (splitRoute.length > 1) {
+      // if our routed state doesn't equal our state, we'll
+      // reset the scroll position.
+      splitRoute[1] !== this.state && $('#obContainer').scrollTop(0);
+
+      this.setState(splitRoute[1]);
+      splitRoute.length > 2 && splitRoute[2] !== this.searchItemsText &&
+        this.searchItems(splitRoute[2]);
+    }
+
+    this.obContainer.on('scroll', this.scrollHandler);
+  },  
+
+  onCacheDetach: function(e) {
+    if (e.view !== this) return;
+
+    this.obContainer.off('scroll', this.scrollHandler);
   },
 
   fetchOwnFollowing: function(callback){
@@ -124,8 +163,8 @@ module.exports = baseVw.extend({
   },
 
   hideList: function(){
-    $('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
-    $('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
+    this.$('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
+    this.$('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
   },
 
   resetLookingCount: function(){
@@ -149,7 +188,6 @@ module.exports = baseVw.extend({
 
   render: function(){
     var self = this;
-    $('#content').html(this.$el);
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
       self.setState(self.state, self.searchItemsText);
@@ -483,6 +521,7 @@ module.exports = baseVw.extend({
           .replace('%{tag}', `<span class="btn-pill color-secondary">#${searchItemsText}</span>`)
       );
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
+      this.$el.find('.js-homeSearchItems').val("#" + searchItemsText)
       this.setState('products', searchItemsText);
     } else {
       this.searchItemsClear();
@@ -620,6 +659,6 @@ module.exports = baseVw.extend({
   remove: function() {
     this.clearSocketTimeout();
     this.scrollHandler && this.obContainer.off('scroll', this.scrollHandler);
-    baseVw.prototype.remove.apply(this, arguments);
+    pageVw.prototype.remove.apply(this, arguments);
   }
 });

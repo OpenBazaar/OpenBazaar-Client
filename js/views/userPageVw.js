@@ -13,7 +13,7 @@ var __ = require('underscore'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
     itemModel = require('../models/itemMd'),
-    baseVw = require('./baseVw'),
+    pageVw = require('./pageVw'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
     reviewsView = require('./reviewsVw'),
@@ -23,7 +23,8 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     storeWizardVw = require('./storeWizardVw'),
     saveToAPI = require('../utils/saveToAPI'),
-    moderatorSettingsVw = require('./moderatorSettingsVw');
+    moderatorSettingsVw = require('./moderatorSettingsVw'),
+    UserPageVw;
 
 var defaultItem = {
   "vendor_offer": {
@@ -117,7 +118,7 @@ function rgb2hex(rgb) {
   return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }
 
-module.exports = baseVw.extend({
+UserPageVw = pageVw.extend({
 
   className: "userView contentWrapper",
 
@@ -324,7 +325,43 @@ module.exports = baseVw.extend({
         }
       }
     });
+
+    this.listenTo(app.router, 'cache-detach', this.onCacheDetach);
+    this.listenTo(app.router, 'cache-reattach', this.onCacheReattach);
   },
+
+  restoreScrollPosition: function(opts) {
+    var splitRoute = opts.route.split('/');
+
+    if (splitRoute[2] === this.state) {
+      return true;
+    }
+  },  
+
+  onCacheReattach: function(e) {
+    var splitRoute = e.route.split('/'),
+        state;
+
+    if (e.view !== this) return;
+
+    // todo: cache the million dom queries for #obContainer
+    // use in this view
+    $('#obContainer').on('scroll', this.onScroll);
+    this.setCustomStyles();
+
+    if (splitRoute.length > 2) {
+      // if our routed state doesn't equal our state, we'll
+      // reset the scroll position.
+      splitRoute[2] !== this.state && $('#obContainer').scrollTop(0);
+      this.setState(splitRoute[2], splitRoute[3], { replaceState: true });
+    }
+  },
+
+  onCacheDetach: function(e) {
+    if (e.view !== this) return;
+
+    $('#obContainer').off('scroll', this.onScroll);
+  },  
 
   loadingConfig: function() {
     var config = {
@@ -357,9 +394,6 @@ module.exports = baseVw.extend({
         isBlocked = blocked.indexOf(this.pageID) !== -1;
 
     this.model.set('isBlocked', isBlocked); //add blocked status to model
-
-    //make sure container is cleared
-    $('#content').html(this.$el);
 
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();
@@ -410,7 +444,7 @@ module.exports = baseVw.extend({
       var $userPageHeader = self.$('.js-userPageHeader');
       var $userPageHeaderSlim = self.$('.js-userPageHeaderSlim');
 
-      $("#obContainer").scroll(function(){
+      $("#obContainer").scroll((self.onScroll = function(){
         if ($(this).scrollTop() > 400 && self.slimVisible === false ) {
           self.slimVisible = true;
           $userPageHeaderSlim.addClass('scrolledIntoView');
@@ -425,7 +459,7 @@ module.exports = baseVw.extend({
           $userPageHeader.find('.rowItem').show();
           $('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
         }
-      });
+      }));
     });
 
     return this;
@@ -458,6 +492,7 @@ module.exports = baseVw.extend({
     if (state === "listing"){
       //clear old templates
       this.$el.find('.js-list4').html("");
+      this.tabClick(this.$el.find('.js-storeTab'), this.$el.find('.js-item'));
       this.renderItem(hash);
       $('#obContainer').scrollTop(352);
     } else if (state === "listingOld") {
@@ -975,7 +1010,6 @@ module.exports = baseVw.extend({
     var self = this;
     this.setItem(hash, function(model, response) {
       if (response.vendor_offer){
-        self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
         self.loadingDeferred.resolve();
       } else {
         self.loadingDeferred.reject();
@@ -1713,11 +1747,28 @@ module.exports = baseVw.extend({
   },
 
   remove: function(){
-    baseVw.prototype.remove.apply(this, arguments);
-
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     //$.colorbox.close();
     messageModal.$el.off('click', this.modalCloseHandler);
+    $('#obContainer').off('scroll', this.onScroll);
+
+    pageVw.prototype.remove.apply(this, arguments);
   }
 
 });
+
+UserPageVw.getCacheIndex = function(fragment) {
+  var splitFrag;
+
+  fragment = fragment || '';
+  splitFrag = fragment.split('/');
+
+  if (splitFrag.length > 1) {
+    return `userPage/${splitFrag[1]}`;
+  } else {
+    throw Error('The expectation is that the user page will be routed ' +
+      'with a minimum fragment of \'userPage\'/<guid>');
+  }
+};
+
+module.exports = UserPageVw;

@@ -314,11 +314,12 @@ module.exports = baseVw.extend({
       self.serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
 
       //listen for address bar set events
-      self.listenTo(window.obEventBus, "setAddressBar", function(options){
+      self.listenTo(window.obEventBus, 'setAddressBar', function(options){
         var text = options.handle || options.addressText;
         self._lastSetAddressBarText = text;
         self.addressInput.val(text);
         self.closeStatusBar();
+        window.obEventBus.trigger('addressBarTextSet', text);
       });
       if (self.showDiscIntro){
         self.showDiscoverIntro();
@@ -532,7 +533,7 @@ module.exports = baseVw.extend({
   },
 
   navRefreshClick: function(){
-    Backbone.history.loadUrl();
+    app.router.refresh();
   },
   
   navRestartClick: function(){

@@ -4,6 +4,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
+    pageVw = require('./pageVw'),
     domUtils = require('../utils/dom'),
     app = require('../App.js').getApp(),
     timezonesModel = require('../models/timezonesMd'),
@@ -23,7 +24,7 @@ var __ = require('underscore'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
-module.exports = Backbone.View.extend({
+module.exports = pageVw.extend({
 
   className: "settingsView contentWrapper",
 
@@ -91,7 +92,7 @@ module.exports = Backbone.View.extend({
     this.firstLoadModerators = true;
     
     this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
-      switch (self._state) {
+      switch (self.state) {
       case 'general':
         self.saveGeneral();
         break;
@@ -120,7 +121,33 @@ module.exports = Backbone.View.extend({
     this.moderatorCount = 0;
 
     this.fetchModel();
+
+    this.$obContainer = $('#obContainer');
   },
+
+  onCacheReattach: function(e) {
+    var splitRoute = e.route.split('/'),
+        state;
+
+    if (e.view !== this) return;
+
+    this.blockedUsersScrollHandler &&
+      this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
+
+    if (splitRoute.length > 1) {
+      // if our routed state doesn't equal our state, we'll
+      // reset the scroll position.
+      splitRoute[1] !== this.state && $('#obContainer').scrollTop(0);
+      this.setState(splitRoute[1]);
+    }
+  },
+
+  onCacheDetach: function(e) {
+    if (e.view !== this) return;
+
+    this.blockedUsersScrollHandler &&
+      this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
+  },  
 
   fetchModel: function(){
     var self = this;
@@ -154,7 +181,6 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    $('#content').html(self.$el);
     this.shownMods = []; //reset to blank 
     
     loadTemplate('./js/templates/settings.html', function(loadedTemplate) {
@@ -346,13 +372,12 @@ module.exports = Backbone.View.extend({
     });
 
     // implement scroll based lazy loading of blocked users
-    this.$obContainer = this.$obContainer || $('#obContainer');
     this.blockedUsersScrollHandler && this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
     this.blockedUsersScrollHandler = __.throttle(function() {
       var colLen;
 
       if (
-          self.getState() === 'blocked' &&
+          self.state === 'blocked' &&
           blockedUsersCl.length < getBlockedGuids().length &&
           domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
       ) {
@@ -531,6 +556,7 @@ module.exports = Backbone.View.extend({
       }
       this.moderatorCount++;
       this.subViews.push(modShort);
+      this.registerChild(modShort);
     }
   },
 
@@ -551,7 +577,6 @@ module.exports = Backbone.View.extend({
   addTabToHistory: function(state){
     //add action to history
     Backbone.history.navigate("#settings/" + state, { replace: true });
-    this.options.state = state;
   },
 
   setTab: function(activeTab, showContent){
@@ -563,7 +588,7 @@ module.exports = Backbone.View.extend({
 
   setState: function(state){
     if (state){
-      this._state = state;
+      this.state = state;
       this.setTab(this.$('.js-' + state + 'Tab'), this.$('.js-' + state));
      
       if (state == "store") {
@@ -594,13 +619,9 @@ module.exports = Backbone.View.extend({
         }
       }
     } else {
-      this._state = "general";
+      this.state = "general";
       this.setTab(this.$('.js-generalTab'), this.$('.js-general'));
     }
-  },
-
-  getState: function() {
-    return this._state;
   },
 
   tabClick: function(e){
@@ -1096,33 +1117,15 @@ module.exports = Backbone.View.extend({
     app.appBar.setStyle($(e.target).val());
   },
 
-  close: function(){
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if (subView.close){
-        subView.close();
-      } else {
-        subView.unbind();
-        subView.remove();
-      }
-    });
-
+  remove: function() {
     this.blockedUsersVw && this.blockedUsersVw.remove();
 
-    if (this.blockedUsersScrollHandler && this.$obContainer.length) {
+    this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
-    }
 
     this.serverConnectSyncHandler &&
-    app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);
+      app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);
 
-    this.model.off();
-    this.off();
-    this.remove();
-    delete this.$el;
-    delete this.el;
+    pageVw.prototype.remove.apply(this, arguments);
   }
-
 });
