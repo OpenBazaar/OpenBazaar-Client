@@ -346,6 +346,7 @@
     "AdditionalPaymentData": "Dodatkowe informacje o płatności",
     "AdditionalPaymentDataInfo": "Umieszczać nazwę płatności i numer zamówienia w kodzie QR?",
     "ShippableHelp": "Produkt zostanie dostarczony na jeden z Twoich aktualnie zapisanych adresów. Dodaj więcej adresów w ustawieniach w sekcji Adresy, aby otrzymywać zamówienie w wielu lokalizacjach.",
+    "Size": "Size",
     "firewall": {
         "Open": "Otwarty",
         "Restricted": "Ograniczony",
