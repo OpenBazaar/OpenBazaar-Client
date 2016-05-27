@@ -13,7 +13,8 @@ var __ = require('underscore'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
     app = require('../App').getApp(),
-    clipboard = require('clipboard');
+    clipboard = require('clipboard'),
+    templateHelpers = require('../utils/templateHelpers');
 Backbone.$ = $;
 
 // randomize function
@@ -541,7 +542,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-buyWizardSpinner').addClass('hide');
     this.orderID = data.order_id;
     totalBTCPrice = data.amount;
-    this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
+    this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(totalBTCPrice));
     this.payURL = data.payment_address;
     
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;
