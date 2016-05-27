@@ -585,9 +585,30 @@
       <div style="height: 264px;" class="scrollOverflowY customThemeScrollbar">
 
         <div class="flexRow custCol-border borderBottom">
-          <% if(ob.status == 0 && ob.transactionType == "purchases"){ %>
-          <div class="flexRow rowItem padding15">
-            You have paid <%= ob.intlNumFormat(ob.orderPaid, 8) %> out of <%= ob.intlNumFormat(ob.orderPrice, 8) %>
+          <% if(ob.status == 0){ %>
+          <div class="rowItem padding15 rowTop10 custCol-secondary marginLeft8 txt-center">
+            <div class="h4 width100">
+              <i class="ion-alert-circled"></i>
+              <% if(ob.transactionType == "purchases"){ %>
+              <%= polyglot.t('transactions.BuyerPaidMessage', {
+                  paidAmount: ob.intlNumFormat(ob.orderPaid, 8),
+                  totalAmount: ob.intlNumFormat(ob.orderPrice, 8)
+              }) %>
+              <% } else { %>
+              <%= polyglot.t('transactions.SellerPaidMessage', {
+              paidAmount: ob.intlNumFormat(ob.orderPaid, 8),
+              totalAmount: ob.intlNumFormat(ob.orderPrice, 8)
+              }) %>
+              <% } %>
+            </div>
+            <hr>
+            <div class="txt-fade fontSize12 rowTop10">
+              <% if(ob.transactionType == "purchases"){ %>
+              <%= polyglot.t('transactions.BuyerPaidMessageHelp') %>
+              <% } else { %>
+              <%= polyglot.t('transactions.SellerPaidMessageHelp') %>
+              <% } %>
+            </div>
           </div>
           <% } %>
           <div class="flexRow rowItem padding15">
