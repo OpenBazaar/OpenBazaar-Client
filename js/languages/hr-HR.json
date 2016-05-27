@@ -346,6 +346,7 @@
     "AdditionalPaymentData": "Dodatni podaci o plaćanju",
     "AdditionalPaymentDataInfo": "Želite li uvrstiti naziv kupovine i broj narudžbe u prikazani QR kôd uplate?",
     "ShippableHelp": "This product can be shipped to one of your currently saved addresses. Add more addresses in the Settings/Addresses section to be able to purchase more listings.",
+    "Size": "Size",
     "firewall": {
         "Open": "Otvoren",
         "Restricted": "Ograničeno",
