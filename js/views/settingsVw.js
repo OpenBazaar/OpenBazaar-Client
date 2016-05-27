@@ -92,7 +92,7 @@ module.exports = pageVw.extend({
     this.firstLoadModerators = true;
     
     this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
-      switch (self._state) {
+      switch (self.state) {
       case 'general':
         self.saveGeneral();
         break;
@@ -121,7 +121,33 @@ module.exports = pageVw.extend({
     this.moderatorCount = 0;
 
     this.fetchModel();
+
+    this.$obContainer = $('#obContainer');
   },
+
+  onCacheReattach: function(e) {
+    var splitRoute = e.route.split('/'),
+        state;
+
+    if (e.view !== this) return;
+
+    this.blockedUsersScrollHandler &&
+      this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
+
+    if (splitRoute.length > 1) {
+      // if our routed state doesn't equal our state, we'll
+      // reset the scroll position.
+      splitRoute[1] !== this.state && $('#obContainer').scrollTop(0);
+      this.setState(splitRoute[1]);
+    }
+  },
+
+  onCacheDetach: function(e) {
+    if (e.view !== this) return;
+
+    this.blockedUsersScrollHandler &&
+      this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
+  },  
 
   fetchModel: function(){
     var self = this;
@@ -346,13 +372,12 @@ module.exports = pageVw.extend({
     });
 
     // implement scroll based lazy loading of blocked users
-    this.$obContainer = this.$obContainer || $('#obContainer');
     this.blockedUsersScrollHandler && this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
     this.blockedUsersScrollHandler = __.throttle(function() {
       var colLen;
 
       if (
-          self.getState() === 'blocked' &&
+          self.state === 'blocked' &&
           blockedUsersCl.length < getBlockedGuids().length &&
           domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
       ) {
@@ -552,7 +577,6 @@ module.exports = pageVw.extend({
   addTabToHistory: function(state){
     //add action to history
     Backbone.history.navigate("#settings/" + state, { replace: true });
-    this.options.state = state;
   },
 
   setTab: function(activeTab, showContent){
@@ -564,7 +588,7 @@ module.exports = pageVw.extend({
 
   setState: function(state){
     if (state){
-      this._state = state;
+      this.state = state;
       this.setTab(this.$('.js-' + state + 'Tab'), this.$('.js-' + state));
      
       if (state == "store") {
@@ -595,13 +619,9 @@ module.exports = pageVw.extend({
         }
       }
     } else {
-      this._state = "general";
+      this.state = "general";
       this.setTab(this.$('.js-generalTab'), this.$('.js-general'));
     }
-  },
-
-  getState: function() {
-    return this._state;
   },
 
   tabClick: function(e){
@@ -1100,9 +1120,8 @@ module.exports = pageVw.extend({
   remove: function() {
     this.blockedUsersVw && this.blockedUsersVw.remove();
 
-    if (this.blockedUsersScrollHandler && this.$obContainer.length) {
+    this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
-    }
 
     this.serverConnectSyncHandler &&
       app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);

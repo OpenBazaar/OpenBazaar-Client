@@ -75,21 +75,34 @@ module.exports = pageVw.extend({
     this.listenTo(app.router, 'cache-reattach', this.onCacheReattach);
   },
 
+  restoreScrollPosition: function(opts) {
+    var splitRoute = opts.route.split('/'),
+        routeSearchText = splitRoute[2] || '',
+        cachedSearchText = this.searchItemsText || '';
+
+    if (splitRoute[1] === this.state) {
+      return true;
+    }
+  },  
+
   onCacheReattach: function(e) {
     var splitRoute = e.route.split('/'),
-        searchText;
+        state;
 
     if (e.view !== this) return;
 
-    if (splitRoute.length > 2 && (searchText = splitRoute[2]) !== this.searchItemsText) {
-      // our view is cached to a search term different than the one the
-      // user is searching for
-      this.searchItems(searchText);
-      this.obContainer[0].scrollTop = 0;
+    if (splitRoute.length > 1) {
+      // if our routed state doesn't equal our state, we'll
+      // reset the scroll position.
+      splitRoute[1] !== this.state && $('#obContainer').scrollTop(0);
+
+      this.setState(splitRoute[1]);
+      splitRoute.length > 2 && splitRoute[2] !== this.searchItemsText &&
+        this.searchItems(splitRoute[2]);
     }
 
     this.obContainer.on('scroll', this.scrollHandler);
-  },
+  },  
 
   onCacheDetach: function(e) {
     if (e.view !== this) return;

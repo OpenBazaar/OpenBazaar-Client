@@ -330,6 +330,14 @@ UserPageVw = pageVw.extend({
     this.listenTo(app.router, 'cache-reattach', this.onCacheReattach);
   },
 
+  restoreScrollPosition: function(opts) {
+    var splitRoute = opts.route.split('/');
+
+    if (splitRoute[2] === this.state) {
+      return true;
+    }
+  },  
+
   onCacheReattach: function(e) {
     var splitRoute = e.route.split('/'),
         state;
@@ -341,10 +349,12 @@ UserPageVw = pageVw.extend({
     $('#obContainer').on('scroll', this.onScroll);
     this.setCustomStyles();
 
-    if (splitRoute.length > 2 && splitRoute[2] !== this.state) {
+    if (splitRoute.length > 2) {
+      // if our routed state doesn't equal our state, we'll
+      // reset the scroll position.
+      splitRoute[2] !== this.state && $('#obContainer').scrollTop(0);
       this.setState(splitRoute[2], splitRoute[3], { replaceState: true });
     }
-
   },
 
   onCacheDetach: function(e) {

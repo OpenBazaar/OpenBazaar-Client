@@ -158,6 +158,8 @@ module.exports = Backbone.Router.extend({
   },
   
   execute: function(callback, args, name) {
+    console.log(`boom: ${Backbone.history.getFragment()}`);
+
     if (this.historyAction == 'default') {
       this.historyPosition += 1;
       this.historySize = this.historyPosition;
@@ -259,14 +261,11 @@ module.exports = Backbone.Router.extend({
 
     if (cached && (now - cached.cachedAt < cached.view.cacheExpires)) {
       // we have an un-expired cached view, let's reattach it
+      console.log('using cached');
       this.view = cached.view;
 
       $('#content').html(this.view.$el);
       this.view.delegateEvents();
-
-      if (this.view.restoreScrollPosition) {
-        this.$obContainer[0].scrollTop = this.view.__cachedScrollPos || 0;
-      }
 
       // if (this.view.__cachedAddressBarText) {
       //   // ensure our address bar text reflects the state of the cached view
@@ -279,7 +278,17 @@ module.exports = Backbone.Router.extend({
         view: this.view,
         route: requestedRoute
       });
+
+      if (this.view.restoreScrollPosition &&
+        this.view.restoreScrollPosition.call(this.view, { route: requestedRoute })) {
+          console.log('restore scroll');
+          this.$obContainer[0].scrollTop = this.view.__cachedScrollPos || 0;
+      } else {
+        console.log('scroll top');
+        this.$obContainer[0].scrollTop = 0;
+      }
     } else {
+      console.log('brand spanking new');
       this.view = new (Function.prototype.bind.apply(View, [null].concat(options.viewArgs)));
       // // clear address bar. Must happen after we set out view above.
       // window.obEventBus.trigger('setAddressBar', options.addressBarText);
@@ -369,6 +378,8 @@ module.exports = Backbone.Router.extend({
   },
 
   home: function(state, searchText){
+    !state && this.navigate('home/products', { replace: true });
+
     this.newView(homeView, {
       viewArgs: {
         userModel: this.userModel,
