@@ -346,6 +346,7 @@
     "AdditionalPaymentData": "Datos de pago adicionales",
     "AdditionalPaymentDataInfo": "¿Incluír el nombre de compra y número de pedido en el código de pago QR?",
     "ShippableHelp": "This product can be shipped to one of your currently saved addresses. Add more addresses in the Settings/Addresses section to be able to purchase more listings.",
+    "Size": "Size",
     "firewall": {
         "Open": "Open",
         "Restricted": "Restricted",
