@@ -76,7 +76,7 @@ module.exports = pageVw.extend({
   },
 
   onCacheReattach: function(e) {
-    var splitRoute = e.requestedRoute.split('/'),
+    var splitRoute = e.route.split('/'),
         searchText;
 
     if (e.view !== this) return;

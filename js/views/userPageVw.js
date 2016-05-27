@@ -331,12 +331,20 @@ UserPageVw = pageVw.extend({
   },
 
   onCacheReattach: function(e) {
+    var splitRoute = e.route.split('/'),
+        state;
+
     if (e.view !== this) return;
 
     // todo: cache the million dom queries for #obContainer
     // use in this view
     $('#obContainer').on('scroll', this.onScroll);
     this.setCustomStyles();
+
+    if (splitRoute.length > 2 && splitRoute[2] !== this.state) {
+      this.setState(splitRoute[2], splitRoute[3], { replaceState: true });
+    }
+
   },
 
   onCacheDetach: function(e) {
@@ -474,6 +482,7 @@ UserPageVw = pageVw.extend({
     if (state === "listing"){
       //clear old templates
       this.$el.find('.js-list4').html("");
+      this.tabClick(this.$el.find('.js-storeTab'), this.$el.find('.js-item'));
       this.renderItem(hash);
       $('#obContainer').scrollTop(352);
     } else if (state === "listingOld") {
@@ -991,7 +1000,6 @@ UserPageVw = pageVw.extend({
     var self = this;
     this.setItem(hash, function(model, response) {
       if (response.vendor_offer){
-        self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
         self.loadingDeferred.resolve();
       } else {
         self.loadingDeferred.reject();

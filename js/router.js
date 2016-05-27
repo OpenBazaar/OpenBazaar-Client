@@ -222,6 +222,7 @@ module.exports = Backbone.Router.extend({
     options.viewArgs = options.viewArgs.length ? options.viewArgs : [options.viewArgs];
 
     this.cleanup();
+    window.obEventBus.trigger('setAddressBar', options.addressBarText);
 
     $('body').attr('id', options.bodyID);
     $('body').attr('class', options.bodyClass);
@@ -267,22 +268,21 @@ module.exports = Backbone.Router.extend({
         this.$obContainer[0].scrollTop = this.view.__cachedScrollPos || 0;
       }
 
-      if (this.view.__cachedAddressBarText) {
-        // ensure our address bar text reflects the state of the cached view
-        window.obEventBus.trigger('setAddressBar', {'addressText': this.view.__cachedAddressBarText});
-      } else {
-        window.obEventBus.trigger('setAddressBar', options.addressBarText);
-      }
+      // if (this.view.__cachedAddressBarText) {
+      //   // ensure our address bar text reflects the state of the cached view
+      //   window.obEventBus.trigger('setAddressBar', {'addressText': this.view.__cachedAddressBarText});
+      // } else {
+      //   window.obEventBus.trigger('setAddressBar', options.addressBarText);
+      // }
 
       this.trigger('cache-reattach', {
         view: this.view,
-        requestedRoute: requestedRoute,
-        cachedRoute: Backbone.history.getFragment()
+        route: requestedRoute
       });
     } else {
       this.view = new (Function.prototype.bind.apply(View, [null].concat(options.viewArgs)));
-      // clear address bar. Must happen after we set out view above.
-      window.obEventBus.trigger('setAddressBar', options.addressBarText);
+      // // clear address bar. Must happen after we set out view above.
+      // window.obEventBus.trigger('setAddressBar', options.addressBarText);
       $('#content').html(this.view.$el);
       this.$obContainer[0].scrollTop = 0;
 
