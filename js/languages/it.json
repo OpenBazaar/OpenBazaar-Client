@@ -346,6 +346,7 @@
     "AdditionalPaymentData": "Dati aggiuntivi per il pagamento",
     "AdditionalPaymentDataInfo": "Includere il nome dell'acquisto e il numero d'ordine nel codice QR del pagamento?",
     "ShippableHelp": "Questo prodotto pu&ograve; essere inviato ad uno dei tuoi attuali indirizzi salvati. Aggiungi pi&ugrave; indirizzi nella sezione Impostazioni/Indirizzi per poter comprare pi&ugrave; annunci.",
+    "Size": "Size",
     "firewall": {
         "Open": "Aperto",
         "Restricted": "Limitato",
