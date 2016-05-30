@@ -864,7 +864,7 @@
                       <div><%= address.displayCountry %></div>
                     </div>
 
-                    <div class="btn marginTop6 custCol-primary clickable">
+                    <div class="btn btn-txt marginTop6 custCol-primary clickable">
                       <input type="checkbox"
                              class="hide js-settingsAddress"
                              id="settingsAddress<%= i %>"
@@ -1238,6 +1238,26 @@
                 </div>
               </div>
             </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('AppBarStyle') %>
+                  </label>
+                  <i class="ion-help-circled tooltip tooltip-box" data-tooltip="<%= polyglot.t('AppBarStyleInfo') %>"></i>
+                </div>
+              </div>              
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <div class="fieldItem">
+                  <input type="radio" class="fieldItem" id="app_bar_style_windows" name="appBarStyle" value="win" checked />
+                  <label for="app_bar_style_windows" class="radioLabel"><%= polyglot.t('OSWindows') %></label>
+                  <input type="radio" class="fieldItem" id="app_bar_style_mac" name="appBarStyle" value="mac" />
+                  <label for="app_bar_style_mac" class="radioLabel"><%= polyglot.t('OSMac') %></label>
+                </div>
+              </div>
+            </div>            
 
             <div class="flexRow">
 

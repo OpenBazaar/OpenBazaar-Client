@@ -1,12 +1,9 @@
 'use strict';
 
-var __ = require('underscore'),
-    Backbone = require('backbone'),
-    loadTemplate = require('../utils/loadTemplate'),
+var loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
     remote = require('electron').remote,        
     ServerConfigMd = require('../models/serverConfigMd'),
-    ServerConfigsCl = require('../collections/serverConfigsCl'),
     BaseModal = require('./baseModal'),
     ServerConnectHeaderVw = require('./serverConnectHeaderVw'),
     ServerConfigFormVw = require('./serverConfigFormVw'),
@@ -26,8 +23,8 @@ module.exports = BaseModal.extend({
 
     this.headerVw = new ServerConnectHeaderVw({
       initialState: {
-        msg: polyglot.t('serverConnectModal.serverConfigsHeaderMsg'),
-        title: polyglot.t('serverConnectModal.serverConfigsTitle'),
+        msg: window.polyglot.t('serverConnectModal.serverConfigsHeaderMsg'),
+        title: window.polyglot.t('serverConnectModal.serverConfigsTitle'),
         showNew: true
       }
     });
@@ -55,14 +52,12 @@ module.exports = BaseModal.extend({
   },  
 
   closeConfigForm: function() {
-    var disp;
-
     if (!this.$jsConfigFormWrap) return;
     
     this.$jsConfigFormWrap.addClass('slide-out');
     this.headerVw.setState({
-      msg: polyglot.t('serverConnectModal.serverConfigsHeaderMsg'),
-      title: polyglot.t('serverConnectModal.serverConfigsTitle'),
+      msg: window.polyglot.t('serverConnectModal.serverConfigsHeaderMsg'),
+      title: window.polyglot.t('serverConnectModal.serverConfigsTitle'),
       showNew: true
     });
 
@@ -80,10 +75,10 @@ module.exports = BaseModal.extend({
     }
 
     this.headerVw.setState({
-      title: model.get('name') || polyglot.t('serverConnectModal.newConfigTitle'),
+      title: model.get('name') || window.polyglot.t('serverConnectModal.newConfigTitle'),
       msg:  configMd ?
-        polyglot.t('serverConnectModal.editConfigHeaderMsg') :
-        polyglot.t('serverConnectModal.newConfigHeaderMsg'),
+        window.polyglot.t('serverConnectModal.editConfigHeaderMsg') :
+        window.polyglot.t('serverConnectModal.newConfigHeaderMsg'),
       showNew: false
     });
 
@@ -126,7 +121,7 @@ module.exports = BaseModal.extend({
     this.showConfigForm(e.model);
   },
 
-  onCancelClick: function(e) {
+  onCancelClick: function() {
     this._connectAttempt && this._connectAttempt.cancel();
   },  
 
@@ -171,14 +166,14 @@ module.exports = BaseModal.extend({
       status: reason === 'canceled' ? 'not-connected' : 'failed'
     });
 
-    msg = polyglot.t('serverConnectModal.connectionFailed', {
+    msg = window.polyglot.t('serverConnectModal.connectionFailed', {
       serverName: configMd.get('name')
     });
 
     if (reason === 'failed-auth-too-many') {
-      msg += `&mdash; ${polyglot.t('serverConnectModal.authFailedTooManyAttempts')}`;
+      msg += `&mdash; ${window.polyglot.t('serverConnectModal.authFailedTooManyAttempts')}`;
     } else if (reason === 'failed-auth') {
-      msg += `&mdash; ${polyglot.t('serverConnectModal.authFailed')}`;
+      msg += `&mdash; ${window.polyglot.t('serverConnectModal.authFailed')}`;
     }
 
     reason !== 'canceled' && this.showMessageBar(msg);
@@ -192,7 +187,6 @@ module.exports = BaseModal.extend({
         promise = deferred.promise(),
         attempt = 1,
         maxAttempts = 5,
-        timeoutBetweenAttempts = 2 * 1000,
         maxAttemptsTime = 20 * 1000,
         startTime = Date.now(),
         attemptConnection,
@@ -243,7 +237,7 @@ module.exports = BaseModal.extend({
           attemptConnection();
         } else {
           deferred.reject(reason);
-          this.failConnection(reason, configMd)
+          this.failConnection(reason, configMd);
         }
       });
     })();
@@ -262,7 +256,7 @@ module.exports = BaseModal.extend({
     return promise;
   },
 
-  attemptConnection: function(options) {
+  attemptConnection: function() {
     var self = this,
         deferred = $.Deferred(),
         promise = deferred.promise(),
@@ -333,19 +327,20 @@ module.exports = BaseModal.extend({
 
     app.getHeartbeatSocket().on('open', login);
 
-    app.getHeartbeatSocket().on('close', (onClose = function() {
+    app.getHeartbeatSocket().on('close', onClose = function() {
       // On local servers the close event on a down server is
       // almost instantaneous and the UI can't even show the
       // user we're attempting to connect. So we'll put up a bit
       // of a facade.
       conclude(true);
-    }));    
+    });
 
     timesup = setTimeout(function() {
       // not timeing out our connections for now, due to
       // server issue where valid connections may take
       // 1 min. +
       // conclude(true, 'timedout');
+      console.log("connection timeout"); 
     }, 10000);
 
     return promise;

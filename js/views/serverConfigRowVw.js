@@ -27,26 +27,26 @@ module.exports = BaseVw.extend({
     this.listenTo(this.model, 'change', this.render);
   },
 
-  onClickCancel: function(e) {
+  onClickCancel: function() {
     this.trigger('cancel', { view: this });
   },
 
-  onClickConnect: function(e) {
+  onClickConnect: function() {
     this.trigger('connect', { view: this });
   },
 
-  onClickDelete: function(e) {
+  onClickDelete: function() {
     this.trigger('delete', { view: this });
   },
 
-  onClickEdit: function(e) {
+  onClickEdit: function() {
     this.trigger('edit', { view: this });
   },
 
   setState: function(state) {
     var newState;
     
-    newState =  __.extend({}, this._state, state);
+    newState = __.extend({}, this._state, state);
 
     if (!__.isEqual(this._state, newState)) {
       this._state = newState;

@@ -1,11 +1,9 @@
+'use strict';
+
 var __ = require('underscore'),
-    Backbone = require('backbone'),
-    $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     chooseCountriesCollection = require('../collections/chooseCountryCl'),
-    baseVw = require('./baseVw'),
-    chooseCountryView = require('../views/chooseCountryVw');
+    baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
 
@@ -21,7 +19,7 @@ module.exports = baseVw.extend({
     this.listContents = [];
     __.each(this.chooseCountries.models, function(item){
       self.renderItem(item);
-    },this);
+    }, this);
     this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">'+ this.listContents.join('') +'</ul>');
     window.obEventBus.trigger("countryListRendered");
   },
@@ -32,7 +30,7 @@ module.exports = baseVw.extend({
     this.listContents.push('<li class="flexRow custCol-border">');
     this.listContents.push('<div class="rowItem js-homeModal-countrySelect paddingLeft6" data-code="'+ itemJSON.dataName +'">');
     this.listContents.push('<input type="radio" class="fieldItem" id="country-'+ itemJSON.dataName +'" name="'+ itemJSON.dataName +'"');
-    if(itemJSON.selected == itemJSON.dataName){
+    if (itemJSON.selected == itemJSON.dataName){
       this.listContents.push('checked="checked"');
     }
     this.listContents.push('>');

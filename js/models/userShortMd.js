@@ -1,7 +1,9 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone');
 
-var ShortItemModel = module.exports = Backbone.Model.extend({
+module.exports = Backbone.Model.extend({
   defaults: {
     name: "",
     guid: "",

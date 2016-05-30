@@ -1,4 +1,5 @@
 "use strict";
+/* eslint no-unused-vars: "off" */
 
 // Check that the deps in node_modules match what's in package.json.
 var safestart = require('safestart');
@@ -21,7 +22,7 @@ var fs = require('fs'),
 
 var launched_from_installer = false;
 var platform = os.platform();
-switch(platform) {
+switch (platform) {
   case "darwin":
     platform = "mac";
 }
@@ -50,40 +51,41 @@ var handleStartupEvent = function() {
     var updateDotExe = path.resolve(path.dirname(process.execPath), '..', 'update.exe');
     var child = require('child_process').spawn(updateDotExe, args, { detached: true });
     child.on('close', function() {
-       cb();
+      cb();
     });
   }
 
   function install(cb) {
-      var target = path.basename(process.execPath);
-      exeSquirrelCommand(["--createShortcut", target], cb);
+    var target = path.basename(process.execPath);
+    exeSquirrelCommand(["--createShortcut", target], cb);
   }
 
   function uninstall(cb) {
-      var target = path.basename(process.execPath);
-      exeSquirrelCommand(["--removeShortcut", target], cb);
+    var target = path.basename(process.execPath);
+    exeSquirrelCommand(["--removeShortcut", target], cb);
   }
 
   switch (squirrelCommand) {
-    case '--squirrel-install':
-          install(app.quit);
+  case '--squirrel-install':
+    install(app.quit);
+    break;
 
-    case '--squirrel-updated':
-      // Always quit when done
-      app.quit();
-      return true;
+  case '--squirrel-updated':
+    // Always quit when done
+    app.quit();
+    return true;
 
-    case '--squirrel-uninstall':
-      // Always quit when done
-      uninstall(app.quit);
-      return true;
-    
-    case '--squirrel-obsolete':
-      // This is called on the outgoing version of your app before
-      // we update to the new version - it's the opposite of
-      // --squirrel-updated
-      app.quit();
-      return true;
+  case '--squirrel-uninstall':
+    // Always quit when done
+    uninstall(app.quit);
+    return true;
+
+  case '--squirrel-obsolete':
+    // This is called on the outgoing version of your app before
+    // we update to the new version - it's the opposite of
+    // --squirrel-updated
+    app.quit();
+    return true;
   }
 };
 
@@ -93,7 +95,7 @@ if (handleStartupEvent()) {
 
 // Set daemon binary name
 var daemon = "openbazaard.exe";
-if(platform == "mac" || platform == "linux") {
+if (platform == "mac" || platform == "linux") {
   daemon = "openbazaard";
 }
 
@@ -110,16 +112,15 @@ var kill_local_server = function() {
       return;
     } else if (!serverRunning) {
       return;
-    } else {
-      pendingKill = subpy;
-      pendingKill.once('close', () => {
-        pendingKill = null;
-      });
     }
+    pendingKill = subpy;
+    pendingKill.once('close', () => {
+      pendingKill = null;
+    });
 
     console.log('Shutting down server daemon');
 
-    if(platform == "mac" || platform == "linux") {
+    if (platform == "mac" || platform == "linux") {
       subpy.kill('SIGINT');
     } else {
       require('child_process').spawn("taskkill", ["/pid", subpy.pid, '/f', '/t']);
@@ -130,9 +131,9 @@ var kill_local_server = function() {
 var start_local_server = function() {
   if(fs.existsSync(serverPath)) {
     if (pendingKill) {
-      pendingKill.once('close', (startAfterClose = () => {
+      pendingKill.once('close', startAfterClose = () => {
         start_local_server();
-      }));
+      });
 
       return;
     }
@@ -240,39 +241,39 @@ function initWin32() {
     setProtocol();
 
     function setProtocol (err) {
-      if (err) log.error(err.message);
+      if (err) console.log.error(err.message);
       console.log(protocolKey);
-      protocolKey.set('', Registry.REG_SZ, name, setURLProtocol)
+      protocolKey.set('', Registry.REG_SZ, name, setURLProtocol);
     }
 
     function setURLProtocol (err) {
-      if (err) log.error(err.message);
+      if (err) console.log.error(err.message);
       console.log(protocolKey);
-      protocolKey.set('URL Protocol', Registry.REG_SZ, '', setIcon)
+      protocolKey.set('URL Protocol', Registry.REG_SZ, '', setIcon);
     }
 
     function setIcon (err) {
-      if (err) log.error(err.message);
+      if (err) console.log.error(err.message);
 
       var iconKey = new Registry({
         hive: Registry.HKCU,
         key: '\\Software\\Classes\\' + protocol + '\\DefaultIcon'
       });
-      iconKey.set('', Registry.REG_SZ, icon, setCommand)
+      iconKey.set('', Registry.REG_SZ, icon, setCommand);
     }
 
     function setCommand (err) {
-      if (err) log.error(err.message);
+      if (err) console.log.error(err.message);
 
       var commandKey = new Registry({
         hive: Registry.HKCU,
         key: '\\Software\\Classes\\' + protocol + '\\shell\\open\\command'
       });
-      commandKey.set('', Registry.REG_SZ, '"' + command + '" "%1"', done)
+      commandKey.set('', Registry.REG_SZ, '"' + command + '" "%1"', done);
     }
 
     function done (err) {
-      if (err) log.error(err.message)
+      if (err) console.log.error(err.message);
     }
   }
 }
@@ -469,9 +470,8 @@ app.on('ready', function() {
           accelerator: (function() {
             if (platform == 'mac') {
               return 'Alt+Command+I';
-            } else {
-              return 'Ctrl+Shift+I';
             }
+            return 'Ctrl+Shift+I';
           })(),
           click: function(item, focusedWindow) {
             if (focusedWindow) {
@@ -484,9 +484,8 @@ app.on('ready', function() {
           accelerator: (function() {
             if (platform == 'mac') {
               return 'Ctrl+Command+F';
-            } else {
-              return 'F11';
             }
+            return 'F11';
           })(),
           click: function() {
             var fullScreen;

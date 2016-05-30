@@ -1,6 +1,6 @@
 <div class="rowItem js-notification padding10 clickable positionRelative">
     <% if (!ob.read) { %>
-        <div class="notificationUnreadIndicator"></div>
+        <div class="highlightRow"></div>
     <% } %>
     <div class="table">
         <div>
@@ -31,6 +31,17 @@
                         <% }else{ %>
                             <span class="inlineBlock top3">
                                 <%= polyglot.t('NotificationDispute',{name:ob.guid}) %>
+                            </span>
+                        <% } %>
+                    </div>
+                    <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
+                    <% } else if(ob.type == "ORDER") { %>
+                    <div class="textSize12px row5">
+                        <% if(ob.username) { %>
+                        <%= polyglot.t('NotificationNewTransactionMessage',{name:ob.username}) %>
+                        <% }else{ %>
+                            <span class="inlineBlock top3">
+                                <%= polyglot.t('NotificationNewTransactionMessage',{name:ob.sender}) %>
                             </span>
                         <% } %>
                     </div>
@@ -95,8 +106,12 @@
                             <strong><%= polyglot.t('NotificationTitle',{title: ob.title}) %></strong>
                         </span>
                         <div class="textSize11px txt-fade textWeightNormal">
-                            <% if(ob.handle){ %>
+                            <% if(ob.username){ %>
+                            <%= polyglot.t('NotificationFrom',{name: ob.handle}) %>
+                            <% } else if(ob.handle){ %>
                                 <%= polyglot.t('NotificationFrom',{name: ob.handle}) %>
+                            <% } else if(ob.sender){ %>
+                            <%= polyglot.t('NotificationFrom',{name: ob.handle}) %>
                             <% }else{ %>
                                 <%= polyglot.t('NotificationFrom',{name: ob.guid}) %>
                             <% } %>

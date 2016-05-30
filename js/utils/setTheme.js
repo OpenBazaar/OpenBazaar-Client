@@ -1,4 +1,4 @@
-var $ = require('jquery');
+'use strict';
 
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -10,12 +10,11 @@ function hexToRgb(hex) {
 }
 
 function shadeColor2(color, percent) {
-  var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+  var f=parseInt(color.slice(1), 16), t=percent<0?0:255, p=percent<0?percent*-1:percent, R=f>>16, G=f>>8&0x00FF, B=f&0x0000FF;
   return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
 }
 
 module.exports = function(primaryColor, secondaryColor, backgroundColor, textColor) {
-  "use strict";
   var opaque = hexToRgb(backgroundColor);
   var opaque1 = hexToRgb(primaryColor);
   var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
@@ -27,7 +26,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
     "#ov1 #userPage .custCol-border { border-color: " + shadeColor2(primaryColor, -0.08) + ";}" +
     "#ov1 #userPage .fieldItem:focus, " +
     "#ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + shadeColor2("#ffffff", -0.15) + " ;}";
-  }else{
+  } else {
     customStyleTag.innerHTML = "#ov1 #userPage .txtField:focus, " +
     "#ov1 #userPage .custCol-border { border-color: " + shadeColor2(primaryColor, 0.08) + ";}" +
     "#ov1 #userPage .fieldItem:focus, " +
@@ -40,7 +39,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .btn-tab.active { background-color: " + primaryColor + ";}" +
       "#ov1 #userPage .btn-tab .pill { background-color: " + primaryColor + ";}" +
       "#ov1 #userPage .btn-tab.active .pill { background-color: " + secondaryColor + ";}" +
-      "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + shadeColor2(primaryColor, -0.35) +  ";}" +
+      "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + shadeColor2(primaryColor, -0.35) + ";}" +
       "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
       "#ov1 #userPage .custCol-secondary { background-color: " + secondaryColor + ";}" +
       "#ov1 #userPage { background-color: " + backgroundColor + ";}" + 
@@ -65,7 +64,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage #obContainer textarea::-webkit-input-placeholder { color: " + textColor + ";}" +
       //"#ov1 #userPage #pageNav textarea::-webkit-input-placeholder { color: " + textColor + ";}" +
       "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + textColor + ";}" +
-      "#ov1 #userPage .mainContainer { box-shadow: 0px 10px 20px " + shadeColor2(backgroundColor, -0.3)  + ";  }" +
+      "#ov1 #userPage .mainContainer { box-shadow: 0px 10px 20px " + shadeColor2(backgroundColor, -0.3) + ";  }" +
       "#ov1 #userPage .mainContainer .txtFieldWrapper:before { color: " + textColor + ";  }" +
       "#ov1 #userPage .container .txtField { color: " + textColor + ";}" +
       "#ov1 #userPage .custCol-font-secondary { color: " + secondaryColor + ";}" +
@@ -86,24 +85,23 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .customThemeScrollbar::-webkit-scrollbar-thumb { background: " + shadeColor2(primaryColor, 0.25) + ";}" +
       "#ov1 #userPage .user-page-header-slim-bg { box-shadow: inset 0px -120px 112px -52px rgba(" + opaque1.r + ", " + opaque1.g + ", " + opaque1.b + ", .65);}" +
       "#ov1 #userPage .custCol-background { background-color: " + backgroundColor + ";}" +
-      "#ov1 #userPage .modal-childMain { box-shadow: 0px 0px 15px " + shadeColor2(backgroundColor, -0.15)  + ";}" +
       "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
       
     // Medium Editor
-    customStyleTag.innerHTML += 
+  customStyleTag.innerHTML += 
       "#ov1 #userPage .medium-editor-toolbar li button { background-color: " + secondaryColor + "; color: " + textColor + "; border: 0}" +
       "#ov1 #userPage .medium-editor-toolbar li button:hover { opacity: .75}" +
       "#ov1 #userPage .medium-editor-toolbar:after { border-top-color: " + secondaryColor + "; border-left-color: transparent; border-right-color: transparent}";
 
     // colorbox
-    customStyleTag.innerHTML +=
+  customStyleTag.innerHTML +=
       "#ov1 #userPage #cboxContent { background-color: " + primaryColor + "; color: " + textColor + ";}" +
       "#ov1 #userPage #cboxCurrent { color: " + textColor + ";}" +
       "#ov1 #userPage #cboxClose { background-color: " + secondaryColor + "; color: " + textColor + "}" +
       "#ov1 #userPage #cboxOverlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 1);}";
 
   // taggle
-     customStyleTag.innerHTML +=
+  customStyleTag.innerHTML +=
       "#ov1 #userPage .taggle_list .taggle { background-color: " + secondaryColor + "; color: " + textColor + ";}" +
       "#ov1 #userPage .taggle_list .taggle .taggle_text { color: " + textColor + ";}" +
       "#ov1 #userPage .taggle_list .taggle .close { color: " + textColor + ";}";

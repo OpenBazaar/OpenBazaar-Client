@@ -1,3 +1,5 @@
+'use strict';
+
 var Backbone = require('backbone'),
     app = require('../App.js').getApp(),
     NotificationMd = require('../models/notificationsMd');
@@ -12,9 +14,6 @@ module.exports = Backbone.Collection.extend({
 
   comparator: function(notif) {
     return -notif.get('timestamp');
-  },
-
-  initialize: function(options) {
   },
 
   getUnreadCount: function() {

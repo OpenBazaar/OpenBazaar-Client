@@ -35,6 +35,7 @@
   "GoToOneName": "Go to Onename.com",
   "GoToOneNameTooltip": "Create an ID at Onename.com, and under App Accounts enter openbazaar as the app name and your guid as the account identifier (your guid is on your page, in the About tab). Verification can take up to several days.",
   "ChangeCurrency": "Change currency",
+  "ChangeCurrencyHelp": "Clicking this will take you to the settings view and will lose any changes you have made.",
   "SKU": "SKU",
   "Refurbished": "Refurbished",
   "Physical": "Physical",
@@ -240,6 +241,7 @@
   "NotificationRefund": "%{name} has refunded your order.",
   "NoticationOrderStatus": "Order status updated, buyer notified.",
   "NotificationNewOrder": "%{name} has made a purchase.",
+  "NotificationNewTransactionMessage": "%{name} has sent you a new message about a transaction.",
   "NotificationTitle": "Title: %{title}",
   "NotificationFrom": "From: %{name}",
   "NotificationType": "Type: %{type}",
@@ -346,6 +348,10 @@
   "Avatar": "Avatar",
   "AdditionalPaymentData": "Additional payment data",
   "AdditionalPaymentDataInfo": "Include name of purchase and order number in payment QR code?",
+  "AppBarStyle": "Application Top Bar Style",
+  "AppBarStyleInfo": "How should the top bar of the application be styled?",
+  "OSWindows": "Windows",
+  "OSMac": "Mac",
   "ShippableHelp": "This product can be shipped to one of your currently saved addresses. Add more addresses in the Settings/Addresses section to be able to purchase more listings.",
   "firewall": {
     "Open": "Open",
@@ -511,7 +517,9 @@
     "UpdateComplete": "Your transaction update is complete",
     "UpdateFailed": "Your transaction update did not complete. Open the transaction and try again",
     "UpdateInvalid": "Your transaction update returned invalid data. Open the transaction and try again",
-    "ExportCSV": "Export to CSV"
+    "ExportCSV": "Export to CSV",
+    "ShowUnpaid": "Show Unfunded",
+    "HideUnpaid": "Hide Unfunded"
   },
   "errorMessages": {
     "saveError": "Data could not be saved.",

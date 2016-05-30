@@ -56,16 +56,6 @@
   </div>
 </div>
 
-<div class="onboardingIntroDiscover js-OnboardingIntroDiscoverHolder hide">
-  <a href="#home" class="js-OnboardingIntroDiscover">
-    <div>
-      <h3 class="margin0 marginTop25"><%= polyglot.t('Discover') %></h3>
-    </div>
-    <p class="textOpacity75 padding025 fontSize15 margin8"><%= polyglot.t('onboarding.discoverCallOut') %></p>
-    <div class="btn btn-enter custCol-secondary custCol-text"><%= polyglot.t('Enter') %></div>
-  </a>
-</div>
-
 <div class="js-navProfileMenu popMenu popMenu-navBar">
   <div class="popMenu-navBarSubMenu popMenu-navBarSubMenu-pageNav">
     <a class="js-serverSubmenuTrigger">
@@ -147,13 +137,13 @@
   <div id="notificationsPanel"></div>
 </div>
 
-<div class="bar navBar pageNavContainer custCol-secondary">
+<div id="pageNavBar" class="bar navBar custCol-secondary">
   <div class="ctrlGroup">
     <a class="btn btn-togLeft btn-back ion-chevron-left js-navBack custCol-primary custCol-text fontSize13 tooltip" data-tooltip="<%= polyglot.t('nav.Back') %>"></a>
     <a class="btn btn-togRight btn-fwd ion-chevron-right js-navFwd custCol-primary custCol-text fontSize13 tooltip" data-tooltip="<%= polyglot.t('nav.Forward') %>"></a>
   </div>
   <div class="ctrlGroup">
-    <a class="btn btn-home ion-refresh custCol-primary custCol-text js-navRefresh tooltip" data-tooltip="<%= polyglot.t('Reload') %> <%= config.keyShortcutPrefix + config.keyShortcuts.refresh.toUpperCase() %>"> </a>
+    <a class="btn btn-home ion-refresh custCol-primary custCol-text js-navRefresh tooltip" data-tooltip="<%= polyglot.t('Reload') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.refresh.toUpperCase() %>)"> </a>
   </div>
   <div class="ctrlGroup flexExpand">
     <div class="txtFieldWrapper searchWrapper mainSearchWrapper js-mainSearchWrapper">
@@ -192,6 +182,16 @@
   </div>
 
   <div id="adminPanel"></div>
+</div>
+
+<div class="onboardingIntroDiscover js-OnboardingIntroDiscoverHolder hide">
+  <a href="#home" class="js-OnboardingIntroDiscover">
+    <div>
+      <h3 class="margin0 marginTop25"><%= polyglot.t('Discover') %></h3>
+    </div>
+    <p class="textOpacity75 padding025 fontSize15 margin8"><%= polyglot.t('onboarding.discoverCallOut') %></p>
+    <div class="btn btn-enter custCol-secondary custCol-text"><%= polyglot.t('Enter') %></div>
+  </a>
 </div>
 
 <div class="softwareUpdate softwareUpdateHidden js-softwareUpdate">

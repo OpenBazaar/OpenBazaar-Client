@@ -1,5 +1,6 @@
+'use strict';
+
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     $ = require('jquery'),
     moment = require('moment'),
     sanitizeHTML = require('sanitize-html'),
@@ -31,7 +32,7 @@ module.exports = baseVw.extend({
         $msg;
 
     sanitizedMsg = sanitizeHTML(this.model.get('message').replace(/\n$/, '').split(/[\r\n]/g).join('<br/><br/>'), {
-      allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img' ]
+      allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'u', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img' ]
     });
 
     // add js-externalLink class to any links in the message text
