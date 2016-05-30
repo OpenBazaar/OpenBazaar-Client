@@ -76,7 +76,6 @@ module.exports = Backbone.Router.extend({
       for (var key in this.viewCache) {
         cached = this.viewCache[key];
         if (Date.now() - cached.cachedAt >= cached.view.cacheExpires) {
-          delete this.viewCache[key].view.__cachedScrollPos;
           delete this.viewCache[key];
         }
       }      

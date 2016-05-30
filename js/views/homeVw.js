@@ -23,7 +23,7 @@ module.exports = pageVw.extend({
     'click .js-vendorsTab': function(){this.setState("vendors");},
     'click .js-homeCreateStore': 'createStore',
     'click .js-homeCreateListing': 'createListing',
-    'click .js-homeSearchItemsClear': 'searchItemsClear',
+    'click .js-homeSearchItemsClear': 'onSearchItemsClear',
     'keyup .js-homeSearchItems': 'searchItemsKeyup',
     'focus .js-homeSearchItems': 'searchItemsFocus',
     'blur .js-homeSearchItems': 'searchItemsBlur',
@@ -79,14 +79,26 @@ module.exports = pageVw.extend({
 
   onCacheReattached: function(e) {
     var splitRoute = e.route.split('/'),
-        state = splitRoute[1];
+        state = splitRoute[1],
+        searchTerm = splitRoute[2];
 
     if (e.view !== this) return;
     state = state || this.state;
 
-    if (this.cachedScrollPositions[state]) this.obContainer[0].scrollTop = this.cachedScrollPositions[state];
+    if (this.cachedScrollPositions[state])
+      this.obContainer[0].scrollTop = this.cachedScrollPositions[state];
     this.setState(state);
-    splitRoute[2] && splitRoute[2] !== this.searchItemsText && this.searchItems(splitRoute[2]);    
+
+    if (!searchTerm && this.searchItemsText) {
+      this.searchItemsClear(state);
+      if (state === 'products') this.obContainer[0].scrollTop = 0;
+    }
+
+    if (searchTerm && searchTerm !== this.searchItemsText) {
+      this.searchItems(searchTerm);
+      this.obContainer[0].scrollTop = 0;
+    }
+
     this.obContainer.on('scroll', this.scrollHandler);
   },  
 
@@ -321,6 +333,8 @@ module.exports = pageVw.extend({
   },
 
   setState: function(state, searchItemsText){
+    var searchTextFrag;
+
     if (!state){
       state = "products";
     }
@@ -330,15 +344,11 @@ module.exports = pageVw.extend({
     this.$el.find('.js-' + state + 'Tab').addClass('active');
     this.$el.find('.js-' + state + 'Search').removeClass('hide');
 
-    if (searchItemsText){
-      this.searchItemsText = searchItemsText;
+    if (searchItemsText) this.searchItemsText = searchItemsText;
+    searchTextFrag = this.searchItemsText ? `/${this.searchItemsText.replace(/ /g, "")}` : '';
 
-      //add action to history
-      Backbone.history.navigate("#home/" + state + "/" + searchItemsText.replace(/ /g, ""), { replace: true });
-    } else {
-      //add action to history
-      Backbone.history.navigate("#home/" + state, { replace: true });
-    }
+    //add action to history
+    Backbone.history.navigate("#home/" + state + searchTextFrag, { replace: true });
 
     this.state = state;
   },
@@ -484,8 +494,13 @@ module.exports = pageVw.extend({
     }
   },
 
-  searchItemsClear: function(){
-    this.setState("products");
+  onSearchItemsClear: function(e) {
+    this.searchItemsClear();
+  },
+
+  searchItemsClear: function(state){
+    this.searchItemsText = '';
+    this.setState(state || 'products');
     this.loadItems();
 
     //clear address bar
