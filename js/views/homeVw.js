@@ -76,9 +76,9 @@ module.exports = pageVw.extend({
   },
 
   restoreScrollPosition: function(opts) {
-    var splitRoute = opts.route.split('/'),
-        routeSearchText = splitRoute[2] || '',
-        cachedSearchText = this.searchItemsText || '';
+    var splitRoute = opts.route.split('/');
+        // routeSearchText = splitRoute[2] || '',
+        // cachedSearchText = this.searchItemsText || '';
 
     if (splitRoute[1] === this.state) {
       return true;
