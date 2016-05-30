@@ -82,6 +82,7 @@ module.exports = pageVw.extend({
     this.subViews = []; //TODO: get rid of subviews, submodels, use proper remove method
     this.subModels = [];
     this.subModels.push(this.userProfile);
+    this.cachedScrollPositions = {};
 
     this.shownMods = []; //array of mods that have been shown, used to prevent duplicates
 
@@ -123,26 +124,33 @@ module.exports = pageVw.extend({
     this.fetchModel();
 
     this.$obContainer = $('#obContainer');
+
+    this.listenTo(app.router, 'cache-will-detach', this.onCacheWillDetach);
+    this.listenTo(app.router, 'cache-detached', this.onCacheDetached);
+    this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);    
   },
 
-  onCacheReattach: function(e) {
+  onCacheReattached: function(e) {
     var splitRoute = e.route.split('/'),
-        state;
+        state = splitRoute[1];
 
     if (e.view !== this) return;
+    state = state || this.state;
 
     this.blockedUsersScrollHandler &&
       this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
 
-    if (splitRoute.length > 1) {
-      // if our routed state doesn't equal our state, we'll
-      // reset the scroll position.
-      splitRoute[1] !== this.state && $('#obContainer').scrollTop(0);
-      this.setState(splitRoute[1]);
-    }
+    if (this.cachedScrollPositions[state]) this.$obContainer[0].scrollTop = this.cachedScrollPositions[state];
+    this.setState(state);
   },
 
-  onCacheDetach: function(e) {
+  onCacheWillDetach: function(e) {
+    if (e.view !== this) return;
+
+    this.cachedScrollPositions[this.state] = this.$obContainer[0].scrollTop;
+  },
+
+  onCacheDetached: function(e) {
     if (e.view !== this) return;
 
     this.blockedUsersScrollHandler &&

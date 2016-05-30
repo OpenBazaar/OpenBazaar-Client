@@ -325,43 +325,9 @@ UserPageVw = pageVw.extend({
         }
       }
     });
-
-    this.listenTo(app.router, 'cache-detach', this.onCacheDetach);
-    this.listenTo(app.router, 'cache-reattach', this.onCacheReattach);
   },
 
-  restoreScrollPosition: function(opts) {
-    var splitRoute = opts.route.split('/');
-
-    if (splitRoute[2] === this.state) {
-      return true;
-    }
-  },  
-
-  onCacheReattach: function(e) {
-    var splitRoute = e.route.split('/'),
-        state;
-
-    if (e.view !== this) return;
-
-    // todo: cache the million dom queries for #obContainer
-    // use in this view
-    $('#obContainer').on('scroll', this.onScroll);
-    this.setCustomStyles();
-
-    if (splitRoute.length > 2) {
-      // if our routed state doesn't equal our state, we'll
-      // reset the scroll position.
-      splitRoute[2] !== this.state && $('#obContainer').scrollTop(0);
-      this.setState(splitRoute[2], splitRoute[3], { replaceState: true });
-    }
-  },
-
-  onCacheDetach: function(e) {
-    if (e.view !== this) return;
-
-    $('#obContainer').off('scroll', this.onScroll);
-  },  
+  cacheExpires: 0,
 
   loadingConfig: function() {
     var config = {

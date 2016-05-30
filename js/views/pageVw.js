@@ -4,23 +4,7 @@ var BaseVw = require('./baseVw'),
     PageVw;
 
 PageVw = BaseVw.extend({
-  cacheExpires: 1000 * 60 * 20,
-  
-  // should be function that returns a boolean
-  restoreScrollPosition: function(opts) {
-    var splitRoute = opts.route.split('/');
-
-    // !!!! if state will not be in the second position
-    // in the route of your view (e.g. myPage/<state>) or
-    // your view does not store it's state as a string in
-    // this.state, then overwrite this method.
-
-    if (splitRoute[1] === this.state) {
-      // if our routed state equals our cached state, we would
-      // like to restore the cached scroll position.
-      return true;
-    }
-  }
+  cacheExpires: 1000 * 60 * 20
 });
 
 // this must be a "static" method and overridden as such (if you

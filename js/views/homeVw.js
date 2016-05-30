@@ -38,7 +38,7 @@ module.exports = pageVw.extend({
     this.userModel = options.userModel;
     this.userProfile = options.userProfile;
     this.socketView = options.socketView;
-    this.state = options.state;
+    this.state = options.state || 'products';
     this.searchItemsText = options.searchItemsText;
     this.slimVisible = false;
     this.itemViews = [];
@@ -50,6 +50,7 @@ module.exports = pageVw.extend({
     this.ownFollowing = [];
     this.onlyFollowing = true;
     this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
+    this.cachedScrollPositions = {};
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
 
@@ -71,40 +72,31 @@ module.exports = pageVw.extend({
 
     this.fetchOwnFollowing(this.render());
 
-    this.listenTo(app.router, 'cache-detach', this.onCacheDetach);
-    this.listenTo(app.router, 'cache-reattach', this.onCacheReattach);
+    this.listenTo(app.router, 'cache-will-detach', this.onCacheWillDetach);
+    this.listenTo(app.router, 'cache-detached', this.onCacheDetached);
+    this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);
   },
 
-  restoreScrollPosition: function(opts) {
-    var splitRoute = opts.route.split('/');
-        // routeSearchText = splitRoute[2] || '',
-        // cachedSearchText = this.searchItemsText || '';
-
-    if (splitRoute[1] === this.state) {
-      return true;
-    }
-  },  
-
-  onCacheReattach: function(e) {
+  onCacheReattached: function(e) {
     var splitRoute = e.route.split('/'),
-        state;
+        state = splitRoute[1];
 
     if (e.view !== this) return;
+    state = state || this.state;
 
-    if (splitRoute.length > 1) {
-      // if our routed state doesn't equal our state, we'll
-      // reset the scroll position.
-      splitRoute[1] !== this.state && $('#obContainer').scrollTop(0);
-
-      this.setState(splitRoute[1]);
-      splitRoute.length > 2 && splitRoute[2] !== this.searchItemsText &&
-        this.searchItems(splitRoute[2]);
-    }
-
+    if (this.cachedScrollPositions[state]) this.obContainer[0].scrollTop = this.cachedScrollPositions[state];
+    this.setState(state);
+    splitRoute[2] && splitRoute[2] !== this.searchItemsText && this.searchItems(splitRoute[2]);    
     this.obContainer.on('scroll', this.scrollHandler);
   },  
 
-  onCacheDetach: function(e) {
+  onCacheWillDetach: function(e) {
+    if (e.view !== this) return;
+
+    this.cachedScrollPositions[this.state] = this.obContainer[0].scrollTop;
+  },
+
+  onCacheDetached: function(e) {
     if (e.view !== this) return;
 
     this.obContainer.off('scroll', this.scrollHandler);
@@ -332,6 +324,7 @@ module.exports = pageVw.extend({
     if (!state){
       state = "products";
     }
+
     this.hideList();
     this.$el.find('.js-' + state).removeClass('hide');
     this.$el.find('.js-' + state + 'Tab').addClass('active');
