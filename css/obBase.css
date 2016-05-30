@@ -606,8 +606,6 @@ form {
   height: 40px;
   line-height: 38px;
   border-top: solid 1px #327EB8;
-  border-right: solid 1px #327EB8;
-  width: 316px;
   padding: 0;
   box-sizing: border-box;
   transition: opacity .5s cubic-bezier(0, 0, 0.2, 1);
