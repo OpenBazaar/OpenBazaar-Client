@@ -77,17 +77,10 @@ module.exports = Backbone.Router.extend({
         cached = this.viewCache[key];
         if (Date.now() - cached.cachedAt >= cached.view.cacheExpires) {
           delete this.viewCache[key].view.__cachedScrollPos;
-          delete this.viewCache[key].view.__cachedAddressBarText;
           delete this.viewCache[key];
         }
       }      
     }, this.cleanCacheInterval);
-
-    this.listenTo(window.obEventBus, 'addressBarTextSet', (text) => {
-      if (this.view) {
-        this.view.__cachedAddressBarText = text;
-      }
-    });    
   },
 
   // how often to clean out expired cached views

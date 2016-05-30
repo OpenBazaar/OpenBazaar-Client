@@ -1723,18 +1723,4 @@ UserPageVw = pageVw.extend({
 
 });
 
-UserPageVw.getCacheIndex = function(fragment) {
-  var splitFrag;
-
-  fragment = fragment || '';
-  splitFrag = fragment.split('/');
-
-  if (splitFrag.length > 1) {
-    return `userPage/${splitFrag[1]}`;
-  } else {
-    throw Error('The expectation is that the user page will be routed ' +
-      'with a minimum fragment of \'userPage\'/<guid>');
-  }
-};
-
 module.exports = UserPageVw;

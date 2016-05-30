@@ -319,7 +319,6 @@ module.exports = baseVw.extend({
         self._lastSetAddressBarText = text;
         self.addressInput.val(text);
         self.closeStatusBar();
-        window.obEventBus.trigger('addressBarTextSet', text);
       });
       if (self.showDiscIntro){
         self.showDiscoverIntro();

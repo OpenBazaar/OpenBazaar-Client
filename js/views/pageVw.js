@@ -8,7 +8,7 @@ PageVw = BaseVw.extend({
 });
 
 // this must be a "static" method and overridden as such (if you
-// are overriding), since the router doesn't have an instance
+// are overriding) since the router doesn't have an instance
 // when it's deciding whether to create a new one or use a cached one.
 PageVw.getCacheIndex = function(fragment) {
   if (!fragment) {
