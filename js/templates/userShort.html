@@ -85,7 +85,7 @@
           </div>
           <% if(ob.isModerator){ %>
           <div class="pull-right rowTop10 fontSize12 txt-fade">
-            <%= polyglot.t('ModeratorFee') %> <%= ob.fee.toFixed(2) %>%
+            <%= polyglot.t('ModeratorFee') %> <%= ob.intlNumFormat(ob.fee, 2) %>%
           </div>
           <% } %>
         </div>

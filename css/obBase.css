@@ -202,7 +202,7 @@ h1,h2,h3,
   line-height: 1.2;
 }
 
-h4,h5,h6
+h4,h5,h6,
 .h4,.h5,.h6 {
   margin-bottom: 10px;
   line-height: 1;
@@ -3466,7 +3466,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .onboardingIntroDiscover:before {
-  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 0%;
+  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 0;
   background-size: 233px 196px;
   content: " ";
   width: 32px;
@@ -4138,7 +4138,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .tooltip:hover:after{
-  max-width: 400px;
   background: rgba(37,37,37,.95);
   border-radius: 3px;
   bottom: -32px;

@@ -78,7 +78,7 @@ module.exports = baseVw.extend({
     this.userModel = this.options.userModel;
     this.worldwide = this.options.worldwide;
     this.shippingRegions = this.options.shippingRegions;
-    this.hideMap = true;
+    //this.hideMap = true;
     this.orderID = "";
     this.model.set('selectedModerator', "");
     this.model.updateAttributes();
@@ -300,7 +300,7 @@ module.exports = baseVw.extend({
   },
 
   doesntHaveWallet: function(){
-    this.hasWallet = false;
+    //this.hasWallet = false;
     this.accNext();
   },
 
@@ -568,7 +568,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-buyWizardSpinner').addClass('hide');
     this.orderID = data.order_id;
     totalBTCPrice = data.amount - this.partialPaymentAmount;
-    this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
+    this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(totalBTCPrice));
     this.payURL = data.payment_address;
     
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;

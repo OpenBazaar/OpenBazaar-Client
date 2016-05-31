@@ -360,9 +360,11 @@ module.exports = baseVw.extend({
     this.$('.js-transactionFeedback').removeClass('bottom0');
   },
 
+  /*
   showRefundOrder: function(){
     this.setState("refund");
   },
+   */
 
   showCompleteForm: function(){
     this.$('.js-transactionShowContract').addClass('hide');

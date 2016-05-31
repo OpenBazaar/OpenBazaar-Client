@@ -32,7 +32,7 @@ module.exports = baseVw.extend({
     this.listenTo(this.collection, 'remove', function(md) {
       var view;
 
-      if (view == __.find(this.subViews, function(subView) {
+      if (view = __.find(this.subViews, function(subView) { // eslint-disable-line no-cond-assign
         return subView.model.get('guid') === md.get('guid');
       })) {
         self.removeSubView(view);
