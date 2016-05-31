@@ -451,11 +451,11 @@ h6, .h6 {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 78px;
+  top: 75px;
   width:230px;
   background-color: #252525;
   border-left: 0;
-  height: calc(100% - 50px);
+  height: calc(100% - 71px);
   z-index: 0;
   transition: right 0.5s ease;
   color: #DDD;
@@ -6217,4 +6217,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .buyWizardMap .mapWrap {
   background-color: #eeeae1;
   height: 100%;  
+}
+
+.backToTop {
+  position: fixed;
+  bottom: 15px;
+  right: 73px;
+  padding: 10px;
+  background-color: #252525;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 300ms ease, right 0.5s ease;
+}
+
+.backToTop.slideUp {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#ov1.chatOpen .backToTop {
+  right: 303px;
 }
