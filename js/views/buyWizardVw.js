@@ -78,7 +78,7 @@ module.exports = baseVw.extend({
     this.userModel = this.options.userModel;
     this.worldwide = this.options.worldwide;
     this.shippingRegions = this.options.shippingRegions;
-    this.hideMap = true;
+    //this.hideMap = true;
     this.orderID = "";
     this.model.set('selectedModerator', "");
     this.model.updateAttributes();
@@ -300,7 +300,7 @@ module.exports = baseVw.extend({
   },
 
   doesntHaveWallet: function(){
-    this.hasWallet = false;
+    //this.hasWallet = false;
     this.accNext();
   },
 
