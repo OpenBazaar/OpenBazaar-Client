@@ -519,7 +519,11 @@
     "UpdateInvalid": "Your transaction update returned invalid data. Open the transaction and try again",
     "ExportCSV": "Export to CSV",
     "ShowUnpaid": "Show Unfunded",
-    "HideUnpaid": "Hide Unfunded"
+    "HideUnpaid": "Hide Unfunded",
+    "BuyerPaidMessage": "You have paid %{paidAmount} out of %{totalAmount} BTC",
+    "BuyerPaidMessageHelp": "To complete your purchase, pay the remaining balance shown above.",
+    "SellerPaidMessage": "The buyer has paid %{paidAmount} out of %{totalAmount} BTC",
+    "SellerPaidMessageHelp": "This purchase can not be confirmed until the buyer has completely funded it."
   },
   "errorMessages": {
     "saveError": "Data could not be saved.",
