@@ -44,7 +44,7 @@
           <div class="pull-left pad20Left txt-bright" style="width:255px;">
             <div class="txt-center row10 textSize16px">
               <%= polyglot.t('buyFlow.SendBTCtoAddress', {
-                  amount: ob.buyer_order.order.payment.amount,
+                  amount: ob.intlNumFormat(ob.orderDue, 20),
                   recipient: '<a class="textSize11px" href="bitcoin:' + ob.buyer_order.order.payment.address + '?amount=' + ob.buyer_order.order.payment.amount + '&message=' + ob.vendor_offer.listing.item.title + '">' + ob.buyer_order.order.payment.address + '</a>'
                 })
               %>
@@ -585,6 +585,31 @@
       <div style="height: 264px;" class="scrollOverflowY customThemeScrollbar">
 
         <div class="flexRow custCol-border borderBottom">
+          <% if(ob.status == 0){ %>
+          <div class="rowItem padding15 rowTop10 custCol-secondary marginLeft8 txt-center">
+            <div class="h4 width100">
+              <i class="ion-alert-circled"></i>
+              <% if(ob.transactionType == "purchases"){ %>
+              <%= polyglot.t('transactions.BuyerPaidMessage', {
+                  paidAmount: ob.intlNumFormat(ob.orderPaid, 8),
+                  totalAmount: ob.intlNumFormat(ob.orderPrice, 8)
+              }) %>
+              <% } else { %>
+              <%= polyglot.t('transactions.SellerPaidMessage', {
+              paidAmount: ob.intlNumFormat(ob.orderPaid, 8),
+              totalAmount: ob.intlNumFormat(ob.orderPrice, 8)
+              }) %>
+              <% } %>
+            </div>
+            <div class="txt-fade fontSize12 rowTop10">
+              <% if(ob.transactionType == "purchases"){ %>
+              <%= polyglot.t('transactions.BuyerPaidMessageHelp') %>
+              <% } else { %>
+              <%= polyglot.t('transactions.SellerPaidMessageHelp') %>
+              <% } %>
+            </div>
+          </div>
+          <% } %>
           <div class="flexRow rowItem padding15">
             <div class="flexCol-7 overflowHidden">
               <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">
