@@ -15,6 +15,8 @@ module.exports = baseVw.extend({
     'click .js-about': 'aboutClick',
     'click .js-itemShortEdit': 'editItemClick',
     'click .js-itemShortDelete': 'deleteItemClick',
+    'click .js-itemShortDeleteConfirm': 'deleteItem',
+    'click .js-itemShortDeleteCancel': 'cancelConfirmDelete',
     'click .js-itemShortClone': 'cloneItemClick',
     'click .js-userShortFollow': 'followUser',
     'click .js-userShortUnfollow': 'unfollowUser',
@@ -92,7 +94,18 @@ module.exports = baseVw.extend({
     window.obEventBus.trigger('itemShortEdit', {'contract_hash': this.model.get('contract_hash')});
   },
 
-  deleteItemClick: function(){
+  deleteItemClick: function(e){
+    console.log("1")
+    this.$(e.target).closest('.gridItemControls').find(".js-deleteOverlay").addClass("fadeIn");
+  },
+
+  cancelConfirmDelete: function(e){
+    console.log("2")
+    e.stopPropagation();
+    this.$(e.target).closest('.gridItemControls').find(".js-deleteOverlay").removeClass("fadeIn");
+  },
+
+  deleteItem: function(){
     window.obEventBus.trigger('itemShortDelete', {'contract_hash': this.model.get('contract_hash')});
   },
 

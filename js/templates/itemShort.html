@@ -36,46 +36,53 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
       <div>
         <% if(ob.discover) { %>
           <div class="btn-gridItemControl borderRight custCol-border js-about">
-            <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('About') %>
+            <span class="ion-ios-book fontSize11 marginRight2 txt-fade"></span>
+            <span class="txt-fade"><%= polyglot.t('About') %></span>
           </div>
 
           <% if(!ob.micro && !ob.hideFollow){ %>
             <div class="btn-gridItemControl borderRight custCol-border js-userShortUnfollow <% if(!ob.ownFollowing){ %> hide <% } %>">
-              <span class="ion-eye-disabled fontSize11 marginRight2 textOpacity1"></span>
+              <span class="ion-eye-disabled fontSize11 marginRight2 txt-fade"></span>
               <%= polyglot.t('Unfollow') %>
             </div>
             <div class="btn-gridItemControl borderRight custCol-border js-userShortFollow <% if(ob.ownFollowing){ %> hide <% } %>">
-              <span class="ion-person-add fontSize11 marginRight2 textOpacity1"></span>            
-              <%= polyglot.t('Follow') %>
+              <span class="ion-person-add fontSize11 marginRight2 txt-fade"></span>
+              <span class="txt-fade"><%= polyglot.t('Follow') %></span>
             </div>
           <% } %>
 
           <div class="btn-gridItemControl custCol-border <%= !ob.isBlocked ? 'js-blockUser' : 'js-unblockUser' %>">
-            <span class="<%= !ob.isBlocked ? 'ion-sad' : 'ion-happy' %> fontSize11 marginRight2 textOpacity1"></span>
-            <%= !ob.isBlocked ? polyglot.t('Block') : polyglot.t('Unblock') %>
+            <span class="<%= !ob.isBlocked ? 'ion-sad' : 'ion-happy' %> fontSize11 marginRight2 txt-fade"></span>
+            <span class="txt-fade"><%= !ob.isBlocked ? polyglot.t('Block') : polyglot.t('Unblock') %></span>
           </div>
         <% } %>
 
         <% if(ob.ownPage){ %>
           <div class="btn-gridItemControl borderRight custCol-border js-itemShortEdit">
-            <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Edit') %>
+            <span class="ion-compose fontSize11 marginRight2 txt-fade"></span>
+            <span class="txt-fade"><%= polyglot.t('Edit') %></span>
           </div>  
           <div class="btn-gridItemControl borderRight custCol-border js-itemShortClone">
-            <span class="ion-ios-copy fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Clone') %>
+            <span class="ion-ios-copy fontSize11 marginRight2 txt-fade"></span>
+            <span class="txt-fade"><%= polyglot.t('Clone') %></span>
           </div>
-          <div class="btn-gridItemControl borderRight custCol-border js-itemShortDelete">
-            <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Delete') %>
+          <div class="btn-gridItemControl custCol-border js-itemShortDelete">
+            <span class="ion-trash-b fontSize11 marginRight2 txt-fade"></span>
+            <span class="txt-fade"><%= polyglot.t('Delete') %></span>
+            <div class="gridItemOverlay custCol-primary custCol-border fadeOut js-deleteOverlay">
+              <span>Are you sure?</span>
+              <div>
+                <a class="btn btn-txt custCol-secondary js-itemShortDeleteCancel">Cancel</a>
+                <a class="btn btn-txt custCol-secondary js-itemShortDeleteConfirm">Yes</a>
+              </div>
+            </div>
           </div>
         <% } %>
 
         <% if(!ob.ownPage && ob.discover === undefined){ %>
           <div class="btn-gridItemControl borderRight custCol-border js-item" data-id="<%= ob.contract_hash %>">
-            <span class="ion-ios-pricetag fontSize10 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('ViewListing') %>
+            <span class="ion-ios-pricetag fontSize10 marginRight2 txt-fade"></span>
+            <span class="txt-fade"><%= polyglot.t('ViewListing') %></span>
           </div>          
         <% } %>
       </div>
