@@ -1770,6 +1770,33 @@ removed because I don't think we're using the trick to hide the borders any more
   left: 168px;
 }
 
+.suggestionsList {
+  position: absolute;
+  width: 100%;
+  max-height: 155px;
+  background: #fff;
+  margin-top: 14px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  overflow-y: scroll;
+}
+
+.suggestionsList a {
+  display: block;
+  color: #000;
+  padding: 8px 20px;
+}
+.suggestionsList a:last-child {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.suggestionsList a:hover, .suggestionsList a:focus {
+  text-decoration: none;
+}
+.suggestionsList a:hover, .suggestionsList a.selected {
+  background-color: #efefef;
+}
+
 .txtField-bar,
 input[type="text"].txtField-bar {
   background: none;
