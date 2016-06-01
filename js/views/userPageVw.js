@@ -427,7 +427,7 @@ module.exports = baseVw.extend({
   onScroll: function() {
     if (this.$obContainer.scrollTop() > 400 && this.slimVisible === false ) {
       this.slimVisible = true;
-      this.$('.user-page-header-slim').addClass('textOpacity1 top70');
+      this.$('.user-page-header-slim').addClass('scrolledIntoView');
       this.$('.user-page-header').removeClass('shadow-inner1')
         .addClass('zIndex4')
         .find('.rowItem')
@@ -436,7 +436,7 @@ module.exports = baseVw.extend({
       this.$backToTop.addClass('slideUp');
     } else if (this.$obContainer.scrollTop() < 400 && this.slimVisible === true ) {
       this.slimVisible = false;
-      this.$('.user-page-header-slim').removeClass('top70');
+      this.$('.user-page-header-slim').removeClass('scrolledIntoView');
       this.$('.user-page-header').addClass('shadow-inner1')
         .removeClass('zIndex4')
         .find('.rowItem')
