@@ -721,25 +721,31 @@ module.exports = baseVw.extend({
   refundOrder: function(e){
     //var targetForm = this.$('#transactionRefundForm'),
     var self = this,
+        $targ = $(e.target).closest(".js-refundTransaction"),
         refData = {};
 
-    $(e.target).addClass('loading');
-    refData.order_id = this.orderID;
+    if (!$targ.hasClass('confirm')){
+      $targ.addClass('confirm');
+    } else {
 
-    saveToAPI(null, null, this.serverUrl + "refund", function(){
-      self.status = 7;
-      self.tabState = "summary";
-      self.getData();
-    }, function(data){
-      if (data.reason == "Refund already processed for this order"){
-        messageModal.show(window.polyglot.t('errorMessages.refundAlreadySent'));
-        $(e.target).addClass('hide'); //hide the button so it can't be pressed again
-      } else {
-        messageModal.show(window.polyglot.t('errorMessages.serverError'));
-      }
-    }, refData).always(() => {
-      $(e.target).removeClass('loading');
-    });
+      $targ.addClass('loading');
+      refData.order_id = this.orderID;
+
+      saveToAPI(null, null, this.serverUrl + "refund", function () {
+        self.status   = 7;
+        self.tabState = "summary";
+        self.getData();
+      }, function (data) {
+        if (data.reason == "Refund already processed for this order") {
+          messageModal.show(window.polyglot.t('errorMessages.refundAlreadySent'));
+          $(e.target).addClass('hide'); //hide the button so it can't be pressed again
+        } else {
+          messageModal.show(window.polyglot.t('errorMessages.serverError'));
+        }
+      }, refData).always(() => {
+        $(e.target).removeClass('loading');
+      });
+    }
   },
 
   updateBuyerBTC: function(e) {

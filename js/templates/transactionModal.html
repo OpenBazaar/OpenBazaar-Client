@@ -76,10 +76,21 @@
               <%= polyglot.t('transactions.MarkAsShipped') %>
             <% } %>
           </a>
-          <a class="btn btn-txt custCol-primary pull-left textOpacity1 js-refundTransaction tooltip"
-             data-tooltip="<%= polyglot.t('transactions.RefundOrderTooltip') %>" style="border-top-left-radius: 0; border-bottom-left-radius: 0">
-            <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('transactions.RefundOrder') %>
+          <a class="btn btn-txt custCol-primary pull-left textOpacity1 confirmable js-refundTransaction tooltip"
+             data-tooltip="<%= polyglot.t('transactions.RefundOrderTooltip') %>"
+             style="border-top-left-radius: 0; border-bottom-left-radius: 0">
+            <span class="preSpacer">
+              <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('transactions.RefundOrder') %>
+            </span>
+            <span class="preConfirm">
+              <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('transactions.RefundOrder') %>
+            </span>
+            <span class="postConfirm">
+              <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('transactions.ConfirmRefund') %>
+            </span>
           </a>
         <% } else if(ob.transactionType == "purchases" && ob.status == 2){ %>
           <a class="btn btn-txt custCol-primary pull-left js-showCompleteForm textOpacity1">
