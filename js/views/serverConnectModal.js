@@ -1,6 +1,7 @@
 'use strict';
 
-var loadTemplate = require('../utils/loadTemplate'),
+var __ = require('underscore'),
+    loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
     remote = require('electron').remote,        
     ServerConfigMd = require('../models/serverConfigMd'),
@@ -45,7 +46,7 @@ module.exports = BaseModal.extend({
     this.listenTo(this.serverConfigsVw, 'connect', this.onConnectClick);
     this.listenTo(this.serverConfigsVw, 'cancel', this.onCancelClick);
 
-    options.userModel.on('change:language', (md, lang) => {
+    options.userModel.on('change:language', () => {
       this.setHeaderState(this._headerState);
       this.serverConfigFormVw && this.serverConfigFormVw.render();
       this.serverConfigsVw.render();
@@ -64,7 +65,7 @@ module.exports = BaseModal.extend({
     var translatedState;
 
     this._headerState = __.extend(this._headerState, state || {});
-    translatedState = this._headerState;
+    translatedState = __.extend({}, this._headerState);
 
     Object.keys(this._headerState).forEach((key) => {
       if (['msg', 'title'].indexOf(key) !== -1) {

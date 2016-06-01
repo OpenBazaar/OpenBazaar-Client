@@ -15,7 +15,7 @@ module.exports = Backbone.View.extend({
   // method called if the parent is removed.
   //
   // As of now, this doesn't work if called from initialize() of your view.
-  // If you do need to register children from there, wrape the call in a timeout:
+  // If you do need to register children from there, wrap the call in a timeout:
   // setTimeout(() => this.registerChild(myChildVw));    
   registerChild: function(childView) {
     if (this._childViews.indexOf(childView) === -1) {
