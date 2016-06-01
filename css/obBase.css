@@ -2515,6 +2515,7 @@ div.chatSearchOut .chatSearchIcon {
   display: inline-block;
   font-weight: 500;
   letter-spacing: 0.2px;
+  word-break: break-all;
 }
 
 #inputConversationMessage {
