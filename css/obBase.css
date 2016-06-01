@@ -747,9 +747,43 @@ h6, .h6 {
 .gridItemControls .btn-gridItemControl {
   text-align: center;
   padding: 0;
-  opacity: .75;
   font-weight: 400;
   font-size: 12px;
+}
+
+.gridItemControls .btn-gridItemControl .gridItemOverlay {
+  position: absolute;
+  bottom: 100%;
+  min-width: 190px;
+  padding: 10px;
+  right: 0;
+  font-size: 16px;
+  font-weight: 700;
+  border-width: 1px;
+  border-style: solid;
+  border-right-width: 0;
+  border-top-left-radius: 2px;
+}
+
+.gridItemControls .btn-gridItemControl .gridItemOverlay .btn {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.gridItemControls .btn-gridItemControl .gridItemOverlay:before {
+  content: "";
+  position: absolute;
+  right: 40px;
+  top: 100%;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  -webkit-clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  border-width: 1px;
+  border-style: solid;
+  border-color: inherit;
+  background: inherit;
+  margin-top: -7px;
 }
 
 .gridItemControls .btn-gridItemControl:hover {
@@ -4731,6 +4765,31 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   display: none;
 }
 
+.buyWizardMap .mapWrap {
+  background-color: #eeeae1;
+  height: 100%;
+}
+
+.backToTop {
+  position: fixed;
+  bottom: 15px;
+  right: 73px;
+  padding: 10px;
+  background-color: #252525;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 300ms ease, right 0.5s ease;
+}
+
+.backToTop.slideUp {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#ov1.chatOpen .backToTop {
+  right: 303px;
+}
+
 /*========== utility classes ==========*/
 
 /* the #ov1 id is on the HTML tag. It is used to force specificity
@@ -5949,6 +6008,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .fadeIn {
+  /* use fadeOut on items that should have fadeIn added to them */
   opacity: 1;
   pointer-events: auto;
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
@@ -6178,6 +6238,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: #262626 !important;
 }
 
+#ov1.notFancy .addressFormOpened .buyWizardMap .blurMore {
+  display: none;
+}
+
 #ov1.notFancy .disabled,
 #ov1.notFancy #userPage .disabled,
 #ov1.notFancy #obContainer .disabled,
@@ -6237,33 +6301,4 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
   display: none; /* hide in production */
-}
-
-#ov1.notFancy .addressFormOpened .buyWizardMap .blurMore {
-  display: none;
-}
-
-.buyWizardMap .mapWrap {
-  background-color: #eeeae1;
-  height: 100%;  
-}
-
-.backToTop {
-  position: fixed;
-  bottom: 15px;
-  right: 73px;
-  padding: 10px;
-  background-color: #252525;
-  transform: translateY(100%);
-  opacity: 0;
-  transition: transform 300ms ease, right 0.5s ease;
-}
-
-.backToTop.slideUp {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-#ov1.chatOpen .backToTop {
-  right: 303px;
 }

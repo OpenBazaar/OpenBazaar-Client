@@ -447,6 +447,7 @@
     "ConfirmOrderResend": "Resend Order Confirmation",
     "ConfirmOrderResendTooltip": "If the buyer has not received the order confirmation, this button will resend it. This may take several seconds to complete.",
     "RefundOrder": "Refund Order",
+    "ConfirmRefund": "Confirm",
     "ConfirmRefundOrder": "Confirm Refund Order",
     "RefundOrderTooltip": "Cancel order and release the funds back to the buyer",
     "RefundReason": "Reason for refund",
