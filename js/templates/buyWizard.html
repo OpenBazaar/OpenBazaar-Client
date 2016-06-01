@@ -15,7 +15,7 @@
           <h3 class="custCol-text padding30"><%= polyglot.t('CheckExchanges') %> </h3>
         </div>
       </div>
-      <div class="modal-hero modal-heroFullHeightNoButtons padding40 js-buyWizardPay hide background1 custCol-primary">
+      <div class="modal-hero modal-heroFullHeightNoButtons padding30 js-buyWizardPay hide background1 custCol-primary">
         <div class="width100 row20">
           <img class="blockCenter qrCode js-buyWizardPayQRCode" height="250" width="250" src="imgs/defaultItem.png"/>
         </div>
@@ -37,6 +37,17 @@
           <a class="btn btn-txt btn-wide js-buyWizardPayCheck custCol-secondary custCol-text"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
           <div class="rowTop10 txt-center note custCol-text">
             <%= polyglot.t('buyFlow.paymentNote') %>
+          </div>
+        </div>
+        <div class="positionBottom width100 padding20 custCol-background borderTop custCol-border txt-center js-partialPaymentMsg opacity0">
+          <div class="h4 width100">
+            <i class="ion-alert-circled"></i>
+            <span class="js-partialPaymentTxt"></span>
+          </div>
+          <div class="txt-fade fontSize12 rowTop10">
+            <%= polyglot.t('transactions.BuyerPaidMessageHelp') %>
+          </div>
+          <div class="btn btn-corner btn-cornerTR btn-txtOnly ion-close btn-small textOpacity50 js-partialPaymentClose">
           </div>
         </div>
       </div>

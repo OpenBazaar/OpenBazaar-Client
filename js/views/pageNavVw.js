@@ -33,6 +33,7 @@ module.exports = baseVw.extend({
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'blur .js-navAddressBar': 'addressBarBlur',
+    'click .js-suggestion': 'suggestionClick',
     'click .js-closeStatus': 'closeStatusBar',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
@@ -112,6 +113,14 @@ module.exports = baseVw.extend({
     this.listenTo(window.obEventBus, "cleanNav", function(){
       this.cleanNav();
     });
+    
+    this.listenTo(window.obEventBus, "searchingText", function(text){
+      this.saveVisitedTag(text);
+    });
+    
+    this.listenTo(window.obEventBus, "handleObtained", function(profile){
+      this.saveVisitedHandle(profile);
+    });
 
     //when language is changed, re-render
     this.listenTo(this.model, 'change:language', function(){
@@ -144,6 +153,72 @@ module.exports = baseVw.extend({
     this.closeNav();
     this.closeStatusBar();
     window.obEventBus.trigger('closeBuyWizard');
+  },
+  
+  saveVisitedTag: function(tag){
+    var tagsList = JSON.parse(localStorage.getItem('tagsHistory')) || [],
+        tagsListLength = tagsList.length,
+        index = tagsList.indexOf(tag);
+
+    // Do nothing if there's just one tag and new one isn't added
+    if (tagsListLength !== 1 || index === -1) {
+      // List is empty, just add the tag   
+      if (tagsListLength === 0) {
+        tagsList.push(tag);
+      } else {
+        // Tag exists, pull it out of the list
+        if (index !== -1) {
+          tagsList.splice(index, 1);
+        }
+        
+         // Tag goes to the beginning of the list
+        tagsList.splice(0, 0, tag);
+      }
+      
+      // History needs to be pruned
+      if (tagsListLength > window.config.maxTagHistory) {
+        tagsList = tagsList.slice(0, window.config.maxTagHistory);
+      }
+
+      // Update the history
+      localStorage.setItem('tagsHistory', JSON.stringify(tagsList));
+    }
+  },
+  
+  saveVisitedHandle: function(profile){
+    var handlesList = JSON.parse(localStorage.getItem('handlesHistory')) || [],
+        handlesListLength = handlesList.length,
+        index = __.findIndex(handlesList, {handle: profile.handle});
+        
+    // Do nothing if there's just one tag and new one isn't added
+    if (handlesListLength !== 1 || index === -1) {
+      let handleObj = {
+        guid: profile.guid,
+        handle: profile.handle,
+        name: profile.name
+      };
+
+      // List is empty, just add the tag   
+      if (handlesListLength === 0) {
+        handlesList.push(handleObj);
+      } else {
+        // Tag exists, pull it out of the list
+        if (index !== -1) {
+          handlesList.splice(index, 1);
+        }
+        
+        // Tag goes to the beginning of the list
+        handlesList.splice(0, 0, handleObj);
+      }
+      
+      // History needs to be pruned
+      if (handlesListLength > window.config.maxHandleHistory) {
+        handlesList = handlesList.slice(0, window.config.maxHandleHistory);
+      }
+
+      // Update the history
+      localStorage.setItem('handlesHistory', JSON.stringify(handlesList));
+    }
   },
 
   handleSocketMessage: function(response) {
@@ -308,16 +383,17 @@ module.exports = baseVw.extend({
       self.registerChild(self.adminPanel);
       */
 
-      self.addressInput = self.$el.find('.js-navAddressBar');
-      self.statusBar = self.$el.find('.js-navStatusBar');
-      self.serverSubmenu = self.$('.js-serverSubmenu');
-      self.serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
+      self.$addressInput = self.$el.find('.js-navAddressBar');
+      self.$statusBar = self.$el.find('.js-navStatusBar');
+      self.$serverSubmenu = self.$('.js-serverSubmenu');
+      self.$serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
+      self.$suggestionsList = self.$('.js-addressBarSuggestions');
 
       //listen for address bar set events
       self.listenTo(window.obEventBus, 'setAddressBar', function(options){
         var text = options.handle || options.addressText;
         self._lastSetAddressBarText = text;
-        self.addressInput.val(text);
+        self.$addressInput.val(text);
         self.closeStatusBar();
       });
       if (self.showDiscIntro){
@@ -477,6 +553,7 @@ module.exports = baseVw.extend({
 
     if ($popMenu.hasClass('popMenu-opened')) {
       app.showOverlay();
+      this.hideSuggestions();
       openHandler = $popMenu.data('onopen');
       openHandler && this[openHandler] && this[openHandler].call(this);
     } else {
@@ -490,14 +567,22 @@ module.exports = baseVw.extend({
     var $target = $(e.target),
         $popMenu,
         closeHandler;
-
-    if (!(
+        
+    if (!$target.hasClass('js-navAddressBar') && this.suggestionsVisible) {
+      app.hideOverlay();
+      this.hideSuggestions();
+    } else if ($target.hasClass('js-navAddressBar') ||
+      !(
         $target.hasClass('popMenu') ||
         $target.parents('.popMenu').length ||
         $target.is('[data-popmenu]') ||
         $target.parents('[data-popmenu]').length
-      )) {
-      app.hideOverlay();
+      ))
+    {
+      if (!this.suggestionsVisible) {
+        app.hideOverlay();
+      }
+      
       $popMenu = self.$('.popMenu.popMenu-opened').removeClass('popMenu-opened');
       $popMenu.each((index, el) => {
         closeHandler = $(el).data('onclose');
@@ -510,7 +595,7 @@ module.exports = baseVw.extend({
     if (
       e &&
       (
-        e.target === this.serverSubmenuTrigger[0] ||
+        e.target === this.$serverSubmenuTrigger[0] ||
         $(e.target).parents('.js-serverSubmenuTrigger').length
       )
     ) {
@@ -520,7 +605,7 @@ module.exports = baseVw.extend({
     app.hideOverlay();
     self.$('.js-navProfileMenu').removeClass('popMenu-opened');
     clearTimeout(this.ServerSubmenuTimeout);
-    this.serverSubmenu.removeClass('server-submenu-opened');    
+    this.$serverSubmenu.removeClass('server-submenu-opened');    
   },
 
   navBackClick: function(){
@@ -540,13 +625,13 @@ module.exports = baseVw.extend({
   },
 
   trimAddressBar: function() {
-    this.addressInput.val(function (i, value) {
+    this.$addressInput.val(function (i, value) {
       return value.replace('ob://', '');
     });
   },
 
   untrimAddressBar: function(){
-    this.addressInput.val(function (i, value) {
+    this.$addressInput.val(function (i, value) {
       if (value) {
         value = value.startsWith('ob://') ? value : 'ob://' + value;
       }
@@ -563,6 +648,11 @@ module.exports = baseVw.extend({
     $(e.target).one('mouseup', function () {
       $('#addressBar').select();
     });
+    
+    // Trigger suggestions box
+    if (!this.suggestionsVisible) {
+      this.$addressInput.trigger('keyup');
+    }
   },
 
   addressBarBlur: function(){
@@ -570,11 +660,16 @@ module.exports = baseVw.extend({
   },
 
   addressBarKeyup: function(e){
-    var barText = this.addressInput.val(),
+    var barText = this.$addressInput.val(),
         sliced;
 
     //detect enter key
     if (e.keyCode == 13){
+      // Stop right here! Route was already changed
+      if (this.selectSuggestionOnEnter()) {
+        return;
+      }
+      
       if (barText.startsWith('ob://')) {
         sliced = barText.length > 5 ? barText.slice(5) : '';
         sliced && this.addressBarProcess(sliced);
@@ -582,6 +677,7 @@ module.exports = baseVw.extend({
         this.addressBarProcess(barText);  
       }
     } else {
+      this.showSuggestionsBox(e, barText);
       this.closeStatusBar();
     }
   },
@@ -591,14 +687,175 @@ module.exports = baseVw.extend({
       Backbone.history.navigate(route, {trigger: true});
     });
   },
+  
+  suggestionClick: function() {
+    this.hideSuggestions();
+  },
+  
+  showSuggestionsBox: function(e, query) {
+    var self = this,
+        keyCode = e.keyCode || e.which,
+        type = null,
+        list = [],
+        suggestions = [];
+        
+    query = query.replace('ob://', '');
+        
+    if (query.startsWith('@')) {        
+      type = 'handles';
+      list = this.findInHandlesList(query);
+    } else if (query.startsWith('#') || !query.startsWith('ob://')) {
+      type = 'tags';
+      list = this.findInTagsList(query);
+    }
+    
+    if (list.length) {
+      // On query text change
+      if (query !== '' && this.lastQuery !== query) {
+        __.each(list, function(item){
+          var itemUrl = '',
+              itemTitle = '';
+          
+          if (type == 'tags') {
+            itemTitle = item.startsWith('#') ? item : '#' + item;
+            itemUrl = '#home/products/' + (item.startsWith('#') ? item.substr(1, item.length) : item);
+          } else if (type == 'handles') {
+            itemTitle = item.handle + ' &ndash; ' + item.name;
+            itemUrl = '#userPage/' + item.guid + '/store';
+          }
+          
+          loadTemplate('./js/templates/pageNavSuggestionItem.html', function(loadedTemplate) {
+            suggestions.push(loadedTemplate({
+              itemTitle: itemTitle,
+              itemUrl: itemUrl,
+            }));
+          });
+        });
+        
+        self.$suggestionsList.html(suggestions);
+        app.showOverlay();
+        self.showSuggestions();
+        
+        self.lastQuery = query;
+      }
+      
+      // Up and down keys
+      if (keyCode == 38 || keyCode == 40) {
+        this.$selectedSuggestion = this.$suggestionsList.find('a.selected');
+        this.$newSuggestion = null;
+
+        if (keyCode == 40) {
+          this.suggestionMoveDown();
+        } 
+        else {
+          this.suggestionMoveUp();
+        }
+      }
+      
+    } else {
+      if (this.lastQuery !== query) {
+        app.hideOverlay();
+        this.hideSuggestions();
+      }
+    }
+  },
+  
+  showSuggestions: function() {
+    this.$suggestionsList.show();
+    
+    this.suggestionsVisible = true;
+  },
+  
+  hideSuggestions: function() {
+    this.$suggestionsList.hide();
+    
+    this.suggestionsVisible = false;
+    this.lastQuery = '';
+  },
+  
+  selectSuggestionOnEnter: function() {
+    var $selected = this.$suggestionsList.find('a.selected');
+    
+    app.hideOverlay();
+    this.hideSuggestions();
+    
+    if (typeof $selected !== 'undefined' && $selected.length) {
+      Backbone.history.navigate($selected.attr('href'), {
+        trigger: true 
+      });
+      
+      return true;
+    }
+  },
+  
+  selectNewSuggestion: function() {
+    if (this.$newSuggestion !== null) {
+      this.$selectedSuggestion.removeClass('selected');
+      this.$newSuggestion.addClass('selected');
+      
+      var itemPos = this.$newSuggestion.position().top;
+      
+      // Show current item if not visible          
+      if (this.$suggestionsList.outerHeight() <= itemPos || itemPos < 0) {
+        this.$suggestionsList.scrollTop(itemPos);
+      }
+    }
+  },
+  
+  suggestionMoveUp: function() {
+    if (this.$selectedSuggestion.length) {
+      this.$newSuggestion = this.$selectedSuggestion.prev();
+      
+      // Return back to address bar
+      if (!this.$newSuggestion.length) {
+        this.$selectedSuggestion.removeClass('selected');
+        this.$addressInput.focus();
+        
+        this.$newSuggestion = null;
+      }
+    }
+    
+    this.selectNewSuggestion();
+  },
+  
+  suggestionMoveDown: function() {
+    if (this.$selectedSuggestion.length) {
+      this.$newSuggestion = this.$selectedSuggestion.next();
+      
+      // Last item
+      if (!this.$newSuggestion.length) {
+        this.$newSuggestion = this.$selectedSuggestion;
+      }
+    } else {
+      this.$newSuggestion = this.$suggestionsList.find('a').first();
+    }
+    
+    this.selectNewSuggestion();
+  },
+  
+  findInTagsList: function(query) {
+    var re = new RegExp(query, 'i');
+    
+    return __.filter(JSON.parse(localStorage.getItem('tagsHistory')), function(item){
+      return query && re.exec(item) !== null;
+    });
+  },
+
+  findInHandlesList: function(query) {
+    var re = new RegExp(query, 'i');
+
+    return __.filter(JSON.parse(localStorage.getItem('handlesHistory')), function(item){
+      return query && re.exec(item.handle) !== null;
+    });
+  },
 
   showStatusBar: function(msgText){
-    this.statusBar.find('.js-statusBarMessage').text(msgText);
-    this.statusBar.removeClass('fadeOut');
+    this.$statusBar.find('.js-statusBarMessage').text(msgText);
+    this.$statusBar.removeClass('fadeOut');
   },
 
   closeStatusBar: function(){
-    this.statusBar.addClass('fadeOut');
+    this.$statusBar.addClass('fadeOut');
   },
 
   navAdminPanel: function(){
@@ -617,10 +874,10 @@ module.exports = baseVw.extend({
   },
 
   mouseenterServerSubmenuTrigger: function() {
-    this.serverSubmenu.css('right', this.$('.popMenu-navBarSubMenu-pageNav').outerWidth());
+    this.$serverSubmenu.css('right', this.$('.popMenu-navBarSubMenu-pageNav').outerWidth());
 
     this.ServerSubmenuTimeout = setTimeout(() => {
-      this.serverSubmenu.addClass('server-submenu-opened');
+      this.$serverSubmenu.addClass('server-submenu-opened');
     }, 150);
   },
 
@@ -629,7 +886,7 @@ module.exports = baseVw.extend({
 
     setTimeout(() => {
       if (!this.overServerSubmenu) {
-        this.serverSubmenu.removeClass('server-submenu-opened');
+        this.$serverSubmenu.removeClass('server-submenu-opened');
       }
     }, 100);
   },
@@ -641,7 +898,7 @@ module.exports = baseVw.extend({
   mouseleaveServerSubmenu: function() {
     this.overServerSubmenu = false;
     clearTimeout(this.ServerSubmenuTimeout);
-    this.serverSubmenu.removeClass('server-submenu-opened');
+    this.$serverSubmenu.removeClass('server-submenu-opened');
   },  
 
   remove: function() {

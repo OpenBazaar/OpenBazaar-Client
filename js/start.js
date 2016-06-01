@@ -68,7 +68,8 @@ var Polyglot = require('node-polyglot'),
     launchOnboarding,
     setServerUrl,
     guidCreating,
-    platformClass;
+    platformClass,
+    updatePolyglot;
 
 if (process.platform === 'darwin') {
   platformClass = 'platform-mac';
@@ -98,12 +99,16 @@ window.polyglot = new Polyglot({locale: window.lang});
   }
 })(window.lang);
 
-user.on('change:language', function(md, lang) {
+updatePolyglot = function(lang){
   window.lang = lang;
   extendPolyglot(lang);
   localStorage.setItem('lang', lang);
   //trigger translation function on index
   window.translateIndex();
+};
+
+user.on('change:language', function(md, lang) {
+  updatePolyglot(lang);
 });
 
 // add in our app bar
@@ -385,7 +390,14 @@ var loadProfile = function(landingRoute, onboarded) {
         //get the user
         user.fetch({
           success: function (model) {
+            var userLang = model.get('language');
             cCode = model.get('currency_code');
+
+            if(userLang != window.polyglot.currentLocale){
+              //when switching nodes, the language saved in localStorage can be different than the language in the
+              // user model, but the user model does not trigger a change because it hasn't changed
+              updatePolyglot(userLang);
+            }
 
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function() {
@@ -406,7 +418,6 @@ var loadProfile = function(landingRoute, onboarded) {
               });
 
               $('#sideBar').html(app.chatVw.render().el);
-              $('html').addClass('chatLoaded');
 
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 

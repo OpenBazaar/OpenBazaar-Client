@@ -30,6 +30,9 @@ module.exports = {
     restart:         'f'
   },
   
+  maxTagHistory: 1000,
+  maxHandleHistory: 1000,
+  
   setTestnet: function(testNetBoolean){
     localStorage.setItem('testnet', testNetBoolean);
   }

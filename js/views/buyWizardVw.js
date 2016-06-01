@@ -13,7 +13,8 @@ var __ = require('underscore'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
     app = require('../App').getApp(),
-    clipboard = require('clipboard');
+    clipboard = require('clipboard'),
+    templateHelpers = require('../utils/templateHelpers');
 Backbone.$ = $;
 
 // randomize function
@@ -59,6 +60,7 @@ module.exports = baseVw.extend({
     'click .js-buyWizardCloseSummary': 'closeWizard',
     'click input[name="radioPaymentType"]': 'changePaymentType',
     'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
+    'click .js-partialPaymentClose': 'hidePartialPaymentMsg',
     'blur input': 'validateInput'
   },
 
@@ -76,11 +78,12 @@ module.exports = baseVw.extend({
     this.userModel = this.options.userModel;
     this.worldwide = this.options.worldwide;
     this.shippingRegions = this.options.shippingRegions;
-    this.hideMap = true;
+    //this.hideMap = true;
     this.orderID = "";
     this.model.set('selectedModerator', "");
     this.model.updateAttributes();
     this.cachePayData = "";
+    this.partialPaymentAmount = 0;
 
     //create the country select list
     this.countryList = countries.get('countries');
@@ -102,9 +105,33 @@ module.exports = baseVw.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if (data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received"){
-      this.showSummary();
+    if (data.notification && data.notification.order_id == this.orderID){
+      if (data.notification.type == "payment received") {
+        this.showSummary();
+        this.hidePartialPaymentMsg();
+      } else if (data.notification.type == "partial payment"){
+        this.showPartialPaymentMsg(data.notification);
+      }
     }
+  },
+
+  showPartialPaymentMsg: function(data){
+    var payMsg = "";
+    this.partialPaymentAmount = data.amount_funded;
+    payMsg = window.polyglot.t('transactions.BuyerPaidMessage', {
+      paidAmount: templateHelpers.intlNumFormat(this.partialPaymentAmount, 8),
+      totalAmount: templateHelpers.intlNumFormat(this.model.get('totalBTCDisplayPrice'), 8)
+    });
+
+    this.$('.js-partialPaymentMsg')
+        .addClass('fadeIn')
+        .find('.js-partialPaymentTxt').text(payMsg);
+
+    this.showPayAddress();
+  },
+
+  hidePartialPaymentMsg: function(){
+    this.$('.js-partialPaymentMsg').removeClass('fadeIn');
   },
 
   initAccordion: function(targ){
@@ -273,7 +300,7 @@ module.exports = baseVw.extend({
   },
 
   doesntHaveWallet: function(){
-    this.hasWallet = false;
+    //this.hasWallet = false;
     this.accNext();
   },
 
@@ -540,8 +567,8 @@ module.exports = baseVw.extend({
         dataURI;
     this.$el.find('.js-buyWizardSpinner').addClass('hide');
     this.orderID = data.order_id;
-    totalBTCPrice = data.amount;
-    this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
+    totalBTCPrice = data.amount - this.partialPaymentAmount;
+    this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(totalBTCPrice));
     this.payURL = data.payment_address;
     
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;

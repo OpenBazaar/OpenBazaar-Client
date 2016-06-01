@@ -90,6 +90,10 @@ p {
   margin: 0 0 1em 0;
 }
 
+p:last-child {
+  margin-bottom: 0;
+}
+
 hr {
   border: solid 1px rgba(255,255,255,0.08);
   width: 100%;
@@ -180,6 +184,134 @@ textarea:focus {
 
 form {
   margin: 0;
+}
+
+/*========== typography ==========*/
+
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 {
+  margin: 0;
+  font-weight: 700;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+h1,h2,h3,
+.h1,.h2,.h3 {
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+h4,h5,h6,
+.h4,.h5,.h6 {
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+h3, .h3 {
+  font-size: 18px;
+}
+
+h4, .h4 {
+  font-size: 17px;
+}
+
+h5, .h5 {
+  font-size: 15px;
+}
+
+h6, .h6 {
+  font-size: 15px; /* TODO: refactor to remove h6 since it is identical to h5 */
+}
+
+.fieldItem-textarea h2, .fieldItem-textarea h3, .editableContent h2, .editableContent h3 {
+  margin-top: 30px;
+}
+
+.fieldItem-textarea h2:first-child, .fieldItem-textarea h3:first-child, .editableContent h2:first-child, .editableContent h3:first-child {
+  margin-top: 0;
+}
+
+.note {
+  /* use for instructions and incidental text */
+  /*font-style: italic;*/
+  font-size: 9px;
+  opacity: 0.50;
+}
+
+[class *= "ion-"]:before {
+  font-size: 1.2em;
+  pointer-events: none;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+#ov1 .txt-fade {
+  opacity: 0.75;
+}
+
+#ov1 .unfilled {
+  opacity: 0.35;
+}
+
+#ov1 .div-fade {
+  opacity: 0.50;
+}
+
+#ov1 .div-fadeExtra {
+  opacity: 0.3;
+}
+
+.txt-lowleading {
+  line-height: 1.2;
+}
+.txt-unleaded {
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+#ov1 .unbold {
+  font-weight: 400;
+}
+
+#ov1 .allCaps {
+  text-transform: uppercase;
+}
+
+.noOverflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+.clamp2 {
+  /* adds an ellipses to the end of wrapped text after 2 lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.clamp4 {
+  /* adds an ellipses to the end of wrapped text after 4 lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.txtRow2 {
+  /* limits an element to being 2 rows of text tall */
+  line-height: 1.25em;;
+  height: 2.5em;
 }
 
 
@@ -319,11 +451,11 @@ form {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 78px;
+  top: 75px;
   width:230px;
   background-color: #252525;
   border-left: 0;
-  height: calc(100% - 50px);
+  height: calc(100% - 71px);
   z-index: 0;
   transition: right 0.5s ease;
   color: #DDD;
@@ -397,6 +529,7 @@ form {
 .barTxt {
   height: 50px;
   line-height: 50px;
+  margin-bottom: 0;
 }
 
 .bar .btn {
@@ -606,8 +739,6 @@ form {
   height: 40px;
   line-height: 38px;
   border-top: solid 1px #327EB8;
-  border-right: solid 1px #327EB8;
-  width: 316px;
   padding: 0;
   box-sizing: border-box;
   transition: opacity .5s cubic-bezier(0, 0, 0.2, 1);
@@ -1293,127 +1424,6 @@ label.fieldItem {
   width: calc(100% - 230px);
 }
 
-/*========== typography ==========*/
-
-h1,h2,h3,h4,h5,h6 {
-  margin: 0;
-  font-weight: 700;
-  -webkit-user-select: none;
-  cursor: default;
-}
-
-h1,h2,h3 {
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-h4,h5,h6 {
-  margin-bottom: 10px;
-  line-height: 1;
-}
-
-h3 {
-  font-size: 18px;
-}
-
-h5 {
-  font-size: 15px;
-}
-
-.h6, h6 {
-  font-size: 15px;
-}
-
-.fieldItem-textarea h2, .fieldItem-textarea h3, .editableContent h2, .editableContent h3 {
-  margin-top: 30px;
-}
-
-.fieldItem-textarea h2:first-child, .fieldItem-textarea h3:first-child, .editableContent h2:first-child, .editableContent h3:first-child {
-  margin-top: 0;
-}
-
-.note {
-  /* use for instructions and incidental text */
-  /*font-style: italic;*/
-  font-size: 9px;
-  opacity: 0.50;
-}
-
-[class *= "ion-"]:before {
-  font-size: 1.2em;
-  pointer-events: none;
-}
-
-.txt-center {
-  text-align: center;
-}
-
-#ov1 .txt-fade {
-  opacity: 0.75;
-}
-
-#ov1 .unfilled {
-  opacity: 0.35;
-}
-
-#ov1 .div-fade {
-  opacity: 0.50;
-}
-
-#ov1 .div-fadeExtra {
-  opacity: 0.3;
-}
-
-.txt-lowleading {
-  line-height: 1.2;
-}
-.txt-unleaded {
-  line-height: 1;
-  margin-bottom: 0;
-}
-
-#ov1 .unbold {
-  font-weight: 400;
-}
-
-#ov1 .allCaps {
-  text-transform: uppercase;
-}
-
-.noOverflow {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.noWrap {
-  white-space: nowrap;
-}
-
-.clamp2 {
-  /* adds an ellipses to the end of wrapped text after 2 lines */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.clamp4 {
-  /* adds an ellipses to the end of wrapped text after 4 lines */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-}
-
-.txtRow2 {
-  /* limits an element to being 2 rows of text tall */
-  line-height: 1.25em;;
-  height: 2.5em;
-}
-
 /*========== skin classes ==========*/
 
 .userPageImageUpload {
@@ -1758,6 +1768,33 @@ removed because I don't think we're using the trick to hide the borders any more
 
 .searchWrapperWithPill:before {
   left: 168px;
+}
+
+.suggestionsList {
+  position: absolute;
+  width: 100%;
+  max-height: 155px;
+  background: #fff;
+  margin-top: 14px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  overflow-y: scroll;
+}
+
+.suggestionsList a {
+  display: block;
+  color: #000;
+  padding: 8px 20px;
+}
+.suggestionsList a:last-child {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.suggestionsList a:hover, .suggestionsList a:focus {
+  text-decoration: none;
+}
+.suggestionsList a:hover, .suggestionsList a.selected {
+  background-color: #efefef;
 }
 
 .txtField-bar,
@@ -3456,7 +3493,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .onboardingIntroDiscover:before {
-  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 0%;
+  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 0;
   background-size: 233px 196px;
   content: " ";
   width: 32px;
@@ -4128,7 +4165,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .tooltip:hover:after{
-  max-width: 400px;
   background: rgba(37,37,37,.95);
   border-radius: 3px;
   bottom: -32px;
@@ -4954,6 +4990,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .textOpacity0,
 #ov1 .opacity0 {
   opacity: 0;
+  pointer-events: none;
 }
 
 #ov1  .textOpacity25 {
@@ -5259,6 +5296,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginLeft7 {
   margin-left: 7px;
+}
+
+#ov1  .marginLeft8 {
+  margin-left: 8px; /* use this to match the gap on the right created by the custom scrollbar */
 }
 
 #ov1  .marginLeft10 {
@@ -6203,4 +6244,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .buyWizardMap .mapWrap {
   background-color: #eeeae1;
   height: 100%;  
+}
+
+.backToTop {
+  position: fixed;
+  bottom: 15px;
+  right: 73px;
+  padding: 10px;
+  background-color: #252525;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 300ms ease, right 0.5s ease;
+}
+
+.backToTop.slideUp {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#ov1.chatOpen .backToTop {
+  right: 303px;
 }
