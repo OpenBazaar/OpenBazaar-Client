@@ -19,6 +19,11 @@ module.exports = BaseVw.extend({
       throw new Error('Please provide a ServerConfigs collection.');
     }
 
+    this.connectionState = {};
+    this.collection.forEach((md) => {
+      this.connectionState[md.id] = { status: 'not-connected' }
+    });
+
     this.listenTo(this.collection, 'update', this.render);
     this.listenTo(this.collection, 'remove', this.onRemoveConfig);
   },
@@ -29,18 +34,19 @@ module.exports = BaseVw.extend({
     __.every(this.configRowViews, (vw) => {
       index++;
       return vw.model !== md;
-
-      
     });
 
-    if (index > -1) this.configRowViews.splice(index, 1);
+    if (index > -1) {
+      this.configRowViews.splice(index, 1);
+    }
   },
 
   setConnectionState: function(state) {
     // 'state' should be in the form:
     // { id: 31 (id of server config model), status: 'connecting' }
 
-    var index = -1;
+    var index = -1,
+        updatedState;
 
     __.every(this.configRowViews, (vw, i) => {
       if (vw.model.id === state.id) {
@@ -52,8 +58,10 @@ module.exports = BaseVw.extend({
     });
 
     if (index > -1) {
+      updatedState = __.omit(state, 'id');
+      this.connectionState[state.id] = updatedState;
       this.configRowViews[index]
-        .setState(__.omit(state, 'id'));
+        .setState(updatedState);
     }
   },
 
@@ -61,6 +69,7 @@ module.exports = BaseVw.extend({
     var scrollTop;
 
     this.rendered = true;
+    this.configRowViews.forEach((vw) => vw.remove());
     this.configRowViews = [];
     scrollTop = this.$rowsWrap ? this.$rowsWrap[0].scrollTop : 0;
 
@@ -70,7 +79,10 @@ module.exports = BaseVw.extend({
       this.$el.html(t());
 
       this.collection.forEach((md) => {
-        var vw = new ServerConfigRowVw({ model: md });
+        var vw = new ServerConfigRowVw({
+          model: md,
+          initialState: this.connectionState[md.id]
+        });
 
         this.listenTo(vw, 'delete', (e) => {
           e.view.model.destroy();
@@ -86,8 +98,9 @@ module.exports = BaseVw.extend({
 
         this.listenTo(vw, 'cancel', (e) => {
           this.trigger('cancel', { model: e.view.model });
-        });        
+        });
 
+        this.registerChild(vw);
         $rows.append( vw.render().el );
         this.configRowViews.push(vw);
       });

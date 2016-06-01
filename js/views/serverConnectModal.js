@@ -21,22 +21,60 @@ module.exports = BaseModal.extend({
   initialize: function(options) {
     this.options = options || {};
 
-    this.headerVw = new ServerConnectHeaderVw({
-      initialState: {
-        msg: window.polyglot.t('serverConnectModal.serverConfigsHeaderMsg'),
-        title: window.polyglot.t('serverConnectModal.serverConfigsTitle'),
-        showNew: true
-      }
+    if (!options.userModel) {
+      throw new Error('Please provide a user model.');
+    }
+
+    this._headerState = {};
+
+    this.headerVw = new ServerConnectHeaderVw();
+    this.setHeaderState({
+      msg: { translate: 'serverConnectModal.serverConfigsHeaderMsg' },
+      title: { translate: 'serverConnectModal.serverConfigsTitle' },
+      showNew: true
     });
+    setTimeout(() => this.registerChild(this.headerVw));    
 
     this.serverConfigs = app.serverConfigs;
     this.serverConfigsVw = new ServerConfigsVw({
       collection: this.serverConfigs
     });
+    setTimeout(() => this.registerChild(this.serverConfigsVw));
 
     this.listenTo(this.serverConfigsVw, 'edit-config', this.onEditConfig);
     this.listenTo(this.serverConfigsVw, 'connect', this.onConnectClick);
     this.listenTo(this.serverConfigsVw, 'cancel', this.onCancelClick);
+
+    options.userModel.on('change:language', (md, lang) => {
+      this.setHeaderState(this._headerState);
+      this.serverConfigFormVw && this.serverConfigFormVw.render();
+      this.serverConfigsVw.render();
+    });    
+  },
+
+  setHeaderState: function(state) {
+    // In order to properly translate the msg and title and update the
+    // translations upon a language change, rather than providing a literal
+    // string, please provide an object with the Polyglot key in a 'translation'
+    // property, e.g:
+    // {
+    //   title: { translate: 'polyglotKey' },
+    //   msg: 'my literal string' // if you dont want to translate
+    // }
+    var translatedState;
+
+    this._headerState = __.extend(this._headerState, state || {});
+    translatedState = this._headerState;
+
+    Object.keys(this._headerState).forEach((key) => {
+      if (['msg', 'title'].indexOf(key) !== -1) {
+        if (this._headerState[key]['translate']) {
+          translatedState[key] = window.polyglot.t(this._headerState[key]['translate']);
+        }
+      }
+    });
+
+    this.headerVw.setState(translatedState);
   },
 
   hideMessageBar: function() {
@@ -55,9 +93,10 @@ module.exports = BaseModal.extend({
     if (!this.$jsConfigFormWrap) return;
     
     this.$jsConfigFormWrap.addClass('slide-out');
-    this.headerVw.setState({
-      msg: window.polyglot.t('serverConnectModal.serverConfigsHeaderMsg'),
-      title: window.polyglot.t('serverConnectModal.serverConfigsTitle'),
+
+    this.setHeaderState({
+      msg: { translate: 'serverConnectModal.serverConfigsHeaderMsg' },
+      title: { translate: 'serverConnectModal.serverConfigsTitle' },
       showNew: true
     });
 
@@ -67,25 +106,23 @@ module.exports = BaseModal.extend({
   showConfigForm: function(configMd) {
     var model = configMd;
 
-    this._state = this.options.initialState || {};
-
     if (!model) {
       model = new ServerConfigMd();
       model.__collection = this.serverConfigs;
     }
 
-    this.headerVw.setState({
-      title: model.get('name') || window.polyglot.t('serverConnectModal.newConfigTitle'),
+    this.setHeaderState({
+      title: model.get('name') || { translate: 'serverConnectModal.newConfigTitle' },
       msg:  configMd ?
-        window.polyglot.t('serverConnectModal.editConfigHeaderMsg') :
-        window.polyglot.t('serverConnectModal.newConfigHeaderMsg'),
+        { translate: 'serverConnectModal.editConfigHeaderMsg' } :
+        { translate: 'serverConnectModal.newConfigHeaderMsg' },
       showNew: false
     });
 
     this.renderServerConfigForm(model);
 
     this.listenTo(model, 'change:name', (md) => {
-      this.headerVw.setState({
+      this.setHeaderState({
         title: md.get('name')
       });
     });
@@ -364,6 +401,7 @@ module.exports = BaseModal.extend({
     this.serverConfigFormVw = new ServerConfigFormVw({
       model: md
     });
+    this.registerChild(this.serverConfigFormVw);
 
     this.$jsConfigFormWrap = this.$jsConfigFormWrap || this.$('.js-config-form-wrap');
     this.$jsConfigFormWrap.html(this.serverConfigFormVw.render().el);

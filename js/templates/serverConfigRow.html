@@ -3,7 +3,7 @@
     <div class="table">
       <div>
         <div class="vertAlignMid noOverflow" style="width: 157px;">
-          <%= ob.name %>
+          <% print(ob.default ? polyglot.t('serverConnectModal.defaultServerName') : ob.name) %>
         </div>
         <div class="vertAlignMid noOverflow">
           <%= ob.server_ip %>

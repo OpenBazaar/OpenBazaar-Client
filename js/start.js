@@ -62,7 +62,6 @@ var Polyglot = require('node-polyglot'),
     extendPolyglot,
     newPageNavView,
     newSocketView,
-    //serverConnectModal,
     onboardingModal,
     pageConnectModal,
     launchOnboarding,
@@ -504,7 +503,10 @@ pageConnectModal.on('cancel', () => {
 }).render().open();
 
 app.connectHeartbeatSocket();
-app.serverConnectModal = new ServerConnectModal().render();
+app.serverConnectModal = new ServerConnectModal({
+  userModel: user
+}).render();
+
 app.serverConnectModal.on('connected', () => {
   if (profileLoaded) {
     // If we've already loaded called loadProfile() and then, we connect
