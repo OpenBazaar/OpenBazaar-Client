@@ -227,8 +227,7 @@ module.exports = Backbone.Router.extend({
     // cachedAt is updated and the user has up until the view's 'cacheExpires' amount of
     // time to come back to it in it's current state.
     for (var key in this.viewCache) {
-      let cached = this.viewCache[key],
-          curHash = location.hash.slice(1);
+      let cached = this.viewCache[key];
 
       if (
           cached.view === this.view &&
