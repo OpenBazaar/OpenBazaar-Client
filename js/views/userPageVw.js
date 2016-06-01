@@ -395,7 +395,7 @@ module.exports = baseVw.extend({
         }
 
         if(!self.options.ownPage && !self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
-            self.hideThisUser("nsfw");
+          self.hideThisUser("nsfw");
         }
 
         self.$el.find('#image-cropper').cropit({
@@ -488,7 +488,7 @@ module.exports = baseVw.extend({
       this.$el.find('.js-list4').html("");
       this.renderItem(hash);
       this.$obContainer.scrollTop(352);
-    }else if(state === "listingOld") {
+    }else if (state === "listingOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
       this.$obContainer.scrollTop(352);
     }else if(state === "listingNew"){
@@ -1552,7 +1552,6 @@ module.exports = baseVw.extend({
     var $targ = $(e.target).closest('.js-addmoderator'),
         self = this,
         modList = {};
-    console.log($targ)
 
     $targ.addClass('loading');
 
