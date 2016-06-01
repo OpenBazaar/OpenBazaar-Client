@@ -74,9 +74,12 @@ module.exports = Backbone.Router.extend({
       var cached;
 
       for (var key in this.viewCache) {
-        cached = this.viewCache[key];
-        if (Date.now() - cached.cachedAt >= cached.view.cacheExpires) {
-          delete this.viewCache[key];
+        if (this.viewCache.hasOwnProperty(key)) {
+          cached = this.viewCache[key];
+
+          if (Date.now() - cached.cachedAt >= cached.view.cacheExpires) {
+            delete this.viewCache[key];
+          }
         }
       }      
     }, this.cleanCacheInterval);
@@ -227,13 +230,15 @@ module.exports = Backbone.Router.extend({
     // cachedAt is updated and the user has up until the view's 'cacheExpires' amount of
     // time to come back to it in it's current state.
     for (var key in this.viewCache) {
-      let cached = this.viewCache[key];
+      if (this.viewCache.hasOwnProperty(key)) {
+        let cached = this.viewCache[key];
 
-      if (
-          cached.view === this.view &&
-          (Date.now() - cached.cachedAt < cached.view.cacheExpires)
-        ) {
-        cached.cachedAt = Date.now();
+        if (
+            cached.view === this.view &&
+            (Date.now() - cached.cachedAt < cached.view.cacheExpires)
+          ) {
+          cached.cachedAt = Date.now();
+        }
       }
     }
 

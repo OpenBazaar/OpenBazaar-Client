@@ -85,14 +85,11 @@ module.exports = pageVw.extend({
     if (e.view !== this) return;
     state = state || this.state;
 
-    if (this.cachedScrollPositions[state])
+    if (this.cachedScrollPositions[state]) {
       this.obContainer[0].scrollTop = this.cachedScrollPositions[state];
-    this.setState(state);
-
-    if (!searchTerm && this.searchItemsText) {
-      this.searchItemsClear(state);
-      if (state === 'products') this.obContainer[0].scrollTop = 0;
     }
+
+    this.setState(state);
 
     if (searchTerm && searchTerm !== this.searchItemsText) {
       this.searchItems(searchTerm);
@@ -192,7 +189,6 @@ module.exports = pageVw.extend({
 
   render: function(){
     var self = this;
-    $('#content').html(this.$el);
 
     loadTemplate('./js/templates/backToTop.html', function(backToTopTmpl) {
       loadTemplate('./js/templates/home.html', function(loadedTemplate) {
@@ -520,7 +516,7 @@ module.exports = pageVw.extend({
     }
   },
 
-  onSearchItemsClear: function(e) {
+  onSearchItemsClear: function() {
     this.searchItemsClear();
   },
 

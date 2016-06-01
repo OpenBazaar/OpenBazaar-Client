@@ -368,9 +368,6 @@ UserPageVw = pageVw.extend({
 
     this.model.set('isBlocked', isBlocked); //add blocked status to model
 
-    //make sure container is cleared
-    $('#content').html(this.$el);
-
     loadTemplate('./js/templates/backToTop.html', function(backToTopTmpl) {
       loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
         self.setCustomStyles();

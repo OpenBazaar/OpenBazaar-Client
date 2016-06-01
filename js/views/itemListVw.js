@@ -1,7 +1,6 @@
 'use strict';
 
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     baseVw = require('./baseVw'),
     itemsShortCollection = require('../collections/itemsShortCl'),
     itemShortView = require('./itemShortVw'),
