@@ -331,7 +331,7 @@ $(window).bind('keydown', function(e) {
       Backbone.history.loadUrl();
       break;
     case window.config.keyShortcuts.restart:
-      location.reload();
+      app.router.refresh();
       break;
     }
 
@@ -403,7 +403,7 @@ var loadProfile = function(landingRoute, onboarded) {
             setCurrentBitCoin(cCode, user, function() {
               newSocketView = new socketView();
 
-              newPageNavView = new pageNavView({
+              app.pageNav = newPageNavView = new pageNavView({
                 model: user,
                 socketView: newSocketView,
                 userProfile: userProfile,

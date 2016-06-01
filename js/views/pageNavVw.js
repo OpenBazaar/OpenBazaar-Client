@@ -390,7 +390,7 @@ module.exports = baseVw.extend({
       self.$suggestionsList = self.$('.js-addressBarSuggestions');
 
       //listen for address bar set events
-      self.listenTo(window.obEventBus, "setAddressBar", function(options){
+      self.listenTo(window.obEventBus, 'setAddressBar', function(options){
         var text = options.handle || options.addressText;
         self._lastSetAddressBarText = text;
         self.$addressInput.val(text);
@@ -617,7 +617,7 @@ module.exports = baseVw.extend({
   },
 
   navRefreshClick: function(){
-    Backbone.history.loadUrl();
+    app.router.refresh();
   },
   
   navRestartClick: function(){

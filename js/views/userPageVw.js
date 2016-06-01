@@ -13,7 +13,7 @@ var __ = require('underscore'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
     itemModel = require('../models/itemMd'),
-    baseVw = require('./baseVw'),
+    pageVw = require('./pageVw'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
     reviewsView = require('./reviewsVw'),
@@ -23,7 +23,8 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     storeWizardVw = require('./storeWizardVw'),
     saveToAPI = require('../utils/saveToAPI'),
-    moderatorSettingsVw = require('./moderatorSettingsVw');
+    moderatorSettingsVw = require('./moderatorSettingsVw'),
+    UserPageVw;
 
 var defaultItem = {
   "vendor_offer": {
@@ -117,7 +118,7 @@ function rgb2hex(rgb) {
   return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }
 
-module.exports = baseVw.extend({
+UserPageVw = pageVw.extend({
 
   className: "userView contentWrapper",
 
@@ -333,6 +334,8 @@ module.exports = baseVw.extend({
     });
   },
 
+  cacheExpires: 0,
+
   loadingConfig: function() {
     var config = {
       promise: this.loadingDeferred.promise(),
@@ -364,9 +367,6 @@ module.exports = baseVw.extend({
         isBlocked = blocked.indexOf(this.pageID) !== -1;
 
     this.model.set('isBlocked', isBlocked); //add blocked status to model
-
-    //make sure container is cleared
-    $('#content').html(this.$el);
 
     loadTemplate('./js/templates/backToTop.html', function(backToTopTmpl) {
       loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
@@ -486,6 +486,7 @@ module.exports = baseVw.extend({
     if (state === "listing"){
       //clear old templates
       this.$el.find('.js-list4').html("");
+      this.tabClick(this.$el.find('.js-storeTab'), this.$el.find('.js-item'));
       this.renderItem(hash);
       this.$obContainer.scrollTop(352);
     }else if (state === "listingOld") {
@@ -1005,7 +1006,6 @@ module.exports = baseVw.extend({
     var self = this;
     this.setItem(hash, function(model, response) {
       if (response.vendor_offer){
-        self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
         self.loadingDeferred.resolve();
       } else {
         self.loadingDeferred.reject();
@@ -1745,9 +1745,11 @@ module.exports = baseVw.extend({
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     //$.colorbox.close();
     messageModal.$el.off('click', this.modalCloseHandler);
-    this.scrollHandler && this.$obContainer.off('scroll', this.scrollHandler);
+    $('#obContainer').off('scroll', this.onScroll);
 
-    baseVw.prototype.remove.apply(this, arguments);
+    pageVw.prototype.remove.apply(this, arguments);
   }
 
 });
+
+module.exports = UserPageVw;
