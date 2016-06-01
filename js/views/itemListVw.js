@@ -1,14 +1,12 @@
 'use strict';
 
 var __ = require('underscore'),
-    Backbone = require('backbone'),
-    //$ = require('jquery'),
-    //loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw'),
     itemsShortCollection = require('../collections/itemsShortCl'),
     itemShortView = require('./itemShortVw'),
     simpleMessageView = require('./simpleMessageVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   initialize: function(options){
     this.options = options || {};
@@ -18,8 +16,12 @@ module.exports = Backbone.View.extend({
     //this.listenTo(this.options.userModel, 'change', function(){
     //  self.render();
     //});
-    this.subViews = [];
-    this.render();
+    
+    // as of now, our base view doesn't support registerChild happening
+    // before the view is fully initialized, hence the timeout here:
+    setTimeout(() => {
+      this.render();
+    });
   },
 
   render: function(){
@@ -42,24 +44,12 @@ module.exports = Backbone.View.extend({
       model: item,
       parentEl: this.$el
     });
-    this.subViews.push(itemShort);
+    // this.$el.append(itemShort.render().$el);
+    this.registerChild(itemShort);
   },
 
   renderNoneFound: function(){
     var simpleMessage = new simpleMessageView({title: this.options.title, message: this.options.message, el: this.$el});
-    this.subViews.push(simpleMessage);
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if (subView.close){
-        subView.close();
-      } else {
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
+    this.registerChild(simpleMessage);
   }
 });

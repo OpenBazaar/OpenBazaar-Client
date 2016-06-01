@@ -2549,6 +2549,7 @@ div.chatSearchOut .chatSearchIcon {
   display: inline-block;
   font-weight: 500;
   letter-spacing: 0.2px;
+  word-break: break-all;
 }
 
 #inputConversationMessage {
@@ -4111,6 +4112,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   transition: width .35s cubic-bezier(0, 0, 0.2, 1);
+  box-sizing: border-box;
 }
 
 .customizePrimaryColorRecommendations.show,

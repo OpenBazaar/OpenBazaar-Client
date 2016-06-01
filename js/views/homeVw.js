@@ -4,14 +4,15 @@ var __ = require('underscore'),
     $ = require('jquery'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
-    baseVw = require('./baseVw'),
+    app = require('../App.js').getApp(),
+    pageVw = require('./pageVw'),
     itemShortView = require('./itemShortVw'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     messageModal = require('../utils/messageModal.js');
 
-module.exports = baseVw.extend({
+module.exports = pageVw.extend({
 
   className: "homeView contentWrapper",
 
@@ -21,7 +22,7 @@ module.exports = baseVw.extend({
     'click .js-vendorsTab': function(){this.setState("vendors");},
     'click .js-homeCreateStore': 'createStore',
     'click .js-homeCreateListing': 'createListing',
-    'click .js-homeSearchItemsClear': 'searchItemsClear',
+    'click .js-homeSearchItemsClear': 'onSearchItemsClear',
     'keyup .js-homeSearchItems': 'searchItemsKeyup',
     'focus .js-homeSearchItems': 'searchItemsFocus',
     'blur .js-homeSearchItems': 'searchItemsBlur',
@@ -37,7 +38,7 @@ module.exports = baseVw.extend({
     this.userModel = options.userModel;
     this.userProfile = options.userProfile;
     this.socketView = options.socketView;
-    this.state = options.state;
+    this.state = options.state || 'products';
     this.searchItemsText = options.searchItemsText;
     this.slimVisible = false;
     this.itemViews = [];
@@ -49,6 +50,7 @@ module.exports = baseVw.extend({
     this.ownFollowing = [];
     this.onlyFollowing = true;
     this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
+    this.cachedScrollPositions = {};
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
 
@@ -69,6 +71,44 @@ module.exports = baseVw.extend({
     });
 
     this.fetchOwnFollowing(this.render());
+
+    this.listenTo(app.router, 'cache-will-detach', this.onCacheWillDetach);
+    this.listenTo(app.router, 'cache-detached', this.onCacheDetached);
+    this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);
+  },
+
+  onCacheReattached: function(e) {
+    var splitRoute = e.route.split('/'),
+        state = splitRoute[1],
+        searchTerm = splitRoute[2];
+
+    if (e.view !== this) return;
+    state = state || this.state;
+
+    if (this.cachedScrollPositions[state]) {
+      this.obContainer[0].scrollTop = this.cachedScrollPositions[state];
+    }
+
+    this.setState(state);
+
+    if (searchTerm && searchTerm !== this.searchItemsText) {
+      this.searchItems(searchTerm);
+      this.obContainer[0].scrollTop = 0;
+    }
+
+    this.obContainer.on('scroll', this.scrollHandler);
+  },  
+
+  onCacheWillDetach: function(e) {
+    if (e.view !== this) return;
+
+    this.cachedScrollPositions[this.state] = this.obContainer[0].scrollTop;
+  },
+
+  onCacheDetached: function(e) {
+    if (e.view !== this) return;
+
+    this.obContainer.off('scroll', this.scrollHandler);
   },
 
   fetchOwnFollowing: function(callback){
@@ -124,8 +164,8 @@ module.exports = baseVw.extend({
   },
 
   hideList: function(){
-    $('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
-    $('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
+    this.$('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
+    this.$('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
   },
 
   resetLookingCount: function(){
@@ -149,7 +189,6 @@ module.exports = baseVw.extend({
 
   render: function(){
     var self = this;
-    $('#content').html(this.$el);
 
     loadTemplate('./js/templates/backToTop.html', function(backToTopTmpl) {
       loadTemplate('./js/templates/home.html', function(loadedTemplate) {
@@ -299,23 +338,22 @@ module.exports = baseVw.extend({
   },
 
   setState: function(state, searchItemsText){
+    var searchTextFrag;
+
     if (!state){
       state = "products";
     }
+
     this.hideList();
     this.$el.find('.js-' + state).removeClass('hide');
     this.$el.find('.js-' + state + 'Tab').addClass('active');
     this.$el.find('.js-' + state + 'Search').removeClass('hide');
 
-    if (searchItemsText){
-      this.searchItemsText = searchItemsText;
+    if (searchItemsText) this.searchItemsText = searchItemsText;
+    searchTextFrag = this.searchItemsText ? `/${this.searchItemsText.replace(/ /g, "")}` : '';
 
-      //add action to history
-      Backbone.history.navigate("#home/" + state + "/" + searchItemsText.replace(/ /g, ""), { replace: true });
-    } else {
-      //add action to history
-      Backbone.history.navigate("#home/" + state, { replace: true });
-    }
+    //add action to history
+    Backbone.history.navigate("#home/" + state + searchTextFrag, { replace: true });
 
     this.state = state;
   },
@@ -478,8 +516,13 @@ module.exports = baseVw.extend({
     }
   },
 
-  searchItemsClear: function(){
-    this.setState("products");
+  onSearchItemsClear: function() {
+    this.searchItemsClear();
+  },
+
+  searchItemsClear: function(state){
+    this.searchItemsText = '';
+    this.setState(state || 'products');
     this.loadItems();
 
     //clear address bar
@@ -512,6 +555,7 @@ module.exports = baseVw.extend({
           .replace('%{tag}', `<span class="btn-pill color-secondary">${hashedItem}</span>`)
       );
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
+      this.$el.find('.js-homeSearchItems').val("#" + searchItemsText)
       this.setState('products', searchItemsText);
     } else {
       this.searchItemsClear();
@@ -649,6 +693,6 @@ module.exports = baseVw.extend({
   remove: function() {
     this.clearSocketTimeout();
     this.scrollHandler && this.obContainer.off('scroll', this.scrollHandler);
-    baseVw.prototype.remove.apply(this, arguments);
+    pageVw.prototype.remove.apply(this, arguments);
   }
 });
