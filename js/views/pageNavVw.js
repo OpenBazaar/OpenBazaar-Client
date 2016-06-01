@@ -176,8 +176,8 @@ module.exports = baseVw.extend({
       }
       
       // History needs to be pruned
-      if (tagsListLength > config.maxTagHistory) {
-        tagsList = tagsList.slice(0, config.maxTagHistory);
+      if (tagsListLength > window.config.maxTagHistory) {
+        tagsList = tagsList.slice(0, window.config.maxTagHistory);
       }
 
       // Update the history
@@ -207,13 +207,13 @@ module.exports = baseVw.extend({
           handlesList.splice(index, 1);
         }
         
-         // Tag goes to the beginning of the list
-         handlesList.splice(0, 0, handleObj);
+        // Tag goes to the beginning of the list
+        handlesList.splice(0, 0, handleObj);
       }
       
       // History needs to be pruned
-      if (handlesListLength > config.maxHandleHistory) {
-        handlesList = handlesList.slice(0, config.maxHandleHistory);
+      if (handlesListLength > window.config.maxHandleHistory) {
+        handlesList = handlesList.slice(0, window.config.maxHandleHistory);
       }
 
       // Update the history
@@ -571,12 +571,14 @@ module.exports = baseVw.extend({
     if (!$target.hasClass('js-navAddressBar') && this.suggestionsVisible) {
       app.hideOverlay();
       this.hideSuggestions();
-    } else if ($target.hasClass('js-navAddressBar') || !($target.hasClass('popMenu') ||
+    } else if ($target.hasClass('js-navAddressBar') ||
+      !(
+        $target.hasClass('popMenu') ||
         $target.parents('.popMenu').length ||
         $target.is('[data-popmenu]') ||
         $target.parents('[data-popmenu]').length
-      )) {
-      
+      ))
+    {
       if (!this.suggestionsVisible) {
         app.hideOverlay();
       }
@@ -719,7 +721,7 @@ module.exports = baseVw.extend({
             itemUrl = '#home/products/' + (item.startsWith('#') ? item.substr(1, item.length) : item);
           } else if (type == 'handles') {
             itemTitle = item.handle + ' &ndash; ' + item.name;
-            itemUrl = '#userPage/' + item.guid + '/store'
+            itemUrl = '#userPage/' + item.guid + '/store';
           }
           
           loadTemplate('./js/templates/pageNavSuggestionItem.html', function(loadedTemplate) {
