@@ -77,7 +77,7 @@ module.exports = pageVw.extend({
     this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);
   },
 
-  onCacheReattached: function(e){
+  onCacheReattached: function(e) {
     var splitRoute = e.route.split('/'),
         state = splitRoute[1],
         searchTerm = splitRoute[2];
