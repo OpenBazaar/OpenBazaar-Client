@@ -85,6 +85,12 @@
           <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
           <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
         </div>
+        <div class="padding10 width100 alignCenter js-loadingMsg">
+          <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
+        </div>
+        <div class="padding10 width100 alignCenter hide js-emptyMsg">
+          <%= polyglot.t("transactions.NoPurchases") %>
+        </div>
       </div>
 
       <div class="flexRow flex-border positionWrapper js-tabTarg js-sales hide" id="transactionsSales">
@@ -124,6 +130,12 @@
           <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
           <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
         </div>
+        <div class="padding10 width100 alignCenter js-loadingMsg">
+          <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
+        </div>
+        <div class="padding10 width100 alignCenter hide js-emptyMsg">
+          <%= polyglot.t("transactions.NoPurchases") %>
+        </div>
       </div>
 
       <div class="flexRow flex-border positionWrapper hide js-tabTarg js-cases" id="transactionsCases">
@@ -136,6 +148,12 @@
         <div class="positionWrapper searchWrapper borderBottom custCol-border flexExpand">
           <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
           <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
+        </div>
+        <div class="padding10 width100 alignCenter js-loadingMsg">
+          <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
+        </div>
+        <div class="padding10 width100 alignCenter hide js-emptyMsg">
+          <%= polyglot.t("transactions.NoPurchases") %>
         </div>
       </div>
 
