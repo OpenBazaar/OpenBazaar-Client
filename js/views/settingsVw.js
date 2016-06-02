@@ -595,7 +595,6 @@ module.exports = pageVw.extend({
   },
 
   setState: function(state){
-    console.log(state)
     if (state){
       this.state = state;
       this.setTab(this.$('.js-' + state + 'Tab'), this.$('.js-' + state));
