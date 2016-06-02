@@ -327,10 +327,10 @@ $(window).bind('keydown', function(e) {
       break;
     case window.config.keyShortcuts.refresh:
       e.preventDefault();
-      Backbone.history.loadUrl();
+      app.router.refresh();
       break;
     case window.config.keyShortcuts.restart:
-      app.router.refresh();
+      location.reload();
       break;
     }
 

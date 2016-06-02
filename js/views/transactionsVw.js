@@ -311,9 +311,15 @@ module.exports = pageVw.extend({
     });
 
     this.$el.find('.js-'+tabName+'Count').html(tabCollection.length);
-    this.$el.find('.js-'+tabName)
+
+    this.$el.find('.js-' + tabName)
         .append(tabWrapper)
-        .find('.js-unpaidCount').html(tabCollection.where({status: 0}).length);
+        .find('.js-unpaidCount').html(tabCollection.where({status: 0}).length)
+        .end().find('.js-loadingMsg').addClass('hide');
+
+    if (!tabCollection.length) {
+      this.$el.find('.js-'+tabName + ' .js-emptyMsg').removeClass('hide');
+    }
   },
 
   addTransaction: function(model, tabWrapper, type){
