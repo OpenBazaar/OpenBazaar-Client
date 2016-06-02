@@ -6241,6 +6241,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   display: none;
 }
 
+#ov1.notFancy .user-page-header-slim {
+  display: none;
+}
+
+#ov1.notFancy .user-page-header-slim.scrolledIntoView {
+  display: block;
+}
+
 #ov1.notFancy .disabled,
 #ov1.notFancy #userPage .disabled,
 #ov1.notFancy #obContainer .disabled,
