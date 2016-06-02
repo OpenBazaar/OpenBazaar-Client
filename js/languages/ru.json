@@ -15,6 +15,7 @@
     "Cancel": "Отмена",
     "TryAgain": "Попробуй еще раз",
     "ClosingOpenBazaar": "Закрыть (Ваша страница будет недоступна)",
+    "ClosingOpenBazaarNonInstaller": "Закрыть",
     "Minimize": "Свернуть",
     "Maximize": "Развернуть",
     "Restore": "Восстановить",
@@ -34,6 +35,7 @@
     "GoToOneName": "Посетить Onename.com",
     "GoToOneNameTooltip": "Создайте ID на Onename.com, и над аккаунтами приложений выберите openbazaar в качестве используемого приложения и введите ваш GUID в качестве идентификатора аккаунта (ваш GUID находится на вашей странице, во вкладке \"О нас\"). Верификация может занять несколько дней.",
     "ChangeCurrency": "Изменить валюту",
+    "ChangeCurrencyHelp": "Щёлкните здесь, чтобы вернуться в настройки не сохраняя произведённых изменений",
     "SKU": "Артикул",
     "Refurbished": "Восстановленный",
     "Physical": "Физический",
@@ -153,11 +155,11 @@
     "SaveChanges": "Применить",
     "YourName": "Ваше имя",
     "UseTestnet": "Включить Testnet",
-    "UseTestnetHelp": "Если назначено в качестве правильного варианта, ваш клиент будет использовать биткойн адреса Testnet. Опция работает только если ваш сервер OB запущен с testnet флагом -t ",
+    "UseTestnetHelp": "Если назначено в качестве правильного варианта, ваш клиент будет использовать биткойн адреса Testnet. Опция работает только если ваш сервер OB запущен с testnet флагом -t",
     "TestnetAddress": "Тестовый адрес",
-    "TestnetAddressHelp": "Ваш клиент может использовать Testnet и позволять только Testnet адреса. Для использования mainnet или реального Биткойна, выключите Tesnet в Настройках/Сервер, и убедитесь что ваш сервер не запущен с testnet флагом -t ",
+    "TestnetAddressHelp": "Ваш клиент может использовать Testnet и позволять только Testnet адреса. Для использования mainnet или реального Биткойна, выключите Tesnet в Настройках/Сервер, и убедитесь что ваш сервер не запущен с testnet флагом -t",
     "MustTestnetAddress": "Должен быть тестовый адрес",
-    "BitcoinAddress": "Current Refund Address",
+    "BitcoinAddress": "Биткойн адрес для возврата средств",
     "BitcoinReturnAddress": "Введите ваш Биткойн адрес",
     "BitcoinReturnAddressPlaceholder": "Введите Биткойн адрес...",
     "BitcoinReturnAddressInfo": "В случае инициирования возмещения убытков, средства поступят на приведённый Биткойн адрес. Пожалуйста предоставьте правильный адрес адрес принадлежащий лично вам. Вы должны иметь исключительный доступ к этому адресу, чтобы ваши средства могли возвращаться обратно.",
@@ -187,6 +189,8 @@
     "SMTPRecipient": "Адрес эл. почты получателя",
     "SMTPSenderExample": "sender@gmail.com",
     "SMTPSender": "Адрес эл. почты отправителя",
+    "TestSMTPButton": "Тест SMPT сервера",
+    "TestSMTPButtonTooltip": "Тестовое подключение к SMTP серверу",
     "ServerIPPort": "Сервер IP:Port",
     "All": "Все",
     "Name": "Имя",
@@ -237,6 +241,7 @@
     "NotificationRefund": "%{name} выписал вам возврат.",
     "NoticationOrderStatus": "Статус заказа обновлен, покупатель оповещен.",
     "NotificationNewOrder": "%{name} совершил покупку.",
+    "NotificationNewTransactionMessage": "%[name] отправил вам новое сообщение касающееся сделки",
     "NotificationTitle": "Звание: %{title}",
     "NotificationFrom": "От: %{name}",
     "NotificationType": "Тип: %{type}",
@@ -343,6 +348,10 @@
     "Avatar": "Аватар",
     "AdditionalPaymentData": "Дополнительная информация по оплате",
     "AdditionalPaymentDataInfo": "Включить имя покупки и номер заказа в платёжный QR код?",
+    "AppBarStyle": "Application Top Bar Style",
+    "AppBarStyleInfo": "How should the top bar of the application be styled?",
+    "OSWindows": "Windows",
+    "OSMac": "Mac",
     "ShippableHelp": "Этот продукт может быть отправлен только по одному из указанных адресов. Добавьте больше адресов в секцию Настройки/Адреса чтобы иметь возможность приобрести больше товаров.",
     "firewall": {
         "Open": "Открыть",
@@ -438,6 +447,7 @@
         "ConfirmOrderResend": "Повторить отправку подтверждения заказа",
         "ConfirmOrderResendTooltip": "Если покупатель заявляет о том что уведомление о заказе не получено, эта кнопка поможет отправить уведомление снова. Уведомление осуществляется за считанные секунды.",
         "RefundOrder": "Возврат заказа",
+        "ConfirmRefund": "Confirm",
         "ConfirmRefundOrder": "Подтверждение возврата заказа",
         "RefundOrderTooltip": "Отменить заказ и вернуть средства покупателю",
         "RefundReason": "Причина возврата",
@@ -508,7 +518,13 @@
         "UpdateComplete": "Обновление ваших операций по сделке завершено",
         "UpdateFailed": "Обновление ваших операций по сделке не удалось завершить. Откройте сделку и повторите попытку.",
         "UpdateInvalid": "Обновление ваших операций по сделке вызвали ошибку. Откройте сделку и повторите попытку.",
-        "ExportCSV": "Экспорт в CSV"
+        "ExportCSV": "Экспорт в CSV",
+        "ShowUnpaid": "Показать неоплаченные",
+        "HideUnpaid": "Скрыть неоплаченные",
+        "BuyerPaidMessage": "You have paid %{paidAmount} out of %{totalAmount} BTC",
+        "BuyerPaidMessageHelp": "To complete your purchase, pay the remaining balance shown above.",
+        "SellerPaidMessage": "The buyer has paid %{paidAmount} out of %{totalAmount} BTC",
+        "SellerPaidMessageHelp": "This purchase can not be confirmed until the buyer has completely funded it."
     },
     "errorMessages": {
         "saveError": "Данные невозможно сохранить.",
@@ -531,7 +547,12 @@
         "refundAlreadySent": "Возврат этого заказа успешно отправлен",
         "serverTimeout": "Не получено ответа от сервера. Возможно он не в сети или слишком медленно отвечает на запросы.",
         "noData": "Информация по заданным параметрам не доступна.",
-        "loadingViewError": "Загрузка этой страницы оказалась дольше, чем ожидалось."
+        "loadingViewError": "Загрузка этой страницы оказалась дольше, чем ожидалось.",
+        "smtpServerError": "Ошибка подключения к SMTP",
+        "smtpServerSuccess": "SMTP успешно подключен",
+        "noSMTPConnection": "Проблема подключения к SMTP серверу",
+        "badSMTPAuthentication": "Ошибочная комбинация пользователя/пароля",
+        "goodSMTPAuthentication": "Вы успешно подключились к SMTP серверу"
     },
     "pageConnectingMessages": {
         "listingConnect": "Подключение к товару ${listing}",
@@ -743,989 +764,411 @@
         "12": "(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka"
     },
     "countries": {
-        "AFGHANISTAN": {
-            "name": "Afghanistan",
-            "currency": "Afghani"
-        },
-        "ALAND_ISLANDS": {
-            "name": "Aland Islands",
-            "currency": "Euro"
-        },
-        "ALBANIA": {
-            "name": "Albania",
-            "currency": "Lek"
-        },
-        "ALGERIA": {
-            "name": "Algeria",
-            "currency": "Algerian Dinar"
-        },
-        "AMERICAN_SAMOA": {
-            "name": "American Samoa",
-            "currency": "United States Dollar"
-        },
-        "ANDORRA": {
-            "name": "Andorra",
-            "currency": "Euro"
-        },
-        "ANGOLA": {
-            "name": "Angola",
-            "currency": "Kwanza"
-        },
-        "ANGUILLA": {
-            "name": "Anguilla",
-            "currency": "East Caribbean Dollar"
-        },
-        "ANTIGUA": {
-            "name": "Antigua and Barbuda",
-            "currency": "East Caribbean Dollar"
-        },
-        "ARGENTINA": {
-            "name": "Argentina",
-            "currency": "Argentine Peso"
-        },
-        "ARMENIA": {
-            "name": "Armenia",
-            "currency": "Armenian Dram"
-        },
-        "ARUBA": {
-            "name": "Aruba",
-            "currency": "Aruban Florin"
-        },
-        "AUSTRALIA": {
-            "name": "Australia",
-            "currency": "Australian Dollar"
-        },
-        "AUSTRIA": {
-            "name": "Austria",
-            "currency": "Euro"
-        },
-        "AZERBAIJAN": {
-            "name": "Azerbaijan",
-            "currency": "Azerbaijanian Manat"
-        },
-        "BAHAMAS": {
-            "name": "Bahamas (The)",
-            "currency": "Bahamian Dollar"
-        },
-        "BAHRAIN": {
-            "name": "Bahrain",
-            "currency": "Bahraini Dinar"
-        },
-        "BANGLADESH": {
-            "name": "Bangladesh",
-            "currency": "Taka"
-        },
-        "BARBADOS": {
-            "name": "Barbados",
-            "currency": "Barbados Dollar"
-        },
-        "BELARUS": {
-            "name": "Belarus",
-            "currency": "Belarussian Ruble"
-        },
-        "BELGIUM": {
-            "name": "Belgium",
-            "currency": "Euro"
-        },
-        "BELIZE": {
-            "name": "Belize",
-            "currency": "Belize Dollar"
-        },
-        "BENIN": {
-            "name": "Benin",
-            "currency": "CFA Franc BCEAO"
-        },
-        "BERMUDA": {
-            "name": "Bermuda",
-            "currency": "Bermudian Dollar"
-        },
-        "BHUTAN": {
-            "name": "Bhutan",
-            "currency": "Ngultrum"
-        },
-        "BOLIVIA": {
-            "name": "Bolivia (Plurinational State of)",
-            "currency": "Boliviano"
-        },
-        "BONAIRE_SINT_EUSTATIUS_SABA": {
-            "name": "Bonaire, Sint Eustatius and Saba",
-            "currency": "United States Dollar"
-        },
-        "BOSNIA": {
-            "name": "Bosnia and Herzegovina",
-            "currency": "Convertible Mark"
-        },
-        "BOTSWANA": {
-            "name": "Botswana",
-            "currency": "Pula"
-        },
-        "BOUVET_ISLAND": {
-            "name": "Bouvet Island",
-            "currency": "Norwegian Krone"
-        },
-        "BRAZIL": {
-            "name": "Brazil",
-            "currency": "Brazilian Real"
-        },
-        "BRITISH_INDIAN_OCEAN_TERRITORY": {
-            "name": "British Indian Ocean Territory (The)",
-            "currency": "United States Dollar"
-        },
-        "BRUNEI_DARUSSALAM": {
-            "name": "Brunei Darussalam",
-            "currency": "Brunei Dollar"
-        },
-        "BULGARIA": {
-            "name": "Bulgaria",
-            "currency": "Bulgarian Lev"
-        },
-        "BURKINA_FASO": {
-            "name": "Burkina Faso",
-            "currency": "CFA Franc BCEAO"
-        },
-        "BURUNDI": {
-            "name": "Burundi",
-            "currency": "Burundi Franc"
-        },
-        "CABO_VERDE": {
-            "name": "Cabo Verde",
-            "currency": "Cabo Verde Escudo"
-        },
-        "CAMBODIA": {
-            "name": "Cambodia",
-            "currency": "Riel"
-        },
-        "CAMEROON": {
-            "name": "Cameroon",
-            "currency": "CFA Franc BEAC"
-        },
-        "CANADA": {
-            "name": "Canada",
-            "currency": "Canadian Dollar"
-        },
-        "CAYMAN_ISLANDS": {
-            "name": "Cayman Islands (The)",
-            "currency": "Cayman Islands Dollar"
-        },
-        "CENTRAL_AFRICAN_REPUBLIC": {
-            "name": "Central African Republic (The)",
-            "currency": "CFA Franc BEAC"
-        },
-        "CHAD": {
-            "name": "Chad",
-            "currency": "CFA Franc BEAC"
-        },
-        "CHILE": {
-            "name": "Chile",
-            "currency": "Chilean Peso"
-        },
-        "CHINA": {
-            "name": "China",
-            "currency": "Yuan Renminbi"
-        },
-        "CHRISTMAS_ISLAND": {
-            "name": "Christmas Island",
-            "currency": "Australian Dollar"
-        },
-        "COCOS_ISLANDS": {
-            "name": "Cocos (KEELING) Islands (The)",
-            "currency": "Australian Dollar"
-        },
-        "COLOMBIA": {
-            "name": "Colombia",
-            "currency": "Colombian Peso"
-        },
-        "COMOROS": {
-            "name": "Comoros (The)",
-            "currency": "Comoro Franc"
-        },
-        "CONGO_REPUBLIC": {
-            "name": "Congo (The Democratic Republic of the)",
-            "currency": "Congolese Franc"
-        },
-        "CONGO": {
-            "name": "Congo (The)",
-            "currency": "CFA Franc BEAC"
-        },
-        "COOK_ISLANDS": {
-            "name": "Cook Islands (The)",
-            "currency": "New Zealand Dollar"
-        },
-        "COSTA_RICA": {
-            "name": "Costa Rica",
-            "currency": "Costa Rican Colon"
-        },
-        "COTE_DIVOIRE": {
-            "name": "Côte D'Ivoire",
-            "currency": "CFA Franc BCEAO"
-        },
-        "CROATIA": {
-            "name": "Croatia",
-            "currency": "Kuna"
-        },
-        "CUBA": {
-            "name": "Cuba",
-            "currency": "Cuban Peso"
-        },
-        "CURACAO": {
-            "name": "Curaçao",
-            "currency": "Netherlands Antillean Guilder"
-        },
-        "CYPRUS": {
-            "name": "Cyprus",
-            "currency": "Euro"
-        },
-        "CZECH_REPUBLIC": {
-            "name": "Czech Republic (The)",
-            "currency": "Czech Koruna"
-        },
-        "DENMARK": {
-            "name": "Denmark",
-            "currency": "Danish Krone"
-        },
-        "DJIBOUTI": {
-            "name": "Djibouti",
-            "currency": "Djibouti Franc"
-        },
-        "DOMINICA": {
-            "name": "Dominica",
-            "currency": "East Caribbean Dollar"
-        },
-        "DOMINICAN_REPUBLIC": {
-            "name": "Dominican Republic (The)",
-            "currency": "Dominican Peso"
-        },
-        "ECUADOR": {
-            "name": "Ecuador",
-            "currency": "United States Dollar"
-        },
-        "EGYPT": {
-            "name": "Egypt",
-            "currency": "Egyptian Pound"
-        },
-        "EL_SALVADOR": {
-            "name": "El Salvador",
-            "currency": "El Salvador Colon"
-        },
-        "EQUATORIAL_GUINEA": {
-            "name": "Equatorial Guinea",
-            "currency": "CFA Franc BEAC"
-        },
-        "ERITREA": {
-            "name": "Eritrea",
-            "currency": "Nakfa"
-        },
-        "ESTONIA": {
-            "name": "Estonia",
-            "currency": "Euro"
-        },
-        "ETHIOPIA": {
-            "name": "Ethiopia",
-            "currency": "Ethiopian Birr"
-        },
-        "FALKLAND_ISLANDS": {
-            "name": "Falkland Islands (The)",
-            "currency": "Falkland Islands Pound"
-        },
-        "FAROE_ISLANDS": {
-            "name": "Faroe Islands (The)",
-            "currency": "Danish Krone"
-        },
-        "FIJI": {
-            "name": "Fiji",
-            "currency": "Fiji Dollar"
-        },
-        "FINLAND": {
-            "name": "Finland",
-            "currency": "Euro"
-        },
-        "FRANCE": {
-            "name": "France",
-            "currency": "Euro"
-        },
-        "FRENCH_GUIANA": {
-            "name": "French Guiana",
-            "currency": "Euro"
-        },
-        "FRENCH_POLYNESIA": {
-            "name": "French Polynesia",
-            "currency": "CFP Franc"
-        },
-        "FRENCH_SOUTHERN_TERRITORIES": {
-            "name": "French Southern Territories (The)",
-            "currency": "Euro"
-        },
-        "GABON": {
-            "name": "Gabon",
-            "currency": "CFA Franc BEAC"
-        },
-        "GAMBIA": {
-            "name": "Gambia (The)",
-            "currency": "Dalasi"
-        },
-        "GEORGIA": {
-            "name": "Georgia",
-            "currency": "Lari"
-        },
-        "GERMANY": {
-            "name": "Germany",
-            "currency": "Euro"
-        },
-        "GHANA": {
-            "name": "Ghana",
-            "currency": "Ghana Cedi"
-        },
-        "GIBRALTAR": {
-            "name": "Gibraltar",
-            "currency": "Gibraltar Pound"
-        },
-        "GREECE": {
-            "name": "Greece",
-            "currency": "Euro"
-        },
-        "GREENLAND": {
-            "name": "Greenland",
-            "currency": "Danish Krone"
-        },
-        "GRENADA": {
-            "name": "Grenada",
-            "currency": "East Caribbean Dollar"
-        },
-        "GUADELOUPE": {
-            "name": "Guadeloupe",
-            "currency": "Euro"
-        },
-        "GUAM": {
-            "name": "Guam",
-            "currency": "United States Dollar"
-        },
-        "GUATEMALA": {
-            "name": "Guatemala",
-            "currency": "Quetzal"
-        },
-        "GUERNSEY": {
-            "name": "Guernsey",
-            "currency": "Pound Sterling"
-        },
-        "GUINEA": {
-            "name": "Guinea",
-            "currency": "Guinea Franc"
-        },
-        "GUINEA_BISSAU": {
-            "name": "Guinea-Bissau",
-            "currency": "CFA Franc BCEAO"
-        },
-        "GUYANA": {
-            "name": "Guyana",
-            "currency": "Guyana Dollar"
-        },
-        "HAITI": {
-            "name": "Haiti",
-            "currency": "Gourde"
-        },
-        "HEARD_ISLAND": {
-            "name": "Heard Island and McDONALD Islands",
-            "currency": "Australian Dollar"
-        },
-        "HOLY_SEE": {
-            "name": "Holy See (The)",
-            "currency": "Euro"
-        },
-        "HONDURAS": {
-            "name": "Honduras",
-            "currency": "Lempira"
-        },
-        "HONG_KONG": {
-            "name": "Hong Kong",
-            "currency": "Hong Kong Dollar"
-        },
-        "HUNGARY": {
-            "name": "Hungary",
-            "currency": "Forint"
-        },
-        "ICELAND": {
-            "name": "Iceland",
-            "currency": "Iceland Krona"
-        },
-        "INDIA": {
-            "name": "India",
-            "currency": "Indian Rupee"
-        },
-        "INDONESIA": {
-            "name": "Indonesia",
-            "currency": "Rupiah"
-        },
-        "IRAN": {
-            "name": "Iran (Islamic Republic of)",
-            "currency": "Iranian Rial"
-        },
-        "IRAQ": {
-            "name": "Iraq",
-            "currency": "Iraqi Dinar"
-        },
-        "IRELAND": {
-            "name": "Ireland",
-            "currency": "Euro"
-        },
-        "ISLE_OF_MAN": {
-            "name": "Isle of Man",
-            "currency": "Pound Sterling"
-        },
-        "ISRAEL": {
-            "name": "Israel",
-            "currency": "New Israeli Sheqel"
-        },
-        "ITALY": {
-            "name": "Italy",
-            "currency": "Euro"
-        },
-        "JAMAICA": {
-            "name": "Jamaica",
-            "currency": "Jamaican Dollar"
-        },
-        "JAPAN": {
-            "name": "Japan",
-            "currency": "Yen"
-        },
-        "JERSEY": {
-            "name": "Jersey",
-            "currency": "Pound Sterling"
-        },
-        "JORDAN": {
-            "name": "Jordan",
-            "currency": "Jordanian Dinar"
-        },
-        "KAZAKHSTAN": {
-            "name": "Kazakhstan",
-            "currency": "Tenge"
-        },
-        "KENYA": {
-            "name": "Kenya",
-            "currency": "Kenyan Shilling"
-        },
-        "KIRIBATI": {
-            "name": "Kiribati",
-            "currency": "Australian Dollar"
-        },
-        "NORTH_KOREA": {
-            "name": "Korea (The Democratic People's Republic of)",
-            "currency": "North Korean Won"
-        },
-        "SOUTH_KOREA": {
-            "name": "Korea (The Republic of)",
-            "currency": "Won"
-        },
-        "KUWAIT": {
-            "name": "Kuwait",
-            "currency": "Kuwaiti Dinar"
-        },
-        "KYRGYZSTAN": {
-            "name": "Kyrgyzstan",
-            "currency": "Som"
-        },
-        "LAO": {
-            "name": "Lao People's Democratic Republic (The)",
-            "currency": "Kip"
-        },
-        "LATVIA": {
-            "name": "Latvia",
-            "currency": "Euro"
-        },
-        "LEBANON": {
-            "name": "Lebanon",
-            "currency": "Lebanese Pound"
-        },
-        "LESOTHO": {
-            "name": "Lesotho",
-            "currency": "Loti"
-        },
-        "LIBERIA": {
-            "name": "Liberia",
-            "currency": "Liberian Dollar"
-        },
-        "LIBYA": {
-            "name": "Libya",
-            "currency": "Libyan Dinar"
-        },
-        "LIECHTENSTEIN": {
-            "name": "Liechtenstein",
-            "currency": "Swiss Franc"
-        },
-        "LITHUANIA": {
-            "name": "Lithuania",
-            "currency": "Euro"
-        },
-        "LUXEMBOURG": {
-            "name": "Luxembourg",
-            "currency": "Euro"
-        },
-        "MACAO": {
-            "name": "Macao",
-            "currency": "Pataca"
-        },
-        "MACEDONIA": {
-            "name": "Macedonia (The Former Yugoslav Republic of)",
-            "currency": "Denar"
-        },
-        "MADAGASCAR": {
-            "name": "Madagascar",
-            "currency": "Malagasy Ariary"
-        },
-        "MALAWI": {
-            "name": "Malawi",
-            "currency": "Kwacha"
-        },
-        "MALAYSIA": {
-            "name": "Malaysia",
-            "currency": "Malaysian Ringgit"
-        },
-        "MALDIVES": {
-            "name": "Maldives",
-            "currency": "Rufiyaa"
-        },
-        "MALI": {
-            "name": "Mali",
-            "currency": "CFA Franc BCEAO"
-        },
-        "MALTA": {
-            "name": "Malta",
-            "currency": "Euro"
-        },
-        "MARSHALL_ISLANDS": {
-            "name": "Marshall Islands (The)",
-            "currency": "United States Dollar"
-        },
-        "MARTINIQUE": {
-            "name": "Martinique",
-            "currency": "Euro"
-        },
-        "MAURITANIA": {
-            "name": "Mauritania",
-            "currency": "Ouguiya"
-        },
-        "MAURITIUS": {
-            "name": "Mauritius",
-            "currency": "Mauritius Rupee"
-        },
-        "MAYOTTE": {
-            "name": "Mayotte",
-            "currency": "Euro"
-        },
-        "MEXICO": {
-            "name": "Mexico",
-            "currency": "Mexican Peso"
-        },
-        "MICRONESIA": {
-            "name": "Micronesia (Federated States of)",
-            "currency": "United States Dollar"
-        },
-        "MOLDOVA": {
-            "name": "Moldova (The Republic of)",
-            "currency": "Moldovan Leu"
-        },
-        "MONACO": {
-            "name": "Monaco",
-            "currency": "Euro"
-        },
-        "MONGOLIA": {
-            "name": "Mongolia",
-            "currency": "Tugrik"
-        },
-        "MONTENEGRO": {
-            "name": "Montenegro",
-            "currency": "Euro"
-        },
-        "MONTSERRAT": {
-            "name": "Montserrat",
-            "currency": "East Caribbean Dollar"
-        },
-        "MOROCCO": {
-            "name": "Morocco",
-            "currency": "Moroccan Dirham"
-        },
-        "MOZAMBIQUE": {
-            "name": "Mozambique",
-            "currency": "Mozambique Metical"
-        },
-        "MYANMAR": {
-            "name": "Myanmar",
-            "currency": "Kyat"
-        },
-        "NAMIBIA": {
-            "name": "Namibia",
-            "currency": "Namibia Dollar"
-        },
-        "NAURU": {
-            "name": "Nauru",
-            "currency": "Australian Dollar"
-        },
-        "NEPAL": {
-            "name": "Nepal",
-            "currency": "Nepalese Rupee"
-        },
-        "NETHERLANDS": {
-            "name": "Netherlands (The)",
-            "currency": "Euro"
-        },
-        "NEW_CALEDONIA": {
-            "name": "New Caledonia",
-            "currency": "CFP Franc"
-        },
-        "NEW_ZEALAND": {
-            "name": "New Zealand",
-            "currency": "New Zealand Dollar"
-        },
-        "NICARAGUA": {
-            "name": "Nicaragua",
-            "currency": "Cordoba Oro"
-        },
-        "NIGER": {
-            "name": "Niger (The)",
-            "currency": "CFA Franc BCEAO"
-        },
-        "NIGERIA": {
-            "name": "Nigeria",
-            "currency": "Naira"
-        },
-        "NIUE": {
-            "name": "Niue",
-            "currency": "New Zealand Dollar"
-        },
-        "NORFOLK_ISLAND": {
-            "name": "Norfolk Island",
-            "currency": "Australian Dollar"
-        },
-        "NORTHERN_MARIANA_ISLANDS": {
-            "name": "Northern Mariana Islands (The)",
-            "currency": "United States Dollar"
-        },
-        "NORWAY": {
-            "name": "Norway",
-            "currency": "Norwegian Krone"
-        },
-        "OMAN": {
-            "name": "Oman",
-            "currency": "Rial Omani"
-        },
-        "PAKISTAN": {
-            "name": "Pakistan",
-            "currency": "Pakistan Rupee"
-        },
-        "PALAU": {
-            "name": "Palau",
-            "currency": "United States Dollar"
-        },
-        "PANAMA": {
-            "name": "PANAMA",
-            "currency": "Balboa"
-        },
-        "PAPUA_NEW_GUINEA": {
-            "name": "Papua New Guinea",
-            "currency": "Kina"
-        },
-        "PARAGUAY": {
-            "name": "Paraguay",
-            "currency": "Guarani"
-        },
-        "PERU": {
-            "name": "Peru",
-            "currency": "Nuevo Sol"
-        },
-        "PHILIPPINES": {
-            "name": "Philippines (The)",
-            "currency": "Philippine Peso"
-        },
-        "PITCAIRN": {
-            "name": "Pitcairn",
-            "currency": "New Zealand Dollar"
-        },
-        "POLAND": {
-            "name": "Poland",
-            "currency": "Zloty"
-        },
-        "PORTUGAL": {
-            "name": "Portugal",
-            "currency": "Euro"
-        },
-        "PUERTO_RICO": {
-            "name": "Puerto Rico",
-            "currency": "United States Dollar"
-        },
-        "QATAR": {
-            "name": "Qatar",
-            "currency": "Qatari Rial"
-        },
-        "REUNION": {
-            "name": "Réunion",
-            "currency": "Euro"
-        },
-        "ROMANIA": {
-            "name": "Romania",
-            "currency": "Romanian Leu"
-        },
-        "RUSSIA": {
-            "name": "Russian Federation (The)",
-            "currency": "Russian Ruble"
-        },
-        "RWANDA": {
-            "name": "Rwanda",
-            "currency": "Rwanda Franc"
-        },
-        "SAINT_BARTHELEMY": {
-            "name": "Saint Barthélemy",
-            "currency": "Euro"
-        },
-        "SAINT_HELENA": {
-            "name": "Saint Helena, Ascension and Tristan da Cunha",
-            "currency": "Saint Helena Pound"
-        },
-        "SAINT_KITTS": {
-            "name": "Saint Kitts and Nevis",
-            "currency": "East Caribbean Dollar"
-        },
-        "SAINT_LUCIA": {
-            "name": "Saint Lucia",
-            "currency": "East Caribbean Dollar"
-        },
-        "SAINT_MARTIN": {
-            "name": "Saint Martin (French Part)",
-            "currency": "Euro"
-        },
-        "SAINT_PIERRE": {
-            "name": "Saint Pierre and Miquelon",
-            "currency": "Euro"
-        },
-        "SAINT_VINCENT": {
-            "name": "Saint Vincent and The Grenadines",
-            "currency": "East Caribbean Dollar"
-        },
-        "SAMOA": {
-            "name": "Samoa",
-            "currency": "Tala"
-        },
-        "SAN_MARINO": {
-            "name": "San Marino",
-            "currency": "Euro"
-        },
-        "SAO_TOME": {
-            "name": "Sao Tome and Principe",
-            "currency": "Dobra"
-        },
-        "SAUDI_ARABIA": {
-            "name": "Saudi Arabia",
-            "currency": "Saudi Riyal"
-        },
-        "SENEGAL": {
-            "name": "Senegal",
-            "currency": "CFA Franc BCEAO"
-        },
-        "SERBIA": {
-            "name": "Serbia",
-            "currency": "Serbian Dinar"
-        },
-        "SEYCHELLES": {
-            "name": "Seychelles",
-            "currency": "Seychelles Rupee"
-        },
-        "SIERRA_LEONE": {
-            "name": "Sierra Leone",
-            "currency": "Leone"
-        },
-        "SINGAPORE": {
-            "name": "Singapore",
-            "currency": "Singapore Dollar"
-        },
-        "SINT_MAARTEN": {
-            "name": "Sint Maarten (Dutch Part)",
-            "currency": "NeTherlands Antillean Guilder"
-        },
-        "SUCRE": {
-            "name": "Sistema Unitario de Compensacion Regional de Pagos 'Sucre'",
-            "currency": "Sucre"
-        },
-        "SLOVAKIA": {
-            "name": "Slovakia",
-            "currency": "Euro"
-        },
-        "SLOVENIA": {
-            "name": "Slovenia",
-            "currency": "Euro"
-        },
-        "SOLOMON_ISLANDS": {
-            "name": "Solomon Islands",
-            "currency": "Solomon Islands Dollar"
-        },
-        "SOMALIA": {
-            "name": "Somalia",
-            "currency": "Somali Shilling"
-        },
-        "SOUTH_AFRICA": {
-            "name": "South Africa",
-            "currency": "Rand"
-        },
-        "SOUTH_SUDAN": {
-            "name": "South Sudan",
-            "currency": "South Sudanese Pound"
-        },
-        "SPAIN": {
-            "name": "Spain",
-            "currency": "Euro"
-        },
-        "SRI_LANKA": {
-            "name": "Sri Lanka",
-            "currency": "Sri Lanka Rupee"
-        },
-        "SUDAN": {
-            "name": "Sudan (The)",
-            "currency": "Sudanese Pound"
-        },
-        "SURINAME": {
-            "name": "Suriname",
-            "currency": "Surinam Dollar"
-        },
-        "SVALBARD": {
-            "name": "Svalbard and Jan Mayen",
-            "currency": "Norwegian Krone"
-        },
-        "SWAZILAND": {
-            "name": "Swaziland",
-            "currency": "Lilangeni"
-        },
-        "SWEDEN": {
-            "name": "Sweden",
-            "currency": "Swedish Krona"
-        },
-        "SWITZERLAND": {
-            "name": "Switzerland",
-            "currency": "Swiss Franc"
-        },
-        "SYRIAN_ARAB_REPUBLIC": {
-            "name": "Syrian Arab Republic",
-            "currency": "Syrian Pound"
-        },
-        "TAIWAN": {
-            "name": "Taiwan",
-            "currency": "New Taiwan Dollar"
-        },
-        "TAJIKISTAN": {
-            "name": "Tajikistan",
-            "currency": "Somoni"
-        },
-        "TANZANIA": {
-            "name": "Tanzania, United Republic of",
-            "currency": "Tanzanian Shilling"
-        },
-        "THAILAND": {
-            "name": "Thailand",
-            "currency": "Baht"
-        },
-        "TIMOR_LESTE": {
-            "name": "Timor-Leste",
-            "currency": "United States Dollar"
-        },
-        "TOGO": {
-            "name": "Togo",
-            "currency": "CFA Franc BCEAO"
-        },
-        "TOKELAU": {
-            "name": "Tokelau",
-            "currency": "New Zealand Dollar"
-        },
-        "TONGA": {
-            "name": "Tonga",
-            "currency": "Pa'anga"
-        },
-        "TRINIDAD": {
-            "name": "Trinidad and Tobago",
-            "currency": "Trinidad and Tobago Dollar"
-        },
-        "TUNISIA": {
-            "name": "Tunisia",
-            "currency": "Tunisian Dinar"
-        },
-        "TURKEY": {
-            "name": "Turkey",
-            "currency": "Turkish Lira"
-        },
-        "TURKMENISTAN": {
-            "name": "Turkmenistan",
-            "currency": "Turkmenistan New Manat"
-        },
-        "TURKS_AND_CAICOS_ISLANDS": {
-            "name": "Turks and Caicos Islands (The)",
-            "currency": "United States Dollar"
-        },
-        "TUVALU": {
-            "name": "Tuvalu",
-            "currency": "Australian Dollar"
-        },
-        "UGANDA": {
-            "name": "Uganda",
-            "currency": "Uganda Shilling"
-        },
-        "UKRAINE": {
-            "name": "Ukraine",
-            "currency": "Hryvnia"
-        },
-        "UNITED_ARAB_EMIRATES": {
-            "name": "United Arab Emirates (The)",
-            "currency": "UAE Dirham"
-        },
-        "UNITED_KINGDOM": {
-            "name": "United Kingdom of Great Britain and Northern Ireland (The)",
-            "currency": "Pound Sterling"
-        },
-        "UNITED_STATES": {
-            "name": "United States of America (The)",
-            "currency": "United States Dollar"
-        },
-        "URUGUAY": {
-            "name": "Uruguay",
-            "currency": "Peso Uruguayo"
-        },
-        "UZBEKISTAN": {
-            "name": "Uzbekistan",
-            "currency": "Uzbekistan Sum"
-        },
-        "VANUATU": {
-            "name": "Vanuatu",
-            "currency": "Vatu"
-        },
-        "VENEZUELA": {
-            "name": "Venezuela (Bolivarian Republic Of)",
-            "currency": "Bolivar"
-        },
-        "VIETNAM": {
-            "name": "Vietnam",
-            "currency": "Dong"
-        },
-        "VIRGIN_ISLANDS_BRITISH": {
-            "name": "Virgin Islands (British)",
-            "currency": "United States Dollar"
-        },
-        "VIRGIN_ISLANDS_US": {
-            "name": "Virgin Islands (U.S.)",
-            "currency": "United States Dollar"
-        },
-        "WALLIS_AND_FUTUNA": {
-            "name": "Wallis and Futuna",
-            "currency": "CFP Franc"
-        },
-        "WESTERN_SAHARA": {
-            "name": "Western Sahara",
-            "currency": "Moroccan Dirham"
-        },
-        "YEMEN": {
-            "name": "Yemen",
-            "currency": "Yemeni Rial"
-        },
-        "ZAMBIA": {
-            "name": "Zambia",
-            "currency": "Zambian Kwacha"
-        },
-        "ZIMBABWE": {
-            "name": "Zimbabwe",
-            "currency": "Zimbabwe Dollar"
-        }
+        "AFGHANISTAN": "Афганистан",
+        "ALAND_ISLANDS": "Аландские острова",
+        "ALBANIA": "Албания",
+        "ALGERIA": "Алжирия",
+        "AMERICAN_SAMOA": "Американское самоа",
+        "ANDORRA": "Андорра",
+        "ANGOLA": "Ангола",
+        "ANGUILLA": "Ангола",
+        "ANTIGUA": "Антигуа и Барбуда",
+        "ARGENTINA": "Аргентина",
+        "ARMENIA": "Армения",
+        "ARUBA": "Аруба",
+        "AUSTRALIA": "Австралия",
+        "AUSTRIA": "Австрия",
+        "AZERBAIJAN": "Азербайджан",
+        "BAHAMAS": "Багамы",
+        "BAHRAIN": "Бахрейн",
+        "BANGLADESH": "Бангладеш",
+        "BARBADOS": "Барбадос",
+        "BELARUS": "Белоруссия",
+        "BELGIUM": "Бельгия",
+        "BELIZE": "Бельгийский",
+        "BENIN": "Бенин",
+        "BERMUDA": "Бермуды",
+        "BHUTAN": "Бутан",
+        "BOLIVIA": "Боливия",
+        "BONAIRE_SINT_EUSTATIUS_SABA": "Бонэйр",
+        "BOSNIA": "Босния и Герцеговина",
+        "BOTSWANA": "Ботсвана",
+        "BOUVET_ISLAND": "Остров Буве",
+        "BRAZIL": "Бразилия",
+        "BRITISH_INDIAN_OCEAN_TERRITORY": "Британская индийская и океаническая территория",
+        "BRUNEI_DARUSSALAM": "Бруней даруссалам",
+        "BULGARIA": "Болгария",
+        "BURKINA_FASO": "Буркина-Фасо",
+        "BURUNDI": "Бурунди",
+        "CABO_VERDE": "Кабо-верде",
+        "CAMBODIA": "Камбоджа",
+        "CAMEROON": "Камерун",
+        "CANADA": "Канада",
+        "CAYMAN_ISLANDS": "Острова Кайман",
+        "CENTRAL_AFRICAN_REPUBLIC": "Центральноафриканская республика",
+        "CHAD": "Чад",
+        "CHILE": "Чили",
+        "CHINA": "Китай",
+        "CHRISTMAS_ISLAND": "Рождественские острова",
+        "COCOS_ISLANDS": "Кокосовые острова",
+        "COLOMBIA": "Колумбия",
+        "COMOROS": "Коморы",
+        "CONGO_REPUBLIC": "Республика конго",
+        "CONGO": "Конго",
+        "COOK_ISLANDS": "Остров кука",
+        "COSTA_RICA": "Коста-рико",
+        "COTE_DIVOIRE": "Кот-д'Ивуар",
+        "CROATIA": "Хорватия",
+        "CUBA": "Куба",
+        "CURACAO": "Кюрасао",
+        "CYPRUS": "Кипр",
+        "CZECH_REPUBLIC": "Чешская республика",
+        "DENMARK": "Дания",
+        "DJIBOUTI": "Джибути",
+        "DOMINICA": "Доминикана",
+        "DOMINICAN_REPUBLIC": "Доминиканская республика",
+        "ECUADOR": "Эквадор",
+        "EGYPT": "Египет",
+        "EL_SALVADOR": "Сальвадо",
+        "EQUATORIAL_GUINEA": "Экваториальная Гвинея",
+        "ERITREA": "Эритреа",
+        "ESTONIA": "Эстония",
+        "ETHIOPIA": "Эфиопия",
+        "FALKLAND_ISLANDS": "Острова фалкланда",
+        "FAROE_ISLANDS": "Фаруйские острова",
+        "FIJI": "Фиджи",
+        "FINLAND": "Финляндия",
+        "FRANCE": "Франция",
+        "FRENCH_GUIANA": "Французская гвиана",
+        "FRENCH_POLYNESIA": "французская полинезия",
+        "FRENCH_SOUTHERN_TERRITORIES": "Французские Южные территории",
+        "GABON": "Габон",
+        "GAMBIA": "Гамбия",
+        "GEORGIA": "Грузия",
+        "GERMANY": "Германия",
+        "GHANA": "Гана",
+        "GIBRALTAR": "Гибралтар",
+        "GREECE": "Греция",
+        "GREENLAND": "Гренландия",
+        "GRENADA": "Гренада",
+        "GUADELOUPE": "Гваделупа",
+        "GUAM": "Гуам",
+        "GUATEMALA": "Гватемала",
+        "GUERNSEY": "Гернсей",
+        "GUINEA": "Гвинея",
+        "GUINEA_BISSAU": "Гвинея-Бисау",
+        "GUYANA": "Гуана",
+        "HAITI": "Гаити",
+        "HEARD_ISLAND": "Острова хэрда и макдональда",
+        "HOLY_SEE": "Ватикан",
+        "HONDURAS": "Гондурас",
+        "HONG_KONG": "Гонконг",
+        "HUNGARY": "Венгрия",
+        "ICELAND": "Исландия",
+        "INDIA": "Индия",
+        "INDONESIA": "Индонезия",
+        "IRAN": "Иран (Исламская Республика)",
+        "IRAQ": "Ирак",
+        "IRELAND": "Ирландия",
+        "ISLE_OF_MAN": "Остров мэн",
+        "ISRAEL": "Израиль",
+        "ITALY": "Италия",
+        "JAMAICA": "Ямайка",
+        "JAPAN": "Япония",
+        "JERSEY": "Джерси",
+        "JORDAN": "Иордан",
+        "KAZAKHSTAN": "Казахстан",
+        "KENYA": "Кения",
+        "KIRIBATI": "Кирибат",
+        "NORTH_KOREA": "Кирибат",
+        "SOUTH_KOREA": "Корея",
+        "KUWAIT": "Кувейт",
+        "KYRGYZSTAN": "Кыргызстан",
+        "LAO": "Демократическая республика Лао",
+        "LATVIA": "Латвия",
+        "LEBANON": "Лебанон",
+        "LESOTHO": "Лесото",
+        "LIBERIA": "Либерия",
+        "LIBYA": "Либия",
+        "LIECHTENSTEIN": "Кня́жество Лихтенште́йн",
+        "LITHUANIA": "Литуания",
+        "LUXEMBOURG": "Люксембург",
+        "MACAO": "Макао",
+        "MACEDONIA": "Македония",
+        "MADAGASCAR": "Мадагаскар",
+        "MALAWI": "Малавийская",
+        "MALAYSIA": "Малайзия",
+        "MALDIVES": "Мальдивы",
+        "MALI": "Мали",
+        "MALTA": "Мальты",
+        "MARSHALL_ISLANDS": "Маршалловы острова",
+        "MARTINIQUE": "Мартиника",
+        "MAURITANIA": "Мавритания",
+        "MAURITIUS": "Мауритус",
+        "MAYOTTE": "майотта",
+        "MEXICO": "Мексика",
+        "MICRONESIA": "Микронезия",
+        "MOLDOVA": "Молдова",
+        "MONACO": "Монако",
+        "MONGOLIA": "Монголия",
+        "MONTENEGRO": "Монтенегр",
+        "MONTSERRAT": "Монсерат",
+        "MOROCCO": "Марокко",
+        "MOZAMBIQUE": "Мозамбик",
+        "MYANMAR": "Мьянма",
+        "NAMIBIA": "Намбия",
+        "NAURU": "Науру",
+        "NEPAL": "Непал",
+        "NETHERLANDS": "Нидерланды",
+        "NEW_CALEDONIA": "Новая каледония",
+        "NEW_ZEALAND": "Новая зеландия",
+        "NICARAGUA": "Никарагуа",
+        "NIGER": "Ниге",
+        "NIGERIA": "Нигерия",
+        "NIUE": "Ниуе",
+        "NORFOLK_ISLAND": "Норфолкский остров",
+        "NORTHERN_MARIANA_ISLANDS": "Северномарианские острова",
+        "NORWAY": "Норвегия",
+        "OMAN": "Оман",
+        "PAKISTAN": "Пакистан",
+        "PALAU": "Палао",
+        "PANAMA": "ПАНАМЫ",
+        "PAPUA_NEW_GUINEA": "Папуа Новая Гвинея",
+        "PARAGUAY": "Парагвай",
+        "PERU": "Перу",
+        "PHILIPPINES": "Филиппины",
+        "PITCAIRN": "Питкаирн",
+        "POLAND": "Польша",
+        "PORTUGAL": "Португальский",
+        "PUERTO_RICO": "Пуэрто рико",
+        "QATAR": "Катар",
+        "REUNION": "Реюньон",
+        "ROMANIA": "Румыния",
+        "RUSSIA": "Российская Федерация",
+        "RWANDA": "Рванда",
+        "SAINT_BARTHELEMY": "Святой Бартелемия",
+        "SAINT_HELENA": "Остров Святой Елены",
+        "SAINT_KITTS": "Сент-Китс и Невис",
+        "SAINT_LUCIA": "Сент-Люсия",
+        "SAINT_MARTIN": "Сент-Марти",
+        "SAINT_PIERRE": "Сан-Пиерро и Микелон",
+        "SAINT_VINCENT": "Сент-винцент и Гренады",
+        "SAMOA": "Самоа",
+        "SAN_MARINO": "Санмарин",
+        "SAO_TOME": "Сантом и принципе",
+        "SAUDI_ARABIA": "Саудовская аравия",
+        "SENEGAL": "Сенегал",
+        "SERBIA": "Сербия",
+        "SEYCHELLES": "Сейчеллес",
+        "SIERRA_LEONE": "Сиера Леонне",
+        "SINGAPORE": "Сингапур",
+        "SINT_MAARTEN": "Синт Маартен",
+        "SUCRE": "Система Унитарио де Компенсатион Регионал де Пагос Сукре",
+        "SLOVAKIA": "Словакия",
+        "SLOVENIA": "Словения",
+        "SOLOMON_ISLANDS": "Соломоновы острова",
+        "SOMALIA": "Сомали",
+        "SOUTH_AFRICA": "Южная Африка",
+        "SOUTH_SUDAN": "Южный Судан",
+        "SPAIN": "Испания",
+        "SRI_LANKA": "Шри ланка",
+        "SUDAN": "Судан",
+        "SURINAME": "Суринаме",
+        "SVALBARD": "Свалд и Жан Майен",
+        "SWAZILAND": "Свазиленд",
+        "SWEDEN": "Швеция",
+        "SWITZERLAND": "Швейцария",
+        "SYRIAN_ARAB_REPUBLIC": "Сирийская арабская республика",
+        "TAIWAN": "Тайвань",
+        "TAJIKISTAN": "Таджикистан",
+        "TANZANIA": "Соединенныизане республики Тан",
+        "THAILAND": "Тайланд",
+        "TIMOR_LESTE": "Тимор лесте",
+        "TOGO": "Тог",
+        "TOKELAU": "Токелао",
+        "TONGA": "Тунга",
+        "TRINIDAD": "Тринидад и тобаг",
+        "TUNISIA": "Тунис",
+        "TURKEY": "Турция",
+        "TURKMENISTAN": "Туркменистан",
+        "TURKS_AND_CAICOS_ISLANDS": "Турки и каиос острова",
+        "TUVALU": "Тувалу",
+        "UGANDA": "Уганда",
+        "UKRAINE": "Украина",
+        "UNITED_ARAB_EMIRATES": "Арабские эмираты",
+        "UNITED_KINGDOM": "Соединенное королевство",
+        "UNITED_STATES": "Соединенные штаты Америки",
+        "URUGUAY": "Уругвай",
+        "UZBEKISTAN": "Узбекистан",
+        "VANUATU": "Ваниату",
+        "VENEZUELA": "Венесуэла (Боливарианская республика)",
+        "VIETNAM": "Вьетнам",
+        "VIRGIN_ISLANDS_BRITISH": "Виргинские острова",
+        "VIRGIN_ISLANDS_US": "Виргинские острова (США)",
+        "WALLIS_AND_FUTUNA": "Валис и футуна",
+        "WESTERN_SAHARA": "Западная сахара",
+        "YEMEN": "Йемен",
+        "ZAMBIA": "Замбия",
+        "ZIMBABWE": "Зимбабве"
+    },
+    "currencies": {
+        "AED": "Дирхам (ОАЭ)",
+        "AFN": "Афганский",
+        "ALL": "Лек",
+        "AMD": "Армянский драм",
+        "ANG": "Нидерландский гульден",
+        "AOA": "Кванза",
+        "ARS": "Аргентинский песо",
+        "AUD": "Австралийский доллар",
+        "AWG": "Арубанский флорин",
+        "AZN": "Азербайджанский манат",
+        "BAM": "Конвертируемая марка",
+        "BBD": "Барбадосский доллар",
+        "BDT": "Така",
+        "BGN": "Болгарский лев",
+        "BHD": "Бахрейнский динар",
+        "BIF": "Бурундийский франк",
+        "BMD": "Бермудский доллар",
+        "BND": "Брунейский доллар",
+        "BOB": "Боливиано",
+        "BRL": "Бразильский реал",
+        "BSD": "\tБагамский доллар",
+        "BTC": "Биткойн",
+        "BTN": "Нгултрум",
+        "BWP": "Пула",
+        "BYR": "Белорусский рубль",
+        "BZD": "Бельгийский доллар",
+        "CAD": "Канадский доллар",
+        "CDF": "Конголезский франк",
+        "CHF": "Шведский франк",
+        "CLP": "Чилийский песо",
+        "CNY": "Уань ренминб",
+        "COP": "Колумбийский песо",
+        "CRC": "Костариканский колон",
+        "CUP": "Кубинское песо",
+        "CVE": "Эскудо Кабо-Верде",
+        "CZK": "Чешская крона",
+        "DJF": "Франк Джибути",
+        "DKK": "Датская крона",
+        "DOP": "Доминиканский песо",
+        "DZD": "Алжирский динар",
+        "EGP": "Египетский фунт",
+        "ERN": "Накфа",
+        "ETB": "Эфиопский быр",
+        "EUR": "Евро",
+        "FJD": "Фиджийский доллар",
+        "FKP": "Фунт Фолклендских островов",
+        "GBP": "Фунт стерлингов",
+        "GEL": "Лар",
+        "GHS": "Седи",
+        "GIP": "Гибралтарский фун",
+        "GMD": "Даласи",
+        "GNF": "Гвинейский франк",
+        "GTQ": "Квезаль",
+        "GYD": "Гайанский доллар",
+        "HKD": "Гонконгский доллар",
+        "HNL": "Лемпира",
+        "HRK": "Куна",
+        "HTG": "Гурдэ",
+        "HUF": "Форинт",
+        "IDR": "Рупий",
+        "ILS": "Израильский шекель",
+        "INR": "Индийский рупий",
+        "IQD": "Иракский динар",
+        "IRR": "Иранский реал",
+        "ISK": "Исландская крона",
+        "JMD": "Ямайский доллар",
+        "JOD": "Иорданский динар",
+        "JPY": "Йен",
+        "KES": "Кенийский шиллинг",
+        "KGS": "Сом",
+        "KHR": "Реал",
+        "KMF": "Коморский франк",
+        "KPW": "Северокорейский вон",
+        "KRW": "Во",
+        "KWD": "кувейтский динар",
+        "KYD": "Доллар каймановых островов",
+        "KZT": "Тенге",
+        "LAK": "Кип",
+        "LBP": "Лебанский фунт",
+        "LKR": "Шри ланкийский рупий",
+        "LRD": "Либерийский доллар",
+        "LSL": "Лоти",
+        "LYD": "Ливийский динар",
+        "MAD": "Мексиканский дирхам",
+        "MDL": "Молдавский лей",
+        "MGA": "Малагайский ариари",
+        "MKD": "Динар",
+        "MMK": "Кьят",
+        "MNT": "Тугрики",
+        "MOP": "Патака",
+        "MRO": "Угия",
+        "MUR": "Маврикийская рупия",
+        "MVR": "Руфия",
+        "MWK": "Квача",
+        "MXN": "Мексиканский песо",
+        "MYR": "Малайзийский ринггит",
+        "MZN": "Мозамбикский метикал",
+        "NAD": "Доллар Намибии",
+        "NGN": "Найра",
+        "NIO": "Никарагуанская кордоба",
+        "NOK": "Норвежская крона\t",
+        "NPR": "Непальский рупий",
+        "NZD": "Новозеландский доллар",
+        "OMR": "Оманский риал",
+        "PAB": "Бальбоа",
+        "PEN": "Новый соль",
+        "PGK": "Кина",
+        "PHP": "Филипинский песо",
+        "PKR": "Пакистанский рупий",
+        "PLN": "Злотый",
+        "PYG": "Гуарана",
+        "QAR": "Катарский риал",
+        "RON": "Румынский лей",
+        "RSD": "Сербский динар",
+        "RUB": "Российский рубль",
+        "RWF": "Франк Руанды",
+        "SAR": "Саудовский реал",
+        "SBD": "Доллар соломонских островов",
+        "SCR": "Сейшельская рупия",
+        "SDG": "Суданский фунт",
+        "SEK": "Шведская крона",
+        "SGD": "Сингапурский доллар",
+        "SHP": "Фунт святой Елены",
+        "SLL": "Лео",
+        "SOS": "Сомалийский шиллинг",
+        "SRD": "Суринамский доллар",
+        "SSP": "Южносуданский фун",
+        "STD": "Добра",
+        "SVC": "Сальвадорский коло",
+        "SYP": "Сирийский фунт",
+        "SZL": "Лилангени",
+        "THB": "Бахт",
+        "TJS": "Сомони",
+        "TMT": "Туркменский манат",
+        "TND": "Тунисский динар",
+        "TOP": "Панага",
+        "TRY": "Турецкая лира",
+        "TTD": "тринидад и тобаго",
+        "TWD": "Новый тайваньский доллар",
+        "TZS": "Танзанийский шиллинг",
+        "UAH": "Гривна",
+        "UGX": "Угандийский шиллинг",
+        "USD": "Доллар США",
+        "UYU": "Уругвайский песо",
+        "UZS": "Узбекские сумы",
+        "VEF": "Боливар",
+        "VND": "Дон",
+        "VUV": "Вату ",
+        "WST": "Тала",
+        "XAF": "Франк Бек",
+        "XCD": "Восточнокорибский доллар",
+        "XOF": "Франк Африканского финансового сообщества",
+        "XPF": "Французский тихоокеанский франк",
+        "XSU": "Сукре",
+        "YER": "Йеменский риал",
+        "ZAR": "Ранд",
+        "ZMW": "Замбвийская квача",
+        "ZWL": "Зимбабвийский доллар"
     }
 }
