@@ -196,7 +196,7 @@ module.exports = Backbone.Router.extend({
     this.viewCache[index] = {
       cachedAt: Date.now(),
       view: this.view
-    }
+    };
   },
 
   newView: function(View, options) {
@@ -249,7 +249,7 @@ module.exports = Backbone.Router.extend({
         this.view.$el.detach();
         this.trigger('cache-detached', { view: this.view });
       } else {
-        this.view.close ? this.view.close() : this.view.remove()          
+        this.view.close ? this.view.close() : this.view.remove();         
       }
     }
 
@@ -345,7 +345,7 @@ module.exports = Backbone.Router.extend({
   },
 
   index: function(){
-    if(localStorage.getItem("route")){
+    if (localStorage.getItem("route")){
       this.navigate('#' + localStorage.getItem("route"), {trigger: true});
     } else {
       this.navigate('#home', {trigger: true});
@@ -437,7 +437,7 @@ module.exports = Backbone.Router.extend({
         orderID: orderID,
         tabState: tabState //opens a tab in the order modal
       },
-      bodyID: 'transactionsPage'
+      bodyID: 'userPage'
     });
 
     app.appBar.setTitle(window.polyglot.t('Transactions'));
@@ -452,7 +452,8 @@ module.exports = Backbone.Router.extend({
         userProfile: this.userProfile,
         state: state,
         socketView: this.socketView
-      }
+      },
+      bodyID: 'userPage'
     });
 
     app.appBar.setTitle(window.polyglot.t('Settings'));

@@ -12,8 +12,8 @@ PageVw = BaseVw.extend({
 // when it's deciding whether to create a new one or use a cached one.
 PageVw.getCacheIndex = function(fragment) {
   if (!fragment) {
-    throw new Error('The fragment is empty. If you want your view to support being ' +
-      'indexed by an empty fragment, please override this method in your view ' +
+    throw new Error('The fragment is empty. If you want your view to support being '+
+      'indexed by an empty fragment, please override this method in your view '+
       'and return a hard-coded string identifier if an empty fragment is passed in.');
   }
 

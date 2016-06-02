@@ -6,7 +6,7 @@
   <% if(ob.invalidData){ %>
   <div class="fullCentered"><h2><%= polyglot.t('errorMessages.serverError') %></h2></div>
   <% } else { %>
-  <div class="modal-hero js-transactionHero shadow-inner1-light"
+  <div class="modal-hero js-transactionHero shadow-inner1-light overflowHidden"
     <% if(ob.vendor_offer.listing.item.image_hashes){ %>
     style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%=ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
     <% } else { %>
