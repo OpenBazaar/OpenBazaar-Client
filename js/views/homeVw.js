@@ -527,8 +527,9 @@ module.exports = pageVw.extend({
 
     //clear address bar
     window.obEventBus.trigger("setAddressBar", {'addressText': ""});
-    
+
     this.$el.find('.js-discoverHeading').html(window.polyglot.t('Discover'));
+    this.$el.find('.js-homeListingToggle').removeClass('hide');
 
     // change loading text copy
     this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('defaultText'));
