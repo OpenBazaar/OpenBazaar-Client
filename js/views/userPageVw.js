@@ -604,6 +604,22 @@ UserPageVw = pageVw.extend({
       }
     }
   },
+  
+  setFollowingPlaceholder: function(totalLength, currentLength) {    
+    if (totalLength > currentLength) {
+      this.$('#inputFollowing').attr('placeholder', window.polyglot.t('SearchForFollowingPlaceholderMore'));
+    } else {
+      this.$('#inputFollowing').attr('placeholder', window.polyglot.t('SearchForFollowingPlaceholder'));
+    }
+  },
+  
+  setFollowersPlaceholder: function(totalLength, currentLength) {
+    if (totalLength > currentLength) {
+      this.$('#inputFollowers').attr('placeholder', window.polyglot.t('SearchForFollowersPlaceholderMore'));
+    } else {
+      this.$('#inputFollowers').attr('placeholder', window.polyglot.t('SearchForFollowersPlaceholder'));
+    }
+  },
 
   categoryChanged: function() {
     this.renderItems(this.listings.get('listings'));
@@ -689,6 +705,8 @@ UserPageVw = pageVw.extend({
             return followingObject.guid;
           });
           self.renderFollowing(followingArray);
+          self.setFollowingPlaceholder(followingArray.length, self.ownFollowing.length);
+          
           //call followers 2nd so list of following is available
           self.fetchFollowers();
         } else {
@@ -703,8 +721,11 @@ UserPageVw = pageVw.extend({
               return followingObject.guid;
             });
             self.renderFollowing(followingArray);
+            self.setFollowingPlaceholder(followingArray.length, self.ownFollowing.length);
+            
             //call followers 2nd so list of following is available
             self.fetchFollowers();
+            
             //mark whether page is following you
             if (self.options.ownPage === false && Boolean(__.findWhere(followingArray, {guid: self.userID}))){
               self.$('.js-followsMe').removeClass('hide');
@@ -713,7 +734,6 @@ UserPageVw = pageVw.extend({
             if (self.options.ownPage === false){
               self.toggleFollowButtons(Boolean(__.findWhere(ownFollowingData.following, {guid: self.pageID})));
             }
-
           }).fail(function(jqXHR, status, errorThrown){
             if (self.isRemoved()) return;
             console.log(jqXHR);
@@ -770,6 +790,7 @@ UserPageVw = pageVw.extend({
         if (followerArray.length || this.followerFetchTotal == 0){
           //always render the first time so the no followers message is shown for no followers
           this.renderFollowers(followerArray, this.followerFetchTotal);
+          this.setFollowersPlaceholder(this.followerFetchTotal, this.followerFetchStart)
         }
       },
       error: function(){
@@ -909,7 +930,7 @@ UserPageVw = pageVw.extend({
     });
   },
 
-  renderFollowing: function (model) {
+  renderFollowing: function (model) {    
     model = model || [];
     this.followingList = new personListView({
       model: model,
@@ -933,11 +954,13 @@ UserPageVw = pageVw.extend({
       });
     }
 
-    this.listenTo(this.followerList, 'usersAdded', ()=>{
+    this.listenTo(this.followingList, 'usersAdded', ()=>{
       var searchTerms = this.$('#inputFollowing').val();
       if (this.followingSearch){
         this.followingSearch.reIndex();
         searchTerms && this.followingSearch.search(searchTerms);
+        
+        this.setFollowingPlaceholder(model.length, this.followingSearch.size());
       }
     });
   },
