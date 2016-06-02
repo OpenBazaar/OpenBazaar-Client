@@ -68,6 +68,8 @@ module.exports = pageVw.extend({
 
   initialize: function(options){
     var self = this;
+
+    $('.js-loadingModal').removeClass('hide');
     this.options = options || {};
     /* expected options:
      userModel
@@ -175,7 +177,6 @@ module.exports = pageVw.extend({
             getBTPrice("USD", function (btAve, currencyList) {
               self.availableCurrenciesList = currencyList;
               self.render();
-              $('.js-loadingModal').removeClass('show');
             });
           }
         });
@@ -183,6 +184,11 @@ module.exports = pageVw.extend({
       error: function(model, response){
         console.log(response);
         messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
+      },
+      complete: function() {
+        if (!self.isRemoved()) {
+          $('.js-loadingModal').addClass('hide');
+        }
       }
     });
   },

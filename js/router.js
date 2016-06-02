@@ -444,8 +444,6 @@ module.exports = Backbone.Router.extend({
   },
 
   settings: function(state){
-    $('.js-loadingModal').addClass('show');
-
     this.newView(settingsView, {
       viewArgs: {
         userModel: this.userModel,
