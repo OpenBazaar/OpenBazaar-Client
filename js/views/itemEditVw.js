@@ -425,9 +425,6 @@ module.exports = baseVw.extend({
       dataType: "json",
       data: formData,
       success: function(data) {
-        var hashArray,
-            imageArray;
-
         if (data.success === true){
           __.each(data.image_hashes, function (hash) {
             if (hash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40){
