@@ -184,7 +184,7 @@ module.exports = pageVw.extend({
   },
 
   setSearchList: function(targetID){
-    this.searchTransactions = new window.List(targetID, {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
+    this.searchTransactions = new window.List(targetID, {valueNames: ['js-searchOrderID', 'js-searchPrice', 'js-searchUser', 'js-searchStatus', 'js-searchTitle'], page: 1000});
   },
 
   render: function(){
