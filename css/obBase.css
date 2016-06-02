@@ -1735,7 +1735,6 @@ removed because I don't think we're using the trick to hide the borders any more
 
 .txtFieldWrapper:before,
 .searchWrapper:before {
-  color: #fff;
   font-family: Ionicons;
   font-size: 18px;
   left: 15px;
