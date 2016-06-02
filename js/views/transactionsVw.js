@@ -310,17 +310,14 @@ module.exports = pageVw.extend({
       }
     });
 
-    console.log("test2")
-
     this.$el.find('.js-'+tabName+'Count').html(tabCollection.length);
 
     this.$el.find('.js-' + tabName)
         .append(tabWrapper)
         .find('.js-unpaidCount').html(tabCollection.where({status: 0}).length)
         .end().find('.js-loadingMsg').addClass('hide');
-    
+
     if (!tabCollection.length) {
-      console.log("boo")
       this.$el.find('.js-'+tabName + ' .js-emptyMsg').removeClass('hide');
     }
   },
