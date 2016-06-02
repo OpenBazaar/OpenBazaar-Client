@@ -20,11 +20,11 @@
       <div class="flexRow custCol-secondary border0 height50">
         <label for="itemImageUploadMain" class="fieldItem width100">
           <h5 class="floatLeft"><%= polyglot.t('Photos') %></h5>
-          <span class="btn btn-c1 btn-txt rowTop20 pull-right custCol-primary textOpacity1 margin0 marginTopNeg8 <%= ob.combinedImagesArray.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>">
+          <span class="btn btn-c1 btn-txt rowTop20 pull-right custCol-primary textOpacity1 margin0 marginTopNeg8 <%= ob.images.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>">
             <span class="ion-images fontSize11 marginRight2 textOpacity75"></span>
             <%= polyglot.t('SelectPhotos') %>
           </span>
-          <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple <%= ob.combinedImagesArray.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>>
+          <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple <%= ob.images.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>>
         </label>
       </div>
       <div class="flexRow js-editItemSubImagesWrapper editItemImageHolder">
@@ -32,8 +32,8 @@
           <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
         </div>
         <div class="js-subImageWrap">
-          <% _.each(ob.combinedImagesArray, function(data, i) { %>
-          <div class="itemImg itemImg-small js-dropImage js-editItemSubImage floatLeft" style="background-image: url(<%= data %>);">
+          <% _.each(ob.images, function(url, i) { %>
+          <div class="itemImg itemImg-small js-dropImage js-editItemSubImage floatLeft" style="background-image: url(<%= url %>);">
             <div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage">
               <i class="ion-android-close icon-centered icon-small"></i>
             </div>
@@ -41,7 +41,7 @@
           <% }); %>
         </div>
       </div>
-      <label for="itemImageUploadMain" class="textSize14px editItemImageLoadPhotoMessage js-itemEditLoadPhotoMessage <%= ob.combinedImagesArray.length ? 'hide' : '' %>">
+      <label for="itemImageUploadMain" class="textSize14px editItemImageLoadPhotoMessage js-itemEditLoadPhotoMessage <%= ob.images.length ? 'hide' : '' %>">
         <span class="fullCentered"><%= polyglot.t('NoPhotosAdded') %></span>
       </label>
       <!--<div class="textOpacity50">Drag photos here or click button above.</div>-->
