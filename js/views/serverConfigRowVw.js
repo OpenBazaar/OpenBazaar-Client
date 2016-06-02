@@ -16,7 +16,7 @@ module.exports = BaseVw.extend({
 
   initialize: function(options) {
     this.options = options || {};
-    this._state = {
+    this._state = options.initialState || {
       status: 'not-connected'
     };
 
