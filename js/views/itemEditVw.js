@@ -526,13 +526,9 @@ module.exports = baseVw.extend({
     validateMediumEditor.checkVal(this.$('#inputDescription'));
 
     if (keywordsArray.length < 1){
-      // this.$('#inputKeyword').closest('.flexRow').addClass('invalid');
       this.$('#inputKeyword').addClass('invalid');
-      // messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ window.polyglot.t('Tags')+"</i>");
-      // return $.Deferred().reject('failed form validation').promise();
       hasError = true;
     }
-    // this.$('#inputKeyword').closest('.flexRow').removeClass('invalid');
 
     keywordsArray = keywordsArray.map(function(tag){
       var re = /#/g;
@@ -557,8 +553,6 @@ module.exports = baseVw.extend({
     if (!shipsToInput.val() && !this.noShipping){
       this.$('.js-shipToWrapper').addClass('invalid');
       hasError = true;
-      // messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-      // return $.Deferred().reject('failed form validation').promise();
     }
 
     //add old and new image hashes
