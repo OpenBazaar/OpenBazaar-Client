@@ -57,7 +57,7 @@ module.exports = pageVw.extend({
     'click #moderatorNo': 'hideModeratorFeeHolder',
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
-    'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
+    'click #advancedForm input[name="minEffects"]': 'toggleFancyStyles',
     'click #advancedForm input[name="useTestnet"]': 'toggleTestnet',
     'change #advancedForm input[name="appBarStyle"]': 'changeAppBarStyle',
     'blur input': 'validateInput',
@@ -437,14 +437,14 @@ module.exports = pageVw.extend({
         notifications = user.notifications,
         moderatorStatus = this.model.get('page').profile.moderator,
         vendorStatus = this.model.get('page').profile.vendor,
-        fancyStatus = window.localStorage.getItem('notFancy'),
+        fancyStatus = window.localStorage.getItem('minEffects'),
         smtp_notifications = user.smtp_notifications == 1;
 
     this.$("#pageForm").find("input[name=nsfw]").val([String(pageNSFW)]);
     generalForm.find("input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
     generalForm.find("input[name=notifications][value=" + notifications + "]").prop('checked', true);
     this.$("#storeForm").find("input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
-    advancedForm.find("input[name=notFancy][value=" + fancyStatus + "]").prop('checked', true);
+    advancedForm.find("input[name=minEffects][value=" + fancyStatus + "]").prop('checked', true);
     advancedForm.find("input[name=additionalPaymentData][value=" + localStorage.getItem('AdditionalPaymentData') + "]").prop('checked', true);
     advancedForm.find("input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
     advancedForm.find("input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
@@ -1113,12 +1113,12 @@ module.exports = pageVw.extend({
   toggleFancyStyles: function(){
     var $html = $('html');
     
-    if ($('#advancedForm').find('input[name="notFancy"]').prop('checked')){
-      $html.addClass('notFancy');
-      localStorage.setItem('notFancy', "true");
+    if ($('#advancedForm').find('input[name="minEffects"]').prop('checked')){
+      $html.addClass('minEffects');
+      localStorage.setItem('minEffects', "true");
     } else {
-      $html.removeClass('notFancy');
-      localStorage.setItem('notFancy', "false");
+      $html.removeClass('minEffects');
+      localStorage.setItem('minEffects', "false");
     }
   },
 

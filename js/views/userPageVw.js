@@ -390,11 +390,11 @@ UserPageVw = pageVw.extend({
         self.$backToTop = self.$('.backToTop');
 
         //check if user is blocked
-        if(!self.options.ownPage && isBlocked) {
+        if (!self.options.ownPage && isBlocked) {
           self.hideThisUser("blocked");
         }
 
-        if(!self.options.ownPage && !self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
+        if (!self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
           self.hideThisUser("nsfw");
         }
 

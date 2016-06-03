@@ -256,8 +256,8 @@ $(window).bind('hashchange', function(){
 });
 
 //set fancy styles class
-if (localStorage.getItem('notFancy') == "true"){
-  $html.addClass('notFancy');
+if (localStorage.getItem('minEffects') == "true"){
+  $html.addClass('minEffects');
 }
 
 //prevent dragging a file to the window from loading that file
