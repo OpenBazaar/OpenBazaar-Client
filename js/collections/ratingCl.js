@@ -17,6 +17,6 @@ module.exports = Backbone.Collection.extend({
       return [];
     }
 
-    return response;
+    return response.reverse();
   }
 });

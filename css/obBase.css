@@ -419,13 +419,6 @@ h6, .h6 {
   -webkit-app-region: no-drag;
 }
 
-#appBar .title {
-  /* since the loading spinners are centered in a manner
-     where chat is excluded from the width, we'll follow
-     suit here so our title is centered with the spinners */
-  width: calc(100% - 45px);
-}
-
 #pageNav .btn {
   -webkit-app-region: no-drag;
 }
@@ -4432,7 +4425,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 0;
   top: 50%;
   margin-top: 117px;
-  margin-left: -40px;
   opacity: 1;
   transition: opacity 1s 5s ease;
   box-sizing: border-box;
