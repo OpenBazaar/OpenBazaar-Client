@@ -4777,12 +4777,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background-color: #252525;
   transform: translateY(100%);
   opacity: 0;
+  border-radius: 4px;
   transition: transform 300ms ease, right 0.5s ease;
 }
 
 .backToTop.slideUp {
   opacity: 1;
   transform: translateY(0);
+}
+
+.backToTop:active {
+  opacity: .75;
 }
 
 #ov1.chatOpen .backToTop {
