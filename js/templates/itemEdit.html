@@ -27,7 +27,7 @@
           <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple <%= ob.images.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>>
         </label>
       </div>
-      <div class="flexRow js-editItemSubImagesWrapper editItemImageHolder">
+      <div class="flexRow js-editItemSubImagesWrapper editItemImageHolder" data-label="<%= polyglot.t('Photos') %>">
         <div class="statusBar navBar fadeOut positionAbsolute js-itemEditImageLoading">
           <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
         </div>
@@ -164,7 +164,7 @@
                 <div class="note rowTop5"><%= polyglot.t('HighlightToStyle') %></div>
               </div>
             </div>
-            <div class="flexCol-9">
+            <div class="flexCol-9" data-label="<%= polyglot.t('Description') %>">
               <textarea name="description"
                         rows="8"
                         class="fieldItem-textarea custCol-text height130 customThemeScrollbar"
@@ -200,7 +200,7 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <div class="fieldItem padding0 js-shipToWrapper">
+                <div class="fieldItem padding0 js-shipToWrapper" data-label="<%= polyglot.t('ShipsTo') %>">
                   <div class="fieldItem-selectWrapper noIcon positionWrapper">
                     <select name="ships_to" class="chosen custCol-text" id="shipsTo" multiple required>
                     </select>
@@ -379,7 +379,7 @@
               </div>
             </div>
             <div class="flexCol-9">
-              <div class="fieldItem padding015" id="inputKeyword"></div>
+              <div class="fieldItem padding015" id="inputKeyword" data-label="<%= polyglot.t('Tags') %>"></div>
             </div>
           </div>
           <div class="flexRow">
