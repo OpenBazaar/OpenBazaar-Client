@@ -638,8 +638,8 @@ app.on('ready', function() {
     autoUpdater.quitAndInstall();
   });
 
-  var feedURL = 'http://updates.openbazaar.org:5000/update/' + platform + '/' + version;
-  autoUpdater.setFeedURL(feedURL);
+  var feedURL = 'https://updates.openbazaar.org:5001/update/' + platform + '/' + version;
+  autoUpdater.setFeedURL(feedURL)
   mainWindow.webContents.executeJavaScript("console.log('Checking for new versions at " + feedURL + " ...')");
 
   // Check for updates every hour

@@ -37,7 +37,6 @@ module.exports = baseVw.extend({
 
   initialize: function(){
     var self=this,
-        hashArray = this.model.get('vendor_offer').listing.item.image_hashes,
         nowDate = new Date(),
         nowMonth = nowDate.getMonth()+ 1;
 
@@ -68,19 +67,9 @@ module.exports = baseVw.extend({
     };
 
     this.prevShipsToVal = [];
-
     this.defaultDate = nowDate.getFullYear() + "-" + padTime(nowMonth) + "-" + padTime(nowDate.getDate()) + "T" + padTime(nowDate.getHours()) + ":" + padTime(nowDate.getMinutes());
-    this.combinedImagesArray = [];
-    __.each(hashArray, function(hash){
-      self.combinedImagesArray.push(self.model.get('serverUrl')+"get_image?hash="+hash);
-    });
-    //add images urls to the combinedImagesArray for rendering
-    this.model.set('combinedImagesArray', this.combinedImagesArray);
-    this.inputKeyword;
-
-    //add existing hashes to the list to be uploaded on save
-    var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
-    self.model.set("imageHashesToUpload", anotherHashArray);
+    this.imgHashes = this.model.get('vendor_offer').listing.item.image_hashes;
+   
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
 
     this.listenTo(this.model, 'change:priceSet', this.render());
@@ -90,7 +79,10 @@ module.exports = baseVw.extend({
     var self = this;
     
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
-      var context = __.extend({}, self.model.toJSON(), { MAX_PHOTOS: self.MAX_PHOTOS });
+      var context = __.extend({}, self.model.toJSON(), {
+        MAX_PHOTOS: self.MAX_PHOTOS,
+        images: self.imgHashes.map((hash) => self.getImageUrl(hash))
+      });
 
       self.$el.html(loadedTemplate(context));
 
@@ -99,10 +91,7 @@ module.exports = baseVw.extend({
       self.sortableImages && self.sortableImages.destroy();
       self.sortableImages = Sortable.create(self.$('.js-subImageWrap')[0], {
         onUpdate: function(e) {
-          var imagesArr = self.model.get('imageHashesToUpload');
-
-          imagesArr.splice(e.newIndex, 0, imagesArr.splice(e.oldIndex, 1)[0]);
-          self.model.set('imageHashesToUpload', imagesArr);
+          self.imgHashes.splice(e.newIndex, 0, self.imgHashes.splice(e.oldIndex, 1)[0]);
         }
       });
 
@@ -339,11 +328,11 @@ module.exports = baseVw.extend({
   resizeImage: function(imageFiles){
     var self = this,
         $imageInput = this.$el.find('.js-itemImageUpload'),
-        curImages = this.model.get('combinedImagesArray'),
         maxH = 944,
         maxW = 1028,
         imageList = [],
         loaded = 0,
+        errored = 0,
         imageCount;
 
     imageFiles = Array.prototype.slice.call(imageFiles || $imageInput[0].files, 0);
@@ -355,14 +344,15 @@ module.exports = baseVw.extend({
 
     $imageInput.val('');
 
-    if (curImages.length + imageFiles.length > this.MAX_PHOTOS) {
-      imageFiles = imageFiles.slice(0, this.MAX_PHOTOS - curImages.length);
+    if (this.imgHashes.length + imageFiles.length > this.MAX_PHOTOS) {
+      imageFiles = imageFiles.slice(0, this.MAX_PHOTOS - this.imgHashes.length);
       messageModal.show(window.polyglot.t('errorMessages.tooManyPhotosTitle'), window.polyglot.t('errorMessages.tooManyPhotosBody'));      
     }
 
     if (!imageFiles.length) return;
 
     imageCount = imageFiles.length;
+    this.$el.find('.js-itemEditImageLoading').removeClass("fadeOut");
 
     __.each(imageFiles, function(imageFile){
       var newImage = document.createElement("img"),
@@ -377,7 +367,6 @@ module.exports = baseVw.extend({
             canvas = document.createElement("canvas");
 
         loaded += 1;
-        self.$el.find('.js-itemEditImageLoading').removeClass("fadeOut");
 
         if (imgW < imgH){
           //if image width is smaller than height, set width to max
@@ -403,8 +392,12 @@ module.exports = baseVw.extend({
 
       newImage.onerror = function() {
         loaded += 1;
+        errored += 1;
 
-        if (loaded === imageCount) {
+        if (errored === imageCount) {
+          self.$el.find('.js-itemEditImageLoading').addClass('fadeOut');
+          messageModal.show(window.polyglot.t('errorMessages.unableToLoadImages'));
+        } else if (loaded === imageCount) {
           self.uploadImage(imageList);
         }        
       };
@@ -420,7 +413,7 @@ module.exports = baseVw.extend({
     });
 
     if (!imageList.length) {
-      self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
+      this.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
       return;
     }
 
@@ -432,20 +425,13 @@ module.exports = baseVw.extend({
       dataType: "json",
       data: formData,
       success: function(data) {
-        var hashArray,
-            imageArray;
-
         if (data.success === true){
-          imageArray = __.clone(self.model.get("combinedImagesArray"));
-          hashArray = __.clone(self.model.get("imageHashesToUpload"));
           __.each(data.image_hashes, function (hash) {
             if (hash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40){
-              imageArray.push(self.model.get('serverUrl') + "get_image?hash=" + hash);
-              hashArray.push(hash);
+              self.imgHashes.push(hash);
             }
           });
-          self.model.set("combinedImagesArray", imageArray);
-          self.model.set("imageHashesToUpload", hashArray);
+
           self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
         } else if (data.success === false){
@@ -460,21 +446,24 @@ module.exports = baseVw.extend({
     });
   },
 
+  getImageUrl: function(hash) {
+    return `${this.model.get('serverUrl')}get_image?hash=${hash}`;
+  },
+
   updateImages: function(){
     var self = this,
         subImageDivs = this.$el.find('.js-editItemSubImage'),
-        imageArray = this.model.get("combinedImagesArray"),
         uploadMsg = this.$el.find('.js-itemEditLoadPhotoMessage');
 
     //remove extra subImage divs
-    subImageDivs.slice(imageArray.length).remove();
+    subImageDivs.slice(this.imgHashes.length).remove();
 
-    if (imageArray.length > 0){
-      __.each(imageArray, function (imageURL, i) {
+    if (this.imgHashes.length > 0){
+      __.each(this.imgHashes, (hash, i) => {
         if (i < subImageDivs.length){
-          $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
+          $(subImageDivs[i]).css('background-image', 'url(' + this.getImageUrl(hash) + ')');
         } else {
-          $('<div class="itemImg itemImg-small js-editItemSubImage floatLeft" style="background-image: url(' + imageURL + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
+          $('<div class="itemImg itemImg-small js-editItemSubImage floatLeft" style="background-image: url(' + this.getImageUrl(hash) + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
               .appendTo(self.$('.js-subImageWrap'));
         }
       });
@@ -483,7 +472,7 @@ module.exports = baseVw.extend({
       uploadMsg.removeClass('hide');
     }
 
-    if (imageArray.length >= this.MAX_PHOTOS) {
+    if (this.imgHashes.length >= this.MAX_PHOTOS) {
       this.$('.js-itemImageUpload').prop('disabled', true)
         .siblings('.btn')
         .addClass('disabled');
@@ -495,15 +484,9 @@ module.exports = baseVw.extend({
   },
 
   deleteImage: function(e) {
-    var imageUploadArray,
-        imgIndex = $(e.target).closest('.itemImg').index('.js-editItemSubImage'),
-        imageArray = __.clone(this.model.get("combinedImagesArray"));
+    var imgIndex = $(e.target).closest('.itemImg').index('.js-editItemSubImage');
 
-    imageArray.splice(imgIndex, 1);
-    this.model.set("combinedImagesArray", imageArray);
-    imageUploadArray = __.clone(this.model.get("imageHashesToUpload"));
-    imageUploadArray.splice(imgIndex, 1);
-    this.model.set("imageHashesToUpload", imageUploadArray);
+    this.imgHashes.splice(imgIndex, 1);
     this.updateImages();
   },
 
@@ -564,7 +547,7 @@ module.exports = baseVw.extend({
     }
 
     //add old and new image hashes
-    __.each(this.model.get('imageHashesToUpload'), function(imHash){
+    __.each(this.imgHashes, function(imHash){
       //make sure all hashes are valid
       if (imHash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imHash.length === 40){
         formData.append('images', imHash);

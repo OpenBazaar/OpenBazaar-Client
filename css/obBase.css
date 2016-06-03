@@ -419,19 +419,12 @@ h6, .h6 {
   -webkit-app-region: no-drag;
 }
 
-#appBar .title {
-  /* since the loading spinners are centered in a manner
-     where chat is excluded from the width, we'll follow
-     suit here so our title is centered with the spinners */
-  width: calc(100% - 45px);
-}
-
 #pageNav .btn {
   -webkit-app-region: no-drag;
 }
 
 #pageNav .navBar.bar {
-  padding: 0 8px 10px;
+  padding: 0 8px;
 }
 
 #pageNav .modal-about .navBar.bar {
@@ -4397,7 +4390,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 0;
   width: 100%;
   height: 100%;
-  -webkit-app-region: no-drag;
   pointer-events: none;
 }
 
@@ -4433,7 +4425,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 0;
   top: 50%;
   margin-top: 117px;
-  margin-left: -40px;
   opacity: 1;
   transition: opacity 1s 5s ease;
   box-sizing: border-box;
@@ -6145,18 +6136,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 /* turn off animations and transitions with this style */
 
-#ov1.notFancy,
-#ov1.notFancy *,
-#ov1.notFancy #userPage,
-#ov1.notFancy #userPage *,
-#ov1.notFancy #obContainer,
-#ov1.notFancy #obContainer *,
-#ov1.notFancy #overlay,
-#ov1.notFancy #sideBar,
-#ov1.notFancy #pageNav,
-#ov1.notFancy #modalHolder,
-#ov1.notFancy #messageModal,
-#ov1.notFancy #statusBar {
+#ov1.minEffects,
+#ov1.minEffects *,
+#ov1.minEffects #userPage,
+#ov1.minEffects #userPage *,
+#ov1.minEffects #obContainer,
+#ov1.minEffects #obContainer *,
+#ov1.minEffects #overlay,
+#ov1.minEffects #sideBar,
+#ov1.minEffects #pageNav,
+#ov1.minEffects #modalHolder,
+#ov1.minEffects #messageModal,
+#ov1.minEffects #statusBar {
   transition: none !important;
   -webkit-filter: none !important;
   opacity: 1 !important;
@@ -6166,108 +6157,120 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-shadow: none !important;
 }
 
-#ov1.notFancy #pageNav .popMenu.popMenu-navBar.popMenu-opened {
+#ov1.minEffects #pageNav .popMenu-navBarSubMenu {
   border-left: 1px solid #444;
   border-right: 1px solid #444;
   border-bottom: 1px solid #444;
 }
 
-#ov1.notFancy .fadeOut,
-#ov1.notFancy .statusBar.fadeOut,
-#ov1.notFancy #pageNav .statusBar.fadeOut,
-#ov1.notFancy #userPage .fadeOut,
-#ov1.notFancy #userPage #pageNav .fadeOut,
-#ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
-#ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
+#ov1.minEffects .fadeOut,
+#ov1.minEffects .statusBar.fadeOut,
+#ov1.minEffects #pageNav .statusBar.fadeOut,
+#ov1.minEffects #userPage .fadeOut,
+#ov1.minEffects #userPage #pageNav .fadeOut,
+#ov1.minEffects #userPage #pageNav .statusBar.fadeOut,
+#ov1.minEffects #userPage #obContainer #content .statusBar.fadeOut {
   opacity: 0 !important;
 }
 
-#ov1.notFancy #sideBar .sideBarSlidShow {
+#ov1.minEffects #sideBar .sideBarSlidShow {
   display: none;
 }
 
-#ov1.notFancy #sideBar.sideBarSlid .sideBarSlidShow {
+#ov1.minEffects #sideBar.sideBarSlid .sideBarSlidShow {
   display: block;
 }
 
-#ov1.notFancy #sideBar .chatConversation textarea,
-#ov1.notFancy #sideBar .chatConversation textarea::-webkit-input-placeholder,
-#ov1.notFancy #sideBar .chatConversation input,
-#ov1.notFancy #sideBar .chatConversation input::-webkit-input-placeholder {
+#ov1.minEffects #sideBar .chatConversation textarea,
+#ov1.minEffects #sideBar .chatConversation textarea::-webkit-input-placeholder,
+#ov1.minEffects #sideBar .chatConversation input,
+#ov1.minEffects #sideBar .chatConversation input::-webkit-input-placeholder {
   color: #fff;
 }
 
-#ov1.notFancy .gridItemControls {
+#ov1.minEffects .gridItemControls {
   display: none;
 }
 
-#ov1.notFancy .gridItemControls .btn-gridItemControl:hover,
-#ov1.notFancy .userPage-subViews .gridItem:hover .gridItemControls,
-#ov1.notFancy .homeView .gridItem:hover .gridItemControls {
+#ov1.minEffects .gridItemControls .btn-gridItemControl:hover,
+#ov1.minEffects .userPage-subViews .gridItem:hover .gridItemControls,
+#ov1.minEffects .homeView .gridItem:hover .gridItemControls {
   display: block;
 }
 
-#ov1.notFancy .btn .postConfirm {
+#ov1.minEffects .btn .postConfirm {
   display: none;
 }
 
-#ov1.notFancy .confirm.btn .preConfirm {
+#ov1.minEffects .confirm.btn .preConfirm {
   display: none;
 }
 
-#ov1.notFancy .confirm.btn .postConfirm {
+#ov1.minEffects .confirm.btn .postConfirm {
   display: inline-block;
 }
 
-#ov1.notFancy #userPage #obContainer #content .labelWrap.fade {
+#ov1.minEffects #userPage #obContainer #content .labelWrap.fade {
   opacity: 0 !important;
 }
 
-#ov1.notFancy #userPage #obContainer #content .labelWrap.fadeIn {
+#ov1.minEffects #userPage #obContainer #content .labelWrap.fadeIn {
   opacity: 1;
 }
 
-#ov1.notFancy #obContainer .taggle_placeholder,
-#ov1.notFancy #userPage #obContainer .taggle_placeholder {
+#ov1.minEffects #obContainer .taggle_placeholder,
+#ov1.minEffects #userPage #obContainer .taggle_placeholder {
   display: none !important;
 }
 
-#ov1.notFancy #obContainer .unfilled,
-#ov1.notFancy #userPage .unfilled {
+#ov1.minEffects #obContainer .unfilled,
+#ov1.minEffects #userPage .unfilled {
   opacity: 0.35 !important;
 }
 
-#ov1.notFancy .notFancyDarkBackground,
-#ov1.notFancy #obContainer .notFancyDarkBackground {
+#ov1.minEffects .minEffectsDarkBackground,
+#ov1.minEffects #obContainer .minEffectsDarkBackground {
   background: #262626 !important;
 }
 
-#ov1.notFancy .addressFormOpened .buyWizardMap .blurMore {
+#ov1.minEffects .addressFormOpened .buyWizardMap .blurMore {
   display: none;
 }
 
-#ov1.notFancy .disabled,
-#ov1.notFancy #userPage .disabled,
-#ov1.notFancy #obContainer .disabled,
-#ov1.notFancy #overlay .disabled,
-#ov1.notFancy #sideBar .disabled,
-#ov1.notFancy #pageNav .disabled,
-#ov1.notFancy #modalHolder .disabled,
-#ov1.notFancy #messageModal .disabled,
-#ov1.notFancy #statusBar .disabled {
+#ov1.minEffects .user-page-header-slim {
+  display: none;
+}
+
+#ov1.minEffects .user-page-header-slim.scrolledIntoView {
+  display: block;
+}
+
+#ov1.minEffects .disabled,
+#ov1.minEffects #userPage .disabled,
+#ov1.minEffects #obContainer .disabled,
+#ov1.minEffects #overlay .disabled,
+#ov1.minEffects #sideBar .disabled,
+#ov1.minEffects #pageNav .disabled,
+#ov1.minEffects #modalHolder .disabled,
+#ov1.minEffects #messageModal .disabled,
+#ov1.minEffects #statusBar .disabled {
   opacity: 0.2 !important;
 }
 
-#ov1.notFancy .disabled2,
-#ov1.notFancy #userPage .disabled2,
-#ov1.notFancy #obContainer .disabled2,
-#ov1.notFancy #overlay .disabled2,
-#ov1.notFancy #sideBar .disabled2,
-#ov1.notFancy #pageNav .disabled2,
-#ov1.notFancy #modalHolder .disabled2,
-#ov1.notFancy #messageModal .disabled2,
-#ov1.notFancy #statusBar .disabled2 {
+#ov1.minEffects .disabled2,
+#ov1.minEffects #userPage .disabled2,
+#ov1.minEffects #obContainer .disabled2,
+#ov1.minEffects #overlay .disabled2,
+#ov1.minEffects #sideBar .disabled2,
+#ov1.minEffects #pageNav .disabled2,
+#ov1.minEffects #modalHolder .disabled2,
+#ov1.minEffects #messageModal .disabled2,
+#ov1.minEffects #statusBar .disabled2 {
   opacity: 0.7 !important;
+}
+
+#ov1.minEffects .nsfw {
+  background: #000 !important;
 }
 
 /* add a shadow and a glow, so modal close buttons are still barely visible if the user picks a bad color */
@@ -6276,21 +6279,21 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 #obContainer .js-closeIndexModal [class *= "ion-"]:before,
 #ov1 #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
 #ov1 #messageModal .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.notFancy .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.notFancy #userPage .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.notFancy #obContainer .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.notFancy #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.notFancy #messageModal .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects #userPage .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects #obContainer .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects #messageModal .js-closeIndexModal [class *= "ion-"]:before,
 #ov1 .js-modal-close [class *= "ion-"]:before,
 #ov1 #userPage .js-modal-close [class *= "ion-"]:before,
 #ov1 #obContainer .js-modal-close [class *= "ion-"]:before,
 #ov1 #modalHolder .js-modal-close [class *= "ion-"]:before,
 #ov1 #messageModal .js-modal-close [class *= "ion-"]:before,
-#ov1.notFancy .js-modal-close [class *= "ion-"]:before,
-#ov1.notFancy #userPage .js-modal-close [class *= "ion-"]:before,
-#ov1.notFancy #obContainer .js-modal-close [class *= "ion-"]:before,
-#ov1.notFancy #modalHolder .js-modal-close [class *= "ion-"]:before,
-#ov1.notFancy #messageModal .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects #userPage .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects #obContainer .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects #modalHolder .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects #messageModal .js-modal-close [class *= "ion-"]:before,
 #ov1 #modalHolder .js-closeBuyWizardModal [class *= "ion-"]:before {
   text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
 }

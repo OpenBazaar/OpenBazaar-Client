@@ -390,11 +390,11 @@ UserPageVw = pageVw.extend({
         self.$backToTop = self.$('.backToTop');
 
         //check if user is blocked
-        if(!self.options.ownPage && isBlocked) {
+        if (!self.options.ownPage && isBlocked) {
           self.hideThisUser("blocked");
         }
 
-        if(!self.options.ownPage && !self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
+        if (!self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
           self.hideThisUser("nsfw");
         }
 
@@ -813,6 +813,7 @@ UserPageVw = pageVw.extend({
   },
 
   renderItems: function (model, skipNSFWmodal) {
+    console.log("render")
     var self = this,
         select = this.$el.find('.js-categories'),
         selectOptions = [],
@@ -871,9 +872,11 @@ UserPageVw = pageVw.extend({
 
     this.$('.js-listingCount').html(model.length);
 
-    if (model.length) {
+    this.listenTo(this.itemList, 'rendered', ()=>{
       this.storeSearch = new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
-    }
+      var searchTerms = this.$('#inputStore').val();
+      searchTerms && this.storeSearch.search(searchTerms);
+    });
   },
 
   renderReviews: function (model) {

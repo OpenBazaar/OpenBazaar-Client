@@ -37,6 +37,7 @@ module.exports = baseVw.extend({
     } else {
       self.renderNoneFound();
     }
+    this.trigger("rendered");
   },
 
   renderContract: function(item){
