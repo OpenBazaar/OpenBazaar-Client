@@ -6040,6 +6040,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-radius: 50%;
   color: white;
   background-color: #FFA41C;
+  pointer-events: none;
 }
 
 #ov1 .alignCenter {

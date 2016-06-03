@@ -182,6 +182,7 @@
   "SSLIsOn": "SSL is on",
   "SSLIsOff": "SSL is off",
   "LibbitcoinServerAddress": "Libbitcoin Server Address",
+  "libbitCoinPlaceholder": "tcp://serveraddress:port or leave this field blank to use the default value (recommended)",
   "SMTPNotificationsWarning": "Turn email notifications on/off",
   "SMTPNotifications": "SMTP Notifications",
   "SMTPPassword": "SMTP Password",

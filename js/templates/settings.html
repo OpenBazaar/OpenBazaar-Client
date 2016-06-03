@@ -1098,6 +1098,8 @@
                        id="libbitcoin_server"
                        type="text"
                        class="fieldItem"
+                       pattern="^tcp:\/\/[A-Za-z0-9\.-]{4,}(?:\:\d{2,4})$"
+                       placeholder="<%= polyglot.t('libbitCoinPlaceholder') %>"
                        value="<%= ob.user.libbitcoin_server %>">
               </div>
             </div>
