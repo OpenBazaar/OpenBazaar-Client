@@ -182,6 +182,7 @@
   "SSLIsOn": "SSL is on",
   "SSLIsOff": "SSL is off",
   "LibbitcoinServerAddress": "Libbitcoin Server Address",
+  "LibbitcoinOfflineWarning":"The Libbitcoin Server is not responding. Transactions can still be made, but payments will not complete until Libbitcoin is back online.",
   "SMTPNotificationsWarning": "Turn email notifications on/off",
   "SMTPNotifications": "SMTP Notifications",
   "SMTPPassword": "SMTP Password",

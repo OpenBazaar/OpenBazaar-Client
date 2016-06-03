@@ -255,7 +255,7 @@ $(window).bind('hashchange', function(){
   localStorage.setItem('route', Backbone.history.getFragment());
 });
 
-//set fancy styles class
+//set minimized effects styles class
 if (localStorage.getItem('minEffects') == "true"){
   $html.addClass('minEffects');
 }
@@ -625,6 +625,19 @@ app.getHeartbeatSocket().on('message', function(e) {
               .open();
         });
       }
+    }
+  }
+  if (e.jsonData && e.jsonData.libbitcoin) {
+    if (e.jsonData.libbitcoin != "online") {
+      if (!this.libbitCoinStatus) {
+        this.libbitCoinStatus = app.statusBar.pushMessage({
+          type: 'warning',
+          msg: '<i>' + window.polyglot.t('LibbitcoinOfflineWarning') + '</i>',
+          duration: false
+        });
+      }
+    } else {
+      this.libbitCoinStatus && this.libbitCoinStatus.remove();
     }
   }
 });
