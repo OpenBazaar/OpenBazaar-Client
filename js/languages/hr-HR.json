@@ -333,7 +333,7 @@
     "HandleResolver": "Registar skraćenih naziva",
     "ShutDownServer": "Isključite poslužitelja",
     "NoFancyStyles": "Isključiti vizualne efekte",
-    "NoFancyStylesWarning": "Ovom ćete postavkom isključiti animacije i prozirnost. To bi moglo pospješiti izvođenje na sporijim sustavima.",
+    "MinimalEffectsWarning": "Ovom ćete postavkom isključiti animacije i prozirnost. To bi moglo pospješiti izvođenje na sporijim sustavima.",
     "LoadingBitcoinPrices": "Učitavanje Bitcoin cijena...",
     "ThisUserIsBlocked": "Ovaj je korisnik skriven, obzirom da se nalazi na Vašoj listi blokiranih korisnika.",
     "ThisUserIsNSFW": "Ovaj je korisnik skriven, obzirom da je njegova stranica na listi stranica sa sadržajem koji nije preporučen za prikaz na radnom mjestu.",

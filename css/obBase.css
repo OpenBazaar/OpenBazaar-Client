@@ -481,8 +481,7 @@ h6, .h6 {
   position: relative;
   min-height: 740px;
   margin-bottom: 50px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-radius: 0;
   z-index: 0;
   box-shadow: 0 10px 20px #05283C;
 }
@@ -3602,10 +3601,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .banner-large {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 0;
   background: 50% 50% / cover no-repeat;
   height: 400px;
   position: absolute;
@@ -4769,12 +4765,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background-color: #252525;
   transform: translateY(100%);
   opacity: 0;
+  border-radius: 4px;
   transition: transform 300ms ease, right 0.5s ease;
 }
 
 .backToTop.slideUp {
   opacity: 1;
   transform: translateY(0);
+}
+
+.backToTop:active {
+  opacity: .75;
 }
 
 #ov1.chatOpen .backToTop {

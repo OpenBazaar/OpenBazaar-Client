@@ -333,7 +333,7 @@
     "HandleResolver": "Recupero Nickname",
     "ShutDownServer": "Spegni il server",
     "NoFancyStyles": "Disattivare effetti visivi",
-    "NoFancyStylesWarning": "Questo consente di disattivare le animazioni e trasparenze. Pu&ograve; migliorare le prestazioni su sistemi lenti.",
+    "MinimalEffectsWarning": "Questo consente di disattivare le animazioni e trasparenze. Pu&ograve; migliorare le prestazioni su sistemi lenti.",
     "LoadingBitcoinPrices": "Caricamento Prezzi Bitcoin...",
     "ThisUserIsBlocked": "Questo utente &egrave; nascosto perch&eacute; si trova nella tua lista bloccati",
     "ThisUserIsNSFW": "Questo utente &egrave; nascosto perch&eacute; la sua pagina &egrave; indicata come NSFW",

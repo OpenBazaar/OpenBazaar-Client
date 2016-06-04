@@ -333,7 +333,7 @@
     "HandleResolver": "Résolveur d'identifiant",
     "ShutDownServer": "Arrêter le serveur",
     "NoFancyStyles": "Désactiver les effets visuels",
-    "NoFancyStylesWarning": "Ceci va désactiver les animations et les transparences. Peut améliorer les performances sur les systèmes lents.",
+    "MinimalEffectsWarning": "Ceci va désactiver les animations et les transparences. Peut améliorer les performances sur les systèmes lents.",
     "LoadingBitcoinPrices": "Chargement des prix Bitcoin...",
     "ThisUserIsBlocked": "Cet utilisateur est masqué parce que vous l'avez bloqué",
     "ThisUserIsNSFW": "Cet utilisateur est masqué parce que sa page est listée comme NSFW",

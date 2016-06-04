@@ -333,7 +333,7 @@
     "HandleResolver": "Handle Resolver",
     "ShutDownServer": "Server stoppen",
     "NoFancyStyles": "Optische Effekte abschalten",
-    "NoFancyStylesWarning": "Dies wird Animationen und Durchsichtige Fl&auml;chen abschalten und dadurch m&ouml;glicherweise die Performance verbessern",
+    "MinimalEffectsWarning": "Dies wird Animationen und Durchsichtige Fl&auml;chen abschalten und dadurch m&ouml;glicherweise die Performance verbessern",
     "LoadingBitcoinPrices": "Bitcoin Preise werden geladen...",
     "ThisUserIsBlocked": "Der Benutzer wird nicht angezeigt, da er von Ihnen blockiert wurde.",
     "ThisUserIsNSFW": "Dieser Benutzer wird nicht angezeigt, da sein Laden Inhalte für Erwachsene enthält.",

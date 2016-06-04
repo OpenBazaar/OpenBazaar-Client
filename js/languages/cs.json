@@ -333,7 +333,7 @@
     "HandleResolver": "Handle Resolver",
     "ShutDownServer": "Vypnout Server",
     "NoFancyStyles": "Vypnout vizuální efekty",
-    "NoFancyStylesWarning": "Vypne animace a průhlednost. Může zlepšit výkon na pomalých systémech.",
+    "MinimalEffectsWarning": "Vypne animace a průhlednost. Může zlepšit výkon na pomalých systémech.",
     "LoadingBitcoinPrices": "Loading Bitcoin Prices...",
     "ThisUserIsBlocked": "Tento uživatel je skrytý, protože ho blokujete.",
     "ThisUserIsNSFW": "This user is hidden because their page is listed as NSFW",

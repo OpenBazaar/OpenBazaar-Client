@@ -333,7 +333,7 @@
     "HandleResolver": "Prekladač Prezývok",
     "ShutDownServer": "Vypnúť Server",
     "NoFancyStyles": "Zrušiť Vizuálne Efekty",
-    "NoFancyStylesWarning": "Táto zmena vypne animácie a priesvitnosť. Môže to zlepšiť výkon na pomalých systémoch.",
+    "MinimalEffectsWarning": "Táto zmena vypne animácie a priesvitnosť. Môže to zlepšiť výkon na pomalých systémoch.",
     "LoadingBitcoinPrices": "Načítavam cenu Bitcoinu...",
     "ThisUserIsBlocked": "Tento používateľ je skrytý, pretože sa nachádza na Vašom zozname zablokovaných používateľov",
     "ThisUserIsNSFW": "Tento používateľ je skrytý, pretože jeho stránka je v zozname NSFW (stránky s nevhodným obsahom)",
