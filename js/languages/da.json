@@ -333,7 +333,7 @@
     "HandleResolver": "Håndtering af brugernavn",
     "ShutDownServer": "Luk serveren ned",
     "NoFancyStyles": "Deaktivér visuelle effekter",
-    "NoFancyStylesWarning": "Dette vil deaktivere animationer og gennemsigtigheder. Det forbedrer måske ydelsen op langsomme systemer.",
+    "MinimalEffectsWarning": "Dette vil deaktivere animationer og gennemsigtigheder. Det forbedrer måske ydelsen op langsomme systemer.",
     "LoadingBitcoinPrices": "Indlæser Bitcoin-priser…",
     "ThisUserIsBlocked": "Denne bruger er skjult, da vedkommende er på din blokeringsliste",
     "ThisUserIsNSFW": "Denne bruger er skjult, da vedkommendes side står opført som potentielt stødende",

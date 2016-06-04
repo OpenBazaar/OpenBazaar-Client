@@ -333,7 +333,7 @@
     "HandleResolver": "ユーザ名解決",
     "ShutDownServer": "サーバーをシャットダウン",
     "NoFancyStyles": "視覚効果を無効にする",
-    "NoFancyStylesWarning": "これはアニメーションや透明度を無効にします。低速のシステムでパフォーマンスを向上させることができます。",
+    "MinimalEffectsWarning": "これはアニメーションや透明度を無効にします。低速のシステムでパフォーマンスを向上させることができます。",
     "LoadingBitcoinPrices": "ビットコイン価格を読み込み中...",
     "ThisUserIsBlocked": "このユーザーは、ブロックリストにあるため非表示です",
     "ThisUserIsNSFW": "このユーザーは、そのページがNSFW（アダルト）を出品しているため非表示です",

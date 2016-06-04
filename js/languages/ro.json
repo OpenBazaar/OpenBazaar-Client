@@ -333,7 +333,7 @@
     "HandleResolver": "Rezolvator de Nume",
     "ShutDownServer": "Oprire Server",
     "NoFancyStyles": "Dezactivare Efecte Vizuale",
-    "NoFancyStylesWarning": "Aceasta va dezactiva animațiile și transparențele. Poate mări performața pe sistemele lente.",
+    "MinimalEffectsWarning": "Aceasta va dezactiva animațiile și transparențele. Poate mări performața pe sistemele lente.",
     "LoadingBitcoinPrices": "Se Încarcă Prețurile Bitcoin...",
     "ThisUserIsBlocked": "Acest utilizator este ascuns pentru că e blocat de dvs.",
     "ThisUserIsNSFW": "Acest utilizator este ascuns pentru că pagina lui este listată ca NSFW",

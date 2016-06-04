@@ -333,7 +333,7 @@
     "HandleResolver": "Serwis rozpoznający nazwy",
     "ShutDownServer": "Zatrzymaj serwer",
     "NoFancyStyles": "Wyłącz efekty wizualne",
-    "NoFancyStylesWarning": "Ta opcja wyłączy animacje i przezroczystość. Może zwiększyć wydajność na słabym komputerze.",
+    "MinimalEffectsWarning": "Ta opcja wyłączy animacje i przezroczystość. Może zwiększyć wydajność na słabym komputerze.",
     "LoadingBitcoinPrices": "Ładowanie kursu Bitcoina...",
     "ThisUserIsBlocked": "Ten użytkownik jest ukryty, ponieważ znajduje się na Twojej liście zablokowanych użytkowników",
     "ThisUserIsNSFW": "Ten użytkownik jest ukryty, ponieważ jego strona została oznaczona jako NSFW",
