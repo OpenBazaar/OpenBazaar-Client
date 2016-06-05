@@ -666,8 +666,8 @@ module.exports = baseVw.extend({
 
     //detect enter key
     if (e.keyCode == 13){
-      // Stop right here! Route was already changed
       if (this.suggestionsVw.wasSelectedOnEnter()) {
+        //if enter was clicked while a suggestion was highlighted, let the suggestions view handle the routing
         return;
       }
       
