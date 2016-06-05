@@ -696,7 +696,7 @@ UserPageVw = pageVw.extend({
     this.following.fetch({
       data: self.userProfileFetchParameters,
       success: function(model){
-        var followingArray = model.get('following');
+        var followingArray = model.get('following') || [];
         if (self.isRemoved()) return;
 
         if (self.options.ownPage === true){
