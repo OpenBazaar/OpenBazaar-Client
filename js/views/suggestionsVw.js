@@ -16,7 +16,7 @@ module.exports = baseVw.extend({
 
   lastQuery: '',
   list: [],
-  selectedOnEnter: false,
+  //selectedOnEnter: false,
   type: '',
   visible: false,
   
@@ -40,7 +40,7 @@ module.exports = baseVw.extend({
     this.$input.on('keyup.local', function(e){
       var keyCode = e.keyCode || e.which;
 
-      if (e.keyCode == 13) {
+      if (keyCode == 13) {
         self.selectItemOnEnter();
       } else {
         self.showBox(e, $(this).val());
@@ -122,17 +122,15 @@ module.exports = baseVw.extend({
   selectItemOnEnter: function() {
     var $selected = this.$('a.selected');
     
-    this.selectedOnEnter = true;
+    //this.selectedOnEnter = true;
     
     app.hideOverlay();
     this.hideSuggestions();
     
-    if (typeof $selected !== 'undefined' && $selected.length) {      
+    if (typeof $selected !== 'undefined' && $selected.length) {
       Backbone.history.navigate($selected.attr('href'), {
         trigger: true
       });
-      
-      return;
     }
   },
   
@@ -201,12 +199,12 @@ module.exports = baseVw.extend({
     this.list = [];
     
     switch (this.type) {
-      case 'handles':
-        this.list = this.findInHandlesList(query);
-        break;
-      case 'tags':
-        this.list = this.findInTagsList(query);
-        break;
+    case 'handles':
+      this.list = this.findInHandlesList(query);
+      break;
+    case 'tags':
+      this.list = this.findInTagsList(query);
+      break;
     }
 
     return this.list;
@@ -224,23 +222,19 @@ module.exports = baseVw.extend({
   
   itemTitle: function(item) {
     switch (this.type) {
-      case 'handles':
-        return item.handle + ' &ndash; ' + item.name;
-        break;
-      case 'tags':
-        return item.startsWith('#') ? item : '#' + item;
-        break;
+    case 'handles':
+      return item.handle + ' &ndash; ' + item.name;
+    case 'tags':
+      return item.startsWith('#') ? item : '#' + item;
     }
   },
   
   itemUrl: function(item) {
     switch (this.type) {
-      case 'handles':
-        return '#userPage/' + item.guid + '/store';
-        break;
-      case 'tags':
-        return '#home/products/' + (item.startsWith('#') ? item.substr(1, item.length) : item);
-        break;
+    case 'handles':
+      return '#userPage/' + item.guid + '/store';
+    case 'tags':
+      return '#home/products/' + (item.startsWith('#') ? item.substr(1, item.length) : item);
     }
   },
   
@@ -249,6 +243,7 @@ module.exports = baseVw.extend({
   },
   
   wasSelectedOnEnter: function() {
+    /*
     if (this.selectedOnEnter) {
       this.selectedOnEnter = false;
       
@@ -256,6 +251,8 @@ module.exports = baseVw.extend({
     }
     
     return false;
+    */
+    return this.$('a.selected').length;
   },
 
   remove: function() {
