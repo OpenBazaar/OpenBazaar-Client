@@ -196,6 +196,8 @@ module.exports = pageVw.extend({
           backToTopTmpl: backToTopTmpl
         }));
 
+        self.listingToggle = self.$('.js-homeListingToggle');
+
         self.setState(self.state, self.searchItemsText);
         if(self.model.get('page').profile.vendor == true) {
           self.$el.find('.js-homeCreateStore').addClass('hide');
@@ -226,9 +228,9 @@ module.exports = pageVw.extend({
         self.obContainer.on('scroll', self.scrollHandler);
 
         //populate search field
-        if(self.searchItemsText){
+        if (self.searchItemsText){
           self.$el.find('.js-homeSearchItems').val("#" + self.searchItemsText);
-          self.$el.find('.js-homeListingToggle').addClass('hide');
+          self.listingToggle.addClass('hide');
           $('#obContainer').scrollTop(0);
         }
 
@@ -490,12 +492,12 @@ module.exports = pageVw.extend({
   },
 
   searchItemsFocus: function(){
-    this.$('.js-homeListingToggle').addClass('hide');
+    this.listingToggle.addClass('hide');
   },
 
   searchItemsBlur: function(){
     if (!this.searchItemsText){
-      this.$('.js-homeListingToggle').removeClass('hide');
+      this.listingToggle.removeClass('hide');
     }
   },
 
@@ -529,7 +531,7 @@ module.exports = pageVw.extend({
     window.obEventBus.trigger("setAddressBar", {'addressText': ""});
 
     this.$el.find('.js-discoverHeading').html(window.polyglot.t('Discover'));
-    this.$el.find('.js-homeListingToggle').removeClass('hide');
+    this.listingToggle.removeClass('hide');
 
     // change loading text copy
     this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('defaultText'));

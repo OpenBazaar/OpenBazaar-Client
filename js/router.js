@@ -199,7 +199,7 @@ module.exports = Backbone.Router.extend({
     };
   },
 
-  newView: function(View, options) {
+  newView: function(View, options, ignoreCache) {
     var now = Date.now(),
         cached = this.viewCache[View.getCacheIndex(Backbone.history.getFragment())],
         requestedRoute = Backbone.history.getFragment(),
@@ -253,7 +253,7 @@ module.exports = Backbone.Router.extend({
       }
     }
 
-    if (cached && (now - cached.cachedAt < cached.view.cacheExpires)) {
+    if (cached && (now - cached.cachedAt < cached.view.cacheExpires && !ignoreCache)) {
       // we have an un-expired cached view, let's reattach it
       this.view = cached.view;
 
@@ -285,10 +285,10 @@ module.exports = Backbone.Router.extend({
 
   launchPageConnectModal: function(config) {
     var defaults = {
-        connectText: 'Connecting...',
-        failedText: 'Unable to Connect.'
-      },
-      deferred = $.Deferred();
+      connectText: 'Connecting...',
+      failedText: 'Unable to Connect.'
+    },
+    deferred = $.Deferred();
 
     if (!(
         config &&
@@ -353,6 +353,8 @@ module.exports = Backbone.Router.extend({
   },
 
   home: function(state, searchText){
+    //if search terms have been given, don't use cached views
+    var ignoreCache = Boolean(searchText);
     this.newView(homeView, {
       viewArgs: {
         userModel: this.userModel,
@@ -361,7 +363,7 @@ module.exports = Backbone.Router.extend({
         state: state,
         searchItemsText: searchText
       }
-    });
+    }, ignoreCache);
 
     // hide the discover onboarding callout
     this.$discoverHolder = this.$discoverHolder || $('.js-OnboardingIntroDiscoverHolder');

@@ -333,7 +333,7 @@
     "HandleResolver": "Gebruikersnaam Resolver",
     "ShutDownServer": "Sluit Server Af",
     "NoFancyStyles": "Zet Visuele Effecten Uit",
-    "NoFancyStylesWarning": "Dit zet animaties en transparanties uit. Het kan voor verbeterde werking op oude computers zorgen.",
+    "MinimalEffectsWarning": "Dit zet animaties en transparanties uit. Het kan voor verbeterde werking op oude computers zorgen.",
     "LoadingBitcoinPrices": "Laadt Bitcoin Prijzen...",
     "ThisUserIsBlocked": "Deze gebruiken is verborgen omdat deze zich op uw blokkeerlijst bevindt",
     "ThisUserIsNSFW": "Deze gebruiker is verborgen omdat zijn/haar pagina als NSFW is ingesteld",

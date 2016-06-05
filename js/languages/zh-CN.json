@@ -333,7 +333,7 @@
     "HandleResolver": "简称解析器",
     "ShutDownServer": "关闭服务器",
     "NoFancyStyles": "Disable Visual Effects",
-    "NoFancyStylesWarning": "This will disable animations and transparencies. It may improve performance on slow systems.",
+    "MinimalEffectsWarning": "This will disable animations and transparencies. It may improve performance on slow systems.",
     "LoadingBitcoinPrices": "正在载入比特币价格...",
     "ThisUserIsBlocked": "该用户已隐藏，因为在你的屏蔽清单中",
     "ThisUserIsNSFW": "该用户已隐藏，因为主页包含成人内容",

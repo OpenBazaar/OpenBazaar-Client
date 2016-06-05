@@ -333,7 +333,7 @@
     "HandleResolver": "Resolvedor de Apelidos",
     "ShutDownServer": "Desligar o Servidor",
     "NoFancyStyles": "Desativar efeitos visuais?",
-    "NoFancyStylesWarning": "Desativa animações e transparências, melhorando o desempenho em computadores lentos.",
+    "MinimalEffectsWarning": "Desativa animações e transparências, melhorando o desempenho em computadores lentos.",
     "LoadingBitcoinPrices": "Carregando cotações do Bitcoin...",
     "ThisUserIsBlocked": "Esse usuário está escondido porque ele está em sua lista de bloqueados",
     "ThisUserIsNSFW": "Esse usuário está escondido porque a página dele está listada como conteúdo adulto",

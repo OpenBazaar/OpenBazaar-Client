@@ -11,6 +11,7 @@ var __ = require('underscore'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
     PageNavServersVw = require('../views/pageNavServersVw'),
+    SuggestionsVw = require('../views/suggestionsVw'),
     pjson = require('../../package.json');
 
 var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
@@ -33,7 +34,6 @@ module.exports = baseVw.extend({
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'blur .js-navAddressBar': 'addressBarBlur',
-    'click .js-suggestion': 'suggestionClick',
     'click .js-closeStatus': 'closeStatusBar',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
@@ -387,7 +387,13 @@ module.exports = baseVw.extend({
       self.$statusBar = self.$el.find('.js-navStatusBar');
       self.$serverSubmenu = self.$('.js-serverSubmenu');
       self.$serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
-      self.$suggestionsList = self.$('.js-addressBarSuggestions');
+      
+      self.suggestionsVw && self.suggestionsVw.remove();
+      self.suggestionsVw = new SuggestionsVw({
+        $input: self.$addressInput
+      });
+      
+      self.$('.js-mainSearchWrapper').append(self.suggestionsVw.render().el);
 
       //listen for address bar set events
       self.listenTo(window.obEventBus, 'setAddressBar', function(options){
@@ -553,7 +559,7 @@ module.exports = baseVw.extend({
 
     if ($popMenu.hasClass('popMenu-opened')) {
       app.showOverlay();
-      this.hideSuggestions();
+      this.suggestionsVw.hideSuggestions();
       openHandler = $popMenu.data('onopen');
       openHandler && this[openHandler] && this[openHandler].call(this);
     } else {
@@ -568,9 +574,9 @@ module.exports = baseVw.extend({
         $popMenu,
         closeHandler;
         
-    if (!$target.hasClass('js-navAddressBar') && this.suggestionsVisible) {
+    if (!$target.hasClass('js-navAddressBar') && this.suggestionsVw.isVisible()) {
       app.hideOverlay();
-      this.hideSuggestions();
+      this.suggestionsVw.hideSuggestions();
     } else if ($target.hasClass('js-navAddressBar') ||
       !(
         $target.hasClass('popMenu') ||
@@ -579,7 +585,7 @@ module.exports = baseVw.extend({
         $target.parents('[data-popmenu]').length
       ))
     {
-      if (!this.suggestionsVisible) {
+      if (!this.suggestionsVw.isVisible()) {
         app.hideOverlay();
       }
       
@@ -648,11 +654,6 @@ module.exports = baseVw.extend({
     $(e.target).one('mouseup', function () {
       $('#addressBar').select();
     });
-    
-    // Trigger suggestions box
-    if (!this.suggestionsVisible) {
-      this.$addressInput.trigger('keyup');
-    }
   },
 
   addressBarBlur: function(){
@@ -665,8 +666,8 @@ module.exports = baseVw.extend({
 
     //detect enter key
     if (e.keyCode == 13){
-      // Stop right here! Route was already changed
-      if (this.selectSuggestionOnEnter()) {
+      if (this.suggestionsVw.wasSelectedOnEnter()) {
+        //if enter was clicked while a suggestion was highlighted, let the suggestions view handle the routing
         return;
       }
       
@@ -677,7 +678,6 @@ module.exports = baseVw.extend({
         this.addressBarProcess(barText);  
       }
     } else {
-      this.showSuggestionsBox(e, barText);
       this.closeStatusBar();
     }
   },
@@ -685,167 +685,6 @@ module.exports = baseVw.extend({
   addressBarProcess: function(addressBarText){
     app.router.translateRoute(addressBarText).done((route) => {
       Backbone.history.navigate(route, {trigger: true});
-    });
-  },
-  
-  suggestionClick: function() {
-    this.hideSuggestions();
-  },
-  
-  showSuggestionsBox: function(e, query) {
-    var self = this,
-        keyCode = e.keyCode || e.which,
-        type = null,
-        list = [],
-        suggestions = [];
-        
-    query = query.replace('ob://', '');
-        
-    if (query.startsWith('@')) {        
-      type = 'handles';
-      list = this.findInHandlesList(query);
-    } else if (query.startsWith('#') || !query.startsWith('ob://')) {
-      type = 'tags';
-      list = this.findInTagsList(query);
-    }
-    
-    if (list.length) {
-      // On query text change
-      if (query !== '' && this.lastQuery !== query) {
-        __.each(list, function(item){
-          var itemUrl = '',
-              itemTitle = '';
-          
-          if (type == 'tags') {
-            itemTitle = item.startsWith('#') ? item : '#' + item;
-            itemUrl = '#home/products/' + (item.startsWith('#') ? item.substr(1, item.length) : item);
-          } else if (type == 'handles') {
-            itemTitle = item.handle + ' &ndash; ' + item.name;
-            itemUrl = '#userPage/' + item.guid + '/store';
-          }
-          
-          loadTemplate('./js/templates/pageNavSuggestionItem.html', function(loadedTemplate) {
-            suggestions.push(loadedTemplate({
-              itemTitle: itemTitle,
-              itemUrl: itemUrl,
-            }));
-          });
-        });
-        
-        self.$suggestionsList.html(suggestions);
-        app.showOverlay();
-        self.showSuggestions();
-        
-        self.lastQuery = query;
-      }
-      
-      // Up and down keys
-      if (keyCode == 38 || keyCode == 40) {
-        this.$selectedSuggestion = this.$suggestionsList.find('a.selected');
-        this.$newSuggestion = null;
-
-        if (keyCode == 40) {
-          this.suggestionMoveDown();
-        } 
-        else {
-          this.suggestionMoveUp();
-        }
-      }
-      
-    } else {
-      if (this.lastQuery !== query) {
-        app.hideOverlay();
-        this.hideSuggestions();
-      }
-    }
-  },
-  
-  showSuggestions: function() {
-    this.$suggestionsList.show();
-    
-    this.suggestionsVisible = true;
-  },
-  
-  hideSuggestions: function() {
-    this.$suggestionsList.hide();
-    
-    this.suggestionsVisible = false;
-    this.lastQuery = '';
-  },
-  
-  selectSuggestionOnEnter: function() {
-    var $selected = this.$suggestionsList.find('a.selected');
-    
-    app.hideOverlay();
-    this.hideSuggestions();
-    
-    if (typeof $selected !== 'undefined' && $selected.length) {
-      Backbone.history.navigate($selected.attr('href'), {
-        trigger: true 
-      });
-      
-      return true;
-    }
-  },
-  
-  selectNewSuggestion: function() {
-    if (this.$newSuggestion !== null) {
-      this.$selectedSuggestion.removeClass('selected');
-      this.$newSuggestion.addClass('selected');
-      
-      var itemPos = this.$newSuggestion.position().top;
-      
-      // Show current item if not visible          
-      if (this.$suggestionsList.outerHeight() <= itemPos || itemPos < 0) {
-        this.$suggestionsList.scrollTop(itemPos);
-      }
-    }
-  },
-  
-  suggestionMoveUp: function() {
-    if (this.$selectedSuggestion.length) {
-      this.$newSuggestion = this.$selectedSuggestion.prev();
-      
-      // Return back to address bar
-      if (!this.$newSuggestion.length) {
-        this.$selectedSuggestion.removeClass('selected');
-        this.$addressInput.focus();
-        
-        this.$newSuggestion = null;
-      }
-    }
-    
-    this.selectNewSuggestion();
-  },
-  
-  suggestionMoveDown: function() {
-    if (this.$selectedSuggestion.length) {
-      this.$newSuggestion = this.$selectedSuggestion.next();
-      
-      // Last item
-      if (!this.$newSuggestion.length) {
-        this.$newSuggestion = this.$selectedSuggestion;
-      }
-    } else {
-      this.$newSuggestion = this.$suggestionsList.find('a').first();
-    }
-    
-    this.selectNewSuggestion();
-  },
-  
-  findInTagsList: function(query) {
-    var re = new RegExp(query, 'i');
-    
-    return __.filter(JSON.parse(localStorage.getItem('tagsHistory')), function(item){
-      return query && re.exec(item) !== null;
-    });
-  },
-
-  findInHandlesList: function(query) {
-    var re = new RegExp(query, 'i');
-
-    return __.filter(JSON.parse(localStorage.getItem('handlesHistory')), function(item){
-      return query && re.exec(item.handle) !== null;
     });
   },
 
