@@ -1518,7 +1518,7 @@ UserPageVw = pageVw.extend({
 
   saveItem: function(){
     if (this.itemEditView) {
-      var $saveBtn = $('.js-saveItem');
+      var $saveBtn = this.$('.js-saveItem');
 
       $saveBtn.addClass('loading');
 

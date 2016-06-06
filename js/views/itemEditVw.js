@@ -2,10 +2,8 @@
 
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-
-var loadTemplate = require('../utils/loadTemplate'),
+    $ = require('jquery'),
+    loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     Taggle = require('taggle'),
     MediumEditor = require('medium-editor'),
@@ -69,6 +67,7 @@ module.exports = baseVw.extend({
     this.prevShipsToVal = [];
     this.defaultDate = nowDate.getFullYear() + "-" + padTime(nowMonth) + "-" + padTime(nowDate.getDate()) + "T" + padTime(nowDate.getHours()) + ":" + padTime(nowDate.getMinutes());
     this.imgHashes = this.model.get('vendor_offer').listing.item.image_hashes;
+    __.bindAll(this, 'validateDescription');
    
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
 
@@ -111,7 +110,6 @@ module.exports = baseVw.extend({
         });
 
         editor.subscribe('blur', self.validateDescription);
-        
 
         //set chosen inputs
         self.$('.chosen').chosen({
@@ -194,7 +192,15 @@ module.exports = baseVw.extend({
         tags: keywordTags,
         preserveCase: true,
         saveOnBlur: true,
-        placeholder: window.polyglot.t('KeywordsPlaceholder')
+        placeholder: window.polyglot.t('KeywordsPlaceholder'),
+        onTagAdd: () => {
+          this.$('#inputKeyword').removeClass('invalid');
+        },
+        onTagRemove: () => {
+          if (!self.inputKeyword.getTags().elements.length) {
+            self.$('#inputKeyword').addClass('invalid');
+          }
+        }
       });
     }, 0);
 
@@ -296,7 +302,12 @@ module.exports = baseVw.extend({
     $(e.target).val(newVal);
     this.$('.chosen').trigger('chosen:updated');
     this.prevShipsToVal = newVal;
-    this.$('.js-shipToWrapper').removeClass('invalid');
+
+    if (newVal.length) {
+      this.$('.js-shipToWrapper').removeClass('invalid');
+    } else {
+      this.$('.js-shipToWrapper').addClass('invalid');
+    }
   },
 
   clearDate: function(){
@@ -351,6 +362,7 @@ module.exports = baseVw.extend({
 
     if (!imageFiles.length) return;
 
+    this.$('#imageForm .invalid').removeClass('invalid');
     imageCount = imageFiles.length;
     this.$el.find('.js-itemEditImageLoading').removeClass("fadeOut");
 
@@ -488,6 +500,7 @@ module.exports = baseVw.extend({
 
     this.imgHashes.splice(imgIndex, 1);
     this.updateImages();
+    !this.imgHashes.length && this.$('.js-editItemSubImagesWrapper').addClass('invalid');
   },
 
   validateInput: function(e) {
@@ -500,7 +513,7 @@ module.exports = baseVw.extend({
 
   validateDescription: function() {
     validateMediumEditor.checkVal(this.$('#inputDescription'));
-  },  
+  },
 
   saveChanges: function(){
     var self = this,
@@ -509,16 +522,15 @@ module.exports = baseVw.extend({
         submitForm = this.$el.find('#contractForm')[0],
         keywordsArray = this.inputKeyword.getTagValues(),
         shipsToInput = this.$('#shipsTo'),
-        invalidInputList = "";
+        invalidInputList = [],
+        hasError;
 
     validateMediumEditor.checkVal(this.$('#inputDescription'));
 
     if (keywordsArray.length < 1){
-      this.$('#inputKeyword').closest('.flexRow').addClass('invalid');
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ window.polyglot.t('Tags')+"</i>");
-      return $.Deferred().reject('failed form validation').promise();
+      this.$('#inputKeyword').addClass('invalid');
+      hasError = true;
     }
-    this.$('#inputKeyword').closest('.flexRow').removeClass('invalid');
 
     keywordsArray = keywordsArray.map(function(tag){
       var re = /#/g;
@@ -542,8 +554,7 @@ module.exports = baseVw.extend({
     //make sure a ships to value is entered
     if (!shipsToInput.val() && !this.noShipping){
       this.$('.js-shipToWrapper').addClass('invalid');
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-      return $.Deferred().reject('failed form validation').promise();
+      hasError = true;
     }
 
     //add old and new image hashes
@@ -554,12 +565,17 @@ module.exports = baseVw.extend({
       }
     });
 
-    if (keywordsArray.length > 0){
+    if (!this.imgHashes.length) {
+      this.$('.js-editItemSubImagesWrapper').addClass('invalid');
+      hasError = true;
+    }
+
+    if (keywordsArray.length) {
       __.each(keywordsArray, function(keyword){
         formData.append('keywords', keyword);
       });
     } else {
-      formData.append('keywords', "");
+      formData.append('keywords', '');
     }
 
     //if this is an existing product, do not delete the images
@@ -581,7 +597,7 @@ module.exports = baseVw.extend({
     //add formChecked class to form so invalid fields are styled as invalid
     this.$el.find('#contractForm').addClass('formChecked');
 
-    if (this.checkFormValidity()){
+    if (this.checkFormValidity() && !hasError) {
       return $.ajax({
         type: "POST",
         url: self.model.get('serverUrl') + "contracts",
@@ -603,13 +619,20 @@ module.exports = baseVw.extend({
         }
       });
     }
-    $(submitForm).find('input, textarea').each(function() {
-      if ($(this).is(":invalid")){
-        var inputName = $("label[for='"+$(this).attr('id')+"']").text() || $(this).attr('id');
-        invalidInputList += "<br/>"+inputName;
-      }
+
+    $(submitForm).add(this.$('#imageForm')).find(':invalid, .invalid').each(function() {
+      var inputName,
+          $label;
+
+      inputName = (($label = self.$("label[for='"+$(this).attr('id')+"']")).length && $label.text()) ||
+        $(this).attr('data-label') || $(this).attr('id');
+
+      invalidInputList.push(inputName.trim())
     });
-    messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
+
+    invalidInputList = __.uniq(invalidInputList);
+    messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') +
+      '<br><i><br />' + invalidInputList.join('<br />') + '</i>');
     return $.Deferred().reject('failed form validation').promise();
   },
 
