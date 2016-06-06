@@ -806,7 +806,7 @@ module.exports = pageVw.extend({
       var bannerCrop = self.$('#settings-image-cropperBanner');
       if (self.newBanner && bannerCrop.cropit('imageSrc')){
         bannerURI = bannerCrop.cropit('export', {
-          type: 'image/webp',
+          type: 'image/jpeg',
           quality: 0.75,
           originalSize: false
         });
@@ -828,7 +828,7 @@ module.exports = pageVw.extend({
     //if an avatar has been set, upload it first and get the hash
     if (self.newAvatar && avatarCrop.cropit('imageSrc')){
       imageURI = avatarCrop.cropit('export', {
-        type: 'image/webp',
+        type: 'image/jpeg',
         quality: 0.75,
         originalSize: false
       });
