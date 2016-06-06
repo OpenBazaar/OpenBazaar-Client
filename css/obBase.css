@@ -6171,6 +6171,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0 !important;
 }
 
+#ov1.minEffects .fadeIn,
+#ov1.minEffects .statusBar.fadeIn,
+#ov1.minEffects #pageNav .statusBar.fadeIn,
+#ov1.minEffects #userPage .fadeIn,
+#ov1.minEffects #userPage #pageNav .fadeIn,
+#ov1.minEffects #userPage #pageNav .statusBar.fadeIn,
+#ov1.minEffects #userPage #obContainer #content .statusBar.fadeIn {
+  opacity: 1 !important;
+}
+
 #ov1.minEffects #sideBar .sideBarSlidShow {
   display: none;
 }
