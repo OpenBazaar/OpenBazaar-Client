@@ -1800,7 +1800,7 @@ removed because I don't think we're using the trick to hide the borders any more
   width: 100%;
   max-height: 155px;
   background: #fff;
-  margin-top: 12px;
+  margin-top: 7px;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   overflow-y: scroll;

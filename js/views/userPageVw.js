@@ -813,7 +813,6 @@ UserPageVw = pageVw.extend({
   },
 
   renderItems: function (model, skipNSFWmodal) {
-    console.log("render")
     var self = this,
         select = this.$el.find('.js-categories'),
         selectOptions = [],
