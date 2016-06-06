@@ -1,7 +1,6 @@
 'use strict';
 
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
