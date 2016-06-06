@@ -197,7 +197,9 @@ module.exports = baseVw.extend({
           this.$('#inputKeyword').removeClass('invalid');
         },
         onTagRemove: () => {
-          this.$('#inputKeyword').addClass('invalid');
+          if (!self.inputKeyword.getTags().elements.length) {
+            self.$('#inputKeyword').addClass('invalid');
+          }
         }
       });
     }, 0);
@@ -624,7 +626,6 @@ module.exports = baseVw.extend({
 
       inputName = (($label = self.$("label[for='"+$(this).attr('id')+"']")).length && $label.text()) ||
         $(this).attr('data-label') || $(this).attr('id');
-      inputName = inputName.trim();
 
       invalidInputList.push(inputName.trim())
     });
