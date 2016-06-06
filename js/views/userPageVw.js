@@ -1331,7 +1331,7 @@ UserPageVw = pageVw.extend({
     //var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
     var serverUrl = self.options.userModel.get('serverUrl'),
         imageURI = self.$el.find('#image-cropper').cropit('export', {
-          type: 'image/webp',
+          type: 'image/jpeg',
           quality: 0.75,
           originalSize: false
         });

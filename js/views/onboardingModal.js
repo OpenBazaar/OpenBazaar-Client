@@ -365,7 +365,7 @@ module.exports = baseModal.extend({
     };
    
     var imageURI = this.$('#image-cropper').cropit('export', {
-      type: 'image/webp',
+      type: 'image/jpeg',
       quality: 0.75,
       originalSize: false
     });
