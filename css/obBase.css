@@ -3779,6 +3779,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 1;
 }
 
+.userPage-subViews img {
+  width: 100%;
+  height: auto;
+}
+
 .icon-huge {
   font-size: 140px;
 }
