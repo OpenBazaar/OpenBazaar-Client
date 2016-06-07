@@ -8,7 +8,7 @@ module.exports = baseVw.extend({
 
   tagName: "li",
 
-  className: "flexRow custCol-border",
+  className: "flexRow custCol-border js-orderShort",
 
   events: {
     'click .js-orderShort': 'orderSummary',
