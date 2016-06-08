@@ -12,7 +12,7 @@
                         <div class="textSize12px floatLeft">
                             <%= polyglot.t('NotificationOrderConfirmed') %>
                         </div>
-                        <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
+                        <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "dispute_close") { %>
                         <div class="textSize12px row5">
                             <% if(ob.handle) { %>
@@ -23,7 +23,7 @@
                                 </span>
                             <% } %>
                         </div>
-                        <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
+                        <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "dispute_open") { %>
                     <div class="textSize12px row5">
                         <% if(ob.handle) { %>
@@ -34,7 +34,7 @@
                             </span>
                         <% } %>
                     </div>
-                    <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
+                    <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "ORDER") { %>
                     <div class="textSize12px row5">
                         <% if(ob.username) { %>
@@ -45,7 +45,7 @@
                             </span>
                         <% } %>
                     </div>
-                    <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
+                    <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "payment received") { %>
                         <div class="textSize12px row5">
                             <% if(ob.handle) { %>
@@ -56,7 +56,7 @@
                                 </span>
                             <% } %>
                         </div>
-                        <div class="textSize11px  txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
+                        <div class="textSize11px  txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "rating received") { %>
                     <div class="textSize12px row5">
                         <% if(ob.handle) { %>
@@ -67,7 +67,7 @@
                             </span>
                         <% } %>
                     </div>
-                    <div class="textSize11px  txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
+                    <div class="textSize11px  txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "new order") { %>
                         <div class="textSize12px row5">
                             <% if(ob.handle) { %>
@@ -78,7 +78,7 @@
                                 </span>
                             <% } %>
                         </div>
-                        <div class="textSize11px clearFix txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
+                        <div class="textSize11px clearFix txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "follow") { %>
                         <div class="textSize12px row5">
                             <% if(ob.handle) { %>
@@ -89,7 +89,7 @@
                                 </span>
                             <% } %>
                         </div>
-                        <div class="textSize11px txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
+                        <div class="textSize11px txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "refund") { %>
                     <div class="textSize12px row5">
                             <% if(ob.handle) { %>
@@ -100,7 +100,7 @@
                                 </span>
                             <% } %>
                     </div>
-                    <div class="textSize11px txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
+                    <div class="textSize11px txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
                     <% }  else { %>
                         <span class="textSize11px marginRight5 marginBottom2 noOverflow" title="<%= ob.title %>">
                             <strong><%= polyglot.t('NotificationTitle',{title: ob.title}) %></strong>
@@ -120,7 +120,7 @@
                             <%= polyglot.t('NotificationType',{type: ob.type}) %>
                         </div>
                         <div class="textSize11px txt-fade">
-                            <%= polyglot.t('NotificationTime', {time: ob.moment(new Date(ob.timestamp*1000)).lang(window.lang).format('MMM D, h:mm A')}) %>
+                            <%= polyglot.t('NotificationTime', {time: ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A')}) %>
                         </div>
                         <% if (ob.order_id) { %>
                             <div class="textSize11px txt-fade"><%= ob.order_id %></div>

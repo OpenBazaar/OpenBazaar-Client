@@ -511,7 +511,7 @@
     "ModerationFee": "Moderation Fee:",
     "DisputeTransaction": "Start a Dispute",
     "DisputeTransactionResend": "Resend Start of Dispute",
-    "DisputeTransactionResendTooltip": "If the other party did not receive your dispute, click this button to send it to them again.",
+    "DisputeTransactionResendTooltip": "If the other party did not receive your dispute, click this button to send a new dispute message.",
     "sendMessagePlaceholder": "Enter message...",
     "DisputeInstructions": "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.",
     "SendMessage": "Send",
