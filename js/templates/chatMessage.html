@@ -5,7 +5,7 @@
 <div class="chatConversationMessageLine <% if(ob.message_type == "ORDER" || ob.message_type == "DISPUTE_OPEN" || ob.message_type == "dispute_open") { %>padding2015 borderBottom1 custCol-border<% } %>">
     <div class="flexRow">
         <div class="chatConversationMessageTimestamp paddingLeft2 <% if (ob.outgoing) { %>width100 alignRight<% } %>">
-            <div><%= ob.moment(new Date(ob.timestamp * 1000)).format('MMM D, h:mm A') %></div>
+            <div><%= ob.moment(new Date(ob.timestamp * 1000)).lang(window.lang).format('MMM D, h:mm A') %></div>
         </div>
     </div>
     <div class="flexRow noFlexWrap marginTop4">
