@@ -814,6 +814,7 @@ UserPageVw = pageVw.extend({
   },
 
   renderItems: function (model, skipNSFWmodal) {
+    console.log("render items")
     var self = this,
         select = this.$el.find('.js-categories'),
         selectOptions = [],
@@ -827,7 +828,7 @@ UserPageVw = pageVw.extend({
     model = model || [];
     __.each(model, function (arrayItem) {
 
-      if (!self.showNSFWContent && !self.showNSFW &&!skipNSFWmodal){
+      if (!self.showNSFWContent && !self.showNSFW &&!skipNSFWmodal && arrayItem.nsfw){
         arrayItem.cloak = true;
       } else {
         arrayItem.cloak = false;
