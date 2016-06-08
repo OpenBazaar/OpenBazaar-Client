@@ -558,7 +558,7 @@
     "refundAlreadySent": "The refund has already been successfully sent for this order",
     "serverTimeout": "No response was received from the server. It may be unreachable or taking a very long time to respond.",
     "noData": "No data is available for the options you have selected.",
-    "loadingViewError": "Loading this page is taking longer than expected.",
+    "loadingTakingTooLong": "Loading is taking longer than expected.",
     "smtpServerError": "SMTP Connection Error",
     "smtpServerSuccess": "SMTP Connection Success",
     "noSMTPConnection": "The connection to the SMTP server failed.",

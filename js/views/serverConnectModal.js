@@ -11,7 +11,7 @@ var __ = require('underscore'),
     ServerConfigsVw = require('./serverConfigsVw');
 
 module.exports = BaseModal.extend({
-  className: 'server-connect-modal modal-fullscreen',
+  className: 'server-connect-modal',
 
   events: {
     'click .js-close': 'closeConfigForm',
@@ -378,7 +378,7 @@ module.exports = BaseModal.extend({
       // server issue where valid connections may take
       // 1 min. +
       // conclude(true, 'timedout');
-      console.log("connection timeout"); 
+      console.log('connection timeout'); 
     }, 10000);
 
     return promise;

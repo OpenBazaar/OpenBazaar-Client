@@ -329,9 +329,10 @@ h6, .h6 {
   position: relative;
 }
 
-#contentFrame.modalOpen #pageNav .badge {
+/*#contentFrame.modalOpen #pageNav .badge {
   display: none;
 }
+*/
 
 #pageNav {
   position: relative;
@@ -357,15 +358,16 @@ h6, .h6 {
   box-sizing: border-box;
 }
 
-#obContainer.modalOpen,
+/*#obContainer.modalOpen,
 #obContainer.innerModalOpen {
   overflow: hidden;
-  /* obContainer must also be set to scrollTop(0), otherwise the modal may be scrolled out of place */
-}
+   obContainer must also be set to scrollTop(0), otherwise the modal may be scrolled out of place 
+}*/
 
-#obContainer.modalOpen #content {
+/*#obContainer.modalOpen #content {
   -webkit-filter: blur(1px);
 }
+*/
 
 #obContainer.customizeUserPage {
   overflow: hidden;
@@ -1280,8 +1282,12 @@ label.fieldItem {
   pointer-events: all;
 }
 
-.modal.noNav {
-  padding-top: 85px
+.modal.underPageNav {
+  top: 46px
+}
+
+.modal.modalCoverFullscreen {
+  padding-top: 0;
 }
 
 .modal-child {
@@ -1292,6 +1298,11 @@ label.fieldItem {
   right: 0;
   left: 0;
   transition: right 0.5s ease;
+}
+
+.modal.modalCoverFullscreen .modal-child {
+  width: 100%;
+  height: 100%;
 }
 
 .modal-opaque .modal-child {
@@ -4397,49 +4408,25 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 74px;
 }
 
-#messageModal {
+/*#messageModal {
   z-index: 9;
 }
-
-#loadingModal {
-  padding-top: 0;
-}
-
+*/
 .page-connect-modal .spinner-with-logo {
   margin-top: -45px;
 }
 
-#ov1 #loadingModal.hide {
-  height: 0; /* kludge to allow top bar to fade in. Transitions don't work if display is none */
-  padding: 0;
-  overflow: hidden;
-  display: block;
-}
-
-#loadingModal #loadingModalContent {
+.loadingModal .loadingModalContent {
   position: absolute;
   right: 0;
   left: 0;
   top: 50%;
   margin-top: 117px;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 1s 5s ease;
   box-sizing: border-box;
   padding: 9px;
   text-align: center;
-}
-
-#loadingModal #loadingModalBtns {
-  opacity: 1;
-  transition: opacity 1s 5s ease;
-  /* this seems redundant, but if you don't also have a transition on the button container, for some reason the normal
-  background color will be used instead of the background color from the custCol-secondary class until the parent
-  transition is complete on Win64 10. */
-}
-
-#loadingModal.hide #loadingModalContent,
-#loadingModal.hide #loadingModalBtns {
-  opacity: 0;
 }
 
 #ov1 .server-connect-modal .modal-child {
@@ -6143,8 +6130,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.minEffects #overlay,
 #ov1.minEffects #sideBar,
 #ov1.minEffects #pageNav,
-#ov1.minEffects #modalHolder,
-#ov1.minEffects #messageModal,
+/*#ov1.minEffects #modalHolder,
+#ov1.minEffects #messageModal,*/
 #ov1.minEffects #statusBar {
   transition: none !important;
   -webkit-filter: none !important;
@@ -6249,8 +6236,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.minEffects #overlay .disabled,
 #ov1.minEffects #sideBar .disabled,
 #ov1.minEffects #pageNav .disabled,
-#ov1.minEffects #modalHolder .disabled,
-#ov1.minEffects #messageModal .disabled,
+/*#ov1.minEffects #modalHolder .disabled,
+#ov1.minEffects #messageModal .disabled,*/
 #ov1.minEffects #statusBar .disabled {
   opacity: 0.2 !important;
 }
@@ -6261,8 +6248,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.minEffects #overlay .disabled2,
 #ov1.minEffects #sideBar .disabled2,
 #ov1.minEffects #pageNav .disabled2,
-#ov1.minEffects #modalHolder .disabled2,
-#ov1.minEffects #messageModal .disabled2,
+/*#ov1.minEffects #modalHolder .disabled2,
+#ov1.minEffects #messageModal .disabled2,*/
 #ov1.minEffects #statusBar .disabled2 {
   opacity: 0.7 !important;
 }
@@ -6272,26 +6259,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 /* add a shadow and a glow, so modal close buttons are still barely visible if the user picks a bad color */
-#ov1 .js-closeIndexModal [class *= "ion-"]:before,
-#ov1 #userPage .js-closeIndexModal [class *= "ion-"]:before,
-#ov1 #obContainer .js-closeIndexModal [class *= "ion-"]:before,
-#ov1 #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
-#ov1 #messageModal .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.minEffects .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.minEffects #userPage .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.minEffects #obContainer .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.minEffects #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
-#ov1.minEffects #messageModal .js-closeIndexModal [class *= "ion-"]:before,
 #ov1 .js-modal-close [class *= "ion-"]:before,
 #ov1 #userPage .js-modal-close [class *= "ion-"]:before,
 #ov1 #obContainer .js-modal-close [class *= "ion-"]:before,
 #ov1 #modalHolder .js-modal-close [class *= "ion-"]:before,
-#ov1 #messageModal .js-modal-close [class *= "ion-"]:before,
+/*#ov1 #messageModal .js-modal-close [class *= "ion-"]:before,*/
 #ov1.minEffects .js-modal-close [class *= "ion-"]:before,
 #ov1.minEffects #userPage .js-modal-close [class *= "ion-"]:before,
 #ov1.minEffects #obContainer .js-modal-close [class *= "ion-"]:before,
 #ov1.minEffects #modalHolder .js-modal-close [class *= "ion-"]:before,
-#ov1.minEffects #messageModal .js-modal-close [class *= "ion-"]:before,
+/*#ov1.minEffects #messageModal .js-modal-close [class *= "ion-"]:before,*/
 #ov1 #modalHolder .js-closeBuyWizardModal [class *= "ion-"]:before {
   text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
 }

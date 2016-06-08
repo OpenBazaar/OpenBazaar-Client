@@ -46,7 +46,7 @@ var Polyglot = require('node-polyglot'),
     socketView = require('./views/socketVw'),
     cCode = "",
     $html = $('html'),
-    $loadingModal = $('.js-loadingModal'),
+    LoadingModal = require('./views/loadingModal'),
     ServerConfigsCl = require('./collections/serverConfigsCl'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
@@ -102,13 +102,18 @@ updatePolyglot = function(lang){
   window.lang = lang;
   extendPolyglot(lang);
   localStorage.setItem('lang', lang);
-  //trigger translation function on index
-  window.translateIndex();
 };
 
 user.on('change:language', function(md, lang) {
   updatePolyglot(lang);
+  app.loadingModal.render();
 });
+
+//put the event bus into the window so it's available everywhere
+window.obEventBus = __.extend({}, Backbone.Events);
+
+app.loadingModal = new LoadingModal();
+app.loadingModal.render().open();
 
 // add in our app bar
 app.appBar = new AppBarVw({
@@ -193,9 +198,6 @@ app.serverConfigs.on('activeServerChange', () => {
   setServerUrl();
   app.serverConfigs.getActive().off('sync', onActiveServerSync);
 });
-
-//put the event bus into the window so it's available everywhere
-window.obEventBus = __.extend({}, Backbone.Events);
 
 // fix zoom issue on Linux hiDPI
 var platform = process.platform;
@@ -476,7 +478,7 @@ launchOnboarding = function(guidCreating) {
     onboardingModal && onboardingModal.remove();
     onboardingModal = null;
     loadProfile('#userPage/' + guid + '/store', true);
-    $loadingModal.removeClass('hide');
+    app.loadingModal.open();
   });
 };
 
@@ -485,7 +487,7 @@ launchOnboarding = function(guidCreating) {
   var activeServer = app.serverConfigs.getActive();
 
   pageConnectModal = new PageConnectModal({
-    className: 'server-connect modal-fullscreen',
+    className: 'server-connect',
     initialState: {
       statusText: activeServer && activeServer.get('default') ?
         window.polyglot.t('serverConnectModal.connectingToDefault') :
@@ -520,7 +522,7 @@ app.serverConnectModal.on('connected', () => {
 app.getHeartbeatSocket().on('open', function() {
   removeStartupRetry();
   pageConnectModal.remove();
-  $loadingModal.removeClass('hide');
+  app.loadingModal.open();  
 
   if (!profileLoaded) {
     // clear some flags so the heartbeat events will
@@ -528,7 +530,7 @@ app.getHeartbeatSocket().on('open', function() {
     guidCreating = null;
     loadProfileNeeded = true;
     app.serverConnectModal.close();
-    $loadingModal.removeClass('hide');    
+    app.loadingModal.open();
   }  
 });
 

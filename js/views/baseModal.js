@@ -29,6 +29,13 @@ module.exports = baseVw.extend({
     events['click .js-modal-close'] = '__closeClick';
     this.events = __.extend({}, events, this.events || {});
 
+    if (typeof this.constructor.__modalsOpen === 'undefined') {
+      this.constructor.__modalsOpen = 0;
+    }
+
+    this.$html = this.constructor.$html = this.constructor.$html || $('html');
+    this.$container = this.constructor.$container = this.constructor.$container || $('#contentFrame');
+
     baseVw.prototype.constructor.apply(this, args);
   },
 
@@ -48,10 +55,9 @@ module.exports = baseVw.extend({
 
   open: function() {
     if (!domUtils.isInPage(this.el)) {
-      var container = document.getElementById('contentFrame');
-      container.classList.add("modalOpen");
-      container.appendChild(this.el);
-
+      this.$html.addClass('modalOpen');
+      this.$container.append(this.el);
+      this.constructor.__modalsOpen += 1;
       this._open = true;
       this.trigger('open');
       window.obEventBus.trigger('modal-open', { modal: this });
@@ -62,10 +68,9 @@ module.exports = baseVw.extend({
 
   close: function() {
     if (domUtils.isInPage(this.el)) {
-      var container = document.getElementById('contentFrame');
-      container.classList.remove("modalOpen");
-      container.removeChild(this.el);
-
+      this.constructor.__modalsOpen -= 1;
+      !this.constructor.__modalsOpen && this.$html.removeClass('modalOpen');
+      this.$el.remove();
       this._open = false;
       this.trigger('close');
       window.obEventBus.trigger('modal-close', { modal: this });
@@ -83,7 +88,11 @@ module.exports = baseVw.extend({
       this.$modalClose[options.showCloseButton ? 'removeClass' : 'addClass']('hide');
     }
 
-      // TODO: allow other options to be modifiable via this method.
+    return this;
+  },
+
+  getModalOptions: function() {
+    return this.__options;
   },
 
   remove: function() {

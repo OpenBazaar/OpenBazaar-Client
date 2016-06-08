@@ -14,7 +14,7 @@ var __ = require('underscore'),
     guidStillCreatingModal = require('../views/guidStillCreatingModal');
 
 module.exports = baseModal.extend({
-  className: 'js-homeModal noNav',
+  className: 'js-homeModal',
 
   events: {
     'click .js-homeModal': 'blockClicks',

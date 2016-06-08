@@ -69,7 +69,8 @@ module.exports = pageVw.extend({
   initialize: function(options){
     var self = this;
 
-    $('.js-loadingModal').removeClass('hide');
+    app.loadingModal.open();
+
     this.options = options || {};
     /* expected options:
      userModel
@@ -187,7 +188,7 @@ module.exports = pageVw.extend({
       },
       complete: function() {
         if (!self.isRemoved()) {
-          $('.js-loadingModal').addClass('hide');
+          app.loadingModal.close();
         }
       }
     });

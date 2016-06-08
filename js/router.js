@@ -5,7 +5,6 @@ var ipcRenderer = require('ipc-renderer'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     app = require('./App').getApp(),    
-    messageModal = require('./utils/messageModal.js'),
     homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
     settingsView = require('./views/settingsVw'),
@@ -181,9 +180,8 @@ module.exports = Backbone.Router.extend({
   },
 
   cleanup: function(){
-    $('#loadingModal').addClass('hide'); //hide modal if it is still visible
-    messageModal.hide();
-    $('#obContainer').removeClass('modalOpen innerModalOpen box-borderDashed noScrollBar overflowHidden');
+    app.loadingModal.close();
+    $('#obContainer').removeClass('customizeUserPage box-borderDashed noScrollBar overflowHidden');
     window.obEventBus.trigger('cleanNav');
   },
 
@@ -221,7 +219,6 @@ module.exports = Backbone.Router.extend({
 
     $('body').attr('id', options.bodyID);
     $('body').attr('class', options.bodyClass);
-    $('#obContainer').removeClass('customizeUserPage'); //remove customization styling if present
     
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
@@ -276,6 +273,8 @@ module.exports = Backbone.Router.extend({
         typeof loadingConfig.promise.then === 'function') {
         this.launchPageConnectModal(loadingConfig).done(() => {
           this.view.cacheExpires && this.cacheView(this.view);
+        }).fail(() => {
+          this.view.remove();
         });
       } else {
         this.view.cacheExpires && this.cacheView(this.view);
@@ -298,7 +297,7 @@ module.exports = Backbone.Router.extend({
       throw new Error('At a minimum, the config must contain a config.promise.');
     }
 
-    $('#loadingModal').addClass('hide');
+    app.loadingModal.close();
     config = __.extend({}, defaults, config);
 
     this.pageConnectModal && this.pageConnectModal.remove();
