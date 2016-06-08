@@ -209,7 +209,10 @@ module.exports = pageVw.extend({
 
       $(".chosen").chosen({
         width: '100%',
-        search_contains: true
+        search_contains: true,
+        no_results_text: window.polyglot.t('chosenJS.noResultsText'),
+        placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
+        placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
       $('#settings-image-cropper').cropit({
         $preview: self.$('.js-settingsAvatarPreview'),

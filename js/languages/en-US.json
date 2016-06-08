@@ -1023,6 +1023,11 @@
     "ZAMBIA": "Zambia",
     "ZIMBABWE": "Zimbabwe"    
   },
+  "chosenJS": {
+    "noResultsText": "No results match",
+    "placeHolderTextSingle": "Select an option",
+    "placeHolderTextMultiple": "Select some options"
+  },
   "currencies": {
     "AED": "UAE Dirham",
     "AFN": "Afghani",
