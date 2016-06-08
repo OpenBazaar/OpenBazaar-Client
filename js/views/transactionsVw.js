@@ -233,12 +233,19 @@ module.exports = pageVw.extend({
   },
 
   transactionFilter: function(e){
-    var tab = $(e.target),
-        tabTarget = tab.data("tab");
+    var searchBy = $(e.target).val();
 
-    this.filterBy = tab.val();
-    this.$('.js-'+tabTarget+' .search').val("");
-    this.renderTab(tabTarget);
+    if (searchBy == 'dateNewest' || searchBy == 'dateOldest'){
+      this.filterBy = searchBy;
+      this.$('.js-'+this.state+' .search').val("");
+      this.renderTab(this.state);
+    } else if (searchBy != "all"){
+      this['searchTransactions_'+this.state] && this['searchTransactions_'+this.state].filter(function(item) {
+        return item.values().js_searchStatusNum == searchBy;
+      });
+    } else {
+      this['searchTransactions_'+this.state] && this['searchTransactions_'+this.state].filter();
+    }
   },
 
   toggleUnpaid: function(e){
@@ -313,7 +320,7 @@ module.exports = pageVw.extend({
       if (this['searchTransactions_'+tabName]){
         this['searchTransactions_'+tabName].reIndex();
       } else {
-        this['searchTransactions_'+tabName] = new window.List('transactions' + tabName.charAt(0).toUpperCase() + tabName.substr(1), {valueNames: ['js-searchOrderID', 'js-searchPrice', 'js-searchUser', 'js-searchStatus', 'js-searchTitle'], page: 1000});
+        this['searchTransactions_'+tabName] = new window.List('transactions' + tabName.charAt(0).toUpperCase() + tabName.substr(1), {valueNames: ['js-searchOrderID', 'js-searchPrice', 'js-searchUser', 'js-searchStatus', 'js-searchTitle', 'js_searchStatusNum'], page: 1000});
       }
     }
     //clear any search text and hide the button
