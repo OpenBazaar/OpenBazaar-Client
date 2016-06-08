@@ -470,9 +470,19 @@ module.exports = pageVw.extend({
     //add BTC
     currencyList.unshift({code: "BTC", currency: "Bitcoin", currencyUnits: "4"});
 
+    //translate the country list
+    __.each(countryList, function(country){
+      country.name = window.polyglot.t('countries.'+country.dataName);
+    });
+
+    //alphabatize the country list using the translated values
+    countryList.sort(function(a, b) {
+      return a.name.localeCompare(b.name);
+    });
+
     __.each(countryList, function(c){
-      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+window.polyglot.t(`countries.${c.dataName}`)+'</option>');
-      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+window.polyglot.t(`countries.${c.dataName}`)+'</option>');
+      var country_option = $('<option value="'+c.dataName+'">'+c.name+'</option>');
+      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
       country_option.attr("selected", user.country == c.dataName);
       //if user has a country in their profile, preselect it in the new address section
       ship_country_option.attr("selected", user.country== c.dataName);
