@@ -1,4 +1,4 @@
-<div class="width100 cursorDefault positionWrapper">
+<div class="width100 cursorDefault positionWrapper <% if(ob.status == 0){ %>hideableChild<% } %>">
   <% if (ob.unread) { %>
   <div class="highlightRow"></div>
   <% } %>
@@ -21,6 +21,7 @@
               <% } %>
             </div>
           </div>
+          <span class="visuallyHidden js_searchStatusNum"><%= ob.status %></span><!--used only for the search filter-->
           <table class="floatLeft custCol-text fontSize14  width450 fontWeight500">
             <tr>
               <td class="textOpacity50 padding2"><%= polyglot.t('Listing') %></td>

@@ -4894,6 +4894,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   display: none;
 }
 
+#ov1 .hideChildren .hideableChild {
+  display: none;
+}
+
+
 #ov1 .invisible {
   visibility: hidden;
 }
