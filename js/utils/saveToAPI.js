@@ -2,7 +2,8 @@
 
 var __ = require('underscore'),
     $ = require('jquery'),
-    messageModal = require('../utils/messageModal.js');
+    messageModal = require('../utils/messageModal.js'),
+    Dialog = require('../views/dialog.js');
 
 
 module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys, onInvalid) {
@@ -30,6 +31,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
       if (typeof onInvalid === 'function'){
         onInvalid();
       } else {
+        // new Dialog
         messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
       }
       return $.Deferred().reject('failed form validation').promise();

@@ -2,7 +2,8 @@
 
 var app = require('../App').getApp(),
     moment = require('moment'),
-    remote = require('electron').remote;
+    remote = require('electron').remote,
+    stringUtils = require('../utils/string');
 
 function cssImageUrl(hash, guid, fallback) {
   var base = app.serverConfigs.getActive().getServerBaseUrl() + '/',
@@ -31,5 +32,6 @@ module.exports = {
   cssImageUrl: cssImageUrl,
   intlNumFormat: app.intlNumFormat,
   moment: moment,
-  launchedFromInstaller: remote.getGlobal('launched_from_installer')
+  launchedFromInstaller: remote.getGlobal('launched_from_installer'),
+  string: stringUtils
 };

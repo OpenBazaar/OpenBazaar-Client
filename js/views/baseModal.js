@@ -12,8 +12,8 @@ module.exports = baseVw.extend({
         defaults;
 
     defaults = {
-      dismissOnOverlayClick: false,
-      showCloseButton: false,
+      dismissOnOverlayClick: true,
+      showCloseButton: true,
       closeButtonClass: 'btn-corner btn-cornerTR',
       innerWrapperClass: 'modal-child modal-childMain custCol-primary'
     };

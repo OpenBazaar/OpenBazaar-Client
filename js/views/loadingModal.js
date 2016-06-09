@@ -1,6 +1,7 @@
 'use strict';
 
 var loadTemplate = require('../utils/loadTemplate'),
+    app = require('../App.js').getApp(),
     baseModal = require('./baseModal');
 
 module.exports = baseModal.extend({
@@ -9,6 +10,22 @@ module.exports = baseModal.extend({
   events: {
     'click .js-indexReload': 'onClickIndexReload'
   },
+
+  initialize: function(options) {
+    this.options = __.extend({
+      showLoadIndexButton: true
+    }, options || {});
+  },
+
+  showLoadIndexButton: function() {
+    this.options.showLoadIndexButton = true;
+    this.render();
+  },
+
+  hideLoadIndexButton: function() {
+    this.options.showLoadIndexButton = false;
+    this.render();
+  },  
 
   onClickIndexReload: function() {
     if (app.router) {
@@ -36,7 +53,7 @@ module.exports = baseModal.extend({
 
   render: function() {
     loadTemplate('./js/templates/loadingModal.html', (t) => {
-      this.$el.html(t());
+      this.$el.html(t(this.options));
 
       baseModal.prototype.render.apply(this, arguments);
 

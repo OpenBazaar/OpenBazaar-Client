@@ -14,7 +14,9 @@ var __ = require('underscore'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
+    LoadingModal = require('./loadingModal'),
     messageModal = require('../utils/messageModal.js'),
+    Dialog = require('../views/dialog.js'),
     cropit = require('../utils/jquery.cropit'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
@@ -69,8 +71,6 @@ module.exports = pageVw.extend({
   initialize: function(options){
     var self = this;
 
-    app.loadingModal.open();
-
     this.options = options || {};
     /* expected options:
      userModel
@@ -94,6 +94,9 @@ module.exports = pageVw.extend({
     this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
 
     this.firstLoadModerators = true;
+
+    this.loading = true;
+    this.loadingModal = new LoadingModal().render().open();
     
     this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
       switch (self.state) {
@@ -140,6 +143,8 @@ module.exports = pageVw.extend({
     if (e.view !== this) return;
     state = state || this.state;
 
+    this.loading && this.loadingModal.open();
+
     this.blockedUsersScrollHandler &&
       this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
 
@@ -155,6 +160,8 @@ module.exports = pageVw.extend({
 
   onCacheDetached: function(e) {
     if (e.view !== this) return;
+
+    this.loadingModal.close();
 
     this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
@@ -188,7 +195,8 @@ module.exports = pageVw.extend({
       },
       complete: function() {
         if (!self.isRemoved()) {
-          app.loadingModal.close();
+          self.loadingModal.close();
+          self.loading = false;
         }
       }
     });
@@ -769,7 +777,12 @@ module.exports = pageVw.extend({
         self.refreshView();
       }, '', pageData, skipKeys, function(){
         //on invalid
-        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        // messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        new Dialog({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: window.polyglot.t('errorMessages.missingError')
+        });
+
         self.scrollToFirstError(self.$('#pageForm'));
       }).always(function(){
         $saveBtn.removeClass('loading');
@@ -1133,8 +1146,9 @@ module.exports = pageVw.extend({
   },
 
   remove: function() {
-    this.blockedUsersVw && this.blockedUsersVw.remove();
+    this.loadingModal.remove();
 
+    this.blockedUsersVw && this.blockedUsersVw.remove();
     this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
 

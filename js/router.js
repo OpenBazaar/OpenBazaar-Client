@@ -180,7 +180,6 @@ module.exports = Backbone.Router.extend({
   },
 
   cleanup: function(){
-    app.loadingModal.close();
     $('#obContainer').removeClass('customizeUserPage box-borderDashed noScrollBar overflowHidden');
     window.obEventBus.trigger('cleanNav');
   },
@@ -297,7 +296,6 @@ module.exports = Backbone.Router.extend({
       throw new Error('At a minimum, the config must contain a config.promise.');
     }
 
-    app.loadingModal.close();
     config = __.extend({}, defaults, config);
 
     this.pageConnectModal && this.pageConnectModal.remove();

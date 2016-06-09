@@ -62,6 +62,7 @@ var Polyglot = require('node-polyglot'),
     extendPolyglot,
     newPageNavView,
     newSocketView,
+    loadingModal,
     onboardingModal,
     pageConnectModal,
     launchOnboarding,
@@ -106,14 +107,16 @@ updatePolyglot = function(lang){
 
 user.on('change:language', function(md, lang) {
   updatePolyglot(lang);
-  app.loadingModal.render();
+  loadingModal.render();
 });
 
 //put the event bus into the window so it's available everywhere
 window.obEventBus = __.extend({}, Backbone.Events);
 
-app.loadingModal = new LoadingModal();
-app.loadingModal.render().open();
+loadingModal = new LoadingModal({
+  showLoadIndexButton: false
+});
+loadingModal.render().open();
 
 // add in our app bar
 app.appBar = new AppBarVw({
@@ -419,7 +422,7 @@ var loadProfile = function(landingRoute, onboarded) {
               });
 
               $('#sideBar').html(app.chatVw.render().el);
-
+              loadingModal.remove();
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 
               if (externalRoute) {
@@ -478,7 +481,7 @@ launchOnboarding = function(guidCreating) {
     onboardingModal && onboardingModal.remove();
     onboardingModal = null;
     loadProfile('#userPage/' + guid + '/store', true);
-    app.loadingModal.open();
+    loadingModal.open();
   });
 };
 
@@ -522,7 +525,7 @@ app.serverConnectModal.on('connected', () => {
 app.getHeartbeatSocket().on('open', function() {
   removeStartupRetry();
   pageConnectModal.remove();
-  app.loadingModal.open();  
+  loadingModal.open();  
 
   if (!profileLoaded) {
     // clear some flags so the heartbeat events will
@@ -530,7 +533,7 @@ app.getHeartbeatSocket().on('open', function() {
     guidCreating = null;
     loadProfileNeeded = true;
     app.serverConnectModal.close();
-    app.loadingModal.open();
+    loadingModal.open();
   }  
 });
 
