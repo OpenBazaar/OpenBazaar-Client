@@ -1,7 +1,6 @@
 'use strict';
 
 var loadTemplate = require('../utils/loadTemplate'),
-    stringUtils = require('../utils/string'),
     baseModal = require('./baseModal');
 
 module.exports = baseModal.extend({
@@ -13,17 +12,26 @@ module.exports = baseModal.extend({
   constructor: function(options) {
     var events = {};
 
-    options = options || {};
+    options = __.extend({
+      innerWrapperClass: 'modal-child modal-childMain color-primary custCol-primary padding20'
+    }, options || {});
 
     if (options.buttons && options.buttons.length) {
-      options.buttons.forEach((btnText) => {
-        events[stringUtils.camelize(btnText)] = 'onBtnClick';
+      options.buttons.forEach((btn) => {
+        var serializedBut = JSON.stringify(btn);
+
+        if (!btn.text || !btn.fragment) {
+          throw new Error(`The button, '${serializedBut.slice(0, 10)}',` +
+            ` is missing either a text or fragment property. Both are required.`);
+        }
+
+        events['click .js-' + btn.fragment] = 'onBtnClick';
       });
 
       this.events = __.extend({}, events, this.events || {});
     }
 
-    baseModal.prototype.constructor.apply(this, arguments);
+    baseModal.prototype.constructor.apply(this, [options].concat(Array.prototype.slice.call(arguments, 1)));
   },
 
   initialize: function(options) {
@@ -41,25 +49,15 @@ module.exports = baseModal.extend({
   },
 
   onBtnClick: function(e) {
-    console.log('trigger ' + $(e.target).data('event-name'));
-    this.trigger($(e.target).data('event-name'));
+    console.log('triggerin ' + 'click-' + $(e.target).data('event-name'));
+    this.trigger('click-' + $(e.target).data('event-name'));
   },
-
-  // open: function() {
-  //   return baseModal.prototype.open.apply(this, arguments);
-  // },  
-
-  // close: function() {
-  //   return baseModal.prototype.close.apply(this, arguments);
-  // },
 
   render: function() {
     loadTemplate('./js/templates/dialog.html', (t) => {
       this.$el.html(t(this.options));
 
       baseModal.prototype.render.apply(this, arguments);
-
-      // this.$statusText = this.$('.statusText');
     });
 
     return this;

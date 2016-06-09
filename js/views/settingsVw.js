@@ -780,7 +780,8 @@ module.exports = pageVw.extend({
         // messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
         new Dialog({
           title: window.polyglot.t('errorMessages.saveError'),
-          message: window.polyglot.t('errorMessages.missingError')
+          message: window.polyglot.t('errorMessages.missingError'),
+          buttons: ['Face The Facts', 'Freak the Presha', 'Deal """ with it']
         });
 
         self.scrollToFirstError(self.$('#pageForm'));

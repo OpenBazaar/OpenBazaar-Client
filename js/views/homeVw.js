@@ -10,7 +10,8 @@ var __ = require('underscore'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
-    messageModal = require('../utils/messageModal.js');
+    // messageModal = require('../utils/messageModal.js'),
+    Dialog = require('../views/dialog.js');
 
 module.exports = pageVw.extend({
 
@@ -634,31 +635,35 @@ module.exports = pageVw.extend({
   },
 
   loadAllItems: function(){
-    var self = this;
+    var dialog;
+
     if (localStorage.getItem('safeListingsWarningDissmissed')){
       this.onlyFollowing = false;
       this.loadItemsOrSearch();
     } else {
-      messageModal.show(
-          window.polyglot.t('ViewUnfilteredListings'),
-          window.polyglot.t('AllListingsWarning'),
-          'modal-hero bg-dark-blue iconBackground',
-          'modal-msg custCol-secondary',
-          function(){
-            messageModal.hide();
-          },
-          window.polyglot.t('Cancel'),
-          'txt-center',
-          function(){
-            localStorage.setItem('safeListingsWarningDissmissed', true);
-            self.$('.js-discoverToggleHelper').addClass('hide');
-            self.loadAllItems();
-            messageModal.hide();
-            self.setListingsAll();
-          },
-          window.polyglot.t('ShowUnlfilteredListings'),
-          'txt-center'
-      );
+      dialog = new Dialog({
+        title: window.polyglot.t('ViewUnfilteredListings'),
+        message: window.polyglot.t('AllListingsWarning'),
+        titleClass: 'modal-hero bg-dark-blue iconBackground',
+        messageClass: 'modal-msg custCol-secondary',
+        buttons: [{
+          text: window.polyglot.t('Cancel'),
+          fragment: 'cancel'
+        }, {
+          text: window.polyglot.t('ShowUnlfilteredListings'),
+          fragment: 'showUnlfilteredListings'          
+        }]
+      }).on('click-cancel', () => {
+        dialog.close();
+      }).on('click-showUnlfilteredListings', () => {
+        localStorage.setItem('safeListingsWarningDissmissed', true);
+        this.$('.js-discoverToggleHelper').addClass('hide');
+        this.loadAllItems();
+        dialog.close();
+        this.setListingsAll();
+      });
+
+      setTimeout(() => this.registerChild(dialog));
     }
   },
 

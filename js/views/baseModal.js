@@ -13,8 +13,9 @@ module.exports = baseVw.extend({
 
     defaults = {
       dismissOnOverlayClick: true,
+      dismissOnEscPress: true,
       showCloseButton: true,
-      closeButtonClass: 'btn-corner btn-cornerTR',
+      closeButtonClass: 'btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop',
       innerWrapperClass: 'modal-child modal-childMain custCol-primary'
     };
 
@@ -24,6 +25,8 @@ module.exports = baseVw.extend({
     args[0] = options;
     this.__options = __.extend({}, defaults, options);
     this._open = false;
+
+    __.bindAll(this, '__onDocKeypress');
 
     events['click'] = '__modalClick';
     events['click .js-modal-close'] = '__closeClick';
@@ -39,6 +42,12 @@ module.exports = baseVw.extend({
     baseVw.prototype.constructor.apply(this, args);
   },
 
+  __onDocKeypress: function(e) {
+    if (this.__options.dismissOnEscPress && e.keyCode === 27) {
+      this.close();
+    }
+  },
+
   __modalClick: function(e) {
     if (this.__options.dismissOnOverlayClick && e.target === this.el) {
       this.close();
@@ -46,6 +55,7 @@ module.exports = baseVw.extend({
   },
 
   __closeClick: function() {
+    console.log('be hap hap')
     this.close();
   },
 
@@ -58,6 +68,7 @@ module.exports = baseVw.extend({
       this.$html.addClass('modalOpen');
       this.$container.append(this.el);
       this.constructor.__modalsOpen += 1;
+      $(document).on('keyup', this.__onDocKeypress);
       this._open = true;
       this.trigger('open');
       window.obEventBus.trigger('modal-open', { modal: this });
@@ -70,7 +81,8 @@ module.exports = baseVw.extend({
     if (domUtils.isInPage(this.el)) {
       this.constructor.__modalsOpen -= 1;
       !this.constructor.__modalsOpen && this.$html.removeClass('modalOpen');
-      this.$el.remove();
+      $(document).off('keyup', this.__onDocKeypress);
+      this.$container[0].removeChild(this.el);
       this._open = false;
       this.trigger('close');
       window.obEventBus.trigger('modal-close', { modal: this });
