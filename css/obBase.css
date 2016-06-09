@@ -4408,10 +4408,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 74px;
 }
 
-/*#messageModal {
-  z-index: 9;
-}
-*/
 .page-connect-modal .spinner-with-logo {
   margin-top: -45px;
 }
@@ -6133,8 +6129,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.minEffects #overlay,
 #ov1.minEffects #sideBar,
 #ov1.minEffects #pageNav,
-/*#ov1.minEffects #modalHolder,
-#ov1.minEffects #messageModal,*/
 #ov1.minEffects #statusBar {
   transition: none !important;
   -webkit-filter: none !important;
@@ -6239,8 +6233,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.minEffects #overlay .disabled,
 #ov1.minEffects #sideBar .disabled,
 #ov1.minEffects #pageNav .disabled,
-/*#ov1.minEffects #modalHolder .disabled,
-#ov1.minEffects #messageModal .disabled,*/
 #ov1.minEffects #statusBar .disabled {
   opacity: 0.2 !important;
 }
@@ -6251,8 +6243,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.minEffects #overlay .disabled2,
 #ov1.minEffects #sideBar .disabled2,
 #ov1.minEffects #pageNav .disabled2,
-/*#ov1.minEffects #modalHolder .disabled2,
-#ov1.minEffects #messageModal .disabled2,*/
 #ov1.minEffects #statusBar .disabled2 {
   opacity: 0.7 !important;
 }
@@ -6266,12 +6256,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 #userPage .js-modal-close [class *= "ion-"]:before,
 #ov1 #obContainer .js-modal-close [class *= "ion-"]:before,
 #ov1 #modalHolder .js-modal-close [class *= "ion-"]:before,
-/*#ov1 #messageModal .js-modal-close [class *= "ion-"]:before,*/
 #ov1.minEffects .js-modal-close [class *= "ion-"]:before,
 #ov1.minEffects #userPage .js-modal-close [class *= "ion-"]:before,
 #ov1.minEffects #obContainer .js-modal-close [class *= "ion-"]:before,
 #ov1.minEffects #modalHolder .js-modal-close [class *= "ion-"]:before,
-/*#ov1.minEffects #messageModal .js-modal-close [class *= "ion-"]:before,*/
 #ov1 #modalHolder .js-closeBuyWizardModal [class *= "ion-"]:before {
   text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
 }

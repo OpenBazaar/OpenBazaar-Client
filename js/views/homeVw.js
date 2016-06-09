@@ -109,6 +109,10 @@ module.exports = pageVw.extend({
   onCacheDetached: function(e) {
     if (e.view !== this) return;
 
+    if (this.safeListingsDialog) {
+      this.safeListingsDialog.close();
+    }
+
     this.obContainer.off('scroll', this.scrollHandler);
   },
 
@@ -635,13 +639,11 @@ module.exports = pageVw.extend({
   },
 
   loadAllItems: function(){
-    var dialog;
-
     if (localStorage.getItem('safeListingsWarningDissmissed')){
       this.onlyFollowing = false;
       this.loadItemsOrSearch();
     } else {
-      dialog = new Dialog({
+      this.safeListingsDialog = new Dialog({
         title: window.polyglot.t('ViewUnfilteredListings'),
         message: window.polyglot.t('AllListingsWarning'),
         titleClass: 'modal-hero bg-dark-blue iconBackground',
@@ -654,16 +656,16 @@ module.exports = pageVw.extend({
           fragment: 'showUnlfilteredListings'          
         }]
       }).on('click-cancel', () => {
-        dialog.close();
+        this.safeListingsDialog.close();
       }).on('click-showUnlfilteredListings', () => {
         localStorage.setItem('safeListingsWarningDissmissed', true);
         this.$('.js-discoverToggleHelper').addClass('hide');
         this.loadAllItems();
-        dialog.close();
+        this.safeListingsDialog.close();
         this.setListingsAll();
       });
 
-      setTimeout(() => this.registerChild(dialog));
+      setTimeout(() => this.registerChild(this.safeListingsDialog));
     }
   },
 

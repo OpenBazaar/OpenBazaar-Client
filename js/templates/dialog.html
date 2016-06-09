@@ -3,7 +3,7 @@
 </div>
 <div class="txt-center row10 <%= ob.messageClass %>">
   <p class="fontSize14"><%= ob.message %></p>
-  <% console.log('suge');window.suge = ob;if (ob.buttons.length) { %>
+  <% if (ob.buttons.length) { %>
   <div class="bar barFlush bottomBar heightAuto">
   <% ob.buttons.forEach((btn, i) => { %>
     <%
