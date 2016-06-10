@@ -104,14 +104,14 @@
               <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
               <input type="number" name="priceLocal" step="any" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%= ob.price %>" required
                 <% if(ob.userCurrencyCode == "BTC"){ %>
-                min="0.0015"
+                min="0.0002"
                 <% } else { %>
-                min="<% print((window.currentBitcoin * 0.002).toFixed(2)) %>"
+                min="<% print((window.currentBitcoin * 0.0002).toFixed(2)) %>"
                 <% } %>
               >
             </div>
             <div class="flexCol-4">
-              <span class="fieldItem txt-placeholder"><%= polyglot.t('MinimumIs', { amount: ob.userCurrencyCode == "BTC" ? ob.intlNumFormat(0.0015) : ob.intlNumFormat(window.currentBitcoin * 0.002) }) %> <span class="ion-help-circled fontSize12 tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>"></span></span>
+              <span class="fieldItem txt-placeholder"><%= polyglot.t('MinimumIs', { amount: ob.userCurrencyCode == "BTC" ? ob.intlNumFormat(0.0002, 4) : ob.intlNumFormat(window.currentBitcoin * 0.0002, 4) }) %> <span class="ion-help-circled fontSize12 tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>"></span></span>
             </div>
           </div>
           <div class="flexRow custCol-border js-shippingRow">
