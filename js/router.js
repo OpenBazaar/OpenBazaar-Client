@@ -9,7 +9,8 @@ var ipcRenderer = require('ipc-renderer'),
     userPageView = require('./views/userPageVw'),
     settingsView = require('./views/settingsVw'),
     transactionsView = require('./views/transactionsVw'),
-    PageConnectModal = require('./views/pageConnectModal');
+    PageConnectModal = require('./views/pageConnectModal'),
+    Dialog = require('./views/dialog.js');
 
 module.exports = Backbone.Router.extend({
   initialize: function(options){
@@ -182,6 +183,7 @@ module.exports = Backbone.Router.extend({
   cleanup: function(){
     $('#obContainer').removeClass('customizeUserPage box-borderDashed noScrollBar overflowHidden');
     window.obEventBus.trigger('cleanNav');
+    Dialog.removeAll();
   },
 
   cacheView: function(view, fragment) {

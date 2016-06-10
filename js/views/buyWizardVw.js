@@ -8,7 +8,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     buyDetailsVw = require('./buyDetailsVw'),
     buyAddressesVw = require('./buyAddressesVw'),
-    messageModal = require('../utils/messageModal.js'),
+    Dialog = require('../views/dialog.js'),
     saveToAPI = require('../utils/saveToAPI'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
@@ -378,11 +378,20 @@ module.exports = baseVw.extend({
         self.buyAddressesView.render(selected);
       },
       error: function(){
-        messageModal.show(window.polyglot.t('errorMessages.serverError'));
+        self.registerChild(
+          new Dialog({
+            title: window.polyglot.t('errorMessages.serverError')
+          })
+        );
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.serverError'),
+              message: window.polyglot.t('errorMessages.badJSON')
+            })
+          );
         }
       }
     });
@@ -444,9 +453,14 @@ module.exports = baseVw.extend({
           window.obEventBus.trigger("updateUserModel");
           self.skipAddressCheck();
         },
-            function () {
-              messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br>" + window.polyglot.t('BitcoinReturnAddress'));
-            });
+        function () {
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.serverError'),
+              message: window.polyglot.t('errorMessages.missingError') + '<br>' + window.polyglot.t('BitcoinReturnAddress')
+            })
+          );
+        });
       } else {
         this.skipAddressCheck();
       }
@@ -485,7 +499,12 @@ module.exports = baseVw.extend({
         bitCoinReturnAddr = this.$('#buyWizardBitcoinAddressInput').val();
 
     if (!this.$('#buyWizardQuantity')[0].checkValidity()){
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      self.registerChild(
+        new Dialog({
+          title: window.polyglot.t('errorMessages.serverError'),
+          message: window.polyglot.t('errorMessages.missingError')
+        })
+      );      
       return;
     }
 
@@ -529,8 +548,14 @@ module.exports = baseVw.extend({
           self.showPayAddress(data);
           self.cachePayData = data; //cache the data for the QR Details toggle
         } else {
-          messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " +
-              window.polyglot.t('errorMessages.checkPurchaseData') + "\n\n Reason: " + data.reason);
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.contractError'),
+              message: window.polyglot.t('errorMessages.sellerError') + ' ' +
+                window.polyglot.t('errorMessages.checkPurchaseData') + '\n\n Reason: ' + data.reason
+            })
+          );
+
           self.$('.js-buyWizardSpinner').addClass('hide');
           //re-enable form so they can try again
           self.$('.js-buyWizardSendPurchase').removeClass('hide');

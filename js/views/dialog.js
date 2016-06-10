@@ -1,9 +1,42 @@
 'use strict';
 
 var loadTemplate = require('../utils/loadTemplate'),
-    baseModal = require('./baseModal');
+    baseModal = require('./baseModal'),
+    Dialog;
 
-module.exports = baseModal.extend({
+/*
+Used to show a dialog with optional buttons. The dialog renders and opens itself on instantiation
+and, by default, removes itself on close. So, in it's simplest form a dialog can be launched as follows:
+
+var myDialog = new Dialog({
+  title: 'Houston, We Have A problem!',
+  message: 'How can you eat your pudding, if you haven't eaten you\'re meat!?'
+});
+
+Additionally, you could specify an array of buttons which will be displayed at the bottom of the
+dialog. The buttons should be provided in the following format:
+
+{
+  title: '...',
+  ...
+  buttons: [{
+    text: 'Cancel', // displayed text of button
+    fragment: 'cancel' // unique fragment to identify the button. Used internally, as well as
+                       // used to determine the event that will be fire upon click of the button,
+                       // e.g. the above fragment would result in 'click-cancel'.
+  },{
+    text: 'Ok',
+    fragment: 'ok'
+  }]
+}
+
+As with all modals, don't forget to register them as children (registerChild(myDialog)), so they are
+removed when your view is removed (even though they self-remove on close, they may be open when your
+view is navigated away from). Additionally, if you are launching from a cacheable PageVw, be sure to
+clean up the dialog in your 'cache-detached' handler (either remove it or close it).
+*/
+
+Dialog = baseModal.extend({
   className: 'messageModal',
 
   events: {
@@ -31,6 +64,11 @@ module.exports = baseModal.extend({
       this.events = __.extend({}, events, this.events || {});
     }
 
+    // temporary duct tape, do the router will be able to remove and dialog's not
+    // launched by a view (e.g. launched by SaveToApi).
+    Dialog.__dialogs = Dialog.__dialogs || [];
+    Dialog.__dialogs.push(this);
+
     baseModal.prototype.constructor.apply(this, [options].concat(Array.prototype.slice.call(arguments, 1)));
   },
 
@@ -49,7 +87,6 @@ module.exports = baseModal.extend({
   },
 
   onBtnClick: function(e) {
-    console.log('triggerin ' + 'click-' + $(e.target).data('event-name'));
     this.trigger('click-' + $(e.target).data('event-name'));
   },
 
@@ -63,3 +100,13 @@ module.exports = baseModal.extend({
     return this;
   }
 });
+
+// temporary duct tape, do the router will be able to remove and dialog's not
+// launched by a view (e.g. launched by SaveToApi).
+Dialog.removeAll = function() {
+  if (Dialog.__dialogs) { 
+    Dialog.__dialogs.forEach((dialog) => dialog.remove());
+  }
+};
+
+module.exports = Dialog;

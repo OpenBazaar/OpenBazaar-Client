@@ -8,7 +8,7 @@ var __ = require('underscore'),
     Taggle = require('taggle'),
     MediumEditor = require('medium-editor'),
     Sortable = require('sortablejs'),
-    messageModal = require('../utils/messageModal'),
+    Dialog = require('../views/dialog.js'),
     chosen = require('../utils/chosen.jquery.min.js'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
     baseVw = require('./baseVw');
@@ -357,7 +357,13 @@ module.exports = baseVw.extend({
 
     if (this.imgHashes.length + imageFiles.length > this.MAX_PHOTOS) {
       imageFiles = imageFiles.slice(0, this.MAX_PHOTOS - this.imgHashes.length);
-      messageModal.show(window.polyglot.t('errorMessages.tooManyPhotosTitle'), window.polyglot.t('errorMessages.tooManyPhotosBody'));      
+      
+      this.registerChild(
+        new Dialog({
+          title: window.polyglot.t('errorMessages.tooManyPhotosTitle'),
+          message: window.polyglot.t('errorMessages.tooManyPhotosBody')
+        })
+      );      
     }
 
     if (!imageFiles.length) return;
@@ -408,7 +414,12 @@ module.exports = baseVw.extend({
 
         if (errored === imageCount) {
           self.$el.find('.js-itemEditImageLoading').addClass('fadeOut');
-          messageModal.show(window.polyglot.t('errorMessages.unableToLoadImages'));
+
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.unableToLoadImages')
+            })
+          );          
         } else if (loaded === imageCount) {
           self.uploadImage(imageList);
         }        
@@ -447,7 +458,12 @@ module.exports = baseVw.extend({
           self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
         } else if (data.success === false){
-          messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.saveError'),
+              message: '<i>' + data.reason + '</i>'
+            })
+          );
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -609,7 +625,12 @@ module.exports = baseVw.extend({
           if (data.success === true) {
             self.trigger('saveNewDone', data.id);
           } else {
-            messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+            self.registerChild(
+              new Dialog({
+                title: window.polyglot.t('errorMessages.saveError'),
+                message: '<i>' + data.reason + '</i>'
+              })
+            );
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -631,8 +652,15 @@ module.exports = baseVw.extend({
     });
 
     invalidInputList = __.uniq(invalidInputList);
-    messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') +
-      '<br><i><br />' + invalidInputList.join('<br />') + '</i>');
+
+    this.registerChild(
+      new Dialog({
+        title: window.polyglot.t('errorMessages.saveError'),
+        message: window.polyglot.t('errorMessages.missingError') + '<br><i><br />' +
+          invalidInputList.join('<br />') + '</i>'
+      })
+    );    
+    
     return $.Deferred().reject('failed form validation').promise();
   },
 

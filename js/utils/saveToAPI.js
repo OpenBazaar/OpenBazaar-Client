@@ -2,7 +2,6 @@
 
 var __ = require('underscore'),
     $ = require('jquery'),
-    messageModal = require('../utils/messageModal.js'),
     Dialog = require('../views/dialog.js');
 
 
@@ -31,8 +30,10 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
       if (typeof onInvalid === 'function'){
         onInvalid();
       } else {
-        // new Dialog
-        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        new Dialog({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: window.polyglot.t('errorMessages.missingError')
+        });
       }
       return $.Deferred().reject('failed form validation').promise();
     }
@@ -124,10 +125,16 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
         if (onFail){
           onFail(data);
         } else {
-          messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          new Dialog({
+            title: window.polyglot.t('errorMessages.saveError'),
+            message: "<i>" + data.reason + "</i>"
+          });
         }
       } else {
-        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
+        new Dialog({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>"
+        });
       }
     },
     error: function(jqXHR, status, errorThrown){

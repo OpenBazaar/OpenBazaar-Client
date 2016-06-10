@@ -55,7 +55,6 @@ module.exports = baseVw.extend({
   },
 
   __closeClick: function() {
-    console.log('be hap hap')
     this.close();
   },
 

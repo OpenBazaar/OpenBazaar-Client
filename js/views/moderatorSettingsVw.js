@@ -3,7 +3,7 @@
 var Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    messageModal = require('../utils/messageModal.js'),
+    Dialog = require('../views/dialog.js'),
     saveToAPI = require('../utils/saveToAPI');
 Backbone.$ = $;
 
@@ -78,7 +78,12 @@ module.exports = Backbone.View.extend({
       processData: false,
       dataType: "json",
       error: function(){
-        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessaes.serverError') + "</i>");
+        self.registerChild(
+          new Dialog({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: '<i>' + window.polyglot.t('errorMessaes.serverError') + '</i>'
+          })
+        );        
       }
     });
   },

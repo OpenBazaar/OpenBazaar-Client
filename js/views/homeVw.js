@@ -10,7 +10,6 @@ var __ = require('underscore'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
-    // messageModal = require('../utils/messageModal.js'),
     Dialog = require('../views/dialog.js');
 
 module.exports = pageVw.extend({
