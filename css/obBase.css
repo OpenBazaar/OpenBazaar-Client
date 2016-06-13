@@ -2574,7 +2574,7 @@ div.chatSearchOut .chatSearchIcon {
   display: inline-block;
   font-weight: 500;
   letter-spacing: 0.2px;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 #inputConversationMessage {
@@ -3190,7 +3190,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   border: 2px solid transparent;
   color: #fff;
   overflow: auto; /* use customThemeScrollbar to add a scrolbar */
-  word-break: break-all; /* prevent urls from making the text area grow */
+  word-break: break-word; /* prevent urls from making the text area grow */
 }
 
 .fieldItem-textarea:focus {
