@@ -10,7 +10,7 @@ var __ = require('underscore'),
     chatMessageView = require('./chatMessageVw'),
     qr = require('qr-encode'),
     app = require('../App.js').getApp(),
-    messageModal = require('../utils/messageModal'),
+    Dialog = require('../views/dialog.js'),
     discussionCl = require('../collections/discussionCl'),
     clipboard = require('clipboard');
 
@@ -119,14 +119,28 @@ module.exports = baseVw.extend({
         if (!response.invalidData && response.vendor_offer.listing){
           self.model.updateAttributes();
         } else {
-          messageModal.show(window.polyglot.t('errorMessages.serverError'));
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.serverError')
+            })
+          );
         }
       },
       error: function (jqXHR, status, errorThrown) {
         if (status.status == 500){
-          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.getError'),
+              message: '<i>' + window.polyglot.t('errorMessages.serverError') + '</i>'
+            })
+          );          
         } else {
-          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown.textStatus + "</i>");
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.getError'),
+              message: '<i>' + errorThrown.textStatus + '</i>'
+            })
+          );
         }
         $('.js-loadingModal').addClass("hide");
         console.log(jqXHR);
@@ -135,7 +149,12 @@ module.exports = baseVw.extend({
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.serverError'),
+              message: window.polyglot.t('errorMessages.badJSON')
+            })
+          );
         }
       }
     });
@@ -150,7 +169,12 @@ module.exports = baseVw.extend({
     $('.js-loadingModal').addClass("hide");
     //makde sure data is valid
     if (this.model.get('invalidData')){
-      messageModal.show(window.polyglot.t('errorMessages.serverError', self.model.get('error')));
+      self.registerChild(
+        new Dialog({
+          title: window.polyglot.t('errorMessages.serverError'),
+          message: self.model.get('error')
+        })
+      );      
       return;
     }
 
@@ -256,7 +280,12 @@ module.exports = baseVw.extend({
       dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
       this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
     } else {
-      messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.serverError'));
+      this.registerChild(
+        new Dialog({
+          title: window.polyglot.t('errorMessages.getError'),
+          message: window.polyglot.t('errorMessages.serverError')
+        })
+      );     
     }
   },
 
@@ -438,7 +467,12 @@ module.exports = baseVw.extend({
           self.getData();
         },
         function(data){
-          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.getError'),
+              message: '<i>' + data.reason + '</i>'
+            })
+          );
         },
         completeData).always(() => {
           targBtn.removeClass('loading');
@@ -476,7 +510,13 @@ module.exports = baseVw.extend({
         self.addAllDiscussionMessages();
       },
       error: function (jqXHR, status, errorThrown) {
-        messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        self.registerChild(
+          new Dialog({
+            title: window.polyglot.t('errorMessages.getError'),
+            message: '<i>' + errorThrown + '</i>'
+          })
+        );
+
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
@@ -685,7 +725,12 @@ module.exports = baseVw.extend({
       }, '', discussionData);
     } else {
       this.$('#transactionDiscussionSendText').addClass("invalid");
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      this.registerChild(
+        new Dialog({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: window.polyglot.t('errorMessages.missingError')
+        })
+      );
     }
   },
 
@@ -737,10 +782,18 @@ module.exports = baseVw.extend({
         self.getData();
       }, function (data) {
         if (data.reason == "Refund already processed for this order") {
-          messageModal.show(window.polyglot.t('errorMessages.refundAlreadySent'));
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.refundAlreadySent')
+            })
+          );
           $(e.target).addClass('hide'); //hide the button so it can't be pressed again
         } else {
-          messageModal.show(window.polyglot.t('errorMessages.serverError'));
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.serverError')
+            })
+          );
         }
       }, refData).always(() => {
         $(e.target).removeClass('loading');

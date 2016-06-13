@@ -30,10 +30,6 @@ dialog. The buttons should be provided in the following format:
   }]
 }
 
-As with all modals, don't forget to register them as children (registerChild(myDialog)), so they are
-removed when your view is removed (even though they self-remove on close, they may be open when your
-view is navigated away from). Additionally, if you are launching from a cacheable PageVw, be sure to
-clean up the dialog in your 'cache-detached' handler (either remove it or close it).
 */
 
 Dialog = baseModal.extend({
@@ -64,17 +60,13 @@ Dialog = baseModal.extend({
       this.events = __.extend({}, events, this.events || {});
     }
 
-    // temporary duct tape, do the router will be able to remove and dialog's not
-    // launched by a view (e.g. launched by SaveToApi).
-    Dialog.__dialogs = Dialog.__dialogs || [];
-    Dialog.__dialogs.push(this);
-
     baseModal.prototype.constructor.apply(this, [options].concat(Array.prototype.slice.call(arguments, 1)));
   },
 
   initialize: function(options) {
     this.options = __.extend({
       removeOnClose: true,
+      removeOnRoute: true,
       title: '',
       message: '',
       titleClass: '',
@@ -83,7 +75,12 @@ Dialog = baseModal.extend({
     }, options || {});
 
     this.options.removeOnClose && this.on('close', () => this.remove());
+    this.options.removeOnClose && this.listenTo(Backbone.history, 'route', this.onRoute);
     this.render().open();
+  },
+
+  onRoute: function() {
+    !this.isRemoved() && this.remove()
   },
 
   onBtnClick: function(e) {
@@ -100,13 +97,5 @@ Dialog = baseModal.extend({
     return this;
   }
 });
-
-// temporary duct tape, do the router will be able to remove and dialog's not
-// launched by a view (e.g. launched by SaveToApi).
-Dialog.removeAll = function() {
-  if (Dialog.__dialogs) { 
-    Dialog.__dialogs.forEach((dialog) => dialog.remove());
-  }
-};
 
 module.exports = Dialog;

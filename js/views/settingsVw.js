@@ -1192,6 +1192,8 @@ module.exports = pageVw.extend({
     this.serverConnectSyncHandler &&
       app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);
 
+    console.log('they be removing me');
+
     pageVw.prototype.remove.apply(this, arguments);
   }
 });

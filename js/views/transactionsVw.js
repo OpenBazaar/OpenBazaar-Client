@@ -4,7 +4,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    messageModal = require('../utils/messageModal.js'),
+    Dialog = require('../views/dialog.js'),    
     setTheme = require('../utils/setTheme.js'),
     Papa = require('papaparse'),
     transactionsCl = require('../collections/transactionsCl'),
@@ -120,7 +120,13 @@ module.exports = pageVw.extend({
                 models.length && self.setSearchList('transactionsCases');
               },
               error: function(jqXHR, status, errorThrown){
-                messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+                self.registerChild(
+                  new Dialog({
+                    title: window.polyglot.t('errorMessages.getError'),
+                    message: '<i>' + errorThrown + '</i>'
+                  })
+                );
+
                 console.log(jqXHR);
                 console.log(status);
                 console.log(errorThrown);
@@ -158,7 +164,13 @@ module.exports = pageVw.extend({
             });
           },
           error: function(jqXHR, status, errorThrown){
-            messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+            self.registerChild(
+              new Dialog({
+                title: window.polyglot.t('errorMessages.getError'),
+                message: '<i>' + errorThrown + '</i>'
+              })
+            );
+
             console.log(jqXHR);
             console.log(status);
             console.log(errorThrown);
@@ -166,7 +178,13 @@ module.exports = pageVw.extend({
         });
       },
       error: function(jqXHR, status, errorThrown){
-        messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        self.registerChild(
+          new Dialog({
+            title: window.polyglot.t('errorMessages.getError'),
+            message: '<i>' + errorThrown + '</i>'
+          })
+        );
+
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
@@ -352,7 +370,8 @@ module.exports = pageVw.extend({
           tempAnchor.href = window.URL.createObjectURL(dataBlob);
           tempAnchor.download = ('export_'+saveDate.toLocaleString(window.lang)+'.csv').replace(/,/g, '_');
           tempAnchor.click();
-        };
+        },
+        self = this;
 
     //clear existing data
     this.currentExportData = [];
@@ -383,7 +402,13 @@ module.exports = pageVw.extend({
 
     return $.when.apply(null, calls)
         .fail(function(){
-          messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.serverError'));
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.getError'),
+              message: window.polyglot.t('errorMessages.serverError')
+            })
+          );
+
           calls.forEach(call => {
             call.abort();
           });
@@ -392,7 +417,11 @@ module.exports = pageVw.extend({
           if (calls.length > 0){
             exportData(this.currentExportData);
           } else {
-            messageModal.show(window.polyglot.t('errorMessages.noData'));
+            self.registerChild(
+              new Dialog({
+                title: window.polyglot.t('errorMessages.noData')
+              })
+            );            
           }
         });
   },
