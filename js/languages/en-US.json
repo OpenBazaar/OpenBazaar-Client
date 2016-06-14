@@ -146,6 +146,7 @@
   "ShipsFrom": "Ships From",
   "ShipsFrom2": "Ships From %{country}",
   "ShipsTo": "Ships To",
+  "ShipsTo2": "Ships To %{country}",
   "AddShipToRegion": "Shipping Region",
   "AddShipToRegionNote": "Adds All Nations in a Region",
   "SelectRegion": "Add an Optional Region",
