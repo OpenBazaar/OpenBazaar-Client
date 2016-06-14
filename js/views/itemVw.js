@@ -176,9 +176,11 @@ module.exports = baseVw.extend({
     this.buyWizardView && this.buyWizardView.remove();
     this.buyWizardView = new buyWizardVw({model: this.model, userModel: this.options.userModel, worldwide: this.worldwide, shippingRegions: this.shippingRegions});
     this.registerChild(this.buyWizardView);
-    $('#modalHolder').html(this.buyWizardView.el).fadeIn(300); //add to DOM first, or accordion will have zero width when initialized
-    this.buyWizardView.render();
-    $('#obContainer').addClass('modalOpen').scrollTop(0);
+    // $('#modalHolder').html(this.buyWizardView.el).fadeIn(300); //add to DOM first, or accordion will have zero width when initialized
+    this.buyWizardView.on('close', () => this.buyWizardView.remove())
+      .render()
+      .open();
+    // $('#obContainer').addClass('modalOpen').scrollTop(0);
   },
 
   clickItemRating: function() {

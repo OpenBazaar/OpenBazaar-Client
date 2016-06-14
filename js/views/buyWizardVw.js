@@ -5,7 +5,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
-    baseVw = require('./baseVw'),
+    baseModal = require('./baseModal'),
     buyDetailsVw = require('./buyDetailsVw'),
     buyAddressesVw = require('./buyAddressesVw'),
     Dialog = require('../views/dialog.js'),
@@ -15,7 +15,6 @@ var __ = require('underscore'),
     app = require('../App').getApp(),
     clipboard = require('clipboard'),
     templateHelpers = require('../utils/templateHelpers');
-Backbone.$ = $;
 
 // randomize function
 $.fn.randomize = function(selector){
@@ -31,9 +30,9 @@ $.fn.randomize = function(selector){
   return this;
 };
 
-module.exports = baseVw.extend({
+module.exports = baseModal.extend({
 
-  className: "buyView",
+  className: "buyView custCol-text",
 
   events: {
     'click .js-buyWizardModal': 'blockClicks',
@@ -190,6 +189,10 @@ module.exports = baseVw.extend({
     loadTemplate('./js/templates/buyWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
+      baseModal.prototype.render.apply(self, arguments);
+
+      return;
+
       //add subviews
       self.buyDetailsView && self.buyDetailsView.remove();
       self.buyDetailsView = new buyDetailsVw({model: self.model});
@@ -204,7 +207,7 @@ module.exports = baseVw.extend({
       self.$buyWizardMap = self.$('.js-buyWizardMap');
 
       //init the accordion
-      self.initAccordion('.js-buyWizardAccordion');
+      setTimeout(() => self.initAccordion('.js-buyWizardAccordion'));
 
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-buyWizardModal').removeClass('fadeOut');
@@ -700,10 +703,10 @@ module.exports = baseVw.extend({
   },
 
   closeWizard: function() {
-    $('#obContainer').removeClass('modalOpen');
     if (this.buyRequest){
       this.buyRequest.abort();
     }
-    this.remove();
+
+    this.close();
   }
 });
