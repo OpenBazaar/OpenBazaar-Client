@@ -88,18 +88,22 @@
               </div>
             </div>
           </div>
-          <div class="flexRow custCol-border js-inputParent">
+          <div class="flexRow custCol-border js-inputParent zIndex1">
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="priceLocal">
                   <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)
                 </label>
-                <div class="underline note rowTop5">
-                  <a href="#settings" class="tooltip tooltip-box" data-tooltip="<%= polyglot.t('ChangeCurrencyHelp') %>"><%= polyglot.t('ChangeCurrency') %></a>
+                <div class="underline rowTop5">
+                  <a href="#settings" class="tooltip tooltip-box" data-tooltip="<%= polyglot.t('ChangeCurrencyHelp') %>">
+                    <span class="note">
+                      <%= polyglot.t('ChangeCurrency') %>
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="flexCol-5">
+            <div class="flexCol-4">
               <input type="number" step="any" name="price" id="inputPrice" class="hide" />
               <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
               <input type="number" name="priceLocal" step="any" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%= ob.price %>" required
@@ -110,8 +114,15 @@
                 <% } %>
               >
             </div>
-            <div class="flexCol-4">
-              <span class="fieldItem txt-placeholder"><%= polyglot.t('MinimumIs', { amount: ob.userCurrencyCode == "BTC" ? ob.intlNumFormat(0.0002, 4) : ob.intlNumFormat(window.currentBitcoin * 0.0002, 4) }) %> <span class="ion-help-circled fontSize12 tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>"></span></span>
+            <div class="flexCol-5">
+              <span class="fieldItem pull-right">
+                <span class="tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>">
+                  <span class="txt-placeholder">
+                    <%= polyglot.t('MinimumIs', { amount: ob.userCurrencyCode == "BTC" ? ob.intlNumFormat(0.0002, 4) : ob.intlNumFormat(window.currentBitcoin * 0.0002, 4) }) %>
+                    <span class="ion-help-circled fontSize12"></span>
+                  </span>
+                </span>
+              </span>
             </div>
           </div>
           <div class="flexRow custCol-border js-shippingRow">
