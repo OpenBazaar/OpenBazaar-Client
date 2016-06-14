@@ -1,0 +1,52 @@
+<div class="modal-child modal-childMain custCol-primary">
+  <div class="about-hero modal-hero-about color-secondary-darken custCol-secondary-darken">
+    <div class="modal-hero-icon"></div>
+    <p class="width100 alignCenter custCol-text marginTop50 textOpacity75 fontSize14"><%= polyglot.t('Version', {version: ob.version}) %></p>
+  </div>
+  <div class="aboutModal-accordion accordion">
+    <div class="accordion-window">
+      <div class="accordion-child color-primary custCol-primary custCol-text">
+        <div class="bar navBar barFlush custCol-text custCol-secondary height56">
+          <a class="btn btn-bar btn-tab custCol-secondary js-tab <% ob.tab === 'about' && print('active') %>"  data-tab="about">
+            <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('About') %>
+          </a>
+          <a class="btn btn-bar btn-tab custCol-secondary js-tab <% ob.tab === 'contributors' && print('active') %>"  data-tab="contributors">
+            <span class="ion-ios-people fontSize12 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Contributors') %>
+          </a>
+          <a class="btn btn-bar btn-tab custCol-secondary js-tab <% ob.tab === 'support' && print('active') %>" data-tab="support">
+            <span class="ion-android-favorite fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Support') %>
+          </a>
+          <a class="btn btn-bar btn-tab custCol-secondary js-tab <% ob.tab === 'licensing' && print('active') %>" data-tab="licensing">
+            <span class="ion-clipboard fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Licensing') %>
+          </a>
+        </div>
+
+        <% if (ob.tab === 'about') { %>
+        <div class="modal-section custCol-primary modal-about-sectionjs-externalLinks customThemeScrollbar lineHeight20">
+          <%= polyglot.t('aboutSection.about') %>
+        </div>
+        <% } else if (ob.tab === 'licensing') { %>
+        <div class="modal-section custCol-primary modal-about-section js-externalLinks customThemeScrollbar lineHeight20">
+          <%= polyglot.t('aboutSection.licensing') %>
+        </div>
+        <% } else if (ob.tab === 'support') { %>
+        <div class="modal-section custCol-primary modal-about-section js-externalLinks customThemeScrollbar lineHeight20">
+          <div class="width100 alignCenter marginBottom12">
+            <img src="./imgs/donations.png" />
+          </div>
+          <%= polyglot.t('aboutSection.support') %>
+        </div>
+        <% } else if (ob.tab === 'contributors') { %>
+        <div class="modal-section custCol-primary modal-about-section js-externalLinks customThemeScrollbar lineHeight20">
+          <%= polyglot.t('aboutSection.contributors') %>
+        </div>
+        <% } %>
+
+      </div>
+    </div>
+  </div>
+</div>
