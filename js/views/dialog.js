@@ -10,7 +10,7 @@ and, by default, removes itself on close. So, in it's simplest form a dialog can
 
 var myDialog = new Dialog({
   title: 'Houston, We Have A problem!',
-  message: 'How can you eat your pudding, if you haven't eaten you\'re meat!?'
+  message: 'How can you eat your pudding, if you haven't eaten your meat!?'
 });
 
 Additionally, you could specify an array of buttons which will be displayed at the bottom of the
@@ -30,6 +30,9 @@ dialog. The buttons should be provided in the following format:
   }]
 }
 
+Please Note: This Dialog is designed for simple messages with optional buttons on the bottom. If
+you find that your situation needs custom markup, css (beyond the classes you can optionally pass in),
+and/or behavior (e.g. tabs, etc.), you should write a custom view and extend from the Base Modal.
 */
 
 Dialog = baseModal.extend({

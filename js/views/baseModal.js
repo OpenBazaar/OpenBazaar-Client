@@ -107,7 +107,7 @@ module.exports = baseVw.extend({
   },
 
   remove: function() {
-    this.close();
+    this.isOpen() && this.close();
     baseVw.prototype.remove.apply(this, arguments);
 
     return this;

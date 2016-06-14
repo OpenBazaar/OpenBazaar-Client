@@ -23,7 +23,7 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     storeWizardVw = require('./storeWizardVw'),
     saveToAPI = require('../utils/saveToAPI'),
-    moderatorSettingsVw = require('./moderatorSettingsVw'),
+    ModeratorSettingsModal = require('./moderatorSettingsModal'),
     UserPageVw;
 
 var defaultItem = {
@@ -1775,8 +1775,17 @@ UserPageVw = pageVw.extend({
   },
 
   showModeratorModal: function(){
-    this.moderatorSettingsView = new moderatorSettingsVw({model: this.model, parentEl: '#modalHolder'});
-    this.registerChild(this.moderatorSettingsView);
+    if (this.moderatorSettingsModal) {
+      this.moderatorSettingsModal.open();
+    } else {
+      this.moderatorSettingsModal = new ModeratorSettingsModal({ model: this.model })
+      this.registerChild(this.moderatorSettingsModal);
+      this.moderatorSettingsModal.render()
+        .on('close', () => {
+          this.moderatorSettingsModal.remove()
+          this.moderatorSettingsModal = null;
+        }).open();
+    }
   },
 
   changeModeratorStatus: function(status, fee){

@@ -4,7 +4,7 @@ var loadTemplate = require('../utils/loadTemplate'),
     baseModal = require('./baseModal');
 
 module.exports = baseModal.extend({
-  className: 'modal-about',
+  className: 'modal-about insideApp',
 
   events: {
     'click .js-tab': 'onTabClick'

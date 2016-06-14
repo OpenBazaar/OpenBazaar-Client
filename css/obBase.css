@@ -1286,6 +1286,25 @@ label.fieldItem {
   top: 46px
 }
 
+/*
+  A fullscreen modal has it's content extended across the entire screen
+  (excluding the top menu bar), as opposed to being a "box" centered in
+  the screen (e.g the loading modal).
+*/
+.modal.insideApp {
+  top: 46px;
+  width: calc(100% - 47px);
+}
+
+#ov1.chatOpen .modal.insideApp {
+  width: calc(100% - 230px);
+}
+
+/*
+  A fullscreen modal has it's content extended across the entire screen
+  (excluding the top menu bar), as opposed to being a "box" centered in
+  the screen (e.g the loading modal). It's not really compatible with .insideApp.
+*/
 .modal.modalCoverFullscreen {
   padding-top: 0;
 }
