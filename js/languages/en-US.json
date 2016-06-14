@@ -369,7 +369,7 @@
   },
   "moderatorSettings": {
     "DisputeResolution": "Dispute Resolution",
-    "ServiceFee": "Service fee",
+    "ServiceFee": "Dispute fee",
     "ServiceFeeNote": "Min: 0%, Max: 25%"
   },
   "BecomeModerator": "Become a Moderator",
