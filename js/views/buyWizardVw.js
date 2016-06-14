@@ -191,8 +191,6 @@ module.exports = baseModal.extend({
 
       baseModal.prototype.render.apply(self, arguments);
 
-      return;
-
       //add subviews
       self.buyDetailsView && self.buyDetailsView.remove();
       self.buyDetailsView = new buyDetailsVw({model: self.model});
