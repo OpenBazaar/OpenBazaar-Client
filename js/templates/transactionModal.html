@@ -638,13 +638,28 @@
                     <strong><%- ob.vendor_offer.listing.item.title %></strong>
                   </a>
                 </div>
+                <% console.log(ob.transactionType)%>
+                <% console.log(ob.status) %>
+                <% if(ob.transactionType == "cases"){ %>
+                <!-- only show this to the moderator -->
+                <div class="noOverflow marginBottom4  fontSize13 txt-fade">
+                  <%= polyglot.t('transactions.Buyer2') %>
+                  <a href="#userPage/<%- ob.buyer_order.order.id.guid %>">
+                    <% if(ob.buyer_order.order.id.blockchain_id){ %>
+                      <%- ob.buyer_order.order.id.blockchain_id %>
+                    <% } else { %>
+                      <%- ob.buyer_order.order.id.guid %>
+                    <% } %>
+                  </a>
+                </div>
+                <% } %>
                 <div class="noOverflow marginBottom4  fontSize13 txt-fade">
                   <%= polyglot.t('transactions.Vendor2') %>
                   <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
                     <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
-                      <%- ob.vendor_offer.listing.id.blockchain_id %>
+                    <%- ob.vendor_offer.listing.id.blockchain_id %>
                     <% } else { %>
-                      <%- ob.vendor_offer.listing.id.guid %>
+                    <%- ob.vendor_offer.listing.id.guid %>
                     <% } %>
                   </a>
                 </div>
