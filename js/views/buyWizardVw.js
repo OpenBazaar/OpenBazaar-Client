@@ -32,7 +32,7 @@ $.fn.randomize = function(selector){
 
 module.exports = baseModal.extend({
 
-  className: "buyView custCol-text",
+  className: "buyView custCol-text insideApp",
 
   events: {
     'click .js-buyWizardModal': 'blockClicks',

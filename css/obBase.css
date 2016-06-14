@@ -1287,9 +1287,7 @@ label.fieldItem {
 }
 
 /*
-  A fullscreen modal has it's content extended across the entire screen
-  (excluding the top menu bar), as opposed to being a "box" centered in
-  the screen (e.g the loading modal).
+  .insideApp will position the modal below the nav bar and so it doesn't obscure chat.
 */
 .modal.insideApp {
   top: 46px;
