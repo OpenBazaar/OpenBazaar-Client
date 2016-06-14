@@ -62,9 +62,7 @@ module.exports = baseVw.extend({
     this.shippingRegions = this.model.get('vendor_offer').listing.shipping.shipping_regions;
     this.shippingOrigin = this.model.get('vendor_offer').listing.shipping.shipping_origin;
     this.worldwide = this.shippingRegions.length === 1 && this.shippingRegions[0] === 'ALL';
-
-    console.log(this.model.attributes)
-
+    
     this.render();
   },
 

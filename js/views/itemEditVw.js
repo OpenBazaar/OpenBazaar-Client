@@ -413,7 +413,7 @@ module.exports = baseVw.extend({
 
         if (errored === imageCount) {
           self.$el.find('.js-itemEditImageLoading').addClass('fadeOut');
-          messageModal.show(window.polyglot.t('errorMessages.unableToLoadImages'));
+          messageModal.show(window.polyglot.t('errorMessages.unableToLoadImages', {smart_count: imageCount}));
         } else if (loaded === imageCount) {
           self.uploadImage(imageList);
         }        
