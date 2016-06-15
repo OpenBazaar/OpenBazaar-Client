@@ -69,7 +69,6 @@ Dialog = baseModal.extend({
   initialize: function(options) {
     this.options = __.extend({
       removeOnClose: true,
-      removeOnRoute: true,
       title: '',
       message: '',
       titleClass: '',
@@ -78,7 +77,6 @@ Dialog = baseModal.extend({
     }, options || {});
 
     this.options.removeOnClose && this.on('close', () => this.remove());
-    this.options.removeOnClose && this.listenTo(Backbone.history, 'route', this.onRoute);
     this.render().open();
   },
 
