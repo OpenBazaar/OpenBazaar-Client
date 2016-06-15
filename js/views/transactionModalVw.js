@@ -141,7 +141,6 @@ module.exports = baseModal.extend({
             })
           );
         }
-        $('.js-loadingModal').addClass("hide");
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
@@ -164,8 +163,6 @@ module.exports = baseModal.extend({
         orderPrice = 0,
         orderPaid = 0,
         orderDue = 0;
-
-    $('.js-loadingModal').addClass("hide");
 
     //make sure data is valid
     if (this.model.get('invalidData')){

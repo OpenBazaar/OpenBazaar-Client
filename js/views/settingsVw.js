@@ -14,7 +14,6 @@ var __ = require('underscore'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
-    LoadingModal = require('./loadingModal'),
     Dialog = require('../views/dialog.js'),
     cropit = require('../utils/jquery.cropit'),
     chosen = require('../utils/chosen.jquery.min.js'),
@@ -95,7 +94,7 @@ module.exports = pageVw.extend({
     this.firstLoadModerators = true;
 
     this.loading = true;
-    this.loadingModal = new LoadingModal().render().open();
+    app.loadingModal.open();
     
     this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
       switch (self.state) {
@@ -142,7 +141,7 @@ module.exports = pageVw.extend({
     if (e.view !== this) return;
     state = state || this.state;
 
-    this.loading && this.loadingModal.open();
+    this.loading && app.loadingModal.open();
 
     this.blockedUsersScrollHandler &&
       this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
@@ -160,7 +159,7 @@ module.exports = pageVw.extend({
   onCacheDetached: function(e) {
     if (e.view !== this) return;
 
-    this.loadingModal.close();
+    app.loadingModal.close();
 
     this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
@@ -200,7 +199,7 @@ module.exports = pageVw.extend({
       },
       complete: function() {
         if (!self.isRemoved()) {
-          self.loadingModal.close();
+          app.loadingModal.close();
           self.loading = false;
         }
       }
@@ -1183,16 +1182,12 @@ module.exports = pageVw.extend({
   },
 
   remove: function() {
-    this.loadingModal.remove();
-
     this.blockedUsersVw && this.blockedUsersVw.remove();
     this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
 
     this.serverConnectSyncHandler &&
       app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);
-
-    console.log('they be removing me');
 
     pageVw.prototype.remove.apply(this, arguments);
   }

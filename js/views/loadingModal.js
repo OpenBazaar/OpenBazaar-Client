@@ -1,7 +1,6 @@
 'use strict';
 
 var loadTemplate = require('../utils/loadTemplate'),
-    app = require('../App.js').getApp(),
     baseModal = require('./baseModal');
 
 module.exports = baseModal.extend({
@@ -28,18 +27,20 @@ module.exports = baseModal.extend({
   },  
 
   onClickIndexReload: function() {
-    if (app.router) {
-      app.router.refresh();
-    } else {
-      window.location.reload();
-    }
+    window.location.reload();
   },
 
-  open: function() {
+  open: function(options) {
+    options = __.extend({
+      insideApp: false
+    }, options || {});
+
     window.clearTimeout(this.longLoadTimeout);
     this.longLoadTimeout = window.setTimeout(() => {
       this.$loadingModalContent.addClass('fadeIn');
     }, 5000);
+
+    this.$el[options.insideApp ? 'addClass' : 'removeClass']('insideApp');
 
     return baseModal.prototype.open.apply(this, arguments);
   },  

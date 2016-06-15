@@ -179,7 +179,8 @@ module.exports = Backbone.Router.extend({
     if (callback) callback.apply(this, args);
   },
 
-  cleanup: function(){
+  cleanup: function() {
+    app.loadingModal.close();
     $('#obContainer').removeClass('customizeUserPage box-borderDashed noScrollBar overflowHidden');
     window.obEventBus.trigger('cleanNav');
   },

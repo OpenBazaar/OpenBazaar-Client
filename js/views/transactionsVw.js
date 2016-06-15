@@ -4,6 +4,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
+    app = require('../App.js').getApp(),
     Dialog = require('../views/dialog.js'),    
     setTheme = require('../utils/setTheme.js'),
     Papa = require('papaparse'),
@@ -80,9 +81,11 @@ module.exports = pageVw.extend({
 
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
 
-    $('.js-loadingModal').removeClass("hide");
+    app.loadingModal.open();
+
     getBTPrice(this.cCode, function(btAve){
-      $('.js-loadingModal').addClass("hide");
+      app.loadingModal.close();
+
       self.btAve = btAve;
       self.purchasesCol = new transactionsCl(null, {btAve: btAve, cCode: self.cCode});
       self.purchasesCol.url = self.serverUrl + "get_purchases";
@@ -478,7 +481,7 @@ module.exports = pageVw.extend({
   },
 
   openOrderModal: function(options){
-    $('.js-loadingModal').removeClass("hide");
+    app.loadingModal.open({ insideApp: true });
     
     if (options.status == "open"){
       options.status = 4;
@@ -500,6 +503,7 @@ module.exports = pageVw.extend({
       socketView: this.socketView,
       unread: options.unread
     }).on('loaded', () => {
+      app.loadingModal.close();
       this.orderModalView.render().open();
     }).on('close', () => {
       this.orderID = '';
