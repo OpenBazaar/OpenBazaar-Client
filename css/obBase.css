@@ -654,27 +654,60 @@ h6, .h6 {
 }
 
 .flexRow .flexCol-11,
-.flexRow .flexCol-11 { flex-basis: 91.66666666666666%; }
+.flexRow .flexCol-11 {
+  flex-basis: 91.66666666666666%;
+  max-width: 91.66666666666666%;
+}
 
-.flexRow .flexCol-10 { flex-basis: 83.33333333333334%; }
+.flexRow .flexCol-10 {
+  flex-basis: 83.33333333333334%;
+  max-width: 83.33333333333334%;
+}
 
-.flexRow .flexCol-9 { flex-basis: 75%; }
+.flexRow .flexCol-9 {
+  flex-basis: 75%;
+  max-width: 75%;
+}
 
-.flexRow .flexCol-8 { flex-basis: 66.66666666666666%; }
+.flexRow .flexCol-8 {
+  flex-basis: 66.66666666666666%;
+  max-width: 66.66666666666666%;
+}
 
-.flexRow .flexCol-7 { flex-basis: 58.333333333333336%; }
+.flexRow .flexCol-7 {
+  flex-basis: 58.333333333333336%;
+  max-width: 58.333333333333336%;
+}
 
-.flexRow .flexCol-6 { flex-basis: 50%; }
+.flexRow .flexCol-6 {
+  flex-basis: 50%;
+  max-width: 50%;
+}
 
-.flexRow .flexCol-5 { flex-basis: 41.66666666666667%; }
+.flexRow .flexCol-5 {
+  flex-basis: 41.66666666666667%;
+  max-width: 41.66666666666667%;
+}
 
-.flexRow .flexCol-4 { flex-basis: 33.33333333333333%; }
+.flexRow .flexCol-4 {
+  flex-basis: 33.33333333333333%;
+  max-width: 33.33333333333333%;
+}
 
-.flexRow .flexCol-3 { flex-basis: 25%; }
+.flexRow .flexCol-3 {
+  flex-basis: 25%;
+  max-width: 25%;
+}
 
-.flexRow .flexCol-2 { flex-basis: 16.666666666666664%;; }
+.flexRow .flexCol-2 {
+  flex-basis: 16.666666666666664%;
+  max-width: 16.666666666666664%;
+}
 
-.flexRow .flexCol-1 { flex-basis: 8.333333333333332%; }
+.flexRow .flexCol-1 {
+  flex-basis: 8.333333333333332%;
+  max-width: 8.333333333333332%;
+}
 
 .flexExpand {
   /* use to make only one item in a flex row expand */
@@ -2541,7 +2574,7 @@ div.chatSearchOut .chatSearchIcon {
   display: inline-block;
   font-weight: 500;
   letter-spacing: 0.2px;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 #inputConversationMessage {
@@ -3157,7 +3190,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   border: 2px solid transparent;
   color: #fff;
   overflow: auto; /* use customThemeScrollbar to add a scrolbar */
-  word-break: break-all; /* prevent urls from making the text area grow */
+  word-break: break-word; /* prevent urls from making the text area grow */
 }
 
 .fieldItem-textarea:focus {
@@ -4242,6 +4275,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .tooltip.tooltip-box.tooltip-boxUp:hover:after {
   bottom: 120%;
+  top: auto;
 }
 
 .btn-notifications.tooltip:hover:after{

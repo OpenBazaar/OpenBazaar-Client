@@ -209,7 +209,10 @@ module.exports = pageVw.extend({
 
       $(".chosen").chosen({
         width: '100%',
-        search_contains: true
+        search_contains: true,
+        no_results_text: window.polyglot.t('chosenJS.noResultsText'),
+        placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
+        placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
       $('#settings-image-cropper').cropit({
         $preview: self.$('.js-settingsAvatarPreview'),
@@ -453,23 +456,33 @@ module.exports = pageVw.extend({
     currencyList = __.uniq(currencyList, function(item){
       return item.code;
     });
-    currencyList = currencyList.sort(function(a, b){
-      var cA = a.currency.toLowerCase(),
-          cB = b.currency.toLowerCase();
-      if (cA < cB){
-        return -1;
-      }
-      if (cA > cB){
-        return 1;
-      }
-      return 0;
+
+    //translate the currency list
+    __.each(currencyList, function(currencyCode){
+      currencyCode.trCur = window.polyglot.t('currencies.'+currencyCode.code);
     });
+
+    //alphabatize the currency list using the translated values
+    currencyList.sort(function(a, b) {
+      return a.trCur.localeCompare(b.trCur);
+    });
+
     //add BTC
-    currencyList.unshift({code: "BTC", currency: "Bitcoin", currencyUnits: "4"});
+    currencyList.unshift({code: "BTC", currency: "Bitcoin", currencyUnits: "4", trCur: window.polyglot.t('currencies.BTC')});
+
+    //translate the country list
+    __.each(countryList, function(country){
+      country.name = window.polyglot.t('countries.'+country.dataName);
+    });
+
+    //alphabatize the country list using the translated values
+    countryList.sort(function(a, b) {
+      return a.name.localeCompare(b.name);
+    });
 
     __.each(countryList, function(c){
-      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+window.polyglot.t(`countries.${c.dataName}`)+'</option>');
-      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+window.polyglot.t(`countries.${c.dataName}`)+'</option>');
+      var country_option = $('<option value="'+c.dataName+'">'+c.name+'</option>');
+      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
       country_option.attr("selected", user.country == c.dataName);
       //if user has a country in their profile, preselect it in the new address section
       ship_country_option.attr("selected", user.country== c.dataName);
@@ -480,7 +493,7 @@ module.exports = pageVw.extend({
     __.each(currencyList, function(c){
       //only show currently available currencies
       if (self.availableCurrenciesList.indexOf(c.code) > -1 || c.code === "BTC"){
-        var currency_option = $('<option value="'+c.code+'">'+ window.polyglot.t(`currencies.${c.code}`) +'</option>');
+        var currency_option = $('<option value="'+c.code+'">'+ c.trCur +'</option>');
         currency_option.attr("selected", user.currency_code == c.code);
         currency_str += currency_option[0].outerHTML;
       }

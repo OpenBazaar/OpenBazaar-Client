@@ -56,7 +56,7 @@ module.exports = baseVw.extend({
     'focus .js-transactionDiscussionSendText': 'highlightInput',
     'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput',
+    //'blur textarea': 'validateInput',
     'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
     'keydown #transactionDiscussionSendText': 'onKeydownDiscussion',
     'keyup #transactionDiscussionSendText': 'onKeyupDiscussion'
@@ -183,16 +183,19 @@ module.exports = baseVw.extend({
       $('#obContainer').addClass('modalOpen').scrollTop(0);
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
-      self.setState(self.tabState);
       if (self.status == 0){
         self.showPayment();
       }
       self.getDiscussion();
       self.discussionScroller = self.$('.js-discussionScroller');
       self.moderatorPercentage = self.model.get('displayModerator').feeDecimal;
+      self.discussionInput = self.$('#transactionDiscussionSendText');
+      self.discussionForm = self.$('#transactionDiscussionForm');
       //set the QR details checkbox
       var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false";
       self.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
+
+      self.setState(self.tabState); //this should always be last
     });
   },
 
@@ -295,6 +298,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-tab').removeClass('active');
     this.$el.find('.js-' + state).removeClass('hide');
     this.$el.find('.js-' + state + 'Tab').addClass('active').removeClass('hide');
+    this.discussionForm.removeClass('formChecked');
     
     if (state == "discussion"){
       $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_discussion_as_read', {id: this.orderID});
@@ -549,7 +553,7 @@ module.exports = baseVw.extend({
 
     //is this a dispute?
     if (this.$('#transactionStartDisputeCheckbox').prop("checked")) {
-      this.confirmDispute(this.$('#transactionDiscussionForm'));
+      this.confirmDispute();
     } else if (this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
       this.closeDispute();
     } else if (this.status == 4 || this.transactionType == "cases"){
@@ -566,6 +570,13 @@ module.exports = baseVw.extend({
         self = this,
         socketMessageId = Math.random().toString(36).slice(2),
         avatar_hash = this.avatar_hash;
+
+    this.discussionForm.removeClass('formChecked');
+
+    if (!this.discussionInput.val()){
+      this.discussionForm.addClass('formChecked');
+      return;
+    }
 
     __.each(messages, function(msg){
       if (messageText) {
@@ -640,18 +651,24 @@ module.exports = baseVw.extend({
     this.setState("discussion");
   },
 
-  confirmDispute: function(targForm){
+  confirmDispute: function(){
     var self = this,
         discussionData = {};
 
     discussionData.order_id = this.orderID;
 
-    saveToAPI(targForm, '', this.serverUrl + "dispute_contract", function(){
-      self.status = 4;
-      self.tabState = "discussion";
-      self.$('.js-startDisputeFlag').addClass('hide');
-      self.getData();
-    }, '', discussionData);
+    this.discussionForm.removeClass('formChecked');
+
+    if (this.discussionInput.val()) {
+      saveToAPI(this.discussionForm, '', this.serverUrl + "dispute_contract", function () {
+        self.status   = 4;
+        self.tabState = "discussion";
+        self.$('.js-startDisputeFlag').addClass('hide');
+        self.getData();
+      }, '', discussionData);
+    } else {
+      this.discussionForm.addClass('formChecked');
+    }
   },
 
   confirmDisputeResend: function(){
@@ -661,12 +678,11 @@ module.exports = baseVw.extend({
   closeDispute: function(){
     var self = this,
         targetForm = this.$('#transactionCloseDispute'),
-        discussionData = {},
-        closeMsgField = this.$('#transactionDiscussionSendText');
+        discussionData = {};
 
-    closeMsgField.removeClass('invalid');
+    this.discussionForm.removeClass('formChecked');
     discussionData.order_id = this.orderID;
-    discussionData.resolution = closeMsgField.val();
+    discussionData.resolution = this.discussionInput.val();
     discussionData.moderator_percentage = this.moderatorPercentage;
     if (this.model.get('vendor_order_confirmation')){
       discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
@@ -684,7 +700,7 @@ module.exports = baseVw.extend({
         self.getData();
       }, '', discussionData);
     } else {
-      this.$('#transactionDiscussionSendText').addClass("invalid");
+      this.discussionForm.addClass("formChecked");
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
     }
   },

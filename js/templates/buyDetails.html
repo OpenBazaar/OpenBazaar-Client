@@ -21,7 +21,7 @@
                   <% } %>
               </div>
             </div>
-            <div class="pad10left txt-unleaded">
+            <div class="pad10left">
               <div class="marginTop12 marginBottom4 fontSize13 noOverflow"><strong><%= ob.vendor_offer.listing.item.title %></strong></div>
               <div class="noOverflow fontSize13 txt-fade"><%= polyglot.t('transactions.Vendor2') %> <% if(ob.page.profile.handle){ %><%= ob.page.profile.handle %><% } else { %><%= ob.page.profile.guid %><% } %></div>
             </div>
@@ -113,7 +113,7 @@
                   <% } %>
               </div>
             </div>
-            <div class="pad10left txt-unleaded">
+            <div class="pad10left">
               <div class="marginTop6 marginBottom4 fontSize13 noOverflow marginBottom4">
                 <%= polyglot.t('Moderator2') %>
                 <% if(ob.selectedModerator.blockchain_id){ %>
@@ -134,7 +134,7 @@
                     <% } %>
                 </div>
               </div>
-              <div class="pad10left txt-unleaded">
+              <div class="pad10left">
                 <div class="marginTop6 marginBottom4 fontSize13 noOverflow"><%= polyglot.t('buyFlow.DirectPayment') %> <%= ob.handle %></div>
                 <div class="textOpacity75 lineHeight15">
                   (<%= polyglot.t('buyFlow.directPaymentDisclaimer') %>)

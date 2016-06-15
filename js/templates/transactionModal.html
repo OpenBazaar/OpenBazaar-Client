@@ -44,7 +44,7 @@
           <div class="pull-left pad20Left txt-bright" style="width:255px;">
             <div class="txt-center row10 textSize16px">
               <%= polyglot.t('buyFlow.SendBTCtoAddress', {
-                  amount: ob.intlNumFormat(ob.orderDue, 20),
+                  amount: ob.intlNumFormat(ob.orderDue, 8),
                   recipient: '<a class="textSize11px" href="bitcoin:' + ob.buyer_order.order.payment.address + '?amount=' + ob.buyer_order.order.payment.amount + '&message=' + ob.vendor_offer.listing.item.title + '">' + ob.buyer_order.order.payment.address + '</a>'
                 })
               %>
@@ -638,13 +638,26 @@
                     <strong><%- ob.vendor_offer.listing.item.title %></strong>
                   </a>
                 </div>
+                <% if(ob.transactionType == "cases"){ %>
+                <!-- only show this to the moderator -->
+                <div class="noOverflow marginBottom4  fontSize13 txt-fade">
+                  <%= polyglot.t('transactions.Buyer2') %>
+                  <a href="#userPage/<%- ob.buyer_order.order.id.guid %>">
+                    <% if(ob.buyer_order.order.id.blockchain_id){ %>
+                      <%- ob.buyer_order.order.id.blockchain_id %>
+                    <% } else { %>
+                      <%- ob.buyer_order.order.id.guid %>
+                    <% } %>
+                  </a>
+                </div>
+                <% } %>
                 <div class="noOverflow marginBottom4  fontSize13 txt-fade">
                   <%= polyglot.t('transactions.Vendor2') %>
                   <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
                     <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
-                      <%- ob.vendor_offer.listing.id.blockchain_id %>
+                    <%- ob.vendor_offer.listing.id.blockchain_id %>
                     <% } else { %>
-                      <%- ob.vendor_offer.listing.id.guid %>
+                    <%- ob.vendor_offer.listing.id.guid %>
                     <% } %>
                   </a>
                 </div>

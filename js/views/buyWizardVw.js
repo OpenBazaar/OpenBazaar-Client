@@ -262,7 +262,12 @@ module.exports = baseVw.extend({
     this.$buyWizardMap.find('iframe').addClass('blurMore');
 
     //set chosen inputs
-    $('.chosen').chosen({ search_contains: true });
+    $('.chosen').chosen({ 
+      search_contains: true,
+      no_results_text: window.polyglot.t('chosenJS.noResultsText'),
+      placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
+      placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
+    });
   },
 
   onAddressCancel: function() {

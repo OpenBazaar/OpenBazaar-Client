@@ -26,7 +26,7 @@
             <div class="fontWeight500 textOpacity1 textSize14px marginTop25 minWidth120 js-buyWizardAddressSelected ">
               <% if(address.country == ob.vendor_offer.listing.shipping.shipping_origin){ %>
                 <% if(ob.vendor_offer.listing.shipping.free){ %>
-                  <%= polyglot.t('Free') %>
+                  <%= polyglot.t('FreeShipping') %>
                 <% } else { %>
                   <%= ob.displayDomesticShipping %>
                   <% if(ob.userCurrencyCode != 'BTC'){ %>
@@ -35,7 +35,7 @@
                 <% } %>
               <% } else { %>
                 <% if(ob.vendor_offer.listing.shipping.free){ %>
-                  <%= polyglot.t('Free') %>
+                  <%= polyglot.t('FreeShipping') %>
                 <% } else { %>
                   <%= ob.displayInternationalShipping %>
                   <% if(ob.userCurrencyCode != 'BTC'){ %>

@@ -113,7 +113,10 @@ module.exports = baseVw.extend({
         //set chosen inputs
         self.$('.chosen').chosen({
           width: '100%',
-          search_contains: true
+          search_contains: true,
+          no_results_text: window.polyglot.t('chosenJS.noResultsText'),
+          placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
+          placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
         }).change(function(e){
           self.shipsToChange(e);
         });
@@ -121,7 +124,10 @@ module.exports = baseVw.extend({
         self.$('.chosenRegions').chosen({
           width: '100%',
           disable_search: true,
-          search_contains: true
+          search_contains: true,
+          no_results_text: window.polyglot.t('chosenJS.noResultsText'),
+          placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
+          placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
         });
       }, 0);
 
@@ -407,7 +413,7 @@ module.exports = baseVw.extend({
 
         if (errored === imageCount) {
           self.$el.find('.js-itemEditImageLoading').addClass('fadeOut');
-          messageModal.show(window.polyglot.t('errorMessages.unableToLoadImages'));
+          messageModal.show(window.polyglot.t('errorMessages.unableToLoadImages', {smart_count: imageCount}));
         } else if (loaded === imageCount) {
           self.uploadImage(imageList);
         }        
