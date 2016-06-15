@@ -44,7 +44,7 @@
           <div class="pull-left pad20Left txt-bright" style="width:255px;">
             <div class="txt-center row10 textSize16px">
               <%= polyglot.t('buyFlow.SendBTCtoAddress', {
-                  amount: ob.intlNumFormat(ob.orderDue, 20),
+                  amount: ob.intlNumFormat(ob.orderDue, 8),
                   recipient: '<a class="textSize11px" href="bitcoin:' + ob.buyer_order.order.payment.address + '?amount=' + ob.buyer_order.order.payment.amount + '&message=' + ob.vendor_offer.listing.item.title + '">' + ob.buyer_order.order.payment.address + '</a>'
                 })
               %>

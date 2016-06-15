@@ -125,6 +125,7 @@ App.prototype.setUnreadChatMessageCount = function(count) {
 };
 
 App.prototype.intlNumFormat = function(numberToFormat, maxDigits){
+  maxDigits = maxDigits || 8; //default to show down to the satoshi (.00000001)
   return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
 };
 
