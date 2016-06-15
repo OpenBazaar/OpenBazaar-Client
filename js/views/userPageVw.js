@@ -24,6 +24,7 @@ var __ = require('underscore'),
     storeWizardVw = require('./storeWizardVw'),
     saveToAPI = require('../utils/saveToAPI'),
     ModeratorSettingsModal = require('./moderatorSettingsModal'),
+    HiddenWarningModal = require('./hiddenWarningModal'),
     UserPageVw;
 
 var defaultItem = {
@@ -160,9 +161,7 @@ UserPageVw = pageVw.extend({
     'click .js-customizeTextColor .js-customColorChoice': 'customizeSelectColor',
     'click .js-block': 'blockUserClick',
     'click .js-unblock': 'unblockUserClick',
-    'click .js-showBlockedUser': 'showBlockedUser',
     'change .js-categories': 'categoryChanged',
-    'click .js-showNSFWContent': 'clickShowNSFWContent',
     'click .backToTop': 'clickBackToTop'
   },
 
@@ -397,11 +396,17 @@ UserPageVw = pageVw.extend({
 
         //check if user is blocked
         if (!self.options.ownPage && isBlocked) {
-          self.hideThisUser("blocked");
+          self.needsBlockedWarning = true;
         }
 
         if (!self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
-          self.hideThisUser("nsfw");
+          self.needsNSFWWarning = true;
+        }
+
+        if (self.needsBlockedWarning) {
+          self.hideThisUser('blocked');
+        } else if (self.needsNSFWWarning) {
+          self.hideThisUser('nsfw');
         }
 
         self.$el.find('#image-cropper').cropit({
@@ -1814,7 +1819,7 @@ UserPageVw = pageVw.extend({
   renderUserBlocked: function() {
     this.$('.js-unblock').removeClass('hide');
     this.$('.js-block').addClass('hide');
-    this.hideThisUser();
+    this.hideThisUser('blocked');
   },
 
   unblockUserClick: function() {
@@ -1828,33 +1833,66 @@ UserPageVw = pageVw.extend({
   },
 
   hideThisUser: function(reason){
-    this.$('.js-blockedWarning').fadeIn(100);
-    $('#obContainer').addClass('innerModalOpen').scrollTop(0);
-    this.$('.js-mainContainer').addClass('blurMore');
-    if (reason == "blocked"){
-      this.$('.js-reasonBlocked').removeClass('hide');
-      this.$('.js-reasonNSFW').addClass('hide');
-    } else if (reason == 'nsfw'){
-      this.$('.js-reasonBlocked').addClass('hide');
-      this.$('.js-reasonNSFW').removeClass('hide');
+    this.hiddenWarningModal && this.hiddenWarningModal.remove();
+
+    if (reason == 'blocked') {
+      this.hiddenWarningModal = new HiddenWarningModal();
+      this.hiddenWarningModal.render()
+        .open()
+        .on('showPage', () => {
+          this.hiddenWarningModal.remove();
+          this.needsBlockedWarning = false;
+          this.needsNSFWWarning && this.hideThisUser('nsfw');
+        });
+    } else if (reason == 'nsfw') {
+      this.hiddenWarningModal = new HiddenWarningModal({
+        reason: 'nsfw'
+      });
+
+      this.hiddenWarningModal.render()
+        .open()
+        .on('showPage', () => {
+          this.hiddenWarningModal.remove();
+          this.needsNSFWWarning = false;
+          this.showNSFWContent = true;
+          this.showNSFW = true;
+          
+          if (this.state == "listing") {
+            this.renderItem(this.currentItemHash);
+          }
+
+          this.renderItems(this.cachedListings, true);
+          this.needsBlockedWarning && this.hideThisUser('blocked');
+        });
     }
+
+    // this.$('.js-blockedWarning').fadeIn(100);
+    // $('#obContainer').addClass('innerModalOpen').scrollTop(0);
+    // this.$('.js-mainContainer').addClass('blurMore');
+    // if (reason == "blocked"){
+    //   this.$('.js-reasonBlocked').removeClass('hide');
+    //   this.$('.js-reasonNSFW').addClass('hide');
+    // } else if (reason == 'nsfw'){
+    //   this.$('.js-reasonBlocked').addClass('hide');
+    //   this.$('.js-reasonNSFW').removeClass('hide');
+    // }
   },
 
-  clickShowNSFWContent: function(){
-    this.showNSFWContent = true;
-    this.showNSFW = true;
-    this.showBlockedUser();
-    if (this.state == "listing"){
-      this.renderItem(this.currentItemHash);
-    }
-    this.renderItems(this.cachedListings, true);
-  },
+  // clickShowNSFWContent: function(){
+  //   this.showNSFWContent = true;
+  //   this.showNSFW = true;
+  //   this.showBlockedUser();
+  //   if (this.state == "listing"){
+  //     this.renderItem(this.currentItemHash);
+  //   }
+  //   this.renderItems(this.cachedListings, true);
+  // },
 
-  showBlockedUser: function(){
-    this.$('.js-blockedWarning').fadeOut(300);
-    $('#obContainer').removeClass('innerModalOpen');
-    this.$('.js-mainContainer').removeClass('blurMore');
-  },
+  // showBlockedUser: function(){
+  //   this.$('.js-blockedWarning').fadeOut(300);
+  //   $('#obContainer').removeClass('innerModalOpen');
+  //   this.$('.js-mainContainer').removeClass('blurMore');
+  // },
 
   remove: function(){
     // close colorbox to make sure the overlay doesnt remain open when going to a different page

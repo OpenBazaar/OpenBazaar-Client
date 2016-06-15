@@ -16,14 +16,18 @@ module.exports = baseVw.extend({
       dismissOnEscPress: true,
       showCloseButton: true,
       closeButtonClass: 'btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop',
+      // This will be concatenated to the className of your view which extends
+      // baseModal. You really shouldn't have to use this options, unless you
+      // don't want 'modal-opaque' (i.e. remove 'modal' at your own risk!)
+      baseModalClass: 'modal modal-opaque',
       innerWrapperClass: 'modal-child modal-childMain custCol-primary'
     };
 
-    options = options || {};
-    options.className = 'modal modal-opaque ' + __.result(this, 'className', '') +
+    options = __.extend({}, defaults, options || {});
+    options.className = options.baseModalClass + ' ' + __.result(this, 'className', '') +
         (' ' + (options.className || ''));
     args[0] = options;
-    this.__options = __.extend({}, defaults, options);
+    this.__options = options;
     this._open = false;
 
     __.bindAll(this, '__onDocKeypress');
