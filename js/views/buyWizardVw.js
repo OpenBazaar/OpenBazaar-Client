@@ -573,7 +573,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-buyWizardSpinner').addClass('hide');
     this.orderID = data.order_id;
     totalBTCPrice = data.amount - this.partialPaymentAmount;
-    this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(totalBTCPrice));
+    this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(totalBTCPrice, 8));
     this.payURL = data.payment_address;
     
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;
