@@ -530,7 +530,8 @@ h6, .h6 {
   float: left;
 }
 
-/*#overlay,
+/* while not used for modals, overlay is used when certain nav menus are shown */
+#overlay,
 .overlay {
   position: absolute;
   top: 0;
@@ -540,7 +541,7 @@ h6, .h6 {
   background-color: rgba(25,25,25,0.85);
   z-index: 0;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
-}*/
+}
 
 .overlayObscurring {
   background-color: rgba(25,25,25,0.95);
@@ -4408,23 +4409,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
 }
 
-#modalHolder,
-.modalHolder {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-#pageNav .modalHolder {
-  /* patch for the about modal. It should be moved to the baseModal view */
-  position: fixed;
-  z-index: 1;
-  top: 74px;
-}
-
 .page-connect-modal .spinner-with-logo {
   margin-top: -45px;
 }
@@ -6272,12 +6256,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .js-modal-close [class *= "ion-"]:before,
 #ov1 #userPage .js-modal-close [class *= "ion-"]:before,
 #ov1 #obContainer .js-modal-close [class *= "ion-"]:before,
-#ov1 #modalHolder .js-modal-close [class *= "ion-"]:before,
 #ov1.minEffects .js-modal-close [class *= "ion-"]:before,
 #ov1.minEffects #userPage .js-modal-close [class *= "ion-"]:before,
-#ov1.minEffects #obContainer .js-modal-close [class *= "ion-"]:before,
-#ov1.minEffects #modalHolder .js-modal-close [class *= "ion-"]:before,
-#ov1 #modalHolder .js-closeBuyWizardModal [class *= "ion-"]:before {
+#ov1.minEffects #obContainer .js-modal-close [class *= "ion-"]:before {
   text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
 }
 
