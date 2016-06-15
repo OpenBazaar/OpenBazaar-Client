@@ -530,7 +530,7 @@ h6, .h6 {
   float: left;
 }
 
-/* while not used for modals, overlay is used when certain nav menus are shown */
+/* while not used for modals, overlay is used when page nav drop downs are opened */
 #overlay,
 .overlay {
   position: absolute;
@@ -539,7 +539,7 @@ h6, .h6 {
   height: 100%;
   width: 100%;
   background-color: rgba(25,25,25,0.85);
-  z-index: 0;
+  z-index: 1;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
 
@@ -1283,6 +1283,10 @@ label.fieldItem {
   pointer-events: all;
 }
 
+.modal .btn-corner {
+  z-index: 0;
+}
+
 .modal.underPageNav {
   top: 46px
 }
@@ -1293,6 +1297,7 @@ label.fieldItem {
 .modal.insideApp {
   top: 46px;
   width: calc(100% - 47px);
+  z-index: 0;
 }
 
 #ov1.chatOpen .modal.insideApp {
