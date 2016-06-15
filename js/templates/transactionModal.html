@@ -1,915 +1,639 @@
-<!-- modal container created by view-->
-<div class="modal-child modal-childMain custCol-primary custCol-text">
-  <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeModal">
-    <h2 class="ion-android-close clickable"></h2>
-  </div>
-  <% if(ob.invalidData){ %>
-  <div class="fullCentered"><h2><%= polyglot.t('errorMessages.serverError') %></h2></div>
+<% if(ob.invalidData){ %>
+<div class="fullCentered"><h2><%= polyglot.t('errorMessages.serverError') %></h2></div>
+<% } else { %>
+<div class="modal-hero js-transactionHero shadow-inner1-light"
+  <% if(ob.vendor_offer.listing.item.image_hashes){ %>
+  style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%=ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
   <% } else { %>
-  <div class="modal-hero js-transactionHero shadow-inner1-light"
-    <% if(ob.vendor_offer.listing.item.image_hashes){ %>
-    style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%=ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
-    <% } else { %>
-    style="background-image: url(imgs/defaultBanner.png);"
-    <% } %>>
-    <div class="modal-hero js-transactionSpinner hide background1">
-      <div class="width100 txt-center">
-        <div class="txt-col1 ion-android-sync spinner spinner-slow icon-huge icon-circle-background1 rowTop30 row20"></div>
-        <h3 class="txt-bright"><%= polyglot.t('CheckExchanges') %> </h3>
+  style="background-image: url(imgs/defaultBanner.png);"
+  <% } %>>
+  <div class="modal-hero js-transactionSpinner hide background1">
+    <div class="width100 txt-center">
+      <div class="txt-col1 ion-android-sync spinner spinner-slow icon-huge icon-circle-background1 rowTop30 row20"></div>
+      <h3 class="txt-bright"><%= polyglot.t('CheckExchanges') %> </h3>
+    </div>
+  </div>
+  <div class="colorWhiteForce positionBottom width100 padding12 minEffectsDarkBackground">
+    <div class="fontSize16">Order #<%- ob.orderID %></div>
+    <div class="fontSize14 textOpacity75 marginTop2">
+      <%= polyglot.t('transactions.OrderStatus'+ob.status) %>
+      <% if(ob.displayModerator && ob.status > 0 && ob.status < 3){ %>
+        <%= polyglot.t('transactions.InEscrow') %>
+      <% } %>
+    </div>
+    <% if( ob.buyer_receipt) { %>
+    <div class="rowTop10">
+      <a class="btn btn-txt textOpacity1 custCol-secondary js-showFeedbackRating">
+        <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.feedback; i++) { %>
+        <span class="starRating textShadow"></span>
+        <% } %>
+        <span><%= polyglot.t('transactions.ViewRating') %></span>
+      </a>
+    </div>
+    <% } %>
+  </div>
+  <% if(ob.status == 0 && ob.transactionType == "purchases"){ %>
+    <div class="modal-hero js-transactionPay background1">
+      <div class="positionTop width100 padding20">
+        <img class="pull-left qrCode js-transactionPayQRCode" height="180" width="180" src="imgs/defaultItem.png"/>
+        <div class="pull-left pad20Left txt-bright" style="width:255px;">
+          <div class="txt-center row10 textSize16px">
+            <%= polyglot.t('buyFlow.SendBTCtoAddress', {
+                amount: ob.intlNumFormat(ob.orderDue, 20),
+                recipient: '<a class="textSize11px" href="bitcoin:' + ob.buyer_order.order.payment.address + '?amount=' + ob.buyer_order.order.payment.amount + '&message=' + ob.vendor_offer.listing.item.title + '">' + ob.buyer_order.order.payment.address + '</a>'
+              })
+            %>
+          </div>
+          <div class="txt-center row10">
+            <input type="checkbox" class="textSize11px fieldItem thin" id="BuyWizardQRDetailsInput">
+            <label for="BuyWizardQRDetailsInput" class="textSize11px"> <%= polyglot.t('AdditionalPaymentDataInfo') %></label>
+          </div>
+          <a class="btn btn-txt btn-wide row10 js-transactionPayCopy" data-url="<%= ob.buyer_order.order.payment.address %>">
+            <i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %>
+          </a>
+          <a class="btn btn-txt btn-wide row10 js-externalLink"
+             href="bitcoin:<%= ob.buyer_order.order.payment.address %>?amount=<%= ob.buyer_order.order.payment.amount %>&message=<%= ob.vendor_offer.listing.item.title %>">
+            <i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %>
+          </a>
+          <a class="btn btn-txt btn-wide js-transactionPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
+        </div>
       </div>
     </div>
-    <div class="colorWhiteForce positionBottom width100 padding12 minEffectsDarkBackground">
-      <div class="fontSize16">Order #<%- ob.orderID %></div>
-      <div class="fontSize14 textOpacity75 marginTop2">
-        <%= polyglot.t('transactions.OrderStatus'+ob.status) %>
-        <% if(ob.displayModerator && ob.status > 0 && ob.status < 3){ %>
-          <%= polyglot.t('transactions.InEscrow') %>
-        <% } %>
-      </div>
-      <% if( ob.buyer_receipt) { %>
-      <div class="rowTop10">
-        <a class="btn btn-txt textOpacity1 custCol-secondary js-showFeedbackRating">
-          <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.feedback; i++) { %>
-          <span class="starRating textShadow"></span>
+  <% } else if(ob.status > 0) { %>
+    <div class="positionTop padding10 width100 custCol-secondary borderRadiusTop">
+      <div class="clearfix">
+      <% if(ob.status == 1 && ob.transactionType == "sales"){ %>
+        <a class="btn btn-txt custCol-primary pull-left borderRight textOpacity1 js-showConfirmForm custCol-border" style="border-top-right-radius: 0; border-bottom-right-radius: 0">
+          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+          <% if(ob.vendor_offer.listing.metadata.category == "digital good" || ob.vendor_offer.listing.metadata.category == "service") { %>
+            <%= polyglot.t('transactions.ConfirmOrder') %>
+          <% } else { %>
+            <%= polyglot.t('transactions.MarkAsShipped') %>
           <% } %>
-          <span><%= polyglot.t('transactions.ViewRating') %></span>
         </a>
-      </div>
+        <a class="btn btn-txt custCol-primary pull-left textOpacity1 confirmable js-refundTransaction tooltip"
+           data-tooltip="<%= polyglot.t('transactions.RefundOrderTooltip') %>"
+           style="border-top-left-radius: 0; border-bottom-left-radius: 0">
+          <span class="preSpacer">
+            <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.RefundOrder') %>
+          </span>
+          <span class="preConfirm">
+            <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.RefundOrder') %>
+          </span>
+          <span class="postConfirm">
+            <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.ConfirmRefund') %>
+          </span>
+        </a>
+      <% } else if(ob.transactionType == "purchases" && ob.status == 2){ %>
+        <a class="btn btn-txt custCol-primary pull-left js-showCompleteForm textOpacity1">
+          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('transactions.CompleteOrder') %>
+        </a>
+      <% } else if(ob.transactionType == "sales" && ob.status == 2){ %>
+        <a class="btn btn-txt custCol-primary pull-left js-confirmOrderResend textOpacity1 tooltip tooltip-box"
+           data-tooltip="<%= polyglot.t('transactions.ConfirmOrderResendTooltip') %>">
+          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('transactions.ConfirmOrderResend') %>
+        </a>
+      <% } else if(ob.transactionType == "purchases" && !ob.resendComplete && ob.status == 3){ %>
+        <a class="btn btn-txt custCol-primary pull-left js-completeOrderResend textOpacity1 tooltip tooltip-box marginRight5"
+           data-tooltip="<%= polyglot.t('transactions.CompleteOrderResendTooltip') %>">
+          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('transactions.CompleteOrderResend') %>
+        </a>
+      <% } else if(ob.transactionType == "purchases" &&
+                  ob.status == 6 &&
+                  !ob.buyer_receipt &&
+                  ob.dispute_resolution &&
+                  ob.dispute_resolution.resolution &&
+                  ob.dispute_resolution.resolution.buyer_payout > ob.dispute_resolution.resolution.vendor_payout){ %>
+        <a class="btn btn-txt custCol-primary pull-left js-showCompleteForm textOpacity1">
+          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('transactions.LeaveReview') %>
+        </a>
+      <% } else if(ob.status == 5 && ob.dispute_resolution && ob.transactionType != "cases"){ %>
+        <a class="btn btn-txt custCol-primary pull-left row10 js-acceptResolution">
+          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('transactions.AcceptDisputeResolution') %>
+        </a>
+      <% } else if(ob.status == 7 && ob.transactionType == "sales"){ %>
+      <a class="btn btn-txt custCol-primary pull-left textOpacity1 js-refundTransactionResend tooltip tooltip-box"
+         data-tooltip="<%= polyglot.t('transactions.RefundOrderResendTooltip') %>">
+        <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+        <%= polyglot.t('transactions.RefundOrderResend') %>
+      </a>
+      <% } %>
+      <% if(ob.status != 0){ %>
+      <a class="btn btn-txt custCol-primary pull-right js-transactionShowContract textOpacity1">
+        <span class="fontSize12 ion-code"></span>
+        <%= polyglot.t('transactions.ContractDetails') %>
+      </a>
       <% } %>
     </div>
-    <% if(ob.status == 0 && ob.transactionType == "purchases"){ %>
-      <div class="modal-hero js-transactionPay background1">
-        <div class="positionTop width100 padding20">
-          <img class="pull-left qrCode js-transactionPayQRCode" height="180" width="180" src="imgs/defaultItem.png"/>
-          <div class="pull-left pad20Left txt-bright" style="width:255px;">
-            <div class="txt-center row10 textSize16px">
-              <%= polyglot.t('buyFlow.SendBTCtoAddress', {
-                  amount: ob.intlNumFormat(ob.orderDue, 20),
-                  recipient: '<a class="textSize11px" href="bitcoin:' + ob.buyer_order.order.payment.address + '?amount=' + ob.buyer_order.order.payment.amount + '&message=' + ob.vendor_offer.listing.item.title + '">' + ob.buyer_order.order.payment.address + '</a>'
-                })
-              %>
-            </div>
-            <div class="txt-center row10">
-              <input type="checkbox" class="textSize11px fieldItem thin" id="BuyWizardQRDetailsInput">
-              <label for="BuyWizardQRDetailsInput" class="textSize11px"> <%= polyglot.t('AdditionalPaymentDataInfo') %></label>
-            </div>
-            <a class="btn btn-txt btn-wide row10 js-transactionPayCopy" data-url="<%= ob.buyer_order.order.payment.address %>">
-              <i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %>
-            </a>
-            <a class="btn btn-txt btn-wide row10 js-externalLink"
-               href="bitcoin:<%= ob.buyer_order.order.payment.address %>?amount=<%= ob.buyer_order.order.payment.amount %>&message=<%= ob.vendor_offer.listing.item.title %>">
-              <i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %>
-            </a>
-            <a class="btn btn-txt btn-wide js-transactionPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
-          </div>
+    <% if(ob.dispute_resolution){ %>
+      <div class="flexRow txt-center rowTop10 borderTop custCol-border pad10Top">
+        <div class="flexExpand">
+          <%= polyglot.t('transactions.BuyerPayout') %> <%= ob.intlNumFormat(ob.dispute_resolution.resolution.buyer_payout, 8) || 0 %> BTC
         </div>
-      </div>
-    <% } else if(ob.status > 0) { %>
-      <div class="positionTop padding10 width100 custCol-secondary borderRadiusTop">
-        <div class="clearfix">
-        <% if(ob.status == 1 && ob.transactionType == "sales"){ %>
-          <a class="btn btn-txt custCol-primary pull-left borderRight textOpacity1 js-showConfirmForm custCol-border" style="border-top-right-radius: 0; border-bottom-right-radius: 0">
-            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <% if(ob.vendor_offer.listing.metadata.category == "digital good" || ob.vendor_offer.listing.metadata.category == "service") { %>
-              <%= polyglot.t('transactions.ConfirmOrder') %>
-            <% } else { %>
-              <%= polyglot.t('transactions.MarkAsShipped') %>
-            <% } %>
-          </a>
-          <a class="btn btn-txt custCol-primary pull-left textOpacity1 confirmable js-refundTransaction tooltip"
-             data-tooltip="<%= polyglot.t('transactions.RefundOrderTooltip') %>"
-             style="border-top-left-radius: 0; border-bottom-left-radius: 0">
-            <span class="preSpacer">
-              <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('transactions.RefundOrder') %>
-            </span>
-            <span class="preConfirm">
-              <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('transactions.RefundOrder') %>
-            </span>
-            <span class="postConfirm">
-              <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('transactions.ConfirmRefund') %>
-            </span>
-          </a>
-        <% } else if(ob.transactionType == "purchases" && ob.status == 2){ %>
-          <a class="btn btn-txt custCol-primary pull-left js-showCompleteForm textOpacity1">
-            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('transactions.CompleteOrder') %>
-          </a>
-        <% } else if(ob.transactionType == "sales" && ob.status == 2){ %>
-          <a class="btn btn-txt custCol-primary pull-left js-confirmOrderResend textOpacity1 tooltip tooltip-box"
-             data-tooltip="<%= polyglot.t('transactions.ConfirmOrderResendTooltip') %>">
-            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('transactions.ConfirmOrderResend') %>
-          </a>
-        <% } else if(ob.transactionType == "purchases" && !ob.resendComplete && ob.status == 3){ %>
-          <a class="btn btn-txt custCol-primary pull-left js-completeOrderResend textOpacity1 tooltip tooltip-box marginRight5"
-             data-tooltip="<%= polyglot.t('transactions.CompleteOrderResendTooltip') %>">
-            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('transactions.CompleteOrderResend') %>
-          </a>
-        <% } else if(ob.transactionType == "purchases" &&
-                    ob.status == 6 &&
-                    !ob.buyer_receipt &&
-                    ob.dispute_resolution &&
-                    ob.dispute_resolution.resolution &&
-                    ob.dispute_resolution.resolution.buyer_payout > ob.dispute_resolution.resolution.vendor_payout){ %>
-          <a class="btn btn-txt custCol-primary pull-left js-showCompleteForm textOpacity1">
-            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('transactions.LeaveReview') %>
-          </a>
-        <% } else if(ob.status == 5 && ob.dispute_resolution && ob.transactionType != "cases"){ %>
-          <a class="btn btn-txt custCol-primary pull-left row10 js-acceptResolution">
-            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('transactions.AcceptDisputeResolution') %>
-          </a>
-        <% } else if(ob.status == 7 && ob.transactionType == "sales"){ %>
-        <a class="btn btn-txt custCol-primary pull-left textOpacity1 js-refundTransactionResend tooltip tooltip-box"
-           data-tooltip="<%= polyglot.t('transactions.RefundOrderResendTooltip') %>">
-          <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('transactions.RefundOrderResend') %>
-        </a>
-        <% } %>
-        <% if(ob.status != 0){ %>
-        <a class="btn btn-txt custCol-primary pull-right js-transactionShowContract textOpacity1">
-          <span class="fontSize12 ion-code"></span>
-          <%= polyglot.t('transactions.ContractDetails') %>
-        </a>
-        <% } %>
-      </div>
-      <% if(ob.dispute_resolution){ %>
-        <div class="flexRow txt-center rowTop10 borderTop custCol-border pad10Top">
-          <div class="flexExpand">
-            <%= polyglot.t('transactions.BuyerPayout') %> <%= ob.intlNumFormat(ob.dispute_resolution.resolution.buyer_payout, 8) || 0 %> BTC
-          </div>
-          <div class="flexExpand">
-            <%= polyglot.t('transactions.SellerPayout') %> <%= ob.intlNumFormat(ob.dispute_resolution.resolution.vendor_payout, 8) || 0 %> BTC
-          </div>
+        <div class="flexExpand">
+          <%= polyglot.t('transactions.SellerPayout') %> <%= ob.intlNumFormat(ob.dispute_resolution.resolution.vendor_payout, 8) || 0 %> BTC
         </div>
-      <% } %>
       </div>
     <% } %>
-
-    
-    <div class="modal-hero js-transactionsConfirmOrderHolder confirmOrderHolder custCol-primary-darken overflowHidden">
-      <div class="positionTop width100">
-        <div class="js-confirm">
-          <div class="flexRow custCol-border borderBottom">
-            <div class="flexRow rowItem padding10">
-              <div class="width100">
-                <div class="fontSize15 pull-left noOverflow lineHeight32">
-                  <span><%= polyglot.t('transactions.ConfirmOrder') %></span>
-                </div>
-                <div class="pull-right  textOpacity1 marginLeft4">
-                    <a class="btn btn-txt custCol-primary js-confirmOrder textOpacity1">
-                      <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-                      <%= polyglot.t('Save') %>
-                    </a>
-                </div>         
-                <div class="pull-right  textOpacity1">
-                    <a class="btn btn-txt custCol-primary  js-hideConfirmForm textOpacity1"><%= polyglot.t('Cancel') %></a>
-                </div>  
-              </div>
-            </div>
-            <form id="transactionConfirmForm" class="flexRow scrollOverflowY custCol-border borderTop customThemeScrollbar fontSize13" style="height: 199px">
-              <div class="flexRow custCol-border">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem">
-                    <label for="inputReceivingAddress"><%= polyglot.t('transactions.ReceivingAddress') %></label>
-                  </div>
-                </div>
-                <div class="flexCol-8">
-                  <input name="payout_address"
-                         id="inputReceivingAddress"
-                         type="text"
-                         class="fieldItem custCol-text"
-                         required
-                         placeholder="<%= polyglot.t('transactions.RecievingAddressPlaceholder') %>"
-                         pattern="<%= config.bitcoinValidationRegex %>"
-                  >
-                  <% if(config.testnet) { %>
-                  <div class="positionTopRight padding10">
-                    <span class="btn btn-txt custCol-secondary fontSize9">
-                      <%= polyglot.t('TestnetAddress') %>
-                    </span>
-                  </div>
-                  <% } %>
-                </div>
-              </div>
-              <div class="flexRow custCol-border borderTop">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem">
-                    <label for="inputComments"><%= polyglot.t('transactions.Comments') %></label>
-                    <div class="note"><%= polyglot.t('maxLength200') %></div>
-                  </div>
-                </div>
-                <div class="flexCol-8">
-                  <textarea name="comments"
-                            rows="2"
-                            maxlength="200"
-                            class="fieldItem-textarea custCol-text"
-                            id="inputComments"
-                            placeholder="<%= polyglot.t('transactions.CommentsPlaceHolder') %>"
-                            required></textarea>
-                </div>
-              </div>
-              <% if(ob.vendor_offer.listing.metadata.category == "physical good") { %>
-              <div class="flexRow custCol-border borderTop">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem">
-                    <label for="inputShipper"><%= polyglot.t('transactions.Shipper') %></label>
-                    <div class="note"><%= polyglot.t('maxLength80') %></div>
-                  </div>
-                </div>
-                <div class="flexCol-8">
-                  <input name="shipper"
-                         id="inputShipper"
-                         type="text"
-                         class="fieldItem custCol-text"
-                         placeholder="<%= polyglot.t('transactions.ShipperPlaceholder') %>"
-                         maxlength="80"
-                  >
-                </div>
-              </div>
-              <div class="flexRow custCol-border borderTop">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem">
-                    <label for="inputTrackingNumber"><%= polyglot.t('transactions.TrackingNumber') %></label>
-                    <div class="note"><%= polyglot.t('maxLength200') %></div>
-                  </div>
-                </div>
-                <div class="flexCol-8">
-                  <input name="tracking_number"
-                         id="inputTrackingNumber"
-                         type="text"
-                         class="fieldItem custCol-text"
-                         placeholder="<%= polyglot.t('transactions.TrackingNumberPlaceholder') %>"
-                         maxlength="200"
-                  >
-                </div>
-              </div>
-              <div class="flexRow custCol-border borderTop">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem">
-                    <label for="inputEstimatedDelivery"><%= polyglot.t('transactions.EstimatedDelivery') %></label>
-                    <div class="note"><%= polyglot.t('maxLength80') %></div>
-                  </div>
-                </div>
-                <div class="flexCol-8">
-                  <input name="est_delivery"
-                         id="inputEstimatedDelivery"
-                         type="text"
-                         class="fieldItem custCol-text"
-                         placeholder="<%= polyglot.t('transactions.EstimatedDeliveryPlaceholder') %>"
-                         maxlength="80"
-                  >
-                </div>
-              </div>
-              <% } %>
-              <% if(ob.vendor_offer.listing.metadata.category == "digital good") { %>
-              <div class="flexRow custCol-border borderTop">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem">
-                    <label for="inputURL"><%= polyglot.t('transactions.URL') %></label>
-                    <div class="note"><%= polyglot.t('maxLength200') %></div>
-                  </div>
-                </div>
-                <div class="flexCol-8">
-                  <input name="url"
-                         id="inputURL"
-                         type="text"
-                         class="fieldItem custCol-text"
-                         placeholder="<%= polyglot.t('transactions.URLPlaceholder') %>"
-                         maxlength="200"
-                  >
-                </div>
-              </div>
-              <div class="flexRow custCol-border borderTop">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem">
-                    <label for="inputPassword"><%= polyglot.t('transactions.Password') %></label>
-                    <div class="note"><%= polyglot.t('maxLength20') %></div>
-                  </div>
-                </div>
-                <div class="flexCol-8">
-                  <input name="password"
-                         id="inputPassword"
-                         type="text"
-                         class="fieldItem custCol-text"
-                         placeholder="<%= polyglot.t('transactions.PasswordPlaceholder') %>"
-                         maxlength="20"
-                  >
-                </div>
-              </div>
-              <% } %>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- only display if buyer_receipt exists -->
-    <% if( ob.buyer_receipt) { %>
-    <div class="modal-hero js-transactionFeedback feedbackHolder custCol-primary-darken">
-      <div class="flexRow custCol-border borderBottom">
-        <div class="flexRow rowItem padding0">
-          <div class="flexRow custCol-border borderBottom">
-            <div class="flexRow rowItem padding10">
-              <div class="width100">
-                <div class="fontSize15 pull-left noOverflow lineHeight32">
-                  <span><%= polyglot.t('transactions.TransactionReview') %></span>
-                </div>    
-                <div class="pull-right textOpacity1">
-                    <a class="btn btn-txt custCol-primary js-hideFeedbackRating textOpacity1"><%= polyglot.t('Close') %></a>
-                </div>  
-              </div>
-            </div>
-          </div>
-          <div class="customThemeScrollbar width100 scrollOverflowYHideX" style="height: 215px;">
-            <div class="flexRow">
-              <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-                <strong><%= polyglot.t('transactions.OverallRating') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.feedback %>)</strong>
-                <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.feedback; i++) { %>
-                <i class="starRating"></i>
-                <% } %>
-              </div>
-            </div>
-            <div class="flexRow">
-              <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-                <strong><%= polyglot.t('transactions.Quality') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.quality %>)</strong>
-                <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.quality; i++) { %>
-                <i class="starRating"></i>
-                <% } %>
-              </div>
-            </div>
-            <div class="flexRow">
-              <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-                <strong><%= polyglot.t('transactions.MatchedDescription') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.description %>)</strong>
-                <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.description; i++) { %>
-                <i class="starRating"></i>
-                <% } %>
-              </div>
-            </div>
-            <div class="flexRow">
-              <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-                <strong><%= polyglot.t('transactions.DeliverySpeed') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.delivery_time %>)</strong>
-                <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.delivery_time; i++) { %>
-                <i class="starRating"></i>
-                <% } %>
-              </div>
-            </div>
-            <div class="flexRow">
-              <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-                <strong><%= polyglot.t('transactions.CustomerService') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.customer_service %>)</strong>
-                <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.customer_service; i++) { %>
-                <i class="starRating"></i>
-                <% } %>
-              </div>
-            </div>
-            <div class="flexRow row30">
-              <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-                <div class="row10">
-                  <strong><%= polyglot.t('transactions.Review') %></strong>
-                </div>
-                <div class="row10">
-                  <%= ob.buyer_receipt.receipt.rating.tx_summary.review %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   <% } %>
 
-    <div class="modal-hero js-complete contractHolder custCol-primary-darken">
-      <div class="flexRow custCol-border borderBottom">
-        <div class="flexRow rowItem padding10">
-          <div class="width100">
-            <div class="fontSize15 pull-left noOverflow lineHeight32">
-              <span class="fontSize13 ion-star marginLeft5"></span>
-              <span><%= polyglot.t('transactions.RateThisTransaction') %></span>
-            </div>    
-            <div class="pull-right textOpacity1 marginLeft4">
-              <a class="btn btn-txt custCol-primary js-completeOrder">
-                <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-                <%= polyglot.t('Save') %>
-              </a>
-            </div>
-            <div class="pull-right textOpacity1">
-              <a class="btn btn-txt custCol-primary js-completeOrderHide textOpacity1"><%= polyglot.t('Cancel') %></a>
-            </div> 
-          </div>
-        </div>        
-        <form id="transactionCompleteForm" class="flexRow scrollOverflowY custCol-border borderTop customThemeScrollbar" style="height: 213px">
-          <div class="flexRow custCol-border">
-            <div class="flexCol-4 borderRight custCol-border">
-              <div class="fieldItem">
-                <label><%= polyglot.t('transactions.OverallRating') %></label>
+  
+  <div class="modal-hero js-transactionsConfirmOrderHolder confirmOrderHolder custCol-primary-darken overflowHidden">
+    <div class="positionTop width100">
+      <div class="js-confirm">
+        <div class="flexRow custCol-border borderBottom">
+          <div class="flexRow rowItem padding10">
+            <div class="width100">
+              <div class="fontSize15 pull-left noOverflow lineHeight32">
+                <span><%= polyglot.t('transactions.ConfirmOrder') %></span>
               </div>
-            </div>
-            <div class="flexCol-8 positionWrapper">
-              <div class="fieldItem">
-                <input name="feedback" id="feedback1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="feedback1" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.oneStar') %>"></label>
-                <input name="feedback" id="feedback2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="feedback2" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.twoStar') %>"></label>
-                <input name="feedback" id="feedback3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="feedback3" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.threeStar') %>"></label>
-                <input name="feedback" id="feedback4" type="radio" class="fieldItem starRating" value = 4 checked>
-                <label for="feedback4" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.fourStar') %>"></label>
-                <input name="feedback" id="feedback5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="feedback5" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.fiveStar') %>"></label>
-              </div>
+              <div class="pull-right  textOpacity1 marginLeft4">
+                  <a class="btn btn-txt custCol-primary js-confirmOrder textOpacity1">
+                    <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Save') %>
+                  </a>
+              </div>         
+              <div class="pull-right  textOpacity1">
+                  <a class="btn btn-txt custCol-primary  js-hideConfirmForm textOpacity1"><%= polyglot.t('Cancel') %></a>
+              </div>  
             </div>
           </div>
-
-          <div class="flexRow custCol-border borderTop">
-            <div class="flexCol-4 borderRight custCol-border">
-              <div class="fieldItem">
-                <label><%= polyglot.t('transactions.Quality') %></label>
+          <form id="transactionConfirmForm" class="flexRow scrollOverflowY custCol-border borderTop customThemeScrollbar fontSize13" style="height: 199px">
+            <div class="flexRow custCol-border">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="inputReceivingAddress"><%= polyglot.t('transactions.ReceivingAddress') %></label>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <input name="payout_address"
+                       id="inputReceivingAddress"
+                       type="text"
+                       class="fieldItem custCol-text"
+                       required
+                       placeholder="<%= polyglot.t('transactions.RecievingAddressPlaceholder') %>"
+                       pattern="<%= config.bitcoinValidationRegex %>"
+                >
+                <% if(config.testnet) { %>
+                <div class="positionTopRight padding10">
+                  <span class="btn btn-txt custCol-secondary fontSize9">
+                    <%= polyglot.t('TestnetAddress') %>
+                  </span>
+                </div>
+                <% } %>
               </div>
             </div>
-            <div class="flexCol-8 positionWrapper">
-              <div class="fieldItem">
-                <input name="quality" id="quality1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="quality1" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.oneStar') %>"></label>
-                <input name="quality" id="quality2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="quality2" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.twoStar') %>"></label>
-                <input name="quality" id="quality3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="quality3" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.threeStar') %>"></label>
-                <input name="quality" id="quality4" type="radio" class="fieldItem starRating" value = 4 checked>
-                <label for="quality4" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.fourStar') %>"></label>
-                <input name="quality" id="quality5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="quality5" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.fiveStar') %>"></label>
+            <div class="flexRow custCol-border borderTop">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="inputComments"><%= polyglot.t('transactions.Comments') %></label>
+                  <div class="note"><%= polyglot.t('maxLength200') %></div>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <textarea name="comments"
+                          rows="2"
+                          maxlength="200"
+                          class="fieldItem-textarea custCol-text"
+                          id="inputComments"
+                          placeholder="<%= polyglot.t('transactions.CommentsPlaceHolder') %>"
+                          required></textarea>
               </div>
             </div>
-          </div>
-
-          <div class="flexRow custCol-border borderTop">
-            <div class="flexCol-4 borderRight custCol-border">
-              <div class="fieldItem">
-                <label><%= polyglot.t('transactions.MatchedDescription') %></label>
+            <% if(ob.vendor_offer.listing.metadata.category == "physical good") { %>
+            <div class="flexRow custCol-border borderTop">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="inputShipper"><%= polyglot.t('transactions.Shipper') %></label>
+                  <div class="note"><%= polyglot.t('maxLength80') %></div>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <input name="shipper"
+                       id="inputShipper"
+                       type="text"
+                       class="fieldItem custCol-text"
+                       placeholder="<%= polyglot.t('transactions.ShipperPlaceholder') %>"
+                       maxlength="80"
+                >
               </div>
             </div>
-            <div class="flexCol-8 positionWrapper">
-              <div class="fieldItem">
-                <input name="description" id="description1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="description1" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.oneStar') %>"></label>
-                <input name="description" id="description2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="description2" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.twoStar') %>"></label>
-                <input name="description" id="description3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="description3" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.threeStar') %>"></label>
-                <input name="description" id="description4" type="radio" class="fieldItem starRating" value = 4 checked>
-                <label for="description4" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.fourStar') %>"></label>
-                <input name="description" id="description5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="description5" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.fiveStar') %>"></label>
+            <div class="flexRow custCol-border borderTop">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="inputTrackingNumber"><%= polyglot.t('transactions.TrackingNumber') %></label>
+                  <div class="note"><%= polyglot.t('maxLength200') %></div>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <input name="tracking_number"
+                       id="inputTrackingNumber"
+                       type="text"
+                       class="fieldItem custCol-text"
+                       placeholder="<%= polyglot.t('transactions.TrackingNumberPlaceholder') %>"
+                       maxlength="200"
+                >
               </div>
             </div>
-          </div>
-
-          <div class="flexRow custCol-border borderTop">
-            <div class="flexCol-4 borderRight custCol-border">
-              <div class="fieldItem">
-                <label><%= polyglot.t('transactions.DeliverySpeed') %></label>
+            <div class="flexRow custCol-border borderTop">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="inputEstimatedDelivery"><%= polyglot.t('transactions.EstimatedDelivery') %></label>
+                  <div class="note"><%= polyglot.t('maxLength80') %></div>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <input name="est_delivery"
+                       id="inputEstimatedDelivery"
+                       type="text"
+                       class="fieldItem custCol-text"
+                       placeholder="<%= polyglot.t('transactions.EstimatedDeliveryPlaceholder') %>"
+                       maxlength="80"
+                >
               </div>
             </div>
-            <div class="flexCol-8 positionWrapper">
-              <div class="fieldItem">
-                <input name="delivery_time" id="delivery_time1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="delivery_time1" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.oneStar') %>"></label>
-                <input name="delivery_time" id="delivery_time2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="delivery_time2" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.twoStar') %>"></label>
-                <input name="delivery_time" id="delivery_time3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="delivery_time3" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.threeStar') %>"></label>
-                <input name="delivery_time" id="delivery_time4" type="radio" class="fieldItem starRating" value = 4 checked>
-                <label for="delivery_time4" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.fourStar') %>"></label>
-                <input name="delivery_time" id="delivery_time5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="delivery_time5" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.fiveStar') %>"></label>
+            <% } %>
+            <% if(ob.vendor_offer.listing.metadata.category == "digital good") { %>
+            <div class="flexRow custCol-border borderTop">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="inputURL"><%= polyglot.t('transactions.URL') %></label>
+                  <div class="note"><%= polyglot.t('maxLength200') %></div>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <input name="url"
+                       id="inputURL"
+                       type="text"
+                       class="fieldItem custCol-text"
+                       placeholder="<%= polyglot.t('transactions.URLPlaceholder') %>"
+                       maxlength="200"
+                >
               </div>
             </div>
-          </div>
-
-          <div class="flexRow custCol-border borderTop">
-            <div class="flexCol-4 borderRight custCol-border">
-              <div class="fieldItem">
-                <label><%= polyglot.t('transactions.CustomerService') %></label>
+            <div class="flexRow custCol-border borderTop">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="inputPassword"><%= polyglot.t('transactions.Password') %></label>
+                  <div class="note"><%= polyglot.t('maxLength20') %></div>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <input name="password"
+                       id="inputPassword"
+                       type="text"
+                       class="fieldItem custCol-text"
+                       placeholder="<%= polyglot.t('transactions.PasswordPlaceholder') %>"
+                       maxlength="20"
+                >
               </div>
             </div>
-            <div class="flexCol-8 positionWrapper">
-              <div class="fieldItem">
-                <input name="customer_service" id="customer_service1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="customer_service1" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.oneStar') %>"></label>
-                <input name="customer_service" id="customer_service2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="customer_service2" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.twoStar') %>"></label>
-                <input name="customer_service" id="customer_service3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="customer_service3" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.threeStar') %>"></label>
-                <input name="customer_service" id="customer_service4" type="radio" class="fieldItem starRating" value = 4 checked> 
-                <label for="customer_service4" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.fourStar') %>"></label>
-                <input name="customer_service" id="customer_service5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="customer_service5" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.fiveStar') %>"></label>
-              </div>
-            </div>
-          </div>
-
-          <div class="flexRow custCol-border borderTop">
-            <div class="flexCol-4 borderRight custCol-border">
-              <div class="fieldItem">
-                <label for="inputReview"><%= polyglot.t('transactions.Review') %></label>
-                <div class="note"><%= polyglot.t('maxLength80') %></div>
-              </div>
-            </div>
-            <div class="flexCol-8">
-              <textarea name="review"
-                        rows="3"
-                        maxlength="80"
-                        class="fieldItem-textarea custCol-text"
-                        id="inputReview"
-                        required></textarea>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-
-
-    <div class="modal-hero js-transactionsContractHolder contractHolder custCol-primary-darken">
-      <div class="flexRow custCol-border borderBottom">
-        <div class="flexRow rowItem padding10">
-          <div class="width100">
-            <div class="fontSize15 pull-left noOverflow lineHeight32">
-              <span class="fontSize13 ion-code marginLeft5"></span>
-              <span><%= polyglot.t('transactions.ContractDetails') %></span>
-            </div>    
-            <div class="pull-right  textOpacity1">
-                <a class="btn btn-txt custCol-primary js-transactionHideContract textOpacity1 hide">
-                  <%= polyglot.t('transactions.HideDetails') %>
-                </a>
-            </div>  
-          </div>
+            <% } %>
+          </form>
         </div>
-      </div>
-      <div class="width100 js-transactionsContract">
-        <pre class="customThemeScrollbar" style="height: 197px; margin: 0; overflow-y: scroll; overflow-x: hidden; font-size: 12px; word-wrap: break-word; padding: 0 12px;" >
-          <xmp>
-            <%= ob.displayJSON %>
-          </xmp>
-        </pre>
       </div>
     </div>
   </div>
 
-  <div class="custCol-primary positionRelative">
-    <div class="bar navBar barFlush custCol-secondary height55 clearFix">
-      <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-summaryTab active" data-tab="summary">
-        <span class="ion-android-list fontSize12 marginRight2 textOpacity1"></span>
-        <%= polyglot.t('Summary') %>
-      </a>
-      <% if(ob.status > 0 && ob.buyer_order.order.shipping || ob.vendor_order_confirmation) { %>
-        <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-shippingTab" data-tab="shipping">
-          <% if(ob.vendor_offer.listing.metadata.category == "digital good") { %>
-            <span class="ion-android-attach fontSize12 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Files') %>
-          <% }else{ %>
-            <span class="ion-cube fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Shipping') %>
-          <% } %>
-        </a>
-      <% } %>
-      <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-fundsTab" data-tab="funds">
-        <span class="ion-social-bitcoin fontSize12 marginRight2 textOpacity1"></span>
-        <%= polyglot.t('Funds') %>
-      </a>
-      <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-discussionTab paddingRight18 positionWrapper" data-tab="discussion">
-        <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
-        <%= polyglot.t('Discussion') %>
-        <div class="pill fontSize12 textOpacity75 marginLeft2 tabPill">
-          <div class="badge js-unreadBadge <% if(!ob.unread){%>hide<%}%>" data-count="<%= ob.unread || 0 %>"></div>
-          <span class="js-discussionCount">0</span>
+
+  <!-- only display if buyer_receipt exists -->
+  <% if( ob.buyer_receipt) { %>
+  <div class="modal-hero js-transactionFeedback feedbackHolder custCol-primary-darken">
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding0">
+        <div class="flexRow custCol-border borderBottom">
+          <div class="flexRow rowItem padding10">
+            <div class="width100">
+              <div class="fontSize15 pull-left noOverflow lineHeight32">
+                <span><%= polyglot.t('transactions.TransactionReview') %></span>
+              </div>    
+              <div class="pull-right textOpacity1">
+                  <a class="btn btn-txt custCol-primary js-hideFeedbackRating textOpacity1"><%= polyglot.t('Close') %></a>
+              </div>  
+            </div>
+          </div>
         </div>
-      </a>
+        <div class="customThemeScrollbar width100 scrollOverflowYHideX" style="height: 215px;">
+          <div class="flexRow">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.OverallRating') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.feedback %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.feedback; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.Quality') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.quality %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.quality; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.MatchedDescription') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.description %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.description; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.DeliverySpeed') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.delivery_time %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.delivery_time; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.CustomerService') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.customer_service %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.customer_service; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexRow row30">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <div class="row10">
+                <strong><%= polyglot.t('transactions.Review') %></strong>
+              </div>
+              <div class="row10">
+                <%= ob.buyer_receipt.receipt.rating.tx_summary.review %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+<% } %>
 
-    <div class="js-main js-summary" style="height:319px">
-      <div style="height: 264px;" class="scrollOverflowY customThemeScrollbar">
-
-        <div class="flexRow custCol-border borderBottom">
-          <% if(ob.status == 0){ %>
-          <div class="rowItem padding15 rowTop10 custCol-secondary marginLeft8 txt-center">
-            <div class="h4 width100">
-              <i class="ion-alert-circled"></i>
-              <% if(ob.transactionType == "purchases"){ %>
-              <%= polyglot.t('transactions.BuyerPaidMessage', {
-                  paidAmount: ob.intlNumFormat(ob.orderPaid, 8),
-                  totalAmount: ob.intlNumFormat(ob.orderPrice, 8)
-              }) %>
-              <% } else { %>
-              <%= polyglot.t('transactions.SellerPaidMessage', {
-              paidAmount: ob.intlNumFormat(ob.orderPaid, 8),
-              totalAmount: ob.intlNumFormat(ob.orderPrice, 8)
-              }) %>
-              <% } %>
-            </div>
-            <div class="txt-fade fontSize12 rowTop10">
-              <% if(ob.transactionType == "purchases"){ %>
-              <%= polyglot.t('transactions.BuyerPaidMessageHelp') %>
-              <% } else { %>
-              <%= polyglot.t('transactions.SellerPaidMessageHelp') %>
-              <% } %>
-            </div>
-          </div>
-          <% } %>
-          <div class="flexRow rowItem padding15">
-            <div class="flexCol-7 overflowHidden">
-              <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">
-                <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
-                            <% if(ob.vendor_offer.listing.item.image_hashes){ %>
-                            style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultItem.png);"
-                            <% } else { %>
-                            style="background-image: url(imgs/defaultItem.png);"
-                            <% } %>>
-                          </div>
-                </a>
-              <div class="txt-unleaded">
-                <div class="marginTop12 marginBottom4 fontSize14 noOverflow">
-                  <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">
-                    <strong><%- ob.vendor_offer.listing.item.title %></strong>
-                  </a>
-                </div>
-                <div class="noOverflow marginBottom4  fontSize13 txt-fade">
-                  <%= polyglot.t('transactions.Vendor2') %>
-                  <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
-                    <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
-                      <%- ob.vendor_offer.listing.id.blockchain_id %>
-                    <% } else { %>
-                      <%- ob.vendor_offer.listing.id.guid %>
-                    <% } %>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="flexCol-5">
-              <div class="txt-unleaded">
-                <div class="marginTop12 marginBottom4 fontSize14">
-                  <% if(ob.displayUnitPrice){ %>
-                  <strong><span class="noWrap"><%= ob.intlNumFormat(ob.displayUnitPriceBTC, 8) %> BTC</span> (<%= ob.displayUnitPrice %>)</strong>
-                  <% } else if(ob.displayUnitPriceBTC){ %>
-                  <strong><%= ob.intlNumFormat(ob.displayUnitPriceBTC, 8) %> BTC</strong>
-                  <% } %>*
-                </div>
-                <div class="noOverflow fontSize13 txt-fade">
-                  <%= polyglot.t('Quantity') %> <%= ob.buyer_order.order.quantity %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- only display shipping if shipping data exists -->
-        <% if(ob.buyer_order.order.shipping && ob.status > 0) { %>
-        <div class="flexRow custCol-border borderBottom">
-          <div class="flexRow rowItem padding15">
-            <div class="flexCol-7">
-              <div class="thumbnail-large-slim pull-left marginRight10">
-                <div class="thumbnail thumbnail-large-slim custCol-secondary alignCenter" >
-                  <span class="ion-cube textOpacity1 fontSize20 positionAbsolute" style="left: 33%; top: 27%;"></span>
-                </div>
-              </div>
-              <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
-                <strong><%- ob.shippingType %></strong>
-              </div>
-              <div class="noOverflow fontSize13 txt-fade marginTop4">
-                <%= polyglot.t('transactions.ShippedBy') %>
-                <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
-                  <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
-                    <%- ob.vendor_offer.listing.id.blockchain_id %>
-                  <% } else { %>
-                    <%- ob.vendor_offer.listing.id.guid %>
-                  <% } %>
-                </a>
-              </div>
-            </div>
-            <div class="flexCol-5">
-              <div class="txt-unleaded fontSize14 textOpacity1 marginTop12">
-                <% if(ob.displayShippingPrice){ %>
-                <strong><%= ob.intlNumFormat(ob.displayShippingPriceBTC, 8) %> BTC <span class="noWrap">(<%= ob.displayShippingPrice %>)</span></strong>
-                <% } else if(ob.displayShippingPriceBTC){ %>
-                <strong><%= ob.intlNumFormat(ob.displayShippingPriceBTC, 8) %> BTC</strong>
-                <% } else { %>
-                <strong><%= polyglot.t('Free') %></strong>
-                <% } %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% } %>
-
-        <!-- only display moderator if one is assigned -->
-        <% if( ob.displayModerator) { %>
-        <div class="flexRow custCol-border borderBottom">
-          <div class="flexRow rowItem padding15">
-            <a href="#userPage/<%- ob.displayModerator.guid %>">
-              <div class="thumbnail thumbnail-large-slim"
-                <% if(ob.displayModerator.avatar) { %>
-                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.displayModerator.avatar %>&guid=<%- ob.displayModerator.guid %>), url(imgs/defaultUser.png);">
-                <% } else { %>
-                style="background-image: url(imgs/defaultUser.png);">
-                <% } %>
-              </div>
+  <div class="modal-hero js-complete contractHolder custCol-primary-darken">
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding10">
+        <div class="width100">
+          <div class="fontSize15 pull-left noOverflow lineHeight32">
+            <span class="fontSize13 ion-star marginLeft5"></span>
+            <span><%= polyglot.t('transactions.RateThisTransaction') %></span>
+          </div>    
+          <div class="pull-right textOpacity1 marginLeft4">
+            <a class="btn btn-txt custCol-primary js-completeOrder">
+              <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('Save') %>
             </a>
-            <div>
-              <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
-                <strong><%= polyglot.t('buyFlow.ModeratedPayment') %></strong>
-              </div>
-
-              <div class="pad10left txt-unleaded fontSize13 txt-fade marginTop5">
-                <%= polyglot.t('Moderator2') %>
-                <a href="#userPage/<%- ob.displayModerator.guid %>">
-                  <%- ob.displayModerator.name %>
-                </a>
-              </div>
+          </div>
+          <div class="pull-right textOpacity1">
+            <a class="btn btn-txt custCol-primary js-completeOrderHide textOpacity1"><%= polyglot.t('Cancel') %></a>
+          </div> 
+        </div>
+      </div>        
+      <form id="transactionCompleteForm" class="flexRow scrollOverflowY custCol-border borderTop customThemeScrollbar" style="height: 213px">
+        <div class="flexRow custCol-border">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label><%= polyglot.t('transactions.OverallRating') %></label>
+            </div>
+          </div>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="feedback" id="feedback1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="feedback1" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.oneStar') %>"></label>
+              <input name="feedback" id="feedback2" type="radio" class="fieldItem starRating" value = 2 checked>
+              <label for="feedback2" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.twoStar') %>"></label>
+              <input name="feedback" id="feedback3" type="radio" class="fieldItem starRating" value = 3 checked>
+              <label for="feedback3" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.threeStar') %>"></label>
+              <input name="feedback" id="feedback4" type="radio" class="fieldItem starRating" value = 4 checked>
+              <label for="feedback4" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.fourStar') %>"></label>
+              <input name="feedback" id="feedback5" type="radio" class="fieldItem starRating" value = 5 checked>
+              <label for="feedback5" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.fiveStar') %>"></label>
             </div>
           </div>
         </div>
-        <% } %>
-        <div class="note rowTop10 marginLeft10">*<%= polyglot.t('PriceForOne') %></div>
-      </div>
 
-      <div class="flexRow rowItem padding2015 width100 positionBottom custCol-secondary fontSize14 borderBottomLeftRaidus3 borderBottomRightRaidus3">
-        <div class="flexCol-7 textOpacity75">
-          <%= polyglot.t('transactions.OrderTotal') %>
+        <div class="flexRow custCol-border borderTop">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label><%= polyglot.t('transactions.Quality') %></label>
+            </div>
+          </div>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="quality" id="quality1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="quality1" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.oneStar') %>"></label>
+              <input name="quality" id="quality2" type="radio" class="fieldItem starRating" value = 2 checked>
+              <label for="quality2" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.twoStar') %>"></label>
+              <input name="quality" id="quality3" type="radio" class="fieldItem starRating" value = 3 checked>
+              <label for="quality3" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.threeStar') %>"></label>
+              <input name="quality" id="quality4" type="radio" class="fieldItem starRating" value = 4 checked>
+              <label for="quality4" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.fourStar') %>"></label>
+              <input name="quality" id="quality5" type="radio" class="fieldItem starRating" value = 5 checked>
+              <label for="quality5" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.fiveStar') %>"></label>
+            </div>
+          </div>
         </div>
-        <div class="flexCol-5 alignRight">
-          <% if(ob.displayTotalPrice){ %>
-          <strong><span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
-          <% } else if(ob.buyer_order.order.payment.amount){ %>
-          <strong><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
-          <% } else { %>
-          <strong><%= polyglot.t('Free') %></strong>
-          <% } %>
+
+        <div class="flexRow custCol-border borderTop">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label><%= polyglot.t('transactions.MatchedDescription') %></label>
+            </div>
+          </div>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="description" id="description1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="description1" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.oneStar') %>"></label>
+              <input name="description" id="description2" type="radio" class="fieldItem starRating" value = 2 checked>
+              <label for="description2" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.twoStar') %>"></label>
+              <input name="description" id="description3" type="radio" class="fieldItem starRating" value = 3 checked>
+              <label for="description3" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.threeStar') %>"></label>
+              <input name="description" id="description4" type="radio" class="fieldItem starRating" value = 4 checked>
+              <label for="description4" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.fourStar') %>"></label>
+              <input name="description" id="description5" type="radio" class="fieldItem starRating" value = 5 checked>
+              <label for="description5" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.fiveStar') %>"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flexRow custCol-border borderTop">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label><%= polyglot.t('transactions.DeliverySpeed') %></label>
+            </div>
+          </div>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="delivery_time" id="delivery_time1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="delivery_time1" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.oneStar') %>"></label>
+              <input name="delivery_time" id="delivery_time2" type="radio" class="fieldItem starRating" value = 2 checked>
+              <label for="delivery_time2" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.twoStar') %>"></label>
+              <input name="delivery_time" id="delivery_time3" type="radio" class="fieldItem starRating" value = 3 checked>
+              <label for="delivery_time3" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.threeStar') %>"></label>
+              <input name="delivery_time" id="delivery_time4" type="radio" class="fieldItem starRating" value = 4 checked>
+              <label for="delivery_time4" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.fourStar') %>"></label>
+              <input name="delivery_time" id="delivery_time5" type="radio" class="fieldItem starRating" value = 5 checked>
+              <label for="delivery_time5" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.fiveStar') %>"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flexRow custCol-border borderTop">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label><%= polyglot.t('transactions.CustomerService') %></label>
+            </div>
+          </div>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="customer_service" id="customer_service1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="customer_service1" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.oneStar') %>"></label>
+              <input name="customer_service" id="customer_service2" type="radio" class="fieldItem starRating" value = 2 checked>
+              <label for="customer_service2" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.twoStar') %>"></label>
+              <input name="customer_service" id="customer_service3" type="radio" class="fieldItem starRating" value = 3 checked>
+              <label for="customer_service3" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.threeStar') %>"></label>
+              <input name="customer_service" id="customer_service4" type="radio" class="fieldItem starRating" value = 4 checked> 
+              <label for="customer_service4" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.fourStar') %>"></label>
+              <input name="customer_service" id="customer_service5" type="radio" class="fieldItem starRating" value = 5 checked>
+              <label for="customer_service5" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.fiveStar') %>"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flexRow custCol-border borderTop">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label for="inputReview"><%= polyglot.t('transactions.Review') %></label>
+              <div class="note"><%= polyglot.t('maxLength80') %></div>
+            </div>
+          </div>
+          <div class="flexCol-8">
+            <textarea name="review"
+                      rows="3"
+                      maxlength="80"
+                      class="fieldItem-textarea custCol-text"
+                      id="inputReview"
+                      required></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="modal-hero js-transactionsContractHolder contractHolder custCol-primary-darken">
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding10">
+        <div class="width100">
+          <div class="fontSize15 pull-left noOverflow lineHeight32">
+            <span class="fontSize13 ion-code marginLeft5"></span>
+            <span><%= polyglot.t('transactions.ContractDetails') %></span>
+          </div>    
+          <div class="pull-right  textOpacity1">
+              <a class="btn btn-txt custCol-primary js-transactionHideContract textOpacity1 hide">
+                <%= polyglot.t('transactions.HideDetails') %>
+              </a>
+          </div>  
         </div>
       </div>
     </div>
+    <div class="width100 js-transactionsContract">
+      <pre class="customThemeScrollbar" style="height: 197px; margin: 0; overflow-y: scroll; overflow-x: hidden; font-size: 12px; word-wrap: break-word; padding: 0 12px;" >
+        <xmp>
+          <%= ob.displayJSON %>
+        </xmp>
+      </pre>
+    </div>
+  </div>
+</div>
 
-    <div class="js-main js-shipping hide" style="height:319px">
-      <% if(ob.buyer_order.order.shipping && ob.status > 0) { %>
+<div class="custCol-primary positionRelative">
+  <div class="bar navBar barFlush custCol-secondary height55 clearFix">
+    <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-summaryTab active" data-tab="summary">
+      <span class="ion-android-list fontSize12 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Summary') %>
+    </a>
+    <% if(ob.status > 0 && ob.buyer_order.order.shipping || ob.vendor_order_confirmation) { %>
+      <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-shippingTab" data-tab="shipping">
+        <% if(ob.vendor_offer.listing.metadata.category == "digital good") { %>
+          <span class="ion-android-attach fontSize12 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('Files') %>
+        <% }else{ %>
+          <span class="ion-cube fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('Shipping') %>
+        <% } %>
+      </a>
+    <% } %>
+    <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-fundsTab" data-tab="funds">
+      <span class="ion-social-bitcoin fontSize12 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Funds') %>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary fontSize13 js-tab js-discussionTab paddingRight18 positionWrapper" data-tab="discussion">
+      <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Discussion') %>
+      <div class="pill fontSize12 textOpacity75 marginLeft2 tabPill">
+        <div class="badge js-unreadBadge <% if(!ob.unread){%>hide<%}%>" data-count="<%= ob.unread || 0 %>"></div>
+        <span class="js-discussionCount">0</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="js-main js-summary" style="height:319px">
+    <div style="height: 264px;" class="scrollOverflowY customThemeScrollbar">
+
       <div class="flexRow custCol-border borderBottom">
-        <div class="flexRow rowItem padding15">
-          <div class="thumbnail-large-slim pull-left marginRight10">
-            <div class="thumbnail thumbnail-large-slim custCol-secondary alignCenter" >
-              <span class="ion-cube textOpacity1 fontSize20 positionAbsolute" style="left: 33%; top: 23%;"></span>
-              <span class="fontSize10 textOpacity1 positionAbsolute width100 alignCenter left0 bottom8px"><%= polyglot.t('ShipTo') %></span>
-            </div>
+        <% if(ob.status == 0){ %>
+        <div class="rowItem padding15 rowTop10 custCol-secondary marginLeft8 txt-center">
+          <div class="h4 width100">
+            <i class="ion-alert-circled"></i>
+            <% if(ob.transactionType == "purchases"){ %>
+            <%= polyglot.t('transactions.BuyerPaidMessage', {
+                paidAmount: ob.intlNumFormat(ob.orderPaid, 8),
+                totalAmount: ob.intlNumFormat(ob.orderPrice, 8)
+            }) %>
+            <% } else { %>
+            <%= polyglot.t('transactions.SellerPaidMessage', {
+            paidAmount: ob.intlNumFormat(ob.orderPaid, 8),
+            totalAmount: ob.intlNumFormat(ob.orderPrice, 8)
+            }) %>
+            <% } %>
           </div>
-          <div class="txt-unleaded pull-left">
-            <div class="fontSize13 lineHeight16">
-              <%- ob.buyer_order.order.shipping.ship_to %>, <br />
-              <%- ob.buyer_order.order.shipping.address %><br />
-              <%- ob.buyer_order.order.shipping.city %>, <%- ob.buyer_order.order.shipping.state %> <%- ob.buyer_order.order.shipping.postal_code %><br />
-              <%= polyglot.t('countries.' + ob.buyer_order.order.shipping.country) %>
-            </div>
+          <div class="txt-fade fontSize12 rowTop10">
+            <% if(ob.transactionType == "purchases"){ %>
+            <%= polyglot.t('transactions.BuyerPaidMessageHelp') %>
+            <% } else { %>
+            <%= polyglot.t('transactions.SellerPaidMessageHelp') %>
+            <% } %>
           </div>
         </div>
-      </div>
-      <% } %>
-
-      <!-- only display if vendor_order_confirmation exists -->
-      <% if( ob.vendor_order_confirmation) { %>
-      <div class="flexRow custCol-border borderBottom">
+        <% } %>
         <div class="flexRow rowItem padding15">
-          <div class="flexCol-8">
+          <div class="flexCol-7 overflowHidden">
             <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">
               <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
-                  <% if(ob.vendor_offer.listing.item.image_hashes){ %>
-                  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
-                  <% } else { %>
-                  style="background-image: url(imgs/defaultBanner.png);"
-                  <% } %>>
-              </div>
-            </a>
-            <div class="pull-left">
-              <div class="txt-unleaded fontSize13 textOpacity1 marginTop6">
-                <%- ob.vendor_order_confirmation.invoice.comments ? ob.vendor_order_confirmation.invoice.comments : polyglot.t('transactions.None') %>
-              </div>
-              <% if( ob.vendor_order_confirmation.invoice.shipping) { %>
-              <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
-                <strong><%= polyglot.t('transactions.EstimatedDelivery') %></strong>
-                <%= ob.vendor_order_confirmation.invoice.shipping.est_delivery ?
-                ob.vendor_order_confirmation.invoice.shipping.est_delivery : polyglot.t('transactions.None') %>
-              </div>
-              <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
-                <strong><%= polyglot.t('transactions.Shipper') %></strong>
-                <%= ob.vendor_order_confirmation.invoice.shipping.shipper ?
-                ob.vendor_order_confirmation.invoice.shipping.shipper : polyglot.t('transactions.None') %>
-              </div>
-              <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
-                <strong><%= polyglot.t('transactions.TrackingNumber') %></strong>
-                <%= ob.vendor_order_confirmation.invoice.shipping.tracking_number
-                ? ob.vendor_order_confirmation.invoice.shipping.tracking_number : polyglot.t('transactions.None') %>
-              </div>
-              <% } %>
-              <% if( ob.vendor_order_confirmation.invoice.content_source) { %>
-                <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
-                  URL: <a href="<%= ob.vendor_order_confirmation.invoice.content_source.url %>">
-                    <%= ob.vendor_order_confirmation.invoice.content_source.url %>
-                  </a>
-                </div>
-                <% if( ob.vendor_order_confirmation.invoice.content_source.password) { %>
-                <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
-                  <%= polyglot.t('transactions.Password') %>
-                  <%= ob.vendor_order_confirmation.invoice.content_source.password ?
-                  ob.vendor_order_confirmation.invoice.content_source.password : polyglot.t('transactions.None') %>
-                </div>
-                <% }else{ %>
-                <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
-                  <%= polyglot.t('transactions.Password') %>
-                  <%- polyglot.t('transactions.None') %>
-                </div>
-                <% } %>
-              <% } %>
-            </div>
-          </div>
-          <% if( ob.vendor_order_confirmation.invoice.content_source && ob.vendor_order_confirmation.invoice.content_source.url ) { %>
-          <div class="flexCol-4">
-            <a href="<%= ob.vendor_order_confirmation.invoice.content_source.url %>"
-               class="btn btn-txt pull-right custCol-secondary textOpacity1 js-externalLink tooltip"
-               data-tooltip="<%= ob.vendor_order_confirmation.invoice.content_source.url %>">
-                Open File <span class="ion-android-open fontSize10"></span>
-            </a>
-          </div>
-          <% } %>
-        </div>
-      </div>
-      <% } %>
-    </div>
-
-    <div class="js-main js-funds hide" style="height:319px">
-      <div class="flexRow" style="height: 314px;">
-        <div class="flexRow rowItem padding15 custCol-border borderBottom">
-          <div class="txt-unleaded">
-            <div class="marginTop12 marginBottom4 fontSize14 noOverflow">
-              <% if( ob.displayModerator) { %>
-                <%= polyglot.t('transactions.ModeratedTransaction') %>
-                <% if(ob.displayTotalPrice){ %>
-                <strong><span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
-                <% } else if(ob.buyer_order.order.payment.amount){ %>
-                <strong><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
-                <% } else { %>
-                <strong><%= polyglot.t('Free') %></strong>
-                <% } %>
-              <% } else { %>
-                <%= polyglot.t('transactions.DirectTransaction') %>
-                <% if(ob.displayTotalPrice){ %>
-                <strong><span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
-                <% } else if(ob.buyer_order.order.payment.amount){ %>
-                <strong><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
-                <% } else { %>
-                <strong><%= polyglot.t('Free') %></strong>
-                <% } %>
-              <% } %>
-            </div>
-          </div>
-          <% if(ob.bitcoin_txs && ob.bitcoin_txs[0]){ %>
-            <% if(config.testnet){ %>
-              <a href="https://live.blockcypher.com/btc-testnet/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
-            <% }else{ %>
-              <a href="https://live.blockcypher.com/btc/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
-            <% } %>
-            <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
-              <%= polyglot.t('transactions.ViewOnBlockchain') %>
-              <span class="ion-android-open fontSize10"></span>
-            </div>
-          </a>
-          <% } else if(ob.buyer_order.order.payment.address){ %>
-            <% if(config.testnet){ %>
-              <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap positionAbsolute right10">
-            <% }else{ %>
-              <a href="https://live.blockcypher.com/btc/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap positionAbsolute right10">
-            <% } %>
-              <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
-                <%= polyglot.t('transactions.ViewOnBlockchain') %>
-                <span class="ion-android-open fontSize10"></span>
-              </div>
-            </a>
-          <% } %>
-        </div>
-        <div class="scrollOverflowY customThemeScrollbar width100 noOverflow height254">
-          <div class="flexRow rowItem padding15 custCol-border borderBottom">
-            <div class="txt-unleaded width100">
-              <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
-                <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
-                <% if(ob.vendorAvatarURL && ob.transactionType == "purchases"){ %>
-                style="background-image: url(<%- ob.vendorAvatarURL %>), url(imgs/defaultUser.png);"
-                <% } else if(ob.transactionType == "sales"){ %>
-                style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"
-                <% } else { %>
-                style="background-image: url(imgs/defaultUser.png);"
-                <% } %>>
-                </div>
+                          <% if(ob.vendor_offer.listing.item.image_hashes){ %>
+                          style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultItem.png);"
+                          <% } else { %>
+                          style="background-image: url(imgs/defaultItem.png);"
+                          <% } %>>
+                        </div>
               </a>
+            <div class="txt-unleaded">
               <div class="marginTop12 marginBottom4 fontSize14 noOverflow">
+                <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">
+                  <strong><%- ob.vendor_offer.listing.item.title %></strong>
+                </a>
+              </div>
+              <div class="noOverflow marginBottom4  fontSize13 txt-fade">
                 <%= polyglot.t('transactions.Vendor2') %>
                 <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
                   <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
@@ -919,306 +643,575 @@
                   <% } %>
                 </a>
               </div>
-              <div class="fontSize13 noOverflow textOpacity75">
-                <% if(ob.displayTotalPrice){ %>
-                <strong>+<span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
-                <% } else if(ob.buyer_order.order.payment.amount){ %>
-                <strong>+<%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
-                <% } else { %>
-                <strong><%= polyglot.t('Free') %></strong>
-                <% } %>
+            </div>
+          </div>
+          <div class="flexCol-5">
+            <div class="txt-unleaded">
+              <div class="marginTop12 marginBottom4 fontSize14">
+                <% if(ob.displayUnitPrice){ %>
+                <strong><span class="noWrap"><%= ob.intlNumFormat(ob.displayUnitPriceBTC, 8) %> BTC</span> (<%= ob.displayUnitPrice %>)</strong>
+                <% } else if(ob.displayUnitPriceBTC){ %>
+                <strong><%= ob.intlNumFormat(ob.displayUnitPriceBTC, 8) %> BTC</strong>
+                <% } %>*
+              </div>
+              <div class="noOverflow fontSize13 txt-fade">
+                <%= polyglot.t('Quantity') %> <%= ob.buyer_order.order.quantity %>
               </div>
             </div>
           </div>
-          <div class="flexRow rowItem padding15 custCol-border borderBottom">
-            <div class="txt-unleaded width100">
-              <a href="#userPage/<%- ob.buyer_order.order.id.guid %>">
-                <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
-                  <% if(ob.avatarURL && ob.transactionType == "purchases"){ %>
-                  style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"
-                  <% } else if(ob.buyerAvatarURL && ob.transactionType == "sales"){ %>
-                  style="background-image: url(<%- ob.buyerAvatarURL %>), url(imgs/defaultUser.png);"
-                  <% } else { %>
-                  style="background-image: url(imgs/defaultUser.png);"
-                  <% } %>>
-                </div>
-              </a>
-              <div class="marginTop12 marginBottom4 fontSize14 noOverflow">
-                <%= polyglot.t('transactions.Buyer2') %>
-                <a href="#userPage/<%- ob.buyer_order.order.id.guid %>">
-                  <% if(ob.buyer_order.order.id.blockchain_id){ %>
-                  <%- ob.buyer_order.order.id.blockchain_id %>
-                  <% } else { %>
-                  <%- ob.buyer_order.order.id.guid %>
-                  <% } %>
-                </a>
-              </div>
-              <div class="fontSize13 noOverflow textOpacity75">
-                <% if(ob.displayTotalPrice){ %>
-                <strong>-<span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
-                <% } else if(ob.buyer_order.order.payment.amount){ %>
-                <strong>-<%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
-                <% } else { %>
-                <strong><%= polyglot.t('Free') %></strong>
-                <% } %>
-              </div>
-    <!--           <% _.each(ob.bitcoin_txs, function(tx, i){ %>
-                <% if(tx.type == "incoming"){ %>
-                  <div class="noOverflow width100 fontSize13 txt-fade">
-                    <div class="marginTop12 marginBottom4"><%= polyglot.t('transactions.transferReceipt') %>:</div>
-                    <div class="marginTop12 marginBottom4 fontSize10">
-                      <a href="https://blockchain.info/btc/tx/<%= ob.bitcoin_txs[i].txid %>" class="noWrap js-externalLink">
-                        <%= ob.bitcoin_txs[i].txid %>
-                      </a>
-                    </div>
-                    <div>
-                      <a class="js-copyIncommingTx" data-tx=<%= ob.bitcoin_txs[i].txid %>">
-                        <i class="ion-clipboard"></i> <%= polyglot.t('transactions.copyTxid') %>
-                      </a>
-                    </div>
-                  </div>
-                <% } %>
-              <% }); %> -->
-
-            </div>
-          </div>
-          <!-- only display moderator if one is assigned -->
-          <% if( ob.displayModerator) { %>
-          <div class="flexRow">
-            <div class="flexCol-8">
-              <div class="rowItem padding2015">
-                <a href="#userPage/<%- ob.displayModerator.guid %>">
-                  <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
-                    <% if(ob.displayModerator.avatar) { %>
-                    style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.displayModerator.avatar %>&guid=<%- ob.displayModerator.guid %>), url(imgs/defaultUser.png);">
-                    <% } else { %>
-                    style="background-image: url(imgs/defaultUser.png);">
-                    <% } %>
-                  </div>
-                </a>
-                <div class="pull-left">
-                  <div class="marginTop12 marginBottom2 fontSize14">
-                    <%= polyglot.t('Moderator2') %> <a href="#userPage/<%- ob.displayModerator.guid %>"><%- ob.displayModerator.name %></a>
-                  </div>
-                  <div class="fontSize14 noOverflow textOpacity75">
-                    <%= polyglot.t('buyFlow.DisputeFee2') %> <%- ob.displayModerator.fee %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="flexCol-4 custCol-border">
-              <% if(ob.displayModerator){ %>
-                <% if(ob.status == 1 && ob.transactionType == "purchases"){ %>
-                <div class="rowItem padding2015">
-                  <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
-                    <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
-                    <%= polyglot.t('transactions.DisputeTransaction') %>
-                  </a>
-                </div>
-                <% } %>
-                <% if(ob.status == 2 || ob.status == 3){ %>
-                <div class="rowItem padding2015">
-                  <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
-                    <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
-                    <%= polyglot.t('transactions.DisputeTransaction') %>
-                  </a>
-                </div>
-                <% } %>
-              <% } %>
-            </div>
-          </div>
-          <% } %>
         </div>
       </div>
-    </div>
 
-    <div class="js-main js-discussion transactionDiscussionTab" style="height:319px">
-      <div class="scrollOverflowY js-discussionScroller customThemeScrollbar" style="height: 237px;">
-        <div class="js-discussionWrapperEmpty textOpacity50 fontSize14 marginTop80 alignCenter"><%= polyglot.t('transactions.NoMessages') %></div>
-        <div class="custCol-text js-discussionWrapper">
-        </div>
-      </div>
-      <div class="flexRow pad10Top width100 positionBottom custCol-secondary js-discussionForm border2 custCol-border-secondary">
-        <div class="pad10">
-          <div class="thumbnail thumbnail-small custCol-border-secondary borderRadius2 width40 height40"
-          <% if(ob.avatarURL) { %>
-          style="background-image: url(<%= ob.avatarURL %>), url(imgs/offlineUser.png);">
-          <% } else { %>
-          style="background-image: url(imgs/defaultUser.png);">
-          <% } %>
-          </div>
-        </div>
-        <form class="flexExpand" id="transactionDiscussionForm">
-          <textarea name="claim"
-                    rows="4"
-                    class=" custCol-text validatable border0 js-transactionDiscussionSendText"
-                    id="transactionDiscussionSendText"
-                    required
-                    placeholder="<%= polyglot.t('transactions.sendMessagePlaceholder') %>"></textarea>
-        </form>
-        <div class="pad10" style="width:140px">
-          <a class="btn btn-txt btn-wide custCol-primary pull-left js-sendDiscussionMessage height36">
-            <%= polyglot.t('transactions.SendMessage') %>
-          </a>
-
-          <% if(ob.transactionType == "cases" && ob.status == 4){ %>
-          <div>
-            <input type="checkbox" class="fieldItem"
-                   id="transactionsCloseDisputeCheckbox" >
-            <label for="transactionsCloseDisputeCheckbox" class="fontSize10 clickable compact minWidth120 marginLeft0 paddingLeft5">
-              <%= polyglot.t('transactions.CloseDispute') %>
-            </label>
-          </div>
-          <% } else if(ob.transactionType == "cases" && ob.status > 4){ %>
-          <div>
-            <a class="btn btn-small rowTop5 row5 width100 custCol-primary tooltip tooltip-box tooltip-boxUp js-closeDisputeResend" data-tooltip="<%= polyglot.t('transactions.CloseDisputeResendTooltip') %>">
-              <%= polyglot.t('transactions.CloseDisputeResend') %>
-            </a>
-          </div>
-          <% } else if(ob.status < 4  && ob.status != 0 && ob.displayModerator) { %>
-            <% if(ob.status == 2 || ob.staus == 3 || ob.status == 1 && ob.transactionType == "purchases"){ %>
-            <div class="js-startDisputeFlag">
-              <input type="checkbox" class="fieldItem"
-                     id="transactionStartDisputeCheckbox" >
-              <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable compact minWidth120 marginLeft0 padding0 tooltip-box tooltip-boxUp"
-                     data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>">
-                <%= polyglot.t('transactions.DisputeTransaction') %>
-              </label>
-            </div>
-            <% } %>
-          <% } else if(ob.status == 4 && ob.dispute && ob.dispute.info.guid == ob.userGuid) {%>
-          <div>
-            <a class="btn btn-small rowTop5 row5 width100 custCol-primary tooltip tooltip-box tooltip-boxUp js-startDisputeResend" data-tooltip="<%= polyglot.t('transactions.DisputeTransactionResendTooltip') %>">
-              <%= polyglot.t('transactions.DisputeTransactionResend') %>
-            </a>
-          </div>
-          <% } %>
-        </div>
-
-        <form class="width100 hide" id="transactionCloseDispute">
-          <div class="flexCol-12 flex-border custCol-border">
-            <div class="flexRow">
-              <div class="flexRow">
-                <div class="flexCol-12 borderRight custCol-border">
-                  <div class="fieldItem fontSize11">
-                    <%= polyglot.t('transactions.TotalInTransaction') %>
-                    <strong>
-                      <%= ob.intlNumFormat(ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal, 8) %> BTC
-                    </strong>
-                    <div class="pull-right">
-                      <%= polyglot.t('transactions.YouEarn') %> <%= ob.intlNumFormat(ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal, 8) %> BTC
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <% if(ob.vendor_order_confirmation){ %>
-              <div class="flexRow">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem"><%= polyglot.t('transactions.BuyerAmount') %></div>
-                </div>
-                <div class="flexCol-8 borderRight custCol-border padding10">
-                  <span class="marginRight10">
-                    <input type="number"
-                           id="transactionsBuyerPayoutPercent"
-                           max="100" min="0" step="0.1"
-                           style="width: 50px"
-                           value="50">%
-                  </span>
-                  <span id="transactionsBuyerPayoutBTC" class=""></span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem"><%= polyglot.t('transactions.SellerAmount') %></div>
-                </div>
-                <div class="flexCol-8 borderRight custCol-border padding10">
-                  <span class="marginRight10">
-                    <input type="number"
-                           id="transactionsSellerPayoutPercent"
-                           max="100" min="0" step="0.1"
-                           style="width: 50px"
-                           value="50">%
-                  </span>
-                  <span id="transactionsSellerPayoutBTC" class=""></span>
-                </div>
-              </div>
-              <% } else {%>
-              <div class="flexRow">
-                <div class="padding15">
-                <%= polyglot.t('transactions.PayoutOnlyBuyer') %>
-                </div>
-              </div>
-              <% } %>
-
-              <div class="flexRow">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <div class="fieldItem"><%= polyglot.t('transactions.YourBitcoinPaymentAddress') %></div>
-                </div>
-                <div class="flexCol-8 borderRight custCol-border padding10">
-                  <input name="moderator_address"
-                         id="moderatorAddress"
-                         type="text"
-                         placeholder="<%= polyglot.t('Address') %>"
-                         class="fieldItem"
-                         pattern="<%= config.bitcoinValidationRegex %>"
-                         required
-                  >
-                  <% if(config.testnet) { %>
-                  <div class="positionTopRight padding10">
-                    <span class="btn btn-txt custCol-secondary fontSize9">
-                      <%= polyglot.t('TestnetAddress') %>
-                    </span>
-                  </div>
-                  <% } %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!-- currently not used
-    <div class="js-main js-refund hide">
+      <!-- only display shipping if shipping data exists -->
+      <% if(ob.buyer_order.order.shipping && ob.status > 0) { %>
       <div class="flexRow custCol-border borderBottom">
-        <div class="flexRow rowItem padding10">
-          <div class="pad10left txt-unleaded">
-            <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
-              <strong><%= polyglot.t('transactions.RefundOrder') %></strong>
+        <div class="flexRow rowItem padding15">
+          <div class="flexCol-7">
+            <div class="thumbnail-large-slim pull-left marginRight10">
+              <div class="thumbnail thumbnail-large-slim custCol-secondary alignCenter" >
+                <span class="ion-cube textOpacity1 fontSize20 positionAbsolute" style="left: 33%; top: 27%;"></span>
+              </div>
+            </div>
+            <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%- ob.shippingType %></strong>
+            </div>
+            <div class="noOverflow fontSize13 txt-fade marginTop4">
+              <%= polyglot.t('transactions.ShippedBy') %>
+              <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
+                <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
+                  <%- ob.vendor_offer.listing.id.blockchain_id %>
+                <% } else { %>
+                  <%- ob.vendor_offer.listing.id.guid %>
+                <% } %>
+              </a>
+            </div>
+          </div>
+          <div class="flexCol-5">
+            <div class="txt-unleaded fontSize14 textOpacity1 marginTop12">
+              <% if(ob.displayShippingPrice){ %>
+              <strong><%= ob.intlNumFormat(ob.displayShippingPriceBTC, 8) %> BTC <span class="noWrap">(<%= ob.displayShippingPrice %>)</span></strong>
+              <% } else if(ob.displayShippingPriceBTC){ %>
+              <strong><%= ob.intlNumFormat(ob.displayShippingPriceBTC, 8) %> BTC</strong>
+              <% } else { %>
+              <strong><%= polyglot.t('Free') %></strong>
+              <% } %>
             </div>
           </div>
         </div>
-        <form id="transactionRefundForm" class="flexRow scrollOverflowY custCol-border borderTop customThemeScrollbar" style="height: 269px">
-          <div class="flexRow custCol-border">
-            <div class="flexCol-4 borderRight custCol-border">
-              <div class="fieldItem">
-                <label for="inputReason"><%= polyglot.t('transactions.RefundReason') %></label>
-                <div class="note"><%= polyglot.t('maxLength200') %></div>
-              </div>
-            </div>
-            <div class="flexCol-8">
-                <textarea name="reason"
-                          rows="6"
-                          maxlength="200"
-                          class="fieldItem-textarea custCol-text"
-                          id="inputReason"
-                          placeholder="<%= polyglot.t('transactions.RefundReasonPlaceholder') %>"
-                          required></textarea>
-            </div>
-          </div>
-          <div class="width100 custCol-border borderTop">
-            <div class="ctrlGroup padding10 pull-right">
-              <a class="btn btn-large custCol-secondary js-refundOrder"><%= polyglot.t('Submit') %></a>
-            </div>
-            <div class="ctrlGroup padding10 pull-right">
-              <a class="btn btn-large custCol-secondary js-closeRefund"><%= polyglot.t('Close') %></a>
-            </div>
-          </div>
-        </form>
       </div>
-    </div>-->
+      <% } %>
+
+      <!-- only display moderator if one is assigned -->
+      <% if( ob.displayModerator) { %>
+      <div class="flexRow custCol-border borderBottom">
+        <div class="flexRow rowItem padding15">
+          <a href="#userPage/<%- ob.displayModerator.guid %>">
+            <div class="thumbnail thumbnail-large-slim"
+              <% if(ob.displayModerator.avatar) { %>
+              style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.displayModerator.avatar %>&guid=<%- ob.displayModerator.guid %>), url(imgs/defaultUser.png);">
+              <% } else { %>
+              style="background-image: url(imgs/defaultUser.png);">
+              <% } %>
+            </div>
+          </a>
+          <div>
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%= polyglot.t('buyFlow.ModeratedPayment') %></strong>
+            </div>
+
+            <div class="pad10left txt-unleaded fontSize13 txt-fade marginTop5">
+              <%= polyglot.t('Moderator2') %>
+              <a href="#userPage/<%- ob.displayModerator.guid %>">
+                <%- ob.displayModerator.name %>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <div class="note rowTop10 marginLeft10">*<%= polyglot.t('PriceForOne') %></div>
+    </div>
+
+    <div class="flexRow rowItem padding2015 width100 positionBottom custCol-secondary fontSize14 borderBottomLeftRaidus3 borderBottomRightRaidus3">
+      <div class="flexCol-7 textOpacity75">
+        <%= polyglot.t('transactions.OrderTotal') %>
+      </div>
+      <div class="flexCol-5 alignRight">
+        <% if(ob.displayTotalPrice){ %>
+        <strong><span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+        <% } else if(ob.buyer_order.order.payment.amount){ %>
+        <strong><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
+        <% } else { %>
+        <strong><%= polyglot.t('Free') %></strong>
+        <% } %>
+      </div>
+    </div>
   </div>
 
-<% } %>
+  <div class="js-main js-shipping hide" style="height:319px">
+    <% if(ob.buyer_order.order.shipping && ob.status > 0) { %>
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding15">
+        <div class="thumbnail-large-slim pull-left marginRight10">
+          <div class="thumbnail thumbnail-large-slim custCol-secondary alignCenter" >
+            <span class="ion-cube textOpacity1 fontSize20 positionAbsolute" style="left: 33%; top: 23%;"></span>
+            <span class="fontSize10 textOpacity1 positionAbsolute width100 alignCenter left0 bottom8px"><%= polyglot.t('ShipTo') %></span>
+          </div>
+        </div>
+        <div class="txt-unleaded pull-left">
+          <div class="fontSize13 lineHeight16">
+            <%- ob.buyer_order.order.shipping.ship_to %>, <br />
+            <%- ob.buyer_order.order.shipping.address %><br />
+            <%- ob.buyer_order.order.shipping.city %>, <%- ob.buyer_order.order.shipping.state %> <%- ob.buyer_order.order.shipping.postal_code %><br />
+            <%= polyglot.t('countries.' + ob.buyer_order.order.shipping.country) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- only display if vendor_order_confirmation exists -->
+    <% if( ob.vendor_order_confirmation) { %>
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding15">
+        <div class="flexCol-8">
+          <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">
+            <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
+                <% if(ob.vendor_offer.listing.item.image_hashes){ %>
+                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
+                <% } else { %>
+                style="background-image: url(imgs/defaultBanner.png);"
+                <% } %>>
+            </div>
+          </a>
+          <div class="pull-left">
+            <div class="txt-unleaded fontSize13 textOpacity1 marginTop6">
+              <%- ob.vendor_order_confirmation.invoice.comments ? ob.vendor_order_confirmation.invoice.comments : polyglot.t('transactions.None') %>
+            </div>
+            <% if( ob.vendor_order_confirmation.invoice.shipping) { %>
+            <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%= polyglot.t('transactions.EstimatedDelivery') %></strong>
+              <%= ob.vendor_order_confirmation.invoice.shipping.est_delivery ?
+              ob.vendor_order_confirmation.invoice.shipping.est_delivery : polyglot.t('transactions.None') %>
+            </div>
+            <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%= polyglot.t('transactions.Shipper') %></strong>
+              <%= ob.vendor_order_confirmation.invoice.shipping.shipper ?
+              ob.vendor_order_confirmation.invoice.shipping.shipper : polyglot.t('transactions.None') %>
+            </div>
+            <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%= polyglot.t('transactions.TrackingNumber') %></strong>
+              <%= ob.vendor_order_confirmation.invoice.shipping.tracking_number
+              ? ob.vendor_order_confirmation.invoice.shipping.tracking_number : polyglot.t('transactions.None') %>
+            </div>
+            <% } %>
+            <% if( ob.vendor_order_confirmation.invoice.content_source) { %>
+              <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
+                URL: <a href="<%= ob.vendor_order_confirmation.invoice.content_source.url %>">
+                  <%= ob.vendor_order_confirmation.invoice.content_source.url %>
+                </a>
+              </div>
+              <% if( ob.vendor_order_confirmation.invoice.content_source.password) { %>
+              <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
+                <%= polyglot.t('transactions.Password') %>
+                <%= ob.vendor_order_confirmation.invoice.content_source.password ?
+                ob.vendor_order_confirmation.invoice.content_source.password : polyglot.t('transactions.None') %>
+              </div>
+              <% }else{ %>
+              <div class="txt-unleaded fontSize13 textOpacity75 marginTop4">
+                <%= polyglot.t('transactions.Password') %>
+                <%- polyglot.t('transactions.None') %>
+              </div>
+              <% } %>
+            <% } %>
+          </div>
+        </div>
+        <% if( ob.vendor_order_confirmation.invoice.content_source && ob.vendor_order_confirmation.invoice.content_source.url ) { %>
+        <div class="flexCol-4">
+          <a href="<%= ob.vendor_order_confirmation.invoice.content_source.url %>"
+             class="btn btn-txt pull-right custCol-secondary textOpacity1 js-externalLink tooltip"
+             data-tooltip="<%= ob.vendor_order_confirmation.invoice.content_source.url %>">
+              Open File <span class="ion-android-open fontSize10"></span>
+          </a>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+  <div class="js-main js-funds hide" style="height:319px">
+    <div class="flexRow" style="height: 314px;">
+      <div class="flexRow rowItem padding15 custCol-border borderBottom">
+        <div class="txt-unleaded">
+          <div class="marginTop12 marginBottom4 fontSize14 noOverflow">
+            <% if( ob.displayModerator) { %>
+              <%= polyglot.t('transactions.ModeratedTransaction') %>
+              <% if(ob.displayTotalPrice){ %>
+              <strong><span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+              <% } else if(ob.buyer_order.order.payment.amount){ %>
+              <strong><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
+              <% } else { %>
+              <strong><%= polyglot.t('Free') %></strong>
+              <% } %>
+            <% } else { %>
+              <%= polyglot.t('transactions.DirectTransaction') %>
+              <% if(ob.displayTotalPrice){ %>
+              <strong><span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+              <% } else if(ob.buyer_order.order.payment.amount){ %>
+              <strong><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
+              <% } else { %>
+              <strong><%= polyglot.t('Free') %></strong>
+              <% } %>
+            <% } %>
+          </div>
+        </div>
+        <% if(ob.bitcoin_txs && ob.bitcoin_txs[0]){ %>
+          <% if(config.testnet){ %>
+            <a href="https://live.blockcypher.com/btc-testnet/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
+          <% }else{ %>
+            <a href="https://live.blockcypher.com/btc/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
+          <% } %>
+          <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
+            <%= polyglot.t('transactions.ViewOnBlockchain') %>
+            <span class="ion-android-open fontSize10"></span>
+          </div>
+        </a>
+        <% } else if(ob.buyer_order.order.payment.address){ %>
+          <% if(config.testnet){ %>
+            <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap positionAbsolute right10">
+          <% }else{ %>
+            <a href="https://live.blockcypher.com/btc/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap positionAbsolute right10">
+          <% } %>
+            <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
+              <%= polyglot.t('transactions.ViewOnBlockchain') %>
+              <span class="ion-android-open fontSize10"></span>
+            </div>
+          </a>
+        <% } %>
+      </div>
+      <div class="scrollOverflowY customThemeScrollbar width100 noOverflow height254">
+        <div class="flexRow rowItem padding15 custCol-border borderBottom">
+          <div class="txt-unleaded width100">
+            <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
+              <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
+              <% if(ob.vendorAvatarURL && ob.transactionType == "purchases"){ %>
+              style="background-image: url(<%- ob.vendorAvatarURL %>), url(imgs/defaultUser.png);"
+              <% } else if(ob.transactionType == "sales"){ %>
+              style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"
+              <% } else { %>
+              style="background-image: url(imgs/defaultUser.png);"
+              <% } %>>
+              </div>
+            </a>
+            <div class="marginTop12 marginBottom4 fontSize14 noOverflow">
+              <%= polyglot.t('transactions.Vendor2') %>
+              <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
+                <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
+                  <%- ob.vendor_offer.listing.id.blockchain_id %>
+                <% } else { %>
+                  <%- ob.vendor_offer.listing.id.guid %>
+                <% } %>
+              </a>
+            </div>
+            <div class="fontSize13 noOverflow textOpacity75">
+              <% if(ob.displayTotalPrice){ %>
+              <strong>+<span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+              <% } else if(ob.buyer_order.order.payment.amount){ %>
+              <strong>+<%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
+              <% } else { %>
+              <strong><%= polyglot.t('Free') %></strong>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <div class="flexRow rowItem padding15 custCol-border borderBottom">
+          <div class="txt-unleaded width100">
+            <a href="#userPage/<%- ob.buyer_order.order.id.guid %>">
+              <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
+                <% if(ob.avatarURL && ob.transactionType == "purchases"){ %>
+                style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"
+                <% } else if(ob.buyerAvatarURL && ob.transactionType == "sales"){ %>
+                style="background-image: url(<%- ob.buyerAvatarURL %>), url(imgs/defaultUser.png);"
+                <% } else { %>
+                style="background-image: url(imgs/defaultUser.png);"
+                <% } %>>
+              </div>
+            </a>
+            <div class="marginTop12 marginBottom4 fontSize14 noOverflow">
+              <%= polyglot.t('transactions.Buyer2') %>
+              <a href="#userPage/<%- ob.buyer_order.order.id.guid %>">
+                <% if(ob.buyer_order.order.id.blockchain_id){ %>
+                <%- ob.buyer_order.order.id.blockchain_id %>
+                <% } else { %>
+                <%- ob.buyer_order.order.id.guid %>
+                <% } %>
+              </a>
+            </div>
+            <div class="fontSize13 noOverflow textOpacity75">
+              <% if(ob.displayTotalPrice){ %>
+              <strong>-<span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+              <% } else if(ob.buyer_order.order.payment.amount){ %>
+              <strong>-<%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
+              <% } else { %>
+              <strong><%= polyglot.t('Free') %></strong>
+              <% } %>
+            </div>
+  <!--           <% _.each(ob.bitcoin_txs, function(tx, i){ %>
+              <% if(tx.type == "incoming"){ %>
+                <div class="noOverflow width100 fontSize13 txt-fade">
+                  <div class="marginTop12 marginBottom4"><%= polyglot.t('transactions.transferReceipt') %>:</div>
+                  <div class="marginTop12 marginBottom4 fontSize10">
+                    <a href="https://blockchain.info/btc/tx/<%= ob.bitcoin_txs[i].txid %>" class="noWrap js-externalLink">
+                      <%= ob.bitcoin_txs[i].txid %>
+                    </a>
+                  </div>
+                  <div>
+                    <a class="js-copyIncommingTx" data-tx=<%= ob.bitcoin_txs[i].txid %>">
+                      <i class="ion-clipboard"></i> <%= polyglot.t('transactions.copyTxid') %>
+                    </a>
+                  </div>
+                </div>
+              <% } %>
+            <% }); %> -->
+
+          </div>
+        </div>
+        <!-- only display moderator if one is assigned -->
+        <% if( ob.displayModerator) { %>
+        <div class="flexRow">
+          <div class="flexCol-8">
+            <div class="rowItem padding2015">
+              <a href="#userPage/<%- ob.displayModerator.guid %>">
+                <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
+                  <% if(ob.displayModerator.avatar) { %>
+                  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.displayModerator.avatar %>&guid=<%- ob.displayModerator.guid %>), url(imgs/defaultUser.png);">
+                  <% } else { %>
+                  style="background-image: url(imgs/defaultUser.png);">
+                  <% } %>
+                </div>
+              </a>
+              <div class="pull-left">
+                <div class="marginTop12 marginBottom2 fontSize14">
+                  <%= polyglot.t('Moderator2') %> <a href="#userPage/<%- ob.displayModerator.guid %>"><%- ob.displayModerator.name %></a>
+                </div>
+                <div class="fontSize14 noOverflow textOpacity75">
+                  <%= polyglot.t('buyFlow.DisputeFee2') %> <%- ob.displayModerator.fee %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flexCol-4 custCol-border">
+            <% if(ob.displayModerator){ %>
+              <% if(ob.status == 1 && ob.transactionType == "purchases"){ %>
+              <div class="rowItem padding2015">
+                <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
+                  <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('transactions.DisputeTransaction') %>
+                </a>
+              </div>
+              <% } %>
+              <% if(ob.status == 2 || ob.status == 3){ %>
+              <div class="rowItem padding2015">
+                <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
+                  <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('transactions.DisputeTransaction') %>
+                </a>
+              </div>
+              <% } %>
+            <% } %>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="js-main js-discussion transactionDiscussionTab" style="height:319px">
+    <div class="scrollOverflowY js-discussionScroller customThemeScrollbar" style="height: 237px;">
+      <div class="js-discussionWrapperEmpty textOpacity50 fontSize14 marginTop80 alignCenter"><%= polyglot.t('transactions.NoMessages') %></div>
+      <div class="custCol-text js-discussionWrapper">
+      </div>
+    </div>
+    <div class="flexRow pad10Top width100 positionBottom custCol-secondary js-discussionForm border2 custCol-border-secondary">
+      <div class="pad10">
+        <div class="thumbnail thumbnail-small custCol-border-secondary borderRadius2 width40 height40"
+        <% if(ob.avatarURL) { %>
+        style="background-image: url(<%= ob.avatarURL %>), url(imgs/offlineUser.png);">
+        <% } else { %>
+        style="background-image: url(imgs/defaultUser.png);">
+        <% } %>
+        </div>
+      </div>
+      <form class="flexExpand" id="transactionDiscussionForm">
+        <textarea name="claim"
+                  rows="4"
+                  class=" custCol-text validatable border0 js-transactionDiscussionSendText"
+                  id="transactionDiscussionSendText"
+                  required
+                  placeholder="<%= polyglot.t('transactions.sendMessagePlaceholder') %>"></textarea>
+      </form>
+      <div class="pad10" style="width:140px">
+        <a class="btn btn-txt btn-wide custCol-primary pull-left js-sendDiscussionMessage height36">
+          <%= polyglot.t('transactions.SendMessage') %>
+        </a>
+
+        <% if(ob.transactionType == "cases" && ob.status == 4){ %>
+        <div>
+          <input type="checkbox" class="fieldItem"
+                 id="transactionsCloseDisputeCheckbox" >
+          <label for="transactionsCloseDisputeCheckbox" class="fontSize10 clickable compact minWidth120 marginLeft0 paddingLeft5">
+            <%= polyglot.t('transactions.CloseDispute') %>
+          </label>
+        </div>
+        <% } else if(ob.transactionType == "cases" && ob.status > 4){ %>
+        <div>
+          <a class="btn btn-small rowTop5 row5 width100 custCol-primary tooltip tooltip-box tooltip-boxUp js-closeDisputeResend" data-tooltip="<%= polyglot.t('transactions.CloseDisputeResendTooltip') %>">
+            <%= polyglot.t('transactions.CloseDisputeResend') %>
+          </a>
+        </div>
+        <% } else if(ob.status < 4  && ob.status != 0 && ob.displayModerator) { %>
+          <% if(ob.status == 2 || ob.staus == 3 || ob.status == 1 && ob.transactionType == "purchases"){ %>
+          <div class="js-startDisputeFlag">
+            <input type="checkbox" class="fieldItem"
+                   id="transactionStartDisputeCheckbox" >
+            <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable compact minWidth120 marginLeft0 padding0 tooltip-box tooltip-boxUp"
+                   data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>">
+              <%= polyglot.t('transactions.DisputeTransaction') %>
+            </label>
+          </div>
+          <% } %>
+        <% } else if(ob.status == 4 && ob.dispute && ob.dispute.info.guid == ob.userGuid) {%>
+        <div>
+          <a class="btn btn-small rowTop5 row5 width100 custCol-primary tooltip tooltip-box tooltip-boxUp js-startDisputeResend" data-tooltip="<%= polyglot.t('transactions.DisputeTransactionResendTooltip') %>">
+            <%= polyglot.t('transactions.DisputeTransactionResend') %>
+          </a>
+        </div>
+        <% } %>
+      </div>
+
+      <form class="width100 hide" id="transactionCloseDispute">
+        <div class="flexCol-12 flex-border custCol-border">
+          <div class="flexRow">
+            <div class="flexRow">
+              <div class="flexCol-12 borderRight custCol-border">
+                <div class="fieldItem fontSize11">
+                  <%= polyglot.t('transactions.TotalInTransaction') %>
+                  <strong>
+                    <%= ob.intlNumFormat(ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal, 8) %> BTC
+                  </strong>
+                  <div class="pull-right">
+                    <%= polyglot.t('transactions.YouEarn') %> <%= ob.intlNumFormat(ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal, 8) %> BTC
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <% if(ob.vendor_order_confirmation){ %>
+            <div class="flexRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem"><%= polyglot.t('transactions.BuyerAmount') %></div>
+              </div>
+              <div class="flexCol-8 borderRight custCol-border padding10">
+                <span class="marginRight10">
+                  <input type="number"
+                         id="transactionsBuyerPayoutPercent"
+                         max="100" min="0" step="0.1"
+                         style="width: 50px"
+                         value="50">%
+                </span>
+                <span id="transactionsBuyerPayoutBTC" class=""></span>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem"><%= polyglot.t('transactions.SellerAmount') %></div>
+              </div>
+              <div class="flexCol-8 borderRight custCol-border padding10">
+                <span class="marginRight10">
+                  <input type="number"
+                         id="transactionsSellerPayoutPercent"
+                         max="100" min="0" step="0.1"
+                         style="width: 50px"
+                         value="50">%
+                </span>
+                <span id="transactionsSellerPayoutBTC" class=""></span>
+              </div>
+            </div>
+            <% } else {%>
+            <div class="flexRow">
+              <div class="padding15">
+              <%= polyglot.t('transactions.PayoutOnlyBuyer') %>
+              </div>
+            </div>
+            <% } %>
+
+            <div class="flexRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem"><%= polyglot.t('transactions.YourBitcoinPaymentAddress') %></div>
+              </div>
+              <div class="flexCol-8 borderRight custCol-border padding10">
+                <input name="moderator_address"
+                       id="moderatorAddress"
+                       type="text"
+                       placeholder="<%= polyglot.t('Address') %>"
+                       class="fieldItem"
+                       pattern="<%= config.bitcoinValidationRegex %>"
+                       required
+                >
+                <% if(config.testnet) { %>
+                <div class="positionTopRight padding10">
+                  <span class="btn btn-txt custCol-secondary fontSize9">
+                    <%= polyglot.t('TestnetAddress') %>
+                  </span>
+                </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- currently not used
+  <div class="js-main js-refund hide">
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding10">
+        <div class="pad10left txt-unleaded">
+          <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
+            <strong><%= polyglot.t('transactions.RefundOrder') %></strong>
+          </div>
+        </div>
+      </div>
+      <form id="transactionRefundForm" class="flexRow scrollOverflowY custCol-border borderTop customThemeScrollbar" style="height: 269px">
+        <div class="flexRow custCol-border">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label for="inputReason"><%= polyglot.t('transactions.RefundReason') %></label>
+              <div class="note"><%= polyglot.t('maxLength200') %></div>
+            </div>
+          </div>
+          <div class="flexCol-8">
+              <textarea name="reason"
+                        rows="6"
+                        maxlength="200"
+                        class="fieldItem-textarea custCol-text"
+                        id="inputReason"
+                        placeholder="<%= polyglot.t('transactions.RefundReasonPlaceholder') %>"
+                        required></textarea>
+          </div>
+        </div>
+        <div class="width100 custCol-border borderTop">
+          <div class="ctrlGroup padding10 pull-right">
+            <a class="btn btn-large custCol-secondary js-refundOrder"><%= polyglot.t('Submit') %></a>
+          </div>
+          <div class="ctrlGroup padding10 pull-right">
+            <a class="btn btn-large custCol-secondary js-closeRefund"><%= polyglot.t('Close') %></a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>-->
 </div>
 
+<% } %>

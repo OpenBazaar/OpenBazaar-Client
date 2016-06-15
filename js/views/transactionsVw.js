@@ -79,10 +79,6 @@ module.exports = pageVw.extend({
     }
 
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
-    this.listenTo(window.obEventBus, "orderModalClosed", function(){
-      this.orderID = "";
-      this.getData();
-    });
 
     $('.js-loadingModal').removeClass("hide");
     getBTPrice(this.cCode, function(btAve){
@@ -483,14 +479,16 @@ module.exports = pageVw.extend({
 
   openOrderModal: function(options){
     $('.js-loadingModal').removeClass("hide");
+    
     if (options.status == "open"){
       options.status = 4;
     }
-    var orderModalView = new transactionModalVw({
+    
+    this.orderModalView && this.orderModalView.remove();
+    this.orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,
       serverUrl: this.serverUrl,
-      parentEl: $('#modalHolder'),
       countriesArray: this.countriesArray,
       cCode: this.userModel.get('currency_code'),
       btAve: this.btAve,
@@ -501,7 +499,14 @@ module.exports = pageVw.extend({
       userProfile: this.userProfile,
       socketView: this.socketView,
       unread: options.unread
+    }).on('loaded', () => {
+      this.orderModalView.render().open();
+    }).on('close', () => {
+      this.orderID = '';
+      this.getData();
+      this.orderModalView.remove();
     });
-    this.registerChild(orderModalView);
+
+    this.registerChild(this.orderModalView);
   }
 });

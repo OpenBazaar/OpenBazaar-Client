@@ -6,7 +6,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     saveToAPI = require('../utils/saveToAPI'),
     orderModel = require('../models/orderMd'),
-    baseVw = require('./baseVw'),
+    baseModal = require('./baseModal'),
     chatMessageView = require('./chatMessageVw'),
     qr = require('qr-encode'),
     app = require('../App.js').getApp(),
@@ -14,13 +14,12 @@ var __ = require('underscore'),
     discussionCl = require('../collections/discussionCl'),
     clipboard = require('clipboard');
 
-module.exports = baseVw.extend({
+module.exports = baseModal.extend({
 
-  className: "modal modal-opaque js-transactionModal",
+  className: "js-transactionModal insideApp",
 
   events: {
     'click .js-transactionModal': 'blockClicks',
-    'click .js-closeModal': 'closeModal',
     'click .js-summaryTab': 'clickSummaryTab',
     'click .js-shippingTab': 'clickShippingTab',
     'click .js-fundsTab': 'clickFundsTab',
@@ -103,7 +102,7 @@ module.exports = baseVw.extend({
       //userGuid: this.userModel.get('guid')
     });
     this.model.urlRoot = options.serverUrl + "get_order";
-    this.listenTo(this.model, 'change:priceSet', this.render);
+    this.listenTo(this.model, 'change:priceSet', () => this.trigger('loaded'));
     this.getData();
   },
 
@@ -167,7 +166,8 @@ module.exports = baseVw.extend({
         orderDue = 0;
 
     $('.js-loadingModal').addClass("hide");
-    //makde sure data is valid
+
+    //make sure data is valid
     if (this.model.get('invalidData')){
       self.registerChild(
         new Dialog({
@@ -186,27 +186,25 @@ module.exports = baseVw.extend({
     orderDue = orderPrice - orderPaid;
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
-      //hide the modal when it first loads
-      self.parentEl.html(self.$el);
-      self.$el.html(loadedTemplate(__.extend({}, self.model.toJSON(), {
-        unread: self.unread,
-        serverUrl: self.serverUrl,
-        bitcoinValidationRegex: window.config.bitcoinValidationRegex,
-        transactionType: self.transactionType,
-        userGuid: self.userModel.get('guid'),
-        status: self.status,
-        avatarURL: self.avatarURL,
-        avatar_hash: self.avatar_hash,
-        orderID: self.orderID,
-        orderPrice: orderPrice,
-        orderPaid: orderPaid,
-        orderDue: orderDue
-      })
+      self.$el.html(loadedTemplate(
+        __.extend({}, self.model.toJSON(), {
+          unread: self.unread,
+          serverUrl: self.serverUrl,
+          bitcoinValidationRegex: window.config.bitcoinValidationRegex,
+          transactionType: self.transactionType,
+          userGuid: self.userModel.get('guid'),
+          status: self.status,
+          avatarURL: self.avatarURL,
+          avatar_hash: self.avatar_hash,
+          orderID: self.orderID,
+          orderPrice: orderPrice,
+          orderPaid: orderPaid,
+          orderDue: orderDue
+        })
       ));
-      // add blur to container
-      $('#obContainer').addClass('modalOpen').scrollTop(0);
-      self.delegateEvents(); //reapply events if this is a second render
-      self.$el.parent().fadeIn(300);
+      
+      baseModal.prototype.render.apply(self);
+
       self.setState(self.tabState);
       if (self.status == 0){
         self.showPayment();
@@ -218,6 +216,8 @@ module.exports = baseVw.extend({
       var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false";
       self.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
     });
+
+    return this;
   },
 
   handleSocketMessage: function(response) {
@@ -429,7 +429,7 @@ module.exports = baseVw.extend({
 
     saveToAPI(targForm, '', this.serverUrl + "confirm_order",
         function(){
-          self.closeModal();
+          self.close();
           self.confirmStatus.updateMessage({
             type: 'confirmed',
             msg: '<i>' + window.polyglot.t('transactions.UpdateComplete') + '</i>'
@@ -841,11 +841,9 @@ module.exports = baseVw.extend({
     }
   },
 
-  closeModal: function(){
-    window.obEventBus.trigger("orderModalClosed");
-    this.$el.parent().fadeOut(300);
-    $('#obContainer').removeClass('modalOpen');
-    this.confirmStatus && this.confirmStatus.remove();
-    this.remove();
+  close: function() {
+    this.confirmStatus && this.confirmStatus.remove();    
+
+    baseModal.prototype.close.apply(this, arguments);
   }
 });
