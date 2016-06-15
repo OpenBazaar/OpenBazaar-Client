@@ -664,6 +664,7 @@ module.exports = pageVw.extend({
         this.setListingsAll();
       });
 
+      this.safeListingsDialog.render().open();
       setTimeout(() => this.registerChild(this.safeListingsDialog));
     }
   },

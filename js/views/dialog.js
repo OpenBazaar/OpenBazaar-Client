@@ -30,9 +30,12 @@ dialog. The buttons should be provided in the following format:
   }]
 }
 
-Please Note: This Dialog is designed for simple messages with optional buttons on the bottom. If
+Please Note: This Dialog is designed for simple messages with optional classes or buttons on the bottom. If
 you find that your situation needs custom markup, css (beyond the classes you can optionally pass in),
 and/or behavior (e.g. tabs, etc.), you should write a custom view and extend from the Base Modal.
+
+Also, if it's just a super simple message you need, please use simpleMessageModal instance attached to
+out app instance.
 */
 
 Dialog = baseModal.extend({
@@ -77,11 +80,6 @@ Dialog = baseModal.extend({
     }, options || {});
 
     this.options.removeOnClose && this.on('close', () => this.remove());
-    this.render().open();
-  },
-
-  onRoute: function() {
-    !this.isRemoved() && this.remove()
   },
 
   onBtnClick: function(e) {

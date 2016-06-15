@@ -8,7 +8,6 @@ var __ = require('underscore'),
     baseModal = require('./baseModal'),
     buyDetailsVw = require('./buyDetailsVw'),
     buyAddressesVw = require('./buyAddressesVw'),
-    Dialog = require('../views/dialog.js'),
     saveToAPI = require('../utils/saveToAPI'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
@@ -379,20 +378,16 @@ module.exports = baseModal.extend({
         self.buyAddressesView.render(selected);
       },
       error: function(){
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.serverError')
-          })
-        );
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.serverError')
+        });
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError'),
-              message: window.polyglot.t('errorMessages.badJSON')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
         }
       }
     });
@@ -455,12 +450,10 @@ module.exports = baseModal.extend({
           self.skipAddressCheck();
         },
         function () {
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError'),
-              message: window.polyglot.t('errorMessages.missingError') + '<br>' + window.polyglot.t('BitcoinReturnAddress')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.missingError') + '<br>' + window.polyglot.t('BitcoinReturnAddress')
+          });
         });
       } else {
         this.skipAddressCheck();
@@ -500,12 +493,10 @@ module.exports = baseModal.extend({
         bitCoinReturnAddr = this.$('#buyWizardBitcoinAddressInput').val();
 
     if (!this.$('#buyWizardQuantity')[0].checkValidity()){
-      self.registerChild(
-        new Dialog({
-          title: window.polyglot.t('errorMessages.serverError'),
-          message: window.polyglot.t('errorMessages.missingError')
-        })
-      );      
+      app.simpleMessageModal.open({
+        title: window.polyglot.t('errorMessages.serverError'),
+        message: window.polyglot.t('errorMessages.missingError')
+      });     
       return;
     }
 
@@ -549,13 +540,11 @@ module.exports = baseModal.extend({
           self.showPayAddress(data);
           self.cachePayData = data; //cache the data for the QR Details toggle
         } else {
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.contractError'),
-              message: window.polyglot.t('errorMessages.sellerError') + ' ' +
-                window.polyglot.t('errorMessages.checkPurchaseData') + '\n\n Reason: ' + data.reason
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.contractError'),
+            message: window.polyglot.t('errorMessages.sellerError') + ' ' +
+              window.polyglot.t('errorMessages.checkPurchaseData') + '\n\n Reason: ' + data.reason
+          })
 
           self.$('.js-buyWizardSpinner').addClass('hide');
           //re-enable form so they can try again

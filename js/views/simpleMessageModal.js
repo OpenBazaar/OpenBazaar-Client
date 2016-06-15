@@ -1,0 +1,67 @@
+'use strict';
+
+var loadTemplate = require('../utils/loadTemplate'),
+    baseModal = require('./baseModal');
+
+/*
+  Please Note: This Modal is designed for a very simple message (containing a title and a message body).
+  If you need something beyond that, check out the Dialog which will allow you to optionally pass in
+  classes as well as buttons. If you need something beyond that, please create a custom modal extending
+  from the baseModal.
+*/
+
+module.exports = baseModal.extend({
+  className: 'messageModal',
+
+  events: {
+  },
+
+  constructor: function(options) {
+    var events = {};
+
+    options = __.extend({
+      innerWrapperClass: 'modal-child modal-childMain color-primary custCol-primary padding20'
+    }, options || {});
+
+    baseModal.prototype.constructor.apply(this, [options].concat(Array.prototype.slice.call(arguments, 1)));
+  },
+
+  initialize: function(options) {
+    this.options = __.extend({
+      removeOnClose: true,
+      title: '',
+      message: ''
+    }, options || {});
+
+    this.options.removeOnClose && this.on('close', () => this.remove());
+    this.title = options.title;
+    this.message = options.message;
+  },
+
+  open: function(content) {
+    if (!content.title && !content.message) {
+      throw new Error('Please provide a title and / or message.');
+    }
+
+    if (content.title !== this.title || content.message !== this.message) {
+      this.title = content.title || '';
+      this.message = content.message || '';
+      this.render();
+    }
+
+    baseModal.prototype.open.apply(this);
+  },
+
+  render: function() {
+    loadTemplate('./js/templates/simpleMessageModal.html', (t) => {
+      this.$el.html(t({
+        title: this.title,
+        message: this.message
+      }));
+
+      baseModal.prototype.render.apply(this, arguments);
+    });
+
+    return this;
+  }
+});

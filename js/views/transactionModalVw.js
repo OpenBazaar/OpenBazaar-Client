@@ -10,7 +10,6 @@ var __ = require('underscore'),
     chatMessageView = require('./chatMessageVw'),
     qr = require('qr-encode'),
     app = require('../App.js').getApp(),
-    Dialog = require('../views/dialog.js'),
     discussionCl = require('../collections/discussionCl'),
     clipboard = require('clipboard');
 
@@ -118,28 +117,22 @@ module.exports = baseModal.extend({
         if (!response.invalidData && response.vendor_offer.listing){
           self.model.updateAttributes();
         } else {
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError')
+          });
         }
       },
       error: function (jqXHR, status, errorThrown) {
         if (status.status == 500){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.getError'),
-              message: '<i>' + window.polyglot.t('errorMessages.serverError') + '</i>'
-            })
-          );          
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.getError'),
+            message: '<i>' + window.polyglot.t('errorMessages.serverError') + '</i>'
+          });          
         } else {
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.getError'),
-              message: '<i>' + errorThrown.textStatus + '</i>'
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.getError'),
+            message: '<i>' + errorThrown.textStatus + '</i>'
+          });
         }
         console.log(jqXHR);
         console.log(status);
@@ -147,12 +140,10 @@ module.exports = baseModal.extend({
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError'),
-              message: window.polyglot.t('errorMessages.badJSON')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
         }
       }
     });
@@ -166,12 +157,10 @@ module.exports = baseModal.extend({
 
     //make sure data is valid
     if (this.model.get('invalidData')){
-      self.registerChild(
-        new Dialog({
-          title: window.polyglot.t('errorMessages.serverError'),
-          message: self.model.get('error')
-        })
-      );      
+      app.simpleMessageModal.open({
+        title: window.polyglot.t('errorMessages.serverError'),
+        message: self.model.get('error')
+      });      
       return;
     }
 
@@ -277,12 +266,10 @@ module.exports = baseModal.extend({
       dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
       this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
     } else {
-      this.registerChild(
-        new Dialog({
-          title: window.polyglot.t('errorMessages.getError'),
-          message: window.polyglot.t('errorMessages.serverError')
-        })
-      );     
+      app.simpleMessageModal.open({
+        title: window.polyglot.t('errorMessages.getError'),
+        message: window.polyglot.t('errorMessages.serverError')
+      });    
     }
   },
 
@@ -464,12 +451,10 @@ module.exports = baseModal.extend({
           self.getData();
         },
         function(data){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.getError'),
-              message: '<i>' + data.reason + '</i>'
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.getError'),
+            message: '<i>' + data.reason + '</i>'
+          });
         },
         completeData).always(() => {
           targBtn.removeClass('loading');
@@ -507,12 +492,10 @@ module.exports = baseModal.extend({
         self.addAllDiscussionMessages();
       },
       error: function (jqXHR, status, errorThrown) {
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.getError'),
-            message: '<i>' + errorThrown + '</i>'
-          })
-        );
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.getError'),
+          message: '<i>' + errorThrown + '</i>'
+        });
 
         console.log(jqXHR);
         console.log(status);
@@ -722,12 +705,10 @@ module.exports = baseModal.extend({
       }, '', discussionData);
     } else {
       this.$('#transactionDiscussionSendText').addClass("invalid");
-      this.registerChild(
-        new Dialog({
-          title: window.polyglot.t('errorMessages.saveError'),
-          message: window.polyglot.t('errorMessages.missingError')
-        })
-      );
+      app.simpleMessageModal.open({
+        title: window.polyglot.t('errorMessages.saveError'),
+        message: window.polyglot.t('errorMessages.missingError')
+      });
     }
   },
 
@@ -779,18 +760,14 @@ module.exports = baseModal.extend({
         self.getData();
       }, function (data) {
         if (data.reason == "Refund already processed for this order") {
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.refundAlreadySent')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.refundAlreadySent')
+          });
           $(e.target).addClass('hide'); //hide the button so it can't be pressed again
         } else {
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError')
+          });
         }
       }, refData).always(() => {
         $(e.target).removeClass('loading');

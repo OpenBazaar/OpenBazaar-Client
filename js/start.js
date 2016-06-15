@@ -47,6 +47,7 @@ var Polyglot = require('node-polyglot'),
     cCode = "",
     $html = $('html'),
     LoadingModal = require('./views/loadingModal'),
+    SimpleMessageModal = require('./views/SimpleMessageModal'),
     ServerConfigsCl = require('./collections/serverConfigsCl'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
@@ -423,8 +424,7 @@ var loadProfile = function(landingRoute, onboarded) {
               $('#sideBar').html(app.chatVw.render().el);
               startUpLoadingModal.remove();
 
-              // setting up a loadingModal instance that all views can
-              // make use of as necessary.
+              // setting up a loadingModal instance that can be used app-wide as necessary.
               app.loadingModal = new LoadingModal({
                 dismissOnOverlayClick: false,
                 dismissOnEscPress: false,
@@ -435,6 +435,16 @@ var loadProfile = function(landingRoute, onboarded) {
                 throw new Error('This instance of the loadingModal is globally shared ' +
                   'and should not be removed. When you are done with it, please close it.');
               };
+
+              // setting up a simpleMessageModal instance that can be used app-wide as necessary.
+              app.simpleMessageModal = new SimpleMessageModal({
+                removeOnClose: false
+              });
+              app.simpleMessageModal.__origRemove = app.simpleMessageModal.remove;
+              app.simpleMessageModal.remove = () => {
+                throw new Error('This instance of the simpleMessageModal is globally shared ' +
+                  'and should not be removed. When you are done with it, please close it.');
+              };              
 
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 

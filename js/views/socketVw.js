@@ -2,9 +2,7 @@
 
 var Backbone = require('backbone'),
     $ = require('jquery'),
-    app = require('../App.js').getApp(),
-    Dialog = require('../views/dialog.js');
-Backbone.$ = $;
+    app = require('../App.js').getApp();
 
 module.exports = Backbone.View.extend({
 
@@ -27,7 +25,7 @@ module.exports = Backbone.View.extend({
       };
     } catch (exception){
       console.log(socketAddress, window.polyglot.t('errorMessages.socketError') + "<br/><br/>" + exception);
-      new Dialog({
+      app.simpleMessageModal.open({
         title: 'The API WebSocket cannot be reached.',
         message: '<i>Interface will continue loading, but some functionality will not be available.</i>'
       });
@@ -51,7 +49,7 @@ module.exports = Backbone.View.extend({
   },
 
   socketError: function() {
-    new Dialog({
+    app.simpleMessageModal.open({
       title: 'The API WebSocket cannot be reached.',
       message: '<i>Interface will continue loading, but some functionality will not be available.</i>'
     });    

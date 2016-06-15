@@ -14,7 +14,7 @@ var __ = require('underscore'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
-    Dialog = require('../views/dialog.js'),
+    app = require('../App').getApp(),
     cropit = require('../utils/jquery.cropit'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
@@ -95,7 +95,7 @@ module.exports = pageVw.extend({
 
     this.loading = true;
     app.loadingModal.open();
-    
+
     this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
       switch (self.state) {
       case 'general':
@@ -190,12 +190,10 @@ module.exports = pageVw.extend({
       error: function(model, response){
         console.log(response);
 
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.getError'),
-            message: window.polyglot.t('errorMessaes.userError')
-          })
-        );
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.getError'),
+          message: window.polyglot.t('errorMessaes.userError')
+        });
       },
       complete: function() {
         if (!self.isRemoved()) {
@@ -732,12 +730,10 @@ module.exports = pageVw.extend({
         }, '', '', '',
         function(){
           //on invalid
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.saveError'),
-              message: window.polyglot.t('errorMessaes.missingError')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.saveError'),
+            message: window.polyglot.t('errorMessaes.missingError')
+          });
           self.scrollToFirstError(self.$('#generalForm'));
         }).always(function(){
           $saveBtn.removeClass('loading');
@@ -786,12 +782,10 @@ module.exports = pageVw.extend({
         self.refreshView();
       }, '', pageData, skipKeys, function(){
         //on invalid
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.saveError'),
-            message: window.polyglot.t('errorMessages.missingError')
-          })
-        );
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: window.polyglot.t('errorMessages.missingError')
+        });
 
         self.scrollToFirstError(self.$('#pageForm'));
       }).always(function(){
@@ -813,12 +807,10 @@ module.exports = pageVw.extend({
               function(data){
                 $saveBtn.removeClass('loading');
 
-                self.registerChild(
-                  new Dialog({
-                    title: window.polyglot.t('errorMessages.saveError'),
-                    message: '<i>' + data.reason + '</i>'
-                  })
-                );
+                app.simpleMessageModal.open({
+                  title: window.polyglot.t('errorMessages.saveError'),
+                  message: '<i>' + data.reason + '</i>'
+                });
               }, socialData);
         } else {
           checkSocialCount();
@@ -922,12 +914,10 @@ module.exports = pageVw.extend({
     onFail = (data) => {
       $saveBtn.removeClass('loading');
       self.scrollToFirstError(self.$('#storeForm'));
-      self.registerChild(
-        new Dialog({
-          title: window.polyglot.t('errorMessages.saveError'),
-          message: '<i>' + data.reason + '</i>'
-        })
-      );
+      app.simpleMessageModal.open({
+        title: window.polyglot.t('errorMessages.saveError'),
+        message: '<i>' + data.reason + '</i>'
+      });
     };
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
@@ -970,12 +960,10 @@ module.exports = pageVw.extend({
     //if form is partially filled out throw error
     if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
       if (!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.saveError'),
-            message: window.polyglot.t('errorMessaes.missingError')
-          })
-        );
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: window.polyglot.t('errorMessaes.missingError')
+        });
         $saveBtn.removeClass('loading');
         return;
       }
@@ -1037,12 +1025,10 @@ module.exports = pageVw.extend({
       processData: false,
       dataType: "json",
       error: function(){
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.saveError'),
-            message: '<i>' + window.polyglot.t('errorMessaes.serverError') + '</i>'
-          })
-        );
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: '<i>' + window.polyglot.t('errorMessaes.serverError') + '</i>'
+        });
       }
     });
   },
@@ -1060,12 +1046,10 @@ module.exports = pageVw.extend({
 
     connection.on('error', () => {
       $('#testSMTPButton').removeClass('loading');
-      this.registerChild(
-        new Dialog({
-          title: window.polyglot.t('errorMessages.smtpServerError'),
-          message: window.polyglot.t('errorMessaes.noSMTPConnection')
-        })
-      );
+      app.simpleMessageModal.open({
+        title: window.polyglot.t('errorMessages.smtpServerError'),
+        message: window.polyglot.t('errorMessaes.noSMTPConnection')
+      });
     });
 
     connection.connect(function() {
@@ -1078,19 +1062,15 @@ module.exports = pageVw.extend({
         pass: password
       }, (err) => {
         if (err) {
-          this.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.smtpServerError'),
-              message: window.polyglot.t('errorMessaes.badSMTPAuthentication')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.smtpServerError'),
+            message: window.polyglot.t('errorMessaes.badSMTPAuthentication')
+          });
         } else {
-          this.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.smtpServerSuccess'),
-              message: window.polyglot.t('errorMessaes.goodSMTPAuthentication')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.smtpServerSuccess'),
+            message: window.polyglot.t('errorMessaes.goodSMTPAuthentication')
+          });
         }
         $('#testSMTPButton').removeClass('loading');
       });
