@@ -1615,12 +1615,13 @@ UserPageVw = pageVw.extend({
     var storeWizardModel = new Backbone.Model();
     
     storeWizardModel.set(this.model.attributes);
-    $('#modalHolder').fadeIn(300);
+    this.storeWizardView && this.storeWizardView.remove();
     this.storeWizardView = new storeWizardVw({
       model: storeWizardModel,
-      parentEl: '#modalHolder',
       socketView: this.socketView
-    });
+    }).on('close', () => this.storeWizardView.remove())
+      .render()
+      .open();
     this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
     this.registerChild(this.storeWizardView);
   },

@@ -6,17 +6,17 @@ var Backbone = require('backbone'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
+    baseModal = require('./baseModal'),
     Taggle = require('taggle'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd');
 
-module.exports = Backbone.View.extend({
+module.exports = baseModal.extend({
 
-  classname: "storeWizard",
+  className: "storeWizard insideApp",
 
   events: {
     'click .js-storeWizardModal': 'blockClicks',
-    'click .js-closeStoreWizardModal': 'closeWizard',
     'click .js-storeWizardSave': 'saveWizard',
     'click .js-accordionNext': 'validateDescription',
     'blur input': 'validateInput',
@@ -25,7 +25,6 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options) {
     this.options = options || {};
-    this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
     if (this.model.get('page').profile.header_hash){
       this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
@@ -36,7 +35,6 @@ module.exports = Backbone.View.extend({
     });
     this.socketModeratorID = Math.random().toString(36).slice(2);
     this.moderatorCount = 0;
-    this.render();
   },
 
   initAccordion: function(targ){
@@ -93,32 +91,37 @@ module.exports = Backbone.View.extend({
 
     loadTemplate('./js/templates/storeWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      //append the view to the passed in parent
-      self.parentEl.append(self.$el).fadeIn(300);
-      self.initAccordion('.js-storeWizardAccordion');
-      self.setValues();
-      // add blur to container
-      $('#obContainer').addClass('modalOpen').scrollTop(0);
-      // fade the modal in after it loads and focus the input
-      self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
-      self.$el.find('#storeNameInput').focus();
-      self.socketView.getModerators(self.socketModeratorID);
-      
-      var editor = new MediumEditor('#aboutInput', {
-        placeholder: {
-          text: ''
-        },
-        toolbar: {
-          imageDragging: false
-        },
-        paste: {
-          cleanPastedHTML: false,
-          forcePlainText: false
-        }
+
+      baseModal.prototype.render.apply(self);
+
+      // since the modal is not in the DOM until it's opened and since
+      // some or all of the items below require the modal to be in the
+      // DOM, we'll execute the rest on the next open.
+      self.stopListening(self, self.nextOpen);
+      self.listenToOnce(self, 'open', self.nextOpen = () => {
+        self.initAccordion('.js-storeWizardAccordion');
+        self.setValues();
+        self.$el.find('#storeNameInput').focus();
+        self.socketView.getModerators(self.socketModeratorID);
+        
+        var editor = new MediumEditor('#aboutInput', {
+          placeholder: {
+            text: ''
+          },
+          toolbar: {
+            imageDragging: false
+          },
+          paste: {
+            cleanPastedHTML: false,
+            forcePlainText: false
+          }
+        });
+
+        editor.subscribe('blur', self.validateDescription);
       });
-      editor.subscribe('blur', self.validateDescription);
-      
     });
+
+    return this;
   },
 
   validateDescription: function() {
@@ -162,10 +165,6 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  closeWizard: function() {
-    this.close();
-  },
-
   validateInput: function(e) {
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
@@ -207,13 +206,5 @@ module.exports = Backbone.View.extend({
         self.trigger('storeCreated');
       }, '', modData);
     }, '', wizData);
-  },
-
-  close: function(){
-    $('#obContainer').removeClass('modalOpen');
-    $('#modalHolder').fadeOut(300, ()=> {
-      this.remove();
-    });
   }
-
 });
