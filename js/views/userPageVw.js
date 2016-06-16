@@ -1837,34 +1837,7 @@ UserPageVw = pageVw.extend({
           this.needsBlockedWarning && this.hideThisUser('blocked');
         });
     }
-
-    // this.$('.js-blockedWarning').fadeIn(100);
-    // $('#obContainer').addClass('innerModalOpen').scrollTop(0);
-    // this.$('.js-mainContainer').addClass('blurMore');
-    // if (reason == "blocked"){
-    //   this.$('.js-reasonBlocked').removeClass('hide');
-    //   this.$('.js-reasonNSFW').addClass('hide');
-    // } else if (reason == 'nsfw'){
-    //   this.$('.js-reasonBlocked').addClass('hide');
-    //   this.$('.js-reasonNSFW').removeClass('hide');
-    // }
   },
-
-  // clickShowNSFWContent: function(){
-  //   this.showNSFWContent = true;
-  //   this.showNSFW = true;
-  //   this.showBlockedUser();
-  //   if (this.state == "listing"){
-  //     this.renderItem(this.currentItemHash);
-  //   }
-  //   this.renderItems(this.cachedListings, true);
-  // },
-
-  // showBlockedUser: function(){
-  //   this.$('.js-blockedWarning').fadeOut(300);
-  //   $('#obContainer').removeClass('innerModalOpen');
-  //   this.$('.js-mainContainer').removeClass('blurMore');
-  // },
 
   remove: function(){
     // close colorbox to make sure the overlay doesnt remain open when going to a different page

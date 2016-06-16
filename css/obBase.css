@@ -329,11 +329,6 @@ h6, .h6 {
   position: relative;
 }
 
-/*#contentFrame.modalOpen #pageNav .badge {
-  display: none;
-}
-*/
-
 #pageNav {
   position: relative;
   -webkit-app-region: no-drag;
@@ -357,17 +352,6 @@ h6, .h6 {
   z-index: 0;
   box-sizing: border-box;
 }
-
-/*#obContainer.modalOpen,
-#obContainer.innerModalOpen {
-  overflow: hidden;
-   obContainer must also be set to scrollTop(0), otherwise the modal may be scrolled out of place 
-}*/
-
-/*#obContainer.modalOpen #content {
-  -webkit-filter: blur(1px);
-}
-*/
 
 #obContainer.customizeUserPage {
   overflow: hidden;
