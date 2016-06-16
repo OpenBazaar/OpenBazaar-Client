@@ -674,7 +674,7 @@ module.exports = pageVw.extend({
   },
 
   cancelView: function(){
-    Backbone.history.loadUrl();
+    app.router.refresh();
   },
 
   themeClick: function(e) {
