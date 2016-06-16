@@ -347,9 +347,16 @@ $(window).bind('keydown', function(e) {
 
     if (route !== null) {
       e.preventDefault();
-      Backbone.history.navigate(route, {
-        trigger: true
-      });
+
+      if (location.hash.startsWith('#' + route)) {
+        // Hard refresh if we're already on the page we're trying to route to
+        // so a cached page is not served.
+        app.router.refresh();
+      } else {
+        Backbone.history.navigate(route, {
+          trigger: true
+        });
+      }
     }
   }
 });
@@ -471,7 +478,19 @@ var loadProfile = function(landingRoute, onboarded) {
                 }).on('click-restart-now', () => {
                   location.reload();
                 }).render().open();
-              });              
+              });
+
+              // If navigating to a page you're already on, we'll hard refresh so
+              // a cached page is not served, which avoids the issue of it looking
+              // like nothing happened.
+              $(document).on('click', '[href^="#"]', (e) => {
+                var href = $(e.target).attr('href');
+
+                if (location.hash.startsWith(href)) {
+                  app.router.refresh();
+                  e.preventDefault();
+                }
+              });
 
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 
