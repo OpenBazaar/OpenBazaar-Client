@@ -1,7 +1,6 @@
 'use strict';
 
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
@@ -549,7 +548,7 @@ module.exports = baseModal.extend({
             title: window.polyglot.t('errorMessages.contractError'),
             message: window.polyglot.t('errorMessages.sellerError') + ' ' +
               window.polyglot.t('errorMessages.checkPurchaseData') + '\n\n Reason: ' + data.reason
-          })
+          });
 
           self.$('.js-buyWizardSpinner').addClass('hide');
           //re-enable form so they can try again

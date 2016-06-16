@@ -14,7 +14,6 @@ var __ = require('underscore'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
-    app = require('../App').getApp(),
     cropit = require('../utils/jquery.cropit'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
@@ -1031,12 +1030,11 @@ module.exports = pageVw.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-      }, function(){
-        self.scrollToFirstError(self.$('#moderatorForm'));
-      }, moderatorData).always(function(){
-        $saveBtn.removeClass('loading');
-      }
-    );
+    }, function(){
+      self.scrollToFirstError(self.$('#moderatorForm'));
+    }, moderatorData).always(function(){
+      $saveBtn.removeClass('loading');
+    });
 
     $.ajax({
       type: "POST",

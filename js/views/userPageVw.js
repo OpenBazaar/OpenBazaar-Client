@@ -326,12 +326,10 @@ UserPageVw = pageVw.extend({
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError'),
-              message: window.polyglot.t('errorMessages.badJSON')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
 
           throw new Error("The user profile data returned from the API has a parsing error.");
         }
@@ -677,21 +675,17 @@ UserPageVw = pageVw.extend({
       error: function () {
         if (self.isRemoved()) return;
 
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.notFoundError'),
-            message: window.polyglot.t('Items')
-          })
-        );        
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Items')
+        });       
       },
       complete: function (xhr, textStatus) {
         if (textStatus == 'parsererror') {
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError'),
-              message: window.polyglot.t('errorMessages.badJSON')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
           
           throw new Error("The listings data returned from the API has a parsing error.");
         }
@@ -710,12 +704,10 @@ UserPageVw = pageVw.extend({
       error: function () {
         if (self.isRemoved()) return;
 
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.notFoundError'),
-            message: window.polyglot.t('Reviews')
-          })
-        );        
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Reviews')
+        });       
       }
     });
   },
@@ -774,21 +766,17 @@ UserPageVw = pageVw.extend({
       error: function(){
         if (self.isRemoved()) return;
         
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.notFoundError'),
-            message: window.polyglot.t('Following')
-          })
-        ); 
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Following')
+        });
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError'),
-              message: window.polyglot.t('errorMessages.badJSON')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
 
           throw new Error("The following data returned from the API has a parsing error.");
         }
@@ -837,22 +825,18 @@ UserPageVw = pageVw.extend({
       error: function(){
         if (self.isRemoved()) return;
         
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.notFoundError'),
-            message: window.polyglot.t('Followers')
-          })
-        );        
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Followers')
+        });        
       },
       complete: function(xhr, textStatus) {
         self.fetchingFollowers = false;
         if (textStatus == 'parsererror'){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError'),
-              message: window.polyglot.t('errorMessages.badJSON')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
 
           throw new Error("The followers data returned from the API has a parsing error.");
         }
@@ -1070,21 +1054,17 @@ UserPageVw = pageVw.extend({
       error: function(){
         if (self.isRemoved()) return;
 
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.notFoundError'),
-            message: window.polyglot.t('Item')
-          })
-        );        
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Item')
+        });        
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError'),
-              message: window.polyglot.t('errorMessages.badJSON')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
 
           throw new Error("The contract data returned from the API has a parsing error.");
         }
@@ -1427,27 +1407,21 @@ UserPageVw = pageVw.extend({
               self.$el.find('.js-userPageBanner').css('background-image', 'url(' + serverUrl + "get_image?hash=" + imageHash + ')');
               self.saveUserPageModel();
             } else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-              self.registerChild(
-                new Dialog({
-                  title: window.polyglot.t('errorMessages.saveError'),
-                  message: window.polyglot.t('errorMessages.serverError')
-                })
-              );
+              app.simpleMessageModal.open({
+                title: window.polyglot.t('errorMessages.saveError'),
+                message: window.polyglot.t('errorMessages.serverError')
+              });
             } else {
-              self.registerChild(
-                new Dialog({
-                  title: window.polyglot.t('errorMessages.saveError'),
-                  message: window.polyglot.t('errorMessages.serverError')
-                })
-              );              
+              app.simpleMessageModal.open({
+                title: window.polyglot.t('errorMessages.saveError'),
+                message: window.polyglot.t('errorMessages.serverError')
+              });              
             }
           } else if (data.success === false){
-            self.registerChild(
-              new Dialog({
-                title: window.polyglot.t('errorMessages.serverError'),
-                message: '<i>' + data.reason + '</i>'
-              })
-            );            
+            app.simpleMessageModal.open({
+              title: window.polyglot.t('errorMessages.serverError'),
+              message: '<i>' + data.reason + '</i>'
+            });            
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -1511,12 +1485,10 @@ UserPageVw = pageVw.extend({
           //refresh the universal profile model
           self.globalUserProfile.fetch();
         } else if (data.success === false && !self.isRemoved()){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.serverError'),
-              message: '<i>' + data.reason + '</i>'
-            })
-          );          
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: '<i>' + data.reason + '</i>'
+          });          
         }
       },
       error: function(jqXHR, status, errorThrown){

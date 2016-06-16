@@ -1,7 +1,6 @@
 'use strict';
 
-var Backbone = require('backbone'),
-    $ = require('jquery'),
+var $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),

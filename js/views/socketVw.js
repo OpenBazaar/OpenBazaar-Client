@@ -1,7 +1,6 @@
 'use strict';
 
 var Backbone = require('backbone'),
-    $ = require('jquery'),
     app = require('../App.js').getApp();
 
 module.exports = Backbone.View.extend({

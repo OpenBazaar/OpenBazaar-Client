@@ -562,7 +562,7 @@ module.exports = pageVw.extend({
           .replace('%{tag}', `<span class="btn-pill color-secondary">${hashedItem}</span>`)
       );
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
-      this.$el.find('.js-homeSearchItems').val("#" + searchItemsText)
+      this.$el.find('.js-homeSearchItems').val("#" + searchItemsText);
       this.setState('products', searchItemsText);
     } else {
       this.searchItemsClear();

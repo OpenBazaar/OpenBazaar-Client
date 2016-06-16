@@ -1,7 +1,6 @@
 'use strict';
 
-var Backbone = require('backbone'),
-    $ = require('jquery'),
+var $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App').getApp(),
     saveToAPI = require('../utils/saveToAPI'),
@@ -20,7 +19,7 @@ module.exports = baseModal.extend({
     'blur input': 'validateInput'
   },
 
-  initialize: function(options){
+  initialize: function(){
     this.moderatorStatus = true;
     this.oldFeeValue = 0;
   },
@@ -113,7 +112,7 @@ module.exports = baseModal.extend({
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
-  onCloseClick: function(e) {
+  onCloseClick: function() {
     this.close();
   }
 });

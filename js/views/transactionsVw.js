@@ -114,12 +114,10 @@ module.exports = pageVw.extend({
                 self.renderTab("cases");
               },
               error: function(jqXHR, status, errorThrown){
-                self.registerChild(
-                  new Dialog({
-                    title: window.polyglot.t('errorMessages.getError'),
-                    message: '<i>' + errorThrown + '</i>'
-                  })
-                );
+                app.simpleMessageModal.open({
+                  title: window.polyglot.t('errorMessages.getError'),
+                  message: '<i>' + errorThrown + '</i>'
+                });
 
                 console.log(jqXHR);
                 console.log(status);
@@ -158,12 +156,10 @@ module.exports = pageVw.extend({
             });
           },
           error: function(jqXHR, status, errorThrown){
-            self.registerChild(
-              new Dialog({
-                title: window.polyglot.t('errorMessages.getError'),
-                message: '<i>' + errorThrown + '</i>'
-              })
-            );
+            app.simpleMessageModal.open({
+              title: window.polyglot.t('errorMessages.getError'),
+              message: '<i>' + errorThrown + '</i>'
+            });
 
             console.log(jqXHR);
             console.log(status);
@@ -172,12 +168,10 @@ module.exports = pageVw.extend({
         });
       },
       error: function(jqXHR, status, errorThrown){
-        self.registerChild(
-          new Dialog({
-            title: window.polyglot.t('errorMessages.getError'),
-            message: '<i>' + errorThrown + '</i>'
-          })
-        );
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.getError'),
+          message: '<i>' + errorThrown + '</i>'
+        });
 
         console.log(jqXHR);
         console.log(status);
@@ -420,11 +414,9 @@ module.exports = pageVw.extend({
           if (calls.length > 0){
             exportData(this.currentExportData);
           } else {
-            self.registerChild(
-              new Dialog({
-                title: window.polyglot.t('errorMessages.noData')
-              })
-            );            
+            app.simpleMessageModal.open({
+              title: window.polyglot.t('errorMessages.noData')
+            });           
           }
         });
   },

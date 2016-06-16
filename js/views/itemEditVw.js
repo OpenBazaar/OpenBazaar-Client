@@ -645,7 +645,7 @@ module.exports = baseVw.extend({
       inputName = (($label = self.$("label[for='"+$(this).attr('id')+"']")).length && $label.text()) ||
         $(this).attr('data-label') || $(this).attr('id');
 
-      invalidInputList.push(inputName.trim())
+      invalidInputList.push(inputName.trim());
     });
 
     invalidInputList = __.uniq(invalidInputList);

@@ -1,6 +1,7 @@
 'use strict';
 
-var loadTemplate = require('../utils/loadTemplate'),
+var __ = require('underscore'),
+    loadTemplate = require('../utils/loadTemplate'),
     baseModal = require('./baseModal');
 
 module.exports = baseModal.extend({

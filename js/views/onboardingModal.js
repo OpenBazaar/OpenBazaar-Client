@@ -277,7 +277,7 @@ module.exports = baseModal.extend({
 
     if (this.$('#storeNameInput').val() != ""){
       self.model.set('name', this.$('#storeNameInput').val());
-    } else if (self.model.get('name') == undefined){
+    } else if (typeof self.model.get('name') === 'undefined'){
         //otherwise error since the profile api needs the name parameter and as of now it is not set in the userMd.js
       self.model.set('name', "ob" + Math.random().toString(36).slice(2));
     }

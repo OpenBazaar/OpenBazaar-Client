@@ -95,12 +95,10 @@ module.exports = baseVw.extend({
   },
 
   deleteItemClick: function(e){
-    console.log("1")
     this.$(e.target).closest('.gridItemControls').find(".js-deleteOverlay").addClass("fadeIn");
   },
 
   cancelConfirmDelete: function(e){
-    console.log("2")
     e.stopPropagation();
     this.$(e.target).closest('.gridItemControls').find(".js-deleteOverlay").removeClass("fadeIn");
   },

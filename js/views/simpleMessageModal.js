@@ -1,6 +1,7 @@
 'use strict';
 
-var loadTemplate = require('../utils/loadTemplate'),
+var __ = require('underscore'),
+    loadTemplate = require('../utils/loadTemplate'),
     baseModal = require('./baseModal');
 
 /*
@@ -17,8 +18,6 @@ module.exports = baseModal.extend({
   },
 
   constructor: function(options) {
-    var events = {};
-
     options = __.extend({
       innerWrapperClass: 'modal-child modal-childMain color-primary custCol-primary padding20'
     }, options || {});
