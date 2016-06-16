@@ -147,6 +147,7 @@ module.exports = pageVw.extend({
       this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
 
     if (this.cachedScrollPositions[state]) this.$obContainer[0].scrollTop = this.cachedScrollPositions[state];
+    this.setTheme();
     this.setState(state);
   },
 
@@ -163,6 +164,14 @@ module.exports = pageVw.extend({
 
     this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
+  },
+
+  setTheme: function() {
+    var profile = this.userProfile.get('profile');
+
+    if (profile) {
+      setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
+    }
   },  
 
   fetchModel: function(){
@@ -170,10 +179,7 @@ module.exports = pageVw.extend({
     this.firstLoadModerators = true;
     this.userProfile.fetch({
       success: function(model) {
-        var profile = model.get('profile');
-        if (profile){
-          setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
-        }
+        self.setTheme();
         self.model.set({page: model.toJSON()});
         self.userModel.fetch({
           success: function(model){
