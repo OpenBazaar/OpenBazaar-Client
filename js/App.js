@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; 
 
 var ipcRenderer = require('ipc-renderer'),
     $ = require('jquery'),
