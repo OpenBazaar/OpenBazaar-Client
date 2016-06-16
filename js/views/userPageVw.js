@@ -565,7 +565,7 @@ UserPageVw = pageVw.extend({
     this.$el.find('.js-unfollow').removeClass('confirm');
     this.$el.find('.js-removemoderator').removeClass('confirm');
     this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
-    this.$obContainer[0].classList.remove("box-borderDashed", "noScrollBar", "overflowHidden");
+    this.$obContainer[0].classList.remove("customizeUserPage", "noScrollBar", "overflowHidden");
     //unhide the ones that are needed
     if (this.options.ownPage === true) {
       if (state === "listing" || state === "listingOld") {
@@ -576,7 +576,7 @@ UserPageVw = pageVw.extend({
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
         this.$el.find('.user-page-header-slim-bg-cover').addClass('user-page-header-slim-bg-cover-customize');
-        this.$obContainer[0].classList.add("box-borderDashed", "noScrollBar", "overflowHidden");
+        this.$obContainer[0].classList.add("customizeUserPage", "noScrollBar", "overflowHidden");
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
       }

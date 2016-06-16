@@ -370,7 +370,7 @@ h6, .h6 {
 #obContainer.customizeUserPage {
   overflow: hidden;
   border: 5px dashed #fff;
-  height: 100%;
+  height: calc(100% - 76px);
   animation: borderDashedFade .35s normal linear;
 }
 
