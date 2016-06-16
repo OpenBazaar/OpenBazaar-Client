@@ -262,7 +262,12 @@ module.exports = baseModal.extend({
     this.$buyWizardMap.find('iframe').addClass('blurMore');
 
     //set chosen inputs
-    $('.chosen').chosen({ search_contains: true });
+    $('.chosen').chosen({ 
+      search_contains: true,
+      no_results_text: window.polyglot.t('chosenJS.noResultsText'),
+      placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
+      placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
+    });
   },
 
   onAddressCancel: function() {
@@ -583,7 +588,7 @@ module.exports = baseModal.extend({
     this.$el.find('.js-buyWizardSpinner').addClass('hide');
     this.orderID = data.order_id;
     totalBTCPrice = data.amount - this.partialPaymentAmount;
-    this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(totalBTCPrice));
+    this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(totalBTCPrice, 8));
     this.payURL = data.payment_address;
     
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;

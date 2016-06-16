@@ -24,7 +24,7 @@ module.exports = pageVw.extend({
     'click .js-casesTab': 'tabHandler',
     'change .js-transactionFilter': 'transactionFilter',
     'keyup .search': 'searchKeyup',
-    'click .js-transactionsSearchClear': 'searchClear',
+    'click .js-transactionsSearchClear': 'searchClearClick',
     'click .js-downloadCSV': 'clickDownloadCSV',
     'change .js-toggleUnpaid': 'toggleUnpaid'
   },
@@ -59,8 +59,7 @@ module.exports = pageVw.extend({
     this.listenTo(window.obEventBus, "openOrderModal", function(options){
       self.openOrderModal(options);
     });
-    this.searchTransactions;
-    this.filterBy; //used for filtering the collections
+    this.filterBy = ''; //used for filtering the collections
     this.currentExportData = []; //used for export to CSV data
 
     this.countries = new countriesMd();
@@ -103,19 +102,16 @@ module.exports = pageVw.extend({
     var self = this;
 
     this.purchasesCol.fetch({
-      success: function(models){
-        self.renderTab("purchases", self.purchasesCol, self.purchasesWrapper);
-        models.length && self.setSearchList('transactionsPurchases');
+      success: function(){
+        self.renderTab("purchases");
         self.salesCol.fetch({
-          success: function(models){
+          success: function(){
             if (self.model.get('page').vendor) {
-              self.renderTab("sales", self.salesCol, self.salesWrapper);
-              models.length && self.setSearchList('transactionsSales');
+              self.renderTab("sales");
             }
             self.casesCol.fetch({
-              success: function(models) {
-                self.renderTab("cases", self.casesCol, self.casesWrapper);
-                models.length && self.setSearchList('transactionsCases');
+              success: function() {
+                self.renderTab("cases");
               },
               error: function(jqXHR, status, errorThrown){
                 self.registerChild(
@@ -199,10 +195,6 @@ module.exports = pageVw.extend({
     }
   },
 
-  setSearchList: function(targetID){
-    this.searchTransactions = new window.List(targetID, {valueNames: ['js-searchOrderID', 'js-searchPrice', 'js-searchUser', 'js-searchStatus', 'js-searchTitle'], page: 1000});
-  },
-
   render: function(){
     var self = this;
     loadTemplate('./js/templates/transactions.html', function(loadedTemplate) {
@@ -236,40 +228,39 @@ module.exports = pageVw.extend({
 
   tabHandler: function(e){
     var tab = $(e.target).closest('.js-tab'),
-        tabID = tab.data("tab"),
-        showContent = this.$el.find('.js-'+tabID);
+        tabID = tab.data("tab");
 
     this.filterBy = '';
-    this.setTab(tab, showContent);
     this.setState(tabID);
   },
 
-  searchKeyup: function(){
-    this.$('.js-transactionsSearchClear').removeClass('hide');
+  searchKeyup: function(e){
+    $(e.target).closest('.js-tabTarg').find('.js-transactionsSearchClear').removeClass('hide');
   },
 
-  searchClear: function(){
-    this.$('.search').val("");
-    this.$('.js-transactionsSearchClear').addClass('hide');
-    this.renderPurchases();
+  searchClearClick: function(e){
+    this.searchClear($(e.target).closest('.js-tabTarg'));
+  },
+
+  searchClear: function($targ){
+    $targ.find('.search').val("")
+        .end().find('.js-transactionsSearchClear').addClass('hide');
+    this['searchTransactions_'+this.state] && this['searchTransactions_'+this.state].search();
   },
 
   transactionFilter: function(e){
-    var tab = $(e.target),
-        tabTarget = tab.data("tab");
+    var searchBy = $(e.target).val();
 
-    this.filterBy = tab.val();
-    this.$('.js-'+tabTarget+' .search').val("");
-    switch (tabTarget){
-    case "purchases":
-      this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper);
-      break;
-    case "sales":
-      this.renderTab("sales", this.salesCol, this.salesWrapper);
-      break;
-    case "cases":
-      this.renderTab("cases", this.casesCol, this.casesWrapper);
-      break;
+    if (searchBy == 'dateNewest' || searchBy == 'dateOldest'){
+      this.filterBy = searchBy;
+      this.$('.js-'+this.state+' .search').val("");
+      this.renderTab(this.state);
+    } else if (searchBy != "all"){
+      this['searchTransactions_'+this.state] && this['searchTransactions_'+this.state].filter(function(item) {
+        return item.values().js_searchStatusNum == searchBy;
+      });
+    } else {
+      this['searchTransactions_'+this.state] && this['searchTransactions_'+this.state].filter();
     }
   },
 
@@ -279,24 +270,27 @@ module.exports = pageVw.extend({
 
     if (localStorage.getItem('showUnpaid_'+tabTarget) == "true"){
       localStorage.setItem('showUnpaid_'+tabTarget, "false");
+      this[tabTarget + "Wrapper"].addClass("hideChildren");
     } else {
       localStorage.setItem('showUnpaid_'+tabTarget, "true");
-    }
-    switch (tabTarget){
-    case "purchases":
-      this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper);
-      break;
-    case "sales":
-      this.renderTab("sales", this.salesCol, this.salesWrapper);
-      break;
+      this[tabTarget + "Wrapper"].removeClass("hideChildren");
     }
   },
 
-  renderTab: function(tabName, tabCollection, tabWrapper, filterBy){
+  renderTab: function(tabName, filterBy){
 
-    var self = this;
+    var self = this,
+        tabCollection = this[tabName + "Col"],
+        tabWrapper = this[tabName + "Wrapper"];
+
     filterBy = filterBy || this.filterBy;
     tabWrapper.html('');
+    if (localStorage.getItem('showUnpaid_'+tabName) == "true"){
+      tabWrapper.removeClass("hideChildren");
+    } else {
+      tabWrapper.addClass("hideChildren");
+    }
+
     if (!filterBy || filterBy == "all"){
       tabCollection.comparator = function(model) {
         //add 1 so unread:zero doesn't get dropped from the front of the string when it's changed to a number by the -
@@ -317,12 +311,10 @@ module.exports = pageVw.extend({
       tabCollection.sort();
     }
     tabCollection.each(function(model){
-      if (model.get('status') > 0 || localStorage.getItem('showUnpaid_'+tabName) == "true") {
-        if (!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest") {
-          self.addTransaction(model, tabWrapper, tabName);
-        } else if (filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
-          self.addTransaction(model, tabWrapper, tabName);
-        }
+      if (!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest") {
+        self.addTransaction(model, tabWrapper, tabName);
+      } else if (filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
+        self.addTransaction(model, tabWrapper, tabName);
       }
     });
 
@@ -334,8 +326,21 @@ module.exports = pageVw.extend({
         .end().find('.js-loadingMsg').addClass('hide');
 
     if (!tabCollection.length) {
-      this.$el.find('.js-'+tabName + ' .js-emptyMsg').removeClass('hide');
+      this.$el.find('.js-' + tabName + ' .js-emptyMsg').removeClass('hide');
     }
+
+    if (!tabWrapper.children().length){
+      //if no transactions are visible, clear the search cache, or it will show old items as results
+      this['searchTransactions_'+tabName] && this['searchTransactions_'+tabName].size() && this['searchTransactions_'+tabName].clear();
+    } else {
+      if (this['searchTransactions_'+tabName]){
+        this['searchTransactions_'+tabName].reIndex();
+      } else {
+        this['searchTransactions_'+tabName] = new window.List('transactions' + tabName.charAt(0).toUpperCase() + tabName.substr(1), {valueNames: ['js-searchOrderID', 'js-searchPrice', 'js-searchUser', 'js-searchStatus', 'js-searchTitle', 'js_searchStatusNum'], page: 1000});
+      }
+    }
+    //clear any search text and hide the button
+    this.searchClear(this.$('.js-'+tabName));
   },
 
   addTransaction: function(model, tabWrapper, type){

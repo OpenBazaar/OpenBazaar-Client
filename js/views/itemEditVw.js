@@ -1,7 +1,6 @@
 'use strict';
 
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     $ = require('jquery'),
     app = require('../App').getApp(),
     loadTemplate = require('../utils/loadTemplate'),
@@ -114,7 +113,10 @@ module.exports = baseVw.extend({
         //set chosen inputs
         self.$('.chosen').chosen({
           width: '100%',
-          search_contains: true
+          search_contains: true,
+          no_results_text: window.polyglot.t('chosenJS.noResultsText'),
+          placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
+          placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
         }).change(function(e){
           self.shipsToChange(e);
         });
@@ -122,7 +124,10 @@ module.exports = baseVw.extend({
         self.$('.chosenRegions').chosen({
           width: '100%',
           disable_search: true,
-          search_contains: true
+          search_contains: true,
+          no_results_text: window.polyglot.t('chosenJS.noResultsText'),
+          placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
+          placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
         });
       }, 0);
 
@@ -414,7 +419,7 @@ module.exports = baseVw.extend({
           self.$el.find('.js-itemEditImageLoading').addClass('fadeOut');
 
           app.simpleMessageModal.open({
-            title: window.polyglot.t('errorMessages.unableToLoadImages')
+            title: window.polyglot.t('errorMessages.unableToLoadImages', {smart_count: imageCount})
           });
         } else if (loaded === imageCount) {
           self.uploadImage(imageList);

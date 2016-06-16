@@ -279,6 +279,7 @@ UserPageVw = pageVw.extend({
       //set page ID to be the user's own ID
       this.pageID = this.userID;
       this.options.ownPage = true;
+      this.showNSFWContent = true;
     } else {
       this.options.ownPage = false;
       this.userProfileFetchParameters = $.param({'guid': this.pageID});
@@ -398,7 +399,7 @@ UserPageVw = pageVw.extend({
           self.needsBlockedWarning = true;
         }
 
-        if (!self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
+        if (!self.options.ownPage && !self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
           self.needsNSFWWarning = true;
         }
 
@@ -878,7 +879,7 @@ UserPageVw = pageVw.extend({
     model = model || [];
     __.each(model, function (arrayItem) {
 
-      if (arrayItem.nsfw && !self.showNSFWContent && !self.showNSFW &&!skipNSFWmodal){
+      if (!self.showNSFWContent && !self.showNSFW &&!skipNSFWmodal && arrayItem.nsfw){
         arrayItem.cloak = true;
       } else {
         arrayItem.cloak = false;

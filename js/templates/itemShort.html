@@ -72,7 +72,7 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
             <div class="gridItemOverlay custCol-primary custCol-border fadeOut js-deleteOverlay">
               <span>Are you sure?</span>
               <div>
-                <a class="fontSize12 fontWeight400 textOpacity75 js-itemShortDeleteCancel"><%= polyglot.t('Cancel') %></a>
+                <a class="btn btn-txt btn-txtOnly fontSize12 fontWeight400 textOpacity75 js-itemShortDeleteCancel"><%= polyglot.t('Cancel') %></a>
                 <a class="btn btn-txt custCol-secondary marginLeft5 fontSize13 js-itemShortDeleteConfirm"><%= polyglot.t('YesDelete') %></a>
               </div>
             </div>
@@ -103,7 +103,7 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
     </div>
   <% } %>
 
-  <% if(!shipsToYou && ob.ships_to.length != 0){ %>
+  <% if(!shipsToYou && ob.ships_to.length != 0 && !ob.ownPage){ %>
     <div class="listingDoesNotShipToYou cursorDefault tooltip" data-tooltip="<%= polyglot.t('DoesNotShip') %>">
       <span class="ion-cube fontSize14 marginLeft05 positionWrapper" style="color: #DCDCDC" ></span>
       <span class="listingsDoesNotShipToYouSlash">/</span>

@@ -8,7 +8,7 @@ module.exports = baseVw.extend({
 
   tagName: "li",
 
-  className: "flexRow custCol-border",
+  className: "flexRow custCol-border js-orderShort",
 
   events: {
     'click .js-orderShort': 'orderSummary',
@@ -19,7 +19,7 @@ module.exports = baseVw.extend({
 
   initialize: function(){
     var timestamp = this.model.get('timestamp');
-    this.model.set('order_date', moment(new Date(timestamp*1000)).format('MMM D, h:mm A'));
+    this.model.set('order_date', moment(new Date(timestamp*1000)).locale(window.lang).format('MMM D, h:mm A'));
   },
 
   render: function(){

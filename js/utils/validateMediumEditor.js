@@ -25,9 +25,6 @@ function checkVal($field) {
     allowedAttributes: {
       'a': [ 'href', 'title', 'alt' ],
       'img': [ 'src', 'style']
-    },
-    exclusiveFilter: function(frame) {
-      return frame.tag === 'p' && !frame.text.trim();
     }
   });
   
