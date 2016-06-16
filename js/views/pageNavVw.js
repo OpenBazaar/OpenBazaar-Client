@@ -463,8 +463,14 @@ module.exports = baseVw.extend({
   },
 
   getUnreadNotifCount: function() {
-    return this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount() -
+    var count;
+
+    count = this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount() -
       this.fetchNotifsMarkedAsRead || 0;
+
+    // fudge fix! sometimes the count is coming back as -1 and we can't reproduce it
+    // nor track down why, so we're reluctantly fudging it.
+    return count < 0 ? 0 : count;
   },
 
   onNotifMenuOpen: function() {
