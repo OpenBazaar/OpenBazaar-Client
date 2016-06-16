@@ -1,7 +1,10 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
+    pageVw = require('./pageVw'),
     domUtils = require('../utils/dom'),
     app = require('../App.js').getApp(),
     timezonesModel = require('../models/timezonesMd'),
@@ -16,14 +19,14 @@ var __ = require('underscore'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
     saveToAPI = require('../utils/saveToAPI'),
+    SMTPConnection = require('smtp-connection'),
     MediumEditor = require('medium-editor'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
-    getBTPrice = require('../utils/getBitcoinPrice'),
-    ServerConnectModal = require('./serverConnectModal');
+    getBTPrice = require('../utils/getBitcoinPrice');
 
-module.exports = Backbone.View.extend({
+module.exports = pageVw.extend({
 
-  className: "settingsView",
+  className: "settingsView contentWrapper",
 
   events: {
     'click .js-generalTab': 'tabClick',
@@ -34,17 +37,18 @@ module.exports = Backbone.View.extend({
     'click .js-moderatorTab': 'tabClick',
     'click .js-advancedTab': 'tabClick',
     'click .js-cancelGeneral': 'cancelView',
-    'click .js-saveGeneral': 'saveGeneral',
+    'click .js-saveGeneral': 'saveGeneralClick',
     'click .js-cancelPage': 'cancelView',
-    'click .js-savePage': 'savePage',
+    'click .js-savePage': 'savePageClick',
     'click .js-cancelAddress': 'cancelView',
-    'click .js-saveAddress': 'saveAddress',
+    'click .js-saveAddress': 'saveAddressClick',
     'click .js-cancelStore': 'cancelView',
-    'click .js-saveStore': 'saveStore',
+    'click .js-saveStore': 'saveStoreClick',
     'click .js-cancelModerator': 'cancelView',
-    'click .js-saveModerator': 'saveModerator',
+    'click .js-saveModerator': 'saveModeratorClick',
     'click .js-cancelAdvanced': 'cancelView',
-    'click .js-saveAdvanced': 'saveAdvanced',
+    'click .js-saveAdvanced': 'saveAdvancedClick',
+    'click .js-testSMTP': 'testSMTPClick',
     'click .js-changeServerSettings': 'launchServerConfig',
     'change .js-settingsThemeSelection': 'themeClick',
     'click .js-settingsAddressDelete': 'addressDelete',
@@ -53,7 +57,9 @@ module.exports = Backbone.View.extend({
     'click #moderatorNo': 'hideModeratorFeeHolder',
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
-    'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
+    'click #advancedForm input[name="minEffects"]': 'toggleFancyStyles',
+    'click #advancedForm input[name="useTestnet"]': 'toggleTestnet',
+    'change #advancedForm input[name="appBarStyle"]': 'changeAppBarStyle',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'change #handle': 'handleChange',
@@ -62,6 +68,8 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options){
     var self = this;
+
+    $('.js-loadingModal').removeClass('hide');
     this.options = options || {};
     /* expected options:
      userModel
@@ -73,15 +81,41 @@ module.exports = Backbone.View.extend({
     this.serverUrl = options.userModel.get('serverUrl');
     this.userModel = this.options.userModel;
     this.model = new Backbone.Model();
-    this.subViews = [];
+    this.subViews = []; //TODO: get rid of subviews, submodels, use proper remove method
     this.subModels = [];
     this.subModels.push(this.userProfile);
+    this.cachedScrollPositions = {};
+
+    this.shownMods = []; //array of mods that have been shown, used to prevent duplicates
 
     this.moderatorFeeInput;
     this.moderatorFeeHolder;
     this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
 
     this.firstLoadModerators = true;
+    
+    this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
+      switch (self.state) {
+      case 'general':
+        self.saveGeneral();
+        break;
+      case 'page':
+        self.savePage();
+        break;
+      case 'store':
+        self.saveStore();
+        break;
+      case 'addresses':
+        self.saveAddress();
+        break;
+      case 'moderator':
+        self.saveModerator();
+        break;
+      case 'advanced':
+        self.saveAdvanced();
+        break;
+      }
+    });
 
     this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
@@ -90,10 +124,42 @@ module.exports = Backbone.View.extend({
     this.moderatorCount = 0;
 
     this.fetchModel();
+
+    this.$obContainer = $('#obContainer');
+
+    this.listenTo(app.router, 'cache-will-detach', this.onCacheWillDetach);
+    this.listenTo(app.router, 'cache-detached', this.onCacheDetached);
+    this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);    
   },
 
+  onCacheReattached: function(e) {
+    var splitRoute = e.route.split('/'),
+        state = splitRoute[1];
+
+    if (e.view !== this) return;
+    state = state || this.state;
+
+    this.blockedUsersScrollHandler &&
+      this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
+
+    if (this.cachedScrollPositions[state]) this.$obContainer[0].scrollTop = this.cachedScrollPositions[state];
+    this.setState(state);
+  },
+
+  onCacheWillDetach: function(e) {
+    if (e.view !== this) return;
+
+    this.cachedScrollPositions[this.state] = this.$obContainer[0].scrollTop;
+  },
+
+  onCacheDetached: function(e) {
+    if (e.view !== this) return;
+
+    this.blockedUsersScrollHandler &&
+      this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
+  },  
+
   fetchModel: function(){
-    "use strict";
     var self = this;
     this.firstLoadModerators = true;
     this.userProfile.fetch({
@@ -105,15 +171,12 @@ module.exports = Backbone.View.extend({
         self.model.set({page: model.toJSON()});
         self.userModel.fetch({
           success: function(model){
-            "use strict";
             self.model.set({user: model.toJSON()});
 
             //use default currency to return list of supported currencies
             getBTPrice("USD", function (btAve, currencyList) {
-              "use strict";
               self.availableCurrenciesList = currencyList;
               self.render();
-              $('.js-loadingModal').removeClass('show');
             });
           }
         });
@@ -121,13 +184,19 @@ module.exports = Backbone.View.extend({
       error: function(model, response){
         console.log(response);
         messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
+      },
+      complete: function() {
+        if (!self.isRemoved()) {
+          $('.js-loadingModal').addClass('hide');
+        }
       }
     });
   },
 
   render: function(){
     var self = this;
-    $('#content').html(self.$el);
+    this.shownMods = []; //reset to blank 
+    
     loadTemplate('./js/templates/settings.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.delegateEvents(); //delegate again for re-render
@@ -138,13 +207,21 @@ module.exports = Backbone.View.extend({
       self.blockedTabAccessed = false;
       self.setState(self.options.state);
 
-      $(".chosen").chosen({ width: '100%' });
+      $(".chosen").chosen({
+        width: '100%',
+        search_contains: true,
+        no_results_text: window.polyglot.t('chosenJS.noResultsText'),
+        placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
+        placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
+      });
       $('#settings-image-cropper').cropit({
         $preview: self.$('.js-settingsAvatarPreview'),
         $fileInput: self.$('#settingsAvatarInput'),
         smallImage: "stretch",
         maxZoom: 2,
-        onFileReaderError: function(data){console.log(data);},
+        onFileReaderError: function(data){
+          console.log(data);
+        },
         onImageLoading: function(){
           self.$('.cropit-image-zoom-input').removeClass('hide');
           self.newAvatar = true;
@@ -159,9 +236,11 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
-      self.moderatorFeeInput = self.$('#moderatorFeeInput');
-      self.moderatorFeeHolder = self.$('.js-settingsModeratorFee');
-      if(self.model.get('page').profile.avatar_hash){
+      //cache elements used more than once
+      self.$moderatorFeeInput = self.$('#moderatorFeeInput');
+      self.$moderatorFeeHolder = self.$('.js-settingsModeratorFee');
+
+      if (self.model.get('page').profile.avatar_hash){
         $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
         self.newAvatar = false;
       }
@@ -172,13 +251,15 @@ module.exports = Backbone.View.extend({
         smallImage: "stretch",
         exportZoom: 1.33,
         maxZoom: 5,
-        onFileReaderError: function(data){console.log(data);},
+        onFileReaderError: function(data){
+          console.log(data);
+        },
         onImageLoading: function(){
           self.newBanner = true;
-          self.$el.find('.js-bannerLoading').removeClass('fadeOut');
+          self.$('.js-bannerLoading').removeClass('fadeOut');
         },
         onImageLoaded: function(){
-          self.$el.find('.js-bannerLoading').addClass('fadeOut');
+          self.$('.js-bannerLoading').addClass('fadeOut');
         },
         onImageError: function(errorObject, errorCode, errorMessage){
           console.log(errorObject);
@@ -186,7 +267,7 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
-      if(self.model.get('page').profile.header_hash){
+      if (self.model.get('page').profile.header_hash){
         $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
         self.newBanner = false;
       }
@@ -196,21 +277,11 @@ module.exports = Backbone.View.extend({
           text: ''
         },
         toolbar: {
-          imageDragging: false,
-          buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
+          imageDragging: false
         },
         paste: {
-          cleanPastedHTML: true,
-          cleanReplacements: [
-            [new RegExp(/<div>/gi), '<p>'],
-            [new RegExp(/<\/div>/gi), '</p>'],
-            [new RegExp(/<font>/gi), ""],
-            [new RegExp(/<\/font>/gi), ""],
-            [new RegExp(/<code>/gi), '<pre>'],
-            [new RegExp(/<\/code>/gi), '</pre>']
-          ],
-          cleanAttrs: ['class', 'style', 'dir', 'color', 'face', 'size', 'align', 'border', 'background', 'opacity'],
-          cleanTags: ['meta', 'style', 'script', 'center', 'basefont', 'frame', 'iframe', 'frameset' ]
+          cleanPastedHTML: false,
+          forcePlainText: false
         }
       });
       editor.subscribe('blur', self.validateDescription);
@@ -218,7 +289,7 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
-  validateDescription: function(e) {
+  validateDescription: function() {
     validateMediumEditor.checkVal(this.$('#about'));
   },
 
@@ -235,9 +306,8 @@ module.exports = Backbone.View.extend({
         model.parse = function (response) {
           if (response.profile) {
             return model.oldParse(response).profile;
-          } else {
-            return response;
           }
+          return response;
         };
 
         model.fetch({ data: { guid: model.get('guid')} });
@@ -248,8 +318,6 @@ module.exports = Backbone.View.extend({
   renderBlocked: function(options) {
     var self = this,
         modelsPerBatch = 5,
-        $lazyLoadTrigger,
-        $blockedForm,
         blockedUsersCl,
         $blockedContainer;
 
@@ -275,7 +343,7 @@ module.exports = Backbone.View.extend({
 
     function getBlockedGuids() {
       return self.userModel.get('blocked_guids').map(function(guid) {
-        return { guid: guid }
+        return { guid: guid };
       });
     }
 
@@ -321,13 +389,12 @@ module.exports = Backbone.View.extend({
     });
 
     // implement scroll based lazy loading of blocked users
-    this.$obContainer = this.$obContainer || $('#obContainer');
     this.blockedUsersScrollHandler && this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
     this.blockedUsersScrollHandler = __.throttle(function() {
       var colLen;
 
       if (
-          self.getState() === 'blocked' &&
+          self.state === 'blocked' &&
           blockedUsersCl.length < getBlockedGuids().length &&
           domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
       ) {
@@ -339,7 +406,7 @@ module.exports = Backbone.View.extend({
 
         self.patchAndFetchBlockedUsers(
             blockedUsersCl.slice(colLen, colLen + modelsPerBatch)
-        )
+        );
       }
     }, 200);
 
@@ -353,16 +420,17 @@ module.exports = Backbone.View.extend({
         timezones = new timezonesModel(),
         languages = new languagesModel(),
         countryList = countries.get('countries'),
-        currecyList = countries.get('countries'),
+        currencyList = countries.get('countries'),
         timezoneList = timezones.get('timezones'),
         languageList = languages.get('languages'),
-        country = this.$el.find('#country'),
-        ship_country = this.$el.find('#settingsShipToCountry'),
-        currency = this.$el.find('#currency_code'),
-        timezone = this.$el.find('#time_zone'),
-        language = this.$el.find('#language'),
+        country = this.$('#country'),
+        ship_country = this.$('#settingsShipToCountry'),
+        currency = this.$('#currency_code'),
+        timezone = this.$('#time_zone'),
+        language = this.$('#language'),
+        generalForm = this.$('#generalForm'),
+        advancedForm = this.$('#advancedForm'),
         user = this.model.get('user'),
-        avatar = user.avatar_hash,
         ship_country_str = "",
         country_str = "",
         currency_str = "",
@@ -372,57 +440,74 @@ module.exports = Backbone.View.extend({
         notifications = user.notifications,
         moderatorStatus = this.model.get('page').profile.moderator,
         vendorStatus = this.model.get('page').profile.vendor,
-        fancyStatus = window.localStorage.getItem('notFancy');
+        fancyStatus = window.localStorage.getItem('minEffects'),
+        smtp_notifications = user.smtp_notifications == 1;
 
-    this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
-    this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
-    this.$("#generalForm input[name=notifications][value=" + notifications + "]").prop('checked', true);
-    this.$("#storeForm input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
-    this.$("#advancedForm input[name=notFancy][value=" + fancyStatus + "]").prop('checked', true);
+    this.$("#pageForm").find("input[name=nsfw]").val([String(pageNSFW)]);
+    generalForm.find("input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
+    generalForm.find("input[name=notifications][value=" + notifications + "]").prop('checked', true);
+    this.$("#storeForm").find("input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
+    advancedForm.find("input[name=minEffects][value=" + fancyStatus + "]").prop('checked', true);
+    advancedForm.find("input[name=additionalPaymentData][value=" + localStorage.getItem('AdditionalPaymentData') + "]").prop('checked', true);
+    advancedForm.find("input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
+    advancedForm.find("input[name=smtp_notifications][value=" + smtp_notifications + "]").prop('checked', true);
+    advancedForm.find("input[name=appBarStyle][value=" + app.appBar.getStyle() + "]").prop('checked', true);
 
-    currecyList = __.uniq(currecyList, function(item){return item.code;});
-    currecyList = currecyList.sort(function(a,b){
-      var cA = a.currency.toLowerCase(),
-          cB = b.currency.toLowerCase();
-        if (cA < cB){
-        return -1;
-      }
-      if (cA > cB){
-        return 1;
-      }
-      return 0;
+    currencyList = __.uniq(currencyList, function(item){
+      return item.code;
     });
-    //add BTC
-    currecyList.unshift({code: "BTC", currency:"Bitcoin", currencyUnits: "4"});
 
-    __.each(countryList, function(c, i){
-      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
+    //translate the currency list
+    __.each(currencyList, function(currencyCode){
+      currencyCode.trCur = window.polyglot.t('currencies.'+currencyCode.code);
+    });
+
+    //alphabatize the currency list using the translated values
+    currencyList.sort(function(a, b) {
+      return a.trCur.localeCompare(b.trCur);
+    });
+
+    //add BTC
+    currencyList.unshift({code: "BTC", currency: "Bitcoin", currencyUnits: "4", trCur: window.polyglot.t('currencies.BTC')});
+
+    //translate the country list
+    __.each(countryList, function(country){
+      country.name = window.polyglot.t('countries.'+country.dataName);
+    });
+
+    //alphabatize the country list using the translated values
+    countryList.sort(function(a, b) {
+      return a.name.localeCompare(b.name);
+    });
+
+    __.each(countryList, function(c){
+      var country_option = $('<option value="'+c.dataName+'">'+c.name+'</option>');
       var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
-      country_option.attr("selected",user.country == c.dataName);
+      country_option.attr("selected", user.country == c.dataName);
       //if user has a country in their profile, preselect it in the new address section
-      ship_country_option.attr("selected",user.country== c.dataName);
+      ship_country_option.attr("selected", user.country== c.dataName);
       ship_country_str += ship_country_option[0].outerHTML;
       country_str += country_option[0].outerHTML;
     });
 
-    __.each(currecyList, function(c, i){
+    __.each(currencyList, function(c){
       //only show currently available currencies
-      if(self.availableCurrenciesList.indexOf(c.code) > -1 || c.code === "BTC"){
-        var currency_option = $('<option value="'+c.code+'">'+c.currency+'</option>');
-        currency_option.attr("selected",user.currency_code == c.code);
+      if (self.availableCurrenciesList.indexOf(c.code) > -1 || c.code === "BTC"){
+        var currency_option = $('<option value="'+c.code+'">'+ c.trCur +'</option>');
+        currency_option.attr("selected", user.currency_code == c.code);
         currency_str += currency_option[0].outerHTML;
       }
     });
 
-    __.each(timezoneList, function(t, i){
-      var timezone_option = $('<option value="'+t.offset+'">'+t.name+'</option>');
-      timezone_option.attr("selected",user.time_zone == t.offset);
+    __.each(timezoneList, function(t){
+      var timezone_option = $('<option value="'+t.offset+'">'+ window.polyglot.t('timezones.' + t.offset) + '</option>');
+      timezone_option.attr("selected", user.time_zone == t.offset);
       timezone_str += timezone_option[0].outerHTML;
     });
 
-    __.each(languageList, function(l, i){
+    __.each(languageList, function(l){
       var language_option = $('<option value="'+l.langCode+'">'+l.langName+'</option>');
-      language_option.attr("selected",user.language == l.langCode);
+      language_option.attr("selected", user.language == l.langCode);
       language_str += language_option[0].outerHTML;
     });
 
@@ -433,37 +518,40 @@ module.exports = Backbone.View.extend({
     language.html(language_str);
 
     //set moderator status
-    this.$('#moderatorForm input[name=moderator]').val([String(moderatorStatus)]);
+    this.$('#moderatorForm').find('input[name=moderator]').val([String(moderatorStatus)]);
+    advancedForm.find('input[name=smtp_mo]').val([String(moderatorStatus)]);
   },
 
   showModeratorFeeHolder: function(){
-    "use strict";
-    this.moderatorFeeHolder.removeClass('hide');
-    this.moderatorFeeInput.val(this.oldFeeValue);
+    this.$moderatorFeeHolder.removeClass('hide');
+    this.$moderatorFeeInput.val(this.oldFeeValue);
   },
 
   hideModeratorFeeHolder: function(){
-    "use strict";
-    this.moderatorFeeHolder.addClass('hide');
-    this.oldFeeValue = this.moderatorFeeInput.val();
-    this.moderatorFeeInput.val(0);
+    this.$moderatorFeeHolder.addClass('hide');
+    this.oldFeeValue = this.$moderatorFeeInput.val();
+    this.$moderatorFeeInput.val(0);
   },
 
   handleSocketMessage: function(response) {
-    "use strict";
     var data = JSON.parse(response.data);
-    if(data.id == this.socketModeratorID){
+    if (data.id == this.socketModeratorID){
       this.renderModerator(data.moderator);
     }
   },
 
   renderModerator: function(moderator){
-    "use strict";
     var self = this,
         existingMods = this.userModel.get('moderator_guids'),
         isExistingMod = existingMods.indexOf(moderator.guid) > -1;
 
-    if(moderator.guid != this.model.get('page').profile.guid && this.userModel.get('blocked_guids').indexOf(moderator.guid) == -1){
+    //make sure this moderator is not a duplicate
+    if (this.shownMods.indexOf(moderator.guid) > -1){
+      return;
+    }
+    this.shownMods.push(moderator.guid);
+
+    if (moderator.guid != this.model.get('page').profile.guid && this.userModel.get('blocked_guids').indexOf(moderator.guid) == -1){
       moderator.serverUrl = self.serverUrl;
       moderator.userID = moderator.guid;
       moderator.avatarURL = self.serverUrl + "get_image?hash=" + moderator.avatar_hash + "&guid=" + moderator.guid;
@@ -475,23 +563,32 @@ module.exports = Backbone.View.extend({
       var modShort = new userShortView({model: newModModel});
       if (isExistingMod){
         //don't add unless it comes from the model
-        if(moderator.fromModel){
-          this.$el.find('.js-settingsCurrentMods').append(modShort.el);
+        if (moderator.fromModel){
+          this.$('.js-settingsCurrentMods').append(modShort.el);
+          if (!this.$('.js-loadingMsgOld').hasClass('foldIn')){
+            //hide spinners after a while
+            setTimeout(()=> {
+              this.$('.js-loadingMsgOld').addClass('foldIn');
+            }, 2000);
+          }
         }
-      }else{
-        this.$el.find('.js-settingsNewMods').append(modShort.el);
+      } else {
+        this.$('.js-settingsNewMods').append(modShort.el);
+        if (!this.$('.js-loadingMsgNew').hasClass('foldIn')){
+          //hide spinners after a while
+          setTimeout(()=> {
+            this.$('.js-loadingMsgNew').addClass('foldIn');
+          }, 2000);
+        }
       }
       this.moderatorCount++;
       this.subViews.push(modShort);
+      this.registerChild(modShort);
     }
   },
 
   validateInput: function(e) {
     var $input = $(e.target);
-
-    if ($input.is('#refund_address')) {
-      $input.val($input.val().trim());
-    }
 
     e.target.checkValidity();
     $input.closest('.flexRow').addClass('formChecked');
@@ -506,21 +603,20 @@ module.exports = Backbone.View.extend({
 
   addTabToHistory: function(state){
     //add action to history
-    Backbone.history.navigate("#settings/" + state);
-    this.options.state = state;
+    Backbone.history.navigate("#settings/" + state, { replace: true });
   },
 
   setTab: function(activeTab, showContent){
-    this.$el.find('.js-tab').removeClass('active');
+    this.$('.js-tab').removeClass('active');
     activeTab.addClass('active');
-    this.$el.find('.js-tabTarg').addClass('hide');
+    this.$('.js-tabTarg').addClass('hide');
     showContent.removeClass('hide');
   },
 
   setState: function(state){
-    if(state){
-      this._state = state;
-      this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
+    if (state){
+      this.state = state;
+      this.setTab(this.$('.js-' + state + 'Tab'), this.$('.js-' + state));
      
       if (state == "store") {
         if (this.firstLoadModerators) {
@@ -550,24 +646,18 @@ module.exports = Backbone.View.extend({
         }
       }
     } else {
-      this._state = "general";
-      this.setTab(this.$el.find('.js-generalTab'), this.$el.find('.js-general'));
+      this.state = "general";
+      this.setTab(this.$('.js-generalTab'), this.$('.js-general'));
     }
   },
 
-  getState: function() {
-    return this._state;
-  },
-
   tabClick: function(e){
-    "use strict";
     var tab = $(e.target).data('tab');
     this.setState(tab);
     this.addTabToHistory(tab);
   },
 
-  cancelView: function(e){
-    "use strict";
+  cancelView: function(){
     Backbone.history.loadUrl();
   },
 
@@ -591,14 +681,44 @@ module.exports = Backbone.View.extend({
     $firstErr = $container.find(':invalid, .invalid').eq(0);
     $firstErr.length && $firstErr[0].scrollIntoViewIfNeeded();
   },  
+  
+  saveGeneralClick: function() {
+    this.saveGeneral();
+  },
+  
+  savePageClick: function() {
+    this.savePage();
+  },
+  
+  saveStoreClick: function() {
+    this.saveStore();
+  },
+  
+  saveAddressClick: function() {
+    this.saveAddress();
+  },
+  
+  saveModeratorClick: function() {
+    this.saveModerator();
+  },
+  
+  saveAdvancedClick: function() {
+    this.saveAdvanced();
+  },
 
-  saveGeneral: function(e) {
+  testSMTPClick: function() {
+    this.testSMTP();
+  },
+
+  saveGeneral: function() {
     var self = this,
-        form = this.$el.find("#generalForm"),
-        cCode = this.$('#currency_code').val();
+        form = this.$("#generalForm"),
+        cCode = this.$('#currency_code').val(),
+        $saveBtn = this.$('.js-saveGeneral');
+        
+    $saveBtn.addClass('loading');
 
-    $(e.target).addClass('loading');
-    localStorage.setItem('NSFWFilter',  this.$("#generalForm input[name=nsfw]:checked").val());
+    localStorage.setItem('NSFWFilter', this.$("#generalForm input[name=nsfw]:checked").val());
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings",
         function(){
@@ -609,37 +729,39 @@ module.exports = Backbone.View.extend({
 
           self.setCurrentBitCoin(cCode);
           self.refreshView();
-        },'', '','',
+        }, '', '', '',
         function(){
           //on invalid
           messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
           self.scrollToFirstError(self.$('#generalForm'));
-        }).always(function(){$(e.target).removeClass('loading');});
+        }).always(function(){
+          $saveBtn.removeClass('loading');
+        });
   },
 
-  savePage: function(e){
-    "use strict";
+  savePage: function(){
     var self = this,
-        form = this.$el.find("#pageForm"),
-        avatarCrop = this.$el.find('#settings-image-cropper'),
+        form = this.$("#pageForm"),
+        avatarCrop = this.$('#settings-image-cropper'),
         imageURI,
         bannerURI,
         img64Data = {},
         banner64Data = {},
         pageData = {},
         socialInputCount = 0,
-        socialInputs = self.$el.find('#settingsFacebookInput, #settingsTwitterInput, #settingsInstagramInput, #settingsSnapchatInput'),
-        pColor = self.$el.find('#primaryColor'),
-        sColor = self.$el.find('#secondaryColor'),
-        bColor = self.$el.find('#backgroundColor'),
-        tColor = self.$el.find('#textColor'),
+        socialInputs = self.$('#settingsFacebookInput, #settingsTwitterInput, #settingsInstagramInput, #settingsSnapchatInput'),
+        pColor = self.$('#primaryColor'),
+        sColor = self.$('#secondaryColor'),
+        bColor = self.$('#backgroundColor'),
+        tColor = self.$('#textColor'),
         pColorVal = pColor.val(),
         bColorVal = bColor.val(),
         sColorVal = sColor.val(),
         tColorVal = tColor.val(),
-        skipKeys = ["avatar_hash", "header_hash"];
+        skipKeys = ["avatar_hash", "header_hash"],
+        $saveBtn = this.$('.js-savePage');
 
-    $(e.target).addClass('loading');
+    $saveBtn.addClass('loading');
 
     var sendPage = function(){
       //change color inputs to hex values
@@ -657,27 +779,28 @@ module.exports = Backbone.View.extend({
         });
         
         self.refreshView();
-      },'', pageData, skipKeys, function(){
+      }, '', pageData, skipKeys, function(){
         //on invalid
         messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
         self.scrollToFirstError(self.$('#pageForm'));
-      }).always(function(){$(e.target).removeClass('loading');});
+      }).always(function(){
+        $saveBtn.removeClass('loading');
+      });
     };
 
     var checkSocialCount = function(){
       var socialSend = function (socialInput) {
         var socialData = {};
         socialInputCount++;
-        if(socialInput.val()){
+        if (socialInput.val()){
           socialData.account_type = socialInput.data('type');
           socialData.username = socialInput.val();
           saveToAPI("", "", self.serverUrl + "social_accounts",
-              function(data){
-                "use strict";
+              function(){
                 checkSocialCount();
               },
               function(data){
-                $(e.target).removeClass('loading');
+                $saveBtn.removeClass('loading');
                 messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
               }, socialData);
         } else {
@@ -685,7 +808,7 @@ module.exports = Backbone.View.extend({
         }
       };
 
-      if(socialInputCount < socialInputs.length){
+      if (socialInputCount < socialInputs.length){
         socialSend($(socialInputs[socialInputCount]));
       } else {
         sendPage();
@@ -693,80 +816,94 @@ module.exports = Backbone.View.extend({
     };
 
     var checkBanner = function(){
-      var bannerCrop = self.$el.find('#settings-image-cropperBanner');
-      if(self.newBanner && bannerCrop.cropit('imageSrc')){
+      var bannerCrop = self.$('#settings-image-cropperBanner');
+      if (self.newBanner && bannerCrop.cropit('imageSrc')){
         bannerURI = bannerCrop.cropit('export', {
           type: 'image/jpeg',
           quality: 0.75,
           originalSize: false
         });
-        bannerURI = bannerURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+        bannerURI = bannerURI.replace(/^data:image\/(png|jpeg|webp);base64,/, "");
         banner64Data.image = bannerURI;
 
         saveToAPI('', '', self.serverUrl + "upload_image", function (data) {
-          "use strict";
           var img_hash = data.image_hashes[0];
-          if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40){
+          if (img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40){
             pageData.header = img_hash;
             checkSocialCount();
           }
-        },"", banner64Data);
+        }, "", banner64Data);
       } else {
         checkSocialCount();
       }
     };
 
     //if an avatar has been set, upload it first and get the hash
-    if(self.newAvatar && avatarCrop.cropit('imageSrc')){
+    if (self.newAvatar && avatarCrop.cropit('imageSrc')){
       imageURI = avatarCrop.cropit('export', {
         type: 'image/jpeg',
         quality: 0.75,
         originalSize: false
       });
-      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+      imageURI = imageURI.replace(/^data:image\/(png|jpeg|webp);base64,/, "");
       img64Data.image = imageURI;
 
       saveToAPI('', '', self.serverUrl + "upload_image", function (data) {
-        "use strict";
         var img_hash = data.image_hashes[0];
-        if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40){
+        if (img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40){
           pageData.avatar = img_hash;
           checkBanner();
         }
-      },"", img64Data);
+      }, "", img64Data);
     } else {
       checkBanner();
     }
   },
 
   keypressFeeInput: function(){
-    "use strict";
-    var fee = $('#moderatorFeeInput').val();
+    var fee = this.$moderatorFeeInput.val();
 
     if (fee.indexOf('.') > 0 && fee.split('.')[1].length > 2) {
       fee = fee.substr(0, fee.length-1);
-      $('#moderatorFeeInput').val(fee);
+      this.$moderatorFeeInput.val(fee);
     }
   },
 
-  saveStore: function(e){
+  saveStore: function(){
     var self = this,
-        form = this.$el.find("#storeForm"),
+        form = this.$("#storeForm"),
         settingsData = {},
-        moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
-        modList = [],
-        onFail;
+        moderatorsNew = form.find('.js-settingsNewMods .js-userShortView input:checked'),
+        moderatorList = this.userModel.get('moderator_guids'),
+        manualModList,
+        moderatorsUnChecked = form.find('.js-settingsCurrentMods .js-userShortView input:not(:checked)'),
+        onFail,
+        $saveBtn = this.$('.js-saveStore');
 
-    $(e.target).addClass('loading');
+    $saveBtn.addClass('loading');
 
-    moderatorsChecked.each(function() {
-      modList.push($(this).data('guid'));
+    //first, remove any existing moderators that have been unchecked. This prevents removing saved moderators that don't show up in the UI for some reason
+    moderatorsUnChecked.each(function() {
+      moderatorList = __.without(moderatorList, $(this).data('guid'));
     });
 
-    settingsData.moderators = modList.length > 0 ? modList : "";
+    //add any new moderators that have been checked
+    moderatorsNew.each(function() {
+      moderatorList.push($(this).data('guid'));
+    });
+
+    //add any manually entered mods
+    manualModList = this.$('#addManualMods').val().split(',');
+    __.each(manualModList, function(mod){
+      if (mod.length === 40){
+        moderatorList.push(mod);
+      }
+    });
+
+    settingsData.moderators = moderatorList.length > 0 ? moderatorList : "";
 
     onFail = (data) => {
-      $(e.target).removeClass('loading');
+      $saveBtn.removeClass('loading');
       self.scrollToFirstError(self.$('#storeForm'));
       messageModal.show(window.polyglot.t('errorMessages.saveError'), data.reason);
     };
@@ -780,45 +917,48 @@ module.exports = Backbone.View.extend({
             });
 
             self.refreshView();
-            }, function(data){
-              onFail(data);
-            }, settingsData).always(function(){$(e.target).removeClass('loading');});
           }, function(data){
             onFail(data);
+          }, settingsData).always(function(){
+            $saveBtn.removeClass('loading');
+          });
+    }, function(data){
+      onFail(data);
     });
   },
 
-  saveAddress: function(e){
-    "use strict";
+  saveAddress: function(){
     var self = this,
-        form = this.$el.find("#addressesForm"),
+        form = this.$("#addressesForm"),
         newAddress = {},
         newAddresses = [],
-        addressData = {};
+        addressData = {},
+        $saveBtn = this.$('.js-saveAddress');
 
-    $(e.target).addClass('loading');
-    newAddress.name = this.$el.find('#settingsShipToName').val();
-    newAddress.street = this.$el.find('#settingsShipToStreet').val();
-    newAddress.city = this.$el.find('#settingsShipToCity').val();
-    newAddress.state = this.$el.find('#settingsShipToState').val();
-    newAddress.postal_code = this.$el.find('#settingsShipToPostalCode').val();
-    newAddress.country = this.$el.find('#settingsShipToCountry').val();
-    newAddress.displayCountry = this.$el.find('#settingsShipToCountry option:selected').data('name');
+    $saveBtn.addClass('loading');
+    
+    newAddress.name = this.$('#settingsShipToName').val();
+    newAddress.street = this.$('#settingsShipToStreet').val();
+    newAddress.city = this.$('#settingsShipToCity').val();
+    newAddress.state = this.$('#settingsShipToState').val();
+    newAddress.postal_code = this.$('#settingsShipToPostalCode').val();
+    newAddress.country = this.$('#settingsShipToCountry').val();
+    newAddress.displayCountry = this.$('#settingsShipToCountry option:selected').data('name');
 
     //if form is partially filled out throw error
-    if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
-      if(!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
+    if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
+      if (!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
         messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-        $(e.target).removeClass('loading');
+        $saveBtn.removeClass('loading');
         return;
       }
     }
 
-    if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+    if (newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
       newAddresses.push(JSON.stringify(newAddress));
     }
 
-    this.$el.find('.js-settingsAddress:not(:checked)').each(function(){
+    this.$('.js-settingsAddress:not(:checked)').each(function(){
       newAddresses.push(JSON.stringify(self.model.get('user').shipping_addresses[$(this).val()]));
     });
 
@@ -832,20 +972,20 @@ module.exports = Backbone.View.extend({
 
       self.refreshView();
     }, function(){
-      $(e.target).removeClass('loading');
+      $saveBtn.removeClass('loading');
       self.scrollToFirstError(self.$('#addressesForm'));
     }, addressData);
   },
 
-  saveModerator: function(e){
-    "use strict";
+  saveModerator: function(){
     var self = this,
-        form = this.$el.find("#moderatorForm"),
+        form = this.$("#moderatorForm"),
         moderatorData = {},
         moderatorStatus = this.$('#moderatorYes').is(':checked'),
-        makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator";
+        makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator",
+        $saveBtn = this.$('.js-saveModerator');
 
-    $(e.target).addClass('loading');
+    $saveBtn.addClass('loading');
     moderatorData.name = self.model.get('page').profile.name;
     moderatorData.location = self.model.get('page').profile.location;
 
@@ -857,9 +997,12 @@ module.exports = Backbone.View.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-    }, function(){
-      self.scrollToFirstError(self.$('#moderatorForm'));
-    }, moderatorData).always(function(){$(e.target).removeClass('loading');});;
+      }, function(){
+        self.scrollToFirstError(self.$('#moderatorForm'));
+      }, moderatorData).always(function(){
+        $saveBtn.removeClass('loading');
+      }
+    );
 
     $.ajax({
       type: "POST",
@@ -872,74 +1015,94 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  saveAdvanced: function(e){
+  testSMTP: function(){
+    var hostport = $('#advancedForm').find('input[name="smtp_server"]').val();
+    hostport = hostport.split(':');
+
+    $('#testSMTPButton').addClass('loading');
+
+    var connection = new SMTPConnection({
+      host: hostport[0],
+      port: hostport[1]
+    });
+
+    connection.on('error', function(){
+      $('#testSMTPButton').removeClass('loading');
+      messageModal.show(
+            window.polyglot.t('errorMessages.smtpServerError'),
+            window.polyglot.t('errorMessages.noSMTPConnection')
+        );
+    }
+    );
+
+    connection.connect(function() {
+
+      var username = $('#advancedForm').find('input[name="smtp_username"]').val();
+      var password = $('#advancedForm').find('input[name="smtp_password"]').val();
+
+      connection.login({
+        user: username,
+        pass: password
+      }, function(err) {
+        if (err) {
+          messageModal.show(
+            window.polyglot.t('errorMessages.smtpServerError'),
+            window.polyglot.t('errorMessages.badSMTPAuthentication')
+          );
+        } else {
+          messageModal.show(
+            window.polyglot.t('errorMessages.smtpServerSuccess'),
+            window.polyglot.t('errorMessages.goodSMTPAuthentication')
+          );
+        }
+        $('#testSMTPButton').removeClass('loading');
+      });
+    });
+  },
+
+  saveAdvanced: function(){
     var self = this,
-        form = this.$el.find("#advancedForm");
+        form = this.$("#advancedForm"),
+        $saveBtn = this.$('.js-saveAdvanced');
 
-    $(e.target).addClass('loading');
+    $saveBtn.addClass('loading');
 
+    localStorage.setItem('AdditionalPaymentData', form.find('input[name=additionalPaymentData]:checked').val());
+    
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       app.statusBar.pushMessage({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
       }, function(){
         self.scrollToFirstError(self.$('#advancedForm'));
-      },'','','');
+      }, '', '', '');
       
       self.refreshView();
-    }).always(function(){$(e.target).removeClass('loading');});;
+    }).always(function(){
+      $saveBtn.removeClass('loading');
+    });
   },
 
   refreshView: function(){
-    "use strict";
     this.fetchModel();
   },
 
   addressDelete: function(e){
-    "use strict";
     $(e.target).closest('.js-address').addClass('div-fadeExtra');
   },
 
   addressUnDelete: function(e){
-    "use strict";
     $(e.target).closest('.js-address').removeClass('div-fadeExtra');
   },
 
   setCurrentBitCoin: function(cCode) {
-    "use strict";
     getBTPrice(cCode, function (btAve) {
       window.currentBitcoin = btAve;
     });
   },
 
   launchServerConfig: function() {
-    var serverConnectModal = new ServerConnectModal({
-      includeCloseButton: true,
-      initialState: {
-        status: 'connected'
-      }
-    }).render().open();
-
-    this.serverConnectSyncHandler &&
-    this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
-
-    this.serverConnectSyncHandler = function() {
-      // todo: bit of a hack to hide the close button. really, the
-      // modal api should provide this if we want to allow
-      // this type of stuff.
-      serverConnectModal.$('.js-modal-close').hide();
-    };
-
-    this.listenTo(app.serverConfig, 'sync', this.serverConnectSyncHandler);
-
-    serverConnectModal.on('connected', function() {
-      location.reload();
-    });
-
-    serverConnectModal.on('close', function() {
-      serverConnectModal.remove();
-      this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
-    });
+    app.serverConnectModal.open();
   },
 
   shutdownServer: function(){
@@ -951,7 +1114,7 @@ module.exports = Backbone.View.extend({
   },
 
   checkPGPKey: function(e){
-    if(!this.$(e.target).val().length){
+    if (!this.$(e.target).val().length){
       this.$('.js-settingsSignatureRow').css("height", 0);
       this.$('#signature').removeAttr("required");
     } else {
@@ -961,43 +1124,35 @@ module.exports = Backbone.View.extend({
   },
 
   toggleFancyStyles: function(){
-    if($('#advancedForm input[name="notFancy"]').prop('checked')){
-      $('html').addClass('notFancy');
-      localStorage.setItem('notFancy', "true");
+    var $html = $('html');
+    
+    if ($('#advancedForm').find('input[name="minEffects"]').prop('checked')){
+      $html.addClass('minEffects');
+      localStorage.setItem('minEffects', "true");
     } else {
-      $('html').removeClass('notFancy');
-      localStorage.setItem('notFancy', "false");
+      $html.removeClass('minEffects');
+      localStorage.setItem('minEffects', "false");
     }
   },
 
-  close: function(){
-    "use strict";
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
+  toggleTestnet: function(){
+    window.config.setTestnet($('#advancedForm').find('input[name="useTestnet"]').prop('checked'));
+    window.location.reload();
+  },
 
+  changeAppBarStyle: function(e) {
+    app.appBar.setStyle($(e.target).val());
+  },
+
+  remove: function() {
     this.blockedUsersVw && this.blockedUsersVw.remove();
 
-    if (this.blockedUsersScrollHandler && this.$obContainer.length) {
+    this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
-    }
 
     this.serverConnectSyncHandler &&
-    app.serverConfig.off(null, this.serverConnectSyncHandler);
+      app.serverConfigs.getActive().off(null, this.serverConnectSyncHandler);
 
-    this.model.off();
-    this.off();
-    this.remove();
-    delete this.$el;
-    delete this.el;
+    pageVw.prototype.remove.apply(this, arguments);
   }
-
 });

@@ -1,8 +1,9 @@
-var Backbone = require('backbone'),
-  $ = require('jquery'),
-  loadTemplate = require('../utils/loadTemplate'),
-  baseVw = require('./baseVw'),
-  chatHeadVw = require('./chatHeadVw');
+'use strict';
+
+var __ = require('underscore'),
+    $ = require('jquery'),
+    baseVw = require('./baseVw'),
+    chatHeadVw = require('./chatHeadVw');
 
 module.exports = baseVw.extend({
 
@@ -49,7 +50,7 @@ module.exports = baseVw.extend({
   chatHeadsRemoveSelectStyle: function(vw){
     //remove any existing selected state
     this.$('.js-chatHeadWrapper').removeClass('chatHeadSelected');
-    if(vw){
+    if (vw){
       vw.$el.addClass('chatHeadSelected');
     }
   },
@@ -89,7 +90,7 @@ module.exports = baseVw.extend({
     
     setTimeout(() => {
       this.checkIfFilled();
-    },0);
+    }, 0);
 
     return this;
   },
@@ -104,7 +105,7 @@ module.exports = baseVw.extend({
   renderChatHeads: function(start, end) {
     var chatsToRender = this.collection.slice(start, end);
 
-    chatsToRender.forEach((md, index) => {
+    chatsToRender.forEach((md) => {
       this.$headContainer.append(
         this.createChatHead(md).render().el
       );

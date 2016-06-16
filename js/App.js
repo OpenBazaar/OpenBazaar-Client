@@ -1,5 +1,8 @@
-var Socket = require('./utils/Socket'),
-    ServerConfigMd = require('./models/serverConfigMd'),
+'use strict';
+
+var ipcRenderer = require('ipc-renderer'),
+    $ = require('jquery'),
+    Socket = require('./utils/Socket'),
     _app;
 
 function App() {
@@ -8,43 +11,28 @@ function App() {
   // ensure we're a singleton
   if (_app) return _app;
 
-  _app = this;
+  _app = self;
+  this._awayCounts = null;
+  this._notifUnread = 0;
+  this._chatMessagesUnread = 0;
 
-  // TODO: what is wrong with the localStorage adapter??? shouldn't need
-  // to manually provide the data to the model. All that should be needed
-  // is an ID and then a subsequent fetch, but that doesn't return the data.
-  // Investigate!
-  this.serverConfig = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
-
-  // serverConfigMd.fetch();
-  if (!localStorage['_serverConfig-1']) {
-    this.serverConfig.save();
-  }  
-
-  this.connectHeartbeatSocket();
+  // TODO: rather than attach the serverConfigs CL
+  // in main.js, pass in the instance here so the
+  // dependency is more explicit.
 }
 
 App.prototype.connectHeartbeatSocket = function() {
-  var self = this;
+  var activeServer = this.serverConfigs.getActive();
 
-  clearTimeout(this.heartbeatSocketTimesup);
-
-  if (this._heartbeatSocket) {
-    this._heartbeatSocket.connect(this.serverConfig.getHeartbeatSocketUrl());
-  } else {
-    this._heartbeatSocket = new Socket(this.serverConfig.getHeartbeatSocketUrl());
-
-    this._heartbeatSocket.on('close', function() {
-      clearTimeout(self._heartbeatSocketTimesup);
-    });
+  if (!activeServer) {
+    throw new Error(`No active server set. Please set via the Server Configs collection.`);
   }
 
-  // give up if it takes to long
-  this._heartbeatSocketTimesup = setTimeout(function() {
-    if (self._heartbeatSocket.getReadyState() !== 1) {
-      self._heartbeatSocket._socket.close();
-    }
-  }, 3000);  
+  if (this._heartbeatSocket) {
+    this._heartbeatSocket.connect(activeServer.getHeartbeatSocketUrl());
+  } else {
+    this._heartbeatSocket = new Socket(activeServer.getHeartbeatSocketUrl());
+  }
 };
 
 App.prototype.getHeartbeatSocket = function() {
@@ -52,12 +40,18 @@ App.prototype.getHeartbeatSocket = function() {
 };
 
 App.prototype.login = function() {
+  var activeServer = this.serverConfigs.getActive();
+
+  if (!activeServer) {
+    throw new Error(`No active server set. Please set via the Server Configs collection.`);
+  }
+
   return $.ajax({
-    url: this.serverConfig.getServerBaseUrl() + '/login',
+    url: activeServer.getServerBaseUrl() + '/login',
     method: 'POST',
     data: {
-      username: this.serverConfig.get('username'),
-      password: this.serverConfig.get('password')
+      username: activeServer.get('username'),
+      password: activeServer.get('password')
     },
     timeout: 3000
   });  
@@ -84,7 +78,7 @@ App.prototype.getGuid = function(handle, resolver) {
     } else {
       deferred.reject();
     }
-  }).fail(function(jqXHR, status, errorThrown){
+  }).fail(function(){
     deferred.reject();
   });
 
@@ -98,17 +92,42 @@ App.prototype.playNotificationSound = function() {
   }
 
   this._notificationSound.play();
-},
+};
 
 App.prototype.showOverlay = function() {
   this._$overlay = this._$overlay || $('#overlay');
   this._$overlay.removeClass('hide');
-},
+};
 
 App.prototype.hideOverlay = function() {
   this._$overlay = this._$overlay || $('#overlay');
   this._$overlay.addClass('hide');
-},
+};
+
+App.prototype.setUnreadCounts = function(notif, chat) {
+  this._notifUnread = typeof notif === 'number' ? notif : this._notifUnread;
+  this._chatMessagesUnread = typeof chat === 'number' ? chat : this._chatMessagesUnread;
+
+  this._awayCounts = this._notifUnread + this._chatMessagesUnread;
+  ipcRenderer.send('set-badge', this._awayCounts || '');
+};
+
+App.prototype.setUnreadNotifCount = function(count) {
+  if (typeof count !== 'undefined' && count !== null) {
+    this.setUnreadCounts(parseInt(count));
+  }
+};
+
+App.prototype.setUnreadChatMessageCount = function(count) {
+  if (typeof count !== 'undefined' && count !== null) {
+    this.setUnreadCounts(null, parseInt(count));
+  }
+};
+
+App.prototype.intlNumFormat = function(numberToFormat, maxDigits){
+  maxDigits = maxDigits || 8; //default to show down to the satoshi (.00000001)
+  return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
+};
 
 App.getApp = function() {
   if (!_app) {
@@ -118,7 +137,4 @@ App.getApp = function() {
   return _app;
 };
 
-
 module.exports = App;
-
-

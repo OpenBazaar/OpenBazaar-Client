@@ -1,0 +1,189 @@
+<div class="accordion-child accordion-active custCol-secondary overflowHidden">
+  <div class="flexContainer scrollOverflowYHideX color-primary custCol-primary customThemeScrollbar"  style="height: 275px">
+    <div class="flexRow borderBottom custCol-border">
+      <p class="margin0 padding2015 textOpacity75"><%= polyglot.t('serverConnectModal.intro') %></p>
+    </div>
+      <form class="width100" name="serverConfigForm">
+        <div class="flexCol-12 flex-border borderBottom">
+          <div class="flexRow">
+            <% // TODO: turn the error output into a template helper so
+               // we don't have to keep repeating it %>
+            <% if (ob.errors.name) { %>
+            <div class="flexCol-12 error">
+              <ul class="padding2015">
+                <% ob.errors.name.forEach(function(err) {
+                     print('<li class="list-style-none"><span class="ion-alert-circled marginRight5"></span>' + err + '</li>');
+                   }); %>
+              </ul>
+            </div>
+            <% } %>
+
+            <div class="flexCol-4 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="fld_name"><%= polyglot.t('Name') %></label>
+              </div>
+            </div>
+
+            <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.name && print('invalid') %>">
+              <input name="name" type="text" id="fld_name" class="fieldItem" value="<%= ob.name %>">
+            </div>            
+          </div>
+
+          <div class="flexRow">
+            <% if (ob.errors.server_ip) { %>
+            <div class="flexCol-12 error">
+              <ul class="padding2015">
+                <% ob.errors.server_ip.forEach(function(err) {
+                     print('<li class="list-style-none"><span class="ion-alert-circled marginRight5"></span>' + err + '</li>');
+                   }); %>
+              </ul>
+            </div>
+            <% } %>
+
+            <div class="flexCol-4 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="fld_server"><%= polyglot.t('serverConnectModal.serverIP') %></label>
+              </div>
+            </div>
+
+            <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.server_ip && print('invalid') %>">
+              <input name="server_ip" type="text" id="fld_server" placeholder="" class="fieldItem" required="" value="<%= ob.server_ip %>">
+              <div class="btn btn-txt btn-corner btn-cornerTR custCol-secondary ion-locked
+                          positionAbsolute tooltip <% if(!ob.SSL){ %> hide <% } %>  js-sslOn"
+                   data-tooltip="<%= polyglot.t('SSLIsOn') %>">
+                <%= polyglot.t('SSLOn') %>
+              </div>
+              <div class="btn btn-txt btn-corner btn-cornerTR custCol-secondary ion-unlocked
+                          positionAbsolute tooltip <% if(ob.SSL){ %> hide <% } %>  js-sslOff"
+                   data-tooltip="<%= polyglot.t('SSLIsOff') %>">
+                <%= polyglot.t('SSLOff') %>
+              </div>
+            </div>
+          </div>
+
+          <div class="flexRow">
+            <% if (ob.errors.username) { %>
+            <div class="flexCol-12">
+              <ul class="padding2015">
+                <% ob.errors.username.forEach(function(err) {
+                  print('<li class="list-style-none"><span class="ion-alert-circled marginRight5"></span>' + err + '</li>');
+                }); %>
+              </ul>
+            </div>
+            <% } %>
+
+            <div class="flexCol-4 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="fld_username"><%= polyglot.t('serverConnectModal.username') %></label>
+              </div>
+            </div>
+
+            <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.username && print('invalid') %>">
+              <input name="username" type="text" id="fld_username" class="fieldItem" value="<%= ob.username %>">
+            </div>
+          </div>
+
+          <div class="flexRow">
+            <% if (ob.errors.password) { %>
+            <div class="flexCol-12">
+              <ul class="padding2015">
+                <% ob.errors.password.forEach(function(err) {
+                  print('<li class="list-style-none"><span class="ion-alert-circled marginRight5"></span>' + err + '</li>');
+                }); %>
+              </ul>
+            </div>
+            <% } %>
+
+            <div class="flexCol-4 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="fld_password"><%= polyglot.t('serverConnectModal.password') %></label>
+              </div>
+            </div>
+
+            <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.password && print('invalid') %>">
+              <input name="password" type="password" id="fld_password" class="fieldItem" value="<%= ob.password %>">
+            </div>
+          </div>
+
+          <div class="flexRow">
+            <% if (ob.errors.rest_api_port) { %>
+            <div class="flexCol-12">
+              <ul class="padding2015">
+                <% ob.errors.rest_api_port.forEach(function(err) {
+                     print('<li class="list-style-none"><span class="ion-alert-circled marginRight5"></span>' + err + '</li>');
+                   }); %>
+              </ul>
+            </div>
+            <% } %>
+
+            <div class="flexCol-4 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="fld_rest_port"><%= polyglot.t('serverConnectModal.restApiPort') %></label>
+              </div>
+            </div>
+
+            <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.rest_api_port && print('invalid') %>">
+              <input name="rest_api_port" type="text" id="fld_rest_port" placeholder="" class="fieldItem" value="<%= ob.rest_api_port %>">
+            </div>
+          </div>
+
+          <div class="flexRow">
+            <% if (ob.errors.api_socket_port) { %>
+            <div class="flexCol-12">
+              <ul class="padding2015">
+                <% ob.errors.api_socket_port.forEach(function(err) {
+                     print('<li class="list-style-none"><span class="ion-alert-circled marginRight5"></span>' + err + '</li>');
+                   }); %>
+              </ul>
+            </div>
+            <% } %>
+
+            <div class="flexCol-4 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="fld_api_socket_port"><%= polyglot.t('serverConnectModal.websocketApiPort') %></label>
+              </div>
+            </div>
+
+            <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.api_socket_port && print('invalid') %>">
+              <input name="api_socket_port" type="text" id="fld_api_socket_port" placeholder="" class="fieldItem" value="<%= ob.api_socket_port %>">
+            </div>
+          </div>
+
+          <div class="flexRow">
+            <% if (ob.errors.heartbeat_socket_port) { %>
+            <div class="flexCol-12">
+              <ul class="padding2015">
+                <% ob.errors.heartbeat_socket_port.forEach(function(err) {
+                     print('<li class="list-style-none"><span class="ion-alert-circled marginRight5"></span>' + err + '</li>');
+                   }); %>
+              </ul>
+            </div>
+            <% } %>
+
+            <div class="flexCol-4 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="fld_heartbeat_socket_port"><%= polyglot.t('serverConnectModal.heartbeatSocketApiPort') %></label>
+              </div>
+            </div>
+
+            <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.heartbeat_socket_port && print('invalid') %>">
+              <input name="heartbeat_socket_port" type="text" id="fld_heartbeat_socket_port" placeholder="" class="fieldItem" value="<%= ob.heartbeat_socket_port %>">
+            </div>
+          </div>            
+
+         </div>
+      </form>
+  </div>
+
+  <div class="bar barFlush borderBottomLeftRaidus3 color-secondary custCol-secondary borderBottomRightRaidus3">
+    <a class="btn btn-bar btn-half js-close color-secondary custCol-secondary custCol-border-primary custCol-text textOpacity90 borderRight" tabindex="0">
+      <span class="fontSize10 marginRight2"></span>
+      <%= polyglot.t('Cancel') %>
+    </a>
+    <a class="btn btn-bar btn-half js-save color-secondary custCol-secondary textOpacity90 custCol-border-primary custCol-text" tabindex="0">
+      <span class="ion-checkmark fontSize10 marginRight2 textOpacity50"></span>
+      <%= polyglot.t('serverConnectModal.saveChanges') %>
+    </a>
+  </div>
+
+</div>

@@ -13,9 +13,9 @@
       <div class="pad20 rowTop20 width100"><h2 class="txt-center"><% polyglot.t('LoadingImage') %></h2></div>
     </div>
     <input type="range" class="cropit-image-zoom-input hCentered rowTop20 js-bannerRangeInput hide" />
-    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce btn-upload-cover-photo">
+    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons btn-upload-cover-photo custCol-primary">
       <span class="ion-qr-scanner fontSize11 marginRight2 textOpacity1"></span>
-      <%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)
+      <%= polyglot.t('UploadCoverPhoto') %> (950px x 400px)
     </label>
     <input id="headerImageInput" type="file" class="cropit-image-input hide" />
     <div class="bar navBar barFlush user-page-navigation positionBottom">
@@ -26,7 +26,7 @@
         <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
           <a class="btn btn-txt custCol-primary js-saveCustomization">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('SaveChanges') %>
+            <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
           </a>
         </div>
       </div>
@@ -34,8 +34,7 @@
   </div>
 
   <div class="user-page-content">
-    <div class="user-page-header-slim-bg-cover custCol-background"></div>
-    <div class="user-page-header-slim borderBottom2 custCol-border-secondary user-page-header-slim-tint">
+    <div class="user-page-header-slim borderBottom2 custCol-border-secondary user-page-header-slim-tint js-userPageHeaderSlim">
       <div class="user-page-header-slim-bg"
         <% if(ob.page.profile.header_hash){ %>
         style="background-image: url(<%= ob.page.headerURL %>), url(imgs/defaultBanner.png); background-position: center; ">
@@ -54,14 +53,16 @@
       </div>
       <div class="pull-left">
         <div class="vCentered marginLeft82">
-          <h1 class="page-userNameLarge floatLeft fancy-heading fontSize20 colorWhiteForce textShadow"><%= ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize11"><%= polyglot.t('FollowsYou') %></span></h1>
+          <h1 class="page-userNameLarge floatLeft fancy-heading fontSize20 colorWhiteForce textShadow">
+            <%= ob.page.profile.name %> <span class="hide js-followsMe colorWhiteForce allCaps fontSize11"><%= polyglot.t('FollowsYou') %></span>
+          </h1>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="shadow-inner1 user-page-header">
-    <div class="rowItem positionBottom width600 padding0 paddingLeft20 zIndex1">
+  <div class="shadow-inner1 user-page-header js-userPageHeader">
+    <div class="rowItem positionBottom width100 padding0 paddingLeft20 minEffectsDarkBackground">
       <div class="table">
         <div>
           <div class="thumbnail thumbnail-large js-userPageAvatar"
@@ -80,138 +81,161 @@
               </a>
             <%}%>
           </div>
-          <div class="pad15 push-down5 noOverflow">
-            <span class="h1 page-userNameLarge fancy-heading colorWhiteForce"><%= ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize12"><%= polyglot.t('FollowsYou') %></span></span>
-            <br />
-            <span class="textSize16px colorWhiteForce">
-            <% if(ob.page.profile.handle) { %><%= ob.page.profile.handle %><% }else{ %><%= ob.page.profile.guid %><% } %>
-            </span>
+          <div class="pad15 pad5Top noOverflow textShadow2">
+            <div>
+              <span class="h1 page-userNameLarge fancy-heading colorWhiteForce">
+                <%= ob.page.profile.name %>
+              </span>
+            </div>
+            <div>
+              <span class="textSize16px colorWhiteForce">
+              <% if(ob.page.profile.handle) { %><%= ob.page.profile.handle %><% }else{ %><%= ob.page.profile.guid %><% } %>
+              </span>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+          <div>
+            <div class="hide js-followsMe allCaps fontSize12 padding10">
+              <div class="pull-right">Follows You</div>
+            </div>
+            <div class="widthAuto bar navBar barFlush user-page-navigation-buttons positionBottomRight backgroundTransparent">
 
-    <div class="bar navBar barFlush user-page-navigation-buttons positionBottom backgroundTransparent width950">
-<!--       <div class="navMoreButtons">
-        <ul class="js-notOwnPageButtons">  
-          <li>Block</li>
-        </ul>
-        <ul class="js-pageButtons ">
-          <li class="js-userPageBecomeModerator <% if(!ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('BecomeModerator') %></li>
-          <li class="js-userPageEditModerator <% if(ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('EditModerator') %></li>
-        </ul>
-      </div> -->
-      <div class="navEnd pad10">
-        <div class="ctrlGroup hide js-pageButtons js-userPageControls zIndex4">
-          <a class="btn btn-txt custCol-primary js-sellItem">
-            <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('nav.createListing') %>
-          </a>
-          <a class="btn btn-txt custCol-primary js-createStore">
-            <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('CreateStore') %>
-          </a>
-        </div>
-        <div class="ctrlGroup hide js-pageButtons js-userPageControls">
-          <a class="btn btn-txt custCol-primary js-customize">
-            <span class="ion-paintbucket fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Customize') %>
-          </a>
-        </div>
-        <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
-          <a class="btn btn-txt custCol-primary hide js-follow">
-            <span class="ion-person-add fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Follow') %>
-          </a>
-          <a class="btn btn-txt custCol-primary hide confirmable js-unfollow">
-            <span class="preSpacer">
-              <span class="ion-eye-disabled fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('Unfollow') %>
-            </span>
-            <span class="preConfirm">
-              <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('Unfollow') %>
-            </span>
-            <span class="postConfirm">
-              <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('ConfirmUnfollow') %>
-            </span>
-          </a>
-        </div>
-        <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
-          <a class="btn btn-txt custCol-primary js-message">
-            <span class="ion-email fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Message') %>
-          </a>
-        </div>
-        <div class="ctrlGroup hide js-itemButtons js-userPageControls hide">
-          <a class="btn btn-txt custCol-primary js-editItem">
-            <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Edit') %>
-          </a>
-        </div>
-        <div class="ctrlGroup hide js-itemButtons js-userPageControls hide">
-          <a class="btn btn-txt custCol-primary js-cloneItem">
-            <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Clone') %>
-          </a>
-        </div>        
-        <div class="ctrlGroup hide js-extraButtonsNotOwnPage js-userPageControls zIndex4">
-          <a class="btn btn-txt custCol-primary js-block <% if(ob.isBlocked){ %>hide<% } %>">
-            <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Block') %>
-          </a>
-          <a class="btn btn-txt custCol-primary js-unblock <% if(!ob.isBlocked){ %>hide<% } %>">
-            <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Unblock') %>
-          </a>
-        </div>
-        <div class="ctrlGroup hide js-extraButtonsOwnPage js-userPageControls zIndex4">
-          <a class="btn btn-txt custCol-primary js-moderatorSettings">
-            <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
-            <span class="js-userPageEditModerator <% if(!ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('EditModerator') %></span>
-            <span class="js-userPageBecomeModerator <% if(ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('BecomeModerator') %></span>
-          </a>
-        </div>
-        <div class="ctrlGroup hide js-pageButtons js-userPageControls">
-          <a class="btn btn-txt custCol-primary js-moreButtonsOwnPage width34 lineHeight32 padding0">...</a>
-        </div>
-        <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
-          <a class="btn btn-txt custCol-primary js-moreButtonsNotOwnPage width34 lineHeight32 padding0">...</a>
-        </div>
-        <div class="ctrlGroup hide js-itemButtons js-userPageControls hide">
-          <a class="btn btn-txt custCol-primary confirmable js-deleteItem">
-            <span class="preSpacer">
-              <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('Delete') %>
-            </span>
-            <span class="preConfirm">
-              <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('Delete') %>
-            </span>
-            <span class="postConfirm">
-              <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('ConfirmDelete') %>
-            </span>
-          </a>
-        </div>
-        <div class="ctrlGroup hide js-itemEditButtons js-userPageControls hide textOpacity1">
-          <a class="btn btn-txt custCol-primary js-cancelItem"><%= polyglot.t('Cancel') %></a>
-        </div>
-        <div class="ctrlGroup hide js-itemCustomizationButtons js-userPageControls hide textOpacity1">
-          <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
-        </div>
-        <div class="ctrlGroup hide js-itemEditButtons js-userPageControls hide">
-          <a class="btn btn-txt custCol-primary js-saveItem">
-            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('SaveChanges') %>
-          </a>
-        </div>
-        <div class="ctrlGroup hide js-itemCustomizationButtons js-userPageControls hide">
-          <a class="btn btn-txt custCol-primary js-saveCustomization">
-            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('SaveChanges') %>
-          </a>
+              <div class="navEnd pad10">
+                <div class="ctrlGroup hide js-pageButtons js-userPageControls zIndex4">
+                  <a class="btn btn-txt custCol-primary js-sellItem">
+                    <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('nav.createListing') %>
+                  </a>
+                  <a class="btn btn-txt custCol-primary js-createStore">
+                    <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('CreateStore') %>
+                  </a>
+                </div>
+                <div class="ctrlGroup hide js-pageButtons js-userPageControls">
+                  <a class="btn btn-txt custCol-primary js-customize">
+                    <span class="ion-paintbucket fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Customize') %>
+                  </a>
+                </div>
+                <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
+                  <a class="btn btn-txt custCol-primary hide js-follow">
+                    <span class="ion-person-add fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Follow') %>
+                  </a>
+                  <a class="btn btn-txt custCol-primary hide confirmable js-unfollow">
+                    <span class="preSpacer">
+                      <span class="ion-eye-disabled fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('Unfollow') %>
+                    </span>
+                    <span class="preConfirm">
+                      <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('Unfollow') %>
+                    </span>
+                    <span class="postConfirm">
+                      <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('ConfirmUnfollow') %>
+                    </span>
+                  </a>
+                </div>
+                <% if(ob.page.profile.moderator && ob.user.vendor) { %>
+  			          <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
+                  <a class="btn btn-txt custCol-primary hide js-addmoderator">
+                    <span class="ion-person-add fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('AddModerator') %>
+                  </a>
+                  <a class="btn btn-txt custCol-primary hide confirmable js-removemoderator">
+                    <span class="preSpacer">
+                      <span class="ion-eye-disabled fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('RemoveModerator') %>
+                    </span>
+                    <span class="preConfirm">
+                      <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('RemoveModerator') %>
+                    </span>
+                    <span class="postConfirm">
+                      <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('ConfirmRemoveModerator') %>
+                    </span>
+                  </a>
+                </div>
+              <% } %>
+                <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
+                  <a class="btn btn-txt custCol-primary js-message">
+                    <span class="ion-email fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Message') %>
+                  </a>
+                </div>
+                <div class="ctrlGroup hide js-itemButtons js-userPageControls hide">
+                  <a class="btn btn-txt custCol-primary js-editItem">
+                    <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Edit') %>
+                  </a>
+                </div>
+                <div class="ctrlGroup hide js-itemButtons js-userPageControls hide">
+                  <a class="btn btn-txt custCol-primary js-cloneItem">
+                    <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Clone') %>
+                  </a>
+                </div>
+                <div class="ctrlGroup hide js-extraButtonsNotOwnPage js-userPageControls zIndex4">
+                  <a class="btn btn-txt custCol-primary js-block <% if(ob.isBlocked){ %>hide<% } %>">
+                    <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Block') %>
+                  </a>
+                  <a class="btn btn-txt custCol-primary js-unblock <% if(!ob.isBlocked){ %>hide<% } %>">
+                    <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Unblock') %>
+                  </a>
+                </div>
+                <div class="ctrlGroup hide js-extraButtonsOwnPage js-userPageControls zIndex4">
+                  <a class="btn btn-txt custCol-primary js-moderatorSettings">
+                    <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
+                    <span class="js-userPageEditModerator <% if(!ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('EditModerator') %></span>
+                    <span class="js-userPageBecomeModerator <% if(ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('BecomeModerator') %></span>
+                  </a>
+                </div>
+                <div class="ctrlGroup hide js-pageButtons js-userPageControls">
+                  <a class="btn btn-txt custCol-primary js-moreButtonsOwnPage width34 lineHeight32 padding0">...</a>
+                </div>
+                <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
+                  <a class="btn btn-txt custCol-primary js-moreButtonsNotOwnPage width34 lineHeight32 padding0">...</a>
+                </div>
+                <div class="ctrlGroup hide js-itemButtons js-userPageControls hide">
+                  <a class="btn btn-txt custCol-primary confirmable js-deleteItem">
+                    <span class="preSpacer">
+                      <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('Delete') %>
+                    </span>
+                    <span class="preConfirm">
+                      <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('Delete') %>
+                    </span>
+                    <span class="postConfirm">
+                      <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('ConfirmDelete') %>
+                    </span>
+                  </a>
+                </div>
+                <div class="ctrlGroup hide js-itemEditButtons js-userPageControls hide textOpacity1">
+                  <a class="btn btn-txt custCol-primary js-cancelItem"><%= polyglot.t('Cancel') %></a>
+                </div>
+                <div class="ctrlGroup hide js-itemCustomizationButtons js-userPageControls hide textOpacity1">
+                  <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
+                </div>
+                <div class="ctrlGroup hide js-itemEditButtons js-userPageControls hide">
+                  <a class="btn btn-txt custCol-primary js-saveItem">
+                    <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
+                  </a>
+                </div>
+                <div class="ctrlGroup hide js-itemCustomizationButtons js-userPageControls hide">
+                  <a class="btn btn-txt custCol-primary js-saveCustomization">
+                    <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -225,18 +249,25 @@
     <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab paddingRight18">
       <span class="ion-person fontSize11 marginRight2 textOpacity"></span>
       <%= polyglot.t('Following') %>
-      <span class="pill fontSize12 textOpacity75 marginLeft2 js-userFollowingCount">0</span>
+      <span class="pill fontSize12 textOpacity75 marginLeft2 js-userFollowingCount">...</span>
     </a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab paddingRight18">
       <span class="ion-person-stalker fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Followers') %>
-      <span class="pill fontSize12 textOpacity75 marginLeft2 js-userFollowerCount">0</span>
+      <span class="pill fontSize12 textOpacity75 marginLeft2 js-userFollowerCount">...</span>
     </a>
+    <% if(ob.page.profile.vendor) { %>
+    <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab paddingRight18">
+      <span class="ion-android-star fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Reviews') %>
+      <span class="pill fontSize12 textOpacity75 marginLeft2 js-userReviewsCount">...</span>
+    </a>
+    <% } %>
     <% if(ob.page.profile.vendor) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab paddingRight18">
       <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Store') %>
-      <span class="pill fontSize12 textOpacity75 marginLeft2 js-listingCount">0</span>
+      <span class="pill fontSize12 textOpacity75 marginLeft2 js-listingCount">...</span>
     <% } %>
     </a>
   </div>
@@ -254,64 +285,25 @@
               </a>
             <%}%>
             <% if(ob.page.profile.about) { %>
-             <p class="js-userAbout margin0"></p>
+             <div class="js-userAbout margin0 editableContent fontSize14"><%= ob.page.profile.displayAbout %></div>
             <%}else{%>
               <span class="textOpacity75"><%= polyglot.t('AboutEmpty') %></span>
             <%}%>
           </div>
         </div>
-        <div class="flexCol-4 flex-border border0 userPageSocialAccounts">
+        <div class="flexCol-4 flex-border border0 userPageSocialAccounts overflowHidden">
           <div class="flexRow">
             <div class="flexRow borderBottom custCol-border">
-              <div class="rowItem positionWrapper">
-                <div class="textOpacity75"><%= polyglot.t('Guid') %></div>
-                <div class="textSize12px">
+              <div class="rowItem positionWrapper noOverflow">
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Guid') %></div>
+                <div class="textSize11px">
                   <%= ob.page.profile.guid %>
                 </div>
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem positionWrapper">
-                <div class="textOpacity75"><%= polyglot.t('Website') %></div>
-                <div>
-                  <% if(ob.ownPage) { %>
-                    <a href="#settings/page" class="userPageEditBtn">
-                      <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
-                        <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
-                        <%= polyglot.t('Edit') %>
-                      </div>
-                    </a>
-                  <%}%>
-                  <% if(ob.page.profile.website) { %>
-                  <a href="<%= ob.page.profile.website %>" class="js-externalLink"><%= ob.page.profile.website %></a> <span class="ion-android-open fontSize10"></span>
-                  <%}else{%>
-                  <%= polyglot.t('NotProvided') %>
-                  <%}%>
-                </div>
-              </div>
-            </div>
-            <div class="flexRow custCol-border">
-              <div class="rowItem positionWrapper">
-                <div class="textOpacity75"><%= polyglot.t('Email') %></div>
-                <div>
-                  <% if(ob.ownPage) { %>
-                    <a href="#settings/page" class="userPageEditBtn">
-                      <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
-                        <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
-                        <%= polyglot.t('Edit') %>
-                      </div>
-                    </a>
-                  <%}%>
-                  <% if(ob.page.profile.email) { %>
-                  <a href="mailto:<%= ob.page.profile.email %>"><%= ob.page.profile.email %></a> <span class="ion-android-open fontSize10"></span>
-                  <%}else{%>
-                  <%= polyglot.t('NotProvided') %>
-                  <%}%>
-                </div>
-              </div>
-            </div>
-            <div class="flexRow custCol-border">
-              <div class="rowItem positionWrapper">
+              <div class="rowItem positionWrapper noOverflow">
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Website') %></div>
                 <% if(ob.ownPage) { %>
                   <a href="#settings/page" class="userPageEditBtn">
                     <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
@@ -320,18 +312,16 @@
                     </div>
                   </a>
                 <%}%>
-                <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
-                <div>
-                  <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
-                  <%= ob.page.profile.social_accounts.facebook.username %>
-                  <%}else{%>
-                  <%= polyglot.t('NotProvided') %>
-                  <%}%>
-                </div>
+                <% if(ob.page.profile.website) { %>
+                <a href="<%= ob.page.profile.website %>" class="js-externalLink"><%= ob.page.profile.website %></a> <span class="ion-android-open fontSize10"></span>
+                <%}else{%>
+                <%= polyglot.t('NotProvided') %>
+                <%}%>
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem positionWrapper">
+              <div class="rowItem positionWrapper noOverflow">
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Email') %></div>
                 <% if(ob.ownPage) { %>
                   <a href="#settings/page" class="userPageEditBtn">
                     <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
@@ -340,73 +330,114 @@
                     </div>
                   </a>
                 <%}%>
-                <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
-                <div>
-                  <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
+                <% if(ob.page.profile.email) { %>
+                <a href="mailto:<%= ob.page.profile.email %>"><%= ob.page.profile.email %></a> <span class="ion-android-open fontSize10"></span>
+                <%}else{%>
+                <%= polyglot.t('NotProvided') %>
+                <%}%>
+              </div>
+            </div>
+            <div class="flexRow custCol-border">
+              <div class="rowItem positionWrapper noOverflow">
+              <% if(ob.ownPage) { %>
+                <a href="#settings/page" class="userPageEditBtn">
+                  <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                    <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Edit') %>
+                  </div>
+                </a>
+              <%}%>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('Facebook') %></div>
+                <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
+                  <a href="https://facebook.com/<%= ob.page.profile.social_accounts.facebook.username %>">
+                    <%= ob.page.profile.social_accounts.facebook.username %>
+                  </a> <i class="ion-android-open fontSize10"></i>
+                <%}else{%>
+                  <%= polyglot.t('NotProvided') %>
+                <%}%>
+              </div>
+            </div>
+            <div class="flexRow custCol-border">
+              <div class="rowItem positionWrapper noOverflow">
+              <% if(ob.ownPage) { %>
+                <a href="#settings/page" class="userPageEditBtn">
+                  <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                    <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Edit') %>
+                  </div>
+                </a>
+              <%}%>
+              <div class="textOpacity75 fontSize14"><%= polyglot.t('Twitter') %></div>
+              <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
+                <a href="https://twitter.com/<%= ob.page.profile.social_accounts.twitter.username %>">
                   <%= ob.page.profile.social_accounts.twitter.username %>
-                  <%}else{%>
-                  <%= polyglot.t('NotProvided') %>
-                  <%}%>
-                </div>
+                </a> <i class="ion-android-open fontSize10"></i>
+              <%}else{%>
+              <%= polyglot.t('NotProvided') %>
+              <%}%>
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem positionWrapper">
-                <% if(ob.ownPage) { %>
-                  <a href="#settings/page" class="userPageEditBtn">
-                    <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
-                      <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
-                      <%= polyglot.t('Edit') %>
-                    </div>
-                  </a>
-                <%}%>
-                <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
-                <div>
-                  <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
-                  <%= ob.page.profile.social_accounts.instagram.username %>
-                  <%}else{%>
+              <div class="rowItem positionWrapper noOverflow">
+              <% if(ob.ownPage) { %>
+                <a href="#settings/page" class="userPageEditBtn">
+                  <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                    <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Edit') %>
+                  </div>
+                </a>
+              <%}%>
+              <div class="textOpacity75 fontSize14"><%= polyglot.t('Instagram') %></div>
+                <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
+                  <a href="https://instagram.com/<%= ob.page.profile.social_accounts.instagram.username %>">
+                    <%= ob.page.profile.social_accounts.instagram.username %>
+                  </a> <i class="ion-android-open fontSize10"></i>
+                <%}else{%>
                   <%= polyglot.t('NotProvided') %>
-                  <%}%>
-                </div>
+                <%}%>
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem positionWrapper">
-                <% if(ob.ownPage) { %>
-                  <a href="#settings/page" class="userPageEditBtn">
-                    <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
-                      <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
-                      <%= polyglot.t('Edit') %>
-                    </div>
-                  </a>
-                <%}%>
-                <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
-                <div>
-                  <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
-                  <%= ob.page.profile.social_accounts.snapchat.username %>
-                  <%}else{%>
+              <div class="rowItem positionWrapper noOverflow">
+              <% if(ob.ownPage) { %>
+                <a href="#settings/page" class="userPageEditBtn">
+                  <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                    <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Edit') %>
+                  </div>
+                </a>
+              <%}%>
+              <div class="textOpacity75 fontSize14"><%= polyglot.t('Snapchat') %></div>
+                <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
+                  <a href="https://snapchat.com/add/<%= ob.page.profile.social_accounts.snapchat.username %>">
+                    <%= ob.page.profile.social_accounts.snapchat.username %>
+                  </a> <i class="ion-android-open fontSize10"></i>
+                <%}else{%>
                   <%= polyglot.t('NotProvided') %>
-                  <%}%>
-                </div>
+                <%}%>
               </div>
             </div>
-            <div class="flexRow borderBottom custCol-border">
-              <div class="rowItem positionWrapper">
-                <% if(ob.ownPage) { %>
-                  <a href="#settings/page" class="userPageEditBtn">
-                    <div class="btn btn-txt custCol-secondary">
-                      <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
-                      <%= polyglot.t('Edit') %>
-                    </div>
-                  </a>
-                <%}%>
-                <div class="textOpacity75"><%= polyglot.t('PGPKey') %></div>
-                <div>
-                  <%= polyglot.t('NotProvided') %>
-                </div>
+            <div class="flexRow borderBottom custCol-border TODO">
+              <div class="rowItem positionWrapper noOverflow">
+              <% if(ob.ownPage) { %>
+                <a href="#settings/page" class="userPageEditBtn">
+                  <div class="btn btn-txt custCol-secondary">
+                    <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Edit') %>
+                  </div>
+                </a>
+              <%}%>
+                <div class="textOpacity75 fontSize14"><%= polyglot.t('PGPKey') %></div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="flexContainer flex-border custCol-primary js-reviews js-tabTarg hide minHeight650">
+      <div class="flexRow js-list6">
+        <div class="padding10 width100 alignCenter js-loadingMsg borderBottom">
+          <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
         </div>
       </div>
     </div>
@@ -437,7 +468,7 @@
       <div class="flexRow height54">
         <!--<div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">-->
         <div class="txtFieldWrapper searchWrapper borderBottom custCol-border">
-          <input type="text" id="inputFollowing" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
+          <input type="text" id="inputFollowing" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForFollowingPlaceholder') %>" />
         </div>
         <!--
         <div class="selectPill pull-up43">
@@ -557,9 +588,11 @@
   </div>
 </div>
 
+<%= ob.backToTopTmpl({ className: 'custCol-secondary' }) %>
+
 <div class="overlay overlayObscurring hide js-blockedWarning">
   <div class="modalHolder">
-    <div class="modal modal-navOffset">
+    <div class="modal">
       <div class="modal-child">
         <div class="modal-small padding15 txt-center custCol-secondary">
           <h3 class="rowTop30 custCol-text">

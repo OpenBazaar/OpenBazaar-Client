@@ -1,5 +1,8 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
+    app = require('../App').getApp(),
     getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.Model.extend({
@@ -44,15 +47,15 @@ module.exports = Backbone.Model.extend({
         newAttributes = {},
         thumbnailHash = this.get('thumbnail_hash');
 
-    if(userCCode) {
+    if (userCCode) {
       getBTPrice(vendorCCode, function(btAve){
         vendorCurrencyInBitcoin = btAve;
         vendorBitCoinPrice = Number(vendorPrice / btAve);
         //if vendor and user currency codes are the same, multiply by one to avoid rounding errors
-        vendToUserBTCRatio = (userCCode == vendorCCode) ? 1 : window.currentBitcoin/vendorCurrencyInBitcoin;
-        newAttributes.vendorBTCPrice = vendorBitCoinPrice.toFixed(4);
+        vendToUserBTCRatio = userCCode == vendorCCode ? 1 : window.currentBitcoin/vendorCurrencyInBitcoin;
+        newAttributes.vendorBTCPrice = vendorBitCoinPrice;
 
-        if(userCCode != 'BTC'){
+        if (userCCode != 'BTC'){
           newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
             style: 'currency',
             minimumFractionDigits: 2,
@@ -60,18 +63,18 @@ module.exports = Backbone.Model.extend({
             currency: userCCode
           }).format(vendorPrice*vendToUserBTCRatio);
         } else {
-          newAttributes.displayPrice = vendorBitCoinPrice.toFixed(4) + " BTC";
+          newAttributes.displayPrice = app.intlNumFormat(vendorBitCoinPrice, 4) + " BTC";
         }
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();
         self.set(newAttributes);
       });
-    }else{
+    } else {
       this.set({displayPrice: "Price Unavailable"});
     }
 
     //check to make sure thumbnail hash is valid
-    if(thumbnailHash === "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" || thumbnailHash.length !== 40) {
+    if (thumbnailHash === "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" || thumbnailHash.length !== 40) {
       this.set('thumbnail_hash', "");
     }
 

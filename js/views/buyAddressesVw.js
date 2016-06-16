@@ -1,7 +1,10 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate');
+    loadTemplate = require('../utils/loadTemplate'),
+    localize = require('../utils/localize');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
@@ -14,20 +17,25 @@ module.exports = Backbone.View.extend({
   className: "flexRow",
 
   initialize: function(options) {
-    "use strict";
     this.userModel = options.userModel;
+    this.worldwide = options.worldwide;
+    this.shippingRegions = options.shippingRegions || [];
     //don't render on init, let parent trigger the render
-    //add list of countries the vendor ships to
-    this.model.set('shipsToList', (this.model.get('vendor_offer').listing.shipping.shipping_regionsDisplay).join(", "));
   },
 
   render: function(selected){
     this.model.set('user', this.userModel.toJSON());
     var self = this;
-    var modelData = this.model.toJSON();
-    modelData.selected = selected;
     loadTemplate('./js/templates/buyAddresses.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(modelData));
+      self.$el.html(
+          loadedTemplate(
+              __.extend({}, self.model.toJSON(), {
+                worldwide: self.worldwide,
+                selected: selected,
+                shipsToList: localize.localizeShippingRegions(self.shippingRegions)
+              })
+          )
+      );
       //this does not add it to the DOM, that is done by the parent view
       self.$('.js-buyWizardAddressRadio').eq(selected).prop('checked', true).trigger('click');
       //self.setAddress(selected);
@@ -36,20 +44,17 @@ module.exports = Backbone.View.extend({
   },
 
   selectAddressAndAdvance: function(){
-    "use strict";
     $(".js-buyWizardAddressNext").trigger( "click" );
   },
 
   selectAddress: function(){
-    "use strict";
     var index = this.$el.find('.js-buyWizardAddressRadio:checked').val();
     this.setAddress(index);
   },
 
   setAddress: function(index){
-    "use strict";
     var selectedAddress = this.model.get('user').shipping_addresses[index];
-    if(selectedAddress){
+    if (selectedAddress){
       this.trigger("setAddress", selectedAddress);
     }
   }

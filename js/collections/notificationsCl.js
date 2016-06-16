@@ -1,3 +1,5 @@
+'use strict';
+
 var Backbone = require('backbone'),
     app = require('../App.js').getApp(),
     NotificationMd = require('../models/notificationsMd');
@@ -5,16 +7,13 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.Collection.extend({
   url: function() {
-    return app.serverConfig.getServerBaseUrl() + '/get_notifications';
+    return app.serverConfigs.getActive().getServerBaseUrl() + '/get_notifications';
   },
   
   model: NotificationMd,
 
   comparator: function(notif) {
     return -notif.get('timestamp');
-  },
-
-  initialize: function(options) {
   },
 
   getUnreadCount: function() {

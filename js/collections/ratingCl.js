@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     app = require('../App.js').getApp(),
@@ -5,19 +7,16 @@ var __ = require('underscore'),
 
 module.exports = Backbone.Collection.extend({
   url: function() {
-    return app.serverConfig.getServerBaseUrl() + '/get_ratings';
+    return app.serverConfigs.getActive().getServerBaseUrl() + '/get_ratings';
   },
 
   model: RatingMd,
-
-  initialize: function(options) {
-  },
 
   parse: function(response) {
     if (!response || __.isEmpty(response)) {
       return [];
     }
 
-    return response;
+    return response.reverse();
   }
 });

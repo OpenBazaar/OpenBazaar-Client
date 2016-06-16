@@ -1,7 +1,6 @@
-var __ = require('underscore'),
-    Backbone = require('backbone'),
-    $ = require('jquery'),
-    moment = require('moment'),
+"use strict";
+
+var moment = require('moment'),
     baseVw = require('./baseVw'),
     loadTemplate = require('../utils/loadTemplate');
 
@@ -9,18 +8,18 @@ module.exports = baseVw.extend({
 
   tagName: "li",
 
-  className: "flexRow custCol-border",
+  className: "flexRow custCol-border js-orderShort",
 
   events: {
-    'click .js-orderShort': 'openOrderModal',
+    'click .js-orderShort': 'orderSummary',
     'click .js-orderShortConfirm': 'orderConfirm',
-    'click .js-orderShortComplete': 'orderComplete'
+    'click .js-orderShortComplete': 'orderComplete',
+    'click .js-orderShortDiscusson': 'orderDiscussion'
   },
 
   initialize: function(){
-    "use strict";
     var timestamp = this.model.get('timestamp');
-    this.model.set('order_date', moment(new Date(timestamp*1000)).format('MMM D, h:mm A'));
+    this.model.set('order_date', moment(new Date(timestamp*1000)).locale(window.lang).format('MMM D, h:mm A'));
   },
 
   render: function(){
@@ -31,36 +30,39 @@ module.exports = baseVw.extend({
     return this;
   },
 
-  openOrderModal: function(e){
-    "use strict";
-    e.stopPropagation();
+  openOrderModal: function(tabState){
     window.obEventBus.trigger("openOrderModal", {
       'orderID': this.model.get('order_id'),
       'status': this.model.get('status'),
-      'transactionType': this.model.get('transactionType')
+      'transactionType': this.model.get('transactionType'),
+      'unread': this.model.get('unread'),
+      'tabState': tabState
     });
+    this.$('.js-unreadBadge').addClass('hide');
+  },
+
+  orderSummary: function(e){
+    e.stopPropagation();
+    this.openOrderModal("summary");
   },
 
   orderConfirm: function(e){
-    "use strict";
     e.stopPropagation();
-    window.obEventBus.trigger("openOrderModal", {
-      'orderID': this.model.get('order_id'),
-      'status': this.model.get('status'),
-      'transactionType': this.model.get('transactionType'),
-      'tabState': "confirm"
-    });
+    this.openOrderModal("summary");
   },
 
   orderComplete: function(e){
-    "use strict";
     e.stopPropagation();
-    window.obEventBus.trigger("openOrderModal", {
-      'orderID': this.model.get('order_id'),
-      'status': this.model.get('status'),
-      'transactionType': this.model.get('transactionType'),
-      'tabState': "complete"
-    });
+    this.openOrderModal("summary");
+  },
+
+  orderDiscussion: function(e){
+    e.stopPropagation();
+    this.openOrderModal("discussion");
+  },
+
+  updateUnread: function(changeBy){
+    this.model.set('unread', this.model.get('unread') + parseInt(changeBy, 10));
   }
 
 });

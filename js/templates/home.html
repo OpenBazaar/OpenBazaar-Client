@@ -34,19 +34,30 @@
     </div>
   </div>
   <div class="bar home-page-navigation-filler hide custCol-primary"></div>
-  <div class="flexContainer flex-border color-primary height54 js-productsSearch">
+  <div class="flex-border color-primary height54 js-productsSearch">
     <div class="flexRow">
-      <div class="flexRow border0">
-        <div class="width100">
-          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
+      <div class="flexRow borderBottom">
+        <div class="flexCol-12">
+          <div class="txtFieldWrapper searchWrapper">
             <input type="text" class="txtField txtField-bar js-homeSearchItems" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
             <a class="btn-corner btn-cornerTR ion-ios-close vCentered icon-med hide js-homeSearchItemsClear textOpacity50"></a>
           </div>
-          <div class="selectPill pull-up43">
-            <select class="custCol-secondary js-homeSelectFollowingFilter">
-              <option value="network"><%= polyglot.t('filters.listingsAll') %></option>
-              <option value="following"><%= polyglot.t('filters.listingsCurated') %></option>
-            </select>
+          <div class="flexRow positionAbsolute">
+            <div class="btn-togWrapper btn-togWrapper-c1 btn-toWrapper-discoverToggle marginRight10 js-homeListingToggle">
+              <a class="btn btn-txt btn-discoverToggle borderRadiusBottom0 btn-togLeft active js-homeListingsFollowed tooltip tooltip-left"
+                 data-tooltip="<%= polyglot.t('ShowOnlyFollowerListingsTooltip') %>">
+                <span class="ion-person fontSize11 marginRight2 toggle-txt"></span>
+                <span class="toggle-txt"><%= polyglot.t('ShowOnlyFollowerListings') %></span>
+              </a>
+              <% if(!localStorage.getItem('safeListingsWarningDissmissed')){ %>
+                <div class="discoverToggleHelper js-discoverToggleHelper"><%= polyglot.t('TryRandom') %></div>
+              <% } %>
+              <a class="btn btn-txt btn-discoverToggle borderRadiusBottom0 btn-togRight js-homeListingsAll tooltip tooltip-left"
+                 data-tooltip="<%= polyglot.t('ShowAllListingsTooltip') %>">
+                <span class="ion-earth fontSize11 marginRight2 toggle-txt"></span>
+                <span class="toggle-txt"><%= polyglot.t('Random') %></span>
+              </a>
+            </div>
           </div>
         </div>
         <!--
@@ -80,14 +91,14 @@
           <div class="js-loadingMessage spinnerWrapper">
             <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
             <div class="textOpacity75 typeWeight400 marginTop6">
-              <span class="js-loadingText" data-default-text="<%= polyglot.t('discover.searchDefaultText') %>" data-searching-text="<%= polyglot.t('discover.searchingText') %>"><%= polyglot.t('discover.searchDefaultText') %></span>
-              <span class="js-discoverSearchKeyword btn-pill color-secondary hide"></span>
+              <div class="js-loadingText" data-default-text="<%= polyglot.t('discover.searchDefaultText') %>" data-searching-text="<%= polyglot.t('discover.searchingText') %>"><%= polyglot.t('discover.searchDefaultText') %></div>
             </div>
           </div> 
         </div>
       </div>
     </div>
   </div>
+  <%= ob.backToTopTmpl() %>
   <div class="js-feed minHeight650 rowTop30 hide alignCenter fontSize14">
     <h1 class="fancy-heading width100 fontweight500"><%= polyglot.t('ComingSoon') %></h1>
     <div class="row20">

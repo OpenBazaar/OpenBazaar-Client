@@ -1,3 +1,5 @@
+'use strict';
+
 var Backbone = require('backbone');
 
 /* use BCP 47 language tags as the key for each language http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry */
@@ -11,12 +13,24 @@ module.exports = Backbone.Model.extend({
         langCode: "en-US"
       },
       {
+        langName: "中文 (Chinese, S)",
+        langCode: "zh-CN"
+      },
+      {
+        langName: "Czech (Czech)",
+        langCode: "cs"
+      },
+      {
+        langName: "Croatian (Croatian, Croatia)",
+        langCode: "hr-HR"
+      },
+      {
         langName: "Dansk (Danish)",
         langCode: "da"
       },
       {
-        langName: "Deutsch (German)",
-        langCode: "de"
+        langName: "Deutsch (German, Germany)",
+        langCode: "de-DE"
       },
       {
         langName: "Dutch (Dutch, Netherlands)",
@@ -24,15 +38,31 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "Espa&ntilde;ol (Spanish)",
-        langCode: "sp"
+        langCode: "es"
       },
       {
         langName: "Italiano (Italian)",
         langCode: "it"
       },
       {
+        langName: "Français (French, Canada)",
+        langCode: "fr-CA"
+      },
+      {
         langName: "Français (French, France)",
-        langCode: "fr-FR"
+        langCode: "fr"
+      },
+      {
+        langName: "Greek (Greek)",
+        langCode: "el"
+      },
+      {
+        langName: "日本語 (Japanese, Japan)",
+        langCode: "ja-JP"
+      },
+      {
+        langName: "한국어 (Korean)",
+        langCode: "ko"
       },
       {
         langName: "Polski (Polish)",
@@ -59,20 +89,12 @@ module.exports = Backbone.Model.extend({
         langCode: "tr"
       },
       {
-        langName: "中文 (Chinese, S)",
-        langCode: "zh-CN"
-      },
-      {
-        langName: "한국어 (Korean)",
-        langCode: "ko"
-      },
-      {
-        langName: "日本語 (Japanese, Japan)",
-        langCode: "ja-JP"
-      },
-      {
         langName: "Українська (Ukrainian)",
         langCode: "uk"
+      },
+      {
+        langName: "Uzbek (Uzbek)",
+        langCode: "uz"
       },
       {
         langName: "Klingon (Klingon)",

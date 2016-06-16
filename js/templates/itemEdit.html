@@ -20,20 +20,20 @@
       <div class="flexRow custCol-secondary border0 height50">
         <label for="itemImageUploadMain" class="fieldItem width100">
           <h5 class="floatLeft"><%= polyglot.t('Photos') %></h5>
-          <span class="btn btn-c1 btn-txt rowTop20 pull-right custCol-primary textOpacity1 margin0 marginTopNeg8 <%= ob.combinedImagesArray.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>">
+          <span class="btn btn-c1 btn-txt rowTop20 pull-right custCol-primary textOpacity1 margin0 marginTopNeg8 <%= ob.images.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>">
             <span class="ion-images fontSize11 marginRight2 textOpacity75"></span>
             <%= polyglot.t('SelectPhotos') %>
           </span>
-          <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple <%= ob.combinedImagesArray.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>>
+          <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple <%= ob.images.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>>
         </label>
       </div>
-      <div class="flexRow js-editItemSubImagesWrapper editItemImageHolder">
+      <div class="flexRow js-editItemSubImagesWrapper editItemImageHolder" data-label="<%= polyglot.t('Photos') %>">
         <div class="statusBar navBar fadeOut positionAbsolute js-itemEditImageLoading">
           <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
         </div>
         <div class="js-subImageWrap">
-          <% _.each(ob.combinedImagesArray, function(data, i) { %>
-          <div class="itemImg itemImg-small js-dropImage js-editItemSubImage floatLeft" style="background-image: url(<%= data %>);">
+          <% _.each(ob.images, function(url, i) { %>
+          <div class="itemImg itemImg-small js-dropImage js-editItemSubImage floatLeft" style="background-image: url(<%= url %>);">
             <div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage">
               <i class="ion-android-close icon-centered icon-small"></i>
             </div>
@@ -41,7 +41,7 @@
           <% }); %>
         </div>
       </div>
-      <label for="itemImageUploadMain" class="textSize14px editItemImageLoadPhotoMessage js-itemEditLoadPhotoMessage <%= ob.combinedImagesArray.length ? 'hide' : '' %>">
+      <label for="itemImageUploadMain" class="textSize14px editItemImageLoadPhotoMessage js-itemEditLoadPhotoMessage <%= ob.images.length ? 'hide' : '' %>">
         <span class="fullCentered"><%= polyglot.t('NoPhotosAdded') %></span>
       </label>
       <!--<div class="textOpacity50">Drag photos here or click button above.</div>-->
@@ -88,28 +88,41 @@
               </div>
             </div>
           </div>
-          <div class="flexRow custCol-border js-inputParent">
+          <div class="flexRow custCol-border js-inputParent zIndex1">
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="priceLocal">
                   <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)
                 </label>
-                <a href="#settings" class="underline fontSize10 textOpacity50 noOverflow width80"><%= polyglot.t('ChangeCurrency') %></a>
+                <div class="underline rowTop5">
+                  <a href="#settings" class="tooltip tooltip-box" data-tooltip="<%= polyglot.t('ChangeCurrencyHelp') %>">
+                    <span class="note">
+                      <%= polyglot.t('ChangeCurrency') %>
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
-            <div class="flexCol-5">
+            <div class="flexCol-4">
               <input type="number" step="any" name="price" id="inputPrice" class="hide" />
               <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
               <input type="number" name="priceLocal" step="any" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%= ob.price %>" required
                 <% if(ob.userCurrencyCode == "BTC"){ %>
-                min="0.0015"
+                min="0.0002"
                 <% } else { %>
-                min="<% print((window.currentBitcoin * 0.002).toFixed(2)) %>"
+                min="<% print((window.currentBitcoin * 0.0002).toFixed(2)) %>"
                 <% } %>
               >
             </div>
-            <div class="flexCol-4">
-              <span class="fieldItem txt-placeholder"><%= polyglot.t('MinimumIs') %> <%= ob.userCurrencyCode == "BTC" ? 0.0015 :  (window.currentBitcoin * 0.002).toFixed(2) %> <span class="ion-help-circled fontSize12 tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>"></span></span>
+            <div class="flexCol-5">
+              <span class="fieldItem pull-right">
+                <span class="tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>">
+                  <span class="txt-placeholder">
+                    <%= polyglot.t('MinimumIs', { amount: ob.userCurrencyCode == "BTC" ? ob.intlNumFormat(0.0002, 4) : ob.intlNumFormat(window.currentBitcoin * 0.0002, 4) }) %>
+                    <span class="ion-help-circled fontSize12"></span>
+                  </span>
+                </span>
+              </span>
             </div>
           </div>
           <div class="flexRow custCol-border js-shippingRow">
@@ -159,13 +172,13 @@
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputDescription"><%= polyglot.t('Description') %></label>
-                <span class="fontSize10 textOpacity50"><%= polyglot.t('HighlightToStyle') %></span>
+                <div class="note rowTop5"><%= polyglot.t('HighlightToStyle') %></div>
               </div>
             </div>
-            <div class="flexCol-9">
+            <div class="flexCol-9" data-label="<%= polyglot.t('Description') %>">
               <textarea name="description"
                         rows="8"
-                        class="fieldItem-textarea custCol-text height130 overflowHidden"
+                        class="fieldItem-textarea custCol-text height130 customThemeScrollbar"
                         id="inputDescription"
                         required
                         placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%- ob.vendor_offer.listing.item.description %></textarea>
@@ -198,8 +211,8 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <div class="fieldItem padding0 js-shipToWrapper">
-                  <div class="fieldItem-selectWrapper noIcon">
+                <div class="fieldItem padding0 js-shipToWrapper" data-label="<%= polyglot.t('ShipsTo') %>">
+                  <div class="fieldItem-selectWrapper noIcon positionWrapper">
                     <select name="ships_to" class="chosen custCol-text" id="shipsTo" multiple required>
                     </select>
                   </div>
@@ -210,15 +223,17 @@
               <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="shipsToRegions"><%= polyglot.t('AddShipToRegion') %></label>
+                  <div class="note rowTop5"><%= polyglot.t('AddShipToRegionNote') %></div>
                 </div>
               </div>
               <div class="flexCol-8">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper noIcon">
-                    <select class="chosenRegions custCol-text" id="shipsToRegions">
+                    <select class="chosenRegions custCol-text" id="shipsToRegions" data-placeholder="<%= polyglot.t('SelectRegion') %>">
                       <option></option>
-                      <option value="EUROPEAN_UNION">European Union</option>
-                      <option value="EUROPEAN_ECONOMIC_AREA">European Economic Area</option>
+                      <option value="ALL"><%= polyglot.t('AllRegions') %></option>
+                      <option value="EUROPEAN_UNION"><%= polyglot.t('EuropeanUnion') %></option>
+                      <option value="EUROPEAN_ECONOMIC_AREA"><%= polyglot.t('EuropeanEconomicArea') %></option>
                     </select>
                   </div>
                 </div>
@@ -310,7 +325,10 @@
             </div>
             <div class="flexRow custCol-border">
               <div class="flexCol-12 custCol-border">
-                <textarea name="terms_conditions" rows="6" placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.terms_conditions %></textarea>
+                <textarea name="terms_conditions"
+                        rows="6"
+                        placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>"
+                        class="fieldItem-textarea custCol-text customThemeScrollbar"><%= ob.vendor_offer.listing.policy.terms_conditions %></textarea>
               </div>
             </div>
           </div>
@@ -324,7 +342,10 @@
             </div>
             <div class="flexRow">
               <div class="flexCol-12">
-                <textarea name="returns" rows="6" placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.returns %></textarea>
+                <textarea name="returns"
+                          rows="6"
+                          placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>"
+                          class="fieldItem-textarea custCol-text customThemeScrollbar"><%= ob.vendor_offer.listing.policy.returns %></textarea>
               </div>
             </div>
         </div>
@@ -359,7 +380,7 @@
         <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border custCol-primary">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
-              <h5><%= polyglot.t('Discover') %> (<%= polyglot.t('Optional') %>)</h5>
+              <h5><%= polyglot.t('Discover') %></h5>
             </div>
           </div>
           <div class="flexRow custCol-border">
@@ -369,7 +390,7 @@
               </div>
             </div>
             <div class="flexCol-9">
-              <div class="fieldItem padding015" id="inputKeyword"></div>
+              <div class="fieldItem padding015" id="inputKeyword" data-label="<%= polyglot.t('Tags') %>"></div>
             </div>
           </div>
           <div class="flexRow">
@@ -409,7 +430,7 @@
         <div class="ctrlGroup js-itemEditButtons floatRight">
           <a class="btn btn-large custCol-secondary js-saveItem">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('SaveChanges') %>
+            <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
           </a>
         </div>
         <div class="ctrlGroup js-itemEditButtons textOpacity1 floatRight marginRight5">

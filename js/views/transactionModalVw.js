@@ -3,11 +3,9 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     saveToAPI = require('../utils/saveToAPI'),
     orderModel = require('../models/orderMd'),
-    getBTPrice = require('../utils/getBitcoinPrice'),
     baseVw = require('./baseVw'),
     chatMessageView = require('./chatMessageVw'),
     qr = require('qr-encode'),
@@ -32,43 +30,47 @@ module.exports = baseVw.extend({
     'click .js-showFeedbackRating': 'showFeedbackRating',
     'click .js-hideFeedbackRating': 'hideFeedbackRating',
     'click .js-showCompleteForm': 'showCompleteForm',
+    'click .js-completeOrderResend': 'clickCompleteOrderResend',
     'click .js-completeOrderHide': 'completeOrderHide',
-    'click .js-confirmOrder': 'confirmOrder',
-    'click .js-completeOrder': 'completeOrder',
+    'click .js-confirmOrder': 'clickConfirmOrder',
+    'click .js-confirmOrderResend': 'clickConfirmOrderResend',
+    'click .js-completeOrder': 'clickCompleteOrder',
     'click .js-copyIncommingTx': 'copyTx',
     'click .js-copyOutgoingTx': 'copyTx',
     'click .js-closeOrderForm': 'closeOrderForm',
     'click .js-showFundOrder': 'showFundOrder',
-    'click .js-transactionPayCheck':'checkPayment',
+    'click .js-transactionPayCopy': 'copyTransactionPay',
+    'click .js-transactionPayCheck': 'checkPayment',
     'click .js-startDispute': 'startDispute',
+    'click .js-startDisputeResend': 'confirmDisputeResend',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
     'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
+    'click .js-closeDisputeResend': 'closeDisputeResend',
     'change #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
     'change #transactionsSellerPayoutPercent': 'updateSellerBTC',
     'click .js-transactionShowContract': 'showContract',
     'click .js-transactionHideContract': 'hideContract',
     'click .js-acceptResolution': 'acceptResolution',
     'click .js-refundTransaction': 'refundOrder',
+    'click .js-refundTransactionResend': 'refundOrder',
     'focus .js-transactionDiscussionSendText': 'highlightInput',
     'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput',
+    //'blur textarea': 'validateInput',
+    'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
     'keydown #transactionDiscussionSendText': 'onKeydownDiscussion',
     'keyup #transactionDiscussionSendText': 'onKeyupDiscussion'
   },
 
   initialize: function (options) {
-    
-    var self = this;
-
     this.orderID = options.orderID;
     this.status = options.status;
     this.transactionType = options.transactionType;
+    this.unread = options.unread;
     this.parentEl = options.parentEl;
     this.countriesArray = options.countriesArray;
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
-    this.bitcoinValidationRegex = options.bitcoinValidationRegex;
     this.tabState = options.tabState ;//active tab
     this.socketView = options.socketView;
     this.userModel = options.userModel;
@@ -78,10 +80,13 @@ module.exports = baseVw.extend({
     this.discussionCount = 0;
     this.discussionCol = new discussionCl();
     this.discussionCol.url = this.serverUrl + "order_messages";
+    this.resendComplete = false; //don't show the resend complete order button again if the call is successful
 
-    if(this.userProfile.get('avatar_hash')){
+    if (this.userProfile.get('avatar_hash')){
       this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
     }
+
+    this.avatar_hash = this.userProfile.get('avatar_hash');
 
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
 
@@ -90,13 +95,13 @@ module.exports = baseVw.extend({
     this.model = new orderModel({
       cCode: this.cCode,
       btAve: this.btAve,
-      serverUrl: this.serverUrl,
-      status: this.status,
-      transactionType: this.transactionType,
-      bitcoinValidationRegex: this.bitcoinValidationRegex,
-      avatarURL: this.avatarURL,
-      avatar_hash: this.userProfile.get('avatar_hash'),
-      orderID: this.orderID});
+      avatar_hash: this.avatar_hash
+      //serverUrl: this.serverUrl,
+      //transactionType: this.transactionType,
+      //avatarURL: this.avatarURL,
+      //orderID: this.orderID,
+      //userGuid: this.userModel.get('guid')
+    });
     this.model.urlRoot = options.serverUrl + "get_order";
     this.listenTo(this.model, 'change:priceSet', this.render);
     this.getData();
@@ -107,16 +112,18 @@ module.exports = baseVw.extend({
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
       dataType: 'json',
-      success: function (model, response, options) {
+      success: function (model, response) {
         self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
-        if(!response.invalidData && response.vendor_offer.listing){
+        self.model.set('resendComplete', self.resendComplete);
+        self.model.set('status', self.status);
+        if (!response.invalidData && response.vendor_offer.listing){
           self.model.updateAttributes();
         } else {
           messageModal.show(window.polyglot.t('errorMessages.serverError'));
         }
       },
       error: function (jqXHR, status, errorThrown) {
-        if(status.status == 500){
+        if (status.status == 500){
           messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
         } else {
           messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown.textStatus + "</i>");
@@ -127,7 +134,7 @@ module.exports = baseVw.extend({
         console.log(errorThrown);
       },
       complete: function(xhr, textStatus) {
-        if(textStatus == 'parsererror'){
+        if (textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
         }
       }
@@ -135,45 +142,79 @@ module.exports = baseVw.extend({
   },
 
   render: function () {
-    var self = this;
+    var self = this,
+        orderPrice = 0,
+        orderPaid = 0,
+        orderDue = 0;
+
     $('.js-loadingModal').addClass("hide");
-    this.model.set('status', this.status);
     //makde sure data is valid
-    if(this.model.get('invalidData')){
+    if (this.model.get('invalidData')){
       messageModal.show(window.polyglot.t('errorMessages.serverError', self.model.get('error')));
       return;
     }
 
+    //calculate how much has been paid
+    orderPrice = this.model.get("buyer_order").order.payment.amount;
+    __.each(this.model.get("bitcoin_txs"), function(payment){
+      orderPaid += payment.value;
+    });
+    orderDue = orderPrice - orderPaid;
+
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
       self.parentEl.html(self.$el);
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.html(loadedTemplate(__.extend({}, self.model.toJSON(), {
+        unread: self.unread,
+        serverUrl: self.serverUrl,
+        bitcoinValidationRegex: window.config.bitcoinValidationRegex,
+        transactionType: self.transactionType,
+        userGuid: self.userModel.get('guid'),
+        status: self.status,
+        avatarURL: self.avatarURL,
+        avatar_hash: self.avatar_hash,
+        orderID: self.orderID,
+        orderPrice: orderPrice,
+        orderPaid: orderPaid,
+        orderDue: orderDue
+      })
+      ));
       // add blur to container
-      $('#obContainer').addClass('blur');
+      $('#obContainer').addClass('modalOpen').scrollTop(0);
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
-      self.setState(self.tabState);
-      if(self.status == 0){
+      if (self.status == 0){
         self.showPayment();
       }
       self.getDiscussion();
       self.discussionScroller = self.$('.js-discussionScroller');
       self.moderatorPercentage = self.model.get('displayModerator').feeDecimal;
+      self.discussionInput = self.$('#transactionDiscussionSendText');
+      self.discussionForm = self.$('#transactionDiscussionForm');
+      //set the QR details checkbox
+      var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false";
+      self.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
+
+      self.setState(self.tabState); //this should always be last
     });
   },
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.notification && data.notification.order_id == this.orderID){
-      switch(data.notification.type){
-        case "payment received":
-          this.status = 1;
-          this.tabState = "summary";
-          break;
-        case "order confirmation":
-          this.status = 2;
-          this.tabState = "summary";
-          break;
+    if (data.notification && data.notification.order_id == this.orderID){
+      switch (data.notification.type){
+      case "payment received":
+        this.status = 1;
+        this.tabState = "summary";
+        break;
+      case "order confirmation":
+        this.status = 2;
+        this.tabState = "summary";
+        break;
+      case "partial payment":
+        this.status = 0;
+        this.tabState = "summary";
+        break;
         /* //this notification is not sent yet by the server
         case "payment released":
           this.status = 3;
@@ -182,15 +223,15 @@ module.exports = baseVw.extend({
           */
       }
       this.getData();
-    } else if(data.message && data.message.subject == this.orderID){
+    } else if (data.message && data.message.subject == this.orderID){
       var messageModel = new Backbone.Model(data.message);
       this.discussionCol.add(messageModel);
-      if(data.message.message_type == "DISPUTE_OPEN"){
+      if (data.message.message_type == "DISPUTE_OPEN"){
         this.status = 4;
         this.tabState = "discussion";
         this.getData();
       }
-      if(data.message.message_type == "DISPUTE_CLOSE"){
+      if (data.message.message_type == "DISPUTE_CLOSE"){
         this.status = 5;
         this.tabState = "discussion";
         this.getData();
@@ -198,12 +239,23 @@ module.exports = baseVw.extend({
     }
   },
 
+  toggleQRDetails: function(){
+    var toggleInput = this.$('#BuyWizardQRDetailsInput'),
+        toggleVal = toggleInput.prop('checked');
+    localStorage.setItem('AdditionalPaymentData', toggleVal);
+    this.showPayment();
+  },
+
   showPayment: function(){
-    var totalBTCPrice = 0,
-        payHREF,
+    var payHREF,
         dataURI;
-    if(this.model.get('buyer_order')){
-      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount + "&message=" + this.model.get('vendor_offer').listing.item.title.substring(1, 20);
+    if (this.model.get('buyer_order')){
+      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount;
+
+      if (localStorage.getItem('AdditionalPaymentData') != "false") {
+        payHREF += "&message=" + this.model.get('vendor_offer').listing.item.title.substring(0, 20) + " " + this.orderID;
+      }
+      
       dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
       this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
     } else {
@@ -224,15 +276,36 @@ module.exports = baseVw.extend({
   },
 
   setState: function(state){
-    if(!state){
-      state = "summary";
+    if (!state){
+      switch (this.status){
+      case 2:
+        state = "shipping";
+        break;
+      case 3:
+        state = "funds";
+        break;
+      case 4:
+        state = "discussion";
+        break;
+      case 5:
+        state = "discussion";
+        break;
+      default:
+        state = "summary";
+      }
     }
     this.$el.find('.js-main').addClass('hide');
     this.$el.find('.js-tab').removeClass('active');
     this.$el.find('.js-' + state).removeClass('hide');
     this.$el.find('.js-' + state + 'Tab').addClass('active').removeClass('hide');
+    this.discussionForm.removeClass('formChecked');
+    
+    if (state == "discussion"){
+      $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_discussion_as_read', {id: this.orderID});
+      this.$('.js-unreadBadge').addClass('hide');
+    }
 
-    if(state == "discussion"){
+    if (state == "discussion" && this.discussionScroller){
       this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
     }
 
@@ -240,11 +313,11 @@ module.exports = baseVw.extend({
     this.state = state;
   },
 
-  highlightInput: function(e) {
+  highlightInput: function() {
     this.$('.js-discussionForm').addClass('custCol-border').removeClass('custCol-border-secondary');
   },
 
-  blurInput: function(e) {
+  blurInput: function() {
     this.$('.js-discussionForm').removeClass('custCol-border').addClass('custCol-border-secondary');
   },
 
@@ -291,9 +364,11 @@ module.exports = baseVw.extend({
     this.$('.js-transactionFeedback').removeClass('bottom0');
   },
 
+  /*
   showRefundOrder: function(){
     this.setState("refund");
   },
+   */
 
   showCompleteForm: function(){
     this.$('.js-transactionShowContract').addClass('hide');
@@ -303,17 +378,23 @@ module.exports = baseVw.extend({
   completeOrderHide: function(){
     this.$('.js-transactionShowContract').removeClass('hide');
     this.$('.js-complete').removeClass('bottom0');
+    this.sendCompleteOrder && this.sendCompleteOrder.abort();
   },
 
-  confirmOrder: function(e){
+  clickConfirmOrder: function(e){
+    this.confirmOrder(this.$el.find('#transactionConfirmForm'), $(e.target));
+  },
+
+  clickConfirmOrderResend: function(e){
+    this.confirmOrder('', $(e.target));
+  },
+
+  confirmOrder: function(targForm, targBtn){
     var self = this,
-        targetForm = this.$el.find('#transactionConfirmForm'),
-        confirmData = {},
-        confirmStatus,
-        targBtn = $(e.target);
+        confirmData = {};
 
     confirmData.id = this.orderID;
-    confirmStatus = app.statusBar.pushMessage({
+    this.confirmStatus = app.statusBar.pushMessage({
       type: 'pending',
       msg: '<i>' + window.polyglot.t('transactions.UpdatingOrder') + '</i>',
       duration: false
@@ -321,69 +402,55 @@ module.exports = baseVw.extend({
 
     targBtn.addClass("loading");
 
-    saveToAPI(targetForm, '', this.serverUrl + "confirm_order",
-        function(data){
+    saveToAPI(targForm, '', this.serverUrl + "confirm_order",
+        function(){
           self.closeModal();
-          confirmStatus.updateMessage({
+          self.confirmStatus.updateMessage({
             type: 'confirmed',
             msg: '<i>' + window.polyglot.t('transactions.UpdateComplete') + '</i>'
           });
           setTimeout(function(){
-            confirmStatus && confirmStatus.remove();
-          },3000);
-          },
-        /*(function(data){
-          //onFail
-          confirmStatus.updateMessage({
-            type: 'warning',
-            msg: '<i>' + window.polyglot.t('transactions.UpdateFailed') + '</i>',
-            duration: 3000
-          });
-          setTimeout(function(){
-            confirmStatus && confirmStatus.remove();
-          },3000);
-        }*/'',
-        confirmData, '',
-        /*function(){
-          //onInvalid
-          confirmStatus.updateMessage({
-            type: 'warning',
-            msg: '<i>' + window.polyglot.t('transactions.UpdateInvalid') + '</i>',
-            duration: 3000
-          });
-          setTimeout(function(){
-            confirmStatus && confirmStatus.remove();
-          },3000);
-        }*/'')
+            self.confirmStatus && self.confirmStatus.remove();
+          }, 3000);
+        }, '',
+        confirmData, '', '')
         .always(function(){
           targBtn.removeClass("loading");
         });
-
-   // this.closeModal();
   },
 
-  completeOrder: function(e){
+  clickCompleteOrder: function(e){
+    this.completeOrder(this.$el.find('#transactionCompleteForm'), $(e.target));
+  },
+
+  clickCompleteOrderResend: function(e){
+    this.completeOrder('', $(e.target));
+  },
+
+  completeOrder: function(targForm, targBtn){
     var self = this,
-        targetForm = this.$el.find('#transactionCompleteForm'),
         completeData = {};
 
-    $(e.target).addClass('loading');
+    targBtn.addClass('loading');
     completeData.id = this.orderID;
-    this.$el.find('.js-transactionSpinner').removeClass('hide');
 
-    saveToAPI(targetForm, '', this.serverUrl + "complete_order",
-        function(data){
+    this.sendCompleteOrder = saveToAPI(targForm, '', this.serverUrl + "complete_order",
+        function(){
           self.status = 3;
           self.tabState = "summary";
+          self.resendComplete = "true";
           self.getData();
         },
         function(data){
-          self.$el.find('.js-transactionSpinner').addClass('hide');
           messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
         },
         completeData).always(() => {
-          $(e.target).removeClass('loading');
+          targBtn.removeClass('loading');
         });
+  },
+
+  copyTransactionPay: function(e){
+    clipboard.writeText($(e.target).data('url'));
   },
 
   checkPayment: function(){
@@ -409,7 +476,7 @@ module.exports = baseVw.extend({
       data: $.param({'order_id': self.orderID}),
       dataType: 'json',
       reset: true,
-      success: function (collection, response, options) {
+      success: function () {
         self.addAllDiscussionMessages();
       },
       error: function (jqXHR, status, errorThrown) {
@@ -425,7 +492,7 @@ module.exports = baseVw.extend({
     var newAttributes = {},
         wrapper = this.$('.js-discussionWrapper');
 
-    newAttributes.moderatorGuid = this.model.get('displayModerator').guid;
+    newAttributes.moderatorGuid = this.model.get('displayModerator') ? this.model.get('displayModerator').guid : "";
     newAttributes.transactionType = this.transactionType;
     newAttributes.vendorGuid = this.model.get('vendor_offer').listing.id.guid;
     newAttributes.buyerGuid = this.model.get('buyer_order').order.id.guid;
@@ -447,7 +514,7 @@ module.exports = baseVw.extend({
     var self = this;
     //clear existing messages
     this.$('.js-discussionWrapper').html('');
-    this.discussionCol.each(function(model, i){
+    this.discussionCol.each(function(model){
       self.addDiscussionMessage(model);
     });
     if (this.discussionCol.length > 0 ){
@@ -467,17 +534,17 @@ module.exports = baseVw.extend({
         modGuid = this.model.get('displayModerator')? this.model.get('displayModerator').guid : "",
         modKey = this.model.get('displayModerator') ? this.model.get('displayModerator').pubkeys.guid : "";
 
-    if(this.transactionType == "purchases"){
+    if (this.transactionType == "purchases"){
       guid = vendorGuid;
       rKey = vendorKey;
       guid2 = modGuid;
       rKey2 = modKey;
-    } else if(this.transactionType == "sales"){
+    } else if (this.transactionType == "sales"){
       guid = buyerGuid;
       rKey = buyerKey;
       guid2 = modGuid;
       rKey2 = modKey;
-    } else if(this.transactionType == "cases"){
+    } else if (this.transactionType == "cases"){
       guid = vendorGuid;
       rKey = vendorKey;
       guid2 = buyerGuid;
@@ -485,12 +552,12 @@ module.exports = baseVw.extend({
     }
 
     //is this a dispute?
-    if(this.$('#transactionStartDisputeCheckbox').prop("checked")) {
+    if (this.$('#transactionStartDisputeCheckbox').prop("checked")) {
       this.confirmDispute();
-    } else if(this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
+    } else if (this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
       this.closeDispute();
-    } else if(this.status == 4 || this.transactionType == "cases"){
-      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}]);
+    } else if (this.status == 4 || this.transactionType == "cases"){
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}, {"guid": guid2, "rKey": rKey2}]);
     } else {
       this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}]);
     }
@@ -502,7 +569,14 @@ module.exports = baseVw.extend({
         messageText = messageInput.val(),
         self = this,
         socketMessageId = Math.random().toString(36).slice(2),
-        avatar_hash = this.model.get('avatar_hash');
+        avatar_hash = this.avatar_hash;
+
+    this.discussionForm.removeClass('formChecked');
+
+    if (!this.discussionInput.val()){
+      this.discussionForm.addClass('formChecked');
+      return;
+    }
 
     __.each(messages, function(msg){
       if (messageText) {
@@ -553,8 +627,8 @@ module.exports = baseVw.extend({
   },
 
   showCloseDispute: function(e){
-    var closeDisputeForm = this.$('#transationCloseDispute');
-    if($(e.target).prop('checked')){
+    var closeDisputeForm = this.$('#transactionCloseDispute');
+    if ($(e.target).prop('checked')){
       closeDisputeForm.removeClass('hide');
       this.percentToBTC(
           this.$('#transactionsBuyerPayoutPercent'),
@@ -579,28 +653,38 @@ module.exports = baseVw.extend({
 
   confirmDispute: function(){
     var self = this,
-        targetForm = this.$('#transactionDiscussionForm'),
         discussionData = {};
 
     discussionData.order_id = this.orderID;
 
-    saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
-      self.status = 4;
-      self.tabState = "discussion";
-      self.$('.js-startDisputeFlag').addClass('hide');
-      self.getData();
-    }, '', discussionData);
+    this.discussionForm.removeClass('formChecked');
+
+    if (this.discussionInput.val()) {
+      saveToAPI(this.discussionForm, '', this.serverUrl + "dispute_contract", function () {
+        self.status   = 4;
+        self.tabState = "discussion";
+        self.$('.js-startDisputeFlag').addClass('hide');
+        self.getData();
+      }, '', discussionData);
+    } else {
+      this.discussionForm.addClass('formChecked');
+    }
+  },
+
+  confirmDisputeResend: function(){
+    this.confirmDispute();
   },
 
   closeDispute: function(){
     var self = this,
-        targetForm = this.$('#transationCloseDispute'),
+        targetForm = this.$('#transactionCloseDispute'),
         discussionData = {};
 
+    this.discussionForm.removeClass('formChecked');
     discussionData.order_id = this.orderID;
-    discussionData.resolution = this.$('#transactionDiscussionSendText').val();
+    discussionData.resolution = this.discussionInput.val();
     discussionData.moderator_percentage = this.moderatorPercentage;
-    if(this.model.get('vendor_order_confirmation')){
+    if (this.model.get('vendor_order_confirmation')){
       discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
       discussionData.vendor_percentage = this.$('#transactionsSellerPayoutPercent').val() * 0.01;
     } else {
@@ -609,15 +693,29 @@ module.exports = baseVw.extend({
     }
 
 
-    if(discussionData.resolution != ""){
-      saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
+    if (discussionData.resolution != ""){
+      saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(){
         self.status = 5;
         self.tabState = "summary";
         self.getData();
       }, '', discussionData);
     } else {
-      messageModal.show(window.polyglot.t('errorMessages.missingError'));
+      this.discussionForm.addClass("formChecked");
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
     }
+  },
+
+  closeDisputeResend: function(){
+    var self = this,
+        discussionData = {};
+
+    discussionData.order_id = this.orderID;
+
+    saveToAPI('', '', this.serverUrl + "close_dispute", function(){
+      self.status = 5;
+      self.tabState = "summary";
+      self.getData();
+    }, '', discussionData);
   },
 
   acceptResolution: function(e){
@@ -627,30 +725,43 @@ module.exports = baseVw.extend({
     $(e.target).addClass('loading');
     resData.order_id = this.orderID;
     
-    saveToAPI(null, null, this.serverUrl + "release_funds", function(data){
+    saveToAPI(null, null, this.serverUrl + "release_funds", function(){
       self.status = 6;
       self.tabState = "summary";
       self.getData();
-    },'', resData).always(() => {
+    }, '', resData).always(() => {
       $(e.target).removeClass('loading');
     });
   },
 
   refundOrder: function(e){
     //var targetForm = this.$('#transactionRefundForm'),
-      var self = this,
-          refData = {};
+    var self = this,
+        $targ = $(e.target).closest(".js-refundTransaction"),
+        refData = {};
 
-    $(e.target).addClass('loading');
-    refData.order_id = this.orderID;
+    if (!$targ.hasClass('confirm')){
+      $targ.addClass('confirm');
+    } else {
 
-    saveToAPI(null, null, this.serverUrl + "refund", function(data){
-      self.status = 7;
-      self.tabState = "summary";
-      self.getData();
-    },'', refData).always(() => {
-      $(e.target).removeClass('loading');
-    });
+      $targ.addClass('loading');
+      refData.order_id = this.orderID;
+
+      saveToAPI(null, null, this.serverUrl + "refund", function () {
+        self.status   = 7;
+        self.tabState = "summary";
+        self.getData();
+      }, function (data) {
+        if (data.reason == "Refund already processed for this order") {
+          messageModal.show(window.polyglot.t('errorMessages.refundAlreadySent'));
+          $(e.target).addClass('hide'); //hide the button so it can't be pressed again
+        } else {
+          messageModal.show(window.polyglot.t('errorMessages.serverError'));
+        }
+      }, refData).always(() => {
+        $(e.target).removeClass('loading');
+      });
+    }
   },
 
   updateBuyerBTC: function(e) {
@@ -674,22 +785,21 @@ module.exports = baseVw.extend({
         total = this.model.get('buyer_order').order.payment.amount,
         adjustedTotal = total - total * this.moderatorPercentage;
 
-    if(updatedVal > 1){
+    if (updatedVal > 1){
       updatedVal = 1;
       targ1.val(100);
     }
-    targ2.text(updatedVal * adjustedTotal);
+    targ2.text(app.intlNumFormat(updatedVal * adjustedTotal), 8);
     targ3.val(100 - updatedVal * 100);
-    targ4.text(adjustedTotal - updatedVal * adjustedTotal);
+    targ4.text(app.intlNumFormat(adjustedTotal - updatedVal * adjustedTotal, 8));
   },
 
-  closeOrderForm: function(e){
+  closeOrderForm: function(){
     this.setState(this.lastTab);
   },
 
   blockClicks: function(e) {
-    "use strict";
-    if(!$(e.target).hasClass('js-externalLink')){
+    if (!$(e.target).hasClass('js-externalLink')){
       e.stopPropagation();
     }
   },
@@ -697,7 +807,8 @@ module.exports = baseVw.extend({
   closeModal: function(){
     window.obEventBus.trigger("orderModalClosed");
     this.$el.parent().fadeOut(300);
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    $('#obContainer').removeClass('modalOpen');
+    this.confirmStatus && this.confirmStatus.remove();
     this.remove();
   }
 });

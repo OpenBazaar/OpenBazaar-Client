@@ -1,10 +1,11 @@
-var Backbone = require('backbone'),
-  $ = require('jquery'),
-  moment = require('moment'),
-  app = require('../App.js').getApp(),
-  loadTemplate = require('../utils/loadTemplate'),
-  baseVw = require('./baseVw'),
-  ChatMessageVw = require('./chatMessageVw');
+'use strict';
+
+var __ = require('underscore'),
+    $ = require('jquery'),
+    app = require('../App.js').getApp(),
+    loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw'),
+    ChatMessageVw = require('./chatMessageVw');
 
 module.exports = baseVw.extend({
   className: 'chatConversation',
@@ -43,8 +44,7 @@ module.exports = baseVw.extend({
 
     this.listenTo(this.collection, 'reset', this.render);
 
-    this.listenTo(this.collection, 'request', (cl, xhr, options) => {
-      var clLen = cl.length;
+    this.listenTo(this.collection, 'request', (cl, xhr) => {
 
       this.fetch = xhr;
       this.$loadingSpinner.removeClass('hide');
@@ -52,9 +52,8 @@ module.exports = baseVw.extend({
       xhr.done(() => this.$loadingSpinner.addClass('hide'));
     });        
 
-    this.listenTo(this.collection, 'update', (cl, options) => {
-      var $msgPage = $('<div />'),
-          md;
+    this.listenTo(this.collection, 'update', (cl) => {
+      var $msgPage = $('<div />');
 
       if (!cl.at(0).viewCreated) {
         // new page of messages
@@ -82,9 +81,20 @@ module.exports = baseVw.extend({
     this.scrollHandler = __.bind(
         __.throttle(this.onScroll, 100), this
     );    
+      
+    $(document).on('click', this.onDocumentClick.bind(this));
   },
 
-  onScroll: function(e) {
+  onDocumentClick: function(e) {
+    if (
+      e.target !== this.$settingsMenu[0] &&
+      !$(e.target).parents('.js-chatSettingsMenu').length
+    ) {
+      this.closeConvoSettings();
+    }
+  },
+
+  onScroll: function() {
     var startId;
 
     if (!this.collection.length) return;
@@ -148,11 +158,13 @@ module.exports = baseVw.extend({
   },
 
   closeConvoSettings: function() {
-    this.$('.chatConversationMenu').addClass('hide');
+    this.$settingsMenu.addClass('hide');
   },
 
   toggleConvoSettings: function() {
-    this.$('.chatConversationMenu').toggleClass('hide');
+    this.$settingsMenu.toggleClass('hide');
+
+    return false;
   },
 
   onBlockClick: function() {
@@ -165,7 +177,7 @@ module.exports = baseVw.extend({
     formData.append('guid', this.model.get('guid'));
 
     $.ajax({
-      url: app.serverConfig.getServerBaseUrl() + '/chat_conversation?guid=' + this.model.get('guid'),
+      url: app.serverConfigs.getActive().getServerBaseUrl() + '/chat_conversation?guid=' +this.model.get('guid'),
       type: 'DELETE'
     });
 
@@ -212,7 +224,7 @@ module.exports = baseVw.extend({
       var $msgWrap = $('<div />');
 
       if (this.msgViews) {
-        this.msgViews.forEach((vw, index) => {
+        this.msgViews.forEach((vw) => {
           vw.remove();
         });
       }
@@ -232,6 +244,7 @@ module.exports = baseVw.extend({
       this.$loadingSpinner = this.$messagesScrollContainer.find('.js-loadingSpinner');
       this.$messagesContainer = this.$messagesScrollContainer.find('.js-messagesContainer');
       this.$msgTextArea = this.$('textarea');
+      this.$settingsMenu = this.$('.js-chatSettingsMenu');
 
       if (this.collection.length) {
         this.collection.forEach((md) => {
@@ -252,6 +265,7 @@ module.exports = baseVw.extend({
 
   remove: function() {
     this.$scrollContainer && this.$scrollContainer.off('scroll', this.scrollHandler);
+    $(document).off('click', this.onDocumentClick);
 
     baseVw.prototype.remove.apply(this, arguments);    
   }  

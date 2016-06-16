@@ -3,38 +3,51 @@
     <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeBuyWizardModal">
       <h2 class="ion-android-close custCol-text clickable"></h2>
     </div>
-    <div class="modal-hero js-buyWizardHero shadow-inner1-light"
+    <div class="modal-hero js-buyWizardHero custCol-text shadow-inner1-light"
          style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %><%= ob.imageExtension %>), url(imgs/defaultBanner.png);">
-      <div class="js-buyWizardMapPlaceholder hide">
-        <div class="overflowhide">
-          <iframe
-            width="525"
-            height="290"
-            frameborder="0" style="border:0;margin-top: -36px"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=placeholder">
-          </iframe>
+      <div class="js-buyWizardMap buyWizardMap positionRelative hide" style="height: 262px">
+        <div class="js-mapSpinner txt-col1 ion-android-sync spinner spinner-slow icon-large icon-circle-background1 zIndex1 fullCentered" style="border: 1px solid #aaa;"></div>
+        <div class="flexContainer mapWrap"></div>
+      </div>
+      <div class="modal-hero modal-heroFullHeightNoButtons js-buyWizardSpinner hide background1 custCol-primary">
+        <div class="width100 txt-center vCentered">
+          <div class="txt-col1 ion-android-sync spinner spinner-slow icon-gigantic icon-circle-background1 rowTop50 row20"></div>
+          <h3 class="custCol-text padding30"><%= polyglot.t('CheckExchanges') %> </h3>
         </div>
       </div>
-      <div class="js-buyWizardMap positionTop"></div>
-      <div class="modal-hero js-buyWizardSpinner hide background1">
-        <div class="width100 txt-center">
-          <div class="txt-col1 ion-android-sync spinner spinner-slow icon-huge icon-circle-background1 rowTop30 row20"></div>
-          <h3 class="txt-bright"><%= polyglot.t('Loading') %> </h3>
+      <div class="modal-hero modal-heroFullHeightNoButtons padding30 js-buyWizardPay hide background1 custCol-primary">
+        <div class="width100 row20">
+          <img class="blockCenter qrCode js-buyWizardPayQRCode" height="250" width="250" src="imgs/defaultItem.png"/>
         </div>
-      </div>
-      <div class="modal-hero js-buyWizardPay hide background1">
-        <div class="positionTop width100 padding20">
-          <img class="pull-left qrCode js-buyWizardPayQRCode" height="180" width="180" src="imgs/defaultItem.png"/>
-          <div class="pull-left rowtop20 pad20Left txt-bright" style="width:255px;">
-            <div class="txt-center row20 textSize16px">
-              <%= polyglot.t('buyFlow.SendBTCtoAddress', {amount: '<span class="js-buyWizardDetailsTotalBTC"></span>'}) %>
-            </div>
-            <div class="txt-center row20">
-              <a class="textSize11px js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span></a>
-            </div>
-            <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
-            <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
-            <a class="btn btn-txt btn-wide js-buyWizardPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
+        <div class="txt-bright pad20">
+          <div class="txt-center row10 textSize20px custCol-text">
+            <%=
+              polyglot.t('buyFlow.SendBTCtoAddress', {
+                amount: '<span class="js-buyWizardDetailsTotalBTC"></span>',
+                recipient: '<a class="textSize16px js-buyWizardPayLink custCol-text"><span class="js-buyWizardPayURL"></span></a>'
+              })
+            %>
+          </div>
+          <div class="txt-center row10">
+            <input type="checkbox" class="textSize11px fieldItem thin" id="BuyWizardQRDetailsInput">
+            <label for="BuyWizardQRDetailsInput" class="textSize11px  custCol-text"> <%= polyglot.t('AdditionalPaymentDataInfo') %></label>
+          </div>
+          <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy custCol-secondary  custCol-text"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
+          <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink custCol-secondary custCol-text"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
+          <a class="btn btn-txt btn-wide js-buyWizardPayCheck custCol-secondary custCol-text"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
+          <div class="rowTop10 txt-center note custCol-text">
+            <%= polyglot.t('buyFlow.paymentNote') %>
+          </div>
+        </div>
+        <div class="positionBottom width100 padding20 custCol-background borderTop custCol-border txt-center js-partialPaymentMsg opacity0">
+          <div class="h4 width100">
+            <i class="ion-alert-circled"></i>
+            <span class="js-partialPaymentTxt"></span>
+          </div>
+          <div class="txt-fade fontSize12 rowTop10">
+            <%= polyglot.t('transactions.BuyerPaidMessageHelp') %>
+          </div>
+          <div class="btn btn-corner btn-cornerTR btn-txtOnly ion-close btn-small textOpacity50 js-partialPaymentClose">
           </div>
         </div>
       </div>
@@ -77,14 +90,14 @@
               
                 <!-- Airbitz -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://airbitz.co/bitcoin-wallet/" target="_blank"> 
                       <img src="imgs/wallet-providers/airbitz.png" class="thumbnail thumbnail-large-slim " />
                     </a>
                   </div>
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <div class="marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
                         <a href="https://airbitz.co/bitcoin-wallet/" class="js-externalLink textOpacity1">Airbitz <span class="ion-android-open fontSize10"></span></a>
                         <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.WalletOnly') %></span>
                       </div>
@@ -95,14 +108,14 @@
 
                 <!-- Coinbase -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://www.coinbase.com/signup" target="_blank"> 
                       <img src="imgs/wallet-providers/coinbase.png" class="thumbnail thumbnail-large-slim " />
                     </a>
                   </div>
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <div class="marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
                         <a href="https://www.coinbase.com/signup" class="js-externalLink textOpacity1">Coinbase <span class="ion-android-open fontSize10"></span></a>
                         <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.ExchangeAndWallet') %></span>
                       </div>
@@ -113,14 +126,14 @@
                       
                 <!-- Samourai Wallet -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="http://samouraiwallet.com/" target="_blank"> 
                       <img src="imgs/wallet-providers/samourai-wallet.png" class="thumbnail thumbnail-large-slim " />
                     </a>
                   </div>
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <div class="marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
                         <a href="http://samouraiwallet.com/" class="js-externalLink textOpacity1">Samourai Wallet <span class="ion-android-open fontSize10"></span></a>
                         <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.WalletOnly') %></span>
                       </div>
@@ -131,14 +144,14 @@
 
                 <!-- RushWallet -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://rushwallet.com/" target="_blank"> 
                       <img src="imgs/wallet-providers/rush-wallet.png" class="thumbnail thumbnail-large-slim " />
                     </a>
                   </div>
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <div class="marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
                         <a href="https://rushwallet.com/" class="js-externalLink textOpacity1">RushWallet <span class="ion-android-open fontSize10"></span></a>
                         <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.WalletOnly') %></span>
                       </div>
@@ -149,14 +162,14 @@
                       
                 <!-- Breadwallet -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="http://breadwallet.com/" target="_blank"> 
                       <img src="imgs/wallet-providers/bread-wallet.png" class="thumbnail thumbnail-large-slim " />
                     </a>
                   </div>
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <div class="marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
                         <a href="http://breadwallet.com/" class="js-externalLink textOpacity1">Breadwallet <span class="ion-android-open fontSize10"></span></a>
                         <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.WalletOnly') %></span>
                       </div>
@@ -167,14 +180,14 @@
 
                 <!-- Mycelium -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://mycelium.com/mycelium-wallet.html" target="_blank"> 
                       <img src="imgs/wallet-providers/mycelium.png" class="thumbnail thumbnail-large-slim " />
                     </a>
                   </div>
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <div class="marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
                         <a href="https://mycelium.com/mycelium-wallet.html" class="js-externalLink textOpacity1">Mycelium <span class="ion-android-open fontSize10"></span></a>
                         <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.WalletOnly') %></span>
 
@@ -186,14 +199,14 @@
 
                 <!-- Blockchain.info -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://blockchain.info/wallet" target="_blank"> 
                       <img src="imgs/wallet-providers/blockchaininfo.png" class="thumbnail thumbnail-large-slim " />
                     </a>
                   </div>
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <div class="marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
                         <a href="https://blockchain.info/wallet" class="js-externalLink textOpacity1">Blockchain.info <span class="ion-android-open fontSize10"></span></a>
                         <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.ExchangeAndWallet') %></span>
                       </div>
@@ -202,34 +215,16 @@
                   </div>
                 </div>
 
-                <!-- DuoMoney -->
-                <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
-                    <a href="https://www.duo.money" target="_blank"> 
-                      <img src="imgs/wallet-providers/duo-money.png" class="thumbnail thumbnail-large-slim " />
-                    </a>
-                  </div>
-                  <div class="floatLeft width420 marginTop4">
-                    <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
-                        <a href="https://www.duo.money" class="js-externalLink textOpacity1">DuoMoney <span class="ion-android-open fontSize10"></span></a>
-                        <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.ExchangeAndWallet') %></span>
-                      </div>
-                      <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.DuoMoneyTagline') %></div>
-                    </div>
-                  </div>
-                </div>
-
                 <!-- Coinkite -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://coinkite.com/promo/nwt1" target="_blank"> 
                       <img src="imgs/wallet-providers/coinkite.png" class="thumbnail thumbnail-large-slim " />
                     </a>
                   </div>
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <div class="marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
                         <a href="https://coinkite.com/promo/nwt1" class="js-externalLink textOpacity1">Coinkite <span class="ion-android-open fontSize10"></span></a>
                         <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.WalletOnly') %></span>
                       </div>
@@ -240,14 +235,14 @@
 
                 <!-- BitGo -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://www.bitgo.com/wallet" target="_blank">
                       <img src="imgs/wallet-providers/bitgo.png" class="thumbnail thumbnail-large-slim " />
                     </a>
                   </div>
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
-                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <div class="marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
                         <a href="https://www.bitgo.com/wallet" class="js-externalLink textOpacity1">BitGo <span class="ion-android-open fontSize10"></span></a>
                         <span class="textOpacity50 fontSize12"><%= polyglot.t('walletProviders.WalletOnly') %></span>
                       </div>
@@ -304,6 +299,7 @@
                         </div>
                         <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
                           <% if(moderator.guid != ob.user.guid){ %>
+                            <% moderator.numFee = moderator.fee.replace(/[^\d.-]/g, ''); %>
                             <div class="flexRow">
                               <div class="">
                                 <label for="buyWizardModeratorRadio<%= i %>" class="textOpacity1 clickable">
@@ -328,7 +324,7 @@
                                             <% if(moderator.handle){ %><%= moderator.handle %><% } else { %><%= moderator.guid %><% } %>
                                             </div>
                                           </div>
-                                          <div class="floatRight textOpacity75"><%= moderator.fee %></div>
+                                          <div class="floatRight textOpacity75"><%= ob.intlNumFormat(moderator.numFee) %>%</div>
                                         </div>
                                       </div>
                                     </div>
@@ -351,7 +347,7 @@
                   </div>
                   <div class="width450 floatLeft">
                     <label for="buyWizardPaymentTypeDirect" class="clickable">
-                      <div class="fontSize15"><%= polyglot.t('buyFlow.DirectPayment') %></div>
+                      <div class="fontSize15"><%= window.polyglot.t('buyFlow.DirectPayment') %></div>
                       <div class="textOpacity75 fontSize14 marginTop4">
                         <%= polyglot.t('buyFlow.DirectPaymentDescription') %>
                       </div>
@@ -390,12 +386,12 @@
                 <div class="flexCol-12 custCol-border positionWrapper">
                   <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
                          placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
-                         pattern="<% if(window.testnet){ print(ob.user.bitcoinValidationRegexTestnet) }else{ print(ob.user.bitcoinValidationRegex)} %>"
+                         pattern="<%= config.bitcoinValidationRegex %>"
                          value="<%= ob.user.refund_address %>" required />
-                  <% if(window.testnet) { %>
+                  <% if(config.testnet) { %>
                   <div class="positionTopRight padding10">
-                    <span class="btn btn-txt custCol-secondary">
-                      <i class="ion-android-arrow-back"></i> <%= polyglot.t('TestnetAddress') %> <!--remove this in production-->
+                    <span class="btn btn-txt custCol-secondary tooltip tooltip-left tooltip-box" data-tooltip="<%= polyglot.t('TestnetAddressHelp') %>">
+                      <i class="ion-android-arrow-back"></i> <%= polyglot.t('TestnetAddress') %>
                     </span>
                   </div>
                   <% } %>
@@ -445,7 +441,7 @@
                       <label for="buyWizardNameInput"><%= polyglot.t('ShipToName') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 custCol-border positionWrapper">
+                  <div class="flexCol-7 custCol-border">
                     <input type="text" name="new_ship_to_name" class="fieldItem custCol-text" id="buyWizardNameInput" required/>
                   </div>
                 </div>
@@ -455,7 +451,7 @@
                       <label for="buyWizardStreetInput"><%= polyglot.t('ShipToStreet') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 custCol-border positionWrapper">
+                  <div class="flexCol-7 custCol-border">
                     <input type="text" name="new_ship_to_street" class="fieldItem custCol-text" id="buyWizardStreetInput" required/>
                   </div>
                 </div>
@@ -465,7 +461,7 @@
                       <label for="buyWizardCityInput"><%= polyglot.t('ShipToCity') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 custCol-border positionWrapper">
+                  <div class="flexCol-7 custCol-border">
                     <input type="text" name="new_ship_to_city" class="fieldItem custCol-text" id="buyWizardCityInput" required/>
                   </div>
                 </div>
@@ -475,7 +471,7 @@
                       <label for="buyWizardStateInput"><%= polyglot.t('ShipToState') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 custCol-border positionWrapper">
+                  <div class="flexCol-7 custCol-border">
                     <input type="text" name="new_ship_to_state" class="fieldItem custCol-text js-buyWizardStateInput" id="buyWizardStateInput" required/>
                   </div>
                 </div>
@@ -485,17 +481,17 @@
                       <label for="buyWizardPostalInput"><%= polyglot.t('ShipToPostalCode') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 custCol-border positionWrapper">
+                  <div class="flexCol-7 custCol-border">
                     <input type="text" name="new_ship_to_street" class="fieldItem custCol-text js-buyWizardPostalInput" id="buyWizardPostalInput" required/>
                   </div>
                 </div>
-                <div class="flexRow overflowVisible">
+                <div class="flexRow">
                   <div class="flexCol-5 custCol-border">
                     <div class="fieldItem">
                       <label for="buyWizardStreetInput"><%= polyglot.t('ShipToCountry') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 custCol-border positionWrapper">
+                  <div class="flexCol-7 custCol-border">
                     <div class="fieldItem padding0">
                       <div class="fieldItem-selectWrapper chosen-relative noIcon js-buyWizardCountryWrapper"></div>
                     </div>
@@ -540,10 +536,16 @@
               <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
               <%= polyglot.t('Back') %>
             </a>
+            <% if(ob.ownPage){ %>
+            <div class="btn btn-bar btn-half custCol-secondary custCol-border-primary borderBottomRightRaidus3 disabled">
+              <%= polyglot.t('buyFlow.BuyOwnProductMsg') %>
+            </div>
+            <% } else { %>
             <a class="btn btn-bar btn-half  js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3">
               <%= polyglot.t('buyFlow.PayForOrder') %>
               <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
             </a>
+            <% } %>
             <span class="btn btn-bar btn-half disabled js-buyWizardPendingMsg hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('PaymentPending') %></span>
             <a class="btn btn-bar btn-wide  js-buyWizardCloseSummary custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 hide"><%= polyglot.t('Close') %></a>
           </div>

@@ -1,5 +1,4 @@
-var __ = require('underscore'),
-    Backbone = require('backbone');
+'use strict';
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
@@ -17,18 +16,16 @@ module.exports = window.Backbone.Model.extend({
   },
 
   parse: function(response){
-    "use strict";
-    if(response.cCode != 'BTC'){
+    if (response.cCode != 'BTC'){
       response.displayPrice = new Intl.NumberFormat(window.lang, {
         style: 'currency',
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
         currency: response.cCode
       }).format(response.btc_total*response.btAve);
-    } else {
-      response.displayPrice = response.btc_total.toFixed(4) + " BTC";
     }
 
+    response.unread = response.unread || 0;
     return response;
   }
 });

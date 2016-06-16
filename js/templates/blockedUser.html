@@ -5,7 +5,7 @@
         <div class="marginLeft15 marginTop2 clearFix">
           <% if(ob.name) { %>
             <div class="floatLeft noOverflow marginBottom2 marginRight5">
-              <a class="textSize16px capitalize" title="<%= ob.name %>" href="<% print('#userPage/' + ob.guid + '/store') %>">
+              <a class="textSize16px" title="<%= ob.name %>" href="<% print('#userPage/' + ob.guid + '/store') %>">
                 <%= ob.name %>
               </a>
             </div>
@@ -30,7 +30,7 @@
           <% } %>
         </div>
       </div>
-      <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 js-unblockUser"><%= polyglot.t('Unblock') %></a>
+      <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 js-unblockUser"><%= window.polyglot.t('Unblock') %></a>
     </div>
   </div>
 </div>

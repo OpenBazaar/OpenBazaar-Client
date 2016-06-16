@@ -1,7 +1,7 @@
 # OpenBazaar-Client
 
 [![Build Status](https://travis-ci.org/OpenBazaar/OpenBazaar-Client.svg)](https://travis-ci.org/OpenBazaar/OpenBazaar-Client)
-[![Slack Status](https://slack.openbazaar.org/badge.svg)](https://slack.openbazaar.org)
+[![Slack Status](http://slack.openbazaar.org/badge.svg)](https://openbazaar-slackin-drwasho.herokuapp.com/)
 
 You **must** be running the [OpenBazaar backend](https://github.com/OpenBazaar/OpenBazaar-Server) for the client to work!
 
@@ -38,3 +38,13 @@ The client uses the following REST API calls.
 - [POST calls](https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f)
 
 Websocket API calls are yet to be documented.
+
+Translations
+-----------
+Translators around the world are welcomed.
+
+You can start translating at our Transifex project:
+
+- https://www.transifex.com/ob1/openbazaar/
+
+Many thanks!

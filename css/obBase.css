@@ -1,6 +1,6 @@
 /*========== scroll bars ==========*/
 #obContainer::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 #obContainer::-webkit-scrollbar-thumb {
@@ -25,7 +25,7 @@
 }
 
 .customThemeScrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .customThemeScrollbar::-webkit-scrollbar-thumb {
@@ -38,7 +38,7 @@
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar-thumb {
@@ -52,12 +52,12 @@ body {
   overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
-  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   /*-webkit-font-smoothing: subpixel-antialiased;*/
-  letter-spacing: .4px;
+  letter-spacing: 0.4px;
   line-height: 1.2;
   margin: 0;
 }
@@ -68,6 +68,7 @@ a {
   opacity: .85;
   transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   cursor: pointer;
+  -webkit-user-drag: none;
 }
 
 a:hover,
@@ -87,6 +88,10 @@ p a {
 p {
   white-space: pre-line;
   margin: 0 0 1em 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
 }
 
 hr {
@@ -128,7 +133,7 @@ textarea {
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
   font-size: 14px;
   font-weight: 500;
-  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 input[type=range]{
@@ -164,7 +169,6 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 textarea {
   background: none;
   outline: none;
-  appearance: none;
   -webkit-appearance: none;
   width: 100%;
   resize: none;
@@ -182,37 +186,237 @@ form {
   margin: 0;
 }
 
+/*========== typography ==========*/
+
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 {
+  margin: 0;
+  font-weight: 700;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+h1,h2,h3,
+.h1,.h2,.h3 {
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+h4,h5,h6,
+.h4,.h5,.h6 {
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+h3, .h3 {
+  font-size: 18px;
+}
+
+h4, .h4 {
+  font-size: 17px;
+}
+
+h5, .h5 {
+  font-size: 15px;
+}
+
+h6, .h6 {
+  font-size: 15px; /* TODO: refactor to remove h6 since it is identical to h5 */
+}
+
+.fieldItem-textarea h2, .fieldItem-textarea h3, .editableContent h2, .editableContent h3 {
+  margin-top: 30px;
+}
+
+.fieldItem-textarea h2:first-child, .fieldItem-textarea h3:first-child, .editableContent h2:first-child, .editableContent h3:first-child {
+  margin-top: 0;
+}
+
+.note {
+  /* use for instructions and incidental text */
+  /*font-style: italic;*/
+  font-size: 9px;
+  opacity: 0.50;
+}
+
+[class *= "ion-"]:before {
+  font-size: 1.2em;
+  pointer-events: none;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+#ov1 .txt-fade {
+  opacity: 0.75;
+}
+
+#ov1 .unfilled {
+  opacity: 0.35;
+}
+
+#ov1 .div-fade {
+  opacity: 0.50;
+}
+
+#ov1 .div-fadeExtra {
+  opacity: 0.3;
+}
+
+.txt-lowleading {
+  line-height: 1.2;
+}
+.txt-unleaded {
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+#ov1 .unbold {
+  font-weight: 400;
+}
+
+#ov1 .allCaps {
+  text-transform: uppercase;
+}
+
+.noOverflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+.clamp2 {
+  /* adds an ellipses to the end of wrapped text after 2 lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.clamp4 {
+  /* adds an ellipses to the end of wrapped text after 4 lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.txtRow2 {
+  /* limits an element to being 2 rows of text tall */
+  line-height: 1.25em;;
+  height: 2.5em;
+}
+
 
 /*========== structure classes ==========*/
 
-#content {
-  margin: auto;
+#appFrame {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+#contentFrame {
+  height: 100%;
+  width: 100%;
   position: relative;
-  width: 950px;
+}
+
+#contentFrame.modalOpen #pageNav .badge {
+  display: none;
+}
+
+#pageNav {
+  position: relative;
+  -webkit-app-region: no-drag;
+}
+
+#pageNavBar {
+  position: relative;
+  padding: 0 8px;
+  height: 46px;
   z-index: 1;
 }
 
 #obContainer {
   transition: width 0.5s ease;
   width: calc(100% - 47px);
-  transition: width 0.5s ease;
+  height: calc(100% - 50px);
+  overflow-y: scroll;
+  padding-top: 20px;
+  -webkit-app-region: no-drag;
+  position: relative;
+  z-index: 0;
+  box-sizing: border-box;
+}
+
+#obContainer.modalOpen,
+#obContainer.innerModalOpen {
+  overflow: hidden;
+  /* obContainer must also be set to scrollTop(0), otherwise the modal may be scrolled out of place */
+}
+
+#obContainer.modalOpen #content {
+  -webkit-filter: blur(1px);
+}
+
+#obContainer.customizeUserPage {
+  overflow: hidden;
+  border: 5px dashed #fff;
+  height: 100%;
+  animation: borderDashedFade .35s normal linear;
+}
+
+#obContainer.customizeUserPage::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+#content {
+  position: relative;
+  z-index: 0;
+}
+
+.contentWrapper {
+  margin: auto;
+  width: 950px;
+}
+
+.userView {
+  margin-top: -20px; /*negate the 20px padding in obContainer */
 }
 
 #ov1.chatOpen #obContainer {
   width: calc(100% - 230px);
 }
 
-#pageNav {
-  position: fixed;
-  top: 0;
+#appBar {
+  background-color: #327EB8;
+  padding: 7px 8px 6px;
+  box-sizing: border-box;
   -webkit-app-region: drag;
-  z-index: 6;
 }
 
+#appBar .windowControls {
+  position: absolute;
+  left: 8px;
+  top: 6px;  
+}
 
-.pageNavContainer {
-  width: 100%;
-  z-index: 3;
+#appBar.style-win .windowControls {
+  left: auto;
+  right: 8px;
+  top: 5px;
+}
+
+#appBar .btn {
+  -webkit-app-region: no-drag;
 }
 
 #pageNav .btn {
@@ -220,7 +424,7 @@ form {
 }
 
 #pageNav .navBar.bar {
-  padding: 10px 8px;
+  padding: 0 8px;
 }
 
 #pageNav .modal-about .navBar.bar {
@@ -240,12 +444,12 @@ form {
 #sideBar {
   position: fixed;
   right: -183px;
-  top: 50px;
+  top: 75px;
   width:230px;
   background-color: #252525;
   border-left: 0;
-  height: calc(100% - 50px);
-  z-index: 5;
+  height: calc(100% - 71px);
+  z-index: 0;
   transition: right 0.5s ease;
   color: #DDD;
   -webkit-app-region: no-drag;
@@ -253,7 +457,7 @@ form {
 }
 
 .chatOpen #sideBar {
-  right: 0px;
+  right: 0;
 }
 
 #sideBar input::-webkit-input-placeholder {
@@ -277,10 +481,9 @@ form {
   position: relative;
   min-height: 740px;
   margin-bottom: 50px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  z-index: 1;
-  box-shadow: 0px 10px 20px #05283C;
+  border-radius: 0;
+  z-index: 0;
+  box-shadow: 0 10px 20px #05283C;
 }
 
 .img-rsp {
@@ -300,9 +503,25 @@ form {
   padding-right: 0;
 }
 
+.bar.barFlush.bottomBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.bar.barFlush.bottomBar .btn-bar {
+  border-radius: 0;
+}
+
 .barTxt {
   height: 50px;
   line-height: 50px;
+  margin-bottom: 0;
 }
 
 .bar .btn {
@@ -311,13 +530,13 @@ form {
 
 #overlay,
 .overlay {
-  position: fixed;
-  top: 50px;
+  position: absolute;
+  top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   background-color: rgba(25,25,25,0.85);
-  z-index: 4;
+  z-index: 0;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
 
@@ -378,6 +597,7 @@ form {
   width: 100%;
   /* reset styles if applied to a list item */
   padding: 0;
+  box-sizing: border-box;
 }
 
 .flexRow.noFlexWrap {
@@ -391,6 +611,17 @@ form {
 
 .flexRow-center {
   justify-content: center;
+}
+
+.flexRow-vCenter {
+  align-items: center;
+  height: 100%;
+}
+
+.flexRow-grid {
+  /* use for wrapping grids of objects with 10px margins on the right side */
+  margin-right: -10px;
+  width: auto;
 }
 
 .flexRow [class |= "flexCol"] {
@@ -423,31 +654,101 @@ form {
 }
 
 .flexRow .flexCol-11,
-.flexRow .flexCol-11 { flex-basis: 91.66666666666666%; }
+.flexRow .flexCol-11 {
+  flex-basis: 91.66666666666666%;
+  max-width: 91.66666666666666%;
+}
 
-.flexRow .flexCol-10 { flex-basis: 83.33333333333334%; }
+.flexRow .flexCol-10 {
+  flex-basis: 83.33333333333334%;
+  max-width: 83.33333333333334%;
+}
 
-.flexRow .flexCol-9 { flex-basis: 75%; }
+.flexRow .flexCol-9 {
+  flex-basis: 75%;
+  max-width: 75%;
+}
 
-.flexRow .flexCol-8 { flex-basis: 66.66666666666666%; }
+.flexRow .flexCol-8 {
+  flex-basis: 66.66666666666666%;
+  max-width: 66.66666666666666%;
+}
 
-.flexRow .flexCol-7 { flex-basis: 58.333333333333336%; }
+.flexRow .flexCol-7 {
+  flex-basis: 58.333333333333336%;
+  max-width: 58.333333333333336%;
+}
 
-.flexRow .flexCol-6 { flex-basis: 50%; }
+.flexRow .flexCol-6 {
+  flex-basis: 50%;
+  max-width: 50%;
+}
 
-.flexRow .flexCol-5 { flex-basis: 41.66666666666667%; }
+.flexRow .flexCol-5 {
+  flex-basis: 41.66666666666667%;
+  max-width: 41.66666666666667%;
+}
 
-.flexRow .flexCol-4 { flex-basis: 33.33333333333333%; }
+.flexRow .flexCol-4 {
+  flex-basis: 33.33333333333333%;
+  max-width: 33.33333333333333%;
+}
 
-.flexRow .flexCol-3 { flex-basis: 25%; }
+.flexRow .flexCol-3 {
+  flex-basis: 25%;
+  max-width: 25%;
+}
 
-.flexRow .flexCol-2 { flex-basis: 16.666666666666664%;; }
+.flexRow .flexCol-2 {
+  flex-basis: 16.666666666666664%;
+  max-width: 16.666666666666664%;
+}
 
-.flexRow .flexCol-1 { flex-basis: 8.333333333333332%; }
+.flexRow .flexCol-1 {
+  flex-basis: 8.333333333333332%;
+  max-width: 8.333333333333332%;
+}
 
 .flexExpand {
   /* use to make only one item in a flex row expand */
   flex-grow: 1;
+}
+
+.listingType,
+.listingType.tooltip {
+  background-color: #252525;
+  color: #ffffff;
+  position: absolute;
+  padding: 6px;
+  top: 40px;
+  right: 40px;
+  font-size: 11px;
+  font-weight: 500;
+  transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.listingDoesNotShipToYou,
+.listingDoesNotShipToYou.tooltip {
+  background: #252525;
+  height: 18px; 
+  width: 18px;
+  right: 39px;
+  padding: 10px; 
+  position: absolute; 
+  text-align: center; 
+  top: 217px;
+  transition: top .3s cubic-bezier(0, 0, 0.2, 1);
+  border-radius: 32px;
+  opacity: 1;
+}
+
+.listingsDoesNotShipToYouSlash {
+  position: absolute; 
+  top: 3px; 
+  color: #DE2A14; 
+  font-size: 26px; 
+  left: 14px; 
+  font-weight: 700;
 }
 
 .noPointerEvents {
@@ -463,8 +764,6 @@ form {
   height: 40px;
   line-height: 38px;
   border-top: solid 1px #327EB8;
-  border-right: solid 1px #327EB8;
-  width: 316px;
   padding: 0;
   box-sizing: border-box;
   transition: opacity .5s cubic-bezier(0, 0, 0.2, 1);
@@ -473,9 +772,43 @@ form {
 .gridItemControls .btn-gridItemControl {
   text-align: center;
   padding: 0;
-  opacity: .75;
   font-weight: 400;
   font-size: 12px;
+}
+
+.gridItemControls .btn-gridItemControl .gridItemOverlay {
+  position: absolute;
+  bottom: 100%;
+  min-width: 190px;
+  padding: 10px;
+  right: 0;
+  font-size: 16px;
+  font-weight: 700;
+  border-width: 1px;
+  border-style: solid;
+  border-right-width: 0;
+  border-top-left-radius: 2px;
+}
+
+.gridItemControls .btn-gridItemControl .gridItemOverlay .btn {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.gridItemControls .btn-gridItemControl .gridItemOverlay:before {
+  content: "";
+  position: absolute;
+  right: 40px;
+  top: 100%;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  -webkit-clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  border-width: 1px;
+  border-style: solid;
+  border-color: inherit;
+  background: inherit;
+  margin-top: -7px;
 }
 
 .gridItemControls .btn-gridItemControl:hover {
@@ -486,7 +819,6 @@ form {
   box-sizing: border-box;
   padding: 34px 32px;
   cursor: pointer;
-  width: 317px;
   height: 340px;
   position: relative;
 }
@@ -496,15 +828,26 @@ form {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
   opacity: .9;
-  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
-  transition: padding-top .3s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1), padding-top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
-  box-shadow: 0px 0px 37px -17px rgb(0, 0, 0);
+  box-shadow: 0 0 37px -17px rgb(0, 0, 0);
   opacity: 1;
   padding-top: 20px;
+}
+
+.userPage-subViews .gridItem:hover > .listingType,
+.homeView .gridItem:hover > .listingType {
+  opacity: 1;
+  top: 26px;
+}
+
+.userPage-subViews .gridItem:hover > .listingDoesNotShipToYou,
+.homeView .gridItem:hover > .listingDoesNotShipToYou {
+  top: 203px;
+  opacity: 1;
 }
 
 .userPage-subViews .gridItem:hover .gridItemControls,
@@ -514,7 +857,7 @@ form {
 
 .userPage-subViews .gridItem:hover .itemImg,
 .homeView .gridItem:hover .itemImg {
-    box-shadow: 0px 0px 37px -10px rgb(0, 0, 0);
+    box-shadow: 0 0 37px -10px rgb(0, 0, 0);
 }
 
 /* if itemImg is nested, do not show box shadow */
@@ -525,7 +868,7 @@ form {
 
 .userPage-subViews .gridItem .itemImg:active,
 .homeView .gridItem .itemImg:active {
-    box-shadow: 0px 0px 67px -10px rgb(0, 0, 0);
+    box-shadow: 0 0 67px -10px rgb(0, 0, 0);
     opacity: .75;
 }
 
@@ -561,20 +904,21 @@ form {
   position: relative;
   background-position: center;
   background-size: cover;
-  border-radius: 3px;
+  background-repeat: no-repeat;
+  border-radius: 2px;
   height: 230px;
   width: 250px;
 }
 
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
-  height: 380px;
-  width: 100%;
+  height: 472px;
+  width: 514px;
   border-radius: 0;
 }
 
 .itemImg.itemImg-small {
-  height: 82px;
+  height: 111px;
   width: 121px;
   margin: 0 10px 10px 0;
   border-radius: 1px;
@@ -680,7 +1024,7 @@ label.fieldItem {
 }
 
 [class |= "flexCol"] > .fieldItem {
-  margin: 0 -1px -1px 0;
+  margin: 0 -2px -2px 0; /* prevent collum overflows */
 }
 
 .table {
@@ -759,7 +1103,7 @@ label.fieldItem {
 }
 
 .btn-corner.btn-flushTop {
-  top: 0px;
+  top: 0;
 }
 
 .btn-corner.btn-cornerTL {
@@ -821,10 +1165,6 @@ label.fieldItem {
   display: block;
 }
 
-.thumbnail-largeTrimmed {
-  height: 70px;
-}
-
 .thumbnail-large-slim {
   height: 58px;
   width: 58px;
@@ -865,6 +1205,10 @@ label.fieldItem {
   margin-bottom: 100px;
 }
 
+.rowTop5 {
+  margin-top: 5px;
+}
+
 .rowTop10 {
   margin-top: 10px;
 }
@@ -878,7 +1222,15 @@ label.fieldItem {
 }
 
 .rowTop30 {
-  margin-top: 20px;
+  margin-top: 30px;
+}
+
+.rowTop40 {
+  margin-top: 40px;
+}
+
+.rowTop50 {
+  margin-top: 50px;
 }
 
 .rowTop241 {
@@ -893,6 +1245,10 @@ label.fieldItem {
 .pad5 {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.pad5Top {
+  padding-top: 5px;
 }
 
 .pad10 {
@@ -945,30 +1301,20 @@ label.fieldItem {
 }
 
 .modal {
-  position: fixed;
+  position: absolute;
+  top: 0;
   display: block;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  /* use fadeIn and fadeOut to change opacity */
-  transition: opacity .05s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .05s cubic-bezier(0, 0, 0.2, 1),
+              width 0.5s ease;
   padding-top: 25px;
   z-index: 1;
+  pointer-events: all;
 }
 
-.modal.modal-navOffset {
-  top: 50px;
-}
-
-.modalHolder {
-  /* use to contain modals inside views */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 7;
+.modal.noNav {
+  padding-top: 85px
 }
 
 .modal-child {
@@ -981,13 +1327,8 @@ label.fieldItem {
   transition: right 0.5s ease;
 }
 
-#ov1.chatOpen .modal-child {
-  right: 230px;
-}
-
-
-.modal.modal-navOffset .modal-child {
-  margin-top: 25px;
+.modal-opaque .modal-child {
+  height: 574px;
 }
 
 .accordion {
@@ -1124,7 +1465,6 @@ label.fieldItem {
   margin-top: 20px;
   transition: margin 0.5s ease;
   position: fixed;
-  transition: margin-left 0.5s ease;
 }
 
 #ov1.chatOpen #colorbox {
@@ -1135,116 +1475,12 @@ label.fieldItem {
   z-index: 11;
   top: 50px;
   height: 100%;
-  width: calc(100% - 30px);
+  width: calc(100% - 47px);
+  transition: width 0.5s ease;
 }
 
-/*========== typography ==========*/
-
-h1,h2,h3,h4,h5,h6 {
-  margin: 0;
-  font-weight: 700;
-  -webkit-user-select: none;
-  cursor: default;
-}
-
-h1,h2,h3 {
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-h4,h5,h6 {
-  margin-bottom: 10px;
-  line-height: 1;
-}
-
-h3 {
-  font-size: 18px;
-}
-
-h5 {
-  font-size: 15px;
-}
-
-.h6, h6 {
-  font-size: 15px;
-}
-
-.note {
-  /* use for instructions and incidental text */
-  /*font-style: italic;*/
-  font-size: 9px;
-  opacity: 0.50;
-}
-
-[class *= "ion-"]:before {
-  font-size: 1.2em;
-  pointer-events: none;
-}
-
-.txt-center {
-  text-align: center;
-}
-
-#ov1 .txt-fade {
-  opacity: 0.75;
-}
-
-#ov1 .div-fade {
-  opacity: 0.50;
-}
-
-#ov1 .div-fadeExtra {
-  opacity: 0.3;
-}
-
-.txt-lowleading {
-  line-height: 1.2;
-}
-.txt-unleaded {
-  line-height: 1;
-  margin-bottom: 0;
-}
-
-#ov1 .unbold {
-  font-weight: 400;
-}
-
-#ov1 .allCaps {
-  text-transform: uppercase;
-}
-
-.noOverflow {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.noWrap {
-  white-space: nowrap;
-}
-
-.clamp2 {
-  /* adds an ellipses to the end of wrapped text after 2 lines */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.clamp4 {
-  /* adds an ellipses to the end of wrapped text after 4 lines */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-}
-
-.txtRow2 {
-  /* limits an element to being 2 rows of text tall */
-  line-height: 1.25em;;
-  height: 2.5em;
+#ov1.chatOpen #cboxOverlay {
+  width: calc(100% - 230px);
 }
 
 /*========== skin classes ==========*/
@@ -1343,26 +1579,23 @@ h5 {
 
 .modal-opaque {
   background-color: rgba(6, 55, 83, 0.80);
-  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 50px;
+  box-shadow: inset 0 -70px 112px -62px rgba(37,37,37,.9);
 }
 
 .modal-opaqueDark {
   background-color: rgba(25,25,25,0.9);
-  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  top: 50px;
+  box-shadow: inset 0 -70px 112px -62px rgba(37,37,37,.9);
 }
 
 .modal-opaque.modal-navBlock {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 78px, rgba(7,65,97,1) 79px);
   top: 0;
-  padding-top: 70px;
+  padding-top: 100px;
 }
 
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
-  box-shadow: 0px 0px 10px #383838;
 }
 
 .modal-hero {
@@ -1374,6 +1607,13 @@ h5 {
   height: 250px;
   position: relative;
   width: 525px;
+  box-sizing: border-box;
+}
+
+.modal-msg {
+  /* use for bottom half of modal under a modal-hero element */
+  width: 525px;
+  height: 374px;
 }
 
 .modal-small {
@@ -1390,6 +1630,14 @@ h5 {
 /*.modal-hero..homeModal-hero, .modal.server-connect-modal .modal-hero*/
 .modal-hero.bg-dark-blue {
   background: #063753;
+  padding-top: 20px;
+}
+
+.modal-hero.iconBackground {
+  background-image: url(../imgs/openbazaar-icon-no-border.png);
+  background-position: 50% 75px;
+  background-size: 136px;
+  background-repeat: no-repeat;
 }
 
 .modal-hero-about {
@@ -1415,6 +1663,13 @@ h5 {
   z-index: 1;
 }
 
+.modal-hero.modal-heroFullHeightNoButtons {
+  height: 624px;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
 .background1 {
   background: linear-gradient(to bottom, rgba(72,78,93,1), rgba(23,24,31,1) 75%, rgba(0,0,0,1) 100%);
 }
@@ -1436,7 +1691,6 @@ removed because I don't think we're using the trick to hide the borders any more
 .flex-border > .flexRow > [class |= "flexCol"] {
   border-right: 1px solid rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding: 0 1px 1px 0;
 }
 
 .flex-border > .flexRow > [class |= "flexCol"].pad10 {
@@ -1475,24 +1729,13 @@ removed because I don't think we're using the trick to hide the borders any more
 }
 
 .box-borderBright:hover {
-  border: 1px solid rbga(255,255,255,1);
+  border: 1px solid rgba(255,255,255,1);
 
-}
-
-.box-borderDashed {
-  border: 5px dashed #fff;
-  box-sizing: border-box;
-  height: calc(100% - 50px) !important;
-  animation: borderDashedFade .35s normal linear;
 }
 
 @-webkit-keyframes borderDashedFade {
     0%   {opacity: 0;}
     100% {opacity: 1;}
-}
-
-#obContainer.box-borderDashed {
-  padding-top: 16px;
 }
 
 .box-dashed {
@@ -1515,8 +1758,8 @@ removed because I don't think we're using the trick to hide the borders any more
   width: 100%;
 }
 
-.txtFieldWrapper:before {
-  color: #fff;
+.txtFieldWrapper:before,
+.searchWrapper:before {
   font-family: Ionicons;
   font-size: 18px;
   left: 15px;
@@ -1524,7 +1767,8 @@ removed because I don't think we're using the trick to hide the borders any more
   padding-left: 2px;
   position: absolute;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
-  top: 13px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
 }
 
@@ -1550,14 +1794,12 @@ removed because I don't think we're using the trick to hide the borders any more
 
 .mainSearchWrapper:before {
   color: #000;
-  top: 5px;
   left: 6px;
   content: "\f4a5"
 }
 
 .mainSearchWrapper.onPage:before {
   color: #000;
-  top: 6px;
   left: 9px;
   content: "\f12f";
   opacity: .75;
@@ -1583,8 +1825,35 @@ removed because I don't think we're using the trick to hide the borders any more
 }
 
 .searchWrapperWithPill:before {
-  top: 17px;
   left: 168px;
+}
+
+.suggestionsList {
+  position: absolute;
+  width: 100%;
+  max-height: 155px;
+  background: #fff;
+  margin-top: 7px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  overflow-y: scroll;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.10);
+}
+
+.suggestionsList a {
+  display: block;
+  color: #000;
+  padding: 8px 20px;
+}
+.suggestionsList a:last-child {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.suggestionsList a:hover, .suggestionsList a:focus {
+  text-decoration: none;
+}
+.suggestionsList a:hover, .suggestionsList a.selected {
+  background-color: #efefef;
 }
 
 .txtField-bar,
@@ -1594,6 +1863,7 @@ input[type="text"].txtField-bar {
   box-shadow: none;
   color: #fff;
   height: 53px;
+  line-height:53px;
   font-size: 14px;
   letter-spacing: 0;
   opacity: 1;
@@ -1607,7 +1877,7 @@ input[type="text"].txtField-bar {
 
 .txtFieldWrapper-bar:before {
   color: #fff;
-  top: 17px;
+  top: 27px;
   left: 15px;
   opacity: 1;
 }
@@ -1624,9 +1894,8 @@ input[type="text"].txtField-bar {
 }
 
 .btn-enter {
-  margin: 15px;
+  margin: 12px 15px 15px 15px;
   border-radius: 3px;
-  margin-top: 12px;
   font-size: 14px;
   cursor: pointer;
   width: 90%;
@@ -1642,12 +1911,20 @@ input[type="text"].txtField-bar {
   pointer-events: none; /* don't fire clicks on icon */
 }
 
+.btn-small {
+  font-size: 10px;
+  line-height: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 3px;
+  opacity: .80;
+  box-sizing: border-box;
+}
+
 .btn-large {
   height: 42px;
   font-size: 15px;
   line-height: 42px;
-  float: left;
-  background-color: #086A9E; /* default color */
   padding: 0 20px;
   border-radius: 3px;
   opacity: .80;
@@ -1668,14 +1945,13 @@ input[type="text"].txtField-bar {
   line-height: 32px;
 }
 
-.btn:active {
-  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
-  opacity: .75;
-}
-
 .btn.btn-txt {
   /* button with text */
   padding: 0 12px;
+}
+
+.btn.btn-txt .pill {
+  margin-right: -6px;
 }
 
 .btn.btn-txtHalf {
@@ -1713,11 +1989,13 @@ margin: auto;
 
 .btn.btn-c1 {
   background-color: rgb(50,126,184);
+  min-width: 50px;
+  box-shadow: none;
 }
 
 #userPage .btn.btn-c1,
 .btn.btn-dark {
-  background-color: rgb(37,37,37);
+  background-color: #215175;
 }
 
 .btn.btn-c1.fade {
@@ -1731,6 +2009,82 @@ margin: auto;
 .btn.btn-c2,
 #userPage .btn.btn-c2 {
   background-color: rgba(200,25,25,1);
+}
+
+.btn.btn-c3,
+#userPage .btn.btn-c3 {
+  background-color: rgba(33,117,47,1);
+}
+
+.btn.btn-discoverToggle {
+  box-shadow: none;
+  border-radius: 0;
+  border: solid 1px #2378AA;
+  opacity: 1;
+  font-weight: 500;
+  font-size: 15px;
+  transition: none;
+  letter-spacing: 0;
+  height: auto;
+  padding: 4px 22px;
+  background-color: transparent;
+}
+
+.btn.btn-discoverToggle .toggle-txt {
+  opacity: .40;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn.btn-discoverToggle:active,
+.btn.btn-discoverToggle.active {
+  border-bottom: solid 2px #106DA3;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.btn.btn-discoverToggle:hover {
+  opacity: 1;
+}
+
+.btn.btn-discoverToggle:hover > .toggle-txt {
+  opacity: 1;
+}
+
+.btn.btn-discoverToggle.active .toggle-txt {
+  opacity: 1;
+}
+
+.btn:active,
+.btn.active,
+.btn.btn-c1:active,
+.btn.btn-c1.active,
+.btn.btn-c2:active,
+.btn.btn-c2.active {
+  box-shadow: inset 0 0 6px 0 rgba(0,0,0,0.4), inset 0 0 12px 0 rgba(255,255,255,0.1);
+}
+
+.btn.btn-c1:active,
+.btn.btn-c1.active {
+  background-color: #215175;
+}
+
+.btn.btn-c2:active,
+.btn.btn-c2.active {
+  background-color: #752121;
+}
+
+.btn.btn-c3:active,
+.btn.btn-c3.active {
+  background-color: #19C836;
+}
+
+.btn.btn-c1 .toggle-txt {
+  opacity: .20;
+}
+
+.btn.btn-c1:active .toggle-txt,
+.btn.btn-c1.active .toggle-txt {
+  opacity: 1;
 }
 
 .btn.btn-win {
@@ -1784,7 +2138,40 @@ margin: auto;
 .btn.btn-win.btn-winMax {
   background-color: #B8E986;
   position: relative;
+}
 
+#appBar.style-win .btn.btn-win {
+  background-color: transparent;
+  border-radius: 0;
+  width: 19px;
+  height: 19px;
+  box-shadow: none;
+}
+
+#appBar.style-win .btn.btn-winClose {
+  float: right;
+  margin-left: 6px;
+}
+
+#appBar.style-win .btn.btn-win .btn-win-icon {
+  display: block;
+  top: -3px;
+  font-size: 21px;
+  color: #fff;  
+}
+
+#appBar.style-win .btn.btn-winMax {
+  float: right;
+  margin-left: 6px;
+  border: 1px solid #fff;
+  width: 13px;
+  height: 13px;
+  top: 3px;  
+}
+
+#appBar.style-win .btn.btn-winMax .btn-win-icon,
+#appBar.style-win .btn.btn-win.btn-winMax:hover .btn-win-icon {
+  display: none;
 }
 
 .btn.btn-bar {
@@ -1913,7 +2300,7 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationContainer {
   width: calc(100% - 1px);
   height: 360px;
-  bottom: 0px;
+  bottom: 0;
   position: absolute;
   transition: bottom 0.35s ease;
   background-color: #2B2B2B;
@@ -1946,8 +2333,7 @@ div.chatSearchOut .chatSearchIcon {
   height: calc(100% - 405px);
   overflow-x: hidden;
   overflow-y: auto;
-  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
-  transition: height 1s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1), height 1s cubic-bezier(0, 0, 0.2, 1);
   -webkit-filter: blur(.25px);
 }
 
@@ -2066,7 +2452,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationAvatar:hover {
-  -webkit-box-shadow: inset 0px 0px 15px 0px rgb(50, 50, 50);
+  -webkit-box-shadow: inset 0 0 15px 0 rgb(50, 50, 50);
 }
 
 .chatConversationMenu {
@@ -2076,7 +2462,7 @@ div.chatSearchOut .chatSearchIcon {
   padding: 10px;
   position: absolute;
   top: 45px;
-  right: 0px;
+  right: 0;
   background: #252525;
   z-index: 5;
   font-weight: 400;
@@ -2098,7 +2484,7 @@ div.chatSearchOut .chatSearchIcon {
   background-color: unset;
   width: 100%;
   font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .chatConversationMessageLine {
@@ -2185,10 +2571,10 @@ div.chatSearchOut .chatSearchIcon {
   border-radius: 3px;
   font-size: 12px;
   padding: 6px 8px;
-  word-break: break-word;
   display: inline-block;
   font-weight: 500;
   letter-spacing: 0.2px;
+  word-break: break-word;
 }
 
 #inputConversationMessage {
@@ -2209,7 +2595,6 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMessageTimestamp {
   font-size: 11px;
-  color: #fff;
   opacity: .35;
   font-weight: 500;
   letter-spacing: 0;
@@ -2303,7 +2688,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn.btn-bar.btn-tab:first-child {
-  border-top-left-radius: 0px;
+  border-top-left-radius: 0;
 }
 
 .btn.btn-bar.btn-tab:active{
@@ -2353,19 +2738,26 @@ div.chatSearchOut .chatSearchIcon {
   float: left;
 }
 
+.btn-togWrapper.btn-toWrapper-discoverToggle {
+  float: none;
+  position: absolute;
+  right: 0;
+  bottom: -2px;
+}
+
 #userPage .btn-togWrapper {
   border: 1px solid rgb(74,72,72);
 }
 
-.btn-togWrapper .btn-togWrapper-light {
+.btn-togWrapper.btn-togWrapper-light {
   border: 1px solid rgba(255,255,255,0.08);
 }
 
-.btn-togWrapper .btn-togWrapper-c1 {
-  border: 1px solid rgb(50,126,184);
+.btn-togWrapper.btn-togWrapper-c1 {
+  border: 0;
 }
 
-#userPage .btn-togWrapper.btn-togWrapper-c1 {
+#userPage .btn-togWrapper.btn-togWrapper-light {
   border: 1px solid rgb(87,87,87);
 }
 
@@ -2398,14 +2790,22 @@ div.chatSearchOut .chatSearchIcon {
   border-bottom-left-radius: 0;
 }
 
+.btn-toWrapper-discoverToggle .btn.btn-togLeft {
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-right: 0;
+}
+
+.btn-toWrapper-discoverToggle .btn.btn-togRight {
+  border-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
 .btn.btn-flushTop {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-.btn.btn-back:before,
-.btn.btn-fwd:before {
-  opacity: 0.3;
 }
 
 .btn.btn-back.active:before,
@@ -2430,7 +2830,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-square:active {
-  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
+  -webkit-box-shadow: inset 0 0 6px 0 rgb(13, 84, 123);
   opacity: .75;
 }
 
@@ -2613,7 +3013,6 @@ input[type="number"].fieldItem::-webkit-outer-spin-button,
 input[type="number"].fieldItem::-webkit-inner-spin-button,
 .noNumberSpinner {
   -webkit-appearance: none;
-  appearance: none;
   margin: 0;
 }
 
@@ -2629,24 +3028,6 @@ input[type="datetime-local"].fieldItem:focus {
 
 .txtAreaField:focus {
   outline: 1px solid #565656;
-}
-
-/* add formChecked class after form has been checked for validity */
-.invalid,
-.formChecked input[type="text"].fieldItem:invalid,
-.formChecked input[type="email"].fieldItem:invalid,
-.formChecked input[type="url"].fieldItem:invalid,
-.formChecked .fieldItem-textarea:invalid,
-.formChecked input[type="number"].fieldItem:invalid,
-.formChecked input[type="text"].fieldItem:focus:invalid,
-.formChecked input[type="email"].fieldItem:focus:invalid,
-.formChecked input[type="url"].fieldItem:focus:invalid,
-.formChecked .fieldItem-textarea:focus:invalid,
-.formChecked input[type="number"].fieldItem:focus:invalid,
-.formChecked .validatable:invalid {
-  border: 2px dashed rgba(89,1,1,0.8);;
-  background-color: rgba(89,1,1,0.2);
-  transition: border 0.3s, background-color 0.4s;
 }
 
 input[type="text"].fieldItem.fieldItem-withButton,
@@ -2694,7 +3075,8 @@ input[type="number"].fieldItem.fieldItem-withButton {
 }
 
 .fieldItem .fieldItem-selectWrapper {
-  position: relative;
+  position: absolute;
+  width: 100%;
 }
 
 .fieldItem .fieldItem-selectWrapper select {
@@ -2706,7 +3088,6 @@ input[type="number"].fieldItem.fieldItem-withButton {
   border: 1px solid transparent;
   outline: none;
   box-sizing: border-box;
-  appearance: none;
   -webkit-appearance: none;
   color: #fff;
 }
@@ -2808,6 +3189,8 @@ input[type="number"].fieldItem.fieldItem-withButton {
   padding: 15px;
   border: 2px solid transparent;
   color: #fff;
+  overflow: auto; /* use customThemeScrollbar to add a scrolbar */
+  word-break: break-word; /* prevent urls from making the text area grow */
 }
 
 .fieldItem-textarea:focus {
@@ -2819,7 +3202,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
 select {
   border: 2px solid transparent;
   border-radius: 0;
-  font-family: "Helvetica Neue", Helvetica, "Open Sans";
+  font-family: "Helvetica Neue", Helvetica, "Open Sans", sans-serif;
   padding: 0 15px;
   -webkit-appearance: none;
 }
@@ -2941,7 +3324,6 @@ input[type="radio"].fieldItem.starRating:checked + label + input + label + input
   font-size: 18px;
 }
 
-
 .radioLabel {
   opacity: .75;
 }
@@ -2958,15 +3340,14 @@ input[type="checkbox"].fieldItem + label {
  }
 
 input[type="checkbox"].fieldItem + label:before {
-  content: "";
   display: inline;
+  content: "\f371";
+  font-family: Ionicons;
   line-height:inherit;
-  height: 16px;
-  padding: 0 8px; /*inline elements have no width, use padding */
-  border-radius: 4px;
-  border: solid 1px #fff;
   box-shadow: none;
   opacity: 1;
+  font-size: 1.5em;
+  vertical-align: middle;
 }
 
 input[type="checkbox"].fieldItem + label.compact {
@@ -2978,22 +3359,18 @@ input[type="checkbox"].fieldItem + label.compact:before {
   left: 0;
 }
 
+input[type="checkbox"].fieldItem.thin + label {
+  line-height: inherit;
+}
+
 input[type="checkbox"].fieldItem:checked + label:before {
-  background: #fff;
-  box-shadow: inset 0 0 0 4px #086A9E;
+  content: "\f374";
 }
 
 input[type="checkbox"].fieldItem + label div,
 input[type="checkbox"].fieldItem + label span {
   /* if the label has elements inside it, remove line height */
   line-height: normal;
-}
-
-input[type="checkbox"] + label .togLabelOn,
-input[type="checkbox"].fieldItem + label .togLabelOn,
-input[type="checkbox"] + label .togLabelOff,
-input[type="checkbox"].fieldItem + label .togLabelOff {
-  padding: 0 16px;
 }
 
 input[type="checkbox"] + label .togLabelOn,
@@ -3026,6 +3403,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .btn input[type="checkbox"].fieldItem + label:before {
   top: 0;
   left: 0;
+}
+
+.homeModal-settings input[type="checkbox"].fieldItem + label:before {
+  float: left;
+  margin-left: 8px;
+  margin-right: 10px;
 }
 
 #userPage .fieldItem-selectWrapper select option {
@@ -3115,18 +3498,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-notifications {
-  top: 50px;
+  top: 100%;
   right: 45px;
-  background-color: #252525;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  color: #fff;
-  font-size: 15px;
-  padding: 0;
   width: 390px;
-  transform: translateY(-440px);
-  transition: transform 200ms;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .popMenu-notificationsHeader {
@@ -3139,8 +3515,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 0 15px;
 }
 
-.popMenu-notifications.popMenu-opened {
+.popMenu-notifications.popMenu-opened #notificationsPanel {
   transform: translateY(0);
+  pointer-events: all;
 }
 
 .notification .rowItem {
@@ -3151,7 +3528,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 1;
 }
 
-.notificationUnreadIndicator {
+.highlightRow {
     position: absolute;
     left: 0;
     top: 0;
@@ -3163,7 +3540,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .onboardingIntroDiscover {
   position: absolute;
   cursor: pointer;
-  top: 50px;
+  top: 43px;
   right: 80px;
   width: 233px;
   background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 100%;
@@ -3171,11 +3548,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   text-align: center;
-  -webkit-box-shadow: 0px 1px 2px 0px rgb(37, 37, 37);
+  -webkit-box-shadow: 0 1px 2px 0 rgb(37, 37, 37);
+  z-index: 1;
 }
 
 .onboardingIntroDiscover:before {
-  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 0%;
+  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 0;
   background-size: 233px 196px;
   content: " ";
   width: 32px;
@@ -3183,7 +3561,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   top: -41px;
   z-index: 10;
-  right: 0px;
+  right: 0;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -3199,8 +3577,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-navBar {
-  top: 50px;
+  top: 100%;
   right: 10px;
+  width: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.popMenu-navBarSubMenu {
+  float: right;
   background-color: #252525;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
   border-bottom-left-radius: 4px;
@@ -3208,14 +3593,21 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: #fff;
   font-size: 13px;
   padding: 10px 0;
-  width: 230px;
+  width: auto;
+  min-width: 230px;
   overflow: hidden;
-  transform: translateY(-330px);
+  transform: translateY(-110%);
   transition: transform 200ms;
 }
 
-.popMenu-navBar.popMenu-opened {
+.popMenu-navBarSubMenu-servers {
+    width: 230px;
+}
+
+.popMenu-opened .popMenu-navBarSubMenu-pageNav,
+.popMenu-navBarSubMenu-servers.server-submenu-opened {
   transform: translateY(0);
+  pointer-events: all;
 }
 
 .popMenu-navBar a {
@@ -3224,6 +3616,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   line-height: 26px;
   padding: 0 16px;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.popMenu-navBar .popMenu-navBarSubMenu-servers a {
+  padding: 0;
 }
 
 .popMenu-navBar a:hover {
@@ -3238,14 +3634,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .banner-large {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 0;
   background: 50% 50% / cover no-repeat;
   height: 400px;
-  position: fixed;
-  top: 70px;
+  position: absolute;
+  top: 0;
   width: 950px;
   padding: 0;
   z-index: 0;
@@ -3258,13 +3651,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .user-page-content {
-  position: relative;
+  position: fixed;
   width: 950px;
-  z-index: 3;
+  z-index: 2;
 }
 
 #noNotifications {
   padding-top: 10px;
+}
+
+#notificationsPanel {
+  background-color: #252525;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: #fff;
+  font-size: 15px;
+  transform: translateY(-110%);
+  transition: transform 200ms;
 }
 
 #notificationsPanel .popMenu-notificationsContent {
@@ -3290,28 +3694,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 0;
 }
 
-.capitalize {
-  text-transform: capitalize;
-}
-
 .shadow-inner1-ultra-light {
-  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.35);
+  box-shadow: inset 0 -130px 112px -52px rgba(25,25,25,.35);
 }
 
 .shadow-inner1-light {
-  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.65);
+  box-shadow: inset 0 -130px 112px -52px rgba(25,25,25,.65);
 }
 
 .modal-shadow-inner1 {
-  box-shadow: inset 0px -20px 50px 0px rgba(25,25,25,.35);
+  box-shadow: inset 0 -20px 50px 0 rgba(25,25,25,.35);
 }
 .shadow-inner1 {
   /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(75%,rgba(0,0,0,.75)));*/
-  box-shadow: inset 0px -350px 222px -282px rgba(25,25,25,.75);
+  box-shadow: inset 0 -350px 222px -282px rgba(25,25,25,.75);
 }
 
 .shadow-inner1-strong {
-  box-shadow: inset 0px -240px 92px -162px rgba(25,25,25,.55);
+  box-shadow: inset 0 -240px 92px -162px rgba(25,25,25,.55);
 }
 
 .icon-centered {
@@ -3328,6 +3728,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .color-secondary {
   background: #327EB8;
+}
+
+.color-secondary-darken {
+  background: #215175;
 }
 
 .homeView {
@@ -3349,24 +3753,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 136px;
 }
 
-.home-page-navigation-slim {
-  position: fixed;
-  top: 135px;
-  z-index: 3;
-  box-shadow: 0px 10px 43px -10px rgba(0,0,0,0.20);
-}
-
 .user-page-navigation {
   width: 950px;
   position: relative;
   z-index: 1;
-}
-
-.user-page-navigation-slim {
-  position: fixed;
-  top: 102px;
-  z-index: 5;
-  box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
 }
 
 .user-page-header {
@@ -3376,8 +3766,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .user-page-header-slim {
-  position: fixed;
-  top: -10px;
+  position: absolute;
+  top: 0;
   border-top-left-radius: 1px;
   border-top-right-radius: 1px;
   height: 50px;
@@ -3387,7 +3777,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: transparent;
   z-index: 5;
   padding: 0;
-  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1), top .4s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1), transform .4s cubic-bezier(0, 0, 0.2, 1);
+  transform: translateY(-110%);
+}
+
+.user-page-header-slim.scrolledIntoView {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .user-page-header-slim-bg {
@@ -3408,25 +3804,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .user-page-header-slim-tint {
-  box-shadow: inset 0px -160px 112px -52px rgba(25,25,25,.9);
-}
-
-
-.user-page-header-slim-bg-cover {
-  position: fixed;
-  top: 50px;
-  height: 20px;
-  z-index: 4;
-  width: 963px;
-  margin-left: -6px;
-  background: transparent;
-}
-.user-page-header-slim-bg-cover-customize {
-  position: fixed;
-  top: 55px;
-  height: 15px;
-  z-index: 4;
-  width: 950px;
+  box-shadow: inset 0 -160px 112px -52px rgba(25,25,25,.9);
 }
 
 .userPage-subViews {
@@ -3434,8 +3812,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 1;
 }
 
+.userPage-subViews img {
+  width: 100%;
+  height: auto;
+}
+
 .icon-huge {
   font-size: 140px;
+}
+
+.icon-gigantic {
+  font-size: 250px;
 }
 
 .icon-large {
@@ -3467,6 +3854,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .icon-huge.icon-circle-background1:before {
   line-height:140px;
+  font-size:0.8em;
+}
+
+.icon-gigantic.icon-circle-background1 {
+  width: 250px;
+  height: 250px;
+}
+
+.icon-gigantic.icon-circle-background1:before {
+  line-height:250px;
   font-size:0.8em;
 }
 
@@ -3508,21 +3905,22 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .spinner-with-logo {
   background: url('../imgs/icon-with-opening.png') 100% 100%;
   background-size: cover;
+  background-repeat: no-repeat;
   width: 215px;
   height: 215px;
   position: relative;
   transition: left 0.5s ease;
 }
 
-.spinner-with-logo i {
+.spinner-with-logo .spinner-with-logo-icon {
   position: absolute;
-  top: 17px;
-  left: 18px;
+  top: 16px;
+  left: 17px;
   opacity: .90;
 }
 
-#ov1.chatOpen .spinner-with-logo {
-  left: calc(50% - 115.5px);
+.spinner-with-logo .spinner-with-logo-icon:before {
+  padding-top: 1px;
 }
 
 .spinnerWrapper {
@@ -3550,8 +3948,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .modal .homeModal-heroText {
   position: absolute;
-  bottom: 0px;
-  top: 180px;
+  bottom: 0;
+  top: 200px;
   color: #fff;
   font-size: 20px;
   line-height: 22px;
@@ -3698,11 +4096,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #customizeControls {
-  position: fixed;
+  position: absolute;
   left: 30px;
-  top: 80px;
-  width: 40px;
-  z-index: 100;
+  top: 30px;
+  z-index: 1;
 }
 
 #customizeControls .js-customizePrimaryColor .btn-square {
@@ -3716,7 +4113,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #customizeControls .btn-square {
-  box-shadow: 0px 1px 2px #898989;
+  box-shadow: 0 1px 2px #898989;
   margin-bottom: 0;
   width: 40px;
   height: 40px;
@@ -3742,6 +4139,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   transition: width .35s cubic-bezier(0, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+.customizePrimaryColorRecommendations.show,
+.customizeSecondaryColorRecommendations.show,
+.customizeBackgroundColorRecommendations.show  {
+  width: 273px;
+}
+
+.customizeTextColorRecommendations.show {
+  width: 121px;
 }
 
 .customColorChoice {
@@ -3783,12 +4191,43 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
 }
 
+.discoverToggleHelper {
+  top: -40px;
+  width: auto;
+  max-width: 300px;
+  background: rgba(37,37,37,.95);
+  border-radius: 3px;
+  color: #fff;
+  padding: 8px 10px;
+  position: absolute;
+  z-index: 10;
+  height: 16px;
+  font-size: 11px;
+  right: 0;
+  line-height: 16px;
+  opacity: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  margin-top: 2px;
+}
+
+.discoverToggleHelper:after {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 10px 0 10px;
+  border-color: rgba(37,37,37,.95) transparent transparent transparent;
+  position: absolute;
+  bottom: -10px;
+  right: 48px;
+}
+
 .tooltip {
   position: relative;
 }
 
 .tooltip:hover:after{
-  max-width: 400px;
   background: rgba(37,37,37,.95);
   border-radius: 3px;
   bottom: -32px;
@@ -3804,6 +4243,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 1;
   white-space: nowrap;
   pointer-events: none;
+  margin-top: 2px;
 }
 
 .tooltip.tooltip-left:hover:after{
@@ -3821,6 +4261,21 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: auto;
   width: 400px;
   white-space: normal;
+  bottom: auto;
+  top: 100%;
+}
+
+.tooltip.tooltip-box2:hover:after {
+  height: auto;
+  width: 200px;
+  white-space: normal;
+  bottom: auto;
+  top: 100%;
+}
+
+.tooltip.tooltip-box.tooltip-boxUp:hover:after {
+  bottom: 120%;
+  top: auto;
 }
 
 .btn-notifications.tooltip:hover:after{
@@ -3895,7 +4350,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .cropit-image-preview.cropit-avatar {
   background: url('../imgs/defaultUser.png');
-  background-size: cover;  
+  background-size: cover;
 }
 
 #userPage .headerCropper .bar.navBar {
@@ -3964,10 +4419,21 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
 }
 
-#modalHolder {
+#modalHolder,
+.modalHolder {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#pageNav .modalHolder {
+  /* patch for the about modal. It should be moved to the baseModal view */
   position: fixed;
-  z-index: 9;
-  -webkit-app-region: no-drag;
+  z-index: 1;
+  top: 74px;
 }
 
 #messageModal {
@@ -3975,15 +4441,94 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #loadingModal {
-  z-index: 9;
+  padding-top: 0;
 }
 
-.server-connect-modal {
-  z-index: 10;
+.page-connect-modal .spinner-with-logo {
+  margin-top: -45px;
 }
 
-#loadingModal .btn {
-  -webkit-app-region: no-drag;
+#ov1 #loadingModal.hide {
+  height: 0; /* kludge to allow top bar to fade in. Transitions don't work if display is none */
+  padding: 0;
+  overflow: hidden;
+  display: block;
+}
+
+#loadingModal #loadingModalContent {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 50%;
+  margin-top: 117px;
+  opacity: 1;
+  transition: opacity 1s 5s ease;
+  box-sizing: border-box;
+  padding: 9px;
+  text-align: center;
+}
+
+#loadingModal #loadingModalBtns {
+  opacity: 1;
+  transition: opacity 1s 5s ease;
+  /* this seems redundant, but if you don't also have a transition on the button container, for some reason the normal
+  background color will be used instead of the background color from the custCol-secondary class until the parent
+  transition is complete on Win64 10. */
+}
+
+#loadingModal.hide #loadingModalContent,
+#loadingModal.hide #loadingModalBtns {
+  opacity: 0;
+}
+
+#ov1 .server-connect-modal .modal-child {
+  height: 625px;
+  overflow: hidden;
+}
+
+#ov1 .server-connect-modal .message-bar {
+  top: 59px;
+  left: 25px;
+  right: 25px;
+  z-index: 1;
+  transition: top .2s, opacity .2s;
+}
+
+#ov1 .server-connect-modal .message-bar > div {
+  background-color: #C62D2D;
+  padding: 8px 20px;
+  line-height: 2.2;
+  display: inline-block;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#ov1 .server-connect-modal .message-bar .message-bar-close {
+  top: -12px;
+  right: -3px;
+}
+
+#ov1 .server-connect-modal .message-bar.slide-out {
+  top: -45px;
+  opacity: 0;
+}
+
+#ov1 .server-config-form:not(.no-transition) {
+  transition: top 250ms;
+}
+
+#ov1 .server-config-form.slide-out {
+  top: 372px;
+}
+
+#ov1 .server-config-row .connection-failed::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: #C62D2D;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .pill {
@@ -3993,11 +4538,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: red;
 }
 
+.pill.tabPill {
+  position: relative;
+  display: inline-block;
+  min-width: 0;
+  line-height: normal;
+}
+
+.pill.tabPill .badge:after {
+  right: -12px;
+  top: -8px;
+}
+
 .selectPill {
   opacity: .75;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
   width: 156px;
   text-align: right;
+  position: relative;
 }
 
 .selectPill select {
@@ -4009,7 +4567,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 12px;
   margin-left: 10px;
   letter-spacing: .4px;
-  padding: 6px;
+  line-height: 32px;
+  height: 32px;
   width: 148px;
   z-index: 2;
   -webkit-user-select: none;
@@ -4035,7 +4594,53 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 }
 
-/* protect customize controls from custom page styles */
+.violatorTR {
+  /* sets triangle to be in the top right corner */
+  /* must be given equal height and width properties */
+  /* text or icons inside the violator should have positionTopRight and a right and top margin or padding based on the violator size */
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-clip-path: polygon(50% 0, 100% 0, 100% 50%);
+  z-index: 1; /* this shouldn't need to be higher. Make it the last element in its container */
+  text-align: center;
+}
+
+.violator1 {
+  width: 50px;
+  height: 50px;
+  background: #215175; /* this should be overridden with a color class */
+  color: #fff;
+}
+
+.violatorTxt{
+  /* use on content of a violator to rotate it to match the violator */
+  display: block;
+  transform: rotate(45deg);
+}
+
+.listingTypeDIGITAL_GOOD:before {
+  color: #EFEF4C;
+  content: "\f137";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+.listingTypePHYSICAL_GOOD:before {
+  color: #805C17;
+  content: "\f318";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+.listingTypeSERVICE:before {
+  color: #DEDEDE;
+  content: "\f2ad";
+  font-family: Ionicons;
+  font-size: 12px;
+}
+
+  /* protect customize controls from custom page styles */
 #ov1 #customizeControls .labelWrap {
   height: 40px;
   border-radius: 0;
@@ -4089,6 +4694,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-color: #616161;
 }
 
+#ov1 .medium-editor-toolbar {
+  background: #353443;
+}
+
 #ov1::-webkit-scrollbar {
   display: none;
   box-sizing: border-box;
@@ -4103,16 +4712,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   max-height: 180px;
 }
 
-#obContainer {
-  height: calc(100% - 50px);
-  overflow-y: scroll;
-  padding-top: 20px;
-  -webkit-app-region: no-drag;
-  position: relative;
-  top: 50px;
-  box-sizing: border-box;
-}
-
 .chatConversationMessageLine .chatConversationMessageBody a {
   text-decoration: underline;
 }
@@ -4121,13 +4720,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: fixed;
   bottom: 0;
   z-index: 10;
-  width: 100%;  
+  width: 100%;
 }
 
 #statusBar .statusMessageWrap {
-  height: 0px;
+  height: 0;
   overflow: hidden;
-  transition: opacity 1.5s, height 1s;   
+  transition: opacity 1.5s, height 1s;
 }
 
 #statusBar .statusMessageWrap.slideUp {
@@ -4145,7 +4744,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: #000;
   border-bottom: 1px solid #222;
   position: relative;
-  top: -1px; 
+  top: -1px;
 }
 
 .page-connect-modal {
@@ -4159,16 +4758,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 100%;
 }
 
-.page-connect-modal .spinner-with-logo {
-  /*
-    so it lines up with the loading modal,
-    otherwise there's a jump when this guy loads
-    right after the loading one.
-  */
-  margin-top: -37px;
-}
-
 .page-connect-modal .spinner-with-logo .icon-no-connection {
+  top: 18px;
   left: 22px;
 }
 
@@ -4177,16 +4768,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   right: 0;
   left: 0;
   top: 50%;
-  max-width: 600px;  
-  margin-top: 90px;  
+  max-width: 600px;
+  margin-top: 75px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   transition: transform 0.5s ease;
-}
-
-#ov1.chatOpen .page-connect-modal .content {
-  transform: translateX(-115.5px);
 }
 
 .page-connect-modal .content .btn {
@@ -4202,6 +4789,36 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .page-connect-modal .mode-failed-connect .btn-cancel,
 .page-connect-modal .mode-failed-connect .spinner {
   display: none;
+}
+
+.buyWizardMap .mapWrap {
+  background-color: #eeeae1;
+  height: 100%;
+}
+
+.backToTop {
+  position: fixed;
+  bottom: 15px;
+  right: 73px;
+  padding: 10px;
+  background-color: #252525;
+  transform: translateY(100%);
+  opacity: 0;
+  border-radius: 4px;
+  transition: transform 300ms ease, right 0.5s ease;
+}
+
+.backToTop.slideUp {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.backToTop:active {
+  opacity: .75;
+}
+
+#ov1.chatOpen .backToTop {
+  right: 303px;
 }
 
 /*========== utility classes ==========*/
@@ -4286,11 +4903,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .positionBottom {
   position: absolute;
   bottom: 0;
+  right: 0;
 }
 
 #ov1 .positionTop {
   position: absolute;
   top: 0;
+  left: 0;
 }
 
 #ov1 .positionTopRight {
@@ -4308,6 +4927,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .hide {
   display: none;
 }
+
+#ov1 .hideChildren .hideableChild {
+  display: none;
+}
+
 
 #ov1 .invisible {
   visibility: hidden;
@@ -4341,6 +4965,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   overflow-x: hidden;
 }
 
+#ov1 .autoOverflowYHideX {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+#ov1 .vertAlignMid {
+  vertical-align: middle;
+}
 
 #ov1 .vCentered {
   /* must be inside a relatively positioned containing element */
@@ -4429,10 +5062,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1  .borderRadiusTop {
-  border-radius: 3px;
-}
-
-#ov1  .borderRadiusTop {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -4455,8 +5084,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
-#ov1  .textOpacity0 {
+#ov1  .textOpacity0,
+#ov1 .opacity0 {
   opacity: 0;
+  pointer-events: none;
 }
 
 #ov1  .textOpacity25 {
@@ -4572,7 +5203,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .textShadow {
-  text-shadow: 0px 1px 5px #000;
+  text-shadow: 0 1px 5px #000;
+}
+
+#ov1 .textShadow2 {
+  text-shadow: 0 0 2px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.7);
 }
 
 #ov1 .fontSize8 {
@@ -4721,12 +5356,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: 15px;
 }
 
+#ov1  .marginRight20 {
+  margin-right: 20px;
+}
+
 #ov1  .marginLeftNeg115 {
   margin-left: -115px;
 }
 
 #ov1  .marginLeft0 {
   margin-left: 0;
+}
+
+#ov1  .marginLeft05 {
+  margin-left: 0.5px;
 }
 
 #ov1  .marginLeft1 {
@@ -4750,6 +5393,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginLeft7 {
   margin-left: 7px;
+}
+
+#ov1  .marginLeft8 {
+  margin-left: 8px; /* use this to match the gap on the right created by the custom scrollbar */
 }
 
 #ov1  .marginLeft10 {
@@ -4912,10 +5559,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 11px;
 }
 
-#ov1  .top70 {
-  top: 70px;
-}
-
 #ov1 .bottomNeg250 {
   bottom: -250px;
 }
@@ -4956,8 +5599,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .height46 {
   height: 46px;
 }
-
-
 
 #ov1  .height30 {
   height: 30px;
@@ -5103,11 +5744,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 30px;
 }
 
+#ov1  .padding40 {
+  padding: 40px;
+}
+
+#ov1  .padding010 {
+  padding: 0 10px;
+}
 #ov1  .padding015 {
-  padding: 0px 15px;
+  padding: 0 15px;
 }
 #ov1  .padding025 {
-  padding: 0px 25px;
+  padding: 0 25px;
 }
 #ov1  .padding515 {
   padding: 5px 15px;
@@ -5278,9 +5926,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 260px;
 }
 
-#ov1 .width270 {
-  width: 270px;
-}
 #ov1 .width380 {
   width: 380px;
 }
@@ -5360,6 +6005,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0.7;
 }
 
+#ov1 .disabled-icon {
+  pointer-events: none;
+}
+
+#ov1 .disabled-icon:before,
+#ov1 .disabled [class *= "ion-"]:before {
+  opacity: 0.2;
+}
+
 #ov1 .overflowVisible {
   overflow: visible;
 }
@@ -5380,15 +6034,28 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
+/* to fade out a visible element, add the fadeOut class */
+/* to fade in an element with opacity 0, add the fadeIn class */
+
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+#ov1 .fadeIn {
+  /* use fadeOut on items that should have fadeIn added to them */
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 #ov1 .foldIn {
   height: 0;
+  padding: 0;
   overflow: hidden;
-  transition: height 1s;
+  transition: height 1s, padding 1s;
+  pointer-events: none;
 }
 
 #ov1 .underline {
@@ -5418,16 +6085,52 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 13px;
   border-radius: 50%;
   color: white;
-  background-opacity: .75;
   background-color: #FFA41C;
+  pointer-events: none;
 }
 
 #ov1 .alignCenter {
   text-align: center;
 }
 
+#ov1 .blockCenter {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#ov1 .marginCenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
 #ov1 .heightAuto {
   height: auto;
+}
+
+#ov1 .editableContent img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* add formChecked class after form has been checked for validity */
+#ov1 .invalid,
+#ov1 .formChecked input[type="text"].fieldItem:invalid,
+#ov1 .formChecked input[type="email"].fieldItem:invalid,
+#ov1 .formChecked input[type="url"].fieldItem:invalid,
+#ov1 .formChecked .fieldItem-textarea:invalid,
+#ov1 .formChecked input[type="number"].fieldItem:invalid,
+#ov1 .formChecked input[type="text"].fieldItem:focus:invalid,
+#ov1 .formChecked input[type="email"].fieldItem:focus:invalid,
+#ov1 .formChecked input[type="url"].fieldItem:focus:invalid,
+#ov1 .formChecked .fieldItem-textarea:focus:invalid,
+#ov1 .forvmChecked input[type="number"].fieldItem:focus:invalid,
+#ov1 .formChecked .validatable:invalid {
+  border: 2px dashed rgba(89,1,1,0.8);;
+  background-color: rgba(89,1,1,0.2);
+  transition: border 0.3s, background-color 0.4s;
 }
 
 #ov1 .loading,
@@ -5458,61 +6161,35 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   animation-delay: 0.5s;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
 }
 
 
 @-webkit-keyframes loaderAnimation {
-  0% {
+  from {
     opacity: 0.2;
     color: rgba(255,255,255,0);
   }
-  100% {
-    opacity: 1;
+  to {
+    opacity: 0.9;
     color: rgba(255,255,255,1);
   }
 }
 
 /* turn off animations and transitions with this style */
 
-#ov1.notFancy,
-#ov1.notFancy *,
-#ov1.notFancy * *,
-#ov1.notFancy * * *,
-#ov1.notFancy * * * *,
-#ov1.notFancy * * * * *,
-#ov1.notFancy * * * * * *,
-#ov1.notFancy * * * * * * *,
-#ov1.notFancy * * * * * * * *,
-#ov1.notFancy * * * * * * * * * ,
-#ov1.notFancy * * * * * * * * * *,
-#ov1.notFancy #userPage,
-#ov1.notFancy #userPage *,
-#ov1.notFancy #userPage * *,
-#ov1.notFancy #userPage * * *,
-#ov1.notFancy #userPage * * * *,
-#ov1.notFancy #userPage * * * * *,
-#ov1.notFancy #userPage * * * * * *,
-#ov1.notFancy #userPage * * * * * * *,
-#ov1.notFancy #userPage * * * * * * * *,
-#ov1.notFancy #userPage * * * * * * * * * ,
-#ov1.notFancy #userPage * * * * * * * * * *,
-#ov1.notFancy #obContainer,
-#ov1.notFancy #obContainer *,
-#ov1.notFancy #obContainer * *,
-#ov1.notFancy #obContainer * * *,
-#ov1.notFancy #obContainer * * * *,
-#ov1.notFancy #obContainer * * * * *,
-#ov1.notFancy #obContainer * * * * * *,
-#ov1.notFancy #obContainer * * * * * * *,
-#ov1.notFancy #obContainer * * * * * * * *,
-#ov1.notFancy #obContainer * * * * * * * * * ,
-#ov1.notFancy #obContainer * * * * * * * * * *,
-#ov1.notFancy #overlay,
-#ov1.notFancy #sideBar,
-#ov1.notFancy #pageNav,
-#ov1.notFancy #modalHolder,
-#ov1.notFancy #messageModal,
-#ov1.notFancy #statusBar {
+#ov1.minEffects,
+#ov1.minEffects *,
+#ov1.minEffects #userPage,
+#ov1.minEffects #userPage *,
+#ov1.minEffects #obContainer,
+#ov1.minEffects #obContainer *,
+#ov1.minEffects #overlay,
+#ov1.minEffects #sideBar,
+#ov1.minEffects #pageNav,
+#ov1.minEffects #modalHolder,
+#ov1.minEffects #messageModal,
+#ov1.minEffects #statusBar {
   transition: none !important;
   -webkit-filter: none !important;
   opacity: 1 !important;
@@ -5522,64 +6199,158 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-shadow: none !important;
 }
 
-#ov1.notFancy #pageNav .popMenu.popMenu-navBar.popMenu-opened {
+#ov1.minEffects #pageNav .popMenu-navBarSubMenu {
   border-left: 1px solid #444;
   border-right: 1px solid #444;
   border-bottom: 1px solid #444;
 }
 
-#ov1.notFancy #pageNav .statusBar.fadeOut,
-#ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
-#ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
+#ov1.minEffects .fadeOut,
+#ov1.minEffects .statusBar.fadeOut,
+#ov1.minEffects #pageNav .statusBar.fadeOut,
+#ov1.minEffects #userPage .fadeOut,
+#ov1.minEffects #userPage #pageNav .fadeOut,
+#ov1.minEffects #userPage #pageNav .statusBar.fadeOut,
+#ov1.minEffects #userPage #obContainer #content .statusBar.fadeOut {
   opacity: 0 !important;
 }
 
-#ov1.notFancy #sideBar .sideBarSlidShow {
+#ov1.minEffects .fadeIn,
+#ov1.minEffects .statusBar.fadeIn,
+#ov1.minEffects #pageNav .statusBar.fadeIn,
+#ov1.minEffects #userPage .fadeIn,
+#ov1.minEffects #userPage #pageNav .fadeIn,
+#ov1.minEffects #userPage #pageNav .statusBar.fadeIn,
+#ov1.minEffects #userPage #obContainer #content .statusBar.fadeIn {
+  opacity: 1 !important;
+}
+
+#ov1.minEffects #sideBar .sideBarSlidShow {
   display: none;
 }
 
-#ov1.notFancy #sideBar.sideBarSlid .sideBarSlidShow {
+#ov1.minEffects #sideBar.sideBarSlid .sideBarSlidShow {
   display: block;
 }
 
-#ov1.notFancy .gridItemControls {
+#ov1.minEffects #sideBar .chatConversation textarea,
+#ov1.minEffects #sideBar .chatConversation textarea::-webkit-input-placeholder,
+#ov1.minEffects #sideBar .chatConversation input,
+#ov1.minEffects #sideBar .chatConversation input::-webkit-input-placeholder {
+  color: #fff;
+}
+
+#ov1.minEffects .gridItemControls {
   display: none;
 }
 
-#ov1.notFancy .gridItemControls .btn-gridItemControl:hover,
-#ov1.notFancy .userPage-subViews .gridItem:hover .gridItemControls,
-#ov1.notFancy .homeView .gridItem:hover .gridItemControls {
+#ov1.minEffects .gridItemControls .btn-gridItemControl:hover,
+#ov1.minEffects .userPage-subViews .gridItem:hover .gridItemControls,
+#ov1.minEffects .homeView .gridItem:hover .gridItemControls {
   display: block;
 }
 
-#ov1.notFancy .btn .postConfirm {
+#ov1.minEffects .btn .postConfirm {
   display: none;
 }
 
-#ov1.notFancy .confirm.btn .preConfirm {
+#ov1.minEffects .confirm.btn .preConfirm {
   display: none;
 }
 
-#ov1.notFancy .confirm.btn .postConfirm {
+#ov1.minEffects .confirm.btn .postConfirm {
   display: inline-block;
 }
 
-#ov1.notFancy #userPage #obContainer #content .labelWrap.fade {
+#ov1.minEffects #userPage #obContainer #content .labelWrap.fade {
   opacity: 0 !important;
 }
 
-#ov1.notFancy #userPage #obContainer #content .labelWrap.fadeIn {
+#ov1.minEffects #userPage #obContainer #content .labelWrap.fadeIn {
   opacity: 1;
 }
 
-#ov1.notFancy #obContainer .taggle_placeholder,
-#ov1.notFancy #userPage #obContainer .taggle_placeholder {
+#ov1.minEffects #obContainer .taggle_placeholder,
+#ov1.minEffects #userPage #obContainer .taggle_placeholder {
   display: none !important;
 }
 
+#ov1.minEffects #obContainer .unfilled,
+#ov1.minEffects #userPage .unfilled {
+  opacity: 0.35 !important;
+}
 
+#ov1.minEffects .minEffectsDarkBackground,
+#ov1.minEffects #obContainer .minEffectsDarkBackground {
+  background: #262626 !important;
+}
 
-/* terrible hack, TODO: remove before production */
+#ov1.minEffects .addressFormOpened .buyWizardMap .blurMore {
+  display: none;
+}
+
+#ov1.minEffects .user-page-header-slim {
+  display: none;
+}
+
+#ov1.minEffects .user-page-header-slim.scrolledIntoView {
+  display: block;
+}
+
+#ov1.minEffects .disabled,
+#ov1.minEffects #userPage .disabled,
+#ov1.minEffects #obContainer .disabled,
+#ov1.minEffects #overlay .disabled,
+#ov1.minEffects #sideBar .disabled,
+#ov1.minEffects #pageNav .disabled,
+#ov1.minEffects #modalHolder .disabled,
+#ov1.minEffects #messageModal .disabled,
+#ov1.minEffects #statusBar .disabled {
+  opacity: 0.2 !important;
+}
+
+#ov1.minEffects .disabled2,
+#ov1.minEffects #userPage .disabled2,
+#ov1.minEffects #obContainer .disabled2,
+#ov1.minEffects #overlay .disabled2,
+#ov1.minEffects #sideBar .disabled2,
+#ov1.minEffects #pageNav .disabled2,
+#ov1.minEffects #modalHolder .disabled2,
+#ov1.minEffects #messageModal .disabled2,
+#ov1.minEffects #statusBar .disabled2 {
+  opacity: 0.7 !important;
+}
+
+#ov1.minEffects .nsfw {
+  background: #000 !important;
+}
+
+/* add a shadow and a glow, so modal close buttons are still barely visible if the user picks a bad color */
+#ov1 .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #userPage .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #obContainer .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #messageModal .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects #userPage .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects #obContainer .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.minEffects #messageModal .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 .js-modal-close [class *= "ion-"]:before,
+#ov1 #userPage .js-modal-close [class *= "ion-"]:before,
+#ov1 #obContainer .js-modal-close [class *= "ion-"]:before,
+#ov1 #modalHolder .js-modal-close [class *= "ion-"]:before,
+#ov1 #messageModal .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects #userPage .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects #obContainer .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects #modalHolder .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects #messageModal .js-modal-close [class *= "ion-"]:before,
+#ov1 #modalHolder .js-closeBuyWizardModal [class *= "ion-"]:before {
+  text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
+}
+
+/* hide unfinished elements */
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
   background: #535353;
@@ -5588,5 +6359,5 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
-  display: none; /* hide when live */
+  display: none; /* hide in production */
 }

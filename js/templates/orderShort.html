@@ -1,82 +1,90 @@
-<div class="width100 cursorDefault">
+<div class="width100 cursorDefault positionWrapper <% if(ob.status == 0){ %>hideableChild<% } %>">
+  <% if (ob.unread) { %>
+  <div class="highlightRow"></div>
+  <% } %>
   <div class="rowItem padding20">
     <div class="flexRow">
-      <div class="width100">
-        <div class="clearFix">
-          <div class="floatLeft noOverflow marginBottom2 marginRight5 textSize15px js-searchOrderID js-orderShort">
-            <span class="noOverflow letterSpacing0"><%= ob.order_date %> — </span>
-            <span class="clickable hoverUnderline "><%= polyglot.t('transactions.Order') %> #<%= ob.order_id %></span>
-          </div>
+      <div class="clearFix">
+        <div class="floatLeft noOverflow marginBottom2 marginRight5 textSize15px js-searchOrderID js-orderShort">
+          <span class="noOverflow letterSpacing0"><%= ob.order_date %> — </span>
+          <span class="clickable hoverUnderline "><%= polyglot.t('transactions.Order') %> #<%= ob.order_id %></span>
         </div>
-        <div class="flexCol-8 clearFix marginTop2">
-          <div class="thumbnail thumbnail-large floatLeft marginRight5 marginTop6">
-            <div class="thumbnail thumbnail-large box-borderBright custCol-border-secondary borderRadius2 textOpacity75 js-userShort border0"
-              <% if(ob.thumbnail_hash) { %>
-              style="background-image: url(<%= ob.imageUrl %>), url(imgs/defaultItem.png);">
-              <% } else { %>
-              style="background-image: url(imgs/defaultItem.png);">
-              <% } %>
-            </div>
-          </div>
-          <table class="floatLeft custCol-text fontSize14  width450 fontWeight500">
-            <tr>
-              <td class="textOpacity50 padding2"><%= polyglot.t('Listing') %></td>
-              <td class="js-searchTitle textOpacity75 padding2"><%= ob.title %></td>
-            </tr>
-            <tr>
-              <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderTotal') %> </td>
-              <td class="padding2 textOpacity75"> 
-                <%= ob.btc_total.toFixed(4) %> BTC
-                <% if(ob.cCode != "BTC"){ %>
-                  (<%= ob.displayPrice %><!-- Would like to get this working at some point <span class="tooltip ion-information-circled fontSize12" data-tooltip="You received *VAL* in Bitcoin at the time of the sale."></span> -->)
-                <% } %>
-              </td>
-            </tr>
-            <tr>
-              <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderStatus') %></td>
-              <td class="js-searchStatus padding2 textOpacity75"><%= polyglot.t('transactions.OrderStatus'+ob.status) %></td>
-            </tr>
-            <tr>
-              <td class="textOpacity50 padding2">
-                <% if(ob.vendor){ %>
-                  <%= polyglot.t('transactions.SoldBy') %> 
-                <% } else if(ob.buyer) { %>
-                  <%= polyglot.t('transactions.PurchasedBy') %>
-                <% } %>                
-              </td>
-              <td class="padding2">
-                <% if(ob.vendor){ %>
-                  <a href="#userPage/<%= ob.vendor %>" class="textOpacity75">               
-                      <%= ob.vendor %>
-                  </a>
-                <% } else if(ob.buyer) { %>
-                  <a href="#userPage/<%= ob.buyer %>" class="textOpacity75"><%= ob.buyer %></a>
-                <% } %>                
-              </td>
-            </tr>
-          </table>
-          <div class="floatRight width200">
-            <div class="btn btn-txt height36 custCol-secondary js-orderShort marginBottom5 width100">
-              <%= polyglot.t('transactions.OrderDetails') %>
-            </div>
-            <% if(ob.transactionType == "purchase" && ob.status == 0){ %>
-              <div class="btn btn-txt height36 custCol-secondary marginBottom5 width100 js-orderShort">
-                <%= polyglot.t('transactions.PayPurchase') %>
-              </div>
-            <% } else if(ob.transactionType == "sale" && ob.status == 1){ %>
-              <div class="btn btn-txt height36 custCol-secondary js-orderShortConfirm marginBottom5 width100">
-              <% if (ob.contract_type == "digital good" || ob.contract_type == "service") { %>
-                <%= polyglot.t('transactions.ConfirmOrder') %>
-              <% } else { %>
-                <%= polyglot.t('transactions.MarkAsShipped') %>
-              <% } %>                
-              </div>
-            <% } else if(ob.transactionType == "purchase" && ob.status == 2){ %>
-              <div class="btn btn-txt height36 custCol-secondary js-orderShortComplete marginBottom5 width100">
-                <%= polyglot.t('transactions.CompleteOrder') %>
-              </div>
+      </div>
+      <div class="flexCol-8 marginTop2">
+        <div class="thumbnail thumbnail-large floatLeft marginRight5 marginTop6">
+          <div class="thumbnail thumbnail-large box-borderBright custCol-border-secondary borderRadius2 textOpacity75 js-userShort border0"
+            <% if(ob.thumbnail_hash) { %>
+            style="background-image: url(<%= ob.imageUrl %>), url(imgs/defaultItem.png);">
+            <% } else { %>
+            style="background-image: url(imgs/defaultItem.png);">
             <% } %>
           </div>
+        </div>
+        <span class="visuallyHidden js_searchStatusNum"><%= ob.status %></span><!--used only for the search filter-->
+        <table class="floatLeft custCol-text fontSize14  width450 fontWeight500">
+          <tr>
+            <td class="textOpacity50 padding2"><%= polyglot.t('Listing') %></td>
+            <td class="js-searchTitle textOpacity75 padding2"><div class="noOverflow width260"><%= ob.title %></div></td>
+          </tr>
+          <tr>
+            <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderTotal') %> </td>
+            <td class="padding2 textOpacity75 js-searchPrice">
+              <%= ob.intlNumFormat(ob.btc_total, 8) %> BTC
+              <% if(ob.cCode != "BTC"){ %>
+                (<%= ob.displayPrice %><!-- Would like to get this working at some point <span class="tooltip ion-information-circled fontSize12" data-tooltip="You received *VAL* in Bitcoin at the time of the sale."></span> -->)
+              <% } %>
+            </td>
+          </tr>
+          <tr>
+            <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderStatus') %></td>
+            <td class="js-searchStatus padding2 textOpacity75"><%= polyglot.t('transactions.OrderStatus'+ob.status) %></td>
+          </tr>
+          <tr>
+            <td class="textOpacity50 padding2">
+              <% if(ob.vendor){ %>
+                <%= polyglot.t('transactions.Vendor') %>
+              <% } else if(ob.buyer) { %>
+                <%= polyglot.t('transactions.Buyer') %>
+              <% } %>
+            </td>
+            <td class="padding2 js-searchUser">
+              <% if(ob.vendor){ %>
+                <a href="ob://<%= ob.vendor %>" class="textOpacity75">
+                    <%= ob.vendor %>
+                </a>
+              <% } else if(ob.buyer) { %>
+                <a href="ob://<%= ob.buyer %>" class="textOpacity75"><%= ob.buyer %></a>
+              <% } %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="flexCol-4 marginTop2">
+        <% if(ob.transactionType == "purchases" && ob.status == 0){ %>
+        <div class="btn btn-txt height36 custCol-secondary marginBottom5 width100 js-orderShort">
+          <%= polyglot.t('transactions.PayPurchase') %>
+        </div>
+        <% } else if(ob.transactionType == "sales" && ob.status == 1){ %>
+        <div class="btn btn-txt height36 custCol-secondary js-orderShortConfirm marginBottom5 width100">
+          <% if (ob.contract_type == "digital good" || ob.contract_type == "service") { %>
+          <%= polyglot.t('transactions.ConfirmOrder') %>
+          <% } else { %>
+          <%= polyglot.t('transactions.MarkAsShipped') %>
+          <% } %>
+        </div>
+        <% } else if(ob.transactionType == "purchases" && ob.status == 2){ %>
+        <div class="btn btn-txt height36 custCol-secondary js-orderShortComplete marginBottom5 width100">
+          <%= polyglot.t('transactions.CompleteOrder') %>
+        </div>
+        <% } else { %>
+        <div class="btn btn-txt height36 custCol-secondary js-orderShort marginBottom5 width100">
+          <%= polyglot.t('transactions.OrderDetails') %>
+        </div>
+        <% } %>
+        <div class="btn btn-txt height36 custCol-secondary marginBottom5 width100 positionWrapper js-orderShortDiscusson <% if(!ob.unread){ %> hide <% } %>"
+             data-order="<%= ob.order_id %>">
+          <i class="ion-chatbubbles"></i> <%= polyglot.t('Discussion') %>
+          <div class="badge js-unreadBadge" data-count="<%= ob.unread || 0 %>"></div>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    Polyglot = require('node-polyglot'),
     languagesModel = require('../models/languagesMd'),
     countriesMd = require('./countriesMd'),
     saveToAPI = require('../utils/saveToAPI');
@@ -38,29 +39,24 @@ module.exports = Backbone.Model.extend({
     terms_conditions: "No terms or conditions", //default terms/conditions (string)
     refund_policy: "No refund policy", //default refund policy (string)
 
-    bitcoinValidationRegex: "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$",
-    //remove this when in production, this is for testNet addresses
-    bitcoinValidationRegexTestnet: "^[2mn][a-km-zA-HJ-NP-Z1-9]{25,34}$",
     moderators: [],
     moderator_guids: [], //list of moderator guids, created in the parse function
-    nsfw: '' //show nsfw work content, yes or no
+    nsfw: '', //show nsfw work content, yes or no
+    smtp_notifications: false, // turn on smtp notifications
+    smtp_server: '', // smtp server for notifications (e.g. smtp.gmail.com:587)
+    smtp_sender: '', // email address FROM:
+    smtp_recipient: '', // email address TO:
+    smtp_username: '', // smtp server username
+    smtp_password: '' // smtp server password or app password
   },
 
   parse: function(response) {
-    "use strict";
-
     //make sure currency code is in all caps
     response.currency_code = response.currency_code ? response.currency_code.toUpperCase() : "BTC";
 
-    //find the human readable name for the country
-    var matchedCountry = this.countryArray.filter(function(value){
-      return value.dataName == response.country;
-    });
-    response.displayCountry = matchedCountry[0] ? matchedCountry[0].name : "";
-
     //addresses come from the server as a string. Parse the string
-    if(response.shipping_addresses && response.shipping_addresses.constructor === Array && response.shipping_addresses.length > 0){
-      try{
+    if (response.shipping_addresses && response.shipping_addresses.constructor === Array && response.shipping_addresses.length > 0){
+      try {
         var tempAddresses = [];
         __.each(response.shipping_addresses, function (address) {
           if (address){
@@ -71,7 +67,7 @@ module.exports = Backbone.Model.extend({
           }
         });
         response.shipping_addresses = tempAddresses;
-      } catch(e) {
+      } catch (e) {
         //server may set a malformed shipping_address value
         console.log("Error in shipping_addresses:");
         console.log(e);
@@ -124,7 +120,7 @@ module.exports = Backbone.Model.extend({
 
 
     //take no action if this is user's own guid
-    if(guid == this.get('guid')){
+    if (guid == this.get('guid')){
       return;
     }
 

@@ -26,7 +26,6 @@
           <div class="thumbnail
           <% if(!ob.micro){ %>
           thumbnail-large
-          thumbnail-largeTrimmed
           <% } else { %>
           thumbnail-small
           <% } %>
@@ -49,18 +48,18 @@
         <% } %>
         </div>
         <div>
-          <div class="marginLeft15 noOverflow marginTop2 clearFix">
+          <div class="marginLeft15 noOverflow clearFix">
             <% if(ob.name) { %>
-            <div class="floatLeft  marginBottom2 marginRight5 lineHeight21">
-              <a class="<% if(ob.micro){ %> textSize12 <% } else { %> textSize16px <% } %> capitalize js-userShort js-searchName"><%= ob.name %></a>
+            <div class="floatLeft marginRight5 lineHeight21">
+              <a class="<% if(ob.micro){ %> textSize14px <% } else { %> textSize16px <% } %> js-userShort js-searchName"><%= ob.name %></a>
             </div>
             <% } %>
             <% if(ob.handle) { %>
-              <div class="pull-left marginBottom2 lineHeight21">
+              <div class="pull-left lineHeight21">
                 <a class="<% if(ob.micro){ %>textSize10<% }else{ %>textSize14px<% } %> txt-fade js-userShort js-searchHandle"><%= ob.handle %></a>
               </div>
             <% }else{ %>
-              <div class="pull-left marginBottom2 lineHeight21
+              <div class="pull-left lineHeight21
               <% if(ob.micro){ %>
               width110 noOverflow
               <% } %>
@@ -86,7 +85,7 @@
           </div>
           <% if(ob.isModerator){ %>
           <div class="pull-right rowTop10 fontSize12 txt-fade">
-            <%= polyglot.t('ModeratorFee') %>: <%= ob.fee %>%
+            <%= polyglot.t('ModeratorFee') %> <%= ob.intlNumFormat(ob.fee, 2) %>%
           </div>
           <% } %>
         </div>

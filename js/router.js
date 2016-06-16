@@ -1,3 +1,5 @@
+'use strict';
+
 var ipcRenderer = require('ipc-renderer'),
     __ = require('underscore'),
     Backbone = require('backbone'),
@@ -6,14 +8,16 @@ var ipcRenderer = require('ipc-renderer'),
     messageModal = require('./utils/messageModal.js'),
     homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
-    donateView = require('./views/donateVw'),
     settingsView = require('./views/settingsVw'),
     transactionsView = require('./views/transactionsVw'),
     PageConnectModal = require('./views/pageConnectModal');
 
 module.exports = Backbone.Router.extend({
   initialize: function(options){
-    var routes;
+    var self = this,
+        routes,
+        originalHistoryBack,
+        originalHistoryForward;
 
     this.options = options || {};
 
@@ -21,21 +25,17 @@ module.exports = Backbone.Router.extend({
       ["", "index"],
       ["home", "home"],
       ["home/:state(/:searchText)", "home"],
-      ["myPage", "userPage"],
       ["userPage", "userPage"],
       ["userPage/:userID(/:state)(/:itemHash)(/:skipNSFWmodal)", "userPage"],
       [/^@([^\/]+)(.*)$/, "userPageViaHandle"],
-      ["userPageViaHandle", "userPageViaHandle"],
       ["transactions", "transactions"],
-      ["transactions/:state(/:orderID)", "transactions"],
+      ["transactions/:state(/:orderID)(/:tabState)", "transactions"],
       ["settings", "settings"],
-      ["settings/:state", "settings"],
-      ["about", "about"],
-      ["support", "donate"]
+      ["settings/:state", "settings"]
     ];
 
     routes.forEach((route) => {
-      this.route.apply(this, route)
+      this.route.apply(this, route);
     });  
 
     /*
@@ -50,30 +50,76 @@ module.exports = Backbone.Router.extend({
         this.navigate(translatedRoute, { trigger: true });
       });
     });
+    
+    originalHistoryBack = history.back;
+    history.back = function() {
+      self.historyAction = 'back';
+      return originalHistoryBack.apply(this, arguments);
+    };
+
+    originalHistoryForward = history.forward;
+    history.forward = function() {
+      self.historyAction = 'forward';
+      return originalHistoryForward.apply(this, arguments);
+    };
+    
+    this.historySize = -1;
+    this.historyPosition = -1;
+    this.historyAction = 'default';
+
+    this.$obContainer = $('#obContainer');
+    this.viewCache = {};
+
+    window.setInterval(() => {
+      var cached;
+
+      for (var key in this.viewCache) {
+        if (this.viewCache.hasOwnProperty(key)) {
+          cached = this.viewCache[key];
+
+          if (Date.now() - cached.cachedAt >= cached.view.cacheExpires) {
+            delete this.viewCache[key];
+          }
+        }
+      }      
+    }, this.cleanCacheInterval);
+  },
+
+  // how often to clean out expired cached views
+  cleanCacheInterval: 1 * 60 * 1000,
+
+  refresh: function() {
+    if (this.view) {
+      // clear any cache for the view, so a fresh view is created
+      delete this.viewCache[this.view.constructor.getCacheIndex(Backbone.history.getFragment())];
+    }
+    
+    Backbone.history.loadUrl();
   },
 
   translateRoute: function(route) {
+    if (!route) throw new Error('You must provide a route');
+    
     var guid = "",
-        handle = "",
         state = "",
         itemHash = "",
-        routeArray = route.replace("ob://","").replace(/ /g, "").split("/"),
+        routeArray = route.replace("ob://", "").replace(/ /g, "").split("/"),
         deferred = $.Deferred();
-
+    
     state = routeArray[1] ? "/" + routeArray[1] : "";
     itemHash = routeArray[2] ? "/" + routeArray[2] : "";
 
-    if(routeArray[0].charAt(0) == "@"){
+    if (routeArray[0].charAt(0) == "@"){
       // user entered a handle
-      deferred.resolve(route);
-    } else if(!routeArray[0].length){
+      deferred.resolve(routeArray[0] + state + itemHash);
+    } else if (!routeArray[0].length){
       // user trying to go back to discover
       deferred.resolve('#home');
-    } else if(routeArray[0].length === 40){
+    } else if (routeArray[0].length === 40){
       // user entered a guid
       guid = routeArray[0];
       deferred.resolve('#userPage/' + guid + state + itemHash);
-    } else if(routeArray[0].charAt(0) == "#"){
+    } else if (routeArray[0].charAt(0) == "#"){
       // user entered a search term
       deferred.resolve('#home/products/' + routeArray[0].replace('#', ''));
     } else {
@@ -84,12 +130,12 @@ module.exports = Backbone.Router.extend({
     return deferred.promise();
   },
 
-  processHandle: function(handle, state, itemHash) {
+  processHandle: function(handle) {
     var deferred = $.Deferred(),
         guidFetch;
 
     if (handle) {
-      guidFetch = app.getGuid(handle, this.userModel.get('resolver') + '/v2/users/')
+      guidFetch = app.getGuid(handle, this.userModel.get('resolver').replace(/\/+$/, "") + '/v2/users/')
         .done((guid) => {
           deferred.resolve(guid);
         }).fail(() => {
@@ -105,45 +151,145 @@ module.exports = Backbone.Router.extend({
 
     return deferred.promise();
   },
+  
+  execute: function(callback, args, name) {
+    if (this.historyAction == 'default') {
+      this.historyPosition += 1;
+      this.historySize = this.historyPosition;
+    } else if (this.historyAction == 'back') {
+      this.historyPosition -= 1;
+    } else if (this.historyAction == 'forward' && this.previousName != name && name != "index") {
+      //don't increment if the same state is navigated to twice
+      //don't increment on index since that isn't a real state
+      this.historyPosition += 1;
+    }
+    this.historyAction = 'default';
 
-  cleanup: function(){
-    "use strict";
-    $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
-    messageModal.hide();
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
-    obEventBus.trigger('cleanNav');
+    if (this.historyPosition == this.historySize) {
+      $('.js-navFwd').addClass('disabled-icon');
+    } else {
+      $('.js-navFwd').removeClass('disabled-icon');
+    }
+    
+    if (this.historyPosition == 1) {
+      $('.js-navBack').addClass('disabled-icon');
+    } else {
+      $('.js-navBack').removeClass('disabled-icon');
+    }
+    
+    if (callback) callback.apply(this, args);
   },
 
-  newView: function(view, bodyID, addressBarText, bodyClass){
-    var loadingConfig;
+  cleanup: function(){
+    $('#loadingModal').addClass('hide'); //hide modal if it is still visible
+    messageModal.hide();
+    $('#obContainer').removeClass('modalOpen innerModalOpen box-borderDashed noScrollBar overflowHidden');
+    window.obEventBus.trigger('cleanNav');
+  },
 
-    if($('body').attr('id') != bodyID){
-      $('body').attr("id", bodyID || "");
-    }
-    if(bodyClass){
-      $('body').attr('class', bodyClass);
-    }
-    $('#obContainer').removeClass("box-borderDashed noScrollBar overflowHidden"); //remove customization styling if present
+  cacheView: function(view, fragment) {
+    var index;
+
+    fragment = fragment || Backbone.history.getFragment();
+    index = view.constructor.getCacheIndex(fragment);
+    
+    this.viewCache[index] = {
+      cachedAt: Date.now(),
+      view: this.view
+    };
+  },
+
+  newView: function(View, options, ignoreCache) {
+    var now = Date.now(),
+        cached = this.viewCache[View.getCacheIndex(Backbone.history.getFragment())],
+        requestedRoute = Backbone.history.getFragment(),
+        loadingConfig;
+
+    options = __.extend({
+      // viewArgs can be an array of args to pass into the view or a single
+      // arg (most likely an options object)
+      viewArgs: [{}],
+      addressBarText: '',
+      bodyID: '',
+      bodyClass: ''
+    }, options || {});
+
+    options.viewArgs = options.viewArgs.length ? options.viewArgs : [options.viewArgs];
+
+    this.cleanup();
+    window.obEventBus.trigger('setAddressBar', options.addressBarText);
+
+    $('body').attr('id', options.bodyID);
+    $('body').attr('class', options.bodyClass);
+    $('#obContainer').removeClass('customizeUserPage'); //remove customization styling if present
     
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
 
-    if (
-      (loadingConfig = __.result(view, 'loadingConfig')) &&
-      loadingConfig.promise &&
-      typeof loadingConfig.promise.then === 'function') {
-      this.launchPageConnectModal(loadingConfig);
+    // let's update the cache of our existing view (if it's cached && not expired) so
+    // cachedAt is updated and the user has up until the view's 'cacheExpires' amount of
+    // time to come back to it in it's current state.
+    for (var key in this.viewCache) {
+      if (this.viewCache.hasOwnProperty(key)) {
+        let cached = this.viewCache[key];
+
+        if (
+            cached.view === this.view &&
+            (Date.now() - cached.cachedAt < cached.view.cacheExpires)
+          ) {
+          cached.cachedAt = Date.now();
+        }
+      }
     }
-    
-    this.view && (this.view.close ? this.view.close() : this.view.remove());
-    this.view = view;
-    //clear address bar. This will be replaced on the user page
-    addressBarText = addressBarText || "";
-    window.obEventBus.trigger("setAddressBar", addressBarText);
-    $('#obContainer')[0].scrollTop = 0;
+
+    // remove / detach any existing view
+    if (this.view) {
+      if (this.view.cacheExpires) {
+        this.trigger('cache-will-detach', { view: this.view });
+        this.view.$el.detach();
+        this.trigger('cache-detached', { view: this.view });
+      } else {
+        this.view.close ? this.view.close() : this.view.remove();         
+      }
+    }
+
+    if (cached && (now - cached.cachedAt < cached.view.cacheExpires && !ignoreCache)) {
+      // we have an un-expired cached view, let's reattach it
+      this.view = cached.view;
+
+      $('#content').html(this.view.$el);
+      this.view.delegateEvents();
+      this.$obContainer[0].scrollTop = 0;
+
+      this.trigger('cache-reattached', {
+        view: this.view,
+        route: requestedRoute
+      });
+    } else {
+      this.view = new (Function.prototype.bind.apply(View, [null].concat(options.viewArgs)));
+      $('#content').html(this.view.$el);
+      this.$obContainer[0].scrollTop = 0;
+
+      if (
+        (loadingConfig = __.result(this.view, 'loadingConfig')) &&
+        loadingConfig.promise &&
+        typeof loadingConfig.promise.then === 'function') {
+        this.launchPageConnectModal(loadingConfig).done(() => {
+          this.view.cacheExpires && this.cacheView(this.view);
+        });
+      } else {
+        this.view.cacheExpires && this.cacheView(this.view);
+      }      
+    }
   },
 
   launchPageConnectModal: function(config) {
+    var defaults = {
+      connectText: 'Connecting...',
+      failedText: 'Unable to Connect.'
+    },
+    deferred = $.Deferred();
+
     if (!(
         config &&
         config.promise &&
@@ -152,11 +298,7 @@ module.exports = Backbone.Router.extend({
       throw new Error('At a minimum, the config must contain a config.promise.');
     }
 
-    var defaults = {
-      connectText: 'Connecting...',
-      failedText: 'Unable to Connect.'
-    };
-
+    $('#loadingModal').addClass('hide');
     config = __.extend({}, defaults, config);
 
     this.pageConnectModal && this.pageConnectModal.remove();
@@ -169,6 +311,7 @@ module.exports = Backbone.Router.extend({
 
     this.pageConnectModal.on('back', () => {
       history.back();
+      deferred.reject();
     });
 
     this.pageConnectModal.on('retry', () => {
@@ -181,51 +324,52 @@ module.exports = Backbone.Router.extend({
 
     this.pageConnectModal.on('cancel', () => {
       typeof config.promise.cancel === 'function' && config.promise.cancel();
+      deferred.reject();
       history.back();
     });
 
     config.promise.done(() => {
       this.pageConnectModal && this.pageConnectModal.remove();
       this.pageConnectModal = null;
+      deferred.resolve();
     }).fail(() => {
-      this.pageConnectModal.setState({
+      this.pageConnectModal && this.pageConnectModal.setState({
         statusText: config.failedText,
         mode: 'failed-connect',
         tooltip: config.failedTooltip
       });
+      deferred.reject();
     });
+
+    return deferred.promise();
   },
 
   index: function(){
-    "use strict";
-    if(localStorage.getItem("route")){
+    if (localStorage.getItem("route")){
       this.navigate('#' + localStorage.getItem("route"), {trigger: true});
-    } else if(this.userProfile.get('profile').beenSet == true){
-      this.home();
     } else {
-      this.userPage();
+      this.navigate('#home', {trigger: true});
     }
   },
 
   home: function(state, searchText){
-    "use strict";
-    var searchItemsText = "",
-        searchUserText = "", //placeholder for future functionality
-        addressBarText = searchText ? "#" + searchText : "";
-    if(state == "products"){
-      searchItemsText = searchText;
-    }
-    this.cleanup();
-    this.newView(new homeView({
-      userModel: this.userModel,
-      userProfile: this.userProfile,
-      socketView: this.socketView,
-      state: state,
-      searchItemsText: searchItemsText
-    }),'',{'addressText': addressBarText});
+    //if search terms have been given, don't use cached views
+    var ignoreCache = Boolean(searchText);
+    this.newView(homeView, {
+      viewArgs: {
+        userModel: this.userModel,
+        userProfile: this.userProfile,
+        socketView: this.socketView,
+        state: state,
+        searchItemsText: searchText
+      }
+    }, ignoreCache);
 
     // hide the discover onboarding callout
-    $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
+    this.$discoverHolder = this.$discoverHolder || $('.js-OnboardingIntroDiscoverHolder');
+    this.$discoverHolder.addClass('hide');
+
+    app.appBar.setTitle(window.polyglot.t('Discover'));
   },
 
   userPage: function(userID, state, itemHash, skipNSFWmodal, handle){
@@ -241,8 +385,17 @@ module.exports = Backbone.Router.extend({
 
     if (handle) options.handle = handle;
 
-    this.cleanup();
-    this.newView(new userPageView(options),"userPage",'','onPage');
+    if (!userID) {
+      this.navigate(`userPage/${this.userModel.get('guid')}`, { replace: true });
+    }
+
+    this.newView(userPageView, {
+      viewArgs: options,
+      bodyID: 'userPage',
+      bodyClass: 'onPage'
+    });
+
+    app.appBar.setTitle(handle ? handle : options.userId || this.userModel.get('guid'));
   },
 
   userPageViaHandle: function(handle, subPath) {
@@ -261,6 +414,7 @@ module.exports = Backbone.Router.extend({
       // we want this to happen after the launchPageConnectModal processes
       // the resolution of the promise, hence the timeout.
       setTimeout(() => {
+        this.navigate(`userPage/${guid}${subPath ? '/' + subPath : ''}`, { replace: true });
         this.userPage(guid, state, itemHash, skipNSFWmodal, '@' + handle);
       }, 0);
     });
@@ -275,38 +429,33 @@ module.exports = Backbone.Router.extend({
     });
   },
 
-  transactions: function(state, orderID){
-    "use strict";
-    this.cleanup();
-    this.newView(new transactionsView({
-      userModel: this.userModel,
-      userProfile: this.userProfile,
-      socketView: this.socketView,
-      state: state,
-      orderID: orderID
-    }),"userPage");
+  transactions: function(state, orderID, tabState){
+    this.newView(transactionsView, {
+      viewArgs: {
+        userModel: this.userModel,
+        userProfile: this.userProfile,
+        socketView: this.socketView,
+        state: state,
+        orderID: orderID,
+        tabState: tabState //opens a tab in the order modal
+      },
+      bodyID: 'userPage'
+    });
+
+    app.appBar.setTitle(window.polyglot.t('Transactions'));
   },
 
   settings: function(state){
-    "use strict";
-    $('.js-loadingModal').addClass('show');
-    this.cleanup();
-    this.newView(new settingsView({
-      userModel: this.userModel,
-      userProfile: this.userProfile,
-      state: state,
-      socketView: this.socketView
-    }), "userPage");
-  },
+    this.newView(settingsView, {
+      viewArgs: {
+        userModel: this.userModel,
+        userProfile: this.userProfile,
+        state: state,
+        socketView: this.socketView
+      },
+      bodyID: 'userPage'
+    });
 
-  about: function(){
-    "use strict";
-    this.cleanup();
-  },
-
-  donate: function(){
-    "use strict";
-    this.cleanup();
-    this.newView(new donateView());
+    app.appBar.setTitle(window.polyglot.t('Settings'));
   }
 });
