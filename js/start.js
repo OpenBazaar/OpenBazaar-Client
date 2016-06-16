@@ -52,6 +52,7 @@ var Polyglot = require('node-polyglot'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
     PageConnectModal = require('./views/pageConnectModal'), 
+    Dialog = require('./views/dialog.js'),
     loadProfileNeeded = true,
     startUpConnectMaxRetries = 2,
     startUpConnectRetryDelay = 2 * 1000,
@@ -107,6 +108,11 @@ updatePolyglot = function(lang){
 };
 
 user.on('change:language', function(md, lang) {
+  // Re-starting the app on lang change. For now leaving in the code in various global views
+  // that deals with lang change.
+  // TODO: Once it looks like the restart on lang change approach is fine, go into the different
+  // views and cleanup any code dealing with lang change.
+
   updatePolyglot(lang);
 });
 
@@ -444,7 +450,28 @@ var loadProfile = function(landingRoute, onboarded) {
               app.simpleMessageModal.remove = () => {
                 throw new Error('This instance of the simpleMessageModal is globally shared ' +
                   'and should not be removed. When you are done with it, please close it.');
-              };              
+              };
+
+              // any lang changes after our app has loaded will need an app re-start to fully take effect
+              user.on('change:language', function(md, lang) {
+                var restartWarning;
+
+                restartWarning = new Dialog({
+                  title: window.polyglot.t('langChangeRestartTitle'),
+                  message: window.polyglot.t('langChangeRestartMessage'),
+                  buttons: [{
+                    text: 'Restart Later',
+                    fragment: 'restart-later'
+                  }, {
+                    text: 'Restart Now',
+                    fragment: 'restart-now'
+                  }]
+                }).on('click-restart-later', () => {
+                  restartWarning.close();
+                }).on('click-restart-now', () => {
+                  location.reload();
+                }).render().open();
+              });              
 
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 
