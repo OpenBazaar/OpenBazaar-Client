@@ -6,12 +6,13 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
     Polyglot = require('node-polyglot'),
-    NotificationsCl = require('../collections/notificationsCl.js'), 
+    NotificationsCl = require('../collections/notificationsCl.js'),
     languagesModel = require('../models/languagesMd'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
-    remote = require('remote');
+    remote = require('remote'),
+    pjson = require('../../package.json');
 
 var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 
@@ -28,13 +29,13 @@ module.exports = baseVw.extend({
     'click .js-showAboutModal': 'showAboutModal',
     'click .js-hideAboutModal': 'hideAboutModal',
     'click .js-showSupportModal': 'showSupportModal',
-    'click .js-hideSupportModal': 'hideSupportModal',
     'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
+    'blur .js-navAddressBar': 'addressBarBlur',
     'click .js-closeStatus': 'closeStatusBar',
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
     'blur input': 'validateInput',
@@ -108,6 +109,10 @@ module.exports = baseVw.extend({
       this.showDiscoverIntro();
     });
 
+    this.listenTo(window.obEventBus, "cleanNav", function(){
+      this.cleanNav();
+    });
+
     //when language is changed, re-render
     this.listenTo(this.model, 'change:language', function(){
       this.render();
@@ -133,6 +138,14 @@ module.exports = baseVw.extend({
 
   dismissUpdate: function() {
     $('.js-softwareUpdate').addClass('softwareUpdateHidden');
+  },
+
+  cleanNav: function(){
+    this.hideAboutModal();
+    this.closeNav();
+    this.closeStatusBar();
+    this.hideDiscoverIntro();
+    obEventBus.trigger('closeBuyWizard');
   },
 
   handleSocketMessage: function(response) {
@@ -204,7 +217,8 @@ module.exports = baseVw.extend({
     //load userProfile data into model
     this.model.set('guid', this.userProfile.get('profile').guid);
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
-	this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
+    this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
+    this.model.set('version', pjson.version);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
@@ -237,8 +251,6 @@ module.exports = baseVw.extend({
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
-        
-        text = text ? 'ob://' + text : '';
         self._lastSetAddressBarText = text;
         self.addressInput.val(text);
         self.closeStatusBar();
@@ -252,6 +264,8 @@ module.exports = baseVw.extend({
   },
 
   showAboutModal: function(e){
+
+    this.cleanNav();
 
     // display the modal
     $('.js-aboutModalHolder').fadeIn(300);
@@ -280,11 +294,6 @@ module.exports = baseVw.extend({
     $('.js-aboutModal .modal-section').addClass('hide');
     $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
     $('#obContainer').addClass('blur');
-  },
-
-  hideSupportModal: function(e){
-    $('.js-aboutModalHolder').fadeOut(300);
-    $('#obContainer').removeClass('blur');
   },
 
   aboutModalTabClick: function(e){
@@ -462,11 +471,34 @@ module.exports = baseVw.extend({
     this.currentWindow.reload();
   },
 
+  trimAddressBar: function() {
+    this.addressInput.val(function (i, value) {
+      return value.replace('ob://', '');
+    });
+  },
+
+  untrimAddressBar: function(){
+    this.addressInput.val(function (i, value) {
+      if(value) {
+        value = value.startsWith('ob://') ? value : 'ob://' + value;
+      }
+      return value;
+    });
+  },
+
   addressBarFocus: function(e){
+
+    // on mouseEnter of the address bar input display the ob:// prefix if it doesn't already exist
+    this.untrimAddressBar();
+
     // on inital focus of input, select all text (this makes it easier to copy or delete the text)
     $(e.target).one('mouseup', function () {
       $('#addressBar').select();
     });
+  },
+
+  addressBarBlur: function(e){
+    this.trimAddressBar();
   },
 
   addressBarKeyup: function(e){

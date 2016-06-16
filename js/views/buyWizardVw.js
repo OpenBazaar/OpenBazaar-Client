@@ -510,18 +510,14 @@ module.exports = baseVw.extend({
     totalBTCPrice = data.amount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
-    payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
+    payHREF = "bitcoin://"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
     dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
     this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
     this.$el.find('.js-buyWizardPayPrice').text();
     this.$el.find('.js-buyWizardPayURL').text(data.payment_address);
-    this.$el.find('.js-buyWizardPayLink').attr('href', payHREF).on('click', function(e){
-      e.preventDefault();
-      var extUrl = payHREF;
-      require("shell").openExternal(extUrl);
-    });
+    this.$el.find('.js-buyWizardPayLink').attr('href', payHREF);
     this.buyDetailsView.lockForm();
   },
 
@@ -612,8 +608,14 @@ module.exports = baseVw.extend({
 
   validateInput: function(e) {
     "use strict";
+    var $input = $(e.target);
+
+    if ($input.is('#buyWizardBitcoinAddressInput')) {
+      $input.val($input.val().trim());
+    }
+
     e.target.checkValidity();
-    $(e.target).closest('.flexRow').addClass('formChecked');
+    $input.closest('.flexRow').addClass('formChecked');
   },
 
   closeWizard: function() {

@@ -191,10 +191,8 @@ module.exports = baseVw.extend({
     item.discover = true;
     item.ownGuid = this.userModel.get('guid');
 
-    item.ownFollowing = false;
-    if(this.ownFollowing.indexOf(item.guid) != -1){
-      item.ownFollowing = true;
-    }
+
+    item.ownFollowing = this.ownFollowing.indexOf(item.guid) != -1;
 
     blocked = this.userModel.get('blocked_guids') || [];    
     item.isBlocked = blocked.indexOf(item.guid) !== -1;
@@ -418,7 +416,7 @@ module.exports = baseVw.extend({
       window.obEventBus.trigger("setAddressBar", {'addressText': addressText});
     }
 
-    if(targetText == ""){
+    if(target.val() == ""){
       this.searchItemsClear();
     }
   },
@@ -439,7 +437,6 @@ module.exports = baseVw.extend({
   },
 
   searchItems: function(searchItemsText){
-    console.log("search items "+searchItemsText)
     if(searchItemsText){
       this.searchItemsText = searchItemsText;
       this.clearItems();

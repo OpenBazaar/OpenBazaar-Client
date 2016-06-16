@@ -15,7 +15,7 @@ function checkVal($field) {
       return frame.tag === 'p' && !frame.text.trim();
     }
   });
-  
+
   $field.val(fVal);
 
   if (!$field[0].checkValidity()) {

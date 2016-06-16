@@ -545,7 +545,7 @@ module.exports = baseModal.extend({
             deferred.reject();
           }
         });
-      }
+      };
       
       reader.readAsDataURL(file)
     };
@@ -553,7 +553,7 @@ module.exports = baseModal.extend({
     xhr.onerror = function (e) {
       console.log(e);
       deferred.reject();
-    }
+    };
 
     xhr.send();
 

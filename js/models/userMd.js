@@ -38,9 +38,9 @@ module.exports = Backbone.Model.extend({
     terms_conditions: "No terms or conditions", //default terms/conditions (string)
     refund_policy: "No refund policy", //default refund policy (string)
 
-    //bitcoinValidationRegex: "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$",
+    bitcoinValidationRegex: "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$",
     //remove this when in production, this is for testNet addresses
-    bitcoinValidationRegex: "^[2mn][a-km-zA-HJ-NP-Z1-9]{25,34}$",
+    bitcoinValidationRegexTestnet: "^[2mn][a-km-zA-HJ-NP-Z1-9]{25,34}$",
     moderators: [],
     moderator_guids: [], //list of moderator guids, created in the parse function
     nsfw: '' //show nsfw work content, yes or no
@@ -99,6 +99,8 @@ module.exports = Backbone.Model.extend({
     if (response.blocked_guids.length && response.blocked_guids[0] === "") {
       response.blocked_guids = [];
     }
+
+    response.libbitcoin_server = response.libbitcoin_server != "null" ? response.libbitcoin_server : "";
 
     return response;
   },
