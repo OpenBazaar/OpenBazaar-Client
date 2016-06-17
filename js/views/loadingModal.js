@@ -11,6 +11,18 @@ module.exports = baseModal.extend({
     'click .js-indexReload': 'onClickIndexReload'
   },
 
+  constructor: function(options) {
+    var events = {};
+
+    options = __.extend({
+      dismissOnOverlayClick: false,
+      dismissOnEscPress: false,
+      showCloseButton: false
+    }, options || {});
+
+    baseModal.prototype.constructor.apply(this, [options].concat(Array.prototype.slice.call(arguments, 1)));
+  },  
+
   initialize: function(options) {
     this.options = __.extend({
       showLoadIndexButton: true

@@ -3,9 +3,10 @@
 var __ = require('underscore'),
     domUtils = require('../utils/dom'),
     loadTemplate = require('../utils/loadTemplate'),
-    baseVw = require('./baseVw');
+    baseVw = require('./baseVw'),
+    baseModal;
 
-module.exports = baseVw.extend({
+baseModal = baseVw.extend({
   constructor: function (options) {
     var events = {},
         args = Array.prototype.slice.call(arguments),
@@ -36,18 +37,27 @@ module.exports = baseVw.extend({
     events['click .js-modal-close'] = '__closeClick';
     this.events = __.extend({}, events, this.events || {});
 
-    if (typeof this.constructor.__modalsOpen === 'undefined') {
-      this.constructor.__modalsOpen = 0;
-    }
+    if (typeof baseModal.__openModals === 'undefined') {
+      baseModal.__openModals = [];
+    }    
 
-    this.$html = this.constructor.$html = this.constructor.$html || $('html');
-    this.$container = this.constructor.$container = this.constructor.$container || $('#contentFrame');
+    this.$html = baseModal.$html = baseModal.$html || $('html');
+    this.$container = baseModal.$container = baseModal.$container || $('#contentFrame');
+
+    if (!baseModal.__docKeyPressHandlerBound) {
+      $(document).on('keyup', baseModal.__onDocKeypress);
+      baseModal.__docKeyPressHandlerBound = true;
+    }
 
     baseVw.prototype.constructor.apply(this, args);
   },
 
   __onDocKeypress: function(e) {
-    if (this.__options.dismissOnEscPress && e.keyCode === 27) {
+    var openModals = baseModal.__openModals,
+        topModal = this.__getTopModal();
+
+    if (this.__options.dismissOnEscPress && e.keyCode === 27 &&
+      topModal && topModal === this) {
       this.close();
     }
   },
@@ -62,6 +72,27 @@ module.exports = baseVw.extend({
     this.close();
   },
 
+  __getTopModal: function() {
+    var openModals = baseModal.__openModals.slice();
+
+    openModals = openModals.map((modal, i) => {
+      return { modal: modal, index: i };
+    });
+
+    openModals = openModals.sort((a, b) => {
+      var aZindex = parseInt(window.getComputedStyle(a.modal.el).zIndex) || 0,
+          bZindex = parseInt(window.getComputedStyle(b.modal.el).zIndex) || 0;
+
+      if (aZindex ===  bZindex) {
+        return (a.index < b.index) ? -1 : (a.index > b.index) ? 1 : 0;
+      } else {
+        return (aZindex < bZindex) ? -1 : (aZindex > bZindex) ? 1 : 0;
+      }      
+    });
+
+    return openModals[openModals.length - 1] && openModals[openModals.length - 1].modal;
+  },
+
   isOpen: function() {
     return this._open;
   },
@@ -70,8 +101,8 @@ module.exports = baseVw.extend({
     if (!domUtils.isInPage(this.el)) {
       this.$html.addClass('modalOpen');
       this.$container.append(this.el);
-      this.constructor.__modalsOpen += 1;
-      $(document).on('keyup', this.__onDocKeypress);
+      baseModal.__openModals.push(this);
+      baseModal.__topModal = this.__getTopModal();
       this._open = true;
       this.trigger('open');
       window.obEventBus.trigger('modal-open', { modal: this });
@@ -81,10 +112,13 @@ module.exports = baseVw.extend({
   },
 
   close: function() {
+    var modalIndex;
+
     if (domUtils.isInPage(this.el)) {
-      this.constructor.__modalsOpen -= 1;
-      !this.constructor.__modalsOpen && this.$html.removeClass('modalOpen');
-      $(document).off('keyup', this.__onDocKeypress);
+      modalIndex = baseModal.__openModals.indexOf(this);
+      modalIndex >= 0 && baseModal.__openModals.splice(modalIndex, 1);
+      !baseModal.__openModals.length && this.$html.removeClass('modalOpen');
+      baseModal.__topModal = this.__getTopModal();
       this.$container[0].removeChild(this.el);
       this._open = false;
       this.trigger('close');
@@ -131,3 +165,14 @@ module.exports = baseVw.extend({
     return this;
   }
 });
+
+baseModal.__onDocKeypress = function(e) {
+  var topModal;
+
+  if (e.keyCode === 27 && (topModal = baseModal.__topModal) &&
+      topModal.__options.dismissOnEscPress) {
+    topModal.close();
+  }
+};
+
+module.exports = baseModal;

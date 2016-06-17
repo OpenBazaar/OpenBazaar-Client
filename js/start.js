@@ -541,9 +541,13 @@ launchOnboarding = function(guidCreating) {
   onboardingModal = new OnboardingModal({
     model: user,
     userProfile: userProfile,
-    guidCreationPromise: guidCreating
+    guidCreationPromise: guidCreating,
+    dismissOnOverlayClick: false,
+    dismissOnEscPress: false,
+    showCloseButton: false
   });
   onboardingModal.render().open();
+  startUpLoadingModal.close();
 
   onboardingModal.on('onboarding-complete', function(guid) {
     app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
