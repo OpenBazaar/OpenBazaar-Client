@@ -1,0 +1,76 @@
+<div class="modal-hero js-storeWizardHero shadow-inner1-light"
+  style="background-image: <% if(ob.headerURL) { %>url(<%= ob.headerURL %>),<% } %>url(imgs/defaultBanner.png);"></div>
+<div class="homeModal-accordion accordion">
+  <div class="accordion-window">
+    <div class="accordion-child">
+      <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+        <% if(ob.page.profile.moderator){ %>
+        <%= polyglot.t('EditModerator') %>
+        <% } else {%>
+        <%= polyglot.t('BecomeModerator') %>
+        <% } %>
+      </div>
+      <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+        <div class="flexRow">
+          <div class="flexRow border0">
+            <form id="moderatorSettingsForm" class="flex-border flexExpand custCol-primary">
+              <div class="flexRow custCol-border">
+                <div class="flexCol-5 custCol-border">
+                  <div class="fieldItem">
+                    <label><%= polyglot.t('moderatorSettings.DisputeResolution') %></label>
+                  </div>
+                </div>
+                <div class="flexCol-7 borderRight0 custCol-border positionWrapper">
+                  <div class="fieldItem">
+                    <input type="radio"
+                           class="fieldItem"
+                           id="moderatorSettingsModYes"
+                           name="moderator"
+                           value="true"
+                           checked />
+                    <label for="moderatorSettingsModYes" class="radioLabel"><%= polyglot.t('On') %></label>
+                    <input type="radio"
+                           class="fieldItem"
+                           id="moderatorSettingsModNo"
+                           name="moderator"
+                           value="false"/>
+                    <label for="moderatorSettingsModNo" class="radioLabel"><%= polyglot.t('Off') %></label>
+                  </div>
+                </div>
+              </div>
+              <div class="flexRow js-moderatorSettingsFeeHolder">
+                <div class="flexCol-5 custCol-border">
+                  <div class="fieldItem">
+                    <label for="moderatorSettingsModalFeeInput"><%= polyglot.t('moderatorSettings.ServiceFee') %></label>
+                    <div class="textOpacity50 fontSize12"><%= polyglot.t('moderatorSettings.ServiceFeeNote') %></div>
+                  </div>
+                </div>
+                <div class="flexCol-7 borderRight0 custCol-border">
+                  <input type="number"
+                         min="0.00"
+                         max="25.00"
+                         step="0.01"
+                         name="moderation_fee"
+                         maxlength="2"
+                         class="fieldItem custCol-text width70px floatLeft alignRight"
+                         id="moderatorSettingsModalFeeInput"
+                         value="<%= Number(ob.page.profile.moderation_fee).toFixed(2) %>" required/>
+                  <label class="paddingLeft2 floatLeft fieldItem textOpacity75">%</label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+        <a class="btn btn-bar btn-half js-closeModeratorModal custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border">
+          <%= polyglot.t('Close') %>
+        </a>
+        <a class="btn btn-bar btn-half js-moderatorSettingsSave custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+          <span class="ion-checkmark fontSize10 marginRight2 textOpacity50"></span>
+          <%= polyglot.t('onboarding.Finished') %>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

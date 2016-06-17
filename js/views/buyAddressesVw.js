@@ -1,13 +1,12 @@
 'use strict';
 
 var __ = require('underscore'),
-    Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw'),    
     localize = require('../utils/localize');
-Backbone.$ = $;
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   events: {
     'click .js-buyWizardAddressRadio': 'selectAddress',

@@ -1,0 +1,12 @@
+<div class="spinner-with-logo fullCentered">
+  <i class="ion-android-sync spinner fontSize30 spinner-with-logo-icon"></i>
+</div>
+<div class="loadingModalContent">
+  <p class="fontSize16"><%= window.polyglot.t('errorMessages.loadingTakingTooLong') %></p>
+  <div id="loadingModalBtns">
+    <a class="btn btn-large marginRight10 custCol-secondary custCol-text js-indexReload"><i class="ion-android-sync"></i> <span><%= window.polyglot.t('Reload') %></span></a>
+    <% if (ob.showLoadIndexButton) { %>
+    <a class="btn btn-large custCol-secondary custCol-text" href="#home"><i class="ion-eye"></i> <span><%= window.polyglot.t('LoadIndex') %></span></a>
+    <% } %>
+  </div>
+</div>  

@@ -1,18 +1,17 @@
 'use strict';
 
-var Backbone = require('backbone'),
-    $ = require('jquery'),
+var $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App').getApp(),
-    saveToAPI = require('../utils/saveToAPI');
+    saveToAPI = require('../utils/saveToAPI'),
+    baseModal = require('./baseModal');
 
-module.exports = Backbone.View.extend({
-
-  className: "moderatorSettings",
+module.exports = baseModal.extend({
+  className: "moderatorSettings insideApp",
 
   events: {
+    'click .js-closeModeratorModal': 'onCloseClick',
     'click .js-moderatorModal': 'blockClicks',
-    'click .js-closeModeratorModal': 'closeModeratorSettings',
     'click .js-moderatorSettingsSave': 'saveModeratorSettings',
     'click #moderatorSettingsModYes': 'showModeratorFeeHolder',
     'click #moderatorSettingsModNo': 'hideModeratorFeeHolder',
@@ -20,28 +19,28 @@ module.exports = Backbone.View.extend({
     'blur input': 'validateInput'
   },
 
-  initialize: function(options){
-    this.parentEl = $(options.parentEl);
-    this.moderatorFeeInput;
+  initialize: function(){
     this.moderatorStatus = true;
     this.oldFeeValue = 0;
-    if (this.model.get('page').profile.header_hash){
-      this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
-    }
-
-    this.render();
   },
 
   render: function(){
     var self = this;
 
-    loadTemplate('./js/templates/moderatorSettings.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+    loadTemplate('./js/templates/moderatorSettingsModal.html', function(loadedTemplate) {
+      var context = self.model.toJSON();
+
+      if (self.model.get('page').profile.header_hash) {
+        context['headerURL'] = self.model.get('user').serverUrl + 'get_image?hash=' + self.model.get('page').profile.header_hash;
+      }
+
+      self.$el.html(loadedTemplate(context));
+      baseModal.prototype.render.apply(self, arguments);
 
       //append the view to the passed in parent
-      self.parentEl.append(self.$el).fadeIn(300);
       self.moderatorFeeInput = self.$('#moderatorSettingsModalFeeInput');
     });
+
     return this;
   },
 
@@ -68,7 +67,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(targetForm, '', self.model.get('user').serverUrl + "profile", function(){
       window.obEventBus.trigger("moderatorStatus", {'status': self.moderatorStatus, 'fee': moderatorFee});
-      self.closeModeratorSettings();
+      self.close();
     }, "", moderatorData);
 
     $.ajax({
@@ -77,6 +76,10 @@ module.exports = Backbone.View.extend({
       processData: false,
       dataType: "json",
       error: function(){
+        if (self.isRemoved()) {
+          return;
+        }
+
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.serverError'),
           message: '<i>' + window.polyglot.t('errorMessaes.serverError') + '</i>'
@@ -109,13 +112,7 @@ module.exports = Backbone.View.extend({
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
-  closeModeratorSettings: function() {
-    $('#obContainer').removeClass('modalOpen');
+  onCloseClick: function() {
     this.close();
-  },
-
-  close: function(){
-    this.remove();
   }
-
 });

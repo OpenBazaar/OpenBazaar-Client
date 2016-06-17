@@ -2,7 +2,7 @@
 
 var __ = require('underscore'),
     $ = require('jquery'),
-    messageModal = require('../utils/messageModal.js');
+    app = require('../App').getApp();
 
 
 module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys, onInvalid) {
@@ -30,7 +30,10 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
       if (typeof onInvalid === 'function'){
         onInvalid();
       } else {
-        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: window.polyglot.t('errorMessages.missingError')
+        });
       }
       return $.Deferred().reject('failed form validation').promise();
     }
@@ -122,10 +125,16 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
         if (onFail){
           onFail(data);
         } else {
-          messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.saveError'),
+            message: "<i>" + data.reason + "</i>"
+          });
         }
       } else {
-        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>"
+        });
       }
     },
     error: function(jqXHR, status, errorThrown){

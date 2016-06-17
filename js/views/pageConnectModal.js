@@ -13,6 +13,16 @@ module.exports = baseModal.extend({
     'click .js-retry': 'onRetryClick'
   },
 
+  constructor: function(options) {
+    options = __.extend({
+      dismissOnOverlayClick: false,
+      dismissOnEscPress: false,
+      showCloseButton: false
+    }, options || {});
+
+    baseModal.prototype.constructor.apply(this, [options].concat(Array.prototype.slice.call(arguments, 1)));
+  },  
+
   initialize: function(options) {
     var defaultState = {
       mode: 'connecting'

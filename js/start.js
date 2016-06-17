@@ -46,7 +46,8 @@ var Polyglot = require('node-polyglot'),
     socketView = require('./views/socketVw'),
     cCode = "",
     $html = $('html'),
-    $loadingModal = $('.js-loadingModal'),
+    LoadingModal = require('./views/loadingModal'),
+    SimpleMessageModal = require('./views/SimpleMessageModal'),
     ServerConfigsCl = require('./collections/serverConfigsCl'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
@@ -62,6 +63,7 @@ var Polyglot = require('node-polyglot'),
     extendPolyglot,
     newPageNavView,
     newSocketView,
+    startUpLoadingModal,
     onboardingModal,
     pageConnectModal,
     launchOnboarding,
@@ -102,13 +104,19 @@ updatePolyglot = function(lang){
   window.lang = lang;
   extendPolyglot(lang);
   localStorage.setItem('lang', lang);
-  //trigger translation function on index
-  window.translateIndex();
 };
 
 user.on('change:language', function(md, lang) {
   updatePolyglot(lang);
 });
+
+//put the event bus into the window so it's available everywhere
+window.obEventBus = __.extend({}, Backbone.Events);
+
+startUpLoadingModal = new LoadingModal({
+  showLoadIndexButton: false
+});
+startUpLoadingModal.render().open();
 
 // add in our app bar
 app.appBar = new AppBarVw({
@@ -193,9 +201,6 @@ app.serverConfigs.on('activeServerChange', () => {
   setServerUrl();
   app.serverConfigs.getActive().off('sync', onActiveServerSync);
 });
-
-//put the event bus into the window so it's available everywhere
-window.obEventBus = __.extend({}, Backbone.Events);
 
 // fix zoom issue on Linux hiDPI
 var platform = process.platform;
@@ -417,6 +422,29 @@ var loadProfile = function(landingRoute, onboarded) {
               });
 
               $('#sideBar').html(app.chatVw.render().el);
+              startUpLoadingModal.remove();
+
+              // setting up a loadingModal instance that can be used app-wide as necessary.
+              app.loadingModal = new LoadingModal({
+                dismissOnOverlayClick: false,
+                dismissOnEscPress: false,
+                showCloseButton: false
+              }).render();
+              app.loadingModal.__origRemove = app.loadingModal.remove;
+              app.loadingModal.remove = () => {
+                throw new Error('This instance of the loadingModal is globally shared ' +
+                  'and should not be removed. When you are done with it, please close it.');
+              };
+
+              // setting up a simpleMessageModal instance that can be used app-wide as necessary.
+              app.simpleMessageModal = new SimpleMessageModal({
+                removeOnClose: false
+              });
+              app.simpleMessageModal.__origRemove = app.simpleMessageModal.remove;
+              app.simpleMessageModal.remove = () => {
+                throw new Error('This instance of the simpleMessageModal is globally shared ' +
+                  'and should not be removed. When you are done with it, please close it.');
+              };              
 
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 
@@ -467,16 +495,20 @@ launchOnboarding = function(guidCreating) {
   onboardingModal = new OnboardingModal({
     model: user,
     userProfile: userProfile,
-    guidCreationPromise: guidCreating
+    guidCreationPromise: guidCreating,
+    dismissOnOverlayClick: false,
+    dismissOnEscPress: false,
+    showCloseButton: false
   });
   onboardingModal.render().open();
+  startUpLoadingModal.close();
 
   onboardingModal.on('onboarding-complete', function(guid) {
     app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
     onboardingModal && onboardingModal.remove();
     onboardingModal = null;
     loadProfile('#userPage/' + guid + '/store', true);
-    $loadingModal.removeClass('hide');
+    startUpLoadingModal.open();
   });
 };
 
@@ -485,7 +517,7 @@ launchOnboarding = function(guidCreating) {
   var activeServer = app.serverConfigs.getActive();
 
   pageConnectModal = new PageConnectModal({
-    className: 'server-connect modal-fullscreen',
+    className: 'server-connect',
     initialState: {
       statusText: activeServer && activeServer.get('default') ?
         window.polyglot.t('serverConnectModal.connectingToDefault') :
@@ -520,7 +552,7 @@ app.serverConnectModal.on('connected', () => {
 app.getHeartbeatSocket().on('open', function() {
   removeStartupRetry();
   pageConnectModal.remove();
-  $loadingModal.removeClass('hide');
+  startUpLoadingModal.open();  
 
   if (!profileLoaded) {
     // clear some flags so the heartbeat events will
@@ -528,7 +560,7 @@ app.getHeartbeatSocket().on('open', function() {
     guidCreating = null;
     loadProfileNeeded = true;
     app.serverConnectModal.close();
-    $loadingModal.removeClass('hide');    
+    startUpLoadingModal.open();
   }  
 });
 

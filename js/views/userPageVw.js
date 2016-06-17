@@ -19,11 +19,11 @@ var __ = require('underscore'),
     reviewsView = require('./reviewsVw'),
     itemVw = require('./itemVw'),
     itemEditVw = require('./itemEditVw'),
-    messageModal = require('../utils/messageModal.js'),
     setTheme = require('../utils/setTheme.js'),
     storeWizardVw = require('./storeWizardVw'),
     saveToAPI = require('../utils/saveToAPI'),
-    moderatorSettingsVw = require('./moderatorSettingsVw'),
+    ModeratorSettingsModal = require('./moderatorSettingsModal'),
+    HiddenWarningModal = require('./hiddenWarningModal'),
     UserPageVw;
 
 var defaultItem = {
@@ -160,9 +160,7 @@ UserPageVw = pageVw.extend({
     'click .js-customizeTextColor .js-customColorChoice': 'customizeSelectColor',
     'click .js-block': 'blockUserClick',
     'click .js-unblock': 'unblockUserClick',
-    'click .js-showBlockedUser': 'showBlockedUser',
     'change .js-categories': 'categoryChanged',
-    'click .js-showNSFWContent': 'clickShowNSFWContent',
     'click .backToTop': 'clickBackToTop'
   },
 
@@ -328,7 +326,11 @@ UserPageVw = pageVw.extend({
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
+
           throw new Error("The user profile data returned from the API has a parsing error.");
         }
       }
@@ -392,11 +394,17 @@ UserPageVw = pageVw.extend({
 
         //check if user is blocked
         if (!self.options.ownPage && isBlocked) {
-          self.hideThisUser("blocked");
+          self.needsBlockedWarning = true;
         }
 
         if (!self.options.ownPage && !self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
-          self.hideThisUser("nsfw");
+          self.needsNSFWWarning = true;
+        }
+
+        if (self.needsBlockedWarning) {
+          self.hideThisUser('blocked');
+        } else if (self.needsNSFWWarning) {
+          self.hideThisUser('nsfw');
         }
 
         self.$el.find('#image-cropper').cropit({
@@ -666,11 +674,19 @@ UserPageVw = pageVw.extend({
       },
       error: function () {
         if (self.isRemoved()) return;
-        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
+
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Items')
+        });       
       },
       complete: function (xhr, textStatus) {
         if (textStatus == 'parsererror') {
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
+          
           throw new Error("The listings data returned from the API has a parsing error.");
         }
       }
@@ -687,7 +703,11 @@ UserPageVw = pageVw.extend({
       },
       error: function () {
         if (self.isRemoved()) return;
-        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Reviews'));
+
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Reviews')
+        });       
       }
     });
   },
@@ -745,11 +765,19 @@ UserPageVw = pageVw.extend({
       },
       error: function(){
         if (self.isRemoved()) return;
-        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
+        
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Following')
+        });
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
+
           throw new Error("The following data returned from the API has a parsing error.");
         }
       }
@@ -796,12 +824,20 @@ UserPageVw = pageVw.extend({
       },
       error: function(){
         if (self.isRemoved()) return;
-        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
+        
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Followers')
+        });        
       },
       complete: function(xhr, textStatus) {
         self.fetchingFollowers = false;
         if (textStatus == 'parsererror'){
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
+
           throw new Error("The followers data returned from the API has a parsing error.");
         }
       }
@@ -1017,11 +1053,19 @@ UserPageVw = pageVw.extend({
       },
       error: function(){
         if (self.isRemoved()) return;
-        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
+
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.notFoundError'),
+          message: window.polyglot.t('Item')
+        });        
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: window.polyglot.t('errorMessages.badJSON')
+          });
+
           throw new Error("The contract data returned from the API has a parsing error.");
         }
       }
@@ -1363,12 +1407,21 @@ UserPageVw = pageVw.extend({
               self.$el.find('.js-userPageBanner').css('background-image', 'url(' + serverUrl + "get_image?hash=" + imageHash + ')');
               self.saveUserPageModel();
             } else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-              messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
+              app.simpleMessageModal.open({
+                title: window.polyglot.t('errorMessages.saveError'),
+                message: window.polyglot.t('errorMessages.serverError')
+              });
             } else {
-              messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
+              app.simpleMessageModal.open({
+                title: window.polyglot.t('errorMessages.saveError'),
+                message: window.polyglot.t('errorMessages.serverError')
+              });              
             }
           } else if (data.success === false){
-            messageModal.show(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
+            app.simpleMessageModal.open({
+              title: window.polyglot.t('errorMessages.serverError'),
+              message: '<i>' + data.reason + '</i>'
+            });            
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -1432,7 +1485,10 @@ UserPageVw = pageVw.extend({
           //refresh the universal profile model
           self.globalUserProfile.fetch();
         } else if (data.success === false && !self.isRemoved()){
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.serverError'),
+            message: '<i>' + data.reason + '</i>'
+          });          
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -1536,12 +1592,13 @@ UserPageVw = pageVw.extend({
     var storeWizardModel = new Backbone.Model();
     
     storeWizardModel.set(this.model.attributes);
-    $('#modalHolder').fadeIn(300);
+    this.storeWizardView && this.storeWizardView.remove();
     this.storeWizardView = new storeWizardVw({
       model: storeWizardModel,
-      parentEl: '#modalHolder',
       socketView: this.socketView
-    });
+    }).on('close', () => this.storeWizardView.remove())
+      .render()
+      .open();
     this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
     this.registerChild(this.storeWizardView);
   },
@@ -1696,8 +1753,17 @@ UserPageVw = pageVw.extend({
   },
 
   showModeratorModal: function(){
-    this.moderatorSettingsView = new moderatorSettingsVw({model: this.model, parentEl: '#modalHolder'});
-    this.registerChild(this.moderatorSettingsView);
+    if (this.moderatorSettingsModal) {
+      this.moderatorSettingsModal.open();
+    } else {
+      this.moderatorSettingsModal = new ModeratorSettingsModal({ model: this.model })
+      this.registerChild(this.moderatorSettingsModal);
+      this.moderatorSettingsModal.render()
+        .on('close', () => {
+          this.moderatorSettingsModal.remove()
+          this.moderatorSettingsModal = null;
+        }).open();
+    }
   },
 
   changeModeratorStatus: function(status, fee){
@@ -1725,7 +1791,7 @@ UserPageVw = pageVw.extend({
   renderUserBlocked: function() {
     this.$('.js-unblock').removeClass('hide');
     this.$('.js-block').addClass('hide');
-    this.hideThisUser();
+    this.hideThisUser('blocked');
   },
 
   unblockUserClick: function() {
@@ -1739,38 +1805,43 @@ UserPageVw = pageVw.extend({
   },
 
   hideThisUser: function(reason){
-    this.$('.js-blockedWarning').fadeIn(100);
-    $('#obContainer').addClass('innerModalOpen').scrollTop(0);
-    this.$('.js-mainContainer').addClass('blurMore');
-    if (reason == "blocked"){
-      this.$('.js-reasonBlocked').removeClass('hide');
-      this.$('.js-reasonNSFW').addClass('hide');
-    } else if (reason == 'nsfw'){
-      this.$('.js-reasonBlocked').addClass('hide');
-      this.$('.js-reasonNSFW').removeClass('hide');
-    }
-  },
+    this.hiddenWarningModal && this.hiddenWarningModal.remove();
 
-  clickShowNSFWContent: function(){
-    this.showNSFWContent = true;
-    this.showNSFW = true;
-    this.showBlockedUser();
-    if (this.state == "listing"){
-      this.renderItem(this.currentItemHash);
-    }
-    this.renderItems(this.cachedListings, true);
-  },
+    if (reason == 'blocked') {
+      this.hiddenWarningModal = new HiddenWarningModal();
+      this.hiddenWarningModal.render()
+        .open()
+        .on('showPage', () => {
+          this.hiddenWarningModal.remove();
+          this.needsBlockedWarning = false;
+          this.needsNSFWWarning && this.hideThisUser('nsfw');
+        });
+    } else if (reason == 'nsfw') {
+      this.hiddenWarningModal = new HiddenWarningModal({
+        reason: 'nsfw'
+      });
 
-  showBlockedUser: function(){
-    this.$('.js-blockedWarning').fadeOut(300);
-    $('#obContainer').removeClass('innerModalOpen');
-    this.$('.js-mainContainer').removeClass('blurMore');
+      this.hiddenWarningModal.render()
+        .open()
+        .on('showPage', () => {
+          this.hiddenWarningModal.remove();
+          this.needsNSFWWarning = false;
+          this.showNSFWContent = true;
+          this.showNSFW = true;
+          
+          if (this.state == "listing") {
+            this.renderItem(this.currentItemHash);
+          }
+
+          this.renderItems(this.cachedListings, true);
+          this.needsBlockedWarning && this.hideThisUser('blocked');
+        });
+    }
   },
 
   remove: function(){
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     //$.colorbox.close();
-    messageModal.$el.off('click', this.modalCloseHandler);
     $('#obContainer').off('scroll', this.onScroll);
 
     pageVw.prototype.remove.apply(this, arguments);

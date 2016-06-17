@@ -11,10 +11,11 @@ var __ = require('underscore'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
     languageListView = require('../views/languageListVw'),
+    LoadingModal = require('./loadingModal'),
     guidStillCreatingModal = require('../views/guidStillCreatingModal');
 
 module.exports = baseModal.extend({
-  className: 'js-homeModal noNav',
+  className: 'js-homeModal',
 
   events: {
     'click .js-homeModal': 'blockClicks',
@@ -42,9 +43,13 @@ module.exports = baseModal.extend({
     this.options = options || {};
     this.$document = $(document).on('focus', this.docFocusHandler);
     this.$el.attr('tabIndex', 0);
-    this.$loadingModal = $('.js-loadingModal');
     this.languages = new languagesModel();
     this.timezones = new timezonesModel();
+
+    this.loadingModal = new LoadingModal({
+      showLoadIndexButton: false
+    }).render().open();
+    setTimeout(() => this.registerChild(this.loadingModal));
 
     // pre-select lauguage.
     var localLanguage = window.navigator.language;
@@ -64,28 +69,16 @@ module.exports = baseModal.extend({
     });
   },
 
-  loadingOff: function() {
-    this.$loadingModal.addClass('hide')
-      .css('z-index', '');
-    this.$el.removeClass('hide');
-  },
-
-  loadingOn: function() {
-    this.$loadingModal.removeClass('hide')
-      .css('z-index', 99999);
-    this.$el.addClass('hide');
-  },  
-
   open: function() {
     if (!this._accordianReady) {
-      this.loadingOn();
+      this.loadingModal.open();
     }
 
     baseModal.prototype.open.apply(this, arguments);
   },
 
   close: function() {
-    this.loadingOff();
+    this.loadingModal.close();
     baseModal.prototype.close.apply(this, arguments);
   },
 
@@ -139,7 +132,7 @@ module.exports = baseModal.extend({
         self = this;
 
     this._accordianReady = true;
-    this.loadingOff();
+    this.loadingModal.close();
 
     this.initAccordion('.js-profileAccordion');
     
@@ -254,10 +247,14 @@ module.exports = baseModal.extend({
 
     if (guidCreation.state() == 'pending') {
       this.guidStillCreatingModal && guidStillCreatingModal.remove();
-      this.guidStillCreatingModal = new guidStillCreatingModal();
+      this.guidStillCreatingModal = new guidStillCreatingModal({
+        dismissOnOverlayClick: false,
+        dismissOnEscPress: false,
+        showCloseButton: false
+      });
       this.guidStillCreatingModal.render().open();
     } else {
-      this.loadingOn();
+      this.loadingModal.open();
     }
 
     guidCreation.done(function() {
@@ -284,7 +281,7 @@ module.exports = baseModal.extend({
 
     if (this.$('#storeNameInput').val() != ""){
       self.model.set('name', this.$('#storeNameInput').val());
-    } else if (self.model.get('name') == undefined){
+    } else if (typeof self.model.get('name') === 'undefined'){
         //otherwise error since the profile api needs the name parameter and as of now it is not set in the userMd.js
       self.model.set('name', "ob" + Math.random().toString(36).slice(2));
     }
@@ -620,7 +617,7 @@ module.exports = baseModal.extend({
   },
 
   remove: function() {
-    this.loadingOff();
+    this.loadingModal.close();
     this.$document.off('focus', this.docFocusHandler);
     this.guidStillCreatingModal && this.guidStillCreatingModal.remove();
     baseModal.prototype.remove.apply(this, arguments);

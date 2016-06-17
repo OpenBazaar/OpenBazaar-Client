@@ -21,7 +21,7 @@ module.exports = BaseVw.extend({
 
     this.connectionState = {};
     this.collection.forEach((md) => {
-      this.connectionState[md.id] = { status: 'not-connected' }
+      this.connectionState[md.id] = { status: 'not-connected' };
     });
 
     this.listenTo(this.collection, 'update', this.render);
