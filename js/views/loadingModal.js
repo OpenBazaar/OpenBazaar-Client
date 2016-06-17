@@ -12,8 +12,6 @@ module.exports = baseModal.extend({
   },
 
   constructor: function(options) {
-    var events = {};
-
     options = __.extend({
       dismissOnOverlayClick: false,
       dismissOnEscPress: false,
