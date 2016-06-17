@@ -247,7 +247,11 @@ module.exports = baseModal.extend({
 
     if (guidCreation.state() == 'pending') {
       this.guidStillCreatingModal && guidStillCreatingModal.remove();
-      this.guidStillCreatingModal = new guidStillCreatingModal();
+      this.guidStillCreatingModal = new guidStillCreatingModal({
+        dismissOnOverlayClick: false,
+        dismissOnEscPress: false,
+        showCloseButton: false
+      });
       this.guidStillCreatingModal.render().open();
     } else {
       this.loadingModal.open();
