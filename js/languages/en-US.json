@@ -743,6 +743,8 @@
     "newConfigTitle": "New Configuration",
     "new": "New"
   },
+  "langChangeRestartTitle": "Restart needed for language change",
+  "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
   "timezones": {
     "-12": "(GMT -12:00) Eniwetok, Kwajalein",
     "-11": "(GMT -11:00) Midway Island, Samoa",

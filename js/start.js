@@ -52,6 +52,7 @@ var Polyglot = require('node-polyglot'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
     PageConnectModal = require('./views/pageConnectModal'), 
+    Dialog = require('./views/dialog.js'),
     loadProfileNeeded = true,
     startUpConnectMaxRetries = 2,
     startUpConnectRetryDelay = 2 * 1000,
@@ -107,6 +108,11 @@ updatePolyglot = function(lang){
 };
 
 user.on('change:language', function(md, lang) {
+  // Re-starting the app on lang change. For now leaving in the code in various global views
+  // that deals with lang change.
+  // TODO: Once it looks like the restart on lang change approach is fine, go into the different
+  // views and cleanup any code dealing with lang change.
+
   updatePolyglot(lang);
 });
 
@@ -341,9 +347,16 @@ $(window).bind('keydown', function(e) {
 
     if (route !== null) {
       e.preventDefault();
-      Backbone.history.navigate(route, {
-        trigger: true
-      });
+
+      if (location.hash.startsWith('#' + route)) {
+        // Hard refresh if we're already on the page we're trying to route to
+        // so a cached page is not served.
+        app.router.refresh();
+      } else {
+        Backbone.history.navigate(route, {
+          trigger: true
+        });
+      }
     }
   }
 });
@@ -444,7 +457,40 @@ var loadProfile = function(landingRoute, onboarded) {
               app.simpleMessageModal.remove = () => {
                 throw new Error('This instance of the simpleMessageModal is globally shared ' +
                   'and should not be removed. When you are done with it, please close it.');
-              };              
+              };
+
+              // any lang changes after our app has loaded will need an app re-start to fully take effect
+              user.on('change:language', function(md, lang) {
+                var restartWarning;
+
+                restartWarning = new Dialog({
+                  title: window.polyglot.t('langChangeRestartTitle'),
+                  message: window.polyglot.t('langChangeRestartMessage'),
+                  buttons: [{
+                    text: 'Restart Later',
+                    fragment: 'restart-later'
+                  }, {
+                    text: 'Restart Now',
+                    fragment: 'restart-now'
+                  }]
+                }).on('click-restart-later', () => {
+                  restartWarning.close();
+                }).on('click-restart-now', () => {
+                  location.reload();
+                }).render().open();
+              });
+
+              // If navigating to a page you're already on, we'll hard refresh so
+              // a cached page is not served, which avoids the issue of it looking
+              // like nothing happened.
+              $(document).on('click', '[href^="#"]', (e) => {
+                var href = $(e.target).attr('href');
+
+                if (location.hash.startsWith(href)) {
+                  app.router.refresh();
+                  e.preventDefault();
+                }
+              });
 
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 
