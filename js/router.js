@@ -183,7 +183,7 @@ module.exports = Backbone.Router.extend({
   cleanup: function(){
     $('#loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
-    $('#obContainer').removeClass('modalOpen innerModalOpen customizeUserPage noScrollBar overflowHidden');
+    $('#obContainer').removeClass('modalOpen innerModalOpen');
     window.obEventBus.trigger('cleanNav');
   },
 

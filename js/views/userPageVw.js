@@ -187,7 +187,7 @@ UserPageVw = pageVw.extend({
     this.followerFetchTotal = 0;
     this.itemFetchParameters = {};
     this.model = new Backbone.Model();
-    this.globalUserProfile = options.userProfile;
+    //this.globalUserProfile = options.userProfile;
     this.userProfile = new userProfileModel();
     //models have to be passed the dynamic URL
     this.userProfile.urlRoot = options.userModel.get('serverUrl') + "profile";
@@ -213,6 +213,7 @@ UserPageVw = pageVw.extend({
     this.showNSFWContent = this.showNSFW;
     this.currentItemHash = options.itemHash;
     this.$obContainer = $('#obContainer');
+    /*
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -222,6 +223,7 @@ UserPageVw = pageVw.extend({
         background_color: ""
       }
     };
+    */
 
     this.loadingDeferred = $.Deferred();
 
@@ -381,11 +383,13 @@ UserPageVw = pageVw.extend({
         self.fetchFollowing();
         self.getIsModerator();
         self.fetchListings();
+        /*
         //save state of the page
         self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
         self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
         self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
         self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
+        */
         self.setCustomStyles();
         self.setState(self.state, self.currentItemHash, { replaceHistory: true });
         self.$backToTop = self.$('.backToTop');
@@ -565,7 +569,7 @@ UserPageVw = pageVw.extend({
     this.$el.find('.js-unfollow').removeClass('confirm');
     this.$el.find('.js-removemoderator').removeClass('confirm');
     this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
-    this.$obContainer[0].classList.remove("customizeUserPage", "noScrollBar", "overflowHidden");
+    this.$obContainer.removeClass("customizeUserPage", "noScrollBar", "overflowHidden");
     //unhide the ones that are needed
     if (this.options.ownPage === true) {
       if (state === "listing" || state === "listingOld") {
@@ -576,7 +580,7 @@ UserPageVw = pageVw.extend({
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
         this.$el.find('.user-page-header-slim-bg-cover').addClass('user-page-header-slim-bg-cover-customize');
-        this.$obContainer[0].classList.add("customizeUserPage", "noScrollBar", "overflowHidden");
+        this.$obContainer.addClass("customizeUserPage", "noScrollBar", "overflowHidden");
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
       }
@@ -1430,7 +1434,7 @@ UserPageVw = pageVw.extend({
           }
 
           //refresh the universal profile model
-          self.globalUserProfile.fetch();
+          //self.globalUserProfile.fetch();
         } else if (data.success === false && !self.isRemoved()){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
         }
@@ -1768,10 +1772,9 @@ UserPageVw = pageVw.extend({
   },
 
   remove: function(){
-    // close colorbox to make sure the overlay doesnt remain open when going to a different page
-    //$.colorbox.close();
     messageModal.$el.off('click', this.modalCloseHandler);
-    $('#obContainer').off('scroll', this.onScroll);
+    this.$obContainer.removeClass("customizeUserPage", "noScrollBar", "overflowHidden")
+        .off('scroll', this.onScroll);
 
     pageVw.prototype.remove.apply(this, arguments);
   }
