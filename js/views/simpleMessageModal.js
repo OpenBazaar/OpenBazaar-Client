@@ -36,6 +36,8 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
+    this.moo = 'POO';
+
     this.options = __.extend({
       removeOnClose: true,
       title: '',
