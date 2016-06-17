@@ -21,7 +21,7 @@ baseModal = baseVw.extend({
       // baseModal. You really shouldn't have to use this options, unless you
       // don't want 'modal-opaque' (i.e. remove 'modal' at your own risk!)
       baseModalClass: 'modal modal-opaque',
-      innerWrapperClass: 'modal-child modal-childMain custCol-primary'
+      innerWrapperClass: 'modal-child modal-childMain custCol-primary custCol-text'
     };
 
     options = __.extend({}, defaults, options || {});
