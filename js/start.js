@@ -460,7 +460,7 @@ var loadProfile = function(landingRoute, onboarded) {
               };
 
               // any lang changes after our app has loaded will need an app re-start to fully take effect
-              user.on('change:language', function(md, lang) {
+              user.on('change:language', function() {
                 var restartWarning;
 
                 restartWarning = new Dialog({

@@ -367,8 +367,7 @@ module.exports = pageVw.extend({
           tempAnchor.href = window.URL.createObjectURL(dataBlob);
           tempAnchor.download = ('export_'+saveDate.toLocaleString(window.lang)+'.csv').replace(/,/g, '_');
           tempAnchor.click();
-        },
-        self = this;
+        };
 
     //clear existing data
     this.currentExportData = [];
@@ -399,12 +398,10 @@ module.exports = pageVw.extend({
 
     return $.when.apply(null, calls)
         .fail(function(){
-          self.registerChild(
-            new Dialog({
-              title: window.polyglot.t('errorMessages.getError'),
-              message: window.polyglot.t('errorMessages.serverError')
-            })
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.getError'),
+            message: window.polyglot.t('errorMessages.serverError')
+          });
 
           calls.forEach(call => {
             call.abort();

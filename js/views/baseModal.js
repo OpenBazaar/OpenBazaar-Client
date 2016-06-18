@@ -53,8 +53,7 @@ baseModal = baseVw.extend({
   },
 
   __onDocKeypress: function(e) {
-    var openModals = baseModal.__openModals,
-        topModal = this.__getTopModal();
+    var topModal = this.__getTopModal();
 
     if (this.__options.dismissOnEscPress && e.keyCode === 27 &&
       topModal && topModal === this) {
@@ -83,11 +82,10 @@ baseModal = baseVw.extend({
       var aZindex = parseInt(window.getComputedStyle(a.modal.el).zIndex) || 0,
           bZindex = parseInt(window.getComputedStyle(b.modal.el).zIndex) || 0;
 
-      if (aZindex ===  bZindex) {
+      if (aZindex === bZindex) {
         return (a.index < b.index) ? -1 : (a.index > b.index) ? 1 : 0;
-      } else {
-        return (aZindex < bZindex) ? -1 : (aZindex > bZindex) ? 1 : 0;
-      }      
+      }
+      return (aZindex < bZindex) ? -1 : (aZindex > bZindex) ? 1 : 0;
     });
 
     return openModals[openModals.length - 1] && openModals[openModals.length - 1].modal;
