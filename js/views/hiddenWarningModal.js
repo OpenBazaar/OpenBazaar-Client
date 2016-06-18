@@ -18,7 +18,7 @@ module.exports = baseModal.extend({
       dismissOnEscPress: false,
       showCloseButton: false,
       baseModalClass: 'modal',
-      innerWrapperClass: 'custCol-primary'
+      innerWrapperClass: 'custCol-primary custCol-text'
     }, options || {});
 
     baseModal.prototype.constructor.apply(this, [options].concat(Array.prototype.slice.call(arguments, 1)));

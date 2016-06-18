@@ -18,10 +18,10 @@ baseModal = baseVw.extend({
       showCloseButton: true,
       closeButtonClass: 'btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop',
       // This will be concatenated to the className of your view which extends
-      // baseModal. You really shouldn't have to use this options, unless you
+      // baseModal. You really shouldn't have to use this option, unless you
       // don't want 'modal-opaque' (i.e. remove 'modal' at your own risk!)
       baseModalClass: 'modal modal-opaque',
-      innerWrapperClass: 'modal-child modal-childMain custCol-primary'
+      innerWrapperClass: 'modal-child modal-childMain custCol-primary custCol-text'
     };
 
     options = __.extend({}, defaults, options || {});
