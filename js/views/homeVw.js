@@ -10,7 +10,7 @@ var __ = require('underscore'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
-    messageModal = require('../utils/messageModal.js');
+    Dialog = require('../views/dialog.js');
 
 module.exports = pageVw.extend({
 
@@ -107,6 +107,10 @@ module.exports = pageVw.extend({
 
   onCacheDetached: function(e) {
     if (e.view !== this) return;
+
+    if (this.safeListingsDialog) {
+      this.safeListingsDialog.close();
+    }
 
     this.obContainer.off('scroll', this.scrollHandler);
   },
@@ -558,7 +562,7 @@ module.exports = pageVw.extend({
           .replace('%{tag}', `<span class="btn-pill color-secondary">${hashedItem}</span>`)
       );
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
-      this.$el.find('.js-homeSearchItems').val("#" + searchItemsText)
+      this.$el.find('.js-homeSearchItems').val("#" + searchItemsText);
       this.setState('products', searchItemsText);
     } else {
       this.searchItemsClear();
@@ -634,31 +638,34 @@ module.exports = pageVw.extend({
   },
 
   loadAllItems: function(){
-    var self = this;
     if (localStorage.getItem('safeListingsWarningDissmissed')){
       this.onlyFollowing = false;
       this.loadItemsOrSearch();
     } else {
-      messageModal.show(
-          window.polyglot.t('ViewUnfilteredListings'),
-          window.polyglot.t('AllListingsWarning'),
-          'modal-hero bg-dark-blue iconBackground',
-          'modal-msg custCol-secondary',
-          function(){
-            messageModal.hide();
-          },
-          window.polyglot.t('Cancel'),
-          'txt-center',
-          function(){
-            localStorage.setItem('safeListingsWarningDissmissed', true);
-            self.$('.js-discoverToggleHelper').addClass('hide');
-            self.loadAllItems();
-            messageModal.hide();
-            self.setListingsAll();
-          },
-          window.polyglot.t('ShowUnlfilteredListings'),
-          'txt-center'
-      );
+      this.safeListingsDialog = new Dialog({
+        title: window.polyglot.t('ViewUnfilteredListings'),
+        message: window.polyglot.t('AllListingsWarning'),
+        titleClass: 'modal-hero bg-dark-blue iconBackground',
+        messageClass: 'modal-msg custCol-secondary',
+        buttons: [{
+          text: window.polyglot.t('Cancel'),
+          fragment: 'cancel'
+        }, {
+          text: window.polyglot.t('ShowUnlfilteredListings'),
+          fragment: 'showUnlfilteredListings'          
+        }]
+      }).on('click-cancel', () => {
+        this.safeListingsDialog.close();
+      }).on('click-showUnlfilteredListings', () => {
+        localStorage.setItem('safeListingsWarningDissmissed', true);
+        this.$('.js-discoverToggleHelper').addClass('hide');
+        this.loadAllItems();
+        this.safeListingsDialog.close();
+        this.setListingsAll();
+      });
+
+      this.safeListingsDialog.render().open();
+      setTimeout(() => this.registerChild(this.safeListingsDialog));
     }
   },
 

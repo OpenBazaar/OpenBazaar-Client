@@ -46,11 +46,13 @@ var Polyglot = require('node-polyglot'),
     socketView = require('./views/socketVw'),
     cCode = "",
     $html = $('html'),
-    $loadingModal = $('.js-loadingModal'),
+    LoadingModal = require('./views/loadingModal'),
+    SimpleMessageModal = require('./views/SimpleMessageModal'),
     ServerConfigsCl = require('./collections/serverConfigsCl'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
     PageConnectModal = require('./views/pageConnectModal'), 
+    Dialog = require('./views/dialog.js'),
     loadProfileNeeded = true,
     startUpConnectMaxRetries = 2,
     startUpConnectRetryDelay = 2 * 1000,
@@ -62,6 +64,7 @@ var Polyglot = require('node-polyglot'),
     extendPolyglot,
     newPageNavView,
     newSocketView,
+    startUpLoadingModal,
     onboardingModal,
     pageConnectModal,
     launchOnboarding,
@@ -102,13 +105,24 @@ updatePolyglot = function(lang){
   window.lang = lang;
   extendPolyglot(lang);
   localStorage.setItem('lang', lang);
-  //trigger translation function on index
-  window.translateIndex();
 };
 
 user.on('change:language', function(md, lang) {
+  // Re-starting the app on lang change. For now leaving in the code in various global views
+  // that deals with lang change.
+  // TODO: Once it looks like the restart on lang change approach is fine, go into the different
+  // views and cleanup any code dealing with lang change.
+
   updatePolyglot(lang);
 });
+
+//put the event bus into the window so it's available everywhere
+window.obEventBus = __.extend({}, Backbone.Events);
+
+startUpLoadingModal = new LoadingModal({
+  showLoadIndexButton: false
+});
+startUpLoadingModal.render().open();
 
 // add in our app bar
 app.appBar = new AppBarVw({
@@ -193,9 +207,6 @@ app.serverConfigs.on('activeServerChange', () => {
   setServerUrl();
   app.serverConfigs.getActive().off('sync', onActiveServerSync);
 });
-
-//put the event bus into the window so it's available everywhere
-window.obEventBus = __.extend({}, Backbone.Events);
 
 // fix zoom issue on Linux hiDPI
 var platform = process.platform;
@@ -336,9 +347,16 @@ $(window).bind('keydown', function(e) {
 
     if (route !== null) {
       e.preventDefault();
-      Backbone.history.navigate(route, {
-        trigger: true
-      });
+
+      if (location.hash.startsWith('#' + route)) {
+        // Hard refresh if we're already on the page we're trying to route to
+        // so a cached page is not served.
+        app.router.refresh();
+      } else {
+        Backbone.history.navigate(route, {
+          trigger: true
+        });
+      }
     }
   }
 });
@@ -417,6 +435,62 @@ var loadProfile = function(landingRoute, onboarded) {
               });
 
               $('#sideBar').html(app.chatVw.render().el);
+              startUpLoadingModal.remove();
+
+              // setting up a loadingModal instance that can be used app-wide as necessary.
+              app.loadingModal = new LoadingModal({
+                dismissOnOverlayClick: false,
+                dismissOnEscPress: false,
+                showCloseButton: false
+              }).render();
+              app.loadingModal.__origRemove = app.loadingModal.remove;
+              app.loadingModal.remove = () => {
+                throw new Error('This instance of the loadingModal is globally shared ' +
+                  'and should not be removed. When you are done with it, please close it.');
+              };
+
+              // setting up a simpleMessageModal instance that can be used app-wide as necessary.
+              app.simpleMessageModal = new SimpleMessageModal({
+                removeOnClose: false
+              });
+              app.simpleMessageModal.__origRemove = app.simpleMessageModal.remove;
+              app.simpleMessageModal.remove = () => {
+                throw new Error('This instance of the simpleMessageModal is globally shared ' +
+                  'and should not be removed. When you are done with it, please close it.');
+              };
+
+              // any lang changes after our app has loaded will need an app re-start to fully take effect
+              user.on('change:language', function(md, lang) {
+                var restartWarning;
+
+                restartWarning = new Dialog({
+                  title: window.polyglot.t('langChangeRestartTitle'),
+                  message: window.polyglot.t('langChangeRestartMessage'),
+                  buttons: [{
+                    text: 'Restart Later',
+                    fragment: 'restart-later'
+                  }, {
+                    text: 'Restart Now',
+                    fragment: 'restart-now'
+                  }]
+                }).on('click-restart-later', () => {
+                  restartWarning.close();
+                }).on('click-restart-now', () => {
+                  location.reload();
+                }).render().open();
+              });
+
+              // If navigating to a page you're already on, we'll hard refresh so
+              // a cached page is not served, which avoids the issue of it looking
+              // like nothing happened.
+              $(document).on('click', '[href^="#"]', (e) => {
+                var href = $(e.target).attr('href');
+
+                if (location.hash.startsWith(href)) {
+                  app.router.refresh();
+                  e.preventDefault();
+                }
+              });
 
               app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
 
@@ -467,16 +541,20 @@ launchOnboarding = function(guidCreating) {
   onboardingModal = new OnboardingModal({
     model: user,
     userProfile: userProfile,
-    guidCreationPromise: guidCreating
+    guidCreationPromise: guidCreating,
+    dismissOnOverlayClick: false,
+    dismissOnEscPress: false,
+    showCloseButton: false
   });
   onboardingModal.render().open();
+  startUpLoadingModal.close();
 
   onboardingModal.on('onboarding-complete', function(guid) {
     app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
     onboardingModal && onboardingModal.remove();
     onboardingModal = null;
     loadProfile('#userPage/' + guid + '/store', true);
-    $loadingModal.removeClass('hide');
+    startUpLoadingModal.open();
   });
 };
 
@@ -485,7 +563,7 @@ launchOnboarding = function(guidCreating) {
   var activeServer = app.serverConfigs.getActive();
 
   pageConnectModal = new PageConnectModal({
-    className: 'server-connect modal-fullscreen',
+    className: 'server-connect',
     initialState: {
       statusText: activeServer && activeServer.get('default') ?
         window.polyglot.t('serverConnectModal.connectingToDefault') :
@@ -520,7 +598,7 @@ app.serverConnectModal.on('connected', () => {
 app.getHeartbeatSocket().on('open', function() {
   removeStartupRetry();
   pageConnectModal.remove();
-  $loadingModal.removeClass('hide');
+  startUpLoadingModal.open();  
 
   if (!profileLoaded) {
     // clear some flags so the heartbeat events will
@@ -528,7 +606,7 @@ app.getHeartbeatSocket().on('open', function() {
     guidCreating = null;
     loadProfileNeeded = true;
     app.serverConnectModal.close();
-    $loadingModal.removeClass('hide');    
+    startUpLoadingModal.open();
   }  
 });
 

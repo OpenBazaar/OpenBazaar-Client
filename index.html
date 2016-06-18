@@ -17,6 +17,9 @@
     <div id="appBar" class="top0 alignCenter custCol-secondary"></div>
 
     <div id="contentFrame">
+      <!-- Overlay is used by pageNav drop down menus and should be here in the markup so that it
+           properly obscures any open modals (without having to manage z-indexes). -->
+      <div id="overlay" class="hide"></div>
 
       <div id="navArea">
         <div id="pageNav" class="custCol-secondary"></div>
@@ -25,12 +28,10 @@
       <div id="contentArea">
         <div class="container custCol-background custCol-text" id="obContainer">
           <div id="content"></div>
-          <div id="modalHolder">
-            <!-- container for modal views -->
-          </div>
         </div>
 
         <div id="sideBar"></div>
+
 
         <div id="messageModal" class="modal modal-opaque js-messageModal hide">
           <!-- modal for messages -->
@@ -52,23 +53,9 @@
             </div>
           </div>
         </div>
-
-        <div id="overlay" class="hide"></div>
+                
         <div id="statusBar"></div>
 
-      </div>
-
-      <div id="loadingModal" class="modal modal-opaque modal-fullscreen js-loadingModal hide">
-        <div class="spinner-with-logo fullCentered">
-          <i class="ion-android-sync spinner fontSize30 spinner-with-logo-icon"></i>
-        </div>
-        <div id="loadingModalContent">
-          <p class="fontSize16 js-translate" data-translate="errorMessages.loadingViewError"></p>
-          <div id="loadingModalBtns">
-            <a class="btn btn-large marginRight10 custCol-secondary custCol-text js-indexReload"><i class="ion-android-sync"></i> <span class="js-translate" data-translate="Reload"></span></a>
-            <a class="btn btn-large custCol-secondary custCol-text" href="#home"><i class="ion-eye"></i> <span class="js-translate" data-translate="LoadIndex"></span></a>
-          </div>
-        </div>
       </div>
 
     </div>
@@ -80,38 +67,7 @@
 
   <!--TODO: modularize non-modular scripts -->
   <script src="js/utils/list.min.js"></script>
-
-  <script>
-    var app = require('./js/start');
-
-    window.translateIndex = function(){
-      $('.js-translate').each(function() {
-        $(this).text(polyglot.t($(this).data("translate")));
-      });
-    };
-    translateIndex();
-    $('.js-closeIndexModal').on('click', function(){
-      $(this).closest('.modal').addClass('hide');
-    });
-    $('.js-closeIndexApp').on('click', function(){
-      var win = remote.getCurrentWindow();
-      var process = remote.process;
-      if (process.platform != 'darwin') {
-        win.close();
-      } else {
-        win.hide();
-      }
-    });
-    $('.js-indexReload').on('click', function(){
-      location.reload();
-    });
-    $('.js-newServerIndexApp').on('click', function(){
-      var newServer = $('#indexNewServer').val();
-      app.loadNewServer(newServer);
-    });
-    $('.js-defaultServerIndexApp').on('click', function(){
-      app.loadNewServer("http://localhost:18469/api/v1/");
-    });
-  </script>
+    
+  <script>require('./js/start')</script>
 </body>
 </html>

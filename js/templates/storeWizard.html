@@ -1,115 +1,108 @@
-<div class="modal modal-opaque js-storeWizardModal fadeOut">
-  <div class="modal-child modal-childMain">
-    <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeStoreWizardModal">
-      <h2 class="ion-android-close custCol-text clickable"></h2>
-    </div>
-    <div class="modal-hero js-storeWizardHero shadow-inner1-light"
-    style="background-image: <% if(ob.headerURL) { %>url(<%= ob.headerURL %>),<% } %>url(imgs/defaultBanner.png);"></div>
-    <div class="homeModal-accordion accordion js-storeWizardAccordion">
-      <div class="accordion-window">
-        <div class="accordion-child accordion-active">
-          <div class="bar barTxt h6 paddingLeft15 custCol-secondary  custCol-text">
-            <%= polyglot.t('CreateStore') %>
-            <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 2</span>
-          </div>
-          <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar" id="storeWizardForm">
-            <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>" />
-            <input name="location" id="locationSelect" type="text" class="hide"/>
+<div class="modal-hero js-storeWizardHero shadow-inner1-light"
+style="background-image: <% if(ob.headerURL) { %>url(<%= ob.headerURL %>),<% } %>url(imgs/defaultBanner.png);"></div>
+<div class="homeModal-accordion accordion js-storeWizardAccordion">
+  <div class="accordion-window">
+    <div class="accordion-child accordion-active">
+      <div class="bar barTxt h6 paddingLeft15 custCol-secondary  custCol-text">
+        <%= polyglot.t('CreateStore') %>
+        <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 2</span>
+      </div>
+      <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar" id="storeWizardForm">
+        <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>" />
+        <input name="location" id="locationSelect" type="text" class="hide"/>
 
-            <div class="flexRow">
-              <div class="flexRow custCol-border">
-                  <div class="flexCol-4 borderRight custCol-border">
-                    <label class="fieldItem" for="storeNameInput">
-                      <%= polyglot.t('Name') %>
-                    </label>
-                  </div>
-                  <div class="flexCol-8">
-                    <input name="name" id="storeNameInput"
-                           type="text"
-                           class="fieldItem"
-                           value="<%= ob.page.profile.name %>"
-                           placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>"
-                           required>
-                  </div>
+        <div class="flexRow">
+          <div class="flexRow custCol-border">
+              <div class="flexCol-4 borderRight custCol-border">
+                <label class="fieldItem" for="storeNameInput">
+                  <%= polyglot.t('Name') %>
+                </label>
               </div>
-              <div class="flexRow custCol-border">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <label class="fieldItem" for="aboutInput">
-                    <%= polyglot.t('Description') %>
-                    <div class="note rowTop5">
-                      <%= polyglot.t('HighlightToStyle') %>
-                    </div>
-                  </label>
-                </div>
-                <div class="flexCol-8">
-                  <textarea name="about"
-                            rows="5"
-                            id="aboutInput"
-                            class="fieldItem-textarea height70 customThemeScrollbar"
-                            required><%= ob.page.profile.about %></textarea>
-                </div>
+              <div class="flexCol-8">
+                <input name="name" id="storeNameInput"
+                       type="text"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.name %>"
+                       placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>"
+                       required>
               </div>
-              <div class="flexRow custCol-border">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <label class="fieldItem" for="realCategoriesInput">
-                    <%= polyglot.t('Tags') %><!--  (<%= polyglot.t('UpTo3') %>) -->
-                  </label>
+          </div>
+          <div class="flexRow custCol-border">
+            <div class="flexCol-4 borderRight custCol-border">
+              <label class="fieldItem" for="aboutInput">
+                <%= polyglot.t('Description') %>
+                <div class="note rowTop5">
+                  <%= polyglot.t('HighlightToStyle') %>
                 </div>
-                <div class="flexCol-8">
-                  <input type="text" name="categories" id="realCategoriesInput" class="hide" />
-                  <div class="fieldItem" id="categoriesInput"></div>
-                </div>
-              </div>
-              <div class="flexRow custCol-border">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <label class="fieldItem">
-                    <%= polyglot.t('NSFW') %>
-                  </label>
-                </div>
-                <div class="flexCol-8">
-                  <div class="fieldItem">
-                    <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                    <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel"><%= polyglot.t('No') %></label>
-                  </div>
-                </div>
+              </label>
+            </div>
+            <div class="flexCol-8">
+              <textarea name="about"
+                        rows="5"
+                        id="aboutInput"
+                        class="fieldItem-textarea height70 customThemeScrollbar"
+                        required><%= ob.page.profile.about %></textarea>
+            </div>
+          </div>
+          <div class="flexRow custCol-border">
+            <div class="flexCol-4 borderRight custCol-border">
+              <label class="fieldItem" for="realCategoriesInput">
+                <%= polyglot.t('Tags') %><!--  (<%= polyglot.t('UpTo3') %>) -->
+              </label>
+            </div>
+            <div class="flexCol-8">
+              <input type="text" name="categories" id="realCategoriesInput" class="hide" />
+              <div class="fieldItem" id="categoriesInput"></div>
+            </div>
+          </div>
+          <div class="flexRow custCol-border">
+            <div class="flexCol-4 borderRight custCol-border">
+              <label class="fieldItem">
+                <%= polyglot.t('NSFW') %>
+              </label>
+            </div>
+            <div class="flexCol-8">
+              <div class="fieldItem">
+                <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel"><%= polyglot.t('No') %></label>
               </div>
             </div>
-          </form>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3  custCol-text">
-            <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary borderBottomLeftRaidus3 borderRight">
-              <%= polyglot.t('Cancel') %>
-            </a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
-              <%= polyglot.t('Next') %>
-              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity50"></span>
-            </a>
           </div>
         </div>
-        <div class="accordion-child accordion-inactive custCol-text">
-          <div class="bar barTxt h6 custCol-secondary">
-            <%= polyglot.t('StoreModeratorsOptional') %>
-            <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 2</span>
-          </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar">
-            <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-primary custCol-border">
-                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Searchformoderators') %>" />
-              </div>
-            </div>
-            <div class="flexRow js-storeWizardModeratorList">
-            </div>
-          </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3  custCol-text">
-            <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3 custCol-secondary borderRight">
-              <span class="ion-chevron-left fontSize10 marginRight2 textOpacity50"></span>
-              <%= polyglot.t('Back') %>
-            </a>
-            <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3 custCol-secondary">
-              <span class="ion-checkmark fontSize10 marginRight2 textOpacity50"></span>
-              <%= polyglot.t('onboarding.Finished') %>
-            </a>
+      </form>
+      <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3  custCol-text">
+        <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary borderBottomLeftRaidus3 borderRight">
+          <%= polyglot.t('Cancel') %>
+        </a>
+        <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+          <%= polyglot.t('Next') %>
+          <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity50"></span>
+        </a>
+      </div>
+    </div>
+    <div class="accordion-child accordion-inactive custCol-text">
+      <div class="bar barTxt h6 custCol-secondary">
+        <%= polyglot.t('StoreModeratorsOptional') %>
+        <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 2</span>
+      </div>
+      <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar">
+        <div class="flexRow">
+          <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-primary custCol-border">
+            <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Searchformoderators') %>" />
           </div>
         </div>
+        <div class="flexRow js-storeWizardModeratorList">
+        </div>
+      </div>
+      <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3  custCol-text">
+        <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3 custCol-secondary borderRight">
+          <span class="ion-chevron-left fontSize10 marginRight2 textOpacity50"></span>
+          <%= polyglot.t('Back') %>
+        </a>
+        <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3 custCol-secondary">
+          <span class="ion-checkmark fontSize10 marginRight2 textOpacity50"></span>
+          <%= polyglot.t('onboarding.Finished') %>
+        </a>
       </div>
     </div>
   </div>

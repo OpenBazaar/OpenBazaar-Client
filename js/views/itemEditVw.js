@@ -2,12 +2,12 @@
 
 var __ = require('underscore'),
     $ = require('jquery'),
+    app = require('../App').getApp(),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     Taggle = require('taggle'),
     MediumEditor = require('medium-editor'),
     Sortable = require('sortablejs'),
-    messageModal = require('../utils/messageModal'),
     chosen = require('../utils/chosen.jquery.min.js'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
     baseVw = require('./baseVw');
@@ -362,7 +362,11 @@ module.exports = baseVw.extend({
 
     if (this.imgHashes.length + imageFiles.length > this.MAX_PHOTOS) {
       imageFiles = imageFiles.slice(0, this.MAX_PHOTOS - this.imgHashes.length);
-      messageModal.show(window.polyglot.t('errorMessages.tooManyPhotosTitle'), window.polyglot.t('errorMessages.tooManyPhotosBody'));      
+      
+      app.simpleMessageModal.open({
+        title: window.polyglot.t('errorMessages.tooManyPhotosTitle'),
+        message: window.polyglot.t('errorMessages.tooManyPhotosBody')
+      });     
     }
 
     if (!imageFiles.length) return;
@@ -413,7 +417,10 @@ module.exports = baseVw.extend({
 
         if (errored === imageCount) {
           self.$el.find('.js-itemEditImageLoading').addClass('fadeOut');
-          messageModal.show(window.polyglot.t('errorMessages.unableToLoadImages', {smart_count: imageCount}));
+
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.unableToLoadImages', {smart_count: imageCount})
+          });
         } else if (loaded === imageCount) {
           self.uploadImage(imageList);
         }        
@@ -452,7 +459,10 @@ module.exports = baseVw.extend({
           self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
         } else if (data.success === false){
-          messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.saveError'),
+            message: '<i>' + data.reason + '</i>'
+          });
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -614,7 +624,10 @@ module.exports = baseVw.extend({
           if (data.success === true) {
             self.trigger('saveNewDone', data.id);
           } else {
-            messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+            app.simpleMessageModal.open({
+              title: window.polyglot.t('errorMessages.saveError'),
+              message: '<i>' + data.reason + '</i>'
+            });
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -632,12 +645,17 @@ module.exports = baseVw.extend({
       inputName = (($label = self.$("label[for='"+$(this).attr('id')+"']")).length && $label.text()) ||
         $(this).attr('data-label') || $(this).attr('id');
 
-      invalidInputList.push(inputName.trim())
+      invalidInputList.push(inputName.trim());
     });
 
     invalidInputList = __.uniq(invalidInputList);
-    messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') +
-      '<br><i><br />' + invalidInputList.join('<br />') + '</i>');
+
+    app.simpleMessageModal.open({
+      title: window.polyglot.t('errorMessages.saveError'),
+      message: window.polyglot.t('errorMessages.missingError') + '<br><i><br />' +
+        invalidInputList.join('<br />') + '</i>'
+    });
+    
     return $.Deferred().reject('failed form validation').promise();
   },
 

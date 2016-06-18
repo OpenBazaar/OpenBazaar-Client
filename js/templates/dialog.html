@@ -1,0 +1,36 @@
+<div class="txt-center row10 <%= ob.titleClass %>">
+  <h1><%= ob.title %></h1>
+</div>
+<div class="txt-center row10 <%= ob.messageClass %>">
+  <p class="fontSize14"><%= ob.message %></p>
+  <% if (ob.buttons.length) { %>
+  <div class="bar barFlush bottomBar heightAuto">
+  <% ob.buttons.forEach((btn, i) => { %>
+    <%
+      var conditionalClass = '',
+          leftButton = false;
+
+      // check if left or right button
+      if (i % 2 === 0) {
+        conditionalClass += 'borderRight';
+      }
+
+      // check if single button on last line
+      if (i + 1 === ob.buttons.length && ob.buttons.length % 2) {
+        conditionalClass += ' btn-wide';
+      } else {
+        conditionalClass += ' btn-half';
+      }
+
+      // check if not top row button or not
+      if (i >= 2) {
+       conditionalClass += ' marginTop0 borderTop';
+      }
+
+      conditionalClass += ' js-' + btn.fragment;
+    %>
+    <a class="btn btn-bar textOpacity90 custCol-secondary <%= conditionalClass %>" data-event-name="<%= btn.fragment %>"><%= btn.text %></a>
+  <% }) %>
+  </div>
+  <% } %>
+</div>

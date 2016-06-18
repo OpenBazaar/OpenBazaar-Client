@@ -9,6 +9,7 @@ var __ = require('underscore'),
     languagesModel = require('../models/languagesMd'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
+    AboutModal = require('../views/aboutModal'),
     NotificationsVw = require('../views/notificationsVw'),
     PageNavServersVw = require('../views/pageNavServersVw'),
     SuggestionsVw = require('../views/suggestionsVw'),
@@ -24,9 +25,7 @@ module.exports = baseVw.extend({
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
     'click .js-showAboutModal': 'showAboutModal',
-    'click .js-hideAboutModal': 'hideAboutModal',
     'click .js-showSupportModal': 'showSupportModal',
-    'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navRefresh': 'navRefreshClick',
     //'click .js-navRestart': 'navRestartClick',
     'click .js-navAdminPanel': 'navAdminPanel',
@@ -149,7 +148,7 @@ module.exports = baseVw.extend({
   },
 
   cleanNav: function(){
-    this.hideAboutModal();
+    this.aboutModal && this.aboutModal.close();
     this.closeNav();
     this.closeStatusBar();
     window.obEventBus.trigger('closeBuyWizard');
@@ -341,7 +340,7 @@ module.exports = baseVw.extend({
     //load userProfile data into model
     this.model.set('guid', this.userProfile.get('profile').guid);
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
-    this.model.set('version', pjson.version);
+
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       var connectedServer = app.serverConnectModal.getConnectedServer();
 
@@ -402,11 +401,18 @@ module.exports = baseVw.extend({
         self.$addressInput.val(text);
         self.closeStatusBar();
       });
+      
       if (self.showDiscIntro){
         self.showDiscoverIntro();
       }
-      self.$aboutModalHolder = $('.js-aboutModalHolder');
-      self.$aboutModal = self.$aboutModalHolder.find('.js-aboutModal');
+
+      if (!self.aboutModal) {
+        self.aboutModal = new AboutModal({
+          version: pjson.version
+        });
+        self.aboutModal.render();
+        self.registerChild(self.aboutModal);
+      }
     });
 
     return this;
@@ -414,60 +420,18 @@ module.exports = baseVw.extend({
 
   showAboutModal: function(){
     this.cleanNav();
-
-    // display the modal
-    this.$aboutModalHolder.fadeIn(300);
-
-    // set the active tab
-    this.$aboutModal.find('.navBar .btn.btn-bar').removeClass('active');
-    $('.js-about-mainTab').addClass('active');
-
-    // set the active section
-    this.$aboutModal.find('.modal-section').addClass('hide');
-    this.$aboutModal.find('.js-modalAboutMain').removeClass('hide');
-
-    // blur the container for extra focus
-    $('#obContainer').addClass('modalOpen').scrollTop(0);
+    this.aboutModal.setTab('about')
+      .open();
   },
 
   hideAboutModal: function(){
-    this.$aboutModalHolder.fadeOut(300);
-    $('#obContainer').removeClass('modalOpen');
+    this.aboutModal && this.aboutModal.close();
   },
 
-  showSupportModal: function(){
-    this.$aboutModalHolder.fadeIn(300);
-    this.$aboutModal.find('.navbar .btn.btn-bar').removeClass('active');
-    $('.js-about-donationsTab').addClass('active');
-    this.$aboutModal.find('.modal-section').addClass('hide');
-    this.$aboutModal.find('.js-modalAboutSupport').removeClass('hide');
-    $('#obContainer').addClass('modalOpen').scrollTop(0);
-  },
-
-  aboutModalTabClick: function(e){
-    var tab = $(e.currentTarget).data('tab'),
-        $aboutSection = $('.modal-about-section');
-    this.$aboutModal.find('.btn-tab').removeClass('active');
-    $(e.currentTarget).addClass('active');
-
-    switch (tab) {
-    case "about":
-      $aboutSection.addClass('hide');
-      $('.js-modalAboutMain').removeClass('hide');
-      break;
-    case "support":
-      $aboutSection.addClass('hide');
-      $('.js-modalAboutSupport').removeClass('hide');
-      break;
-    case "contributors":
-      $aboutSection.addClass('hide');
-      $('.js-modalAboutContributors').removeClass('hide');
-      break;
-    case "licensing":
-      $aboutSection.addClass('hide');
-      $('.js-modalAboutLicensing').removeClass('hide');
-      break;
-    }
+  showSupportModal: function() {
+    this.cleanNav();
+    this.aboutModal.setTab('support')
+      .open();
   },
 
   closeNotificationsMenu: function() {
@@ -499,8 +463,14 @@ module.exports = baseVw.extend({
   },
 
   getUnreadNotifCount: function() {
-    return this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount() -
+    var count;
+
+    count = this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount() -
       this.fetchNotifsMarkedAsRead || 0;
+
+    // fudge fix! sometimes the count is coming back as -1 and we can't reproduce it
+    // nor track down why, so we're reluctantly fudging it.
+    return count < 0 ? 0 : count;
   },
 
   onNotifMenuOpen: function() {

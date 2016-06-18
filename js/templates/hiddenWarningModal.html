@@ -1,0 +1,18 @@
+<div class="modal-small padding15 txt-center custCol-secondary">
+  <h3 class="rowTop30 custCol-text">
+    <% if (ob.reason === 'blocked') { %>
+    <span><%= polyglot.t('ThisUserIsBlocked') %></span>
+    <% } else if (ob.reason === 'nsfw') { %>  
+    <span><%= polyglot.t('ThisUserIsNSFW') %></span>
+    <% } %>
+  </h3>
+  <% if (ob.reason === 'blocked') { %>
+  <a class="btn btn-txt custCol-primary row10 js-showBlockedUser">
+    <span class="custCol-text"><%= polyglot.t('ShowBlockedUser') %></span>
+  </a>
+  <% } else if (ob.reason === 'nsfw') { %>  
+  <a class="btn btn-txt custCol-primary row10 js-showNSFWContent">
+    <span class="custCol-text"><%= polyglot.t('ShowNSFWContent') %></span>
+  </a>
+  <% } %>
+</div>

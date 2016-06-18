@@ -4,7 +4,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    messageModal = require('../utils/messageModal.js'),
+    app = require('../App.js').getApp(),
     setTheme = require('../utils/setTheme.js'),
     Papa = require('papaparse'),
     transactionsCl = require('../collections/transactionsCl'),
@@ -78,14 +78,12 @@ module.exports = pageVw.extend({
     }
 
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
-    this.listenTo(window.obEventBus, "orderModalClosed", function(){
-      this.orderID = "";
-      this.getData();
-    });
 
-    $('.js-loadingModal').removeClass("hide");
+    app.loadingModal.open();
+
     getBTPrice(this.cCode, function(btAve){
-      $('.js-loadingModal').addClass("hide");
+      app.loadingModal.close();
+
       self.btAve = btAve;
       self.purchasesCol = new transactionsCl(null, {btAve: btAve, cCode: self.cCode});
       self.purchasesCol.url = self.serverUrl + "get_purchases";
@@ -116,7 +114,11 @@ module.exports = pageVw.extend({
                 self.renderTab("cases");
               },
               error: function(jqXHR, status, errorThrown){
-                messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+                app.simpleMessageModal.open({
+                  title: window.polyglot.t('errorMessages.getError'),
+                  message: '<i>' + errorThrown + '</i>'
+                });
+
                 console.log(jqXHR);
                 console.log(status);
                 console.log(errorThrown);
@@ -154,7 +156,11 @@ module.exports = pageVw.extend({
             });
           },
           error: function(jqXHR, status, errorThrown){
-            messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+            app.simpleMessageModal.open({
+              title: window.polyglot.t('errorMessages.getError'),
+              message: '<i>' + errorThrown + '</i>'
+            });
+
             console.log(jqXHR);
             console.log(status);
             console.log(errorThrown);
@@ -162,7 +168,11 @@ module.exports = pageVw.extend({
         });
       },
       error: function(jqXHR, status, errorThrown){
-        messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.getError'),
+          message: '<i>' + errorThrown + '</i>'
+        });
+
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
@@ -357,7 +367,8 @@ module.exports = pageVw.extend({
           tempAnchor.href = window.URL.createObjectURL(dataBlob);
           tempAnchor.download = ('export_'+saveDate.toLocaleString(window.lang)+'.csv').replace(/,/g, '_');
           tempAnchor.click();
-        };
+        },
+        self = this;
 
     //clear existing data
     this.currentExportData = [];
@@ -388,7 +399,13 @@ module.exports = pageVw.extend({
 
     return $.when.apply(null, calls)
         .fail(function(){
-          messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.serverError'));
+          self.registerChild(
+            new Dialog({
+              title: window.polyglot.t('errorMessages.getError'),
+              message: window.polyglot.t('errorMessages.serverError')
+            })
+          );
+
           calls.forEach(call => {
             call.abort();
           });
@@ -397,7 +414,9 @@ module.exports = pageVw.extend({
           if (calls.length > 0){
             exportData(this.currentExportData);
           } else {
-            messageModal.show(window.polyglot.t('errorMessages.noData'));
+            app.simpleMessageModal.open({
+              title: window.polyglot.t('errorMessages.noData')
+            });           
           }
         });
   },
@@ -458,15 +477,17 @@ module.exports = pageVw.extend({
   },
 
   openOrderModal: function(options){
-    $('.js-loadingModal').removeClass("hide");
+    app.loadingModal.open({ insideApp: true });
+    
     if (options.status == "open"){
       options.status = 4;
     }
-    var orderModalView = new transactionModalVw({
+    
+    this.orderModalView && this.orderModalView.remove();
+    this.orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,
       serverUrl: this.serverUrl,
-      parentEl: $('#modalHolder'),
       countriesArray: this.countriesArray,
       cCode: this.userModel.get('currency_code'),
       btAve: this.btAve,
@@ -477,7 +498,15 @@ module.exports = pageVw.extend({
       userProfile: this.userProfile,
       socketView: this.socketView,
       unread: options.unread
+    }).on('loaded', () => {
+      app.loadingModal.close();
+      this.orderModalView.render().open();
+    }).on('close', () => {
+      this.orderID = '';
+      this.getData();
+      this.orderModalView.remove();
     });
-    this.registerChild(orderModalView);
+
+    this.registerChild(this.orderModalView);
   }
 });

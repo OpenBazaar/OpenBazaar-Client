@@ -14,7 +14,6 @@ var __ = require('underscore'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
-    messageModal = require('../utils/messageModal.js'),
     cropit = require('../utils/jquery.cropit'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
@@ -69,7 +68,6 @@ module.exports = pageVw.extend({
   initialize: function(options){
     var self = this;
 
-    $('.js-loadingModal').removeClass('hide');
     this.options = options || {};
     /* expected options:
      userModel
@@ -93,7 +91,10 @@ module.exports = pageVw.extend({
     this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
 
     this.firstLoadModerators = true;
-    
+
+    this.loading = true;
+    app.loadingModal.open();
+
     this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
       switch (self.state) {
       case 'general':
@@ -139,10 +140,13 @@ module.exports = pageVw.extend({
     if (e.view !== this) return;
     state = state || this.state;
 
+    this.loading && app.loadingModal.open();
+
     this.blockedUsersScrollHandler &&
       this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
 
     if (this.cachedScrollPositions[state]) this.$obContainer[0].scrollTop = this.cachedScrollPositions[state];
+    this.setTheme();
     this.setState(state);
   },
 
@@ -155,8 +159,18 @@ module.exports = pageVw.extend({
   onCacheDetached: function(e) {
     if (e.view !== this) return;
 
+    app.loadingModal.close();
+
     this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
+  },
+
+  setTheme: function() {
+    var profile = this.userProfile.get('profile');
+
+    if (profile) {
+      setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
+    }
   },  
 
   fetchModel: function(){
@@ -164,10 +178,7 @@ module.exports = pageVw.extend({
     this.firstLoadModerators = true;
     this.userProfile.fetch({
       success: function(model) {
-        var profile = model.get('profile');
-        if (profile){
-          setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
-        }
+        self.setTheme();
         self.model.set({page: model.toJSON()});
         self.userModel.fetch({
           success: function(model){
@@ -183,11 +194,16 @@ module.exports = pageVw.extend({
       },
       error: function(model, response){
         console.log(response);
-        messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
+
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.getError'),
+          message: window.polyglot.t('errorMessaes.userError')
+        });
       },
       complete: function() {
         if (!self.isRemoved()) {
-          $('.js-loadingModal').addClass('hide');
+          app.loadingModal.close();
+          self.loading = false;
         }
       }
     });
@@ -658,7 +674,7 @@ module.exports = pageVw.extend({
   },
 
   cancelView: function(){
-    Backbone.history.loadUrl();
+    app.router.refresh();
   },
 
   themeClick: function(e) {
@@ -732,7 +748,10 @@ module.exports = pageVw.extend({
         }, '', '', '',
         function(){
           //on invalid
-          messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.saveError'),
+            message: window.polyglot.t('errorMessaes.missingError')
+          });
           self.scrollToFirstError(self.$('#generalForm'));
         }).always(function(){
           $saveBtn.removeClass('loading');
@@ -781,7 +800,11 @@ module.exports = pageVw.extend({
         self.refreshView();
       }, '', pageData, skipKeys, function(){
         //on invalid
-        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: window.polyglot.t('errorMessages.missingError')
+        });
+
         self.scrollToFirstError(self.$('#pageForm'));
       }).always(function(){
         $saveBtn.removeClass('loading');
@@ -801,7 +824,11 @@ module.exports = pageVw.extend({
               },
               function(data){
                 $saveBtn.removeClass('loading');
-                messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+
+                app.simpleMessageModal.open({
+                  title: window.polyglot.t('errorMessages.saveError'),
+                  message: '<i>' + data.reason + '</i>'
+                });
               }, socialData);
         } else {
           checkSocialCount();
@@ -905,7 +932,10 @@ module.exports = pageVw.extend({
     onFail = (data) => {
       $saveBtn.removeClass('loading');
       self.scrollToFirstError(self.$('#storeForm'));
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), data.reason);
+      app.simpleMessageModal.open({
+        title: window.polyglot.t('errorMessages.saveError'),
+        message: '<i>' + data.reason + '</i>'
+      });
     };
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
@@ -948,7 +978,10 @@ module.exports = pageVw.extend({
     //if form is partially filled out throw error
     if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
       if (!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
-        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: window.polyglot.t('errorMessaes.missingError')
+        });
         $saveBtn.removeClass('loading');
         return;
       }
@@ -997,12 +1030,11 @@ module.exports = pageVw.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-      }, function(){
-        self.scrollToFirstError(self.$('#moderatorForm'));
-      }, moderatorData).always(function(){
-        $saveBtn.removeClass('loading');
-      }
-    );
+    }, function(){
+      self.scrollToFirstError(self.$('#moderatorForm'));
+    }, moderatorData).always(function(){
+      $saveBtn.removeClass('loading');
+    });
 
     $.ajax({
       type: "POST",
@@ -1010,7 +1042,10 @@ module.exports = pageVw.extend({
       processData: false,
       dataType: "json",
       error: function(){
-        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessaes.serverError') + "</i>");
+        app.simpleMessageModal.open({
+          title: window.polyglot.t('errorMessages.saveError'),
+          message: '<i>' + window.polyglot.t('errorMessaes.serverError') + '</i>'
+        });
       }
     });
   },
@@ -1026,14 +1061,13 @@ module.exports = pageVw.extend({
       port: hostport[1]
     });
 
-    connection.on('error', function(){
+    connection.on('error', () => {
       $('#testSMTPButton').removeClass('loading');
-      messageModal.show(
-            window.polyglot.t('errorMessages.smtpServerError'),
-            window.polyglot.t('errorMessages.noSMTPConnection')
-        );
-    }
-    );
+      app.simpleMessageModal.open({
+        title: window.polyglot.t('errorMessages.smtpServerError'),
+        message: window.polyglot.t('errorMessaes.noSMTPConnection')
+      });
+    });
 
     connection.connect(function() {
 
@@ -1043,17 +1077,17 @@ module.exports = pageVw.extend({
       connection.login({
         user: username,
         pass: password
-      }, function(err) {
+      }, (err) => {
         if (err) {
-          messageModal.show(
-            window.polyglot.t('errorMessages.smtpServerError'),
-            window.polyglot.t('errorMessages.badSMTPAuthentication')
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.smtpServerError'),
+            message: window.polyglot.t('errorMessaes.badSMTPAuthentication')
+          });
         } else {
-          messageModal.show(
-            window.polyglot.t('errorMessages.smtpServerSuccess'),
-            window.polyglot.t('errorMessages.goodSMTPAuthentication')
-          );
+          app.simpleMessageModal.open({
+            title: window.polyglot.t('errorMessages.smtpServerSuccess'),
+            message: window.polyglot.t('errorMessaes.goodSMTPAuthentication')
+          });
         }
         $('#testSMTPButton').removeClass('loading');
       });
@@ -1146,7 +1180,6 @@ module.exports = pageVw.extend({
 
   remove: function() {
     this.blockedUsersVw && this.blockedUsersVw.remove();
-
     this.blockedUsersScrollHandler &&
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
 

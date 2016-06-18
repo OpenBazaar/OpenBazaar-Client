@@ -11,7 +11,7 @@ var __ = require('underscore'),
     ServerConfigsVw = require('./serverConfigsVw');
 
 module.exports = BaseModal.extend({
-  className: 'server-connect-modal modal-fullscreen',
+  className: 'server-connect-modal',
 
   events: {
     'click .js-close': 'closeConfigForm',
@@ -183,7 +183,11 @@ module.exports = BaseModal.extend({
     });
 
     this.hideMessageBar();
-    this.setModalOptions({ showCloseButton: true });
+    this.setModalOptions({
+      dismissOnOverlayClick: true,
+      dismissOnEscPress: true,
+      showCloseButton: true
+    });
 
     return this;
   },
@@ -215,7 +219,11 @@ module.exports = BaseModal.extend({
     }
 
     reason !== 'canceled' && this.showMessageBar(msg);
-    this.setModalOptions({ showCloseButton: false });
+    this.setModalOptions({
+      dismissOnOverlayClick: false,
+      dismissOnEscPress: false,
+      showCloseButton: false
+    });
 
     return this;
   },
@@ -254,7 +262,11 @@ module.exports = BaseModal.extend({
       status: 'connecting'
     });
 
-    this.setModalOptions({ showCloseButton: false });
+    this.setModalOptions({
+      dismissOnOverlayClick: false,
+      dismissOnEscPress: false,
+      showCloseButton: false
+    });
     this.serverConfigs.setActive(configMd.id);
 
     (attemptConnection = () => {
@@ -378,7 +390,7 @@ module.exports = BaseModal.extend({
       // server issue where valid connections may take
       // 1 min. +
       // conclude(true, 'timedout');
-      console.log("connection timeout"); 
+      console.log('connection timeout'); 
     }, 10000);
 
     return promise;

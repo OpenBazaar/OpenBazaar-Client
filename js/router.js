@@ -5,7 +5,6 @@ var ipcRenderer = require('ipc-renderer'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     app = require('./App').getApp(),    
-    messageModal = require('./utils/messageModal.js'),
     homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
     settingsView = require('./views/settingsVw'),
@@ -179,11 +178,10 @@ module.exports = Backbone.Router.extend({
     
     if (callback) callback.apply(this, args);
   },
-
-  cleanup: function(){
-    $('#loadingModal').addClass('hide'); //hide modal if it is still visible
-    messageModal.hide();
-    $('#obContainer').removeClass('modalOpen innerModalOpen');
+  
+  cleanup: function() {
+    app.loadingModal.close();
+    app.simpleMessageModal.close();
     window.obEventBus.trigger('cleanNav');
   },
 
@@ -199,7 +197,7 @@ module.exports = Backbone.Router.extend({
     };
   },
 
-  newView: function(View, options, ignoreCache) {
+  newView: function(View, options) {
     var now = Date.now(),
         cached = this.viewCache[View.getCacheIndex(Backbone.history.getFragment())],
         requestedRoute = Backbone.history.getFragment(),
@@ -221,7 +219,6 @@ module.exports = Backbone.Router.extend({
 
     $('body').attr('id', options.bodyID);
     $('body').attr('class', options.bodyClass);
-    $('#obContainer').removeClass('customizeUserPage'); //remove customization styling if present
     
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
@@ -253,7 +250,7 @@ module.exports = Backbone.Router.extend({
       }
     }
 
-    if (cached && (now - cached.cachedAt < cached.view.cacheExpires && !ignoreCache)) {
+    if (cached && (now - cached.cachedAt < cached.view.cacheExpires)) {
       // we have an un-expired cached view, let's reattach it
       this.view = cached.view;
 
@@ -276,6 +273,8 @@ module.exports = Backbone.Router.extend({
         typeof loadingConfig.promise.then === 'function') {
         this.launchPageConnectModal(loadingConfig).done(() => {
           this.view.cacheExpires && this.cacheView(this.view);
+        }).fail(() => {
+          this.view.remove();
         });
       } else {
         this.view.cacheExpires && this.cacheView(this.view);
@@ -298,7 +297,6 @@ module.exports = Backbone.Router.extend({
       throw new Error('At a minimum, the config must contain a config.promise.');
     }
 
-    $('#loadingModal').addClass('hide');
     config = __.extend({}, defaults, config);
 
     this.pageConnectModal && this.pageConnectModal.remove();
@@ -353,8 +351,6 @@ module.exports = Backbone.Router.extend({
   },
 
   home: function(state, searchText){
-    //if search terms have been given, don't use cached views
-    var ignoreCache = Boolean(searchText);
     this.newView(homeView, {
       viewArgs: {
         userModel: this.userModel,
@@ -363,7 +359,7 @@ module.exports = Backbone.Router.extend({
         state: state,
         searchItemsText: searchText
       }
-    }, ignoreCache);
+    });
 
     // hide the discover onboarding callout
     this.$discoverHolder = this.$discoverHolder || $('.js-OnboardingIntroDiscoverHolder');
