@@ -1,5 +1,14 @@
 <div class="width100 cursorDefault positionWrapper <% if(ob.status == 0){ %>hideableChild<% } %>">
-  <% if (ob.unread) { %>
+  <%
+  var flagStatus = false;
+  if(ob.transactionType == "purchases"){
+    flagStatus = ob.status == 2 || ob.status > 3;
+  } else if(ob.transactionType == "sales") {
+    flagStatus = ob.status == 1 || ob.status > 2;
+  } else {
+    flagStatus = true;
+  }
+  if (ob.unread || flagStatus && ob.status_changed) { %>
   <div class="highlightRow"></div>
   <% } %>
   <div class="rowItem padding20">
