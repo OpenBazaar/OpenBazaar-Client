@@ -287,8 +287,21 @@ module.exports = pageVw.extend({
 
     if (!filterBy || filterBy == "all"){
       tabCollection.comparator = function(model) {
-        //add 1 so unread:zero doesn't get dropped from the front of the string when it's changed to a number by the -
-        return -(String(model.get("unread")+1) + String(model.get("timestamp")));
+        //order the collection so items that are unread or have status updates are first
+        var status = model.get("status"),
+            flagStatus = false;
+
+        //only use the status_changed if the status matters to that tab
+        if(tabName == "purchases"){
+          flagStatus = status == 2 || status > 3;
+        } else if(tabName == "sales") {
+          flagStatus = status == 1 || status > 2;
+        } else {
+          flagStatus = true;
+        }
+
+        var attentionVal = model.get("unread") > 0 || model.get("status_changed") && flagStatus ? "2" : "1";
+        return -(String(attentionVal) + model.get("timestamp"));
       };
       tabCollection.sort();
     }
