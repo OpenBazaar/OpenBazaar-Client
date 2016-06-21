@@ -18,7 +18,7 @@ var fs = require('fs'),
     tray = require('tray'),
     ini = require('ini'),
     dialog = require('dialog'),
-    ipcMain = require('ipc-main')
+    ipcMain = require('ipc-main'),
     open = require('open');
 
 var launched_from_installer = false;
