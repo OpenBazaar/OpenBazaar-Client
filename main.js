@@ -188,7 +188,7 @@ var start_local_server = function() {
     });
     subpy.unref();
   } else {
-    mainWindow.webContents.executeJavaScript("console.log('Unable to find OpenBazaar-Server at: '" + serverPath + "')");
+    mainWindow && mainWindow.webContents.executeJavaScript("console.log('Unable to find OpenBazaar-Server at: '" + serverPath + "')");
   }
   if (fs.existsSync(__dirname + path.sep + '..' + path.sep + 'gpg')) {
        process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
