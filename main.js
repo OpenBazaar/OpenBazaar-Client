@@ -582,23 +582,10 @@ app.on('ready', function() {
 
   template.push(
     {
-      label: 'Send Debug Package', type: 'normal', click: function() {
-        var body = 'OpenBazaar Debug Report\n\n';
-        body += 'OS: ' + os.platform() + ' ' + os.release() + '\n';
-        body += 'Architecture: ' + os.arch() + '\n';
-        body += 'CPUs: ' + JSON.stringify(os.cpus(), null, 2) + '\n';
-        body += 'Free Memory: ' + os.freemem() + '\n';
-        body += 'Total Memory: ' + os.totalmem() + '\n\n';
-        body += 'Debug Log:\n';
-        body += serverOut;
-
-        require('open')('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
-      }
+      type: 'separator'
     },
     {
-      type: 'separator' },
-      {
-        label: 'Quit', type: 'normal', accelerator: 'Command+Q', click: function () {
+      label: 'Quit', type: 'normal', accelerator: 'Command+Q', click: function () {
         app.quit();
       }
     }
