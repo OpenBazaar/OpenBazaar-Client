@@ -528,7 +528,7 @@ app.on('ready', function() {
   var osTrayIcon = 'openbazaar-mac-system-tray.png';
 
   trayMenu = new tray(__dirname + '/imgs/' + osTrayIcon);
-  var contextMenu = menu.buildFromTemplate([
+  var template = [
     {
       label: 'Start Local Server', type: 'normal', click: function () {
       start_local_server();
@@ -554,7 +554,7 @@ app.on('ready', function() {
           dialog.showErrorBox('Unable To Open Debug Log',
             'There was an error and we are unable to open the server debug log at this time.\n\n' + err);
         }
-        
+
         require('open')(debugPath);
       });
     }},
@@ -570,31 +570,41 @@ app.on('ready', function() {
 
       require('open')('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
 
-    }},
-    {label: 'View Python Error Log', type: 'normal', click: function() {
+    }}
+  ];
+
+  if(launched_from_installer) {
+    template.push({label: 'View Python Error Log', type: 'normal', click: function() {
       var logPath = __dirname + path.sep + 'python_error.log';
       require('open')(logPath);
-    }},
-    {label: 'Send Debug Package', type: 'normal', click: function() {
-      var body = 'OpenBazaar Debug Report\n\n';
-      body += 'OS: ' + os.platform() + ' ' + os.release() + '\n';
-      body += 'Architecture: ' + os.arch() + '\n';
-      body += 'CPUs: ' + JSON.stringify(os.cpus(), null, 2) + '\n';
-      body += 'Free Memory: ' + os.freemem() + '\n';
-      body += 'Total Memory: ' + os.totalmem() + '\n\n';
-      body += 'Debug Log:\n';
-      body += serverOut;
+    }});
+  }
 
-      require('open')('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
-
-    }},
-    {type: 'separator'},
+  template.push(
     {
-      label: 'Quit', type: 'normal', accelerator: 'Command+Q', click: function () {
-      app.quit();
+      label: 'Send Debug Package', type: 'normal', click: function() {
+        var body = 'OpenBazaar Debug Report\n\n';
+        body += 'OS: ' + os.platform() + ' ' + os.release() + '\n';
+        body += 'Architecture: ' + os.arch() + '\n';
+        body += 'CPUs: ' + JSON.stringify(os.cpus(), null, 2) + '\n';
+        body += 'Free Memory: ' + os.freemem() + '\n';
+        body += 'Total Memory: ' + os.totalmem() + '\n\n';
+        body += 'Debug Log:\n';
+        body += serverOut;
+
+        require('open')('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
+      }
+    },
+    {
+      type: 'separator' },
+      {
+        label: 'Quit', type: 'normal', accelerator: 'Command+Q', click: function () {
+        app.quit();
+      }
     }
-    }
-  ]);
+  );
+
+  var contextMenu = menu.buildFromTemplate(template);
 
   trayMenu.setContextMenu(contextMenu);
 
