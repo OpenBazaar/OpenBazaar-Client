@@ -18,7 +18,8 @@ var fs = require('fs'),
     tray = require('tray'),
     ini = require('ini'),
     dialog = require('dialog'),
-    ipcMain = require('ipc-main');
+    ipcMain = require('ipc-main')
+    open = require('open');
 
 var launched_from_installer = false;
 var platform = os.platform();
@@ -29,6 +30,10 @@ switch (platform) {
 var version = app.getVersion();
 var trayMenu = null;
 var subpy = null;
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is GCed.
+var mainWindow = null;
 
 var open_url = null; // This is for if someone opens a URL before the client is open
 
@@ -161,10 +166,20 @@ var start_local_server = function() {
     });
     subpy.stderr.on('data', function (buf) {
       console.log('[STR] stderr "%s"', String(buf));
+      fs.appendFile(__dirname + path.sep + "python_error.log", String(buf), function(err) {
+          if(err) {
+              return console.log(err);
+          }
+      });
       stderr += buf;
     });
     subpy.on('error', function (err) {
       console.log('Python error %s', String(err));
+      fs.appendFile(__dirname + path.sep + "python_error.log", String(err), function(error) {
+          if(error) {
+              return console.log(error);
+          }
+      });
     });
     subpy.on('close', function (code) {
       console.log('exited with ' + code);
@@ -173,6 +188,8 @@ var start_local_server = function() {
       serverRunning = false;
     });
     subpy.unref();
+  } else {
+    mainWindow && mainWindow.webContents.executeJavaScript("console.log('Unable to find OpenBazaar-Server at: '" + serverPath + "')");
   }
   if (fs.existsSync(__dirname + path.sep + '..' + path.sep + 'gpg')) {
        process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
@@ -196,10 +213,6 @@ ipcMain.on('activeServerChange', function(event, server) {
 
 // Report crashes to our server.
 //require('crash-reporter').start();
-
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is GCed.
-var mainWindow = null;
 
 if (process.platform === "win32") {
   initWin32();
@@ -521,7 +534,7 @@ app.on('ready', function() {
   var osTrayIcon = 'openbazaar-mac-system-tray.png';
 
   trayMenu = new tray(__dirname + '/imgs/' + osTrayIcon);
-  var contextMenu = menu.buildFromTemplate([
+  var template = [
     {
       label: 'Start Local Server', type: 'normal', click: function () {
       start_local_server();
@@ -547,8 +560,8 @@ app.on('ready', function() {
           dialog.showErrorBox('Unable To Open Debug Log',
             'There was an error and we are unable to open the server debug log at this time.\n\n' + err);
         }
-        
-        require('open')(debugPath);
+
+        open(debugPath);
       });
     }},
     {label: 'Send Debug Package', type: 'normal', click: function() {
@@ -561,16 +574,30 @@ app.on('ready', function() {
       body += 'Debug Log:\n';
       body += serverOut;
 
-      require('open')('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
+      open('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
 
-    }},
-    {type: 'separator'},
+    }}
+  ];
+
+  if(launched_from_installer) {
+    template.push({label: 'View Python Error Log', type: 'normal', click: function() {
+      var logPath = __dirname + path.sep + 'python_error.log';
+      open(logPath);
+    }});
+  }
+
+  template.push(
+    {
+      type: 'separator'
+    },
     {
       label: 'Quit', type: 'normal', accelerator: 'Command+Q', click: function () {
-      app.quit();
+        app.quit();
+      }
     }
-    }
-  ]);
+  );
+
+  var contextMenu = menu.buildFromTemplate(template);
 
   trayMenu.setContextMenu(contextMenu);
 
