@@ -161,6 +161,11 @@ var start_local_server = function() {
     });
     subpy.stderr.on('data', function (buf) {
       console.log('[STR] stderr "%s"', String(buf));
+      fs.appendFile(__dirname + path.sep + "python_error.log", String(buf), function(err) {
+          if(err) {
+              return console.log(err);
+          }
+      });
       stderr += buf;
     });
     subpy.on('error', function (err) {
@@ -173,6 +178,8 @@ var start_local_server = function() {
       serverRunning = false;
     });
     subpy.unref();
+  } else {
+    mainWindow.webContents.executeJavaScript("console.log('Unable to find OpenBazaar-Server at: '" + serverPath + "')");
   }
   if (fs.existsSync(__dirname + path.sep + '..' + path.sep + 'gpg')) {
        process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
@@ -550,6 +557,23 @@ app.on('ready', function() {
         
         require('open')(debugPath);
       });
+    }},
+    {label: 'Send Debug Package', type: 'normal', click: function() {
+      var body = 'OpenBazaar Debug Report\n\n';
+      body += 'OS: ' + os.platform() + ' ' + os.release() + '\n';
+      body += 'Architecture: ' + os.arch() + '\n';
+      body += 'CPUs: ' + JSON.stringify(os.cpus(), null, 2) + '\n';
+      body += 'Free Memory: ' + os.freemem() + '\n';
+      body += 'Total Memory: ' + os.totalmem() + '\n\n';
+      body += 'Debug Log:\n';
+      body += serverOut;
+
+      require('open')('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
+
+    }},
+    {label: 'View Python Error Log', type: 'normal', click: function() {
+      var logPath = __dirname + path.sep + 'python_error.log';
+      require('open')(logPath);
     }},
     {label: 'Send Debug Package', type: 'normal', click: function() {
       var body = 'OpenBazaar Debug Report\n\n';
