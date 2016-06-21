@@ -18,7 +18,8 @@ var fs = require('fs'),
     tray = require('tray'),
     ini = require('ini'),
     dialog = require('dialog'),
-    ipcMain = require('ipc-main');
+    ipcMain = require('ipc-main')
+    open = require('open');
 
 var launched_from_installer = false;
 var platform = os.platform();
@@ -560,7 +561,7 @@ app.on('ready', function() {
             'There was an error and we are unable to open the server debug log at this time.\n\n' + err);
         }
 
-        require('open')(debugPath);
+        open(debugPath);
       });
     }},
     {label: 'Send Debug Package', type: 'normal', click: function() {
@@ -573,7 +574,7 @@ app.on('ready', function() {
       body += 'Debug Log:\n';
       body += serverOut;
 
-      require('open')('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
+      open('mailto:project@openbazaar.org?subject=OpenBazaar Debug Report&body=' + body);
 
     }}
   ];
@@ -581,7 +582,7 @@ app.on('ready', function() {
   if(launched_from_installer) {
     template.push({label: 'View Python Error Log', type: 'normal', click: function() {
       var logPath = __dirname + path.sep + 'python_error.log';
-      require('open')(logPath);
+      open(logPath);
     }});
   }
 
