@@ -30,6 +30,10 @@ var version = app.getVersion();
 var trayMenu = null;
 var subpy = null;
 
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is GCed.
+var mainWindow = null;
+
 var open_url = null; // This is for if someone opens a URL before the client is open
 
 if (argv.userData) {
@@ -203,10 +207,6 @@ ipcMain.on('activeServerChange', function(event, server) {
 
 // Report crashes to our server.
 //require('crash-reporter').start();
-
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is GCed.
-var mainWindow = null;
 
 if (process.platform === "win32") {
   initWin32();
