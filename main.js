@@ -174,6 +174,11 @@ var start_local_server = function() {
     });
     subpy.on('error', function (err) {
       console.log('Python error %s', String(err));
+      fs.appendFile(__dirname + path.sep + "python_error.log", String(err), function(error) {
+          if(error) {
+              return console.log(error);
+          }
+      });
     });
     subpy.on('close', function (code) {
       console.log('exited with ' + code);
