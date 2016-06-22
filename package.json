@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "valiquire": "valiquire --redirect valiquire-redirect.js .",
     "startwithserver": "electron main.js",
-    "validate": "npm ls"
+    "validate": "npm ls",
+    "test": "exit 0"
   },
   "dependencies": {
     "autolinker": "^0.22.0",
