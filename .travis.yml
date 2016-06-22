@@ -5,5 +5,5 @@ node_js:
   - "0.12"
   - "iojs"
 script:
-  - npm install lint
-  - npm run lint
+  - npm install eslint
+  - npm run eslint
