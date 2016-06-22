@@ -4,3 +4,5 @@ node_js:
   - "0.10"
   - "0.12"
   - "iojs"
+script:
+  - npm run lint
