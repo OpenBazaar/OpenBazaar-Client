@@ -4,6 +4,8 @@ node_js:
   - "0.10"
   - "0.12"
   - "iojs"
-script:
+install:
   - npm install eslint
+  - npm install
+script:
   - npm run eslint
