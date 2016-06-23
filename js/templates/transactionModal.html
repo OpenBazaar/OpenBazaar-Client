@@ -120,10 +120,20 @@
           <%= polyglot.t('transactions.AcceptDisputeResolution') %>
         </a>
       <% } else if(ob.status == 7 && ob.transactionType == "sales"){ %>
-      <a class="btn btn-txt custCol-primary pull-left textOpacity1 js-refundTransactionResend tooltip tooltip-box"
+      <a class="btn btn-txt custCol-primary pull-left textOpacity1 confirmable js-refundTransaction tooltip tooltip-box"
          data-tooltip="<%= polyglot.t('transactions.RefundOrderResendTooltip') %>">
-        <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
-        <%= polyglot.t('transactions.RefundOrderResend') %>
+        <span class="preSpacer">
+            <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.RefundOrderResend') %>
+          </span>
+          <span class="preConfirm">
+            <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.RefundOrderResend') %>
+          </span>
+          <span class="postConfirm">
+            <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.ConfirmRefund') %>
+          </span>
       </a>
       <% } %>
       <% if(ob.status != 0){ %>
