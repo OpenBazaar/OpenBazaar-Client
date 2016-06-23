@@ -18,7 +18,6 @@ module.exports = pageVw.extend({
 
   events: {
     'click .js-productsTab': function(){this.setState("products");},
-    'click .js-feedTab': function(){this.setState("feed");},
     'click .js-vendorsTab': function(){this.setState("vendors");},
     'click .js-homeCreateStore': 'createStore',
     'click .js-homeCreateListing': 'createListing',
@@ -168,8 +167,8 @@ module.exports = pageVw.extend({
   },
 
   hideList: function(){
-    this.$('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
-    this.$('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
+    this.$('.js-products, .js-vendors, .js-productsSearch').addClass('hide');
+    this.$('.js-productsTab, .js-vendorsTab').removeClass('active');
   },
 
   resetLookingCount: function(){
