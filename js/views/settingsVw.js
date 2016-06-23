@@ -210,6 +210,7 @@ module.exports = pageVw.extend({
   },
 
   render: function(){
+    console.log("render")
     var self = this;
     this.shownMods = []; //reset to blank 
     
@@ -221,7 +222,7 @@ module.exports = pageVw.extend({
       self.newAvatar = false;
       self.newBanner = false;
       self.blockedTabAccessed = false;
-      self.setState(self.options.state);
+      self.setState(self.state || self.options.state);
 
       $(".chosen").chosen({
         width: '100%',
