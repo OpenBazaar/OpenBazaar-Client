@@ -133,6 +133,10 @@ module.exports = pageVw.extend({
     this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);    
   },
 
+  // disabling caching on settings for now -- too much
+  // edge case overhead, like #1720
+  cacheExpires: 0,
+
   onCacheReattached: function(e) {
     var splitRoute = e.route.split('/'),
         state = splitRoute[1];
@@ -210,7 +214,6 @@ module.exports = pageVw.extend({
   },
 
   render: function(){
-    console.log("render")
     var self = this;
     this.shownMods = []; //reset to blank 
     
