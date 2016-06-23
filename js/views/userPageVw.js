@@ -681,7 +681,7 @@ UserPageVw = pageVw.extend({
 
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.notFoundError'),
-          message: window.polyglot.t('Items')
+          message: window.polyglot.t('Listings')
         });       
       },
       complete: function (xhr, textStatus) {
@@ -1060,7 +1060,7 @@ UserPageVw = pageVw.extend({
 
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.notFoundError'),
-          message: window.polyglot.t('Item')
+          message: window.polyglot.t('Listing')
         });        
       },
       complete: function(xhr, textStatus) {

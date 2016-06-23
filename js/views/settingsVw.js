@@ -210,7 +210,6 @@ module.exports = pageVw.extend({
   },
 
   render: function(){
-    console.log("render")
     var self = this;
     this.shownMods = []; //reset to blank 
     
