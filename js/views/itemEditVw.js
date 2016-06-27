@@ -663,5 +663,10 @@ module.exports = baseVw.extend({
     this.validateDescription();
 
     return this.$('#contractForm')[0].checkValidity();
+  },
+
+  remove: function() {
+    baseVw.prototype.remove.apply(this, arguments);
+    return this;
   }
 });

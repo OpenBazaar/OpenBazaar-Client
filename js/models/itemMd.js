@@ -23,8 +23,6 @@ module.exports = window.Backbone.Model.extend({
     userCountry: "", //set by userPage View. This is a country code. This is used for editing.
     ownPage: false, //set by userPage View
     itemHash: "", //set by userPage View
-    combinedImagesArray: [], //tracks uploaded and old images
-    imageHashesToUpload: [],
     priceSet: 0, //set in Update Attribute below, so view can listen for it
 
     //the object below is just a reference for a typical response from the server.
