@@ -3830,11 +3830,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 1;
 }
 
-.userPage-subViews img {
-  width: 100%;
-  height: auto;
-}
-
 .icon-huge {
   font-size: 140px;
 }
@@ -6089,6 +6084,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .editableContent img {
   max-width: 100%;
   max-height: 100%;
+  height: auto;
 }
 
 /* add formChecked class after form has been checked for validity */
