@@ -1017,14 +1017,11 @@ module.exports = pageVw.extend({
   saveModerator: function(){
     var self = this,
         form = this.$("#moderatorForm"),
-        moderatorData = {},
         moderatorStatus = this.$('#moderatorYes').is(':checked'),
         makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator",
         $saveBtn = this.$('.js-saveModerator');
 
     $saveBtn.addClass('loading');
-    moderatorData.name = self.model.get('page').profile.name;
-    moderatorData.location = self.model.get('page').profile.location;
 
     saveToAPI(form, '', self.serverUrl + "profile", function(){
       app.statusBar.pushMessage({
@@ -1036,7 +1033,7 @@ module.exports = pageVw.extend({
       self.refreshView();
     }, function(){
       self.scrollToFirstError(self.$('#moderatorForm'));
-    }, moderatorData).always(function(){
+    }).always(function(){
       $saveBtn.removeClass('loading');
     });
 

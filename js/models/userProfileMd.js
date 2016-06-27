@@ -44,7 +44,6 @@ module.exports = Backbone.Model.extend({
       background_color: "#063753",
       pgp_key: "",
       nsfw: false,
-      location: "UNITED_STATES",
       avatar_hash: "",
       handle: "",
       public_key: ""
@@ -96,11 +95,6 @@ module.exports = Backbone.Model.extend({
       //if name comes back blank, set to random value
       if (!response.profile.name){
         response.profile.name = "ob" + Math.random().toString(36).slice(2);
-      }
-
-      //if no country, set to USA
-      if (!response.profile.location) {
-        response.profile.location = "UNITED_STATES";
       }
 
       //put a copy of the avatar outside of the profile object, so change events can be triggered for it
