@@ -1104,6 +1104,7 @@ UserPageVw = pageVw.extend({
       defaultItem.userCurrencyCode = self.options.userModel.get('currency_code');
       defaultItem.vendor_offer.listing.item.price_per_unit.fiat.currency_code =self.options.userModel.get('currency_code');
       defaultItem.vendor_offer.listing.id.guid = self.model.get('page').profile.guid;
+      defaultItem.vendor_offer.listing.item.image_hashes = [];
       this.itemEdit = new itemModel(defaultItem);
     }
     //add the moderator list to the item model
