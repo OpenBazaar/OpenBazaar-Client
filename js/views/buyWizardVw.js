@@ -14,20 +14,6 @@ var __ = require('underscore'),
     clipboard = require('clipboard'),
     templateHelpers = require('../utils/templateHelpers');
 
-// randomize function
-$.fn.randomize = function(selector){
-  var $elems = selector ? $(this).find(selector) : $(this).children(),
-      $parents = $elems.parent();
-
-  $parents.each(function(){
-    $(this).children(selector).sort(function(){
-      return Math.round(Math.random()) - 0.5;
-    }).detach().appendTo(this);
-  });
-
-  return this;
-};
-
 module.exports = baseModal.extend({
 
   className: "buyView custCol-text insideApp",
@@ -220,9 +206,13 @@ module.exports = baseModal.extend({
       //auto select first payment type
       self.$el.find("input:radio[name=radioPaymentType]:first").attr('checked', true).trigger('click');
 
-      //randomize the bitcoin wallet providers 5 times
-      for (var i = 0; i < 5; i++) {
-        $(".js-BuyWizardWallets").randomize();
+      //randomize the bitcoin wallet providers
+
+      let $allWallets = self.$(".js-BuyWizardWallets");
+      let wallets = $allWallets.children('.js-bitcoinWalletProvider');
+
+      while (wallets.length){
+        $allWallets.append(wallets.splice(Math.floor(Math.random() * wallets.length), 1)[0]);
       }
 
       //set the QR details checkbox
