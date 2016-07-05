@@ -61,7 +61,6 @@ var Polyglot = require('node-polyglot'),
     startUpRetry,
     removeStartupRetry,
     onActiveServerSync,
-    extendPolyglot,
     newPageNavView,
     newSocketView,
     startUpLoadingModal,
@@ -94,24 +93,15 @@ validateLanguage = function(lang){
   return "en-US"; //if language is not found, use English
 };
 
-//put language in the window so all templates and models can reach it. It's especially important in formatting currency.
-//retrieve the stored value, since user is a blank model at this point
-window.lang = validateLanguage(localStorage.getItem('lang'));
-
 //put polyglot in the window so all templates can reach it
 window.polyglot = new Polyglot();
 
-(extendPolyglot = function(lang) {
-  var language = require('./languages/' + lang + '.json');
-  window.polyglot.extend(language);
-})(window.lang);
-
-updatePolyglot = function(lang){
+(updatePolyglot = function(lang){
   lang = validateLanguage(lang);//make sure the language is valid
-  window.lang = lang;
-  extendPolyglot(lang);
+  window.lang = lang; //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
   localStorage.setItem('lang', lang);
-};
+  window.polyglot.extend(require('./languages/' + lang + '.json'));
+})(validateLanguage(localStorage.getItem('lang')));
 
 user.on('change:language', function(md, lang) {
   // Re-starting the app on lang change. For now leaving in the code in various global views
