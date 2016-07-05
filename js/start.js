@@ -101,7 +101,7 @@ window.polyglot = new Polyglot();
   window.lang = lang; //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
   localStorage.setItem('lang', lang);
   window.polyglot.extend(require('./languages/' + lang + '.json'));
-})(validateLanguage(localStorage.getItem('lang')));
+})(localStorage.getItem('lang'));
 
 user.on('change:language', function(md, lang) {
   // Re-starting the app on lang change. For now leaving in the code in various global views
