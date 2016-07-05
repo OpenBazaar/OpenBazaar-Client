@@ -71,7 +71,8 @@ var Polyglot = require('node-polyglot'),
     setServerUrl,
     guidCreating,
     platformClass,
-    updatePolyglot;
+    updatePolyglot,
+    validateLanguage;
 
 if (process.platform === 'darwin') {
   platformClass = 'platform-mac';
@@ -85,23 +86,28 @@ if (process.platform === 'darwin') {
 
 $html.addClass(platformClass);
 
+validateLanguage = function(lang){
+  //check to see if the language exists in the language model
+  if (__.where(languages.get('languages'), {langCode: lang}).length) {
+    return lang;
+  }
+  return "en-US"; //if language is not found, use English
+};
+
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 //retrieve the stored value, since user is a blank model at this point
-window.lang = localStorage.getItem('lang') || "en-US";
+window.lang = validateLanguage(localStorage.getItem('lang'));
 
 //put polyglot in the window so all templates can reach it
-window.polyglot = new Polyglot({locale: window.lang});
+window.polyglot = new Polyglot();
 
-(extendPolyglot = function() {
-  // Make sure the language exists in the languages model
-  if (__.where(languages.get('languages'), {langCode: window.lang}).length) {
-    var language = require('./languages/' + window.lang + '.json');
-
-    window.polyglot.extend(language);
-  }
+(extendPolyglot = function(lang) {
+  var language = require('./languages/' + lang + '.json');
+  window.polyglot.extend(language);
 })(window.lang);
 
 updatePolyglot = function(lang){
+  lang = validateLanguage(lang);//make sure the language is valid
   window.lang = lang;
   extendPolyglot(lang);
   localStorage.setItem('lang', lang);

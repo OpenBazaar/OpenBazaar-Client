@@ -2,7 +2,6 @@
 
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    languagesModel = require('../models/languagesMd'),
     countriesMd = require('./countriesMd'),
     saveToAPI = require('../utils/saveToAPI');
 
@@ -11,7 +10,6 @@ module.exports = Backbone.Model.extend({
   initialize: function(){
     this.countries = new countriesMd();
     this.countryArray = this.countries.get('countries');
-    this.languages = new languagesModel();
   },
 
   defaults: {
