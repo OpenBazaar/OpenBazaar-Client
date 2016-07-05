@@ -165,6 +165,17 @@ module.exports = baseVw.extend({
     var countries = new countriesModel();
     //make a copy of the countries array
     var countryList = countries.get('countries').slice(0);
+    let shipsFrom = this.$el.find('#shipsFrom');
+    __.each(countryList, function(countryFromList, i){
+      let content = !i ? countryFromList.name : window.polyglot.t(`countries.${countryFromList.dataName}`);
+
+      shipsFrom.append(
+          `<option value="${countryFromList.dataName}">${content}</option>`
+      );
+    });
+    //set to existing value, default to user's home country if no value is set
+    shipsFrom.val(this.model.get('vendor_offer').listing.shipping.shipping_origin || this.model.get('userCountry'));
+    //add the ALL option
     countryList.unshift({
       "name": window.polyglot.t('WorldwideShipping'),
       "dataName": "ALL",
@@ -554,7 +565,6 @@ module.exports = baseVw.extend({
 
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
-    this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
     //convert number field to string field
     this.$el.find('#inputPrice').val(this.$el.find('#priceLocal').val());
     this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());

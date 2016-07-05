@@ -50,7 +50,6 @@
 </form>
 
 <form id="contractForm">
-  <input type="text" name="shipping_origin" id="inputShippingOrigin" class="hide" />
   <div class="flexRow border0 marginBottom50">
     <div class="flexRow flexExpand">
       <div class="flexCol-7 pad15 flex-border">
@@ -234,6 +233,21 @@
                       <option value="ALL"><%= polyglot.t('AllRegions') %></option>
                       <option value="EUROPEAN_UNION"><%= polyglot.t('EuropeanUnion') %></option>
                       <option value="EUROPEAN_ECONOMIC_AREA"><%= polyglot.t('EuropeanEconomicArea') %></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow custCol-border js-shippingRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="shipsFrom"><%= polyglot.t('ShipsFrom') %></label>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <div class="fieldItem padding0" data-label="<%= polyglot.t('ShipsFrom') %>">
+                  <div class="fieldItem-selectWrapper noIcon positionWrapper">
+                    <select name="shipping_origin" class="chosen custCol-text" id="shipsFrom" required>
                     </select>
                   </div>
                 </div>
