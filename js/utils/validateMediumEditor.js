@@ -25,7 +25,8 @@ function checkVal($field) {
     allowedAttributes: {
       'a': [ 'href', 'title', 'alt' ],
       'img': [ 'src', 'style']
-    }
+    },
+    allowedSchemes: [ 'http', 'https', 'ftp', 'mailto', 'ob' ]
   });
   
   $field.val(fVal);

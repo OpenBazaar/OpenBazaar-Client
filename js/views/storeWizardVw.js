@@ -1,6 +1,7 @@
 'use strict';
 
-var $ = require('jquery'),
+var __ = require('underscore'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),
@@ -34,6 +35,7 @@ module.exports = baseModal.extend({
     });
     this.socketModeratorID = Math.random().toString(36).slice(2);
     this.moderatorCount = 0;
+    __.bindAll(this, 'validateDescription');
   },
 
   initAccordion: function(targ){
@@ -124,7 +126,7 @@ module.exports = baseModal.extend({
   },
 
   validateDescription: function() {
-    validateMediumEditor.checkVal($('#aboutInput'));
+    validateMediumEditor.checkVal(this.$('#aboutInput'));
   },
 
   setValues: function() {

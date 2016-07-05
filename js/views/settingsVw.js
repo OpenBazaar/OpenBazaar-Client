@@ -130,7 +130,9 @@ module.exports = pageVw.extend({
 
     this.listenTo(app.router, 'cache-will-detach', this.onCacheWillDetach);
     this.listenTo(app.router, 'cache-detached', this.onCacheDetached);
-    this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);    
+    this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);
+
+    __.bindAll(this, 'validateDescription');
   },
 
   // disabling caching on settings for now -- too much
@@ -196,9 +198,7 @@ module.exports = pageVw.extend({
           }
         });
       },
-      error: function(model, response){
-        console.log(response);
-
+      error: function(){
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.getError'),
           message: window.polyglot.t('errorMessaes.userError')
