@@ -57,18 +57,16 @@ module.exports = baseModal.extend({
     var self = this,
         targetForm = this.$el.find('#moderatorSettingsForm'),
         moderatorFee = this.moderatorFeeInput.val(),
-        moderatorData = {},
         makeModeratorUrl = this.moderatorStatus ? this.model.get('user').serverUrl + "make_moderator" : this.model.get('user').serverUrl + "unmake_moderator";
 
-    moderatorData.name = self.model.get('page').profile.name;
-    moderatorData.location = self.model.get('page').profile.location;
+
     this.model.set('moderation_fee', moderatorFee);
     this.model.set('moderator', this.moderatorStatus);
 
     saveToAPI(targetForm, '', self.model.get('user').serverUrl + "profile", function(){
       window.obEventBus.trigger("moderatorStatus", {'status': self.moderatorStatus, 'fee': moderatorFee});
       self.close();
-    }, "", moderatorData);
+    }, "");
 
     $.ajax({
       type: "POST",

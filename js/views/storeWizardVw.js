@@ -192,8 +192,6 @@ module.exports = baseModal.extend({
     });
 
     modData.moderators = modList.length > 0 ? modList : "";
-    modData.name = this.model.get('page').profile.name;
-    modData.location = this.model.get('page').profile.location;
 
     wizData.primary_color = parseInt(userProfile.primary_color.slice(1), 16);
     wizData.secondary_color = parseInt(userProfile.secondary_color.slice(1), 16);
