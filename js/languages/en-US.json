@@ -127,6 +127,7 @@
   "ReturnsPolicy": "Returns Policy",
   "Tags": "Tags",
   "Keywords": "Keywords",
+  "ShipsFrom": "Ships From",
   "ShipsFrom2": "Ships From %{country}",
   "ShipsTo": "Ships To",
   "ShipsTo2": "Ships To %{country}",
