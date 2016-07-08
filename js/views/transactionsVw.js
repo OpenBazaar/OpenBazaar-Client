@@ -106,9 +106,7 @@ module.exports = pageVw.extend({
         self.renderTab("purchases");
         self.salesCol.fetch({
           success: function(){
-            if (self.model.get('page').vendor) {
-              self.renderTab("sales");
-            }
+            self.renderTab("sales");
             self.casesCol.fetch({
               success: function() {
                 self.renderTab("cases");
@@ -273,7 +271,6 @@ module.exports = pageVw.extend({
   },
 
   renderTab: function(tabName, filterBy){
-
     var self = this,
         tabCollection = this[tabName + "Col"],
         tabWrapper = this[tabName + "Wrapper"];
@@ -322,15 +319,18 @@ module.exports = pageVw.extend({
       self.addTransaction(model, tabWrapper, tabName);
     });
 
-    this.$el.find('.js-'+tabName+'Count').html(tabCollection.length);
+    this.$('.js-'+tabName+'Count').html(tabCollection.length);
 
-    this.$el.find('.js-' + tabName)
+    this.$('.js-' + tabName)
         .append(tabWrapper)
         .find('.js-unpaidCount').html(tabCollection.where({status: 0}).length)
         .end().find('.js-loadingMsg').addClass('hide');
 
     if (!tabCollection.length) {
-      this.$el.find('.js-' + tabName + ' .js-emptyMsg').removeClass('hide');
+      this.$('.js-' + tabName + ' .js-emptyMsg').removeClass('hide');
+    } else {
+      //if the tab is hidden because they have turned off their store or moderator status, but it has transactions, unhide it
+      this.$('.js-'+tabName+"Tab").removeClass('hide');
     }
 
     if (!tabWrapper.children().length){

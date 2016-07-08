@@ -27,20 +27,16 @@
     <%= polyglot.t('Purchases') %>
     <span class="pill fontSize12 textOpacity75 marginLeft2 js-purchasesCount"></span>
   </a>
-  <% if(ob.page.vendor){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-salesTab paddingRight18" data-tab="sales">
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-salesTab paddingRight18 <% if(!ob.page.vendor){ %>hide<% } %>" data-tab="sales">
     <span class="ion-log-in fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('Sales') %>
     <span class="pill fontSize12 textOpacity75 marginLeft2 js-salesCount"></span>
   </a>
-  <% } %>
-  <% if(ob.page.moderator){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-casesTab paddingRight18" data-tab="cases">
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-casesTab paddingRight18 <% if(!ob.page.moderator){ %>hide<% } %>" data-tab="cases">
     <span class="ion-briefcase fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('Cases') %>
     <span class="pill fontSize12 textOpacity75 marginLeft2 js-casesCount"></span>
   </a>
-  <% } %>
   <div class="flexExpand marginRight10">
     <a class="btn btn-txt pull-right custCol-primary js-downloadCSV"><i class="ion-archive fontSize12"></i><%= polyglot.t('transactions.ExportCSV') %></a>
   </div>
