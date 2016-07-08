@@ -245,8 +245,9 @@ module.exports = pageVw.extend({
   transactionFilter: function(e){
     var searchBy = $(e.target).val();
 
+    this.filterBy = searchBy;
+
     if (searchBy == 'dateNewest' || searchBy == 'dateOldest'){
-      this.filterBy = searchBy;
       this.$('.js-'+this.state+' .search').val("");
       this.renderTab(this.state);
     } else if (searchBy != "all"){
@@ -318,11 +319,7 @@ module.exports = pageVw.extend({
       tabCollection.sort();
     }
     tabCollection.each(function(model){
-      if (!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest") {
-        self.addTransaction(model, tabWrapper, tabName);
-      } else if (filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
-        self.addTransaction(model, tabWrapper, tabName);
-      }
+      self.addTransaction(model, tabWrapper, tabName);
     });
 
     this.$el.find('.js-'+tabName+'Count').html(tabCollection.length);
@@ -341,7 +338,15 @@ module.exports = pageVw.extend({
       this['searchTransactions_'+tabName] && this['searchTransactions_'+tabName].size() && this['searchTransactions_'+tabName].clear();
     } else {
       if (this['searchTransactions_'+tabName]){
-        this['searchTransactions_'+tabName].reIndex();
+        if (!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest") {
+          //reindex the list with new elements
+          this['searchTransactions_'+tabName].reIndex();
+        } else {
+          //re-filter the list with new elements
+          this['searchTransactions_'+tabName].filter(function (item) {
+            return item.values().js_searchStatusNum == filterBy;
+          });
+        }
       } else {
         this['searchTransactions_'+tabName] = new window.List('transactions' + tabName.charAt(0).toUpperCase() + tabName.substr(1), {valueNames: ['js-searchOrderID', 'js-searchPrice', 'js-searchUser', 'js-searchStatus', 'js-searchTitle', 'js_searchStatusNum'], page: 1000});
       }
