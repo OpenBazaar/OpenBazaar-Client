@@ -338,10 +338,8 @@ module.exports = pageVw.extend({
       this['searchTransactions_'+tabName] && this['searchTransactions_'+tabName].size() && this['searchTransactions_'+tabName].clear();
     } else {
       if (this['searchTransactions_'+tabName]){
-        if (!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest") {
-          //reindex the list with new elements
-          this['searchTransactions_'+tabName].reIndex();
-        } else {
+        this['searchTransactions_'+tabName].reIndex();
+        if (filterBy && filterBy != "all" && filterBy != "dateNewest" && filterBy != "dateOldest") {
           //re-filter the list with new elements
           this['searchTransactions_'+tabName].filter(function (item) {
             return item.values().js_searchStatusNum == filterBy;
