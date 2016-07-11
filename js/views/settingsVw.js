@@ -201,7 +201,7 @@ module.exports = pageVw.extend({
       error: function(){
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.getError'),
-          message: window.polyglot.t('errorMessaes.userError')
+          message: window.polyglot.t('errorMessages.userError')
         });
       },
       complete: function() {
@@ -754,7 +754,7 @@ module.exports = pageVw.extend({
           //on invalid
           app.simpleMessageModal.open({
             title: window.polyglot.t('errorMessages.saveError'),
-            message: window.polyglot.t('errorMessaes.missingError')
+            message: window.polyglot.t('errorMessages.missingError')
           });
           self.scrollToFirstError(self.$('#generalForm'));
         }).always(function(){
@@ -984,7 +984,7 @@ module.exports = pageVw.extend({
       if (!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.saveError'),
-          message: window.polyglot.t('errorMessaes.missingError')
+          message: window.polyglot.t('errorMessages.missingError')
         });
         $saveBtn.removeClass('loading');
         return;
@@ -1045,7 +1045,7 @@ module.exports = pageVw.extend({
       error: function(){
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.saveError'),
-          message: '<i>' + window.polyglot.t('errorMessaes.serverError') + '</i>'
+          message: '<i>' + window.polyglot.t('errorMessages.serverError') + '</i>'
         });
       }
     });
@@ -1066,7 +1066,7 @@ module.exports = pageVw.extend({
       $('#testSMTPButton').removeClass('loading');
       app.simpleMessageModal.open({
         title: window.polyglot.t('errorMessages.smtpServerError'),
-        message: window.polyglot.t('errorMessaes.noSMTPConnection')
+        message: window.polyglot.t('errorMessages.noSMTPConnection')
       });
     });
 
@@ -1082,12 +1082,12 @@ module.exports = pageVw.extend({
         if (err) {
           app.simpleMessageModal.open({
             title: window.polyglot.t('errorMessages.smtpServerError'),
-            message: window.polyglot.t('errorMessaes.badSMTPAuthentication')
+            message: window.polyglot.t('errorMessages.badSMTPAuthentication')
           });
         } else {
           app.simpleMessageModal.open({
             title: window.polyglot.t('errorMessages.smtpServerSuccess'),
-            message: window.polyglot.t('errorMessaes.goodSMTPAuthentication')
+            message: window.polyglot.t('errorMessages.goodSMTPAuthentication')
           });
         }
         $('#testSMTPButton').removeClass('loading');

@@ -80,7 +80,7 @@ module.exports = baseModal.extend({
 
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.serverError'),
-          message: '<i>' + window.polyglot.t('errorMessaes.serverError') + '</i>'
+          message: '<i>' + window.polyglot.t('errorMessages.serverError') + '</i>'
         });       
       }
     });
