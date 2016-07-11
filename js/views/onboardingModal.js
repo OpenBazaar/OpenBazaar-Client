@@ -351,6 +351,10 @@ module.exports = baseModal.extend({
                 console.log(errorThrown);
               }
             });
+          } else {
+            console.log("Save to settings has failed. Reason: "+data.reason);
+            app.serverConnectModal.failConnection("canceled", app.serverConfigs.getActive())
+                .open();
           }
         },
         error: function(jqXHR, status, errorThrown){
