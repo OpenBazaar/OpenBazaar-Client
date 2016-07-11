@@ -61,6 +61,8 @@ module.exports = baseVw.extend({
 
     this.shippingRegions = this.model.get('vendor_offer').listing.shipping.shipping_regions;
     this.shippingOrigin = this.model.get('vendor_offer').listing.shipping.shipping_origin;
+    this.shipsLocal = this.shippingRegions.indexOf(this.shippingOrigin) > -1;
+    this.nonLocalRegions = __.without(this.shippingRegions, this.shippingOrigin);
     this.worldwide = this.shippingRegions.length === 1 && this.shippingRegions[0] === 'ALL';
     
     this.render();
@@ -105,6 +107,8 @@ module.exports = baseVw.extend({
               userCountry: window.polyglot.t(`countries.${self.userModel.get('country')}`),
               shippingRegionsDisplay: localize.localizeShippingRegions(self.shippingRegions),
               worldwide: self.worldwide,
+              shipsLocal: self.shipsLocal,
+              nonLocalRegions: self.nonLocalRegions,
               displayShippingOrigin: self.shippingOrigin && window.polyglot.t(`countries.${self.shippingOrigin}`)
             })
           )
