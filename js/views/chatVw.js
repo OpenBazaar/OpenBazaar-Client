@@ -336,7 +336,9 @@ module.exports = baseVw.extend({
         openlyChatting = false,
         conversationMd;
 
-    if (!msg) return;
+    if (!msg || this.model.isBlocked(msg.sender)){
+      return;
+    }
 
     if (msg.message_type === 'CHAT') {
       if (this.chatConversationVw && msg.sender === this.chatConversationVw.model.get('guid')) {
@@ -387,7 +389,7 @@ module.exports = baseVw.extend({
         });
       }
 
-      if ((!window.focused || !openlyChatting) && !this.model.isBlocked(msg.sender)) {
+      if ((!window.focused || !openlyChatting)) {
         new Notification(msg.handle || msg.sender + ':', {
           body: msg.message,
           icon: msg.avatar_hash ? app.serverConfigs.getActive().getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
