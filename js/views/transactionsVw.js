@@ -106,9 +106,7 @@ module.exports = pageVw.extend({
         self.renderTab("purchases");
         self.salesCol.fetch({
           success: function(){
-            if (self.model.get('page').vendor) {
-              self.renderTab("sales");
-            }
+            self.renderTab("sales");
             self.casesCol.fetch({
               success: function() {
                 self.renderTab("cases");
@@ -245,8 +243,9 @@ module.exports = pageVw.extend({
   transactionFilter: function(e){
     var searchBy = $(e.target).val();
 
+    this.filterBy = searchBy;
+
     if (searchBy == 'dateNewest' || searchBy == 'dateOldest'){
-      this.filterBy = searchBy;
       this.$('.js-'+this.state+' .search').val("");
       this.renderTab(this.state);
     } else if (searchBy != "all"){
@@ -272,7 +271,6 @@ module.exports = pageVw.extend({
   },
 
   renderTab: function(tabName, filterBy){
-
     var self = this,
         tabCollection = this[tabName + "Col"],
         tabWrapper = this[tabName + "Wrapper"];
@@ -318,22 +316,21 @@ module.exports = pageVw.extend({
       tabCollection.sort();
     }
     tabCollection.each(function(model){
-      if (!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest") {
-        self.addTransaction(model, tabWrapper, tabName);
-      } else if (filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
-        self.addTransaction(model, tabWrapper, tabName);
-      }
+      self.addTransaction(model, tabWrapper, tabName);
     });
 
-    this.$el.find('.js-'+tabName+'Count').html(tabCollection.length);
+    this.$('.js-'+tabName+'Count').html(tabCollection.length);
 
-    this.$el.find('.js-' + tabName)
+    this.$('.js-' + tabName)
         .append(tabWrapper)
         .find('.js-unpaidCount').html(tabCollection.where({status: 0}).length)
         .end().find('.js-loadingMsg').addClass('hide');
 
     if (!tabCollection.length) {
-      this.$el.find('.js-' + tabName + ' .js-emptyMsg').removeClass('hide');
+      this.$('.js-' + tabName + ' .js-emptyMsg').removeClass('hide');
+    } else {
+      //if the tab is hidden because they have turned off their store or moderator status, but it has transactions, unhide it
+      this.$('.js-'+tabName+"Tab").removeClass('hide');
     }
 
     if (!tabWrapper.children().length){
@@ -342,6 +339,12 @@ module.exports = pageVw.extend({
     } else {
       if (this['searchTransactions_'+tabName]){
         this['searchTransactions_'+tabName].reIndex();
+        if (filterBy && filterBy != "all" && filterBy != "dateNewest" && filterBy != "dateOldest") {
+          //re-filter the list with new elements
+          this['searchTransactions_'+tabName].filter(function (item) {
+            return item.values().js_searchStatusNum == filterBy;
+          });
+        }
       } else {
         this['searchTransactions_'+tabName] = new window.List('transactions' + tabName.charAt(0).toUpperCase() + tabName.substr(1), {valueNames: ['js-searchOrderID', 'js-searchPrice', 'js-searchUser', 'js-searchStatus', 'js-searchTitle', 'js_searchStatusNum'], page: 1000});
       }
