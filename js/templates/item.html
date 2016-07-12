@@ -189,7 +189,7 @@
           <div class="flexCol-6">
             <div class="rowItem fontSize16 padding30 lineHeight24 fontWeight400">
               <% if(ob.worldwide || ob.shipsLocal){ %>
-                <h3><% if(ob.worldwide){print(polyglot.t('WorldwideShipping'));}else{print(polyglot.t('Local'));} %></h3>
+                <h3><%= polyglot.t('Local') %></h3>
                 <div>
                   <% if(ob.userCurrencyCode != "BTC"){ %>
                   <%= polyglot.t('Shipping2') %> <%= ob.displayDomesticShipping %> (<%= ob.intlNumFormat(ob.domesticShippingBTC, 8) %> BTC)
@@ -202,7 +202,7 @@
               <% if(ob.worldwide || ob.shipsLocal && ob.nonLocalRegions.length){ %>
                 <hr/>
               <% } %>
-              <% if(!ob.worldwide && ob.nonLocalRegions.length){ %>
+              <% if(ob.nonLocalRegions.length){ %>
                 <h3><%= polyglot.t('International') %></h3>
                 <div>
                   <% if(ob.userCurrencyCode != "BTC"){ %>
