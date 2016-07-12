@@ -336,9 +336,7 @@ module.exports = baseVw.extend({
         openlyChatting = false,
         conversationMd;
 
-    if (!msg) return;
-
-    if (this.model.isBlocked(msg.sender)){
+    if (!msg || this.model.isBlocked(msg.sender)){
       //don't do anything if the user is blocked
       return;
     }
