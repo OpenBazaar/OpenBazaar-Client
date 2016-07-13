@@ -240,6 +240,9 @@ module.exports = baseVw.extend({
       notif.guid = notif.guid || notif.sender;
 
       //only show follow notifcations from the same user once per hour
+      if (!this.notificationsRecord[username]){
+        this.notificationsRecord[username] = {};
+      }
       if (this.notificationsRecord[username].notifStamp &&
           notifStamp - this.notificationsRecord[username].notifStamp < 3600000 &&
           notif.type === "follow"){
