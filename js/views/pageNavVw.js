@@ -239,15 +239,10 @@ module.exports = baseVw.extend({
       notifStamp = Date.now();
       notif.guid = notif.guid || notif.sender;
 
-      //prevent message spamming from one user
-      if (!this.notificationsRecord[username]){
-        this.notificationsRecord[username] = {};
-      }
-      if (notif.type == 'follow' && this.notificationsRecord[username]){
-        //don't show any duplicate follow notifications
-        return;
-      }
-      if (this.notificationsRecord[username].notifStamp && notifStamp - this.notificationsRecord[username].notifStamp < 30000){
+      //only show follow notifcations from the same user once per hour
+      if (this.notificationsRecord[username].notifStamp &&
+          notifStamp - this.notificationsRecord[username].notifStamp < 3600000 &&
+          notif.type === "follow"){
         return;
       }
       this.notificationsRecord[username].notifStamp = notifStamp;

@@ -20,7 +20,6 @@ module.exports = baseVw.extend({
 
     this.options = options;
     this.fetch = this.options.initialFetch;
-    this.uniqueFollows = []; //list of unique follows
     
     this.listenTo(this.collection, 'update', (cl, options) => {
       if (!options.add) return;
@@ -34,7 +33,7 @@ module.exports = baseVw.extend({
       // models at the bottom (lazy loaded via scroll) -or- a new
       // model at the top (new notification via socket) 
       cl.forEach((md) => {
-        if (!md.notifCreated && this.isNotDuplicateFollow(md)) {
+        if (!md.notifCreated) {
           if (cl.indexOf(md) === 0) {
             // new notif via socket
             this.addNotificationsToDom(
@@ -64,19 +63,6 @@ module.exports = baseVw.extend({
     this.scrollHandler = __.bind(
         __.throttle(this.onScroll, 100), this
     );
-  },
-
-  isNotDuplicateFollow: function(md){
-    //do not add duplicate follow notifications
-    if (md.get('type') == 'follow'){
-      var guid = md.get('guid') || md.get('sender');
-      if (this.uniqueFollows.indexOf(guid) < 0) {
-        this.uniqueFollows.push(guid);
-        return true;
-      }
-    } else {
-      return true;
-    }
   },
 
   notificationClick: function(e) {
@@ -162,10 +148,8 @@ module.exports = baseVw.extend({
 
       if (!isFetching) {
         this.collection.forEach((md) => {
-          if (this.isNotDuplicateFollow(md)){
-            $container.append(this.createNotification(md).render().el);
-            this.addNotificationsToDom($container);
-          }
+          $container.append(this.createNotification(md).render().el);
+          this.addNotificationsToDom($container);
         });
 
         if (this.collection.length) {

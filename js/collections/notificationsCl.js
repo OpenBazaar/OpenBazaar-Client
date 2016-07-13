@@ -2,7 +2,7 @@
 
 var Backbone = require('backbone'),
     app = require('../App.js').getApp(),
-    NotificationMd = require('../models/notificationsMd');
+    NotificationMd = require('../models/notificationMd');
 
 
 module.exports = Backbone.Collection.extend({
