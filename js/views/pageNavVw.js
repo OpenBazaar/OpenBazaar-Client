@@ -232,7 +232,7 @@ module.exports = baseVw.extend({
       username = notif.sender ? notif.sender : username;
       avatarHash = notif.image_hash || notif.avatar_hash;
       avatar = avatarHash ? app.serverConfigs.getActive().getServerBaseUrl + '/get_image?hash=' +
-      avatarHash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
+        avatarHash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
       notif.type = notif.type || notif.message_type;
       notif.guid = notif.guid || notif.sender;
       
