@@ -55,7 +55,6 @@ module.exports = baseVw.extend({
     this.model.set('moderator', this.userProfile.get('profile').moderator);
     this.languages = new languagesModel();
     this.showDiscIntro = options.showDiscIntro;
-    this.notificationsRecord = {}; //store notification timestamps to prevent too many from the same user
 
     this.listenTo(window.obEventBus, "updateProfile", function(){
       this.refreshProfile();
@@ -225,8 +224,7 @@ module.exports = baseVw.extend({
         username,
         avatar,
         avatarHash,
-        notif,
-        notifStamp;
+        notif;
 
     if (data.hasOwnProperty('notification') || data.hasOwnProperty('message') && data.message.subject) {
       notif = data.notification || data.message;
@@ -236,7 +234,6 @@ module.exports = baseVw.extend({
       avatar = avatarHash ? app.serverConfigs.getActive().getServerBaseUrl + '/get_image?hash=' +
         avatarHash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
       notif.type = notif.type || notif.message_type;
-      notifStamp = Date.now();
       notif.guid = notif.guid || notif.sender;
       
       this.unreadNotifsViaSocket++;
@@ -245,19 +242,9 @@ module.exports = baseVw.extend({
           __.extend({}, notif, { 
             read: false,
             username: username,
-            image_hash: avatarHash,
-            notifStamp: notifStamp,
+            image_hash: avatarHash
           })
       );
-
-      //prevent message spamming from one user
-      if (!this.notificationsRecord[username]){
-        this.notificationsRecord[username] = {};
-      }
-      if (this.notificationsRecord[username].notifStamp && notifStamp - this.notificationsRecord[username].notifStamp < 30000){
-        return;
-      }
-      this.notificationsRecord[username].notifStamp = notifStamp;
 
       switch (notif.type) {
       case "follow":
