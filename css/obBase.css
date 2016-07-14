@@ -4449,6 +4449,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-align: center;
 }
 
+#ov1 .server-connect-modal {
+  z-index: 10; /* slightly hacky way to resolve problems when loading modal is in front of the server connect modal*/
+}
+
 #ov1 .server-connect-modal .modal-child {
   height: 625px;
 }
