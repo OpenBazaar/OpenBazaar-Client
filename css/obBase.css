@@ -392,7 +392,7 @@ h6, .h6 {
 #appBar .windowControls {
   position: absolute;
   left: 8px;
-  top: 6px;  
+  top: 6px;
 }
 
 #appBar.style-win .windowControls {
@@ -717,12 +717,12 @@ h6, .h6 {
 .listingDoesNotShipToYou,
 .listingDoesNotShipToYou.tooltip {
   background: #252525;
-  height: 18px; 
+  height: 18px;
   width: 18px;
   right: 39px;
-  padding: 10px; 
-  position: absolute; 
-  text-align: center; 
+  padding: 10px;
+  position: absolute;
+  text-align: center;
   top: 217px;
   transition: top .3s cubic-bezier(0, 0, 0.2, 1);
   border-radius: 32px;
@@ -730,11 +730,11 @@ h6, .h6 {
 }
 
 .listingsDoesNotShipToYouSlash {
-  position: absolute; 
-  top: 3px; 
-  color: #DE2A14; 
-  font-size: 26px; 
-  left: 14px; 
+  position: absolute;
+  top: 3px;
+  color: #DE2A14;
+  font-size: 26px;
+  left: 14px;
   font-weight: 700;
 }
 
@@ -2175,7 +2175,7 @@ margin: auto;
   display: block;
   top: -3px;
   font-size: 21px;
-  color: #fff;  
+  color: #fff;
 }
 
 #appBar.style-win .btn.btn-winMax {
@@ -2184,7 +2184,7 @@ margin: auto;
   border: 1px solid #fff;
   width: 13px;
   height: 13px;
-  top: 3px;  
+  top: 3px;
 }
 
 #appBar.style-win .btn.btn-winMax .btn-win-icon,
@@ -6299,10 +6299,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .js-modal-close [class *= "ion-"]:before,
 #ov1 #userPage .js-modal-close [class *= "ion-"]:before,
 #ov1 #obContainer .js-modal-close [class *= "ion-"]:before,
+#ov1 #userPage .btn.btn-c1 [class *= "ion-"]:before,
 #ov1.minEffects .js-modal-close [class *= "ion-"]:before,
 #ov1.minEffects #userPage .js-modal-close [class *= "ion-"]:before,
-#ov1.minEffects #obContainer .js-modal-close [class *= "ion-"]:before {
+#ov1.minEffects #obContainer .js-modal-close [class *= "ion-"]:before,
+#ov1.minEffects #userPage .btn.btn-c1 [class *= "ion-"]:before {
   text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
+}
+
+
+#ov1 #userPage .btn.btn-c1:not(.custCol-primary) [class *= "ion-"]:before {
+  color: #fff !important;
 }
 
 /* hide unfinished elements */
