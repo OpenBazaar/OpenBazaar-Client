@@ -19,7 +19,7 @@ module.exports = baseVw.extend({
     'click #shippingFreeFalse': 'enableShippingPrice',
     'change .js-itemImageUpload': 'onImageFileChange',
     'dragover .js-photosModule': 'onPhotoDragOver',
-    'dragleave .js-photosModule': 'onPhotoDragLeave',    
+    'dragleave .js-photosModule': 'onPhotoDragLeave',
     'drop .js-photosModule': 'onPhotoDrop',
     'change #inputType': 'changeType',
     'click .js-editItemDeleteImage': 'deleteImage',
@@ -48,15 +48,15 @@ module.exports = baseVw.extend({
     countryList.forEach(function(country) {
       allRegions.push(country.dataName);
     });
-    
+
     var europeanUnion = [
       'AUSTRIA', 'BELGIUM', 'BULGARIA', 'CROATIA', 'CYPRUS', 'CZECH_REPUBLIC', 'DENMARK', 'ESTONIA',
       'FINLAND', 'FRANCE', 'GERMANY', 'GREECE', 'HUNGARY', 'IRELAND', 'ITALY', 'LATVIA', 'LITHUANIA', 'LUXEMBOURG',
-      'MALTA', 'NETHERLANDS', 'POLAND', 'PORTUGAL', 'ROMANIA', 'SLOVAKIA', 'SLOVENIA', 'SPAIN', 'SWEDEN', 'UNITED_KINGDOM' 
+      'MALTA', 'NETHERLANDS', 'POLAND', 'PORTUGAL', 'ROMANIA', 'SLOVAKIA', 'SLOVENIA', 'SPAIN', 'SWEDEN', 'UNITED_KINGDOM'
     ];
-    
+
     var europeanEconomicArea = europeanUnion.concat(['ICELAND', 'LIECHTENSTEIN', 'NORWAY']);
-    
+
     this.regions = {
       'ALL': allRegions,
       'EUROPEAN_UNION': europeanUnion,
@@ -67,7 +67,7 @@ module.exports = baseVw.extend({
     this.defaultDate = nowDate.getFullYear() + "-" + padTime(nowMonth) + "-" + padTime(nowDate.getDate()) + "T" + padTime(nowDate.getHours()) + ":" + padTime(nowDate.getMinutes());
     this.imgHashes = this.model.get('vendor_offer').listing.item.image_hashes;
     __.bindAll(this, 'validateDescription');
-   
+
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
 
     this.listenTo(this.model, 'change:priceSet', this.render());
@@ -75,7 +75,7 @@ module.exports = baseVw.extend({
 
   render: function(){
     var self = this;
-    
+
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       var context = __.extend({}, self.model.toJSON(), {
         MAX_PHOTOS: self.MAX_PHOTOS,
@@ -120,7 +120,7 @@ module.exports = baseVw.extend({
         }).change(function(e){
           self.shipsToChange(e);
         });
-        
+
         self.$('.chosenRegions').chosen({
           width: '100%',
           disable_search: true,
@@ -209,6 +209,17 @@ module.exports = baseVw.extend({
         preserveCase: true,
         saveOnBlur: true,
         placeholder: window.polyglot.t('KeywordsPlaceholder'),
+        onBeforeTagAdd: (event, tag) => {
+          console.log(tag);
+          console.log(tag.length);
+          if(tag.length > 40) {
+            app.simpleMessageModal.open({
+              title: window.polyglot.t('errorMessages.tagIsTooLongHeadline'),
+              message: window.polyglot.t('errorMessages.tagIsTooLongBody')
+            });
+            return false;
+          }
+        },
         onTagAdd: () => {
           this.$('#inputKeyword').removeClass('invalid');
         },
@@ -340,7 +351,7 @@ module.exports = baseVw.extend({
   onPhotoDragLeave: function(e) {
     this.$photosModule.removeClass('dragOver');
     e.preventDefault();
-  },  
+  },
 
   onPhotoDrop: function(e) {
     this.$photosModule.removeClass('dragOver');
@@ -373,11 +384,11 @@ module.exports = baseVw.extend({
 
     if (this.imgHashes.length + imageFiles.length > this.MAX_PHOTOS) {
       imageFiles = imageFiles.slice(0, this.MAX_PHOTOS - this.imgHashes.length);
-      
+
       app.simpleMessageModal.open({
         title: window.polyglot.t('errorMessages.tooManyPhotosTitle'),
         message: window.polyglot.t('errorMessages.tooManyPhotosBody')
-      });     
+      });
     }
 
     if (!imageFiles.length) return;
@@ -434,7 +445,7 @@ module.exports = baseVw.extend({
           });
         } else if (loaded === imageCount) {
           self.uploadImage(imageList);
-        }        
+        }
       };
     });
   },
@@ -442,7 +453,7 @@ module.exports = baseVw.extend({
   uploadImage: function(imageList){
     var self = this,
         formData = new FormData();
-    
+
     __.each(imageList, function(dataURL){
       formData.append('image', dataURL);
     });
@@ -665,7 +676,7 @@ module.exports = baseVw.extend({
       message: window.polyglot.t('errorMessages.missingError') + '<br><i><br />' +
         invalidInputList.join('<br />') + '</i>'
     });
-    
+
     return $.Deferred().reject('failed form validation').promise();
   },
 

@@ -112,7 +112,7 @@
             if(data.length < 100 && i < 11) {
           %>
             <a href="#home/products/<%= data.replace(/\s+/g, '')  %>">
-              <div class="btn-pill custCol-secondary floatLeft">
+              <div class="btn-pill custCol-secondary floatLeft taggle">
                 #<%= data.replace(/\s+/g, '') %>
               </div>
             </a>
@@ -178,7 +178,7 @@
         <div class="padding20 marginBottom12 width100 alignCenter">
           <div class="spinnerWrapper">
             <i class="ion-android-sync spinner textSize24px"></i>
-          </div>         
+          </div>
         </div>
         <% } %>
         <div class="js-reviewsContainer <% (ob.fetchingRatings) && print ('hide') %>"></div>
