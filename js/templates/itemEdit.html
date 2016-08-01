@@ -103,21 +103,22 @@
               </div>
             </div>
             <div class="flexCol-4">
+              <% var minBTCPrice = 0.0005 %>
               <input type="number" step="any" name="price" id="inputPrice" class="hide" />
               <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
               <input type="number" name="priceLocal" step="any" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%= ob.price %>" required
                 <% if(ob.userCurrencyCode == "BTC"){ %>
-                min="0.0002"
+                min="<%= minBTCPrice %>"
                 <% } else { %>
-                min="<% print((window.currentBitcoin * 0.0002).toFixed(2)) %>"
+                min="<% print((window.currentBitcoin * minBTCPrice).toFixed(2)) %>"
                 <% } %>
               >
             </div>
             <div class="flexCol-5">
               <span class="fieldItem pull-right">
                 <span class="tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>">
-                  <span class="txt-placeholder">
-                    <%= polyglot.t('MinimumIs', { amount: ob.userCurrencyCode == "BTC" ? ob.intlNumFormat(0.0002, 4) : ob.intlNumFormat(window.currentBitcoin * 0.0002, 4) }) %>
+                  <span class="txt-placeholder custCol-text">
+                    <%= polyglot.t('MinimumIs', { amount: ob.userCurrencyCode == "BTC" ? ob.intlNumFormat(minBTCPrice, 4) : ob.intlNumFormat(window.currentBitcoin * minBTCPrice, 4) }) %>
                     <span class="ion-help-circled fontSize12"></span>
                   </span>
                 </span>
@@ -207,6 +208,10 @@
               <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="shipsTo"><%= polyglot.t('ShipsTo') %></label>
+                  <div>
+                    <a class="btn btn-txtOnly btn-small js-clearShipsTo">
+                      <%= polyglot.t('ClearShippingLocations') %></a>
+                  </div>
                 </div>
               </div>
               <div class="flexCol-8">
@@ -408,7 +413,8 @@
             </div>
           </div>
           <div class="flexRow">
-            <p class="textOpacity50 helper-text marginTop8"><%= polyglot.t('KeywordsHelperText') %></p>
+            <p class="textOpacity50 helper-text marginTop8"><%= polyglot.t('KeywordsHelperText',
+              {maxTagChars: ob.maxTagChars}) %></p>
           </div>
         </div>
 

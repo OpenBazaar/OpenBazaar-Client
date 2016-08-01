@@ -94,9 +94,10 @@
   "CategoryPlaceholder": "Enter category",
   "CategoryHelperText": "Categories are used to group and organize listing within your store.",
   "KeywordsPlaceholder": "Enter One or More Tags",
-  "KeywordsHelperText": "Adding tags helps your listing to be discovered in the market. You can only have one of each tag, and a maximum of 10 tags, separated by commas or the enter key.",
+  "KeywordsHelperText": "Adding tags helps your listing to be discovered in the market. You can only have one of each tag, and a maximum of 10 tags, separated by commas or the enter key. Tags cannot be longer than %{maxTagChars} characters.",
   "ExpirationDateHelperText": "Set a date for the listing to automatically be pulled from your store.",
   "ClearExpirationDate": "Clear Expiration Date",
+  "ClearShippingLocations": "Clear All",
   "ReturnPolicy": "Return Policy",
   "TermsAndConditions": "Terms and Conditions",
   "Photos": "Photos",
@@ -189,7 +190,7 @@
   "Listing": "Listing",
   "Listings": "Listings",
   "ViewPage": "View page",
-  "ClearConvo": "Clear conversation",  
+  "ClearConvo": "Clear conversation",
   "Pages": "Pages",
   "Page": "Page",
   "Language": "Language",
@@ -526,7 +527,9 @@
     "smtpServerSuccess": "SMTP Connection Success",
     "noSMTPConnection": "The connection to the SMTP server failed.",
     "badSMTPAuthentication": "The username/password combination used failed.",
-    "goodSMTPAuthentication": "You have successfully connected to the SMTP server."
+    "goodSMTPAuthentication": "You have successfully connected to the SMTP server.",
+    "tagIsTooLongHeadline": "The tag is too long",
+    "tagIsTooLongBody": "Tags cannot be more than %{maxTagChars} characters long."
   },
   "pageConnectingMessages": {
     "listingConnect": "Connecting to listing ${listing}",
@@ -985,7 +988,7 @@
     "WESTERN_SAHARA": "Western Sahara",
     "YEMEN": "Yemen",
     "ZAMBIA": "Zambia",
-    "ZIMBABWE": "Zimbabwe"    
+    "ZIMBABWE": "Zimbabwe"
   },
   "chosenJS": {
     "noResultsText": "No results match",
