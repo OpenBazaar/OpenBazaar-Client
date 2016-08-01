@@ -71,6 +71,8 @@ module.exports = baseVw.extend({
 
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
 
+    this.maxTagChars = 40;
+
     this.listenTo(this.model, 'change:priceSet', this.render());
   },
 
@@ -80,7 +82,8 @@ module.exports = baseVw.extend({
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       var context = __.extend({}, self.model.toJSON(), {
         MAX_PHOTOS: self.MAX_PHOTOS,
-        images: self.imgHashes.map((hash) => self.getImageUrl(hash))
+        images: self.imgHashes.map((hash) => self.getImageUrl(hash)),
+        maxTagChars: self.maxTagChars
       });
 
       self.$el.html(loadedTemplate(context));
@@ -211,10 +214,10 @@ module.exports = baseVw.extend({
         saveOnBlur: true,
         placeholder: window.polyglot.t('KeywordsPlaceholder'),
         onBeforeTagAdd: (event, tag) => {
-          if(tag.length > 40) {
+          if(tag.length > self.maxTagChars) {
             app.simpleMessageModal.open({
               title: window.polyglot.t('errorMessages.tagIsTooLongHeadline'),
-              message: window.polyglot.t('errorMessages.tagIsTooLongBody')
+              message: window.polyglot.t('errorMessages.tagIsTooLongBody', {maxTagChars: self.maxTagChars})
             });
             return false;
           }
