@@ -97,6 +97,7 @@
   "KeywordsHelperText": "Adding tags helps your listing to be discovered in the market. You can only have one of each tag, and a maximum of 10 tags, separated by commas or the enter key.",
   "ExpirationDateHelperText": "Set a date for the listing to automatically be pulled from your store.",
   "ClearExpirationDate": "Clear Expiration Date",
+  "ClearShippingLocations": "Clear All",
   "ReturnPolicy": "Return Policy",
   "TermsAndConditions": "Terms and Conditions",
   "Photos": "Photos",

@@ -27,7 +27,8 @@ module.exports = baseVw.extend({
     'blur textarea': 'validateInput',
     'focus #inputExpirationDate': 'addDefaultTime',
     'click .js-itemEditClearDate': 'clearDate',
-    'change #shipsToRegions': 'selectRegions'
+    'change #shipsToRegions': 'selectRegions',
+    'click .js-clearShipsTo': 'clearShipsTo'
   },
 
   MAX_PHOTOS: 10,
@@ -210,8 +211,6 @@ module.exports = baseVw.extend({
         saveOnBlur: true,
         placeholder: window.polyglot.t('KeywordsPlaceholder'),
         onBeforeTagAdd: (event, tag) => {
-          console.log(tag);
-          console.log(tag.length);
           if(tag.length > 40) {
             app.simpleMessageModal.open({
               title: window.polyglot.t('errorMessages.tagIsTooLongHeadline'),
@@ -302,6 +301,10 @@ module.exports = baseVw.extend({
     this.$('.chosenRegions').trigger('chosen:updated');
   },
 
+  clearShipsTo: function(){
+    this.$('#shipsTo').val("").trigger('chosen:updated');
+  },
+
   addDefaultTime: function(){
     var timeInput = this.$el.find('#inputExpirationDate'),
         currentValue = timeInput.val();
@@ -314,7 +317,8 @@ module.exports = baseVw.extend({
   shipsToChange: function(e){
     var newVal = $(e.target).val() || [],
         newSelection = __.difference(newVal, this.prevShipsToVal),
-        wwNewIndex = newVal.indexOf('ALL');
+        wwNewIndex = newVal.indexOf('ALL'),
+        $shipsToWrapper = this.$('.js-shipToWrapper');
 
     //is the new value different from ALL?
     if (newSelection[0] != "ALL"){
@@ -331,9 +335,9 @@ module.exports = baseVw.extend({
     this.prevShipsToVal = newVal;
 
     if (newVal.length) {
-      this.$('.js-shipToWrapper').removeClass('invalid');
+      $shipsToWrapper.removeClass('invalid');
     } else {
-      this.$('.js-shipToWrapper').addClass('invalid');
+      $shipsToWrapper.addClass('invalid');
     }
   },
 

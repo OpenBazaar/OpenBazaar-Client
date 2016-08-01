@@ -4977,6 +4977,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: none;
   box-shadow: none;
   border: none;
+  padding: 0;
 }
 
 #ov1 .overflowHidden {
