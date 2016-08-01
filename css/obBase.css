@@ -1122,6 +1122,11 @@ label.fieldItem {
   position: relative;
 }
 
+.fieldItem.thumbnail-small {
+  min-height: 30px;
+  margin: 10px 0 10px 10px;
+}
+
 .thumbnail {
   height: 54px;
   width: 54px;
@@ -2978,6 +2983,10 @@ label {
 .fieldItem h5,
 .fieldItem h6 {
   margin: 0;
+}
+
+.fieldItem.plainText {
+  line-height: 20px;
 }
 
 input[type="text"].fieldItem,
