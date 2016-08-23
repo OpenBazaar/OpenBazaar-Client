@@ -94,7 +94,8 @@
   "CategoryPlaceholder": "Enter category",
   "CategoryHelperText": "Categories are used to group and organize listing within your store.",
   "KeywordsPlaceholder": "Enter One or More Tags",
-  "KeywordsHelperText": "Adding tags helps your listing to be discovered in the market. You can only have one of each tag, and a maximum of 10 tags, separated by commas or the enter key. Tags cannot be longer than %{maxTagChars} characters.",
+  "KeywordsHelperText": "Adding tags helps your listing to be discovered in the market. You can only have one of each tag, and a maximum of 10 tags, separated by commas or the enter key.",
+  "KeywordsHelperText2": "Tags cannot be longer than %{smart_count} character. |||| Tags cannot be longer than %{smart_count} characters.",
   "ExpirationDateHelperText": "Set a date for the listing to automatically be pulled from your store.",
   "ClearExpirationDate": "Clear Expiration Date",
   "ClearShippingLocations": "Clear All",
@@ -529,7 +530,7 @@
     "badSMTPAuthentication": "The username/password combination used failed.",
     "goodSMTPAuthentication": "You have successfully connected to the SMTP server.",
     "tagIsTooLongHeadline": "The tag is too long",
-    "tagIsTooLongBody": "Tags cannot be more than %{maxTagChars} characters long."
+    "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
   },
   "pageConnectingMessages": {
     "listingConnect": "Connecting to listing ${listing}",
