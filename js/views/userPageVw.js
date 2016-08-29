@@ -311,7 +311,7 @@ UserPageVw = pageVw.extend({
           self.model.set({ownPage: self.options.ownPage});
           self.render();
           !self.currentItemHash && self.loadingDeferred.resolve();
-          
+
           // Handle was requested
           if (profile.handle) {
             window.obEventBus.trigger('handleObtained', profile);
@@ -428,7 +428,7 @@ UserPageVw = pageVw.extend({
             console.log(errorMessage);
           }
         });
-        
+
         self.scrollHandler = __.bind(
           __.throttle(self.onScroll, 100),
           self
@@ -461,7 +461,7 @@ UserPageVw = pageVw.extend({
         .show();
       this.$('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
       this.$backToTop.removeClass('slideUp');
-    }    
+    }
   },
 
   clickBackToTop: function() {
@@ -470,7 +470,7 @@ UserPageVw = pageVw.extend({
         this.$backToTop.removeClass('slideUp');
       }
     });
-  },  
+  },
 
   setCustomStyles: function() {
     var self = this,
@@ -617,15 +617,15 @@ UserPageVw = pageVw.extend({
       }
     }
   },
-  
-  setFollowingPlaceholder: function(totalLength, currentLength) {    
+
+  setFollowingPlaceholder: function(totalLength, currentLength) {
     if (totalLength > currentLength) {
       this.$('#inputFollowing').attr('placeholder', window.polyglot.t('SearchForFollowingPlaceholderMore'));
     } else {
       this.$('#inputFollowing').attr('placeholder', window.polyglot.t('SearchForFollowingPlaceholder'));
     }
   },
-  
+
   setFollowersPlaceholder: function(totalLength, currentLength) {
     if (totalLength > currentLength) {
       this.$('#inputFollowers').attr('placeholder', window.polyglot.t('SearchForFollowersPlaceholderMore'));
@@ -682,7 +682,7 @@ UserPageVw = pageVw.extend({
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.notFoundError'),
           message: window.polyglot.t('Listings')
-        });       
+        });
       },
       complete: function (xhr, textStatus) {
         if (textStatus == 'parsererror') {
@@ -690,7 +690,7 @@ UserPageVw = pageVw.extend({
             title: window.polyglot.t('errorMessages.serverError'),
             message: window.polyglot.t('errorMessages.badJSON')
           });
-          
+
           throw new Error("The listings data returned from the API has a parsing error.");
         }
       }
@@ -711,7 +711,7 @@ UserPageVw = pageVw.extend({
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.notFoundError'),
           message: window.polyglot.t('Reviews')
-        });       
+        });
       }
     });
   },
@@ -731,7 +731,7 @@ UserPageVw = pageVw.extend({
           });
           self.renderFollowing(followingArray);
           self.setFollowingPlaceholder(followingArray.length, self.ownFollowing.length);
-          
+
           //call followers 2nd so list of following is available
           self.fetchFollowers();
         } else {
@@ -747,10 +747,10 @@ UserPageVw = pageVw.extend({
             });
             self.renderFollowing(followingArray);
             self.setFollowingPlaceholder(followingArray.length, self.ownFollowing.length);
-            
+
             //call followers 2nd so list of following is available
             self.fetchFollowers();
-            
+
             //mark whether page is following you
             if (self.options.ownPage === false && Boolean(__.findWhere(followingArray, {guid: self.userID}))){
               self.$('.js-followsMe').removeClass('hide');
@@ -769,7 +769,7 @@ UserPageVw = pageVw.extend({
       },
       error: function(){
         if (self.isRemoved()) return;
-        
+
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.notFoundError'),
           message: window.polyglot.t('Following')
@@ -796,7 +796,7 @@ UserPageVw = pageVw.extend({
       //don't fetch again if all of the followers have been fetched
       return;
     }
-    
+
     if (this.fetchingFollowers){
       //don't cue up multiple calls
       return;
@@ -809,7 +809,7 @@ UserPageVw = pageVw.extend({
     } else {
       fetchFollowersParameters = $.param({'guid': this.pageID, 'start': this.followerFetchStart});
     }
-    
+
     this.followers.fetch({
       data: fetchFollowersParameters,
       success: (model)=> {
@@ -828,11 +828,11 @@ UserPageVw = pageVw.extend({
       },
       error: function(){
         if (self.isRemoved()) return;
-        
+
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.notFoundError'),
           message: window.polyglot.t('Followers')
-        });        
+        });
       },
       complete: function(xhr, textStatus) {
         self.fetchingFollowers = false;
@@ -973,7 +973,7 @@ UserPageVw = pageVw.extend({
     });
   },
 
-  renderFollowing: function (model) {    
+  renderFollowing: function (model) {
     model = model || [];
     this.followingList = new personListView({
       model: model,
@@ -1002,7 +1002,7 @@ UserPageVw = pageVw.extend({
       if (this.followingSearch){
         this.followingSearch.reIndex();
         searchTerms && this.followingSearch.search(searchTerms);
-        
+
         this.setFollowingPlaceholder(model.length, this.followingSearch.size());
       }
     });
@@ -1061,7 +1061,7 @@ UserPageVw = pageVw.extend({
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.notFoundError'),
           message: window.polyglot.t('Listing')
-        });        
+        });
       },
       complete: function(xhr, textStatus) {
         if (textStatus == 'parsererror'){
@@ -1241,7 +1241,7 @@ UserPageVw = pageVw.extend({
       // set recommendations
       $customColorChoice.css('background', '#fff'); // reset to white to give a cool transition
       $customColorChoice.first().css('background', 'transparent'); // set to transparent
-      
+
       for (var i = 2; i <= 6; i++) {
         $customColorChoice.eq(i).css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
       }
@@ -1296,7 +1296,7 @@ UserPageVw = pageVw.extend({
       // set recommendations
       $customColorChoice.css('background', '#fff'); // reset to white to give a cool transition
       $customColorChoice.first().css('background', 'transparent'); // set to transparent
-      
+
       for (var i = 2; i <= 6; i++) {
         $customColorChoice.eq(i).css('background', shadeColor2(secondaryColor, shades[i-2])); // 70% darker than primary_color
       }
@@ -1310,7 +1310,7 @@ UserPageVw = pageVw.extend({
   },
 
   displayCustomizeTextColor: function() {
-    
+
     var $customizeTextColorRecommendations = this.$el.find('.customizeTextColorRecommendations'),
         $customColorChoice = $customizeTextColorRecommendations.find('.customColorChoice');
 
@@ -1420,13 +1420,13 @@ UserPageVw = pageVw.extend({
               app.simpleMessageModal.open({
                 title: window.polyglot.t('errorMessages.saveError'),
                 message: window.polyglot.t('errorMessages.serverError')
-              });              
+              });
             }
           } else if (data.success === false){
             app.simpleMessageModal.open({
               title: window.polyglot.t('errorMessages.serverError'),
               message: '<i>' + data.reason + '</i>'
-            });            
+            });
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -1493,7 +1493,7 @@ UserPageVw = pageVw.extend({
           app.simpleMessageModal.open({
             title: window.polyglot.t('errorMessages.serverError'),
             message: '<i>' + data.reason + '</i>'
-          });          
+          });
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -1595,7 +1595,7 @@ UserPageVw = pageVw.extend({
 
   createStore: function() {
     var storeWizardModel = new Backbone.Model();
-    
+
     storeWizardModel.set(this.model.attributes);
     this.storeWizardView && this.storeWizardView.remove();
     this.storeWizardView = new storeWizardVw({
@@ -1833,7 +1833,7 @@ UserPageVw = pageVw.extend({
           this.needsNSFWWarning = false;
           this.showNSFWContent = true;
           this.showNSFW = true;
-          
+
           if (this.state == "listing") {
             this.renderItem(this.currentItemHash);
           }
@@ -1847,7 +1847,7 @@ UserPageVw = pageVw.extend({
   remove: function(){
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     //$.colorbox.close();
-    $('#obContainer').off('scroll', this.onScroll);
+    $('#obContainer').off('scroll', this.onScroll).removeClass('customizeUserPage ');
 
     pageVw.prototype.remove.apply(this, arguments);
   }
