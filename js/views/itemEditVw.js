@@ -217,7 +217,7 @@ module.exports = baseVw.extend({
           if(tag.length > self.maxTagChars) {
             app.simpleMessageModal.open({
               title: window.polyglot.t('errorMessages.tagIsTooLongHeadline'),
-              message: window.polyglot.t('errorMessages.tagIsTooLongBody', {maxTagChars: self.maxTagChars})
+              message: window.polyglot.t('errorMessages.tagIsTooLongBody', {smart_count: self.maxTagChars})
             });
             return false;
           }

@@ -413,8 +413,8 @@
             </div>
           </div>
           <div class="flexRow">
-            <p class="textOpacity50 helper-text marginTop8"><%= polyglot.t('KeywordsHelperText',
-              {maxTagChars: ob.maxTagChars}) %></p>
+            <p class="textOpacity50 helper-text marginTop8">
+              <%= polyglot.t('KeywordsHelperText') %> <%= polyglot.t('KeywordsHelperText2', {smart_count: ob.maxTagChars}) %></p>
           </div>
         </div>
 
