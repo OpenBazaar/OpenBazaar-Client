@@ -1761,11 +1761,11 @@ UserPageVw = pageVw.extend({
     if (this.moderatorSettingsModal) {
       this.moderatorSettingsModal.open();
     } else {
-      this.moderatorSettingsModal = new ModeratorSettingsModal({ model: this.model })
+      this.moderatorSettingsModal = new ModeratorSettingsModal({ model: this.model });
       this.registerChild(this.moderatorSettingsModal);
       this.moderatorSettingsModal.render()
         .on('close', () => {
-          this.moderatorSettingsModal.remove()
+          this.moderatorSettingsModal.remove();
           this.moderatorSettingsModal = null;
         }).open();
     }
@@ -1814,6 +1814,7 @@ UserPageVw = pageVw.extend({
 
     if (reason == 'blocked') {
       this.hiddenWarningModal = new HiddenWarningModal();
+      this.registerChild(this.hiddenWarningModal);
       this.hiddenWarningModal.render()
         .open()
         .on('showPage', () => {
@@ -1825,6 +1826,7 @@ UserPageVw = pageVw.extend({
       this.hiddenWarningModal = new HiddenWarningModal({
         reason: 'nsfw'
       });
+      this.registerChild(this.hiddenWarningModal);
 
       this.hiddenWarningModal.render()
         .open()
