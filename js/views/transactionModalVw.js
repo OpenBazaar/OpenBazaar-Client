@@ -126,7 +126,7 @@ module.exports = baseModal.extend({
           app.simpleMessageModal.open({
             title: window.polyglot.t('errorMessages.getError'),
             message: '<i>' + window.polyglot.t('errorMessages.serverError') + '</i>'
-          });          
+          });
         } else {
           app.simpleMessageModal.open({
             title: window.polyglot.t('errorMessages.getError'),
@@ -159,7 +159,7 @@ module.exports = baseModal.extend({
       app.simpleMessageModal.open({
         title: window.polyglot.t('errorMessages.serverError'),
         message: self.model.get('error')
-      });      
+      });
       return;
     }
 
@@ -187,7 +187,7 @@ module.exports = baseModal.extend({
           orderDue: orderDue
         })
       ));
-      
+
       baseModal.prototype.render.apply(self);
 
       if (self.status == 0){
@@ -264,14 +264,14 @@ module.exports = baseModal.extend({
       if (localStorage.getItem('AdditionalPaymentData') != "false") {
         payHREF += "&message=" + this.model.get('vendor_offer').listing.item.title.substring(0, 20) + " " + this.orderID;
       }
-      
+
       dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
       this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
     } else {
       app.simpleMessageModal.open({
         title: window.polyglot.t('errorMessages.getError'),
         message: window.polyglot.t('errorMessages.serverError')
-      });    
+      });
     }
   },
 
@@ -311,7 +311,7 @@ module.exports = baseModal.extend({
     this.$el.find('.js-' + state).removeClass('hide');
     this.$el.find('.js-' + state + 'Tab').addClass('active').removeClass('hide');
     this.discussionForm.removeClass('formChecked');
-    
+
     if (state == "discussion"){
       $.post(app.serverConfigs.getActive().getServerBaseUrl() + '/mark_discussion_as_read', {id: this.orderID});
       this.$('.js-unreadBadge').addClass('hide');
@@ -359,7 +359,7 @@ module.exports = baseModal.extend({
     this.$('.js-transactionShowContract').removeClass('hide');
     this.$('.js-transactionsConfirmOrderHolder').removeClass('bottom0');
   },
-  
+
   showConfirmForm: function(){
     this.$('.js-transactionShowContract').addClass('hide');
     this.$('.js-transactionsConfirmOrderHolder').addClass('bottom0');
@@ -469,20 +469,19 @@ module.exports = baseModal.extend({
   },
 
   checkPayment: function(){
-    var self = this,
-        formData = new FormData();
+    var formData = new FormData();
 
     formData.append("order_id", this.orderID);
     $.ajax({ //this only triggers the server to send a new socket message
       type: "POST",
-      url: self.model.get('serverUrl') + "check_for_payment",
+      url: app.serverConfigs.getActive().getServerBaseUrl() + "/check_for_payment",
       contentType: false,
       processData: false,
       data: formData,
       dataType: "json"
     });
   },
-  
+
   getDiscussion: function(){
     var self = this;
     this.discussionCount = 0;
@@ -661,7 +660,7 @@ module.exports = baseModal.extend({
   },
 
   copyTx: function(e){
-    
+
     var tx = $(e.target).data('tx');
     clipboard.writeText(tx);
   },
@@ -743,10 +742,10 @@ module.exports = baseModal.extend({
   acceptResolution: function(e){
     var self = this,
         resData = {};
-    
+
     $(e.target).addClass('loading');
     resData.order_id = this.orderID;
-    
+
     saveToAPI(null, null, this.serverUrl + "release_funds", function(){
       self.status = 6;
       self.tabState = "summary";
@@ -831,7 +830,7 @@ module.exports = baseModal.extend({
   },
 
   close: function() {
-    this.confirmStatus && this.confirmStatus.remove();    
+    this.confirmStatus && this.confirmStatus.remove();
 
     baseModal.prototype.close.apply(this, arguments);
   }

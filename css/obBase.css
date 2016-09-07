@@ -3065,6 +3065,11 @@ input[type="number"].fieldItem.fieldItem-withButton {
   padding-left: 50px;
 }
 
+input[type="number"].fieldItem.spinButtons {
+  overflow: hidden;
+  padding-right: 25px;
+}
+
 .numberSpinnerUp,
 .numberSpinnerDown {
   cursor: pointer;
