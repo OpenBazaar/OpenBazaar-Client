@@ -3,7 +3,7 @@
 var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    baseVw = require('./baseVw'),    
+    baseVw = require('./baseVw'),
     localize = require('../utils/localize');
 
 module.exports = baseVw.extend({
@@ -36,7 +36,8 @@ module.exports = baseVw.extend({
           )
       );
       //this does not add it to the DOM, that is done by the parent view
-      self.$('.js-buyWizardAddressRadio').eq(selected).prop('checked', true).trigger('click');
+      self.$('.js-buyWizardAddressRadio').eq(selected).prop('checked', true);
+      self.selectAddress(selected);
       //self.setAddress(selected);
     });
     return this;
@@ -46,8 +47,8 @@ module.exports = baseVw.extend({
     $(".js-buyWizardAddressNext").trigger( "click" );
   },
 
-  selectAddress: function(){
-    var index = this.$el.find('.js-buyWizardAddressRadio:checked').val();
+  selectAddress: function(selected){
+    var index = selected || this.$el.find('.js-buyWizardAddressRadio:checked').val();
     this.setAddress(index);
   },
 

@@ -230,7 +230,7 @@ module.exports = baseModal.extend({
     } else {
       this.model.set('selectedModerator', "");
     }
-    
+
     this.$el.find('#BuyWizardPaymentType .js-buyWizardModNext').removeClass('disabled');
 
   },
@@ -251,7 +251,7 @@ module.exports = baseModal.extend({
     this.$buyWizardMap.find('iframe').addClass('blurMore');
 
     //set chosen inputs
-    $('.chosen').chosen({ 
+    $('.chosen').chosen({
       search_contains: true,
       no_results_text: window.polyglot.t('chosenJS.noResultsText'),
       placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
@@ -349,7 +349,7 @@ module.exports = baseModal.extend({
 
     addressData.shipping_addresses = newAddresses;
 
-    saveToAPI(targetForm, this.userModel.toJSON(), self.model.get('serverUrl') + "settings", function(){
+    saveToAPI(targetForm, this.userModel.toJSON(), app.serverConfigs.getActive().getServerBaseUrl() + "/settings", function(){
       self.$el.find('#buyWizardNameInput').val("");
       self.$el.find('#buyWizardStreetInput').val("");
       self.$el.find('#buyWizardCityInput').val("");
@@ -400,12 +400,12 @@ module.exports = baseModal.extend({
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
     } else {
       // if address is invalid, we'll create a dummy address for which google maps will show a map of the world
-      addressString = "123 Street, City, State 12345 Country";      
+      addressString = "123 Street, City, State 12345 Country";
     }
 
     addressString = encodeURIComponent(addressString);
     var $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="250" frameborder="0" style="border:0; margin-top: 0; height: 250px; clip: rect(0,0,0,0)" />');
-       
+
     if ($currentIframe.length) {
       this.$buyWizardMap.find('.js-mapSpinner').removeClass('hide');
       $iFrame.insertBefore($currentIframe);
@@ -413,10 +413,10 @@ module.exports = baseModal.extend({
       this.$buyWizardMap.find('.mapWrap')
         .prepend($iFrame);
     }
-    
+
     $iFrame.on('load', () => {
       this.$buyWizardMap.find('.js-mapSpinner').addClass('hide');
-      
+
       $currentIframe.addClass('js-iframe-leaving')
         .fadeOut({
           duration: 'slow',
@@ -439,7 +439,7 @@ module.exports = baseModal.extend({
 
     if (modForm[0].checkValidity()) {
       if (bitCoinReturnAddr != this.userModel.get('refund_address')) {
-        saveToAPI(modForm, this.userModel.toJSON(), this.model.get('serverUrl') + "settings", function () {
+        saveToAPI(modForm, this.userModel.toJSON(), app.serverConfigs.getActive().getServerBaseUrl() + "/settings", function () {
           window.obEventBus.trigger("updateUserModel");
           self.skipAddressCheck();
         },
@@ -490,7 +490,7 @@ module.exports = baseModal.extend({
       app.simpleMessageModal.open({
         title: window.polyglot.t('errorMessages.serverError'),
         message: window.polyglot.t('errorMessages.missingError')
-      });     
+      });
       return;
     }
 
@@ -524,7 +524,7 @@ module.exports = baseModal.extend({
 
     this.buyRequest = $.ajax({
       type: "POST",
-      url: self.model.get('serverUrl') + "purchase_contract",
+      url: app.serverConfigs.getActive().getServerBaseUrl() + "/purchase_contract",
       contentType: false,
       processData: false,
       data: formData,
@@ -579,12 +579,12 @@ module.exports = baseModal.extend({
     totalBTCPrice = data.amount - this.partialPaymentAmount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(totalBTCPrice, 8));
     this.payURL = data.payment_address;
-    
+
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;
     if (localStorage.getItem('AdditionalPaymentData') != "false") {
       payHREF += "&label="+storeName+"&message="+message;
     }
-    
+
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
     dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
@@ -631,13 +631,12 @@ module.exports = baseModal.extend({
   },
 
   checkPayment: function(){
-    var self = this,
-        formData = new FormData();
+    var formData = new FormData();
 
     formData.append("order_id", this.orderID);
     $.ajax({ //this only triggers the server to send a new socket message
       type: "POST",
-      url: self.model.get('serverUrl') + "check_for_payment",
+      url: app.serverConfigs.getActive().getServerBaseUrl() + "/check_for_payment",
       contentType: false,
       processData: false,
       data: formData,
@@ -653,7 +652,7 @@ module.exports = baseModal.extend({
     new Notification(window.polyglot.t('buyFlow.paymentSent'), {
       silent: true
     });
-    
+
     // play notification sound
     var notificationSound = document.createElement('audio');
     notificationSound.setAttribute('src', './audio/notification.mp3');
