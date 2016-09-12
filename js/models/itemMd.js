@@ -183,7 +183,6 @@ module.exports = window.Backbone.Model.extend({
     //listen for fetched. This is set by the view after fetch is successful, to prevent multiple fires of changed.
     this.on('change:fetched', this.updateAttributes, this);
     this.countries = new countriesMd();
-    this.countryArray = this.countries.get('countries');
   },
 
   updateAttributes: function(callback){

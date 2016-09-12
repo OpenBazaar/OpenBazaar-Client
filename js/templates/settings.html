@@ -490,11 +490,11 @@
                     <label for="settings-theme-1" class="radioLabel">
                       <div class="theme-background" style="background: #5E3E36">
                         <div class="theme-global-header" style="background: #cc504b"></div>
-                        <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div>
                         <div class="theme-nav" style="background: #cc504b">
                           <div class="theme-tab" style="background: #ba4a3f"></div>
                         </div>
-                        <div class="theme-body" style="background: #ba4a3f"></div> 
+                        <div class="theme-body" style="background: #ba4a3f"></div>
                       </div>
                     </label>
                   </div>
@@ -510,11 +510,11 @@
                     <label for="settings-theme-2" class="radioLabel">
                       <div class="theme-background" style="background: #B2B2B2">
                         <div class="theme-global-header" style="background: #E6E6E6"></div>
-                        <div class="theme-header" style="background: url(imgs/themes/2/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-header" style="background: url(imgs/themes/2/header-thumbnail.png); background-size: cover"></div>
                         <div class="theme-nav" style="background: #E6E6E6">
-                          <div class="theme-tab" style="background: #ffffff"></div>                      
+                          <div class="theme-tab" style="background: #ffffff"></div>
                         </div>
-                        <div class="theme-body" style="background: #ffffff"></div> 
+                        <div class="theme-body" style="background: #ffffff"></div>
                       </div>
                     </label>
                   </div>
@@ -530,11 +530,11 @@
                     <label for="settings-theme-3" class="radioLabel">
                       <div class="theme-background" style="background: #1d1d25">
                         <div class="theme-global-header" style="background: #353443"></div>
-                        <div class="theme-header" style="background: url(imgs/themes/3/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-header" style="background: url(imgs/themes/3/header-thumbnail.png); background-size: cover"></div>
                         <div class="theme-nav" style="background: #353443">
                           <div class="theme-tab" style="background: #474559"></div>
                         </div>
-                        <div class="theme-body" style="background: #474559"></div> 
+                        <div class="theme-body" style="background: #474559"></div>
                       </div>
                     </label>
                   </div>
@@ -544,11 +544,11 @@
                     <label for="settings-theme-4" class="radioLabel">
                       <div class="theme-background" style="background: #3d413b">
                         <div class="theme-global-header" style="background: #6e776b"></div>
-                        <div class="theme-header" style="background: url(imgs/themes/4/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-header" style="background: url(imgs/themes/4/header-thumbnail.png); background-size: cover"></div>
                         <div class="theme-nav" style="background: #6e776b">
                           <div class="theme-tab" style="background: #929e8e"></div>
                         </div>
-                        <div class="theme-body" style="background: #929e8e"></div> 
+                        <div class="theme-body" style="background: #929e8e"></div>
                       </div>
                     </label>
                   </div>
@@ -558,11 +558,11 @@
                     <label for="settings-theme-5" class="radioLabel">
                       <div class="theme-background" style="background: #1c2b3a">
                         <div class="theme-global-header" style="background: #334e6a"></div>
-                        <div class="theme-header" style="background: url(imgs/themes/5/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-header" style="background: url(imgs/themes/5/header-thumbnail.png); background-size: cover"></div>
                         <div class="theme-nav" style="background: #334e6a">
                           <div class="theme-tab" style="background: #41658a"></div>
                         </div>
-                        <div class="theme-body" style="background: #41658a"></div> 
+                        <div class="theme-body" style="background: #41658a"></div>
                       </div>
                     </label>
                   </div>
@@ -572,11 +572,11 @@
                     <label for="settings-theme-6" class="radioLabel">
                       <div class="theme-background" style="background: #141414">
                         <div class="theme-global-header" style="background: #1B1B1B"></div>
-                        <div class="theme-header" style="background: url(imgs/themes/6/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-header" style="background: url(imgs/themes/6/header-thumbnail.png); background-size: cover"></div>
                         <div class="theme-nav" style="background: #1B1B1B">
                           <div class="theme-tab" style="background: #252525"></div>
                         </div>
-                        <div class="theme-body" style="background: #252525"></div> 
+                        <div class="theme-body" style="background: #252525"></div>
                       </div>
                     </label>
                   </div>
@@ -855,16 +855,22 @@
               </div>
               <div class="flexRow pad5 rowTop15">
                 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
+                <% console.log(address) %>
                 <div class="flexCol-4 pad10 row15">
-                  <div class="padding10 color-secondary custCol-secondary borderRadius3 fontSize15 clearfix js-address">
-                    <div class="textOpacity1">
+                  <div class="addressBox custCol-secondary js-address">
+                    <div class="textOpacity1 row40">
                       <div><%= address.name %></div>
                       <div><%= address.street %></div>
-                      <div><%= address.city %>, <%= address.state %> <%= address.postal_code %></div>
+                      <div>
+                        <% if(address.city) print(address.city) %>
+                        <% if(address.city && address.state || address.city && address.postal_code) print(",") %>
+                        <%= address.state %> <%= address.postal_code %>
+                      </div>
+                      <div><%= address.other %></div>
                       <div><%= address.displayCountry %></div>
                     </div>
 
-                    <div class="btn btn-txt marginTop6 custCol-primary clickable">
+                    <div class="btn btn-txt positionBottom row10 custCol-primary clickable">
                       <input type="checkbox"
                              class="hide js-settingsAddress"
                              id="settingsAddress<%= i %>"
@@ -980,6 +986,26 @@
                        id="settingsShipToPostalCode"
                        type="text"
                        placeholder="<%= polyglot.t('ShipToPostalCode') %>"
+                       class="fieldItem settingsAddressInput">
+              </div>
+
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="settingsShipToPostalCode">
+                    <%= polyglot.t('ShipToOther') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="ship_to_other"
+                       id="settingsShipToOther"
+                       type="text"
+                       placeholder="<%= polyglot.t('ShipToOtherPlaceholder') %>"
                        class="fieldItem settingsAddressInput">
               </div>
 
@@ -1218,7 +1244,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
@@ -1247,7 +1273,7 @@
                   </label>
                   <i class="ion-help-circled tooltip tooltip-box" data-tooltip="<%= polyglot.t('AppBarStyleInfo') %>"></i>
                 </div>
-              </div>              
+              </div>
 
               <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem">
@@ -1257,7 +1283,7 @@
                   <label for="app_bar_style_mac" class="radioLabel"><%= polyglot.t('OSMac') %></label>
                 </div>
               </div>
-            </div>            
+            </div>
 
             <div class="flexRow">
 

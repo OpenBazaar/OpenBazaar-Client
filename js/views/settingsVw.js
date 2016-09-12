@@ -177,7 +177,7 @@ module.exports = pageVw.extend({
     if (profile) {
       setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     }
-  },  
+  },
 
   fetchModel: function(){
     var self = this;
@@ -215,8 +215,8 @@ module.exports = pageVw.extend({
 
   render: function(){
     var self = this;
-    this.shownMods = []; //reset to blank 
-    
+    this.shownMods = []; //reset to blank
+
     loadTemplate('./js/templates/settings.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.delegateEvents(); //delegate again for re-render
@@ -378,7 +378,7 @@ module.exports = pageVw.extend({
 
     $blockedContainer.html(
         this.blockedUsersVw.render().el
-    );    
+    );
 
     this.$lazyLoadTrigger = $('<div id="blocked_user_lazy_load_trigger">').css({
       position: 'absolute',
@@ -637,7 +637,7 @@ module.exports = pageVw.extend({
     if (state){
       this.state = state;
       this.setTab(this.$('.js-' + state + 'Tab'), this.$('.js-' + state));
-     
+
       if (state == "store") {
         if (this.firstLoadModerators) {
           this.$('.js-settingsNewMods').html("");
@@ -700,28 +700,28 @@ module.exports = pageVw.extend({
     $container = $container && $container.length ? $container : this.$el;
     $firstErr = $container.find(':invalid, .invalid').eq(0);
     $firstErr.length && $firstErr[0].scrollIntoViewIfNeeded();
-  },  
-  
+  },
+
   saveGeneralClick: function() {
     this.saveGeneral();
   },
-  
+
   savePageClick: function() {
     this.savePage();
   },
-  
+
   saveStoreClick: function() {
     this.saveStore();
   },
-  
+
   saveAddressClick: function() {
     this.saveAddress();
   },
-  
+
   saveModeratorClick: function() {
     this.saveModerator();
   },
-  
+
   saveAdvancedClick: function() {
     this.saveAdvanced();
   },
@@ -735,7 +735,7 @@ module.exports = pageVw.extend({
         form = this.$("#generalForm"),
         cCode = this.$('#currency_code').val(),
         $saveBtn = this.$('.js-saveGeneral');
-        
+
     $saveBtn.addClass('loading');
 
     localStorage.setItem('NSFWFilter', this.$("#generalForm input[name=nsfw]:checked").val());
@@ -795,12 +795,12 @@ module.exports = pageVw.extend({
 
       saveToAPI(form, self.model.get('page').profile, self.serverUrl + "profile", function(){
         window.obEventBus.trigger("updateProfile");
-        
+
         app.statusBar.pushMessage({
           type: 'confirmed',
           msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
         });
-        
+
         self.refreshView();
       }, '', pageData, skipKeys, function(){
         //on invalid
@@ -970,28 +970,32 @@ module.exports = pageVw.extend({
         $saveBtn = this.$('.js-saveAddress');
 
     $saveBtn.addClass('loading');
-    
+    this.$('#settingsShipToName').removeClass('invalid');
+
     newAddress.name = this.$('#settingsShipToName').val();
     newAddress.street = this.$('#settingsShipToStreet').val();
     newAddress.city = this.$('#settingsShipToCity').val();
     newAddress.state = this.$('#settingsShipToState').val();
     newAddress.postal_code = this.$('#settingsShipToPostalCode').val();
+    newAddress.other = this.$('#settingsShipToOther').val();
     newAddress.country = this.$('#settingsShipToCountry').val();
     newAddress.displayCountry = this.$('#settingsShipToCountry option:selected').data('name');
 
     //if form is partially filled out throw error
     if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
-      if (!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
+      if (!newAddress.name) {
+        this.$('#settingsShipToName').addClass('invalid');
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.saveError'),
-          message: window.polyglot.t('errorMessages.missingError')
+          message: window.polyglot.t('errorMessages.missingErrorList', {errorList: window.polyglot.t('ShipToName')})
         });
         $saveBtn.removeClass('loading');
         return;
       }
     }
 
-    if (newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+
+    if (newAddress.name && newAddress.country) {
       newAddresses.push(JSON.stringify(newAddress));
     }
 
@@ -1028,7 +1032,7 @@ module.exports = pageVw.extend({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
       });
-      
+
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
     }, function(){
@@ -1103,7 +1107,7 @@ module.exports = pageVw.extend({
     $saveBtn.addClass('loading');
 
     localStorage.setItem('AdditionalPaymentData', form.find('input[name=additionalPaymentData]:checked').val());
-    
+
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       app.statusBar.pushMessage({
         type: 'confirmed',
@@ -1111,7 +1115,7 @@ module.exports = pageVw.extend({
       }, function(){
         self.scrollToFirstError(self.$('#advancedForm'));
       }, '', '', '');
-      
+
       self.refreshView();
     }).always(function(){
       $saveBtn.removeClass('loading');
@@ -1160,7 +1164,7 @@ module.exports = pageVw.extend({
 
   toggleFancyStyles: function(){
     var $html = $('html');
-    
+
     if ($('#advancedForm').find('input[name="minEffects"]').prop('checked')){
       $html.addClass('minEffects');
       localStorage.setItem('minEffects', "true");
