@@ -4818,6 +4818,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: relative;
 }
 
+.buyAddressWrapper {
+  padding: 15px;
+  overflow: hidden;
+}
+
+.buyAddressWrapper > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /*========== utility classes ==========*/
 
 /* the #ov1 id is on the HTML tag. It is used to force specificity

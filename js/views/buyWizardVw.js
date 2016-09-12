@@ -343,7 +343,7 @@ module.exports = baseModal.extend({
     newAddress.country = this.$el.find('#buyWizardCountryInput').val();
     newAddress.displayCountry = this.$el.find('#buyWizardCountryInput option:selected').data('name');
 
-    if (newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+    if (newAddress.name && newAddress.country) {
       newAddresses.push(JSON.stringify(newAddress));
     }
 
