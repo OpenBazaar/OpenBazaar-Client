@@ -25,7 +25,7 @@ module.exports = Backbone.View.extend({
     this.usersShort = new usersShortCollection(this.model);
     this.options.reverse && this.usersShort.models.reverse();
     this.subViews = [];
-    this.showPerScroll = 30;
+    this.showPerScroll = 10;
     this.nextUserToShow = 0;
     this.fetchedUsers = this.usersShort.length;
     this.totalUsers = this.options.followerCount;

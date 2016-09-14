@@ -14,7 +14,7 @@ module.exports = baseVw.extend({
     this.category = options.category || "all";
     //the model must be passed in by the constructor
     this.itemsShort = new itemsShortCollection(this.model);
-    this.showPerScroll = 30;
+    this.showPerScroll = 18;
     this.nextToShow = 0;
     this.$container = $('#obContainer');
 

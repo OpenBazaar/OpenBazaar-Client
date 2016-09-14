@@ -385,13 +385,6 @@ UserPageVw = pageVw.extend({
         self.fetchFollowing();
         self.getIsModerator();
         self.fetchListings();
-        /*
-        //save state of the page
-        self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
-        self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
-        self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
-        self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
-        */
         self.setCustomStyles();
         self.setState(self.state, self.currentItemHash, { replaceHistory: true });
         self.$backToTop = self.$('.backToTop');
@@ -674,7 +667,6 @@ UserPageVw = pageVw.extend({
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
-      //timeout: 5000,
       success: function (model) {
         if (self.isRemoved()) return;
         self.cachedListings = model.get('listings'); //cache for rerendering
