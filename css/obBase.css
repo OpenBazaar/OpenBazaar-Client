@@ -47,6 +47,11 @@
 }
 
 /*========== base styles ==========*/
+
+html {
+  transform: translate3d(0,0,0); /* improves chrome performance by forcing use of the GPU */
+}
+
 body {
   background-color: rgb(6,55,83);
   overflow: hidden;
