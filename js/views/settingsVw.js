@@ -970,7 +970,7 @@ module.exports = pageVw.extend({
     newAddress.displayCountry = this.$('#settingsShipToCountry option:selected').data('name');
 
     //if form is partially filled out throw error
-    if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
+    if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code || newAddress.other) {
       if (!newAddress.name) {
         this.$('#settingsShipToName').addClass('invalid');
         app.simpleMessageModal.open({

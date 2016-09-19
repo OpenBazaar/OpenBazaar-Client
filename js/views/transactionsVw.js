@@ -429,7 +429,7 @@ module.exports = pageVw.extend({
           } else {
             app.simpleMessageModal.open({
               title: window.polyglot.t('errorMessages.noData')
-            });           
+            });
           }
         });
   },
@@ -459,7 +459,7 @@ module.exports = pageVw.extend({
         dataObject.quantity = data.buyer_order.order.quantity;
         if (data.buyer_order.order.shipping){
           var dShipping = data.buyer_order.order.shipping;
-          dataObject.shipping_address = dShipping.ship_to + " " + dShipping.address +", " + dShipping.city + ", " + dShipping.state + ", " + dShipping.postal_code + ", " + dShipping.country;
+          dataObject.shipping_address = dShipping.ship_to + " " + dShipping.address +", " + dShipping.city + ", " + dShipping.state + ", " + dShipping.postal_code + ", " + dShipping.order + ", " + dShipping.country;
         }
         dataObject.payment_amount = dPayment.amount;
         dataObject.payment_address = dPayment.address;
@@ -482,7 +482,7 @@ module.exports = pageVw.extend({
       if (data.vendor_offer.policy){
         dataObject.return_policy = data.vendor_offer.policy.returns;
       }
-      
+
       this.currentExportData.push(dataObject);
     });
 
@@ -491,11 +491,11 @@ module.exports = pageVw.extend({
 
   openOrderModal: function(options){
     app.loadingModal.open({ insideApp: true });
-    
+
     if (options.status == "open"){
       options.status = 4;
     }
-    
+
     this.orderModalView && this.orderModalView.remove();
     this.orderModalView = new transactionModalVw({
       orderID: options.orderID,
