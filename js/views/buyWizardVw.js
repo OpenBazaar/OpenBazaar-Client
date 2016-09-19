@@ -356,6 +356,7 @@ module.exports = baseModal.extend({
       self.$el.find('#buyWizardCityInput').val("");
       self.$el.find('#buyWizardStateInput').val("");
       self.$el.find('#buyWizardPostalInput').val("");
+      self.$el.find('#buyWizardOther').val("");
       self.$el.find('#buyWizardCountryInput').val(self.userModel.get('country'));
       self.$el.find('.chosen').trigger('chosen:updated');
       targetForm.removeClass('formChecked').find('.formChecked').removeClass('formChecked');
@@ -508,6 +509,7 @@ module.exports = baseModal.extend({
       formData.append("city", selectedAddress.city);
       formData.append("state", selectedAddress.state);
       formData.append("postal_code", selectedAddress.postal_code);
+      formData.append("other", selectedAddress.other);
       formData.append("country", selectedAddress.country);
     }
 
