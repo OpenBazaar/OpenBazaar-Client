@@ -418,7 +418,11 @@
                 </div>
               </div>
               <div class="flexCol-7 custCol-border">
-                <input type="text" name="new_ship_to_name" class="fieldItem custCol-text" id="buyWizardNameInput" required/>
+                <input type="text"
+                       name="new_ship_to_name"
+                       class="fieldItem custCol-text"
+                       placeholder="<%= polyglot.t('ShipToName') %>"
+                       id="buyWizardNameInput" required/>
               </div>
             </div>
             <div class="flexRow">
@@ -428,7 +432,11 @@
                 </div>
               </div>
               <div class="flexCol-7 custCol-border">
-                <input type="text" name="new_ship_to_street" class="fieldItem custCol-text" id="buyWizardStreetInput"/>
+                <input type="text"
+                       name="new_ship_to_street"
+                       class="fieldItem custCol-text"
+                       placeholder="<%= polyglot.t('ShipToStreet') %>"
+                       id="buyWizardStreetInput"/>
               </div>
             </div>
             <div class="flexRow">
@@ -438,7 +446,11 @@
                 </div>
               </div>
               <div class="flexCol-7 custCol-border">
-                <input type="text" name="new_ship_to_city" class="fieldItem custCol-text" id="buyWizardCityInput"/>
+                <input type="text"
+                       name="new_ship_to_city"
+                       class="fieldItem custCol-text"
+                       placeholder="<%= polyglot.t('ShipToCity') %>"
+                       id="buyWizardCityInput"/>
               </div>
             </div>
             <div class="flexRow">
@@ -448,7 +460,11 @@
                 </div>
               </div>
               <div class="flexCol-7 custCol-border">
-                <input type="text" name="new_ship_to_state" class="fieldItem custCol-text js-buyWizardStateInput" id="buyWizardStateInput"/>
+                <input type="text"
+                       name="new_ship_to_state"
+                       class="fieldItem custCol-text js-buyWizardStateInput"
+                       placeholder="<%= polyglot.t('ShipToState') %>"
+                       id="buyWizardStateInput"/>
               </div>
             </div>
             <div class="flexRow">
@@ -458,7 +474,25 @@
                 </div>
               </div>
               <div class="flexCol-7 custCol-border">
-                <input type="text" name="new_ship_to_street" class="fieldItem custCol-text js-buyWizardPostalInput" id="buyWizardPostalInput"/>
+                <input type="text"
+                       name="new_ship_to_street"
+                       class="fieldItem custCol-text js-buyWizardPostalInput"
+                       placeholder="<%= polyglot.t('ShipToPostalCode') %>"
+                       id="buyWizardPostalInput"/>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-5 custCol-border">
+                <div class="fieldItem">
+                  <label for="buyWizardOther"><%= polyglot.t('ShipToOther') %></label>
+                </div>
+              </div>
+              <div class="flexCol-7 custCol-border">
+                <input type="text"
+                       name="new_ship_to_other"
+                       class="fieldItem custCol-text js-buyWizardPostalInput"
+                       placeholder="<%= polyglot.t('ShipToOtherPlaceholderShort') %>"
+                       id="buyWizardOther"/>
               </div>
             </div>
             <div class="flexRow">

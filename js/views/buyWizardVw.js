@@ -340,6 +340,7 @@ module.exports = baseModal.extend({
     newAddress.city = this.$el.find('#buyWizardCityInput').val();
     newAddress.state = this.$el.find('#buyWizardStateInput').val();
     newAddress.postal_code = this.$el.find('#buyWizardPostalInput').val();
+    newAddress.other = this.$el.find('#buyWizardOther').val();
     newAddress.country = this.$el.find('#buyWizardCountryInput').val();
     newAddress.displayCountry = this.$el.find('#buyWizardCountryInput option:selected').data('name');
 

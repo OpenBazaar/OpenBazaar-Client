@@ -163,6 +163,7 @@
   "ShipToPostalCode": "Postal code",
   "ShipToOther": "Contact Information",
   "ShipToOtherPlaceholder": "Alternate method(s) the seller can use to contact you, like email",
+  "ShipToOtherPlaceholderShort": "Alternate contact method",
   "ShipToCountry": "Country",
   "EnableNotifications": "Enable Notifications",
   "SSLOn": "SSL on",

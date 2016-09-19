@@ -28,6 +28,9 @@
               <%= address.state %> <%= address.postal_code %>
             </div>
             <div>
+              <%= address.other %>
+            </div>
+            <div>
               <%= address.displayCountry %>
             </div>
           </div>
@@ -76,6 +79,9 @@
             <div>
               <%= address.city %><% if(address.city && address.state || address.city && address.postal_code) print(",") %>
               <%= address.state %> <%= address.postal_code %>
+            </div>
+            <div>
+              <%= address.other %>
             </div>
             <div>
               <%= address.displayCountry %>
