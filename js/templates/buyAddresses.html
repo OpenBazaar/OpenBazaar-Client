@@ -1,13 +1,10 @@
+<% if(_.intersection(_.pluck(ob.user.shipping_addresses, 'country'), ob.vendor_offer.listing.shipping.shipping_regions).length < 1 && !ob.worldwide) { %>
 <div class="flexRow custCol-primary custCol-border">
-  <div class="rowItem padding10">
-    <div class="textSize14px txt-fade padding10">
-      <strong><%= polyglot.t('buyFlow.VendorShipsTo') %> </strong>
-      <span>
-        <%= ob.shipsToList %>
-      </span>
-    </div>
+  <div class="rowItem padding10 txt-center">
+    <strong><%= polyglot.t('buyFlow.NoShippableAddresses') %></strong>
   </div>
 </div>
+<% } %>
 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
   <% if(address.country && address.displayCountry && address.name) { %>
     <% if(ob.worldwide || ob.vendor_offer.listing.shipping.shipping_regions.indexOf(address.country) > -1){ %>

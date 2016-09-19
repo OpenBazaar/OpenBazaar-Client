@@ -7,7 +7,6 @@ var __ = require('underscore'),
     pageVw = require('./pageVw'),
     domUtils = require('../utils/dom'),
     app = require('../App.js').getApp(),
-    timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd.js'),
     usersCl = require('../collections/usersCl.js'),
     blockedUsersVw = require('./blockedUsersVw'),
@@ -437,16 +436,13 @@ module.exports = pageVw.extend({
   setFormValues: function(){
     var self = this,
         countries = new countriesModel(),
-        timezones = new timezonesModel(),
         languages = new languagesModel(),
         countryList = countries.get('countries'),
         currencyList = countries.get('countries'),
-        timezoneList = timezones.get('timezones'),
         languageList = languages.get('languages'),
         country = this.$('#country'),
         ship_country = this.$('#settingsShipToCountry'),
         currency = this.$('#currency_code'),
-        timezone = this.$('#time_zone'),
         language = this.$('#language'),
         generalForm = this.$('#generalForm'),
         advancedForm = this.$('#advancedForm'),
@@ -454,7 +450,6 @@ module.exports = pageVw.extend({
         ship_country_str = "",
         country_str = "",
         currency_str = "",
-        timezone_str = "",
         language_str = "",
         pageNSFW = this.model.get('page').profile.nsfw,
         notifications = user.notifications,
@@ -519,12 +514,6 @@ module.exports = pageVw.extend({
       }
     });
 
-    __.each(timezoneList, function(t){
-      var timezone_option = $('<option value="'+t.offset+'">'+ window.polyglot.t('timezones.' + t.offset) + '</option>');
-      timezone_option.attr("selected", user.time_zone == t.offset);
-      timezone_str += timezone_option[0].outerHTML;
-    });
-
     __.each(languageList, function(l){
       var language_option = $('<option value="'+l.langCode+'">'+l.langName+'</option>');
       language_option.attr("selected", user.language == l.langCode);
@@ -534,7 +523,6 @@ module.exports = pageVw.extend({
     ship_country.html(ship_country_str);
     currency.html(currency_str);
     country.html(country_str);
-    timezone.html(timezone_str);
     language.html(language_str);
 
     //set moderator status

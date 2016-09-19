@@ -3,8 +3,7 @@
 var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    baseVw = require('./baseVw'),
-    localize = require('../utils/localize');
+    baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
 
@@ -30,8 +29,7 @@ module.exports = baseVw.extend({
           loadedTemplate(
               __.extend({}, self.model.toJSON(), {
                 worldwide: self.worldwide,
-                selected: selected,
-                shipsToList: localize.localizeShippingRegions(self.shippingRegions)
+                selected: selected
               })
           )
       );
