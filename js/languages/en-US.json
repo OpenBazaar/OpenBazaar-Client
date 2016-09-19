@@ -122,6 +122,7 @@
   "CountryOfOrigin": "Country of Origin:",
   "CanBeShippedTo": "Can Ship to You In:",
   "NoShippableAddress": "None of your saved addresses are in a country this listing can be shipped to.",
+  "NoSavedAddresses": "You don't have any saved addresses yet.",
   "Addresses": "Addresses",
   "Files": "Files",
   "NewAddress": "New Address",
