@@ -662,6 +662,7 @@
     "MustAddAddress": "You must add an address to ship to",
     "VendorShipsTo": "Ships to:",
     "DoesNotShipHere": "Does not ship here",
+    "NoShippableAddresses": "This item does not ship to any of your saved addresses.",
     "Send": "Send",
     "SendBTCtoAddress": "Send %{amount} BTC to %{recipient}",
     "OpenAddress": "Open in Local Wallet",
