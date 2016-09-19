@@ -7,7 +7,6 @@ var __ = require('underscore'),
     pageVw = require('./pageVw'),
     domUtils = require('../utils/dom'),
     app = require('../App.js').getApp(),
-    timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd.js'),
     usersCl = require('../collections/usersCl.js'),
     blockedUsersVw = require('./blockedUsersVw'),
@@ -177,7 +176,7 @@ module.exports = pageVw.extend({
     if (profile) {
       setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     }
-  },  
+  },
 
   fetchModel: function(){
     var self = this;
@@ -215,8 +214,8 @@ module.exports = pageVw.extend({
 
   render: function(){
     var self = this;
-    this.shownMods = []; //reset to blank 
-    
+    this.shownMods = []; //reset to blank
+
     loadTemplate('./js/templates/settings.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.delegateEvents(); //delegate again for re-render
@@ -378,7 +377,7 @@ module.exports = pageVw.extend({
 
     $blockedContainer.html(
         this.blockedUsersVw.render().el
-    );    
+    );
 
     this.$lazyLoadTrigger = $('<div id="blocked_user_lazy_load_trigger">').css({
       position: 'absolute',
@@ -437,16 +436,13 @@ module.exports = pageVw.extend({
   setFormValues: function(){
     var self = this,
         countries = new countriesModel(),
-        timezones = new timezonesModel(),
         languages = new languagesModel(),
         countryList = countries.get('countries'),
         currencyList = countries.get('countries'),
-        timezoneList = timezones.get('timezones'),
         languageList = languages.get('languages'),
         country = this.$('#country'),
         ship_country = this.$('#settingsShipToCountry'),
         currency = this.$('#currency_code'),
-        timezone = this.$('#time_zone'),
         language = this.$('#language'),
         generalForm = this.$('#generalForm'),
         advancedForm = this.$('#advancedForm'),
@@ -454,7 +450,6 @@ module.exports = pageVw.extend({
         ship_country_str = "",
         country_str = "",
         currency_str = "",
-        timezone_str = "",
         language_str = "",
         pageNSFW = this.model.get('page').profile.nsfw,
         notifications = user.notifications,
@@ -519,12 +514,6 @@ module.exports = pageVw.extend({
       }
     });
 
-    __.each(timezoneList, function(t){
-      var timezone_option = $('<option value="'+t.offset+'">'+ window.polyglot.t('timezones.' + t.offset) + '</option>');
-      timezone_option.attr("selected", user.time_zone == t.offset);
-      timezone_str += timezone_option[0].outerHTML;
-    });
-
     __.each(languageList, function(l){
       var language_option = $('<option value="'+l.langCode+'">'+l.langName+'</option>');
       language_option.attr("selected", user.language == l.langCode);
@@ -534,7 +523,6 @@ module.exports = pageVw.extend({
     ship_country.html(ship_country_str);
     currency.html(currency_str);
     country.html(country_str);
-    timezone.html(timezone_str);
     language.html(language_str);
 
     //set moderator status
@@ -637,7 +625,7 @@ module.exports = pageVw.extend({
     if (state){
       this.state = state;
       this.setTab(this.$('.js-' + state + 'Tab'), this.$('.js-' + state));
-     
+
       if (state == "store") {
         if (this.firstLoadModerators) {
           this.$('.js-settingsNewMods').html("");
@@ -700,28 +688,28 @@ module.exports = pageVw.extend({
     $container = $container && $container.length ? $container : this.$el;
     $firstErr = $container.find(':invalid, .invalid').eq(0);
     $firstErr.length && $firstErr[0].scrollIntoViewIfNeeded();
-  },  
-  
+  },
+
   saveGeneralClick: function() {
     this.saveGeneral();
   },
-  
+
   savePageClick: function() {
     this.savePage();
   },
-  
+
   saveStoreClick: function() {
     this.saveStore();
   },
-  
+
   saveAddressClick: function() {
     this.saveAddress();
   },
-  
+
   saveModeratorClick: function() {
     this.saveModerator();
   },
-  
+
   saveAdvancedClick: function() {
     this.saveAdvanced();
   },
@@ -735,7 +723,7 @@ module.exports = pageVw.extend({
         form = this.$("#generalForm"),
         cCode = this.$('#currency_code').val(),
         $saveBtn = this.$('.js-saveGeneral');
-        
+
     $saveBtn.addClass('loading');
 
     localStorage.setItem('NSFWFilter', this.$("#generalForm input[name=nsfw]:checked").val());
@@ -795,12 +783,12 @@ module.exports = pageVw.extend({
 
       saveToAPI(form, self.model.get('page').profile, self.serverUrl + "profile", function(){
         window.obEventBus.trigger("updateProfile");
-        
+
         app.statusBar.pushMessage({
           type: 'confirmed',
           msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
         });
-        
+
         self.refreshView();
       }, '', pageData, skipKeys, function(){
         //on invalid
@@ -970,7 +958,7 @@ module.exports = pageVw.extend({
         $saveBtn = this.$('.js-saveAddress');
 
     $saveBtn.addClass('loading');
-    
+
     newAddress.name = this.$('#settingsShipToName').val();
     newAddress.street = this.$('#settingsShipToStreet').val();
     newAddress.city = this.$('#settingsShipToCity').val();
@@ -1028,7 +1016,7 @@ module.exports = pageVw.extend({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
       });
-      
+
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
     }, function(){
@@ -1103,7 +1091,7 @@ module.exports = pageVw.extend({
     $saveBtn.addClass('loading');
 
     localStorage.setItem('AdditionalPaymentData', form.find('input[name=additionalPaymentData]:checked').val());
-    
+
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       app.statusBar.pushMessage({
         type: 'confirmed',
@@ -1111,7 +1099,7 @@ module.exports = pageVw.extend({
       }, function(){
         self.scrollToFirstError(self.$('#advancedForm'));
       }, '', '', '');
-      
+
       self.refreshView();
     }).always(function(){
       $saveBtn.removeClass('loading');
@@ -1160,7 +1148,7 @@ module.exports = pageVw.extend({
 
   toggleFancyStyles: function(){
     var $html = $('html');
-    
+
     if ($('#advancedForm').find('input[name="minEffects"]').prop('checked')){
       $html.addClass('minEffects');
       localStorage.setItem('minEffects', "true");

@@ -99,39 +99,6 @@
     </div>
     <div class="accordion-child accordion-inactive custCol-primary">
       <div class="bar barTxt h6 custCol-secondary custCol-text">
-        <%= polyglot.t('onboarding.timeZone') %>
-        <span class="textOpacity75 fontSize14 floatRight">5 <%= polyglot.t('of') %> 10</span>
-      </div>
-      <div class="flexContainer flex-border" id="homeModal-timeList">
-        <div class="flexRow">
-          <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border">
-            <input type="text" class="search txtField txtField-bar custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
-          </div>
-        </div>
-        <ul class="flexRow list js-homeModal-listParent js-homeModal-timeZoneList homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">
-          <% ob.timezones.forEach((tz) => { %>
-            <li class="flexRow custCol-border">
-              <div class="rowItem js-homeModal-timeSelect paddingLeft6">
-                <input type="radio" class="fieldItem" id="<%= tz.name %>" name="time_zone" value="<%= tz.offset %>">
-                <label class="homeModal-time radioLabel" for="<%= tz.name %>"><%= polyglot.t('timezones.' + tz.offset) %></label>
-              </div>
-            </li>            
-          <% }) %>
-        </ul>
-      </div>
-      <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-        <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight" tabIndex="0">
-          <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
-          <%= polyglot.t('Back') %>
-        </a>
-        <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text" tabIndex="0">
-          <%= polyglot.t('Next') %>
-          <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
-        </a>
-      </div>
-    </div>
-    <div class="accordion-child accordion-inactive custCol-primary">
-      <div class="bar barTxt h6 custCol-secondary custCol-text">
         <%= polyglot.t('onboarding.yourDetails') %> (<%= polyglot.t('Optional') %>)
         <span class="textOpacity75 fontSize14 floatRight">6 <%= polyglot.t('of') %> 10</span>
       </div>
