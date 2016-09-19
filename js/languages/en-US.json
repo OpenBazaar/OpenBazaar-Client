@@ -165,6 +165,7 @@
   "ShipToOtherPlaceholder": "Alternate method(s) the seller can use to contact you, like email",
   "ShipToOtherPlaceholderShort": "Alternate contact method",
   "ShipToCountry": "Country",
+  "Required": "Required",
   "EnableNotifications": "Enable Notifications",
   "SSLOn": "SSL on",
   "SSLOff": "SSL off",

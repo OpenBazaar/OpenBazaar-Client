@@ -896,7 +896,7 @@
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="settingsShipToName">
-                    <%= polyglot.t('ShipToName') %>
+                    <%= polyglot.t('ShipToName') %> *
                   </label>
                 </div>
               </div>
@@ -1016,7 +1016,7 @@
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="settingsShipToCountry">
-                    <%= polyglot.t('ShipToCountry') %>
+                    <%= polyglot.t('ShipToCountry') %> *
                   </label>
                 </div>
               </div>
@@ -1031,6 +1031,10 @@
                     </select>
                   </div>
                 </div>
+              </div>
+
+              <div class="padding15">
+                <span class="note">* <%= polyglot.t('Required') %></span>
               </div>
             </div>
 

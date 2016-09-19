@@ -414,7 +414,7 @@
             <div class="flexRow custCol-border borderTop">
               <div class="flexCol-5 custCol-border">
                 <div class="fieldItem">
-                  <label for="buyWizardNameInput"><%= polyglot.t('ShipToName') %></label>
+                  <label for="buyWizardNameInput"><%= polyglot.t('ShipToName') %> *</label>
                 </div>
               </div>
               <div class="flexCol-7 custCol-border">
@@ -498,7 +498,7 @@
             <div class="flexRow">
               <div class="flexCol-5 custCol-border">
                 <div class="fieldItem">
-                  <label for="buyWizardStreetInput"><%= polyglot.t('ShipToCountry') %></label>
+                  <label for="buyWizardStreetInput"><%= polyglot.t('ShipToCountry') %> *</label>
                 </div>
               </div>
               <div class="flexCol-7 custCol-border">
@@ -506,6 +506,9 @@
                   <div class="fieldItem-selectWrapper chosen-relative noIcon js-buyWizardCountryWrapper"></div>
                 </div>
               </div>
+            </div>
+            <div class="padding15">
+              <span class="note">* <%= polyglot.t('Required') %></span>
             </div>
           </form>
         </div>
