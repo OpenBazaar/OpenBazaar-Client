@@ -9,7 +9,7 @@ var loadTemplate = require('../utils/loadTemplate'),
 
 module.exports = baseVw.extend({
 
-  className: "flexRow borderBottom custCol-border js-userShortView",
+  className: "custCol-border userShort js-userShortView",
 
   events: {
     'click .js-userShort': 'userClick',
@@ -21,7 +21,7 @@ module.exports = baseVw.extend({
     this.listenTo(window.obEventBus, "blockingUser", function(e){
       if (e.guid == this.model.get('guid')) {
         this.model.set('isBlocked', true);
-      }      
+      }
     });
 
     this.listenTo(window.obEventBus, "unblockingUser", function(e){
@@ -34,7 +34,7 @@ module.exports = baseVw.extend({
     var localAvatar = this.model.get('avatarURL') || this.model.get('serverUrl')+"get_image?hash="+this.model.avatar_hash+"&guid="+this.model.get('guid');
     localAvatar && localStorage.setItem('userAvatar-'+this.model.get('guid'), localAvatar);
 
-    this.render();        
+    this.render();
   },
 
   render: function(){

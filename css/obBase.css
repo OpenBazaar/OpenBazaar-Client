@@ -47,6 +47,11 @@
 }
 
 /*========== base styles ==========*/
+
+html {
+  transform: translate3d(0,0,0); /* improves chrome performance by forcing use of the GPU */
+}
+
 body {
   background-color: rgb(6,55,83);
   overflow: hidden;
@@ -4185,7 +4190,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 32px;
   height: 32px;
   margin-right: 2px;
-  margin-top: 3px;
+  margin-top: 1px;
   margin-bottom: 5px;
   cursor: pointer;
   z-index: 5;
@@ -4804,6 +4809,23 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.chatOpen .backToTop {
   right: 303px;
+}
+
+.userShort {
+  border-bottom: solid 1px rgba(255,255,255,0.08);
+  box-sizing: border-box;
+}
+
+.userShort .userShortWrapper {
+  padding: 20px 15px;
+}
+
+.userList .userShort {
+  height: 116px; /* fix the height to prevent a reflow when the wrapper is hidden */
+}
+
+.userList .userShort.outOfScroll .userShortWrapper {
+  display: none;
 }
 
 /*========== utility classes ==========*/

@@ -4,7 +4,8 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     itemsShortCollection = require('../collections/itemsShortCl'),
     itemShortView = require('./itemShortVw'),
-    simpleMessageView = require('./simpleMessageVw');
+    simpleMessageView = require('./simpleMessageVw'),
+    hideListChildrenOnScroll = require('../utils/hideListChildrenOnScroll');
 
 module.exports = baseVw.extend({
 
@@ -13,10 +14,16 @@ module.exports = baseVw.extend({
     this.category = options.category || "all";
     //the model must be passed in by the constructor
     this.itemsShort = new itemsShortCollection(this.model);
-    //this.listenTo(this.options.userModel, 'change', function(){
-    //  self.render();
-    //});
-    
+    this.showPerScroll = 18;
+    this.nextToShow = 0;
+    this.$container = $('#obContainer');
+
+    //listen to scrolling on container
+    this.scrollHandler = __.bind(
+        __.throttle(this.onScroll, 100), this
+    );
+    this.$container.on('scroll', this.scrollHandler);
+
     // as of now, our base view doesn't support registerChild happening
     // before the view is fully initialized, hence the timeout here:
     setTimeout(() => {
@@ -29,15 +36,32 @@ module.exports = baseVw.extend({
     //clear the list
     this.$el.empty();
     if (this.itemsShort.models.length > 0) {
-      __.each(this.itemsShort.models, function(item){
-        if (item.toJSON().category == self.category || self.category == "all") {
-          self.renderContract(item);
-        }
-      }, this);
+      this.renderItemSet(this.nextToShow, this.showPerScroll);
+      setTimeout(()=> {
+        this.itemHeight = this.$el[0].firstElementChild.offsetHeight;
+      }, 0);
     } else {
       self.renderNoneFound();
     }
     this.trigger("rendered");
+  },
+
+  renderItemSet: function(start, end){
+    let renderSet = [];
+
+    if (start >= this.itemsShort.models.length) return;
+
+    renderSet = __.filter(this.itemsShort.models, function(value, index){
+      return (index >= start) && (index < end);
+    });
+
+    __.each(renderSet, (item) => {
+      if (item.toJSON().category == this.category || this.category == "all") {
+        this.renderContract(item);
+      }
+    }, this);
+
+    this.nextToShow = end;
   },
 
   renderContract: function(item){
@@ -52,5 +76,18 @@ module.exports = baseVw.extend({
   renderNoneFound: function(){
     var simpleMessage = new simpleMessageView({title: this.options.title, message: this.options.message, el: this.$el});
     this.registerChild(simpleMessage);
-  }
+  },
+
+  onScroll: function(){
+    if (this.$el.is(":visible")){
+
+      if (this.$container[0].scrollTop + this.$container[0].clientHeight + 200 > this.$container[0].scrollHeight &&
+          this.$el[0].hasChildNodes()) {
+        this.renderItemSet(this.nextToShow, this.nextToShow + this.showPerScroll);
+      }
+
+      hideListChildrenOnScroll(this.$el, this.itemHeight, 3);
+    }
+  },
+
 });
