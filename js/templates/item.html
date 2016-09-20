@@ -48,7 +48,8 @@
           <% } %>
         </li>
         <li class="border0 alignCenter padding10 height70 marginBottom12">
-          <div class="btn btn-light btn-buyNow js-buyButton custCol-secondary">
+          <div class="btn btn-light btn-buyNow js-buyButton custCol-secondary
+          <% if(ob.vendor_offer.listing.metadata.max_quantity === 0) { %>disabled<% } %>">
             <%= polyglot.t('BUYNOW') %>
           </div>
         </li>
@@ -58,8 +59,20 @@
         </li>
         <% } %>
       </ul>
-    </div>
 
+      <% if(ob.vendor_offer.listing.metadata.max_quantity || ob.vendor_offer.listing.metadata.max_quantity === 0) { %>
+      <div class="flexRow width100">
+        <div class="width100 fontSize15 marginLeft10 textOpacity75 row10 txt-center">
+          <% if(ob.vendor_offer.listing.metadata.max_quantity > 0) { %>
+          <h5><%= polyglot.t('MaxQuantityDisplay', {quantity: ob.vendor_offer.listing.metadata.max_quantity}) %></h5>
+          <% } else { %>
+          <h5><%= polyglot.t('NoQuantityDisplay') %></h5>
+          <% } %>
+        </div>
+      </div>
+      <% } %>
+
+    </div>
 
     <div class="width100 custCol-text borderBottom paddingBottom12 paddingLeft6 custCol-border">
       <div class="flexRow width100 row20">

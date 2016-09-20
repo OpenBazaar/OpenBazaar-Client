@@ -116,9 +116,37 @@
             </div>
             <div class="flexCol-5">
               <span class="fieldItem pull-right">
-                <span class="tooltip" data-tooltip="<%= polyglot.t('MinimumPrice') %>">
+                <span class="tooltip tooltip-left" data-tooltip="<%= polyglot.t('MinimumPrice') %>">
                   <span class="txt-placeholder custCol-text">
                     <%= polyglot.t('MinimumIs', { amount: ob.userCurrencyCode == "BTC" ? ob.intlNumFormat(minBTCPrice, 4) : ob.intlNumFormat(window.currentBitcoin * minBTCPrice, 4) }) %>
+                    <span class="ion-help-circled fontSize12"></span>
+                  </span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="flexRow custCol-border">
+            <div class="flexCol-3  borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="inputCondition"><%= polyglot.t('MaxQuantity') %></label>
+              </div>
+            </div>
+            <div class="flexCol-8">
+              <% maxQ = ob.vendor_offer.listing.metadata.max_quantity %>
+              <input type="number"
+                     step="any"
+                     min="0"
+                     max="999998"
+                     name="max_quantity"
+                     id="inputMaxQuantity"
+                     placeholder="<%= polyglot.t('MaxQuantityPlaceholder') %>"
+                     class="fieldItem custCol-text"
+                     value="<%= maxQ && maxQ < 999999 ? maxQ : '' %>"/>
+            </div>
+            <div class="flexCol-1">
+               <span class="fieldItem">
+                <span class="tooltip tooltip-left" data-tooltip="<%= polyglot.t('MaxQuantityHelp') %>">
+                  <span class="txt-placeholder custCol-text">
                     <span class="ion-help-circled fontSize12"></span>
                   </span>
                 </span>

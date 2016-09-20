@@ -32,20 +32,33 @@
     <div class="flexCol-2">
       <div class="rowItem padding0 paddingTop20">
         <form id="buyWizardQuantity" class="positionWrapper">
-          <input type="number" step="1" min="1" class="fieldItem spinButtons js-buyWizardQuantity border1 custCol-border marginTop4" value="1"/>
+          <input type="number"
+                 step="1"
+                 min="1"
+                 name="max_quantity"
+                 max="<%= ob.vendor_offer.listing.metadata.max_quantity %>"
+                 class="fieldItem spinButtons js-buyWizardQuantity border1 custCol-border marginTop4"
+                 value="1"/>
           <div class="numberSpinnerUp"></div>
           <div class="numberSpinnerDown"></div>
         </form>
+        <% if(ob.vendor_offer.listing.metadata.max_quantity) { %>
+        <div class="textOpacity75 fontSize10 txt-center rowTop5">
+          <%= polyglot.t('MaxQuantityDisplayShort', {quantity: ob.vendor_offer.listing.metadata.max_quantity}) %>
+        </div>
+        <% } %>
       </div>
     </div>
     <div class="flexCol-4 overflowHidden">
       <div class="rowItem padding5 paddingTop20 alignRight marginTop20">
-        <span class="noOverflow fontSize13 js-buyWizardBTCPrice"></span>
-        <span class="noOverflow textOpacity75 fontSize13 js-buyWizardPrice">
-          <% if(ob.userCurrencyCode != 'BTC'){ %>
-            (<%= ob.displayPrice %>)
-          <% } %>
-        </span>
+        <div>
+          <span class="noOverflow fontSize13 js-buyWizardBTCPrice"></span>
+          <span class="noOverflow textOpacity75 fontSize13 js-buyWizardPrice">
+            <% if(ob.userCurrencyCode != 'BTC'){ %>
+              (<%= ob.displayPrice %>)
+            <% } %>
+          </span>
+        </div>
       </div>
     </div>
   </div>
