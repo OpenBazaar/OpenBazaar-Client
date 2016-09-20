@@ -290,9 +290,9 @@ module.exports = pageVw.extend({
             flagStatus = false;
 
         //only use the status_changed if the status matters to that tab
-        if(tabName == "purchases"){
+        if (tabName == "purchases"){
           flagStatus = status == 2 || status > 3;
-        } else if(tabName == "sales") {
+        } else if (tabName == "sales") {
           flagStatus = status == 1 || status > 2;
         } else {
           flagStatus = true;
@@ -429,7 +429,7 @@ module.exports = pageVw.extend({
           } else {
             app.simpleMessageModal.open({
               title: window.polyglot.t('errorMessages.noData')
-            });           
+            });
           }
         });
   },
@@ -482,7 +482,7 @@ module.exports = pageVw.extend({
       if (data.vendor_offer.policy){
         dataObject.return_policy = data.vendor_offer.policy.returns;
       }
-      
+
       this.currentExportData.push(dataObject);
     });
 
@@ -491,11 +491,11 @@ module.exports = pageVw.extend({
 
   openOrderModal: function(options){
     app.loadingModal.open({ insideApp: true });
-    
+
     if (options.status == "open"){
       options.status = 4;
     }
-    
+
     this.orderModalView && this.orderModalView.remove();
     this.orderModalView = new transactionModalVw({
       orderID: options.orderID,

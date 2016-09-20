@@ -60,22 +60,22 @@
             </div>
           </div>
           <div class="flexRow custCol-border">
-            <div class="flexCol-3 borderRight custCol-border">
+            <div class="flexCol-4 borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputName"><%= polyglot.t('Title') %></label>
               </div>
             </div>
-            <div class="flexCol-9">
+            <div class="flexCol-8">
               <input name="title" id="inputName" type="text" class="fieldItem custCol-text" required placeholder="<%= polyglot.t('TitlePlaceholder') %>" value="<%= ob.vendor_offer.listing.item.title %>">
             </div>
           </div>
           <div class="flexRow custCol-border">
-            <div class="flexCol-3 borderRight custCol-border">
+            <div class="flexCol-4 borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputType"><%= polyglot.t('Type') %></label>
               </div>
             </div>
-            <div class="flexCol-9">
+            <div class="flexCol-8">
               <div class="fieldItem padding0">
                 <div class="fieldItem-selectWrapper">
                   <select name="metadata_category" id="inputType" class="custCol-text">
@@ -88,7 +88,7 @@
             </div>
           </div>
           <div class="flexRow custCol-border js-inputParent zIndex1">
-            <div class="flexCol-3  borderRight custCol-border">
+            <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="priceLocal">
                   <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)
@@ -114,7 +114,7 @@
                 <% } %>
               >
             </div>
-            <div class="flexCol-5">
+            <div class="flexCol-4">
               <span class="fieldItem pull-right">
                 <span class="tooltip tooltip-left" data-tooltip="<%= polyglot.t('MinimumPrice') %>">
                   <span class="txt-placeholder custCol-text">
@@ -126,12 +126,12 @@
             </div>
           </div>
           <div class="flexRow custCol-border">
-            <div class="flexCol-3  borderRight custCol-border">
+            <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputCondition"><%= polyglot.t('MaxQuantity') %></label>
               </div>
             </div>
-            <div class="flexCol-8">
+            <div class="flexCol-7">
               <% maxQ = ob.vendor_offer.listing.metadata.max_quantity %>
               <input type="number"
                      step="any"
@@ -154,12 +154,12 @@
             </div>
           </div>
           <div class="flexRow custCol-border js-shippingRow">
-            <div class="flexCol-3  borderRight custCol-border">
+            <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputCondition"><%= polyglot.t('Condition') %></label>
               </div>
             </div>
-            <div class="flexCol-9">
+            <div class="flexCol-8">
               <div class="fieldItem padding0">
                 <div class="fieldItem-selectWrapper">
                   <select name="condition" id="inputCondition" class="custCol-text">
@@ -174,7 +174,7 @@
             </div>
           </div>
           <div class="flexRow custCol-border">
-            <div class="flexCol-3 borderRight custCol-border">
+            <div class="flexCol-4 borderRight custCol-border">
               <div class="fieldItem">
                 <label for="nsfwFalse"><%= polyglot.t('NSFW') %></label>
               </div>
@@ -187,7 +187,59 @@
             </div>
           </div>
           <div class="flexRow custCol-border">
-            <div class="flexCol-3  borderRight custCol-border">
+            <div class="flexCol-4 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="nsfwFalse"><%= polyglot.t('Pinned') %></label>
+              </div>
+            </div>
+            <div class="flexCol-7">
+              <div class="fieldItem">
+                <input type="radio" class="fieldItem" id="pinnedTrue" name="pinned" value="true"
+                <% if(ob.vendor_offer.listing.metadata.pinned){ %>checked<% } %> />
+                <label for="pinnedTrue" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                <input type="radio" class="fieldItem" id="pinnedFalse" name="pinned" value="false"
+                <% if(!ob.vendor_offer.listing.metadata.pinned){ %>checked<% } %> />
+                <label for="pinnedFalse" class="radioLabel"><%= polyglot.t('No') %></label>
+              </div>
+            </div>
+            <div class="flexCol-1">
+               <span class="fieldItem">
+                <span class="tooltip tooltip-left" data-tooltip="<%= polyglot.t('PinnedHelp') %>">
+                  <span class="txt-placeholder custCol-text">
+                    <span class="ion-help-circled fontSize12"></span>
+                  </span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="flexRow custCol-border">
+            <div class="flexCol-4 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="nsfwFalse"><%= polyglot.t('Hidden') %></label>
+              </div>
+            </div>
+            <div class="flexCol-7">
+              <div class="fieldItem">
+                <input type="radio" class="fieldItem" id="hiddenTrue" name="hidden" value="true"
+                <% if(ob.vendor_offer.listing.metadata.hidden){ %>checked<% } %> />
+                <label for="hiddenTrue" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                <input type="radio" class="fieldItem" id="hiddenFalse" name="hidden" value="false"
+                <% if(!ob.vendor_offer.listing.metadata.hidden){ %>checked<% } %> />
+                <label for="hiddenFalse" class="radioLabel"><%= polyglot.t('No') %></label>
+              </div>
+            </div>
+            <div class="flexCol-1">
+               <span class="fieldItem">
+                <span class="tooltip tooltip-left" data-tooltip="<%= polyglot.t('HiddenHelp') %>">
+                  <span class="txt-placeholder custCol-text">
+                    <span class="ion-help-circled fontSize12"></span>
+                  </span>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="flexRow custCol-border">
+            <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputSku"><%= polyglot.t('SKU') %> </label>
               </div>
@@ -197,13 +249,13 @@
             </div>
           </div>
           <div class="flexRow custCol-border">
-            <div class="flexCol-3  borderRight custCol-border">
+            <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputDescription"><%= polyglot.t('Description') %></label>
                 <div class="note rowTop5"><%= polyglot.t('HighlightToStyle') %></div>
               </div>
             </div>
-            <div class="flexCol-9" data-label="<%= polyglot.t('Description') %>">
+            <div class="flexCol-8" data-label="<%= polyglot.t('Description') %>">
               <textarea name="description"
                         rows="8"
                         class="fieldItem-textarea custCol-text height130 customThemeScrollbar"
