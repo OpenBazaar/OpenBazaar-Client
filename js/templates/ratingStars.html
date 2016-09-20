@@ -8,7 +8,7 @@
   <% } %>
 </div>
 <% } %>
-<% for (var i=0; i < 5 - ob.rating; i++) { %>
+<% for (var i=0; i < 5 - Math.ceil(ob.rating); i++) { %>
 <div class="inlineBlock positionRelative">
   <span class="ion-android-star unfilled"></span>
 </div>
