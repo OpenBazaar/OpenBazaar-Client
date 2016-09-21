@@ -1189,6 +1189,10 @@ label.fieldItem {
   margin-bottom: 30px;
 }
 
+.row40 {
+  margin-bottom: 40px;
+}
+
 .row60 {
   margin-bottom: 60px;
 }
@@ -4806,6 +4810,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   right: 303px;
 }
 
+.addressBox {
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 3px;
+  min-height: 120px;
+  position: relative;
+}
+
+.buyAddressWrapper {
+  padding: 15px;
+  overflow: hidden;
+}
+
+.buyAddressWrapper > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /*========== utility classes ==========*/
 
 /* the #ov1 id is on the HTML tag. It is used to force specificity
@@ -4888,7 +4910,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .positionBottom {
   position: absolute;
   bottom: 0;
-  right: 0;
 }
 
 #ov1 .positionTop {

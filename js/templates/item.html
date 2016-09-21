@@ -127,16 +127,20 @@
         </div>
         <div class="marginBottom20  marginLeft7 row10">
           <% var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'country'), ob.vendor_offer.listing.shipping.shipping_regions));
-          if(matchedItemShippableCountries.length > 0){
-            _.each(matchedItemShippableCountries, function(data){
-              print("<p>" + polyglot.t(`countries.${data}`) + "</p>");
-            });
-          } else if(!ob.worldwide){
-            print(polyglot.t('NoShippableAddress'));
+          if(ob.userAddresses.length > 0) {
+            if(matchedItemShippableCountries.length > 0){
+              _.each(matchedItemShippableCountries, function(data){
+                print("<p>" + polyglot.t(`countries.${data}`) + "</p>");
+              });
+            } else if(!ob.worldwide){
+              print(polyglot.t('NoShippableAddress'));
+            } else {
+              _.each(_.uniq(_.pluck(ob.userAddresses, 'country')), function(data){
+                print("<p>" + polyglot.t(`countries.${data}`) + "</p>");
+              });
+            }
           } else {
-            _.each(_.uniq(_.pluck(ob.userAddresses, 'country')), function(data){
-              print("<p>" + polyglot.t(`countries.${data}`) + "</p>");
-            });
+            print(polyglot.t('NoSavedAddresses'));
           }
           %>
         </div>
