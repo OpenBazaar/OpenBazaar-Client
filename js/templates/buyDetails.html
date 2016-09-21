@@ -42,7 +42,7 @@
           <div class="numberSpinnerUp"></div>
           <div class="numberSpinnerDown"></div>
         </form>
-        <% if(ob.vendor_offer.listing.metadata.max_quantity) { %>
+        <% if(ob.vendor_offer.listing.metadata.max_quantity && ob.vendor_offer.listing.metadata.max_quantity < 999999) { %>
         <div class="textOpacity75 fontSize10 txt-center rowTop5">
           <%= polyglot.t('MaxQuantityDisplayShort', {quantity: ob.vendor_offer.listing.metadata.max_quantity}) %>
         </div>
