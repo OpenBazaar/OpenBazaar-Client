@@ -60,7 +60,7 @@
         <% } %>
       </ul>
 
-      <% if(ob.vendor_offer.listing.metadata.max_quantity || ob.vendor_offer.listing.metadata.max_quantity === 0) { %>
+      <% if(ob.vendor_offer.listing.metadata.max_quantity && ob.vendor_offer.listing.metadata.max_quantity < 999999 || ob.vendor_offer.listing.metadata.max_quantity === 0) { %>
       <div class="flexRow width100">
         <div class="width100 fontSize15 marginLeft10 textOpacity75 row10 txt-center">
           <% if(ob.vendor_offer.listing.metadata.max_quantity > 0) { %>
