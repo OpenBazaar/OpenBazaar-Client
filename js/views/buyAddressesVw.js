@@ -8,7 +8,7 @@ var __ = require('underscore'),
 module.exports = baseVw.extend({
 
   events: {
-    'click .js-buyWizardAddressRadio': 'selectAddress',
+    'click .js-buyWizardAddressRadio': 'selectAddressClick',
     'click .js-buyWizardAddressSelected': 'selectAddressAndAdvance'
   },
 
@@ -45,8 +45,11 @@ module.exports = baseVw.extend({
     $(".js-buyWizardAddressNext").trigger( "click" );
   },
 
-  selectAddress: function(selected){
-    var index = selected || this.$el.find('.js-buyWizardAddressRadio:checked').val();
+  selectAddressClick: function(e) {
+    this.selectAddress($(e.target).val());
+  },
+
+  selectAddress: function(index){
     this.setAddress(index);
   },
 

@@ -340,10 +340,11 @@ module.exports = baseModal.extend({
     newAddress.city = this.$el.find('#buyWizardCityInput').val();
     newAddress.state = this.$el.find('#buyWizardStateInput').val();
     newAddress.postal_code = this.$el.find('#buyWizardPostalInput').val();
+    newAddress.other = this.$el.find('#buyWizardOther').val();
     newAddress.country = this.$el.find('#buyWizardCountryInput').val();
     newAddress.displayCountry = this.$el.find('#buyWizardCountryInput option:selected').data('name');
 
-    if (newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+    if (newAddress.name && newAddress.country) {
       newAddresses.push(JSON.stringify(newAddress));
     }
 
@@ -355,6 +356,7 @@ module.exports = baseModal.extend({
       self.$el.find('#buyWizardCityInput').val("");
       self.$el.find('#buyWizardStateInput').val("");
       self.$el.find('#buyWizardPostalInput').val("");
+      self.$el.find('#buyWizardOther').val("");
       self.$el.find('#buyWizardCountryInput').val(self.userModel.get('country'));
       self.$el.find('.chosen').trigger('chosen:updated');
       targetForm.removeClass('formChecked').find('.formChecked').removeClass('formChecked');
@@ -507,6 +509,7 @@ module.exports = baseModal.extend({
       formData.append("city", selectedAddress.city);
       formData.append("state", selectedAddress.state);
       formData.append("postal_code", selectedAddress.postal_code);
+      formData.append("other", selectedAddress.other);
       formData.append("country", selectedAddress.country);
     }
 

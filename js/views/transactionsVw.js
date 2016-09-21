@@ -459,7 +459,7 @@ module.exports = pageVw.extend({
         dataObject.quantity = data.buyer_order.order.quantity;
         if (data.buyer_order.order.shipping){
           var dShipping = data.buyer_order.order.shipping;
-          dataObject.shipping_address = dShipping.ship_to + " " + dShipping.address +", " + dShipping.city + ", " + dShipping.state + ", " + dShipping.postal_code + ", " + dShipping.country;
+          dataObject.shipping_address = dShipping.ship_to + " " + dShipping.address +", " + dShipping.city + ", " + dShipping.state + ", " + dShipping.postal_code + ", " + dShipping.order + ", " + dShipping.country;
         }
         dataObject.payment_amount = dPayment.amount;
         dataObject.payment_address = dPayment.address;

@@ -835,16 +835,22 @@
               </div>
               <div class="flexRow pad5 rowTop15">
                 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
+                <% console.log(address) %>
                 <div class="flexCol-4 pad10 row15">
-                  <div class="padding10 color-secondary custCol-secondary borderRadius3 fontSize15 clearfix js-address">
-                    <div class="textOpacity1">
+                  <div class="addressBox custCol-secondary js-address">
+                    <div class="textOpacity1 row40">
                       <div><%= address.name %></div>
                       <div><%= address.street %></div>
-                      <div><%= address.city %>, <%= address.state %> <%= address.postal_code %></div>
+                      <div>
+                        <% if(address.city) print(address.city) %>
+                        <% if(address.city && address.state || address.city && address.postal_code) print(",") %>
+                        <%= address.state %> <%= address.postal_code %>
+                      </div>
+                      <div><%= address.other %></div>
                       <div><%= address.displayCountry %></div>
                     </div>
 
-                    <div class="btn btn-txt marginTop6 custCol-primary clickable">
+                    <div class="btn btn-txt positionBottom row10 custCol-primary clickable">
                       <input type="checkbox"
                              class="hide js-settingsAddress"
                              id="settingsAddress<%= i %>"
@@ -870,7 +876,7 @@
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="settingsShipToName">
-                    <%= polyglot.t('ShipToName') %>
+                    <%= polyglot.t('ShipToName') %> *
                   </label>
                 </div>
               </div>
@@ -965,12 +971,32 @@
 
             </div>
 
+            <div class="flexRow">
+
+              <div class="flexCol-3 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="settingsShipToPostalCode">
+                    <%= polyglot.t('ShipToOther') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="ship_to_other"
+                       id="settingsShipToOther"
+                       type="text"
+                       placeholder="<%= polyglot.t('ShipToOtherPlaceholder') %>"
+                       class="fieldItem settingsAddressInput">
+              </div>
+
+            </div>
+
             <div class="flexRow overflowVisible">
 
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="settingsShipToCountry">
-                    <%= polyglot.t('ShipToCountry') %>
+                    <%= polyglot.t('ShipToCountry') %> *
                   </label>
                 </div>
               </div>
@@ -985,6 +1011,10 @@
                     </select>
                   </div>
                 </div>
+              </div>
+
+              <div class="padding15">
+                <span class="note">* <%= polyglot.t('Required') %></span>
               </div>
             </div>
 

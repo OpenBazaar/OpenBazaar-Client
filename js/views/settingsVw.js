@@ -958,28 +958,32 @@ module.exports = pageVw.extend({
         $saveBtn = this.$('.js-saveAddress');
 
     $saveBtn.addClass('loading');
+    this.$('#settingsShipToName').removeClass('invalid');
 
     newAddress.name = this.$('#settingsShipToName').val();
     newAddress.street = this.$('#settingsShipToStreet').val();
     newAddress.city = this.$('#settingsShipToCity').val();
     newAddress.state = this.$('#settingsShipToState').val();
     newAddress.postal_code = this.$('#settingsShipToPostalCode').val();
+    newAddress.other = this.$('#settingsShipToOther').val();
     newAddress.country = this.$('#settingsShipToCountry').val();
     newAddress.displayCountry = this.$('#settingsShipToCountry option:selected').data('name');
 
     //if form is partially filled out throw error
-    if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
-      if (!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
+    if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code || newAddress.other) {
+      if (!newAddress.name) {
+        this.$('#settingsShipToName').addClass('invalid');
         app.simpleMessageModal.open({
           title: window.polyglot.t('errorMessages.saveError'),
-          message: window.polyglot.t('errorMessages.missingError')
+          message: window.polyglot.t('errorMessages.missingErrorList', {errorList: window.polyglot.t('ShipToName')})
         });
         $saveBtn.removeClass('loading');
         return;
       }
     }
 
-    if (newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+
+    if (newAddress.name && newAddress.country) {
       newAddresses.push(JSON.stringify(newAddress));
     }
 
