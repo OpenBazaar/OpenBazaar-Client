@@ -340,7 +340,7 @@ module.exports = baseModal.extend({
     newAddress.city = this.$el.find('#buyWizardCityInput').val();
     newAddress.state = this.$el.find('#buyWizardStateInput').val();
     newAddress.postal_code = this.$el.find('#buyWizardPostalInput').val();
-    newAddress.other = this.$el.find('#buyWizardOther').val();
+    newAddress.alternate_contact = this.$el.find('#buyWizardOther').val();
     newAddress.country = this.$el.find('#buyWizardCountryInput').val();
     newAddress.displayCountry = this.$el.find('#buyWizardCountryInput option:selected').data('name');
 
@@ -509,7 +509,7 @@ module.exports = baseModal.extend({
       formData.append("city", selectedAddress.city);
       formData.append("state", selectedAddress.state);
       formData.append("postal_code", selectedAddress.postal_code);
-      formData.append("other", selectedAddress.other);
+      formData.append("alternate_contact", selectedAddress.alternate_contact);
       formData.append("country", selectedAddress.country);
     }
 

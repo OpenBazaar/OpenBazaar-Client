@@ -67,7 +67,7 @@
   <% if( ob.vendor_offer.listing.metadata.category === "physical good" ) { %>
   <div class="flexRow custCol-border borderBottom">
     <div class="flexCol-8">
-      <div class="rowItem padding2015">
+      <div class="payAddressWrapper">
         <div class="table">
           <div>
             <div class="thumbnail-large-slim">
@@ -80,8 +80,11 @@
               <% if(ob.selectedAddress) { %>
               <div class="marginBottom2"><%= ob.selectedAddress.name %></div>
               <div class="marginBottom2"><%= ob.selectedAddress.street %></div>
-              <div class="marginBottom2"><%= ob.selectedAddress.city %>, <%= ob.selectedAddress.state %> <%= ob.selectedAddress.postal_code %></div>
-              <div class="marginBottom2"><%= ob.selectedAddress.other %></div>
+              <div class="marginBottom2">
+                <%= ob.selectedAddress.city %><% if(ob.selectedAddress.state || ob.selectedAddress.postal_code && ob.selectedAddress.city){ %>,<% } %>
+                <%= ob.selectedAddress.state %> <%= ob.selectedAddress.postal_code %>
+              </div>
+              <div class="marginBottom2"><%= ob.selectedAddress.alternate_contact %></div>
               <div><%= ob.selectedAddress.displayCountry %></div>
               <% } %>
             </div>
