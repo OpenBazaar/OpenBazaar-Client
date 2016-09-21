@@ -214,7 +214,7 @@ module.exports = baseVw.extend({
         saveOnBlur: true,
         placeholder: window.polyglot.t('KeywordsPlaceholder'),
         onBeforeTagAdd: (event, tag) => {
-          if(tag.length > self.maxTagChars) {
+          if (tag.length > self.maxTagChars) {
             app.simpleMessageModal.open({
               title: window.polyglot.t('errorMessages.tagIsTooLongHeadline'),
               message: window.polyglot.t('errorMessages.tagIsTooLongBody', {smart_count: self.maxTagChars})
@@ -370,6 +370,39 @@ module.exports = baseVw.extend({
     this.resizeImage();
   },
 
+  getOrientation: function(file, callback) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const dataView = new DataView(e.target.result);  // eslint-disable-line no-undef
+      let offset = 2;
+
+      if (dataView.getUint16(0, false) != 0xFFD8) return callback(-2);
+
+      while (offset < dataView.byteLength) {
+        const marker = dataView.getUint16(offset, false);
+        offset += 2;
+        if (marker == 0xFFE1) {
+          if (dataView.getUint32(offset += 2, false) != 0x45786966) return callback(-1);
+          const little = dataView.getUint16(offset += 6, false) == 0x4949;
+          offset += dataView.getUint32(offset + 4, little);
+          const tags = dataView.getUint16(offset, little);
+          offset += 2;
+          for (var i = 0; i < tags; i++) {
+            if (dataView.getUint16(offset + (i * 12), little) == 0x0112) {
+              return callback(dataView.getUint16(offset + (i * 12) + 8, little));
+            }
+          }
+        } else if ((marker & 0xFF00) != 0xFF00) {
+          break;
+        } else {
+          offset += dataView.getUint16(offset, false);
+        }
+      }
+      return callback(-1);
+    };
+    reader.readAsArrayBuffer(file.slice(0, 64 * 1024));
+  },
+
   resizeImage: function(imageFiles){
     var self = this,
         $imageInput = this.$el.find('.js-itemImageUpload'),
@@ -406,7 +439,14 @@ module.exports = baseVw.extend({
 
     __.each(imageFiles, function(imageFile){
       var newImage = document.createElement("img"),
-          ctx;
+          ctx,
+          orientation;
+
+      self.getOrientation(imageFile, function(val) {
+        if (val === -2) throw new Error('The image is not a jpeg.');
+        if (val === -1) throw new Error('The image is undefined.');
+        orientation = val;
+      });
 
       newImage.src = imageFile.path;
 
@@ -430,6 +470,19 @@ module.exports = baseVw.extend({
         canvas.width = imgW;
         canvas.height = imgH;
         ctx = canvas.getContext('2d');
+        if (orientation > 4) {
+          canvas.width = imgH;
+          canvas.height = imgW;
+        }
+        switch (orientation) {
+          case 2: ctx.translate(imgW, 0);      ctx.scale(-1, 1); break;
+          case 3: ctx.translate(imgW, imgH);   ctx.rotate(Math.PI); break;
+          case 4: ctx.translate(0, imgH);      ctx.scale(1, -1); break;
+          case 5: ctx.rotate(0.5 * Math.PI);   ctx.scale(1, -1); break;
+          case 6: ctx.rotate(0.5 * Math.PI);   ctx.translate(0, -imgH); break;
+          case 7: ctx.rotate(0.5 * Math.PI);   ctx.translate(imgW, -imgH); ctx.scale(-1, 1); break;
+          case 8: ctx.rotate(-0.5 * Math.PI);  ctx.translate(-imgW, 0); break;
+        }
         ctx.drawImage(newImage, 0, 0, imgW, imgH);
         dataURI = canvas.toDataURL('image/jpeg', 0.7);
         dataURI = dataURI.replace(/^data:image\/(png|jpeg|webp);base64,/, "");
