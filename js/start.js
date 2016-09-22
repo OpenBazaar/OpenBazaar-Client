@@ -259,7 +259,9 @@ $(document).on('mouseleave', 'a[data-href-tooltip]', function() {
 
 //record changes to the app state
 $(window).bind('hashchange', function(){
-  localStorage.setItem('route', Backbone.history.getFragment());
+   const host = encodeURIComponent(app.serverConfigs.getActive().getServerBaseUrl());
+   const route =  Backbone.history.getFragment();
+  localStorage.setItem(host, route);
 });
 
 //set minimized effects styles class

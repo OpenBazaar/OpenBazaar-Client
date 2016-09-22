@@ -4,7 +4,7 @@ var ipcRenderer = require('ipc-renderer'),
     __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    app = require('./App').getApp(),    
+    app = require('./App').getApp(),
     homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
     settingsView = require('./views/settingsVw'),
@@ -35,7 +35,7 @@ module.exports = Backbone.Router.extend({
 
     routes.forEach((route) => {
       this.route.apply(this, route);
-    });  
+    });
 
     /*
     expects options.userModel, options userProfile, socketView from main.js
@@ -49,7 +49,7 @@ module.exports = Backbone.Router.extend({
         this.navigate(translatedRoute, { trigger: true });
       });
     });
-    
+
     originalHistoryBack = history.back;
     history.back = function() {
       self.historyAction = 'back';
@@ -61,7 +61,7 @@ module.exports = Backbone.Router.extend({
       self.historyAction = 'forward';
       return originalHistoryForward.apply(this, arguments);
     };
-    
+
     this.historySize = -1;
     this.historyPosition = -1;
     this.historyAction = 'default';
@@ -80,7 +80,7 @@ module.exports = Backbone.Router.extend({
             delete this.viewCache[key];
           }
         }
-      }      
+      }
     }, this.cleanCacheInterval);
   },
 
@@ -92,19 +92,19 @@ module.exports = Backbone.Router.extend({
       // clear any cache for the view, so a fresh view is created
       delete this.viewCache[this.view.constructor.getCacheIndex(Backbone.history.getFragment())];
     }
-    
+
     Backbone.history.loadUrl();
   },
 
   translateRoute: function(route) {
     if (!route) throw new Error('You must provide a route');
-    
+
     var guid = "",
         state = "",
         itemHash = "",
         routeArray = route.replace("ob://", "").replace(/ /g, "").split("/"),
         deferred = $.Deferred();
-    
+
     state = routeArray[1] ? "/" + routeArray[1] : "";
     itemHash = routeArray[2] ? "/" + routeArray[2] : "";
 
@@ -150,7 +150,7 @@ module.exports = Backbone.Router.extend({
 
     return deferred.promise();
   },
-  
+
   execute: function(callback, args, name) {
     if (this.historyAction == 'default') {
       this.historyPosition += 1;
@@ -169,16 +169,16 @@ module.exports = Backbone.Router.extend({
     } else {
       $('.js-navFwd').removeClass('disabled-icon');
     }
-    
+
     if (this.historyPosition == 1) {
       $('.js-navBack').addClass('disabled-icon');
     } else {
       $('.js-navBack').removeClass('disabled-icon');
     }
-    
+
     if (callback) callback.apply(this, args);
   },
-  
+
   cleanup: function() {
     app.loadingModal.close();
     app.simpleMessageModal.close();
@@ -190,7 +190,7 @@ module.exports = Backbone.Router.extend({
 
     fragment = fragment || Backbone.history.getFragment();
     index = view.constructor.getCacheIndex(fragment);
-    
+
     this.viewCache[index] = {
       cachedAt: Date.now(),
       view: this.view
@@ -219,7 +219,7 @@ module.exports = Backbone.Router.extend({
 
     $('body').attr('id', options.bodyID);
     $('body').attr('class', options.bodyClass);
-    
+
     this.pageConnectModal && this.pageConnectModal.remove();
     this.pageConnectModal = null;
 
@@ -246,7 +246,7 @@ module.exports = Backbone.Router.extend({
         this.view.$el.detach();
         this.trigger('cache-detached', { view: this.view });
       } else {
-        this.view.close ? this.view.close() : this.view.remove();         
+        this.view.close ? this.view.close() : this.view.remove();
       }
     }
 
@@ -278,7 +278,7 @@ module.exports = Backbone.Router.extend({
         });
       } else {
         this.view.cacheExpires && this.cacheView(this.view);
-      }      
+      }
     }
   },
 
@@ -305,7 +305,7 @@ module.exports = Backbone.Router.extend({
         statusText: config.connectText,
         tooltip: config.connectTooltip
       }
-    }).render().open();    
+    }).render().open();
 
     this.pageConnectModal.on('back', () => {
       history.back();
@@ -343,8 +343,10 @@ module.exports = Backbone.Router.extend({
   },
 
   index: function(){
-    if (localStorage.getItem("route")){
-      this.navigate('#' + localStorage.getItem("route"), {trigger: true});
+    const host = encodeURIComponent(app.serverConfigs.getActive().getServerBaseUrl());
+    const route = localStorage.getItem(host);
+    if (route){
+      this.navigate('#' + route, {trigger: true});
     } else {
       this.navigate('#home', {trigger: true});
     }
