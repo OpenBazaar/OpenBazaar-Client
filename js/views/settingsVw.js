@@ -13,7 +13,7 @@ var __ = require('underscore'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
-    cropit = require('../utils/jquery.cropit'),
+    cropit = require('cropit'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
     saveToAPI = require('../utils/saveToAPI'),
@@ -62,7 +62,8 @@ module.exports = pageVw.extend({
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'change #handle': 'handleChange',
-    'input #pgp_key': 'checkPGPKey'
+    'click .js-avatarRotateLeft': 'rotateAvatarLeft',
+    'click .js-avatarRotateRight': 'rotateAvatarRight',
   },
 
   initialize: function(options){
@@ -235,7 +236,9 @@ module.exports = pageVw.extend({
         placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
 
-      $('#settings-image-cropper').cropit({
+      self.avatarCropper =  self.$('#settings-image-cropper');
+
+      self.avatarCropper.cropit({
         $preview: self.$('.js-settingsAvatarPreview'),
         $fileInput: self.$('#settingsAvatarInput'),
         smallImage: "stretch",
@@ -690,6 +693,14 @@ module.exports = pageVw.extend({
     //$('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
     $('#settings-image-cropperBanner').cropit('imageSrc', theme["coverPhoto"]);
     this.newBanner = true;
+  },
+
+  rotateAvatarLeft: function() {
+    this.avatarCropper.cropit('rotateCCW');
+  },
+
+  rotateAvatarRight: function() {
+    this.avatarCropper.cropit('rotateCW');
   },
 
   scrollToFirstError: function($container) {
@@ -1148,16 +1159,6 @@ module.exports = pageVw.extend({
       type: "GET",
       url: self.serverUrl + "shutdown"
     });
-  },
-
-  checkPGPKey: function(e){
-    if (!this.$(e.target).val().length){
-      this.$('.js-settingsSignatureRow').css("height", 0);
-      this.$('#signature').removeAttr("required");
-    } else {
-      this.$('.js-settingsSignatureRow').css("height", 50);
-      this.$('#signature').attr("required", '');
-    }
   },
 
   toggleFancyStyles: function(){

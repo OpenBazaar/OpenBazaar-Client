@@ -7,7 +7,7 @@ var __ = require('underscore'),
     app = require('../App.js').getApp(),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
-    cropit = require('../utils/jquery.cropit'),
+    cropit = require('cropit'),
     ratingCl = require('../collections/ratingCl'),
     userProfileModel = require('../models/userProfileMd'),
     listingsModel = require('../models/listingsMd'),
@@ -411,17 +411,18 @@ UserPageVw = pageVw.extend({
           self.hideThisUser('nsfw');
         }
 
-        self.$el.find('#image-cropper').cropit({
+        self.headerCropper = self.$('#image-cropper');
+
+        self.headerCropper.cropit({
           smallImage: "stretch",
           maxZoom: 5,
+          $preview: self.$('.headerCropperPreview'),
           onFileReaderError: function(data){console.log(data);},
           onFileChange: function(){
-            $('.js-headerLoading').removeClass('fadeOut');
-            if(self.$el.find('#image-cropper').cropit('isZoomable')){
+            if(self.headerCropper.cropit('isZoomable')){
               $('.js-bannerRangeInput').removeClass('hide');
             }
           },
-          onImageLoaded: function(){$('.js-headerLoading').addClass('fadeOut');},
           onImageError: function(errorObject, errorCode, errorMessage){
             console.log(errorObject);
             console.log(errorCode);

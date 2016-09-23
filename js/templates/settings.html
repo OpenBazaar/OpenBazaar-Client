@@ -262,16 +262,24 @@
                 </div>
               </div>
               <div class="flexCol-9 borderRight0 custCol-border">
-                <div id="settings-image-cropper" class="positionWrapper">
+                <div id="settings-image-cropper" class="positionWrapper flexRow">
                   <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
                     <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
                   </div>
                   <div class="cropit-image-preview cropit-avatar js-settingsAvatarPreview rowTop20 thumbnail thumbnail-huge box-border pull-left row20 marginLeft12"></div>
-                  <div>
-                    <input type="range" class="cropit-image-zoom-input rowTop20 row20  marginLeft12 hide" />
+                  <div class="pull-left marginLeft12 flexCol-3">
+                    <div>
+                      <input type="range" class="cropit-image-zoom-input rowTop20 row20 hide" />
+                    </div>
+                    <div class="flexRow">
+                      <a class="btn flexExpand marginRight5 color-secondary custCol-secondary ion-reply js-avatarRotateLeft"></a>
+                      <a class="btn flexExpand marginLeft5 color-secondary custCol-secondary ion-forward js-avatarRotateRight"></a>
+                    </div>
+                    <div>
+                      <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
+                      <label for="settingsAvatarInput" class="btn btn-txt rowTop20 row20 width100 color-secondary custCol-secondary"><%= polyglot.t('NewAvatar') %></label>
+                    </div>
                   </div>
-                  <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
-                  <label for="settingsAvatarInput" class="btn btn-txt rowTop20 marginLeft12 row20 color-secondary custCol-secondary"><%= polyglot.t('NewAvatar') %></label>
                 </div>
               </div>
             </div>
@@ -386,41 +394,6 @@
                        value="<%= ob.page.profile.social_accounts.snapchat.username %>">
               </div>
             </div>
-<!--
-            <div class="flexRow TODO">
-              <div class="flexCol-3 borderRight custCol-border">
-                <div class="fieldItem">
-                  <label for="pgp_key"><%= polyglot.t('PGPKey') %></label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 borderRight0 custCol-border">
-                <input name="pgp_key"
-                       type="text"
-                       id="pgp_key"
-                       placeholder="<%= polyglot.t('PGPKey') %>"
-                       class="fieldItem"
-                       value="<%= ob.page.profile.pgp_key %>">
-              </div>
-            </div>
-
-            <div class="flexRow foldIn js-settingsSignatureRow TODO">
-              <div class="flexCol-3 borderRight custCol-border">
-                <div class="fieldItem">
-                  <label for="signature"><%= polyglot.t('Signature') %></label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 borderRight0 custCol-border">
-                <input name="signature"
-                       type="text"
-                       id="signature"
-                       placeholder="<%= polyglot.t('SignaturePlaceholder') %>"
-                       class="fieldItem">
-              </div>
-            </div>
-
-            -->
 
             <div class="flexRow borderBottom custCol-border marginTop20">
               <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('About') %></h3>

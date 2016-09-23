@@ -138,6 +138,7 @@ textarea {
 
 input[type=range]{
   -webkit-appearance: none;
+  width: 100%;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
@@ -150,7 +151,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  border: #777;
+  border: #777 1px solid;
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -160,10 +161,6 @@ input[type=range]::-webkit-slider-thumb {
 
 input[type=range]:focus {
   outline: none;
-}
-
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: rgba(255,255,255,0.9);
 }
 
 textarea {
@@ -4164,7 +4161,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 0;
   height: 38px;
   line-height: 38px;
-  padding: 2px;
   border-radius: 0;
   overflow: hidden;
   border-top-right-radius: 3px;
@@ -4377,6 +4373,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .cropit-image-zoom-input {
   margin-left: 0;
   margin-right: 0;
+}
+
+.cropit-preview.cropit-image-loading .spinner {
+  opacity: 1;
+}
+
+.cropit-preview.cropit-image-loaded .cropit-preview-image-container {
+  cursor: move;
+}
+
+.cropit-image-zoom-input[disabled] {
+  opacity: .2;
 }
 
 .cropit-image-preview.cropit-avatar {
@@ -6124,8 +6132,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: auto;
   margin-right: auto;
 }
-
-
 
 #ov1 .heightAuto {
   height: auto;
