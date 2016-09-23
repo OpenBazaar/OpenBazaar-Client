@@ -4828,6 +4828,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-style: dashed;
 }
 
+.addressesWrapper .addressBox .defaultLabel {
+  display: none;
+}
+
+.addressesWrapper:first-child .addressBox .defaultLabel {
+  display: block;
+}
+
 .buyAddressWrapper {
   padding: 15px;
   overflow: hidden;
