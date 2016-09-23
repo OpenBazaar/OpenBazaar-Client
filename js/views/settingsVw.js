@@ -20,7 +20,8 @@ var __ = require('underscore'),
     SMTPConnection = require('smtp-connection'),
     MediumEditor = require('medium-editor'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
-    getBTPrice = require('../utils/getBitcoinPrice');
+    getBTPrice = require('../utils/getBitcoinPrice'),
+    Sortable = require('sortablejs');
 
 module.exports = pageVw.extend({
 
@@ -233,6 +234,7 @@ module.exports = pageVw.extend({
         placeholder_text_single: window.polyglot.t('chosenJS.placeHolderTextSingle'),
         placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
+
       $('#settings-image-cropper').cropit({
         $preview: self.$('.js-settingsAvatarPreview'),
         $fileInput: self.$('#settingsAvatarInput'),
@@ -255,6 +257,7 @@ module.exports = pageVw.extend({
           console.log(errorMessage);
         }
       });
+
       //cache elements used more than once
       self.$moderatorFeeInput = self.$('#moderatorFeeInput');
       self.$moderatorFeeHolder = self.$('.js-settingsModeratorFee');
@@ -286,6 +289,7 @@ module.exports = pageVw.extend({
           console.log(errorMessage);
         }
       });
+
       if (self.model.get('page').profile.header_hash){
         $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
         self.newBanner = false;
@@ -304,6 +308,12 @@ module.exports = pageVw.extend({
         }
       });
       editor.subscribe('blur', self.validateDescription);
+
+      self.sortableAddresses && self.sortableAddresses.destroy();
+      self.sortableAddresses = Sortable.create(self.$('.js-sortableAddresses')[0], {
+        chosenClass: "addressBoxDragging",
+        ghostClass: "addressBoxGhost"
+      });
     });
     return this;
   },

@@ -4818,6 +4818,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: relative;
 }
 
+.addressBoxDragging .addressBox{
+  border-width: 2px;
+  border-style: solid;
+}
+
+.addressBoxGhost .addressBox{
+  border-width: 2px;
+  border-style: dashed;
+}
+
 .buyAddressWrapper {
   padding: 15px;
   overflow: hidden;
