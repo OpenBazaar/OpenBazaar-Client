@@ -965,12 +965,12 @@ module.exports = pageVw.extend({
     newAddress.city = this.$('#settingsShipToCity').val();
     newAddress.state = this.$('#settingsShipToState').val();
     newAddress.postal_code = this.$('#settingsShipToPostalCode').val();
-    newAddress.other = this.$('#settingsShipToOther').val();
+    newAddress.alternate_contact = this.$('#settingsShipToOther').val();
     newAddress.country = this.$('#settingsShipToCountry').val();
     newAddress.displayCountry = this.$('#settingsShipToCountry option:selected').data('name');
 
     //if form is partially filled out throw error
-    if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code || newAddress.other) {
+    if (newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code || newAddress.alternate_contact) {
       if (!newAddress.name) {
         this.$('#settingsShipToName').addClass('invalid');
         app.simpleMessageModal.open({

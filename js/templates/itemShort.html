@@ -6,7 +6,7 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
 %>
 
 
-<div class="gridItem clearfix custCol-border">
+<div class="gridItem clearfix custCol-border <% if(ob.hidden){ %>div-fadeExtra<% } %>">
 
   <div class="itemImg row10 color-secondary custCol-secondary overflowHidden js-item" data-id="<%= ob.contract_hash %>">
     <div class="itemImg <% if(ob.cloak){ %> nsfw <% } %>" style="background-image: url(<%= ob.imageURL %>), url(imgs/defaultItem.png);"></div>
@@ -61,7 +61,7 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
           <div class="btn-gridItemControl borderRight custCol-border js-itemShortEdit">
             <span class="ion-compose fontSize11 marginRight2 txt-fade"></span>
             <span class="txt-fade"><%= polyglot.t('Edit') %></span>
-          </div>  
+          </div>
           <div class="btn-gridItemControl borderRight custCol-border js-itemShortClone">
             <span class="ion-ios-copy fontSize11 marginRight2 txt-fade"></span>
             <span class="txt-fade"><%= polyglot.t('Clone') %></span>
@@ -83,7 +83,7 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
           <div class="btn-gridItemControl borderRight custCol-border js-item" data-id="<%= ob.contract_hash %>">
             <span class="ion-ios-pricetag fontSize10 marginRight2 txt-fade"></span>
             <span class="txt-fade"><%= polyglot.t('ViewListing') %></span>
-          </div>          
+          </div>
         <% } %>
       </div>
     </div>

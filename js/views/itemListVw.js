@@ -13,10 +13,15 @@ module.exports = baseVw.extend({
     this.category = options.category || "all";
     //the model must be passed in by the constructor
     this.itemsShort = new itemsShortCollection(this.model);
+    this.itemsShort.models.reverse();
+    this.itemsShort.comparator = (model) => {
+      return !model.get('pinned');
+    };
+    this.itemsShort.sort();
     //this.listenTo(this.options.userModel, 'change', function(){
     //  self.render();
     //});
-    
+
     // as of now, our base view doesn't support registerChild happening
     // before the view is fully initialized, hence the timeout here:
     setTimeout(() => {

@@ -4820,12 +4820,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .buyAddressWrapper {
   padding: 15px;
-  overflow: hidden;
+    word-wrap: break-word;
 }
 
-.buyAddressWrapper > div {
-  overflow: hidden;
-  text-overflow: ellipsis;
+.payAddressWrapper {
+    padding: 20px 15px;
+    word-wrap: break-word;
 }
 
 /*========== utility classes ==========*/

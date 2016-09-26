@@ -290,9 +290,9 @@ module.exports = pageVw.extend({
             flagStatus = false;
 
         //only use the status_changed if the status matters to that tab
-        if(tabName == "purchases"){
+        if (tabName == "purchases"){
           flagStatus = status == 2 || status > 3;
-        } else if(tabName == "sales") {
+        } else if (tabName == "sales") {
           flagStatus = status == 1 || status > 2;
         } else {
           flagStatus = true;

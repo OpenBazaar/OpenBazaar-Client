@@ -620,6 +620,8 @@ module.exports = baseVw.extend({
         keywordsArray = this.inputKeyword.getTagValues(),
         shipsToInput = this.$('#shipsTo'),
         invalidInputList = [],
+        maxQuantInput = this.$el.find('#inputMaxQuantity'),
+        tempDisabledFields = [],
         hasError;
 
     validateMediumEditor.checkVal(this.$('#inputDescription'));
@@ -640,6 +642,12 @@ module.exports = baseVw.extend({
     this.$el.find('#inputPrice').val(this.$el.find('#priceLocal').val());
     this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
     this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
+
+    // disable blank fields that cause errors if sent to the server
+    if (!maxQuantInput.val()) {
+      maxQuantInput.attr('disabled', true);
+      tempDisabledFields.push(maxQuantInput);
+    }
 
     formData = new FormData(submitForm);
 
@@ -715,6 +723,12 @@ module.exports = baseVw.extend({
           console.log(jqXHR);
           console.log(status);
           console.log(errorThrown);
+        },
+        complete: function(){
+          //re-enable any disabled fields
+          __.each(tempDisabledFields, function(jQObject){
+            jQObject.attr('disabled', false);
+          });
         }
       });
     }
