@@ -42,7 +42,6 @@ module.exports = Backbone.Model.extend({
       secondary_color: "#317DB8",
       text_color: "#ffffff",
       background_color: "#063753",
-      pgp_key: "",
       nsfw: false,
       avatar_hash: "",
       handle: "",

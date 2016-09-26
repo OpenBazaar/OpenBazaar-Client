@@ -2,7 +2,7 @@
 
 var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
-    cropit = require('../utils/jquery.cropit'),
+    cropit = require('cropit'),
     app = require('../App').getApp(),
     baseModal = require('./baseModal'),
     languagesModel = require('../models/languagesMd'),
