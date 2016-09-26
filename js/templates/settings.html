@@ -833,11 +833,10 @@
               <div class="flexRow">
                 <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('CurrentAddress') %></h3>
               </div>
-              <div class="flexRow pad5 rowTop15">
+              <div class="flexRow pad5 rowTop15 js-sortableAddresses">
                 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
-                <% console.log(address) %>
-                <div class="flexCol-4 pad10 row15">
-                  <div class="addressBox custCol-secondary js-address">
+                <div class="flexCol-4 pad10 row15 addressesWrapper">
+                  <div class="addressBox custCol-secondary custCol-border-background js-address">
                     <div class="textOpacity1 row40">
                       <div><%= address.name %></div>
                       <div><%= address.street %></div>
@@ -859,6 +858,9 @@
                         <span class="fontSize12 clickable togLabelOff js-settingsAddressDelete"><%= polyglot.t('Delete') %></span>
                         <span class="fontSize12 clickable togLabelOn js-settingsAddressUnDelete"><%= polyglot.t('DontDelete') %></span>
                       </label>
+                    </div>
+                    <div class="positionBottomRight defaultLabel padding10 note">
+                      <%= polyglot.t('DefaultAddress') %>
                     </div>
                   </div>
                 </div>
