@@ -54,12 +54,11 @@ var Polyglot = require('node-polyglot'),
     PageConnectModal = require('./views/pageConnectModal'),
     Dialog = require('./views/dialog.js'),
     loadProfileNeeded = true,
-    startUpConnectMaxRetries = 4,
-    startUpConnectRetryDelay = 2 * 1000,
-    startUpConnectMaxTime = 10 * 1000,
-    startTime = Date.now(),
+    startUpConnectMaxRetries = 5,
+    starutUpConnectCurrentRetries = startUpConnectMaxRetries,
+    startUpConnectRetryDelay = 3 * 1000,
     startUpRetry,
-    removeStartupRetry,
+    resetRetry,
     onActiveServerSync,
     newPageNavView,
     newSocketView,
@@ -571,7 +570,7 @@ launchOnboarding = function(guidCreating) {
 })();
 
 pageConnectModal.on('cancel', () => {
-  removeStartupRetry();
+  resetRetry();
   app.getHeartbeatSocket()._socket.onclose = null;
   app.getHeartbeatSocket().close();
   pageConnectModal.remove();
@@ -594,9 +593,10 @@ app.serverConnectModal.on('connected', () => {
 });
 
 app.getHeartbeatSocket().on('open', function() {
-  removeStartupRetry();
+  resetRetry();
   pageConnectModal.remove();
-  startUpLoadingModal.open();
+  //startUpLoadingModal.open();
+  this.retryConnectionMsg && this.retryConnectionMsg.remove();
 
   if (!profileLoaded) {
     // clear some flags so the heartbeat events will
@@ -609,21 +609,33 @@ app.getHeartbeatSocket().on('open', function() {
 });
 
 app.getHeartbeatSocket().on('close', startUpRetry = function() {
-  if (
-    Date.now() - startTime < startUpConnectMaxTime &&
-    startUpConnectMaxRetries
+  if (starutUpConnectCurrentRetries
   ) {
     startUpRetry.timeout = setTimeout(() => {
-      startUpConnectMaxRetries--;
+      var retryMsg = {
+        type: 'warning',
+        msg: '<i>' + window.polyglot.t('errorMessages.retryingConnection', {attempt: startUpConnectMaxRetries - starutUpConnectCurrentRetries +1, total: startUpConnectMaxRetries}) + '</i>',
+        duration: false
+      };
+      starutUpConnectCurrentRetries--;
       app.connectHeartbeatSocket();
+      if (this.retryConnectionMsg) {
+        this.retryConnectionMsg.updateMessage(retryMsg);
+      } else {
+        this.retryConnectionMsg = app.statusBar.pushMessage(retryMsg);
+      }
     }, startUpConnectRetryDelay);
   } else {
+    this.retryConnectionMsg && this.retryConnectionMsg.remove();
     app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
       .open();
   }
 });
 
-removeStartupRetry = function() {
+resetRetry = function() {
+  starutUpConnectCurrentRetries = startUpConnectMaxRetries;
+  /* this code removed so the app will automatically reconnect when the internet connection is flaky */
+  /*
   clearTimeout(startUpRetry.timeout);
   app.getHeartbeatSocket().off('close', startUpRetry);
   app.getHeartbeatSocket().on('close', () => {
@@ -638,6 +650,7 @@ removeStartupRetry = function() {
       app.serverConnectModal.open();
     }
   });
+  */
 };
 
 app.getHeartbeatSocket().on('message', function(e) {
