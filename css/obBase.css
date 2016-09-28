@@ -341,7 +341,7 @@ h6, .h6 {
 #obContainer {
   transition: width 0.5s ease;
   width: calc(100% - 47px);
-  height: calc(100% - 50px);
+  height: calc(100% - 74px);
   overflow-y: scroll;
   padding-top: 20px;
   -webkit-app-region: no-drag;
@@ -4816,6 +4816,23 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.chatOpen .backToTop {
   right: 303px;
+}
+
+.userShort {
+  border-bottom: solid 1px rgba(255,255,255,0.08);
+  box-sizing: border-box;
+}
+
+.userShort .userShortWrapper {
+  padding: 20px 15px;
+}
+
+.userList .userShort {
+  height: 116px; /* fix the height to prevent a reflow when the wrapper is hidden */
+}
+
+.userList .userShort.outOfScroll .userShortWrapper {
+  display: none;
 }
 
 .addressBox {
