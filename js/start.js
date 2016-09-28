@@ -56,8 +56,8 @@ var Polyglot = require('node-polyglot'),
     loadProfileNeeded = true,
     startUpConnectMaxRetries = 4,
     startUpConnectRetryDelay = 2 * 1000,
-    startUpConnectMaxTime = 10 * 1000,
-    startTime = Date.now(),
+    //startUpConnectMaxTime = 10 * 1000,
+    //startTime = Date.now(),
     startUpRetry,
     removeStartupRetry,
     onActiveServerSync,
@@ -527,6 +527,7 @@ $(document).ajaxSend(function(e, jqXhr) {
 });
 
 $(document).ajaxError(function(event, jqxhr) {
+  console.log("ajax error");
   if (jqxhr.status === 401 && jqxhr.serverConfig.id === app.serverConfigs.getActive().id) {
     app.serverConnectModal.failConnection('failed-auth', jqxhr.serverConfig)
       .open();
@@ -571,6 +572,7 @@ launchOnboarding = function(guidCreating) {
 })();
 
 pageConnectModal.on('cancel', () => {
+  console.log("page connect modal on cancel");
   removeStartupRetry();
   app.getHeartbeatSocket()._socket.onclose = null;
   app.getHeartbeatSocket().close();
@@ -596,7 +598,9 @@ app.serverConnectModal.on('connected', () => {
 app.getHeartbeatSocket().on('open', function() {
   removeStartupRetry();
   pageConnectModal.remove();
-  startUpLoadingModal.open();
+  //startUpLoadingModal.open();
+  console.log("heartbeat open");
+  this.retryConnectionMsg && this.retryConnectionMsg.remove();
 
   if (!profileLoaded) {
     // clear some flags so the heartbeat events will
@@ -609,27 +613,44 @@ app.getHeartbeatSocket().on('open', function() {
 });
 
 app.getHeartbeatSocket().on('close', startUpRetry = function() {
+  console.log("heartbeat closed starupRetry");
+  console.log(startUpConnectMaxRetries);
+  /*
   if (
     Date.now() - startTime < startUpConnectMaxTime &&
     startUpConnectMaxRetries
+    */
+  if (startUpConnectMaxRetries
   ) {
     startUpRetry.timeout = setTimeout(() => {
+      console.log("retry connection");
       startUpConnectMaxRetries--;
       app.connectHeartbeatSocket();
+      this.retryConnectionMsg = this.retryConnectionMsg || app.statusBar.pushMessage({
+        type: 'warning',
+        msg: '<i>' + window.polyglot.t('retryingConnection') + '</i>',
+        duration: false
+      });
     }, startUpConnectRetryDelay);
   } else {
+    console.log("connect retries exceeded");
+    this.retryConnectionMsg && this.retryConnectionMsg.remove();
     app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
       .open();
   }
 });
 
 removeStartupRetry = function() {
+  startUpConnectMaxRetries = 4;
+  /*
   clearTimeout(startUpRetry.timeout);
   app.getHeartbeatSocket().off('close', startUpRetry);
   app.getHeartbeatSocket().on('close', () => {
+    console.log("removeStartupRetry close")
     app.serverConnectModal.failConnection(null, app.serverConfigs.getActive());
 
     if (app.serverConnectModal.getConnectAttempt()) {
+      console.log("get connect attempt")
       app.serverConnectModal.getConnectAttempt()
         .fail(() => {
           app.serverConnectModal.open();
@@ -638,6 +659,7 @@ removeStartupRetry = function() {
       app.serverConnectModal.open();
     }
   });
+  */
 };
 
 app.getHeartbeatSocket().on('message', function(e) {
