@@ -359,8 +359,6 @@ UserPageVw = pageVw.extend({
     } else {
       config.connectText = window.polyglot.t('pageConnectingMessages.userConnect').replace('${guid}', this.pageID);
       config.failedText = window.polyglot.t('pageConnectingMessages.userFail');
-      // config.connectTooltip = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere, lectus quis euismod vestibulum, sapien justo laoreet ante, sit amet mollis nibh diam cursus massa. Duis a eros dapibus, ultrices tortor nec, sodales magna.';
-      // config.failedTooltip = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere, lectus quis euismod vestibulum, sapien justo laoreet ante, sit amet mollis nibh diam cursus massa. Duis a eros dapibus, ultrices tortor nec, sodales magna.';
     }
 
     return config;
@@ -385,13 +383,6 @@ UserPageVw = pageVw.extend({
         self.fetchFollowing();
         self.getIsModerator();
         self.fetchListings();
-        /*
-        //save state of the page
-        self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
-        self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
-        self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
-        self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
-        */
         self.setCustomStyles();
         self.setState(self.state, self.currentItemHash, { replaceHistory: true });
         self.$backToTop = self.$('.backToTop');
@@ -417,9 +408,11 @@ UserPageVw = pageVw.extend({
           smallImage: "stretch",
           maxZoom: 5,
           $preview: self.$('.headerCropperPreview'),
-          onFileReaderError: function(data){console.log(data);},
+          onFileReaderError: function(data){
+            console.log(data);
+          },
           onFileChange: function(){
-            if(self.headerCropper.cropit('isZoomable')){
+            if (self.headerCropper.cropit('isZoomable')){
               $('.js-bannerRangeInput').removeClass('hide');
             }
           },
@@ -503,10 +496,10 @@ UserPageVw = pageVw.extend({
       this.tabClick(this.$el.find('.js-storeTab'), this.$el.find('.js-item'));
       this.renderItem(hash);
       this.$obContainer.scrollTop(352);
-    }else if (state === "listingOld") {
+    } else if (state === "listingOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
       this.$obContainer.scrollTop(352);
-    }else if(state === "listingNew"){
+    } else if (state === "listingNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       this.$obContainer.scrollTop(352);
       this.addTabToHistory('listingNew', options.replaceHistory);
@@ -671,7 +664,6 @@ UserPageVw = pageVw.extend({
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
-      //timeout: 5000,
       success: function (model) {
         if (self.isRemoved()) return;
         self.cachedListings = model.get('listings'); //cache for rerendering
@@ -824,7 +816,7 @@ UserPageVw = pageVw.extend({
         if (followerArray.length || this.followerFetchTotal == 0){
           //always render the first time so the no followers message is shown for no followers
           this.renderFollowers(followerArray, this.followerFetchTotal);
-          this.setFollowersPlaceholder(this.followerFetchTotal, this.followerFetchStart)
+          this.setFollowersPlaceholder(this.followerFetchTotal, this.followerFetchStart);
         }
       },
       error: function(){
@@ -947,7 +939,6 @@ UserPageVw = pageVw.extend({
         hideFollow: true,
         serverUrl: this.options.userModel.get('serverUrl'),
         reverse: true,
-        perFetch: 30,
         followerCount: followerCount
       });
       this.registerChild(this.followerList);
@@ -1692,21 +1683,25 @@ UserPageVw = pageVw.extend({
   },
 
   moreButtonsOwnPageClick: function(){
-    if ($('.js-extraButtonsOwnPage').hasClass('hide')){
-      $('.js-extraButtonsOwnPage').removeClass('hide');
-      $('.js-moreButtonsOwnPage').html('x');
+    var extBtn = $('.js-extraButtonsOwnPage'),
+        moreExtBtn = $('.js-moreButtonsOwnPage');
+    if (extBtn.hasClass('hide')){
+      extBtn.removeClass('hide');
+      moreExtBtn.html('x');
     } else {
-      $('.js-extraButtonsOwnPage').addClass('hide');
-      $('.js-moreButtonsOwnPage').html('...');
+      extBtn.addClass('hide');
+      moreExtBtn.html('...');
     }
   },
   moreButtonsNotOwnPageClick: function(){
-    if ($('.js-extraButtonsNotOwnPage').hasClass('hide')){
-      $('.js-extraButtonsNotOwnPage').removeClass('hide');
-      $('.js-moreButtonsNotOwnPage').html('x');
+    var extBtn = $('.js-extraButtonsNotOwnPage'),
+        moreExtBtn = $('.js-moreButtonsNotOwnPage');
+    if (extBtn.hasClass('hide')){
+      extBtn.removeClass('hide');
+      moreExtBtn.html('x');
     } else {
-      $('.js-extraButtonsNotOwnPage').addClass('hide');
-      $('.js-moreButtonsNotOwnPage').html('...');
+      extBtn.addClass('hide');
+      moreExtBtn.html('...');
     }
   },
 

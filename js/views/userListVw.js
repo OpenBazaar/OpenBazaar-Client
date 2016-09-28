@@ -18,14 +18,13 @@ module.exports = Backbone.View.extend({
      options.ownFollowing: array of guids this user is following
      options.hideFollow: boolean, hide follow button
      options.reverse: should the list of users be reversed?
-     options.perFetch: the number of users returned per fetch (optional, only applies to the get_followers api)
      options.followerCount: the total number of followers (optional, only applise to the get_followers api)
      */
     //the model must be passed in by the constructor
     this.usersShort = new usersShortCollection(this.model);
     this.options.reverse && this.usersShort.models.reverse();
     this.subViews = [];
-    this.showPerScroll = 30;
+    this.showPerScroll = 10;
     this.nextUserToShow = 0;
     this.fetchedUsers = this.usersShort.length;
     this.totalUsers = this.options.followerCount;
@@ -49,7 +48,7 @@ module.exports = Backbone.View.extend({
     var self = this;
 
     if (this.usersShort.models.length > 0) {
-      this.listWrapper = $('<div class="list flexRow flexExpand border0 custCol-border"></div>');
+      this.listWrapper = $('<div class="list userList"></div>');
       this.renderUserSet(this.nextUserToShow, this.showPerScroll);
       this.$el.html(this.listWrapper);
     } else {
@@ -58,18 +57,21 @@ module.exports = Backbone.View.extend({
   },
 
   renderUserSet: function(start, end){
-    var self = this,
-        renderSet = __.filter(this.usersShort.models, function(value, index){
-          return (index >= start) && (index < end);
-        });
+    let renderSet = [];
 
-    __.each(renderSet, function(user) {
-      user.set('avatarURL', self.options.serverUrl+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
-      if (self.options.ownFollowing.indexOf(user.get('guid')) != -1){
+    if (start >= this.totalUsers) return;
+
+    renderSet = __.filter(this.usersShort.models, function(value, index){
+      return (index >= start) && (index < end);
+    });
+
+    __.each(renderSet, (user) => {
+      user.set('avatarURL', this.options.serverUrl+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
+      if (this.options.ownFollowing.indexOf(user.get('guid')) != -1){
         user.set("ownFollowing", true);
       }
-      user.set('hideFollow', self.options.hideFollow);
-      self.renderUser(user);
+      user.set('hideFollow', this.options.hideFollow);
+      this.renderUser(user);
     }, this);
 
     //if at least one user was added, trigger call so parent can refresh searches
@@ -77,7 +79,7 @@ module.exports = Backbone.View.extend({
       this.trigger('usersAdded');
     }
 
-    this.nextUserToShow = this.nextUserToShow >= this.fetchedUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
+    this.nextUserToShow = this.nextUserToShow >= this.fetchedUsers ? this.nextUserToShow : end;
 
     if (this.fetchedUsers < this.totalUsers && this.$el.is(':visible')){
       this.trigger('fetchMoreUsers');
@@ -93,9 +95,13 @@ module.exports = Backbone.View.extend({
   },
 
   onScroll: function(){
-    if (this.$container[0].scrollTop + this.$container[0].clientHeight + 200 > this.$container[0].scrollHeight &&
-        this.listWrapper && this.listWrapper[0].hasChildNodes() && this.listWrapper.is(":visible")) {
-      this.renderUserSet(this.nextUserToShow, this.nextUserToShow + this.showPerScroll);
+    if (!this.userShortHeight) this.userShortHeight = this.listWrapper[0].firstElementChild.offsetHeight;
+    if (this.listWrapper.is(":visible")){
+
+      if (this.$container[0].scrollTop + this.$container[0].clientHeight + 200 > this.$container[0].scrollHeight &&
+          this.listWrapper && this.listWrapper[0].hasChildNodes()) {
+        this.renderUserSet(this.nextUserToShow, this.nextUserToShow + this.showPerScroll);
+      }
     }
   },
 
