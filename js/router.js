@@ -402,17 +402,19 @@ module.exports = Backbone.Router.extend({
     processHandle = this.processHandle(handle).done((guid) => {
       var state,
           itemHash,
-          skipNSFWmodal;
+          skipNSFWmodal,
+          subPathString;
 
       subPath = subPath && subPath.slice(1).split('/');
       state = subPath && subPath[0] || null;
       itemHash = subPath && subPath[1] || null;
       skipNSFWmodal = subPath && subPath[2] || null;
+      subPathString = subPath.join('/');
 
       // we want this to happen after the launchPageConnectModal processes
       // the resolution of the promise, hence the timeout.
       setTimeout(() => {
-        this.navigate(`userPage/${guid}${subPath ? '/' + subPath : ''}`, { replace: true });
+        this.navigate(`userPage/${guid}${subPath ? '/' + subPathString : ''}`, { replace: true });
         this.userPage(guid, state, itemHash, skipNSFWmodal, '@' + handle);
       }, 0);
     });

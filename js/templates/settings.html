@@ -1051,7 +1051,7 @@
                        name="moderation_fee"
                        class="fieldItem custCol-text width70px floatLeft"
                        id="moderatorFeeInput"
-                       value="<%= ob.page.profile.moderation_fee.toFixed(2) %>" required/><div class="floatLeft marginLeft5 lineHeight51 fontWeight500 textOpacity75">%</div>
+                       value="<%= Number(ob.page.profile.moderation_fee).toFixed(2) %>" required/><div class="floatLeft marginLeft5 lineHeight51 fontWeight500 textOpacity75">%</div>
               </div>
             </div>
             <a class="btn btn-large js-saveModerator custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary">

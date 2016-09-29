@@ -4,7 +4,8 @@ var __ = require('underscore'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     app = require('../App').getApp(),
     countriesMd = require('./countriesMd'),
-    autolinker = require( '../utils/customLinker');
+    autolinker = require( '../utils/customLinker'),
+    sanitizeModel = require('../utils/sanitizeModel');
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
@@ -108,6 +109,10 @@ module.exports = window.Backbone.Model.extend({
     //when vendor currency code is in bitcoins, the json returned is different. Put the value in the expected place so the templates don't break.
     //check to make sure a blank result wasn't returned from the server
     if (response.vendor_offer){
+
+      //sanitize html
+      response.vendor_offer = sanitizeModel(response.vendor_offer);
+
       if (response.vendor_offer.listing.item.price_per_unit.bitcoin){
         response.vendor_offer.listing.item.price_per_unit.fiat = {
           "price": response.vendor_offer.listing.item.price_per_unit.bitcoin,
