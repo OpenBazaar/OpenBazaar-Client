@@ -3,7 +3,8 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     is = require('is_js'),
-    autolinker = require( '../utils/customLinker');
+    autolinker = require( '../utils/customLinker'),
+    sanitizeModel = require('../utils/sanitizeModel');
 
 module.exports = Backbone.Model.extend({
   defaults: {
@@ -66,6 +67,8 @@ module.exports = Backbone.Model.extend({
   parse: function(response) {
     //first check to make sure server sent data in the response. Sometimes it doesn't.
     if (response.profile){
+
+      response.profile = sanitizeModel(response.profile);
 
       //check if colors are in hex, if not convert. This assumes non-hex colors are numbers or strings of numbers.
       response.profile.background_color = response.profile.background_color === 0 || response.profile.background_color ? this.convertColor(response.profile.background_color) : "#063753";

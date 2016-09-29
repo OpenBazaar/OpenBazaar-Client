@@ -1,7 +1,6 @@
 'use strict';
 
-var __ = require('underscore'),
-    Backbone = require('backbone'),
+var Backbone = require('backbone'),
     app = require('../App').getApp(),
     getBTPrice = require('../utils/getBitcoinPrice');
 
@@ -23,17 +22,11 @@ module.exports = Backbone.Model.extend({
     handle: 0,
     avatar_hash: "",
     priceSet: 0, //set in Update Attribute below, so view can listen for it
-    short_description: ""
   },
 
   initialize: function(){
     this.updateAttributes();
     //this.on('change', this.updateAttributes, this);
-  },
-
-  parse: function(response){
-    response.short_description = __.unescape(response.short_description);
-    return response;
   },
 
   updateAttributes: function(){
@@ -77,7 +70,5 @@ module.exports = Backbone.Model.extend({
     if (thumbnailHash === "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" || thumbnailHash.length !== 40) {
       this.set('thumbnail_hash', "");
     }
-
-    this.set('short_description', this.get('short_description'));
   }
 });
