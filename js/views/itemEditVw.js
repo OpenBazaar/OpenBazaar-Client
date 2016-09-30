@@ -443,7 +443,6 @@ module.exports = baseVw.extend({
           orientation;
 
       self.getOrientation(imageFile, function(val) {
-        if (val === -2) throw new Error('The image is not a jpeg.');
         if (val === -1) throw new Error('The image is undefined.');
         orientation = val;
       });
