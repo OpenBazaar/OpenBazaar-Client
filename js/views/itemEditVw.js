@@ -481,6 +481,7 @@ module.exports = baseVw.extend({
           case 6: ctx.rotate(0.5 * Math.PI);   ctx.translate(0, -imgH); break;
           case 7: ctx.rotate(0.5 * Math.PI);   ctx.translate(imgW, -imgH); ctx.scale(-1, 1); break;
           case 8: ctx.rotate(-0.5 * Math.PI);  ctx.translate(-imgW, 0); break;
+          default: // do nothing
         }
         ctx.drawImage(newImage, 0, 0, imgW, imgH);
         dataURI = canvas.toDataURL('image/jpeg', 0.7);
