@@ -311,7 +311,6 @@ module.exports = pageVw.extend({
         }
       });
       editor.subscribe('blur', self.validateDescription);
-      console.log("render");
 
       self.sortableAddresses && self.sortableAddresses.destroy();
       if(self.$('.js-sortableAddresses').length) {
