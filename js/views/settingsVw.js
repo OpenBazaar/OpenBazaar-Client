@@ -311,12 +311,15 @@ module.exports = pageVw.extend({
         }
       });
       editor.subscribe('blur', self.validateDescription);
+      console.log("render");
 
       self.sortableAddresses && self.sortableAddresses.destroy();
-      self.sortableAddresses = Sortable.create(self.$('.js-sortableAddresses')[0], {
-        chosenClass: "addressBoxDragging",
-        ghostClass: "addressBoxGhost"
-      });
+      if(self.$('.js-sortableAddresses').length) {
+        self.sortableAddresses = Sortable.create(self.$('.js-sortableAddresses')[0], {
+          chosenClass: "addressBoxDragging",
+          ghostClass: "addressBoxGhost"
+        });
+      }
     });
     return this;
   },
