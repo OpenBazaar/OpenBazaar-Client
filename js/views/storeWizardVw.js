@@ -19,6 +19,7 @@ module.exports = baseModal.extend({
     'click .js-storeWizardModal': 'blockClicks',
     'click .js-storeWizardSave': 'saveWizard',
     'click .js-accordionNext': 'validateDescription',
+    'click .js-closeStoreWizardModal': 'cancelClick',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -104,7 +105,7 @@ module.exports = baseModal.extend({
         self.setValues();
         self.$el.find('#storeNameInput').focus();
         self.socketView.getModerators(self.socketModeratorID);
-        
+
         var editor = new MediumEditor('#aboutInput', {
           placeholder: {
             text: ''
@@ -159,7 +160,7 @@ module.exports = baseModal.extend({
     this.$el.find('.js-storeWizardModeratorList').append(modShort.el);
     this.moderatorCount++;
   },
-  
+
   blockClicks: function(e) {
     if (!$(e.target).hasClass('js-externalLink')){
       e.stopPropagation();
@@ -169,6 +170,10 @@ module.exports = baseModal.extend({
   validateInput: function(e) {
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
+  },
+
+  cancelClick: function() {
+    this.close();
   },
 
   saveWizard: function() {

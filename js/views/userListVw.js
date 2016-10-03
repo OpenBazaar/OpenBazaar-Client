@@ -95,6 +95,7 @@ module.exports = Backbone.View.extend({
   },
 
   onScroll: function(){
+    if (!this.listWrapper) return; //if no users have been added, do nothing
     if (!this.userShortHeight) this.userShortHeight = this.listWrapper[0].firstElementChild.offsetHeight;
     if (this.listWrapper.is(":visible")){
 

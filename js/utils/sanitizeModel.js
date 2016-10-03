@@ -30,7 +30,9 @@ module.exports = function(modelObject) {
       if (typeof obj[key] === 'object') {
         return sanitizeModelData(obj[key]);
       }
-      obj[key] = sanitize(obj[key]);
+      if (typeof obj[key] === 'string') {
+        obj[key] = sanitize(obj[key]);
+      }
     });
   }
   sanitizeModelData(modelObject);
