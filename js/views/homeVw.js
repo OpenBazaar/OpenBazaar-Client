@@ -50,6 +50,7 @@ module.exports = pageVw.extend({
     this.onlyFollowing = true;
     this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
     this.cachedScrollPositions = {};
+    this.loadedUsers = [];
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
 
@@ -96,7 +97,7 @@ module.exports = pageVw.extend({
     }
 
     this.obContainer.on('scroll', this.scrollHandler);
-  },  
+  },
 
   onCacheWillDetach: function(e) {
     if (e.view !== this) return;
@@ -147,7 +148,7 @@ module.exports = pageVw.extend({
       if ($('.homeGridItems .gridItem').length === 0){
         self.$el.find('.js-loadingMessage').removeClass('fadeOut');
         self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
-        
+
         if (self.searchItemsText) {
           self.$el.find('.js-loadingText').html(
             window.polyglot.t('discover.noTaggedResults')
@@ -186,7 +187,7 @@ module.exports = pageVw.extend({
       this.loadingVendors = false;
       this.renderUser(data.vendor);
     }
-    
+
     this.resetLookingCount();
   },
 
@@ -268,7 +269,7 @@ module.exports = pageVw.extend({
 
     item.ownFollowing = this.ownFollowing.indexOf(item.guid) != -1;
 
-    blocked = this.userModel.get('blocked_guids') || [];    
+    blocked = this.userModel.get('blocked_guids') || [];
     item.isBlocked = blocked.indexOf(item.guid) !== -1;
 
     var newItem = function(){
@@ -314,6 +315,12 @@ module.exports = pageVw.extend({
         newUserModel,
         storeShort;
 
+    //don't load duplicates
+    if (this.loadedUsers.indexOf(user.guid) !== -1){
+      return;
+    }
+    this.loadedUsers.push(user.guid);
+
     if (blocked.indexOf(user.guid) !== -1) return;
 
     if (user.nsfw && !this.showNSFW) return;
@@ -323,10 +330,7 @@ module.exports = pageVw.extend({
     user.serverUrl = this.userModel.get('serverUrl');
     user.userID = user.guid;
     user.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
-    
-    if (this.ownFollowing.indexOf(user.guid) != -1){
-      user.ownFollowing = true;
-    }
+    user.ownFollowing = this.ownFollowing.indexOf(user.guid) != -1;
 
     newUserModel = new userShortModel(user);
     storeShort = new userShortView({model: newUserModel});
@@ -336,7 +340,7 @@ module.exports = pageVw.extend({
         self.removeUserView(storeShort);
       }
     });
-    
+
     this.$el.find('.js-vendors .js-loadingSpinner').before(storeShort.el);
     this.registerChild(storeShort);
     this.userViews.push(storeShort);
@@ -427,7 +431,7 @@ module.exports = pageVw.extend({
         console.log(status);
         console.log(errorThrown);
       }
-    });    
+    });
   },
 
   followUser: function(options){
@@ -545,15 +549,15 @@ module.exports = pageVw.extend({
   searchItems: function(searchItemsText){
     if (searchItemsText){
       var hashedItem = "#" + searchItemsText;
-      
+
       window.obEventBus.trigger('searchingText', hashedItem);
-      
+
       this.searchItemsText = searchItemsText;
       this.clearItems();
       this.socketItemsID = "";
       this.socketSearchID = Math.random().toString(36).slice(2);
       this.socketView.search(this.socketSearchID, searchItemsText);
-      this.setSocketTimeout();      
+      this.setSocketTimeout();
       this.$el.find('.js-discoverHeading').html(hashedItem);
       this.$el.find('.js-loadingText').html(
         this.$el.find('.js-loadingText')
@@ -585,7 +589,7 @@ module.exports = pageVw.extend({
     count = count || 0;
     if (this._blockedItemCount === count) return;
     this._blockedItemCount = count;
-    
+
     if (count) {
       text = count + ' blocked item' + (count !== 1 ? 's' : '') + ' not shown';
     }
@@ -651,7 +655,7 @@ module.exports = pageVw.extend({
           fragment: 'cancel'
         }, {
           text: window.polyglot.t('ShowUnlfilteredListings'),
-          fragment: 'showUnlfilteredListings'          
+          fragment: 'showUnlfilteredListings'
         }]
       }).on('click-cancel', () => {
         this.safeListingsDialog.close();
