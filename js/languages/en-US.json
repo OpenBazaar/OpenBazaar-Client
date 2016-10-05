@@ -18,7 +18,7 @@
   "Close": "Close",
   "Yes": "Yes",
   "No": "No",
-  "of": "of",
+  "pageXofY": "%{currentPage} of %{totalPages}",
   "New": "New",
   "Retry": "Retry",
   "HighlightToStyle": "Highlight text to style",

@@ -5,7 +5,7 @@ style="background-image: <% if(ob.headerURL) { %>url(<%= ob.headerURL %>),<% } %
     <div class="accordion-child accordion-active">
       <div class="bar barTxt h6 paddingLeft15 custCol-secondary  custCol-text">
         <%= polyglot.t('CreateStore') %>
-        <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 2</span>
+        <span class="textOpacity75 fontSize14 floatRight"><%= polyglot.t('pageXofY', {currentPage: 1, totalPages: 2}) %></span>
       </div>
       <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar" id="storeWizardForm">
         <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>" />
@@ -83,7 +83,7 @@ style="background-image: <% if(ob.headerURL) { %>url(<%= ob.headerURL %>),<% } %
     <div class="accordion-child accordion-inactive custCol-text">
       <div class="bar barTxt h6 custCol-secondary">
         <%= polyglot.t('StoreModeratorsOptional') %>
-        <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 2</span>
+        <span class="textOpacity75 fontSize14 floatRight"><%= polyglot.t('pageXofY', {currentPage: 2, totalPages: 2}) %></span>
       </div>
       <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar">
         <div class="flexRow">
