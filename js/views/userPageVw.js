@@ -483,11 +483,9 @@ UserPageVw = pageVw.extend({
   },
 
   setState: function(state, hash, options) {
-    var currentGUID = this.model.get('page').profile.guid,
-        addressState,
+    var addressState,
         currentHandle = this.model.get('page').profile.handle,
-        currentAddress,
-        isItemType = false;
+        currentAddress;
 
     options = options || {};
 
@@ -544,21 +542,14 @@ UserPageVw = pageVw.extend({
     }
 
     if (state == "listing" || state == "listingOld" || state == "listingNew") {
-      isItemType = true;
-    }
-
-    //set address bar
-    if (isItemType) {
       addressState = "/listing";
+      addressState = hash ? addressState + "/" + hash : addressState;
     } else {
       addressState = "/" + state;
     }
 
-    currentAddress = currentHandle || currentGUID;
+    currentAddress = currentHandle || this.model.get('page').profile.guid;
     currentAddress += addressState;
-    if (isItemType && hash) {
-      currentAddress += "/" + hash;
-    }
 
     window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress});
     currentHandle && app.appBar.setTitle(currentHandle);
