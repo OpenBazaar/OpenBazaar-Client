@@ -1931,7 +1931,6 @@ input[type="text"].txtField-bar {
   margin-right: 6px;
 }
 
-.btn *[class *= "ion-"],
 .btn *[class *= "ion-"]:before {
   pointer-events: none; /* don't fire clicks on icon */
 }

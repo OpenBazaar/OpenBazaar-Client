@@ -675,7 +675,7 @@ module.exports = pageVw.extend({
   },
 
   tabClick: function(e){
-    var tab = $(e.target).data('tab');
+    var tab = $(e.target).closest('.btn-tab').data('tab');
     this.setState(tab);
     this.addTabToHistory(tab);
   },
