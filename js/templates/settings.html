@@ -266,14 +266,14 @@
                   <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
                     <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
                   </div>
-                  <div class="cropit-image-preview cropit-avatar js-settingsAvatarPreview rowTop20 thumbnail thumbnail-huge box-border pull-left row20 marginLeft12"></div>
-                  <div class="pull-left marginLeft12 flexCol-3">
-                    <div>
-                      <input type="range" class="cropit-image-zoom-input rowTop20 row20 hide" />
+                  <div class="cropit-image-preview cropit-avatar js-settingsAvatarPreview rowTop20 thumbnail thumbnail-huge box-border row20 marginLeft12"></div>
+                  <div class="rowTop20 marginLeft12 flexCol-3">
+                    <div class="flexRow row20">
+                      <a class="btn flexExpand marginRight5 color-secondary custCol-secondary ion-reply disabled js-avatarRotateLeft"></a>
+                      <a class="btn flexExpand marginLeft5 color-secondary custCol-secondary ion-forward disabled js-avatarRotateRight"></a>
                     </div>
-                    <div class="flexRow">
-                      <a class="btn flexExpand marginRight5 color-secondary custCol-secondary ion-reply js-avatarRotateLeft"></a>
-                      <a class="btn flexExpand marginLeft5 color-secondary custCol-secondary ion-forward js-avatarRotateRight"></a>
+                    <div>
+                      <input type="range" class="cropit-image-zoom-input row20 disabled js-avatarZoom" />
                     </div>
                     <div>
                       <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
