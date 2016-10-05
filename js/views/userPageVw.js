@@ -483,9 +483,10 @@ UserPageVw = pageVw.extend({
   },
 
   setState: function(state, hash, options) {
-    var currentAddress,
+    var currentGUID = this.model.get('page').profile.guid,
         addressState,
         currentHandle = this.model.get('page').profile.handle,
+        currentAddress,
         isItemType = false;
 
     options = options || {};
@@ -552,16 +553,15 @@ UserPageVw = pageVw.extend({
     } else {
       addressState = "/" + state;
     }
-    currentAddress = this.model.get('page').profile.guid + addressState;
-    currentHandle = currentHandle ? currentHandle + addressState : "";
+
+    currentAddress = currentHandle || currentGUID;
+    currentAddress += addressState;
     if (isItemType && hash) {
-      currentAddress += "/"+ hash;
-      currentHandle = currentHandle ? currentHandle += "/"+ hash : "";
-    } else if (addressState === "createStore"){
-      currentAddress = this.model.get('page').profile.guid;
+      currentAddress += "/" + hash;
     }
 
-    window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress, 'handle': currentHandle});
+    window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress});
+    currentHandle && app.appBar.setTitle(currentHandle);
   },
 
   setControls: function(state){
