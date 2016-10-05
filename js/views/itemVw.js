@@ -64,7 +64,7 @@ module.exports = baseVw.extend({
     this.shipsLocal = this.shippingRegions.indexOf(this.shippingOrigin) > -1;
     this.nonLocalRegions = __.without(this.shippingRegions, this.shippingOrigin);
     this.worldwide = this.shippingRegions.length === 1 && this.shippingRegions[0] === 'ALL';
-    
+
     this.render();
   },
 
@@ -91,7 +91,7 @@ module.exports = baseVw.extend({
       var imageExtension = self.model.get('imageExtension') || "";
     });
     */
-    
+
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
       loadTemplate('./js/templates/ratingStars.html', function(starsTemplate) {
@@ -132,12 +132,12 @@ module.exports = baseVw.extend({
   photoGalleryClick: function(){
     $('.js-photoGallery').colorbox({
       'transition': 'fade',
-      'rel': 'js-photoGallery', 
+      'rel': 'js-photoGallery',
       'photo': true,
       'fadeOut': 0,
       'previous': '<span class="arrowIcon ion-ios-arrow-back"></span>',
       'next': '<span class="arrowIcon ion-ios-arrow-forward"></span>',
-      'current': '{current} ' + window.polyglot.t('of') + ' {total}',
+      'current':  window.polyglot.t('pageXofY', {currentPage: '{current}', totalPages: '{total}'}),
       'close': window.polyglot.t('Close'),
       'maxHeight': '620px',
       'opacity': '.95',
