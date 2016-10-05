@@ -247,11 +247,11 @@ module.exports = pageVw.extend({
           console.log(data);
         },
         onImageLoading: function(){
-          self.$('.cropit-image-zoom-input').removeClass('hide');
           self.newAvatar = true;
           self.$('.js-avatarLoading').removeClass('fadeOut');
         },
         onImageLoaded: function(){
+          self.$('.js-avatarZoom, .js-avatarRotateLeft, .js-avatarRotateRight').removeClass('disabled');
           self.$('.js-avatarLoading').addClass('fadeOut');
         },
         onImageError: function(errorObject, errorCode, errorMessage){
