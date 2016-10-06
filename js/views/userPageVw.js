@@ -315,6 +315,7 @@ UserPageVw = pageVw.extend({
           // Handle was requested
           if (profile.handle) {
             window.obEventBus.trigger('handleObtained', profile);
+            app.appBar.setTitle(profile.handle);
           }
         } else {
           //model was returned as a blank object
@@ -483,8 +484,8 @@ UserPageVw = pageVw.extend({
   },
 
   setState: function(state, hash, options) {
-    var addressState,
-        currentHandle = this.model.get('page').profile.handle,
+    var currentHandle = this.model.get('page').profile.handle,
+        addressState,
         currentAddress;
 
     options = options || {};
@@ -552,7 +553,6 @@ UserPageVw = pageVw.extend({
     currentAddress += addressState;
 
     window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress});
-    currentHandle && app.appBar.setTitle(currentHandle);
   },
 
   setControls: function(state){
