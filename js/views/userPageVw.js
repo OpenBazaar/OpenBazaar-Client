@@ -315,6 +315,7 @@ UserPageVw = pageVw.extend({
           // Handle was requested
           if (profile.handle) {
             window.obEventBus.trigger('handleObtained', profile);
+            app.appBar.setTitle(profile.handle);
           }
         } else {
           //model was returned as a blank object
@@ -483,10 +484,9 @@ UserPageVw = pageVw.extend({
   },
 
   setState: function(state, hash, options) {
-    var currentAddress,
+    var currentHandle = this.model.get('page').profile.handle,
         addressState,
-        currentHandle = this.model.get('page').profile.handle,
-        isItemType = false;
+        currentAddress;
 
     options = options || {};
 
@@ -543,25 +543,16 @@ UserPageVw = pageVw.extend({
     }
 
     if (state == "listing" || state == "listingOld" || state == "listingNew") {
-      isItemType = true;
-    }
-
-    //set address bar
-    if (isItemType) {
       addressState = "/listing";
+      addressState = hash ? addressState + "/" + hash : addressState;
     } else {
       addressState = "/" + state;
     }
-    currentAddress = this.model.get('page').profile.guid + addressState;
-    currentHandle = currentHandle ? currentHandle + addressState : "";
-    if (isItemType && hash) {
-      currentAddress += "/"+ hash;
-      currentHandle = currentHandle ? currentHandle += "/"+ hash : "";
-    } else if (addressState === "createStore"){
-      currentAddress = this.model.get('page').profile.guid;
-    }
 
-    window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress, 'handle': currentHandle});
+    currentAddress = currentHandle || this.model.get('page').profile.guid;
+    currentAddress += addressState;
+
+    window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress});
   },
 
   setControls: function(state){
