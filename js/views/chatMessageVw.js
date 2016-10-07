@@ -32,7 +32,12 @@ module.exports = baseVw.extend({
         $msg;
 
     sanitizedMsg = sanitizeHTML(this.model.get('message').replace(/\n$/, '').split(/[\r\n]/g).join('<br/><br/>'), {
-      allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'u', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img' ]
+      allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'u', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img' ],
+      allowedAttributes: {
+        'a': [ 'href', 'title', 'alt' ],
+        'img': [ 'src', 'style']
+      },
+      allowedSchemes: [ 'http', 'https', 'ftp', 'mailto', 'ob' ]
     });
 
     // add js-externalLink class to any links in the message text
@@ -52,7 +57,7 @@ module.exports = baseVw.extend({
         )
       );
     });
-    
+
     return this;
   }
 });
