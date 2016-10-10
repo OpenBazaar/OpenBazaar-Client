@@ -3,7 +3,6 @@
 var __ = require('underscore'),
     $ = require('jquery'),
     moment = require('moment'),
-    sanitizeHTML = require('sanitize-html'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
     baseVw = require('./baseVw');
@@ -29,19 +28,11 @@ module.exports = baseVw.extend({
 
   render: function(){
     var sanitizedMsg,
+        msgTxt = this.model.get('message'),
         $msg;
 
-    sanitizedMsg = sanitizeHTML(this.model.get('message').replace(/\n$/, '').split(/[\r\n]/g).join('<br/><br/>'), {
-      allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'u', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img' ],
-      allowedAttributes: {
-        'a': [ 'href', 'title', 'alt' ],
-        'img': [ 'src', 'style']
-      },
-      allowedSchemes: [ 'http', 'https', 'ftp', 'mailto', 'ob' ]
-    });
-
     // add js-externalLink class to any links in the message text
-    $msg = $('<div>' + sanitizedMsg + '</div>');
+    $msg = $('<div>' + msgTxt + '</div>');
     $msg.find('a').addClass('js-externalLink');
     sanitizedMsg = $msg.html();
 
