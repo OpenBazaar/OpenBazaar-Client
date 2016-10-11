@@ -398,15 +398,16 @@ module.exports = baseModal.extend({
     $currentIframe = this.$buyWizardMap.find('iframe');
     $currentIframe.addClass('blurMore');
 
-    if (address && address.street && address.city && address.state && address.postal_code) {
-      addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
+    if (address) {
+      addressString = address.street + " " + address.city + " " + address.state + " " + address.postal_code + " " + address.displayCountry;
+      addressString = addressString.trim();
     } else {
       // if address is invalid, we'll create a dummy address for which google maps will show a map of the world
       addressString = "123 Street, City, State 12345 Country";
     }
 
     addressString = encodeURIComponent(addressString);
-    var $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="250" frameborder="0" style="border:0; margin-top: 0; height: 250px;" />');
+    var $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="250" frameborder="0" style="border:0; margin-top: 0;" />');
 
     if ($currentIframe.length) {
       this.$buyWizardMap.find('.js-mapSpinner').removeClass('hide');
