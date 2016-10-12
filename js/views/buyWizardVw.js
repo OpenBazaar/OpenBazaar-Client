@@ -407,7 +407,7 @@ module.exports = baseModal.extend({
     }
 
     addressString = encodeURIComponent(addressString);
-    var $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="250" frameborder="0" style="border:0; margin-top: 0;" />');
+    var $iFrame = $('<iframe class="js-iframe-pending positionTop" width="525" height="250" frameborder="0" style="border:0; margin-top: 0; height: 250px; clip: rect(0,525px,250px,0)" />');
 
     if ($currentIframe.length) {
       this.$buyWizardMap.find('.js-mapSpinner').removeClass('hide');
@@ -464,6 +464,7 @@ module.exports = baseModal.extend({
       this.showMaps();
       if (this.userModel.get('shipping_addresses').length === 0){
         this.createNewAddress();
+        this.displayMap();
         $('.js-buyWizardAddressBack').show();
         $('.js-buyWizardNewAddressCancel').hide();
       }
