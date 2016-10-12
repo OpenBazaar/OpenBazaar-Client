@@ -9,9 +9,10 @@ module.exports = BaseVw.extend({
 
   events: {
     'click .js-save': 'saveForm',
+    'keyup': 'processKey',
     'input input': 'inputEntered',
     'click .js-sslOn': 'sslOn',
-    'click .js-sslOff': 'sslOff'    
+    'click .js-sslOff': 'sslOff'
   },
 
   initialize: function(options) {
@@ -30,6 +31,10 @@ module.exports = BaseVw.extend({
     });
   },
 
+  processKey: function(e) {
+    if(e.which === 13) this.saveForm();
+  },
+
   inputEntered: function(e) {
     var val = e.target.value;
 
@@ -42,7 +47,7 @@ module.exports = BaseVw.extend({
     }
 
     this.model.set(e.target.name, val);
-  },  
+  },
 
   saveForm: function() {
     this.model.save();
@@ -54,7 +59,7 @@ module.exports = BaseVw.extend({
 
   sslOff: function(){
     this.model.set('SSL', true);
-  },  
+  },
 
   render: function() {
     loadTemplate('./js/templates/serverConfigForm.html', (t) => {
