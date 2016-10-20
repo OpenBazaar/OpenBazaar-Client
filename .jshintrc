@@ -1,6 +1,6 @@
 {
   "node": true,
-	"browser": true,
+  "browser": true,
 	"esversion": 6,
 
   "curly": true,
@@ -9,7 +9,7 @@
   "undef": true,
   "unused": true,
   "trailing": true,
-	"expr": true,
+  "expr": true,
 	"immed": true,
 
 	"globals": {
