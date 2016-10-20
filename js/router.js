@@ -454,6 +454,6 @@ module.exports = Backbone.Router.extend({
       bodyID: 'userPage'
     });
 
-    app.appBar.setTitle(window.polyglot.t('Settings'));
+    app.appBar.setTitle(window.polyglot.t('nav.settings'));
   }
 });
