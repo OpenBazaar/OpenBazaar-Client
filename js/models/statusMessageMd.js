@@ -25,6 +25,8 @@ module.exports = window.Backbone.Model.extend({
       err['msg'] = 'Msg is required and must be a string.';
     }    
 
-    return Object.keys(err).length && err || undefined;
+    if (Object.keys(err).length > 0) {
+      return err;
+    }
   }
 });
