@@ -679,7 +679,7 @@ module.exports = baseModal.extend({
 
     if (this.discussionInput.val()) {
       saveToAPI(this.discussionForm, '', this.serverUrl + "dispute_contract", function () {
-        self.status   = 4;
+        self.status = 4;
         self.tabState = "discussion";
         self.$('.js-startDisputeFlag').addClass('hide');
         self.getData();
@@ -769,7 +769,7 @@ module.exports = baseModal.extend({
       refData.order_id = this.orderID;
 
       saveToAPI(null, null, this.serverUrl + "refund", function () {
-        self.status   = 7;
+        self.status = 7;
         self.tabState = "summary";
         self.getData();
       }, function (data) {

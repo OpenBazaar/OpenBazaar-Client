@@ -18,7 +18,9 @@ var electronModules = [
 
 module.exports = function redirect(request) {
   // Tell valiquire to ignore these modules
-  if(~electronModules.indexOf(request)) return null;
+  if (~electronModules.indexOf(request)) {
+    return null;
+  }
 
   // all others we don't redirect
   return request;

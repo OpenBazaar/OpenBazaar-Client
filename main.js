@@ -24,8 +24,8 @@ var fs = require('fs'),
 var launched_from_installer = false;
 var platform = os.platform();
 switch (platform) {
-  case "darwin":
-    platform = "mac";
+case "darwin":
+  platform = "mac";
 }
 var version = app.getVersion();
 var trayMenu = null;
@@ -134,7 +134,7 @@ var kill_local_server = function() {
 };
 
 var start_local_server = function() {
-  if(fs.existsSync(serverPath)) {
+  if (fs.existsSync(serverPath)) {
     if (pendingKill) {
       pendingKill.once('close', startAfterClose = () => {
         start_local_server();
@@ -167,18 +167,18 @@ var start_local_server = function() {
     subpy.stderr.on('data', function (buf) {
       console.log('[STR] stderr "%s"', String(buf));
       fs.appendFile(__dirname + path.sep + "python_error.log", String(buf), function(err) {
-          if(err) {
-              return console.log(err);
-          }
+        if (err) {
+          return console.log(err);
+        }
       });
       stderr += buf;
     });
     subpy.on('error', function (err) {
       console.log('Python error %s', String(err));
       fs.appendFile(__dirname + path.sep + "python_error.log", String(err), function(error) {
-          if(error) {
-              return console.log(error);
-          }
+        if (error) {
+          return console.log(error);
+        }
       });
     });
     subpy.on('close', function (code) {
@@ -192,12 +192,12 @@ var start_local_server = function() {
     mainWindow && mainWindow.webContents.executeJavaScript("console.log('Unable to find OpenBazaar-Server at: '" + serverPath + "')");
   }
   if (fs.existsSync(__dirname + path.sep + '..' + path.sep + 'gpg')) {
-       process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
-   }
+    process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
+  }
 };
 
 // Check if we need to kick off the python server-daemon (Desktop app)
-if(fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + path.sep + daemon)) {
+if (fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + path.sep + daemon)) {
   global.launched_from_installer = launched_from_installer = true;
 }
 
@@ -319,11 +319,11 @@ app.on('window-all-closed', function() {
 
 // You can use 'before-quit' instead of (or with) the close event
 app.on('before-quit', function () {
-    // Handle menu-item or keyboard shortcut quit here
-    console.log('Closing Application');
-    if (launched_from_installer) {
-      kill_local_server();
-    }
+  // Handle menu-item or keyboard shortcut quit here
+  console.log('Closing Application');
+  if (launched_from_installer) {
+    kill_local_server();
+  }
 });
 
 app.commandLine.appendSwitch('ignore-certificate-errors', true);
@@ -518,15 +518,15 @@ app.on('ready', function() {
       ]
     },
     {
-    label: 'Window',
-    submenu: [
-      {
-        label: 'Minimize',
-        selector: 'performMiniaturize:',
-        accelerator: 'Command+M'
-      }
-    ]
-  }
+      label: 'Window',
+      submenu: [
+        {
+          label: 'Minimize',
+          selector: 'performMiniaturize:',
+          accelerator: 'Command+M'
+        }
+      ]
+    }
   ]);
   menu.setApplicationMenu(appMenu);
 
@@ -537,8 +537,8 @@ app.on('ready', function() {
   var template = [
     {
       label: 'Start Local Server', type: 'normal', click: function () {
-      start_local_server();
-    }
+        start_local_server();
+      }
     },
     {
       label: 'Shutdown Local Server', type: 'normal', click: function () {
@@ -579,7 +579,7 @@ app.on('ready', function() {
     }}
   ];
 
-  if(launched_from_installer) {
+  if (launched_from_installer) {
     template.push({label: 'View Python Error Log', type: 'normal', click: function() {
       var logPath = __dirname + path.sep + 'python_error.log';
       open(logPath);
@@ -615,7 +615,7 @@ app.on('ready', function() {
   });
 
   // and load the index.html of the app.
-  if(open_url) {
+  if (open_url) {
     mainWindow.loadURL('file://' + __dirname + '/index.html' + open_url);
   } else {
     mainWindow.loadURL('file://' + __dirname + '/index.html');
@@ -666,13 +666,13 @@ app.on('ready', function() {
   });
 
   var feedURL = 'https://updates.openbazaar.org:5001/update/' + platform + '/' + version;
-  autoUpdater.setFeedURL(feedURL)
+  autoUpdater.setFeedURL(feedURL);
   mainWindow.webContents.executeJavaScript("console.log('Checking for new versions at " + feedURL + " ...')");
 
   // Check for updates every hour
   autoUpdater.checkForUpdates();
   setInterval(function () {
-      autoUpdater.checkForUpdates();
+    autoUpdater.checkForUpdates();
   }, 3600000);
 
 });

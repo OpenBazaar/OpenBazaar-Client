@@ -284,10 +284,10 @@ module.exports = Backbone.Router.extend({
 
   launchPageConnectModal: function(config) {
     var defaults = {
-      connectText: 'Connecting...',
-      failedText: 'Unable to Connect.'
-    },
-    deferred = $.Deferred();
+          connectText: 'Connecting...',
+          failedText: 'Unable to Connect.'
+        },
+        deferred = $.Deferred();
 
     if (!(
         config &&
