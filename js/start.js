@@ -406,7 +406,7 @@ var profileLoaded;
 var loadProfile = function(landingRoute, onboarded) {
   var externalRoute = remote.getGlobal('externalRoute');
 
-  landingRoute = landingRoute && landingRoute != undefined ? landingRoute : '#';
+  landingRoute = landingRoute || '#';
 
   profileLoaded = true;
 
@@ -423,7 +423,7 @@ var loadProfile = function(landingRoute, onboarded) {
             var userLang = model.get('language');
             cCode = model.get('currency_code');
 
-            if (userLang != window.polyglot.currentLocale){
+            if (userLang != window.polyglot.currentLocale) {
               //when switching nodes, the language saved in localStorage can be different than the language in the
               // user model, but the user model does not trigger a change because it hasn't changed
               updatePolyglot(userLang);
@@ -480,10 +480,10 @@ var loadProfile = function(landingRoute, onboarded) {
                   title: window.polyglot.t('langChangeRestartTitle'),
                   message: window.polyglot.t('langChangeRestartMessage'),
                   buttons: [{
-                    text: 'Restart Later',
+                    text: window.polyglot.t('restartLater'),
                     fragment: 'restart-later'
                   }, {
-                    text: 'Restart Now',
+                    text: window.polyglot.t('restartNow'),
                     fragment: 'restart-now'
                   }]
                 }).on('click-restart-later', () => {

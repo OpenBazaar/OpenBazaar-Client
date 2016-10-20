@@ -725,6 +725,8 @@
     },
     "langChangeRestartTitle": "Redémarrage requis pour le changement de langue",
     "langChangeRestartMessage": "Vous devez redémarrer l'application pour que le changement de langue soit pleinement effectif.",
+		"restartNow": "Redémarrer maintenant",
+	  "restartLater": "Redémarrer plus tard",
     "countries": {
         "AFGHANISTAN": "Afghanistan",
         "ALAND_ISLANDS": "Aland Islands",

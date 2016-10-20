@@ -726,6 +726,8 @@
   },
   "langChangeRestartTitle": "Restart needed for language change",
   "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
+	"restartNow": "Restart Now",
+	"restartLater": "Restart Later",
   "countries": {
     "AFGHANISTAN": "Afghanistan",
     "ALAND_ISLANDS": "Aland Islands",
