@@ -186,7 +186,7 @@ app.serverConfigs.fetch().done(() => {
     } else {
       app.serverConfigs.setActive(defaultConfig.id);
     }
-  } else if (remote.getGlobal('launched_from_installer')) {
+  } else if (remote.getGlobal('launched_from_installer') && activeServer.get('default')) {
     activeServer.save({
       'rest_api_port': remote.getGlobal('restAPIPort'),
       'api_socket_port': remote.getGlobal('apiSocketPort'),
