@@ -303,9 +303,15 @@ UserPageVw = pageVw.extend({
             model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
             model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
           }
+
           // Cache user avatar in localStorage
           var profile = model.toJSON().profile;
           window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
+
+          if (response.profile.website) {
+            var website = profile.website;
+            self.short_website = self.trimUrl(website);
+          }
 
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
           self.model.set({ownPage: self.options.ownPage});
@@ -317,6 +323,7 @@ UserPageVw = pageVw.extend({
             window.obEventBus.trigger('handleObtained', profile);
             app.appBar.setTitle(profile.handle);
           }
+
         } else {
           //model was returned as a blank object
           self.loadingDeferred.reject();
@@ -377,7 +384,8 @@ UserPageVw = pageVw.extend({
         self.setCustomStyles();
         self.$el.html(loadedTemplate(
           __.extend(self.model.toJSON(), {
-            backToTopTmpl: backToTopTmpl
+            backToTopTmpl: backToTopTmpl,
+            short_website: self.short_website
           })
         ));
         self.fetchReviews();
@@ -1839,6 +1847,12 @@ UserPageVw = pageVw.extend({
     $('#obContainer').off('scroll', this.onScroll).removeClass('customizeUserPage ');
 
     pageVw.prototype.remove.apply(this, arguments);
+  },
+
+  trimUrl: function(url) {
+    var parser = document.createElement('a');
+    parser.href = url;
+    return parser.hostname;
   }
 
 });
