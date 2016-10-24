@@ -8,17 +8,10 @@ safestart(__dirname);
 var fs = require('fs'),
     path = require('path'),
     argv = require('yargs').argv,
-    app = require('app'),
-    electron = require('electron'),
-    browserWindow = require('browser-window'),
+    { app, BrowserWindow, autoUpdater, Menu, Tray, dialog, ipcMain } = require('electron'),
     request = require('request'),
     os = require('os'),
-    autoUpdater = require('auto-updater'),
-    menu = require('menu'),
-    tray = require('tray'),
     ini = require('ini'),
-    dialog = require('dialog'),
-    ipcMain = require('ipc-main'),
     open = require('open');
 
 var launched_from_installer = false;
@@ -71,26 +64,26 @@ var handleStartupEvent = function() {
   }
 
   switch (squirrelCommand) {
-  case '--squirrel-install':
-    install(app.quit);
-    break;
+    case '--squirrel-install':
+      install(app.quit);
+      break;
 
-  case '--squirrel-updated':
-    // Always quit when done
-    app.quit();
-    return true;
+    case '--squirrel-updated':
+      // Always quit when done
+      app.quit();
+      return true;
 
-  case '--squirrel-uninstall':
-    // Always quit when done
-    uninstall(app.quit);
-    return true;
+    case '--squirrel-uninstall':
+      // Always quit when done
+      uninstall(app.quit);
+      return true;
 
-  case '--squirrel-obsolete':
-    // This is called on the outgoing version of your app before
-    // we update to the new version - it's the opposite of
-    // --squirrel-updated
-    app.quit();
-    return true;
+    case '--squirrel-obsolete':
+      // This is called on the outgoing version of your app before
+      // we update to the new version - it's the opposite of
+      // --squirrel-updated
+      app.quit();
+      return true;
   }
 };
 
@@ -150,7 +143,7 @@ global.apiSocketPort = getRandomPort();
 global.heartbeatSocketPort = getRandomPort();
 
 var start_local_server = function() {
-  if(fs.existsSync(serverPath)) {
+  if (fs.existsSync(serverPath)) {
     if (pendingKill) {
       pendingKill.once('close', startAfterClose = () => {
         start_local_server();
@@ -196,18 +189,18 @@ var start_local_server = function() {
     subpy.stderr.on('data', function (buf) {
       console.log('[STR] stderr "%s"', String(buf));
       fs.appendFile(__dirname + path.sep + "python_error.log", String(buf), function(err) {
-          if(err) {
-              return console.log(err);
-          }
+        if (err) {
+          return console.log(err);
+        }
       });
       stderr += buf;
     });
     subpy.on('error', function (err) {
       console.log('Python error %s', String(err));
       fs.appendFile(__dirname + path.sep + "python_error.log", String(err), function(error) {
-          if(error) {
-              return console.log(error);
-          }
+        if (error) {
+          return console.log(error);
+        }
       });
     });
     subpy.on('close', function (code) {
@@ -221,12 +214,12 @@ var start_local_server = function() {
     mainWindow && mainWindow.webContents.executeJavaScript("console.log('Unable to find OpenBazaar-Server at: '" + serverPath + "')");
   }
   if (fs.existsSync(__dirname + path.sep + '..' + path.sep + 'gpg')) {
-       process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
-   }
+    process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
+  }
 };
 
 // Check if we need to kick off the python server-daemon (Desktop app)
-if(fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + path.sep + daemon)) {
+if (fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + path.sep + daemon)) {
   global.launched_from_installer = launched_from_installer = true;
 }
 
@@ -241,7 +234,7 @@ ipcMain.on('activeServerChange', function(event, server) {
 });
 
 // Report crashes to our server.
-//require('crash-reporter').start();
+//require('electron').crash-reporter.start();
 
 if (process.platform === "win32") {
   initWin32();
@@ -348,16 +341,16 @@ app.on('window-all-closed', function() {
 
 // You can use 'before-quit' instead of (or with) the close event
 app.on('before-quit', function () {
-    // Handle menu-item or keyboard shortcut quit here
-    console.log('Closing Application');
-    if (launched_from_installer) {
-      kill_local_server();
-    }
+  // Handle menu-item or keyboard shortcut quit here
+  console.log('Closing Application');
+  if (launched_from_installer) {
+    kill_local_server();
+  }
 });
 
 app.commandLine.appendSwitch('ignore-certificate-errors', true);
 
-var rightClickMenu = menu.buildFromTemplate([
+var rightClickMenu = Menu.buildFromTemplate([
   {
     label: 'Edit',
     submenu: [
@@ -470,7 +463,7 @@ ipcMain.on('contextmenu-click', function() {
 app.on('ready', function() {
 
   // Application Menu
-  var appMenu = menu.buildFromTemplate([
+  var appMenu = Menu.buildFromTemplate([
     {
       label: 'OpenBazaar',
       submenu: [
@@ -543,31 +536,31 @@ app.on('ready', function() {
               }
             }
           }
-        }    
+        }
       ]
     },
     {
-    label: 'Window',
-    submenu: [
-      {
-        label: 'Minimize',
-        selector: 'performMiniaturize:',
-        accelerator: 'Command+M'
-      }
-    ]
-  }
+      label: 'Window',
+      submenu: [
+        {
+          label: 'Minimize',
+          selector: 'performMiniaturize:',
+          accelerator: 'Command+M'
+        }
+      ]
+    }
   ]);
-  menu.setApplicationMenu(appMenu);
+  Menu.setApplicationMenu(appMenu);
 
   // put logic here to set tray icon based on OS
   var osTrayIcon = 'openbazaar-mac-system-tray.png';
 
-  trayMenu = new tray(__dirname + '/imgs/' + osTrayIcon);
+  trayMenu = new Tray(__dirname + '/imgs/' + osTrayIcon);
   var template = [
     {
       label: 'Start Local Server', type: 'normal', click: function () {
-      start_local_server();
-    }
+        start_local_server();
+      }
     },
     {
       label: 'Shutdown Local Server', type: 'normal', click: function () {
@@ -608,7 +601,7 @@ app.on('ready', function() {
     }}
   ];
 
-  if(launched_from_installer) {
+  if (launched_from_installer) {
     template.push({label: 'View Python Error Log', type: 'normal', click: function() {
       var logPath = __dirname + path.sep + 'python_error.log';
       open(logPath);
@@ -626,12 +619,12 @@ app.on('ready', function() {
     }
   );
 
-  var contextMenu = menu.buildFromTemplate(template);
+  var contextMenu = Menu.buildFromTemplate(template);
 
   trayMenu.setContextMenu(contextMenu);
 
   // Create the browser window.
-  mainWindow = new browserWindow({
+  mainWindow = new BrowserWindow({
     "width": 1200,
     "height": 760,
     "minWidth": 1024,
@@ -644,7 +637,7 @@ app.on('ready', function() {
   });
 
   // and load the index.html of the app.
-  if(open_url) {
+  if (open_url) {
     mainWindow.loadURL('file://' + __dirname + '/index.html' + open_url);
   } else {
     mainWindow.loadURL('file://' + __dirname + '/index.html');
@@ -695,13 +688,13 @@ app.on('ready', function() {
   });
 
   var feedURL = 'https://updates.openbazaar.org:5001/update/' + platform + '/' + version;
-  autoUpdater.setFeedURL(feedURL)
+  autoUpdater.setFeedURL(feedURL);
   mainWindow.webContents.executeJavaScript("console.log('Checking for new versions at " + feedURL + " ...')");
 
   // Check for updates every hour
   autoUpdater.checkForUpdates();
   setInterval(function () {
-      autoUpdater.checkForUpdates();
+    autoUpdater.checkForUpdates();
   }, 3600000);
 
 });
@@ -721,7 +714,7 @@ function openURL(uri) {
     // if our app router is fully loaded it will process the event sent below, otherwise
     // the global.externalRoute will be used
     mainWindow.webContents.send('external-route', uri);
-  }  
+  }
 
 }
 

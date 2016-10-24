@@ -11,7 +11,7 @@ var __ = require('underscore'),
     qr = require('qr-encode'),
     app = require('../App.js').getApp(),
     discussionCl = require('../collections/discussionCl'),
-    clipboard = require('clipboard');
+    clipboard = require('electron').clipboard;
 
 module.exports = baseModal.extend({
 
@@ -212,24 +212,24 @@ module.exports = baseModal.extend({
     var data = JSON.parse(response.data);
     if (data.notification && data.notification.order_id == this.orderID){
       switch (data.notification.type){
-      case "payment received":
-        this.status = 1;
-        this.tabState = "summary";
-        break;
-      case "order confirmation":
-        this.status = 2;
-        this.tabState = "summary";
-        break;
-      case "partial payment":
-        this.status = 0;
-        this.tabState = "summary";
-        break;
-        /* //this notification is not sent yet by the server
-        case "payment released":
-          this.status = 3;
+        case "payment received":
+          this.status = 1;
           this.tabState = "summary";
           break;
-          */
+        case "order confirmation":
+          this.status = 2;
+          this.tabState = "summary";
+          break;
+        case "partial payment":
+          this.status = 0;
+          this.tabState = "summary";
+          break;
+          /* //this notification is not sent yet by the server
+          case "payment released":
+            this.status = 3;
+            this.tabState = "summary";
+            break;
+            */
       }
       this.getData();
     } else if (data.message && data.message.subject == this.orderID){
@@ -290,20 +290,20 @@ module.exports = baseModal.extend({
   setState: function(state){
     if (!state){
       switch (this.status){
-      case 2:
-        state = "shipping";
-        break;
-      case 3:
-        state = "funds";
-        break;
-      case 4:
-        state = "discussion";
-        break;
-      case 5:
-        state = "discussion";
-        break;
-      default:
-        state = "summary";
+        case 2:
+          state = "shipping";
+          break;
+        case 3:
+          state = "funds";
+          break;
+        case 4:
+          state = "discussion";
+          break;
+        case 5:
+          state = "discussion";
+          break;
+        default:
+          state = "summary";
       }
     }
     this.$el.find('.js-main').addClass('hide');
@@ -679,7 +679,7 @@ module.exports = baseModal.extend({
 
     if (this.discussionInput.val()) {
       saveToAPI(this.discussionForm, '', this.serverUrl + "dispute_contract", function () {
-        self.status   = 4;
+        self.status = 4;
         self.tabState = "discussion";
         self.$('.js-startDisputeFlag').addClass('hide');
         self.getData();
@@ -769,7 +769,7 @@ module.exports = baseModal.extend({
       refData.order_id = this.orderID;
 
       saveToAPI(null, null, this.serverUrl + "refund", function () {
-        self.status   = 7;
+        self.status = 7;
         self.tabState = "summary";
         self.getData();
       }, function (data) {
