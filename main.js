@@ -133,6 +133,22 @@ var kill_local_server = function() {
   }
 };
 
+var getRandomPort = function() {
+  var port = Math.floor((Math.random() * 10000) + 30000);
+
+  while (port === global.serverPort || port === global.restAPIPort ||
+    port === global.apiSocketPort || port === global.heartbeatSocketPort) {
+    port = Math.floor((Math.random() * 10000) + 30000);
+  }
+
+  return port;
+};
+
+var serverPort;
+global.restAPIPort = getRandomPort();
+global.apiSocketPort = getRandomPort();
+global.heartbeatSocketPort = getRandomPort();
+
 var start_local_server = function() {
   if(fs.existsSync(serverPath)) {
     if (pendingKill) {
@@ -147,9 +163,22 @@ var start_local_server = function() {
 
     console.log('Starting OpenBazaar Server');
 
-    var random_port = Math.floor((Math.random() * 10000) + 30000);
+    serverPort = getRandomPort();
 
-    subpy = require('child_process').spawn(serverPath + daemon, ['start', '--loglevel', 'debug', '-p', random_port], {
+    subpy = require('child_process').spawn(serverPath + daemon,
+      [
+        'start',
+        '--loglevel',
+        'debug',
+        '-p',
+        serverPort,
+        '-r',
+        global.restAPIPort,
+        '-w',
+        global.apiSocketPort,
+        '-b',
+        global.heartbeatSocketPort
+      ], {
       detach: false,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });

@@ -132,14 +132,23 @@ window.addEventListener('contextmenu', (e) => {
 
 app.serverConfigs = new ServerConfigsCl();
 app.serverConfigs.fetch().done(() => {
-  var oldConfig,
+  var activeServer = app.serverConfigs.getActive(),
+      oldConfig,
       defaultConfig;
 
-  if (!app.serverConfigs.getActive()) {
-    defaultConfig = app.serverConfigs.create({
+  if (!activeServer) {
+    var serverConfigOpts = {
       name: window.polyglot.t('serverConnectModal.defaultServerName'),
       default: true
-    });
+    };
+
+    if (remote.getGlobal('launched_from_installer')) {
+      serverConfigOpts.rest_api_port = remote.getGlobal('restAPIPort');
+      serverConfigOpts.api_socket_port = remote.getGlobal('apiSocketPort');
+      serverConfigOpts.heartbeat_socket_port = remote.getGlobal('heartbeatSocketPort');
+    }
+
+    defaultConfig = app.serverConfigs.create(serverConfigOpts);
 
     // migrate any existing connection from the
     // old single config set-up (_serverConfig-1)
@@ -177,6 +186,12 @@ app.serverConfigs.fetch().done(() => {
     } else {
       app.serverConfigs.setActive(defaultConfig.id);
     }
+  } else if (remote.getGlobal('launched_from_installer') && activeServer.get('default')) {
+    activeServer.save({
+      'rest_api_port': remote.getGlobal('restAPIPort'),
+      'api_socket_port': remote.getGlobal('apiSocketPort'),
+      'heartbeat_socket_port': remote.getGlobal('heartbeatSocketPort'),
+    });
   }
 });
 
