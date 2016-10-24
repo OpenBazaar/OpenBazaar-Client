@@ -4,7 +4,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    remote = require('remote'),
+    remote = require('electron').remote,
     userSettingsModel = require('../models/userMd'),
     userProfileModel = require('../models/userProfileMd');
 
@@ -26,7 +26,6 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function () {
-    this.avatarHash = "";
     this.serverUrl = this.model.get('serverUrl');
     this.userSettings = new userSettingsModel();
     this.userProfile = new userProfileModel();

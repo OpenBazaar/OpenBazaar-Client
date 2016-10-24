@@ -1,9 +1,10 @@
-'use strict'; 
+'use strict';
 
-var ipcRenderer = require('ipc-renderer'),
+var ipcRenderer = require('electron').ipcRenderer,
     $ = require('jquery'),
     Socket = require('./utils/Socket'),
     _app;
+
 
 function App() {
   var self = this;
@@ -54,7 +55,7 @@ App.prototype.login = function() {
       password: activeServer.get('password')
     },
     timeout: 3000
-  });  
+  });
 };
 
 App.prototype.getGuid = function(handle, resolver) {

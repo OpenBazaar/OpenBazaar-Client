@@ -19,7 +19,7 @@
     "dot-location": [2, "property"],
     "dot-notation": 0,
     "eqeqeq": 0,
-    "indent": [1, 2, { "VariableDeclarator": { "var": 2, "let": 2, "const": 3 } }],
+    "indent": [1, 2, { "VariableDeclarator": { "var": 2, "let": 2, "const": 3 }, "SwitchCase": 1 }],
     "guard-for-in": 2,
     "key-spacing": [1, {
       "singleLine": {
