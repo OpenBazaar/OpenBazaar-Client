@@ -38,10 +38,16 @@ module.exports = baseVw.extend({
 
   render: function(){
     var self = this;
-    //clear the list
+    // clear the list
     this.$el.empty();
-    if (this.itemsShort.models.length > 0) {
-      this.renderItemSet(this.nextToShow, this.showPerScroll);
+    // create list based on category each time this is rendered
+    if(this.category !== 'all') {
+       this.categorizedItems = this.itemsShort.where({category: this.category})
+    } else {
+      this.categorizedItems = this.itemsShort.models;
+    }
+    if (this.categorizedItems.length > 0) {
+      this.renderItemSet(0, this.showPerScroll);
     } else {
       self.renderNoneFound();
     }
@@ -51,16 +57,16 @@ module.exports = baseVw.extend({
   renderItemSet: function(start, end){
     let renderSet = [];
 
-    if (start >= this.itemsShort.models.length) return;
+    if (start >= this.categorizedItems.length) return;
 
-    renderSet = __.filter(this.itemsShort.models, function(value, index){
+    renderSet = __.filter(this.categorizedItems, function(value, index){
       return (index >= start) && (index < end);
     });
 
     __.each(renderSet, (item) => {
       if (item.toJSON().category == this.category || this.category == "all") {
         this.renderContract(item);
-      }
+       }
     }, this);
 
     this.nextToShow = end;
