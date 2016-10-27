@@ -17,8 +17,12 @@ module.exports = pageVw.extend({
   className: "homeView contentWrapper",
 
   events: {
-    'click .js-productsTab': function(){this.setState("products");},
-    'click .js-vendorsTab': function(){this.setState("vendors");},
+    'click .js-productsTab': function() {
+      this.setState("products");
+    },
+    'click .js-vendorsTab': function() {
+      this.setState("vendors");
+    },
     'click .js-homeCreateStore': 'createStore',
     'click .js-homeCreateListing': 'createListing',
     'click .js-homeSearchItemsClear': 'onSearchItemsClear',
@@ -203,11 +207,11 @@ module.exports = pageVw.extend({
         self.listingToggle = self.$('.js-homeListingToggle');
 
         self.setState(self.state, self.searchItemsText);
-        if(self.model.get('page').profile.vendor == true) {
+        if (self.model.get('page').profile.vendor == true) {
           self.$el.find('.js-homeCreateStore').addClass('hide');
           self.$el.find('.js-homeMyPage').addClass('show');
           self.$el.find('.js-homeCreateListing').addClass('show');
-        }else{
+        } else {
           self.$el.find('.js-homeCreateStore').addClass('show');
           self.$el.find('.js-homeCreateListing').addClass('hide');
         }
@@ -216,7 +220,7 @@ module.exports = pageVw.extend({
         self.loadingVendors = true;
         self.socketView.getVendors(self.socketUsersID);
         //set the filter
-        if(localStorage.getItem('homeShowAll') == "yes"){
+        if (localStorage.getItem('homeShowAll') == "yes"){
           self.setListingsAll();
           self.loadAllItems();
         } else {
@@ -246,7 +250,9 @@ module.exports = pageVw.extend({
   renderItem: function(item){
     var self = this,
         blocked,
-        addressCountries = this.userModel.get('shipping_addresses').map(function(address){ return address.country; }),
+        addressCountries = this.userModel.get('shipping_addresses').map(function(address) {
+          return address.country;
+        }),
         userCountry = this.userModel.get('country'),
         contract_type = item.contract_type;
 

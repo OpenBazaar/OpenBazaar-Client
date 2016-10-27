@@ -82,7 +82,9 @@ module.exports = Backbone.Model.extend({
       }
     }
 
-    return Object.keys(err).length && err || undefined;
+    if (Object.keys(err).length > 0) {
+      return err;
+    }
   },
 
   getServerBaseUrl: function() {

@@ -236,7 +236,7 @@ module.exports = pageVw.extend({
         placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
 
-      self.avatarCropper =  self.$('#settings-image-cropper');
+      self.avatarCropper = self.$('#settings-image-cropper');
 
       self.avatarCropper.cropit({
         $preview: self.$('.js-settingsAvatarPreview'),
@@ -313,7 +313,7 @@ module.exports = pageVw.extend({
       editor.subscribe('blur', self.validateDescription);
 
       self.sortableAddresses && self.sortableAddresses.destroy();
-      if(self.$('.js-sortableAddresses').length) {
+      if (self.$('.js-sortableAddresses').length) {
         self.sortableAddresses = Sortable.create(self.$('.js-sortableAddresses')[0], {
           chosenClass: "addressBoxDragging",
           ghostClass: "addressBoxGhost"

@@ -88,8 +88,7 @@ module.exports = baseVw.extend({
 
         if (keyCode == 40) {
           this.itemMoveDown();
-        } 
-        else {
+        } else {
           this.itemMoveUp();
         }
       }

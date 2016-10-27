@@ -17,8 +17,8 @@ var fs = require('fs'),
 var launched_from_installer = false;
 var platform = os.platform();
 switch (platform) {
-  case "darwin":
-    platform = "mac";
+case "darwin":
+  platform = "mac";
 }
 var version = app.getVersion();
 var trayMenu = null;

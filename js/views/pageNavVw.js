@@ -539,8 +539,7 @@ module.exports = baseVw.extend({
         $target.parents('.popMenu').length ||
         $target.is('[data-popmenu]') ||
         $target.parents('[data-popmenu]').length
-      ))
-    {
+      )) {
       if (!this.suggestionsVw.isVisible()) {
         app.hideOverlay();
       }
