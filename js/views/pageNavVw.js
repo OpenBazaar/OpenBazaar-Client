@@ -15,7 +15,7 @@ var __ = require('underscore'),
     SuggestionsVw = require('../views/suggestionsVw'),
     pjson = require('../../package.json');
 
-var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
+var ipcRenderer = require('electron').ipcRenderer;  // Allows to talk Electon main process
 
 module.exports = baseVw.extend({
 
@@ -111,11 +111,11 @@ module.exports = baseVw.extend({
     this.listenTo(window.obEventBus, "cleanNav", function(){
       this.cleanNav();
     });
-    
+
     this.listenTo(window.obEventBus, "searchingText", function(text){
       this.saveVisitedTag(text);
     });
-    
+
     this.listenTo(window.obEventBus, "handleObtained", function(profile){
       this.saveVisitedHandle(profile);
     });
@@ -152,7 +152,7 @@ module.exports = baseVw.extend({
     this.closeStatusBar();
     window.obEventBus.trigger('closeBuyWizard');
   },
-  
+
   saveVisitedTag: function(tag){
     var tagsList = JSON.parse(localStorage.getItem('tagsHistory')) || [],
         tagsListLength = tagsList.length,
@@ -160,7 +160,7 @@ module.exports = baseVw.extend({
 
     // Do nothing if there's just one tag and new one isn't added
     if (tagsListLength !== 1 || index === -1) {
-      // List is empty, just add the tag   
+      // List is empty, just add the tag
       if (tagsListLength === 0) {
         tagsList.push(tag);
       } else {
@@ -168,11 +168,11 @@ module.exports = baseVw.extend({
         if (index !== -1) {
           tagsList.splice(index, 1);
         }
-        
+
          // Tag goes to the beginning of the list
         tagsList.splice(0, 0, tag);
       }
-      
+
       // History needs to be pruned
       if (tagsListLength > window.config.maxTagHistory) {
         tagsList = tagsList.slice(0, window.config.maxTagHistory);
@@ -182,12 +182,12 @@ module.exports = baseVw.extend({
       localStorage.setItem('tagsHistory', JSON.stringify(tagsList));
     }
   },
-  
+
   saveVisitedHandle: function(profile){
     var handlesList = JSON.parse(localStorage.getItem('handlesHistory')) || [],
         handlesListLength = handlesList.length,
         index = __.findIndex(handlesList, {handle: profile.handle});
-        
+
     // Do nothing if there's just one tag and new one isn't added
     if (handlesListLength !== 1 || index === -1) {
       let handleObj = {
@@ -196,7 +196,7 @@ module.exports = baseVw.extend({
         name: profile.name
       };
 
-      // List is empty, just add the tag   
+      // List is empty, just add the tag
       if (handlesListLength === 0) {
         handlesList.push(handleObj);
       } else {
@@ -204,11 +204,11 @@ module.exports = baseVw.extend({
         if (index !== -1) {
           handlesList.splice(index, 1);
         }
-        
+
         // Tag goes to the beginning of the list
         handlesList.splice(0, 0, handleObj);
       }
-      
+
       // History needs to be pruned
       if (handlesListLength > window.config.maxHandleHistory) {
         handlesList = handlesList.slice(0, window.config.maxHandleHistory);
@@ -235,11 +235,11 @@ module.exports = baseVw.extend({
         avatarHash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
       notif.type = notif.type || notif.message_type;
       notif.guid = notif.guid || notif.sender;
-      
+
       this.unreadNotifsViaSocket++;
 
       this.notificationsCl.add(
-          __.extend({}, notif, { 
+          __.extend({}, notif, {
             read: false,
             username: username,
             image_hash: avatarHash
@@ -247,59 +247,58 @@ module.exports = baseVw.extend({
       );
 
       switch (notif.type) {
-      case "follow":
-        new Notification(window.polyglot.t('NotificationFollow', {name: username}), {
-          icon: avatar,
-          silent: true
-        });
-        break;
-      case "dispute_open":
-        new Notification(window.polyglot.t('NotificationDispute', {name: username}), {
-          icon: avatar,
-          silent: true
-        });
-        break;
-      case "dispute_close":
-        new Notification(window.polyglot.t('NotificationDisputeClosed', {name: username}), {
-          icon: avatar,
-          silent: true
-        });
-        break;
-      case "new order":
-        new Notification(window.polyglot.t('NotificationNewOrder', {name: username}), {
-          icon: avatar,
-          silent: true
-        });
-        break;
-      case "payment received":
-        new Notification(window.polyglot.t('NotificationPaymentReceived', {name: username}), {
-          icon: avatar,
-          silent: true
-        });
-        break;
-      case "order confirmation":
-        new Notification(window.polyglot.t('NotificationOrderConfirmed', {name: username}), {
-          icon: avatar,
-          silent: true
-        });
-        break;
-      case "rating received":
-        new Notification(window.polyglot.t('NotificationRatingRecieved', {name: username}), {
-          icon: avatar,
-          silent: true
-        });
-        break;
-      case "ORDER":
-        new Notification(window.polyglot.t('NotificationNewTransactionMessage', {name: username}), {
-          icon: avatar,
-          silent: true
-        });
-        break;
+        case "follow":
+          new Notification(window.polyglot.t('NotificationFollow', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "dispute_open":
+          new Notification(window.polyglot.t('NotificationDispute', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "dispute_close":
+          new Notification(window.polyglot.t('NotificationDisputeClosed', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "new order":
+          new Notification(window.polyglot.t('NotificationNewOrder', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "payment received":
+          new Notification(window.polyglot.t('NotificationPaymentReceived', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "order confirmation":
+          new Notification(window.polyglot.t('NotificationOrderConfirmed', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "rating received":
+          new Notification(window.polyglot.t('NotificationRatingRecieved', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "ORDER":
+          new Notification(window.polyglot.t('NotificationNewTransactionMessage', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
       }
-
       app.playNotificationSound();
     }
-  },  
+  },
 
   refreshProfile: function() {
     var self = this;
@@ -373,12 +372,12 @@ module.exports = baseVw.extend({
       self.$statusBar = self.$el.find('.js-navStatusBar');
       self.$serverSubmenu = self.$('.js-serverSubmenu');
       self.$serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
-      
+
       self.suggestionsVw && self.suggestionsVw.remove();
       self.suggestionsVw = new SuggestionsVw({
         $input: self.$addressInput
       });
-      
+
       self.$('.js-mainSearchWrapper').append(self.suggestionsVw.render().el);
 
       //listen for address bar set events
@@ -388,7 +387,7 @@ module.exports = baseVw.extend({
         self.$addressInput.val(text);
         self.closeStatusBar();
       });
-      
+
       if (self.showDiscIntro){
         self.showDiscoverIntro();
       }
@@ -511,7 +510,7 @@ module.exports = baseVw.extend({
 
     self.$('.popMenu').not($popMenu)
       .removeClass('popMenu-opened');
-    
+
     $popMenu.toggleClass('popMenu-opened');
 
     if ($popMenu.hasClass('popMenu-opened')) {
@@ -530,7 +529,7 @@ module.exports = baseVw.extend({
     var $target = $(e.target),
         $popMenu,
         closeHandler;
-        
+
     if (!$target.hasClass('js-navAddressBar') && this.suggestionsVw.isVisible()) {
       app.hideOverlay();
       this.suggestionsVw.hideSuggestions();
@@ -545,7 +544,7 @@ module.exports = baseVw.extend({
       if (!this.suggestionsVw.isVisible()) {
         app.hideOverlay();
       }
-      
+
       $popMenu = self.$('.popMenu.popMenu-opened').removeClass('popMenu-opened');
       $popMenu.each((index, el) => {
         closeHandler = $(el).data('onclose');
@@ -563,12 +562,12 @@ module.exports = baseVw.extend({
       )
     ) {
       return;
-    }    
+    }
 
     app.hideOverlay();
     self.$('.js-navProfileMenu').removeClass('popMenu-opened');
     clearTimeout(this.ServerSubmenuTimeout);
-    this.$serverSubmenu.removeClass('server-submenu-opened');    
+    this.$serverSubmenu.removeClass('server-submenu-opened');
   },
 
   navBackClick: function(){
@@ -582,7 +581,7 @@ module.exports = baseVw.extend({
   navRefreshClick: function(){
     app.router.refresh();
   },
-  
+
   navRestartClick: function(){
     location.reload();
   },
@@ -627,12 +626,12 @@ module.exports = baseVw.extend({
         //if enter was clicked while a suggestion was highlighted, let the suggestions view handle the routing
         return;
       }
-      
+
       if (barText.startsWith('ob://')) {
         sliced = barText.length > 5 ? barText.slice(5) : '';
         sliced && this.addressBarProcess(sliced);
       } else {
-        this.addressBarProcess(barText);  
+        this.addressBarProcess(barText);
       }
     } else {
       this.closeStatusBar();
@@ -695,7 +694,7 @@ module.exports = baseVw.extend({
     this.overServerSubmenu = false;
     clearTimeout(this.ServerSubmenuTimeout);
     this.$serverSubmenu.removeClass('server-submenu-opened');
-  },  
+  },
 
   remove: function() {
     $(document).off('click', this.onDocumentClick);

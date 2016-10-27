@@ -26,7 +26,7 @@ window.onblur = function() {
 };
 
 var Polyglot = require('node-polyglot'),
-    ipcRenderer = require('ipc-renderer'),
+    ipcRenderer = require('electron').ipcRenderer,
     remote = require('electron').remote,
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
@@ -132,14 +132,23 @@ window.addEventListener('contextmenu', (e) => {
 
 app.serverConfigs = new ServerConfigsCl();
 app.serverConfigs.fetch().done(() => {
-  var oldConfig,
+  var activeServer = app.serverConfigs.getActive(),
+      oldConfig,
       defaultConfig;
 
-  if (!app.serverConfigs.getActive()) {
-    defaultConfig = app.serverConfigs.create({
+  if (!activeServer) {
+    var serverConfigOpts = {
       name: window.polyglot.t('serverConnectModal.defaultServerName'),
       default: true
-    });
+    };
+
+    if (remote.getGlobal('launched_from_installer')) {
+      serverConfigOpts.rest_api_port = remote.getGlobal('restAPIPort');
+      serverConfigOpts.api_socket_port = remote.getGlobal('apiSocketPort');
+      serverConfigOpts.heartbeat_socket_port = remote.getGlobal('heartbeatSocketPort');
+    }
+
+    defaultConfig = app.serverConfigs.create(serverConfigOpts);
 
     // migrate any existing connection from the
     // old single config set-up (_serverConfig-1)
@@ -177,6 +186,12 @@ app.serverConfigs.fetch().done(() => {
     } else {
       app.serverConfigs.setActive(defaultConfig.id);
     }
+  } else if (remote.getGlobal('launched_from_installer') && activeServer.get('default')) {
+    activeServer.save({
+      'rest_api_port': remote.getGlobal('restAPIPort'),
+      'api_socket_port': remote.getGlobal('apiSocketPort'),
+      'heartbeat_socket_port': remote.getGlobal('heartbeatSocketPort'),
+    });
   }
 });
 
@@ -208,7 +223,7 @@ app.serverConfigs.on('activeServerChange', () => {
 var platform = process.platform;
 
 if (platform === "linux") {
-  var scaleFactor = require('screen').getPrimaryDisplay().scaleFactor;
+  var scaleFactor = require('electron').screen.getPrimaryDisplay().scaleFactor;
   if (scaleFactor === 0) {
     scaleFactor = 1;
   }
@@ -259,8 +274,8 @@ $(document).on('mouseleave', 'a[data-href-tooltip]', function() {
 
 //record changes to the app state
 $(window).bind('hashchange', function(){
-   const host = encodeURIComponent(app.serverConfigs.getActive().getServerBaseUrl());
-   const route =  Backbone.history.getFragment();
+  const host = encodeURIComponent(app.serverConfigs.getActive().getServerBaseUrl());
+  const route = Backbone.history.getFragment();
   localStorage.setItem(host, route);
 });
 
@@ -298,49 +313,49 @@ $(window).bind('keydown', function(e) {
 
   if (ctrl) {
     switch (char) {
-    case window.config.keyShortcuts.undo:
-      e.preventDefault();
-        //run undo programmatically to avoid crash
-      document.execCommand('undo');
-      break;
-    case window.config.keyShortcuts.discover:
-      route = 'home';
-      break;
-    case window.config.keyShortcuts.myPage:
-      route = 'userPage';
-      break;
-    case window.config.keyShortcuts.customizePage:
-      route = 'userPage/' + user.get('guid') + '/customize';
-      break;
-    case window.config.keyShortcuts.create:
-      route = 'userPage/' + user.get('guid') + '/listingNew';
-      break;
-    case window.config.keyShortcuts.purchases:
-      route = 'transactions/purchases';
-      break;
-    case window.config.keyShortcuts.sales:
-      route = 'transactions/sales';
-      break;
-    case window.config.keyShortcuts.cases:
-      route = 'transactions/cases';
-      break;
-    case window.config.keyShortcuts.settings:
-      route = 'settings';
-      break;
-    case window.config.keyShortcuts.addressBar:
-        // Select all text in address bar
-      $('.js-navAddressBar').select();
-      break;
-    case window.config.keyShortcuts.save:
-      window.obEventBus.trigger('saveCurrentForm');
-      break;
-    case window.config.keyShortcuts.refresh:
-      e.preventDefault();
-      app.router.refresh();
-      break;
-    case window.config.keyShortcuts.restart:
-      location.reload();
-      break;
+      case window.config.keyShortcuts.undo:
+        e.preventDefault();
+          //run undo programmatically to avoid crash
+        document.execCommand('undo');
+        break;
+      case window.config.keyShortcuts.discover:
+        route = 'home';
+        break;
+      case window.config.keyShortcuts.myPage:
+        route = 'userPage';
+        break;
+      case window.config.keyShortcuts.customizePage:
+        route = 'userPage/' + user.get('guid') + '/customize';
+        break;
+      case window.config.keyShortcuts.create:
+        route = 'userPage/' + user.get('guid') + '/listingNew';
+        break;
+      case window.config.keyShortcuts.purchases:
+        route = 'transactions/purchases';
+        break;
+      case window.config.keyShortcuts.sales:
+        route = 'transactions/sales';
+        break;
+      case window.config.keyShortcuts.cases:
+        route = 'transactions/cases';
+        break;
+      case window.config.keyShortcuts.settings:
+        route = 'settings';
+        break;
+      case window.config.keyShortcuts.addressBar:
+          // Select all text in address bar
+        $('.js-navAddressBar').select();
+        break;
+      case window.config.keyShortcuts.save:
+        window.obEventBus.trigger('saveCurrentForm');
+        break;
+      case window.config.keyShortcuts.refresh:
+        e.preventDefault();
+        app.router.refresh();
+        break;
+      case window.config.keyShortcuts.restart:
+        location.reload();
+        break;
     }
 
     if (route !== null) {
@@ -408,7 +423,7 @@ var loadProfile = function(landingRoute, onboarded) {
             var userLang = model.get('language');
             cCode = model.get('currency_code');
 
-            if(userLang != window.polyglot.currentLocale){
+            if (userLang != window.polyglot.currentLocale){
               //when switching nodes, the language saved in localStorage can be different than the language in the
               // user model, but the user model does not trigger a change because it hasn't changed
               updatePolyglot(userLang);
@@ -643,64 +658,64 @@ removeStartupRetry = function() {
 app.getHeartbeatSocket().on('message', function(e) {
   if (e.jsonData && e.jsonData.status) {
     switch (e.jsonData.status) {
-    case 'generating GUID':
-      profileLoaded && location.reload();
-      if (guidCreating) return;
+      case 'generating GUID':
+        profileLoaded && location.reload();
+        if (guidCreating) return;
 
-        // todo: put in some timeout in the off chance the guid
-        // creation process doesn't complete after a long time.
-      guidCreating = $.Deferred();
+          // todo: put in some timeout in the off chance the guid
+          // creation process doesn't complete after a long time.
+        guidCreating = $.Deferred();
 
-        // launch onboarding, pass in guid creating
-      launchOnboarding(guidCreating);
-      break;
-    case 'GUID generation complete':
-      profileLoaded && location.reload();
+          // launch onboarding, pass in guid creating
+        launchOnboarding(guidCreating);
+        break;
+      case 'GUID generation complete':
+        profileLoaded && location.reload();
 
-      app.serverConfigs.getActive().save({
-        username: e.jsonData.username,
-        password: e.jsonData.password
-      });
-
-      app.login().done(function() {
-        guidCreating.resolve();
-      });
-
-      break;
-    case 'online':
-      if (loadProfileNeeded && !guidCreating) {
-        loadProfileNeeded = false;
-        onboardingModal && onboardingModal.remove();
-
-        app.login().done(function(data) {
-          if (data.success) {
-            $.getJSON(app.serverConfigs.getActive().getServerBaseUrl() + '/profile')
-                  .done(function(profile, textStatus) {
-                    if (textStatus == 'parsererror') {
-                      alert(window.polyglot.t('errorMessages.serverError') +"\n\n"+ window.polyglot.t('errorMessages.badJSON'));
-                      app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
-                        .open();
-                      return;
-                    }
-
-                    if (__.isEmpty(profile)) {
-                      launchOnboarding(guidCreating = $.Deferred().resolve().promise());
-                    } else {
-                      app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
-                      loadProfile();
-                    }
-                  });
-          } else {
-            app.serverConnectModal.failConnection(
-                data.reason === 'too many attempts' ? 'failed-auth-too-many' : 'failed-auth',
-                app.serverConfigs.getActive()
-              ).open();
-          }
-        }).fail(function() {
-          app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
-              .open();
+        app.serverConfigs.getActive().save({
+          username: e.jsonData.username,
+          password: e.jsonData.password
         });
-      }
+
+        app.login().done(function() {
+          guidCreating.resolve();
+        });
+
+        break;
+      case 'online':
+        if (loadProfileNeeded && !guidCreating) {
+          loadProfileNeeded = false;
+          onboardingModal && onboardingModal.remove();
+
+          app.login().done(function(data) {
+            if (data.success) {
+              $.getJSON(app.serverConfigs.getActive().getServerBaseUrl() + '/profile')
+                    .done(function(profile, textStatus) {
+                      if (textStatus == 'parsererror') {
+                        alert(window.polyglot.t('errorMessages.serverError') +"\n\n"+ window.polyglot.t('errorMessages.badJSON'));
+                        app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
+                          .open();
+                        return;
+                      }
+
+                      if (__.isEmpty(profile)) {
+                        launchOnboarding(guidCreating = $.Deferred().resolve().promise());
+                      } else {
+                        app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
+                        loadProfile();
+                      }
+                    });
+            } else {
+              app.serverConnectModal.failConnection(
+                  data.reason === 'too many attempts' ? 'failed-auth-too-many' : 'failed-auth',
+                  app.serverConfigs.getActive()
+                ).open();
+            }
+          }).fail(function() {
+            app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
+                .open();
+          });
+        }
     }
   }
   if (e.jsonData && e.jsonData.libbitcoin) {

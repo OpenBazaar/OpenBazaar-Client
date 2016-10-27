@@ -1,6 +1,6 @@
 'use strict';
 
-var ipcRenderer = require('ipc-renderer'),
+var ipcRenderer = require('electron').ipcRenderer,
     __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -284,10 +284,10 @@ module.exports = Backbone.Router.extend({
 
   launchPageConnectModal: function(config) {
     var defaults = {
-      connectText: 'Connecting...',
-      failedText: 'Unable to Connect.'
-    },
-    deferred = $.Deferred();
+          connectText: 'Connecting...',
+          failedText: 'Unable to Connect.'
+        },
+        deferred = $.Deferred();
 
     if (!(
         config &&
