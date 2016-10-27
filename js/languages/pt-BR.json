@@ -725,6 +725,8 @@
     },
     "langChangeRestartTitle": "Reinicialização necessária para a mudança de idioma.",
     "langChangeRestartMessage": "Para mudar o seu idioma, você precisa reinicializar o aplicativo.",
+		"restartNow": "Recomece agora",
+	  "restartLater": "Recomeçar depois",
     "countries": {
         "AFGHANISTAN": "Afeganistão",
         "ALAND_ISLANDS": "Ilhas da Åland",
