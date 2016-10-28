@@ -20,6 +20,10 @@ module.exports = baseModal.extend({
       throw new Error('Please provide a version.');
     }
 
+    if (!this.options.serverVersion) {
+      throw new Error('Please provide a server version.');
+    }
+
     this._tab = this.options.initialTab;
   },
 
@@ -47,6 +51,7 @@ module.exports = baseModal.extend({
     loadTemplate('./js/templates/aboutModal.html', (t) => {
       this.$el.html(t({
         version: this.options.version,
+        serverVersion: this.options.serverVersion,
         tab: this._tab
       }));
 

@@ -46,6 +46,7 @@
   "RemoveModerator": "Remove as Moderator",
   "About": "About",
   "Version": "Version %{version}",
+  "ServerVersion": "Server Version %{serverVersion}",
   "NoDescriptionAdded": "No description added",
   "NoListings": "No listings",
   "CoverPhoto": "Cover Photo",
