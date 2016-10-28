@@ -20,10 +20,6 @@ module.exports = baseModal.extend({
       throw new Error('Please provide a version.');
     }
 
-    if (!this.options.serverVersion) {
-      throw new Error('Please provide a server version.');
-    }
-
     this._tab = this.options.initialTab;
   },
 

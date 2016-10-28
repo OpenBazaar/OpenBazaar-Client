@@ -395,7 +395,7 @@ module.exports = baseVw.extend({
       if (!self.aboutModal) {
         self.aboutModal = new AboutModal({
           version: pjson.version,
-          serverVersion: self.model.get('version'),
+          serverVersion: self.model.get('version') || 0,
         });
         self.aboutModal.render();
         self.registerChild(self.aboutModal);

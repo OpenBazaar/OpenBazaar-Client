@@ -2,7 +2,9 @@
   <div class="about-hero modal-hero-about color-secondary-darken custCol-secondary-darken">
     <div class="modal-hero-icon"></div>
     <p class="width100 alignCenter custCol-text marginTop50 row5 textOpacity75 fontSize14"><%= polyglot.t('Version', {version: ob.version}) %></p>
-    <p class="width100 alignCenter custCol-text marginTop10 textOpacity75 fontSize14"><%= polyglot.t('ServerVersion', {serverVersion: ob.serverVersion}) %></p>
+    <% if(ob.serverVersion) { %>
+      <p class="width100 alignCenter custCol-text marginTop10 textOpacity75 fontSize14"><%= polyglot.t('ServerVersion', {serverVersion: ob.serverVersion}) %></p>
+    <% } %>
   </div>
   <div class="aboutModal-accordion accordion">
     <div class="accordion-window">
