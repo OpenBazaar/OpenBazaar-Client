@@ -395,6 +395,7 @@ UserPageVw = pageVw.extend({
         self.setCustomStyles();
         self.setState(self.state, self.currentItemHash, { replaceHistory: true });
         self.$backToTop = self.$('.backToTop');
+        self.$categorySelect = self.$('.js-categories');
 
         //check if user is blocked
         if (!self.options.ownPage && isBlocked) {
@@ -598,16 +599,24 @@ UserPageVw = pageVw.extend({
     }
   },
 
-  setCategory: function(category) {
-    var $select;
+  setCategorySelect: function(category) {
+    if (category && this.$categorySelect.val() !== category &&
+        this.$categorySelect.find('option[value="' + category + '"]').length) {
+        this.$categorySelect.val(category);
+    }
+    this.showCategory(category);
+  },
 
-    if (category) {
-      $select = this.$el.find('.js-categories');
+  categoryChanged: function() {
+    this.showCategory(this.$categorySelect.val());
+  },
 
-      if ($select.val() !== category && $select.find('option[value="' + category + '"]').length) {
-        $select.val(category);
-        this.categoryChanged();
-      }
+  showCategory: function(category) {
+    if (this.itemList) {
+      this.itemList.category = category;
+      this.itemList.render();
+    } else {
+      this.renderItems(this.cachedListings);
     }
   },
 
@@ -625,10 +634,6 @@ UserPageVw = pageVw.extend({
     } else {
       this.$('#inputFollowers').attr('placeholder', window.polyglot.t('SearchForFollowersPlaceholder'));
     }
-  },
-
-  categoryChanged: function() {
-    this.renderItems(this.listings.get('listings'));
   },
 
   toggleFollowButtons: function(followed) {
@@ -847,7 +852,6 @@ UserPageVw = pageVw.extend({
 
   renderItems: function (model, skipNSFWmodal) {
     var self = this,
-        select = this.$el.find('.js-categories'),
         selectOptions = [],
         addressCountries = self.options.userModel.get('shipping_addresses').map(function(address){
           return address.country;
@@ -857,38 +861,38 @@ UserPageVw = pageVw.extend({
     addressCountries.push(userCountry);
     skipNSFWmodal = skipNSFWmodal || this.skipNSFWmodal;
     model = model || [];
-    __.each(model, function (arrayItem) {
+    __.each(model, (arrayItem) => {
 
-      if (!self.showNSFWContent && !self.showNSFW &&!skipNSFWmodal && arrayItem.nsfw){
+      if (!this.showNSFWContent && !this.showNSFW &&!skipNSFWmodal && arrayItem.nsfw){
         arrayItem.cloak = true;
       } else {
         arrayItem.cloak = false;
       }
-      arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
-      arrayItem.serverUrl = self.options.userModel.get('serverUrl');
+      arrayItem.userCurrencyCode = this.options.userModel.get('currency_code');
+      arrayItem.serverUrl = this.options.userModel.get('serverUrl');
       arrayItem.showAvatar = false;
-      arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
-      arrayItem.handle = self.model.get('page').profile.handle;
-      arrayItem.userID = self.pageID;
-      arrayItem.ownPage = self.options.ownPage;
+      arrayItem.avatar_hash = this.model.get('page').profile.avatar_hash;
+      arrayItem.handle = this.model.get('page').profile.handle;
+      arrayItem.userID = this.pageID;
+      arrayItem.ownPage = this.options.ownPage;
       arrayItem.onUserPage = true;
       arrayItem.userCountries = addressCountries;
       arrayItem.skipNSFWmodal = skipNSFWmodal;
-      if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
+      if (arrayItem.category != "" && this.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         selectOptions[arrayItem.category] = true;
       }
-      if (self.options.ownPage === true){
-        arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash;
+      if (this.options.ownPage === true){
+        arrayItem.imageURL = this.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash;
       } else {
-        arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+self.pageID;
+        arrayItem.imageURL = this.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+this.pageID;
       }
     });
 
-    Object.keys(selectOptions).sort().forEach(function(selectOption) {
+    Object.keys(selectOptions).sort().forEach((selectOption) => {
       var opt = document.createElement('option');
       opt.value = selectOption;
       opt.innerHTML = selectOption;
-      select.append(opt);
+      this.$categorySelect.append(opt);
     });
 
     this.itemList = new itemListView({
@@ -897,7 +901,7 @@ UserPageVw = pageVw.extend({
       title: window.polyglot.t('NoListings'),
       message: "",
       userModel: this.options.userModel,
-      category: this.$el.find('.js-categories').val()
+      category: this.$categorySelect.val(),
     });
 
     this.registerChild(this.itemList);
@@ -1148,16 +1152,11 @@ UserPageVw = pageVw.extend({
   },
 
   storeTabClick: function(e) {
-    if (this.$el.find('.js-categories').val() != "all"){
-      $(".js-categories option[value='all']").attr("selected", "selected");
-      this.categoryChanged();
-    }
-
     this.storeClick(e);
   },
 
   storeCatClick: function(e) {
-    this.setCategory($(e.target).text());
+    this.setCategorySelect($(e.target).text());
     this.storeClick(e);
   },
 
