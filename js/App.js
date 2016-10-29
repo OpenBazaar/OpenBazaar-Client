@@ -130,6 +130,20 @@ App.prototype.intlNumFormat = function(numberToFormat, maxDigits){
   return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
 };
 
+/**
+ * Format a bitcoin amount in the user's locale.
+ *
+ * @param {Number} amount - Bitcoin (BTC) amount.
+ * @param {Number} [maxDigits=8] - Maximum number of fraction digits to display.
+ * @returns {String} localised amount ending with ' BTC'
+ *
+ * @see intlNumFormat
+ */
+App.prototype.formatBitcoin = function(amount, maxDigits) {
+  return this.intlNumFormat(amount, maxDigits)
+    + ' BTC';
+}
+
 App.getApp = function() {
   if (!_app) {
     throw new Error('The app instance was never instantiated and is therefore not available.');

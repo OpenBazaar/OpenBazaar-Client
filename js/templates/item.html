@@ -41,7 +41,7 @@
       <ul class="itemMeta">
         <li class="alignCenter itemPrice">
           <span class="textSize22px textOpacity1 fontWeight500 marginRight2">
-            <%= ob.intlNumFormat(ob.vendorBTCPrice, 8) %> BTC
+            <%= ob.formatBitcoin(ob.vendorBTCPrice) %>
           </span>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
           <span class="textSize22px textOpacity65">(<%= ob.displayPrice %>)</span>
