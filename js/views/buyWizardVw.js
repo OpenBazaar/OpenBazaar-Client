@@ -608,7 +608,7 @@ module.exports = baseModal.extend({
     var totalPrice = this.model.get('totalPrice'),
         totalBTCPrice = this.model.get('totalBTCDisplayPrice'),
         userCurrency = this.model.get('userCurrencyCode'),
-        totalDisplayPrice = userCurrency == "BTC" ? app.intlNumFormat(totalPrice, 8) + " BTC" : new Intl.NumberFormat(window.lang, {
+        totalDisplayPrice = userCurrency == "BTC" ? app.formatBitcoin(totalPrice) : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,

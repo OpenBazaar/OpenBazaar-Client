@@ -75,19 +75,19 @@ module.exports = Backbone.View.extend({
         totalPrice = totalItemPrice + totalShipping,
         newBTCDisplayPrice = app.intlNumFormat(this.model.get('vendorBTCPrice') * quantity, 8),
         newBTCShippingDisplayPrice = app.intlNumFormat(this.model.get('currentShippingBTCPrice') * quantity, 8),
-        newDisplayPrice = userCurrency == "BTC" ? app.intlNumFormat(totalItemPrice, 8) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newDisplayPrice = userCurrency == "BTC" ? app.formatBitcoin(totalItemPrice) : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalItemPrice),
-        newDisplayShippingPrice = userCurrency == "BTC" ? app.intlNumFormat(totalShipping, 8) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newDisplayShippingPrice = userCurrency == "BTC" ? app.formatBitcoin(totalShipping) : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalShipping),
-        newDisplayModeratorPrice = userCurrency == "BTC" ? app.intlNumFormat(moderatorTotal, 8) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newDisplayModeratorPrice = userCurrency == "BTC" ? app.formatBitcoin(moderatorTotal) : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
@@ -96,7 +96,7 @@ module.exports = Backbone.View.extend({
         totalBTCDisplayPrice = (this.model.get('vendorBTCPrice') + this.model.get('currentShippingBTCPrice')) * quantity,
         moderatorPriceBTC = moderatorPercentage ? totalBTCDisplayPrice * moderatorPercentage : 0,
         moderatorPriceString = this.model.get('userCurrencyCode') == 'BTC' ?
-        app.intlNumFormat(moderatorPriceBTC, 8) + " BTC" : app.intlNumFormat(moderatorPriceBTC, 8) + " BTC (" + newDisplayModeratorPrice + ")";
+        app.formatBitcoin(moderatorPriceBTC)  : app.formatBitcoin(moderatorPriceBTC) + " (" + newDisplayModeratorPrice + ")";
 
     this.$('.js-buyWizardBTCPrice').html(newBTCDisplayPrice+"BTC");
     this.$('.js-buyWizardBTCShippingPrice').html(newBTCShippingDisplayPrice+"BTC");
