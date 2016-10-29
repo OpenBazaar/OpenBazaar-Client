@@ -99,9 +99,9 @@
         <% } else { %>
           <span class="noOverflow fontSize13 js-buyWizardBTCShippingPrice">
             <% if(ob.shippingType === "domestic") { %>
-              <%= ob.intlNumFormat(ob.domesticShippingBTC, 8) %> BTC
+              <%= ob.formatBitcoin(ob.domesticShippingBTC) %>
             <% }else{ %>
-              <%= ob.intlNumFormat(ob.internationalShippingBTC, 8) %> BTC
+              <%= ob.formatBitcoin(ob.internationalShipping) %>
             <% } %>
           </span>
           <span class="noOverflow js-buyWizardShippingPrice textOpacity75 fontSize13">
