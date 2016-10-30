@@ -17,7 +17,7 @@ function App() {
   this._awayCounts = null;
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
-  this.btcUnit = 'mBTC';
+  this.btcUnit = 'BTC';
 
   // TODO: rather than attach the serverConfigs CL
   // in main.js, pass in the instance here so the
