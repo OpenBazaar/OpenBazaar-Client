@@ -3,6 +3,7 @@
 var ipcRenderer = require('electron').ipcRenderer,
     $ = require('jquery'),
     Socket = require('./utils/Socket'),
+    btcConvert = require('bitcoin-convert'),
     _app;
 
 
@@ -16,6 +17,7 @@ function App() {
   this._awayCounts = null;
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
+  this.btcUnit = 'mBTC';
 
   // TODO: rather than attach the serverConfigs CL
   // in main.js, pass in the instance here so the
@@ -140,8 +142,9 @@ App.prototype.intlNumFormat = function(numberToFormat, maxDigits){
  * @see intlNumFormat
  */
 App.prototype.formatBitcoin = function(amount, maxDigits) {
-  return this.intlNumFormat(amount, maxDigits)
-    + ' BTC';
+  amount = btcConvert(amount, 'BTC', _app.btcUnit);
+  return _app.intlNumFormat(amount, maxDigits)
+    + ' ' + _app.btcUnit;
 }
 
 App.getApp = function() {
