@@ -17,7 +17,7 @@ function App() {
   this._awayCounts = null;
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
-  this.btcUnit = 'BTC';
+  this.bitcoinUnit = 'BTC';
 
   // TODO: rather than attach the serverConfigs CL
   // in main.js, pass in the instance here so the
@@ -142,10 +142,10 @@ App.prototype.intlNumFormat = function(numberToFormat, maxDigits){
  * @see intlNumFormat
  */
 App.prototype.formatBitcoin = function(amount, maxDigits) {
-  amount = btcConvert(amount, 'BTC', _app.btcUnit);
+  amount = btcConvert(amount, 'BTC', _app.bitcoinUnit);
   return _app.intlNumFormat(amount, maxDigits)
-    + ' ' + _app.btcUnit;
-}
+    + ' ' + _app.bitcoinUnit;
+};
 
 App.getApp = function() {
   if (!_app) {

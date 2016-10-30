@@ -126,6 +126,27 @@
             <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
+                  <label><%= polyglot.t('BitcoinUnit') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <div class="fieldItem">
+                  <input type="radio" class="fieldItem" id="bitcoin_unit_BTC" name="bitcoinUnit" value="BTC" />
+                  <label for="bitcoin_unit_BTC" class="radioLabel">BTC</label>
+                  <input type="radio" class="fieldItem" id="bitcoin_unit_mBTC" name="bitcoinUnit" value="mBTC" />
+                  <label for="bitcoin_unit_mBTC" class="radioLabel">mBTC</label>
+                  <input type="radio" class="fieldItem" id="bitcoin_unit_μBTC" name="bitcoinUnit" value="μBTC" />
+                  <label for="bitcoin_unit_μBTC" class="radioLabel">μBTC</label>
+                  <input type="radio" class="fieldItem" id="bitcoin_unit_sat" name="bitcoinUnit" value="sat" />
+                  <label for="bitcoin_unit_sat" class="radioLabel">Satoshi (sat)</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border">
+                <div class="fieldItem">
                   <label>
                     <%= polyglot.t('EnableNotifications') %>
                   </label>

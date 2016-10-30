@@ -467,6 +467,7 @@ module.exports = pageVw.extend({
         currency_str = "",
         language_str = "",
         pageNSFW = this.model.get('page').profile.nsfw,
+        bitcoinUnit = localStorage.getItem('BitcoinUnit') || 'BTC',
         notifications = user.notifications,
         moderatorStatus = this.model.get('page').profile.moderator,
         vendorStatus = this.model.get('page').profile.vendor,
@@ -475,6 +476,7 @@ module.exports = pageVw.extend({
 
     this.$("#pageForm").find("input[name=nsfw]").val([String(pageNSFW)]);
     generalForm.find("input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
+    generalForm.find("input[name=bitcoinUnit][value=" + bitcoinUnit + "]").prop('checked', true);
     generalForm.find("input[name=notifications][value=" + notifications + "]").prop('checked', true);
     this.$("#storeForm").find("input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
     advancedForm.find("input[name=minEffects][value=" + fancyStatus + "]").prop('checked', true);
@@ -745,11 +747,14 @@ module.exports = pageVw.extend({
     var self = this,
         form = this.$("#generalForm"),
         cCode = this.$('#currency_code').val(),
+        bitcoinUnit = this.$("#generalForm input[name=bitcoinUnit]:checked").val(),
         $saveBtn = this.$('.js-saveGeneral');
 
     $saveBtn.addClass('loading');
 
     localStorage.setItem('NSFWFilter', this.$("#generalForm input[name=nsfw]:checked").val());
+    localStorage.setItem('BitcoinUnit', bitcoinUnit);
+    app.bitcoinUnit = bitcoinUnit;
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings",
         function(){
