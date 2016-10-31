@@ -127,8 +127,10 @@ App.prototype.setUnreadChatMessageCount = function(count) {
   }
 };
 
-App.prototype.intlNumFormat = function(numberToFormat, maxDigits){
-  maxDigits = maxDigits || 8; //default to show down to the satoshi (.00000001)
+App.prototype.intlNumFormat = function(numberToFormat, maxDigits) {
+  if (maxDigits === undefined) { // Allow maxDigits = 0
+    maxDigits = 8; //default to show down to the satoshi (.00000001)
+  }
   return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
 };
 
@@ -142,6 +144,11 @@ App.prototype.intlNumFormat = function(numberToFormat, maxDigits){
  * @see intlNumFormat
  */
 App.prototype.formatBitcoin = function(amount, maxDigits) {
+  if (_app.bitcoinUnit === 'mBTC') {
+    maxDigits = 2;
+  } else if (_app.bitcoinUnit !== 'BTC') {
+    maxDigits = 0;
+  }
   amount = btcConvert(amount, 'BTC', _app.bitcoinUnit);
   return _app.intlNumFormat(amount, maxDigits)
     + ' ' + _app.bitcoinUnit;
