@@ -47,6 +47,7 @@ module.exports = pageVw.extend({
     'click .js-saveModerator': 'saveModeratorClick',
     'click .js-cancelAdvanced': 'cancelView',
     'click .js-saveAdvanced': 'saveAdvancedClick',
+    'click .js-showPeers': 'showPeers',
     'click .js-testSMTP': 'testSMTPClick',
     'click .js-changeServerSettings': 'launchServerConfig',
     'change .js-settingsThemeSelection': 'themeClick',
@@ -134,6 +135,8 @@ module.exports = pageVw.extend({
     this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);
 
     __.bindAll(this, 'validateDescription');
+
+
   },
 
   // disabling caching on settings for now -- too much
@@ -236,6 +239,22 @@ module.exports = pageVw.extend({
         placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
 
+      var connectedPeers = ""
+      $.ajax({
+        url: self.serverUrl+ "routing_table",
+        success: function(data){
+          self.$el.find('span.js-numConnectedPeers').text(data.length);
+          data.forEach(function (peer) {
+            connectedPeers += (peer['ip'] + ":" + peer['port'] + "\n");
+          })
+          self.$el.find('span.js-connectedPeers').text(connectedPeers);
+          $('.js-connectedPeers').hide();
+        },
+        error: function(){
+          self.$el.find('.js-numConnectedPeers').text("Call to peers API failed.");
+        }
+      });
+
       self.avatarCropper = self.$('#settings-image-cropper');
 
       self.avatarCropper.cropit({
@@ -321,6 +340,10 @@ module.exports = pageVw.extend({
       }
     });
     return this;
+  },
+
+  showPeers: function () {
+    $('.js-connectedPeers').toggle();
   },
 
   validateDescription: function() {
