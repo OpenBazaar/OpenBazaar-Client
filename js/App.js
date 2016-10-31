@@ -131,14 +131,14 @@ App.prototype.intlNumFormat = function(numberToFormat, maxDigits = 8) {
 };
 
 App.prototype.getBitcoinUnit = function() {
-  if (!_app.bitcoinUnit) {
-    _app.bitcoinUnit = localStorage.getItem('BitcoinUnit') || 'BTC';
+  if (!this.bitcoinUnit) {
+    this.bitcoinUnit = localStorage.getItem('BitcoinUnit') || 'BTC';
   }
-  return _app.bitcoinUnit;
+  return this.bitcoinUnit;
 };
 
 App.prototype.setBitcoinUnit = function(unit) {
-  _app.bitcoinUnit = unit;
+  this.bitcoinUnit = unit;
   localStorage.setItem('BitcoinUnit', unit);
 };
 
@@ -152,14 +152,14 @@ App.prototype.setBitcoinUnit = function(unit) {
  * @see intlNumFormat
  */
 App.prototype.formatBitcoin = function(amount, maxDigits) {
-  let unit = _app.getBitcoinUnit();
+  let unit = this.getBitcoinUnit();
   if (unit === 'mBTC') {
     maxDigits = 2;
   } else if (unit !== 'BTC') {
     maxDigits = 0;
   }
   amount = btcConvert(amount, 'BTC', unit);
-  return _app.intlNumFormat(amount, maxDigits)
+  return this.intlNumFormat(amount, maxDigits)
     + ' ' + unit;
 };
 
