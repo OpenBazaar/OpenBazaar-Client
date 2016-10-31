@@ -6407,6 +6407,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-top: 10px;
   display: block;
   color: #9999A0;
-  height: 200px;
-  overflow: scroll
+  max-height: 200px;
+  overflow: scroll;
 }

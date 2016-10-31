@@ -239,7 +239,7 @@ module.exports = pageVw.extend({
         placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
 
-      var connectedPeers = ""
+      var connectedPeers = "";
       $.ajax({
         url: self.serverUrl+ "routing_table",
         success: function(data){
@@ -248,10 +248,10 @@ module.exports = pageVw.extend({
             connectedPeers += (peer['ip'] + ":" + peer['port'] + "\n");
           })
           self.$el.find('span.js-connectedPeers').text(connectedPeers);
-          $('.js-connectedPeers').hide();
+          self.$el.find('.js-connectedPeers').hide();
         },
         error: function(){
-          self.$el.find('.js-numConnectedPeers').text("Call to peers API failed.");
+          self.$el.find('.js-numConnectedPeers').text(window.polyglot.t('errorMessages.peersFail'));
         }
       });
 
@@ -343,7 +343,7 @@ module.exports = pageVw.extend({
   },
 
   showPeers: function () {
-    $('.js-connectedPeers').toggle();
+    this.$el.find('.js-connectedPeers').toggle();
   },
 
   validateDescription: function() {
