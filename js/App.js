@@ -126,10 +126,7 @@ App.prototype.setUnreadChatMessageCount = function(count) {
   }
 };
 
-App.prototype.intlNumFormat = function(numberToFormat, maxDigits) {
-  if (maxDigits === undefined) { // Allow maxDigits = 0
-    maxDigits = 8; //default to show down to the satoshi (.00000001)
-  }
+App.prototype.intlNumFormat = function(numberToFormat, maxDigits = 8) {
   return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
 };
 
@@ -138,19 +135,19 @@ App.prototype.getBitcoinUnit = function() {
     _app.bitcoinUnit = localStorage.getItem('BitcoinUnit') || 'BTC';
   }
   return _app.bitcoinUnit;
-}
+};
 
 App.prototype.setBitcoinUnit = function(unit) {
   _app.bitcoinUnit = unit;
   localStorage.setItem('BitcoinUnit', unit);
-}
+};
 
 /**
  * Format a bitcoin amount in the user's locale.
  *
  * @param {Number} amount - Bitcoin (BTC) amount.
  * @param {Number} [maxDigits=8] - Maximum number of fraction digits to display.
- * @returns {String} localised amount ending with ' BTC'
+ * @returns {String} localised amount ending with ' BTC' or the default bitcoin unit.
  *
  * @see intlNumFormat
  */
