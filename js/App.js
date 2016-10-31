@@ -17,7 +17,6 @@ function App() {
   this._awayCounts = null;
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
-  this.bitcoinUnit = 'BTC';
 
   // TODO: rather than attach the serverConfigs CL
   // in main.js, pass in the instance here so the
@@ -134,6 +133,18 @@ App.prototype.intlNumFormat = function(numberToFormat, maxDigits) {
   return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
 };
 
+App.prototype.getBitcoinUnit = function() {
+  if (!_app.bitcoinUnit) {
+    _app.bitcoinUnit = localStorage.getItem('BitcoinUnit') || 'BTC';
+  }
+  return _app.bitcoinUnit;
+}
+
+App.prototype.setBitcoinUnit = function(unit) {
+  _app.bitcoinUnit = unit;
+  localStorage.setItem('BitcoinUnit', unit);
+}
+
 /**
  * Format a bitcoin amount in the user's locale.
  *
@@ -144,14 +155,15 @@ App.prototype.intlNumFormat = function(numberToFormat, maxDigits) {
  * @see intlNumFormat
  */
 App.prototype.formatBitcoin = function(amount, maxDigits) {
-  if (_app.bitcoinUnit === 'mBTC') {
+  let unit = _app.getBitcoinUnit();
+  if (unit === 'mBTC') {
     maxDigits = 2;
-  } else if (_app.bitcoinUnit !== 'BTC') {
+  } else if (unit !== 'BTC') {
     maxDigits = 0;
   }
-  amount = btcConvert(amount, 'BTC', _app.bitcoinUnit);
+  amount = btcConvert(amount, 'BTC', unit);
   return _app.intlNumFormat(amount, maxDigits)
-    + ' ' + _app.bitcoinUnit;
+    + ' ' + unit;
 };
 
 App.getApp = function() {

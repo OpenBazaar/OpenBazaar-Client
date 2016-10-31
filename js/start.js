@@ -85,8 +85,6 @@ if (process.platform === 'darwin') {
 
 $html.addClass(platformClass);
 
-app.bitcoinUnit = localStorage.getItem('BitcoinUnit') || 'BTC';
-
 validateLanguage = function(lang){
   //check to see if the language exists in the language model
   if (__.where(languages.get('languages'), {langCode: lang}).length) {
