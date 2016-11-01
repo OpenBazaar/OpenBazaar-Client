@@ -131,14 +131,14 @@ App.prototype.intlNumFormat = function(numberToFormat, maxDigits = 8) {
 };
 
 App.prototype.getBitcoinUnit = function() {
-  if (!this.bitcoinUnit) {
-    this.bitcoinUnit = localStorage.getItem('BitcoinUnit') || 'BTC';
+  if (!this._bitcoinUnit) {
+    this._bitcoinUnit = localStorage.getItem('BitcoinUnit') || 'BTC';
   }
-  return this.bitcoinUnit;
+  return this._bitcoinUnit;
 };
 
 App.prototype.setBitcoinUnit = function(unit) {
-  this.bitcoinUnit = unit;
+  this._bitcoinUnit = unit;
   localStorage.setItem('BitcoinUnit', unit);
 };
 
