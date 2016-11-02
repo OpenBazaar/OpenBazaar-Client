@@ -6402,11 +6402,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 
-.js-connectedPeers {
-  line-height: 20px;
+.peersList {
   margin-top: 10px;
   display: block;
   color: #9999A0;
   max-height: 200px;
-  overflow: scroll;
+  overflow: auto;
+
+}
+
+.peersList>ul{
+  list-style-type: none;
+  padding-left: 0;
 }

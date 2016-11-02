@@ -239,19 +239,18 @@ module.exports = pageVw.extend({
         placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
 
-      var connectedPeers = "";
+      var connectedPeers = "<ul>";
       $.ajax({
-        url: self.serverUrl+ "routing_table",
+        url: self.serverUrl + "routing_table",
         success: function(data){
-          self.$el.find('span.js-numConnectedPeers').text(data.length);
+          self.$('.js-numConnectedPeers').html("<p>" + data.length + "</p>");
           data.forEach(function (peer) {
-            connectedPeers += (peer['ip'] + ":" + peer['port'] + "\n");
-          })
-          self.$el.find('span.js-connectedPeers').text(connectedPeers);
-          self.$el.find('.js-connectedPeers').hide();
+            connectedPeers += `<li><a href="#userPage/${peer.guid}">${peer.ip}:${peer.port}</a></li>`;
+          });
+          self.$('.js-connectedPeers').html(connectedPeers + "</ul>").hide();
         },
         error: function(){
-          self.$el.find('.js-numConnectedPeers').text(window.polyglot.t('errorMessages.peersFail'));
+          self.$('.js-numConnectedPeers').text(window.polyglot.t('errorMessages.peersFail'));
         }
       });
 
