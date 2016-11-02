@@ -375,7 +375,7 @@ module.exports = Backbone.Router.extend({
       userModel: this.userModel,
       userProfile: this.userProfile,
       userID: userID,
-      state: state,
+      state: state === 'listing' && !itemHash ? 'store' : state,
       itemHash: itemHash,
       socketView: this.socketView,
       skipNSFWmodal: skipNSFWmodal

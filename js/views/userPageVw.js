@@ -499,7 +499,7 @@ UserPageVw = pageVw.extend({
 
     options = options || {};
 
-    if (state === "listing"){
+    if (state === "listing" && hash){
       //clear old templates
       this.$el.find('.js-list4').html("");
       this.tabClick(this.$el.find('.js-storeTab'), this.$el.find('.js-item'));
@@ -534,7 +534,7 @@ UserPageVw = pageVw.extend({
       }
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
       this.addTabToHistory(state, options.replaceHistory);
-    } else if (state){
+    } else if (state && state !== 'listing'){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     } else {
       //if no state was set
