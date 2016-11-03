@@ -6408,10 +6408,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: #9999A0;
   max-height: 200px;
   overflow: auto;
-
 }
 
 .peersList>ul{
   list-style-type: none;
   padding-left: 0;
+}
+
+.peersList>ul>li {
+  padding-bottom: 5px;
 }

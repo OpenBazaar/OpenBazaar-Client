@@ -243,7 +243,7 @@ module.exports = pageVw.extend({
       $.ajax({
         url: self.serverUrl + "routing_table",
         success: function(data){
-          self.$('.js-numConnectedPeers').html("<p>" + data.length + "</p>");
+          self.$('.js-numConnectedPeers').text(data.length);
           data.forEach(function (peer) {
             connectedPeers += `<li><a href="#userPage/${peer.guid}">${peer.ip}:${peer.port}</a></li>`;
           });

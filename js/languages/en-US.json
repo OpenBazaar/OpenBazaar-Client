@@ -547,7 +547,7 @@
     "tagIsTooLongHeadline": "The tag is too long",
     "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
     "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}.",
-    "peersFail": "Call to peers API failed."
+    "peersFail": "Call to the peers API failed."
   },
   "pageConnectingMessages": {
     "listingConnect": "Connecting to listing ${listing}",
