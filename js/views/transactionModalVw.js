@@ -728,11 +728,12 @@ module.exports = baseModal.extend({
 
   closeDisputeResend: function(){
     var self = this,
+        targetForm = this.$('#transactionCloseDispute'),
         discussionData = {};
 
     discussionData.order_id = this.orderID;
 
-    saveToAPI('', '', this.serverUrl + "close_dispute", function(){
+    saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(){
       self.status = 5;
       self.tabState = "summary";
       self.getData();
