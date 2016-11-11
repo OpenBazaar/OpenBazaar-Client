@@ -246,7 +246,7 @@ module.exports = baseVw.extend({
           })
       );
 
-      switch (notif.type) {
+      switch (notif.type.toLowerCase()) {
         case "follow":
           new Notification(window.polyglot.t('NotificationFollow', {name: username}), {
             icon: avatar,
@@ -289,7 +289,7 @@ module.exports = baseVw.extend({
             silent: true
           });
           break;
-        case "ORDER":
+        case "order":
           new Notification(window.polyglot.t('NotificationNewTransactionMessage', {name: username}), {
             icon: avatar,
             silent: true
