@@ -319,7 +319,7 @@
 
               <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="website"
-                       type="text"
+                       type="url"
                        id="website"
                        placeholder="http://mywebsite.com"
                        class="fieldItem"
@@ -336,7 +336,7 @@
 
               <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="email"
-                       type="text"
+                       type="email"
                        id="email"
                        placeholder="me@email.com"
                        class="fieldItem"
@@ -356,7 +356,8 @@
                        type="text"
                        id="settingsFacebookInput"
                        data-type="facebook"
-                       placeholder="<%= polyglot.t('Facebook') %>"
+                       pattern="^[a-z\d\.]{5,}$"
+                       placeholder="<%= polyglot.t('Username') %>"
                        class="fieldItem"
                        value="<%= ob.page.profile.social_accounts.facebook.username %>">
               </div>
@@ -374,7 +375,8 @@
                        type="text"
                        id="settingsTwitterInput"
                        data-type="twitter"
-                       placeholder="<%= polyglot.t('Twitter') %>"
+                       pattern="^[A-Za-z0-9_]{1,32}$"
+                       placeholder="<%= polyglot.t('Username') %>"
                        class="fieldItem"
                        value="<%= ob.page.profile.social_accounts.twitter.username %>">
               </div>
@@ -392,7 +394,8 @@
                        type="text"
                        id="settingsInstagramInput"
                        data-type="instagram"
-                       placeholder="<%= polyglot.t('Instagram') %>"
+                       pattern="([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
+                       placeholder="<%= polyglot.t('Username') %>"
                        class="fieldItem"
                        value="<%= ob.page.profile.social_accounts.instagram.username %>">
               </div>
@@ -410,7 +413,7 @@
                        type="text"
                        id="settingsSnapchatInput"
                        data-type="snapchat"
-                       placeholder="<%= polyglot.t('Snapchat') %>"
+                       placeholder="<%= polyglot.t('Username') %>"
                        class="fieldItem"
                        value="<%= ob.page.profile.social_accounts.snapchat.username %>">
               </div>
