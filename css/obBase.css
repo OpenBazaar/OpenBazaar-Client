@@ -6401,7 +6401,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   display: none; /* hide in production */
 }
 
-
 .peersList {
   margin-top: 10px;
   padding-right: 30px;
@@ -6418,4 +6417,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .peersList>ul>li {
   padding-bottom: 5px;
+}
+
+.sslSwitch-radio {
+  margin: auto;
+  padding: 15px;
+}
+
+.sslSwitch-radio>input[type="radio"].fieldItem + label {
+  padding: 0 0px 0 35px
 }
