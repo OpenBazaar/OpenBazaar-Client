@@ -47,6 +47,7 @@ module.exports = pageVw.extend({
     'click .js-saveModerator': 'saveModeratorClick',
     'click .js-cancelAdvanced': 'cancelView',
     'click .js-saveAdvanced': 'saveAdvancedClick',
+    'click .js-showPeers': 'showPeers',
     'click .js-testSMTP': 'testSMTPClick',
     'click .js-changeServerSettings': 'launchServerConfig',
     'change .js-settingsThemeSelection': 'themeClick',
@@ -134,6 +135,8 @@ module.exports = pageVw.extend({
     this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);
 
     __.bindAll(this, 'validateDescription');
+
+
   },
 
   // disabling caching on settings for now -- too much
@@ -236,6 +239,21 @@ module.exports = pageVw.extend({
         placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
 
+      var connectedPeers = "<ul>";
+      $.ajax({
+        url: self.serverUrl + "routing_table",
+        success: function(data){
+          self.$('.js-numConnectedPeers').text(data.length);
+          data.forEach(function (peer) {
+            connectedPeers += `<li><a href="#userPage/${peer.guid}">${peer.ip}:${peer.port}</a></li>`;
+          });
+          self.$('.js-connectedPeers').html(connectedPeers + "</ul>").hide();
+        },
+        error: function(){
+          self.$('.js-numConnectedPeers').text(window.polyglot.t('errorMessages.peersFail'));
+        }
+      });
+
       self.avatarCropper = self.$('#settings-image-cropper');
 
       self.avatarCropper.cropit({
@@ -321,6 +339,10 @@ module.exports = pageVw.extend({
       }
     });
     return this;
+  },
+
+  showPeers: function () {
+    this.$el.find('.js-connectedPeers').toggle();
   },
 
   validateDescription: function() {
