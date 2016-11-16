@@ -128,15 +128,16 @@
             <div class="flexRow borderBottom custCol-border">
               <div class="flexCol-3 borderRight custCol-border">
                 <label class="fieldItem" for="aboutInput">
-                  <%= polyglot.t('Description') %>
+                  <%= polyglot.t('ShortDescription') %>
                 </label>
               </div>
               <div class="flexCol-9">
-                <textarea name="about"
-                          rows="5"
+                <textarea name="short_description"
+                          rows="3"
+                          maxlength="160"
                           id="aboutInput"
                           class="fieldItem-textarea custCol-text customThemeScrollbar"
-                          placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"></textarea>
+                          placeholder="<%= polyglot.t('ShortDescriptionPlaceholder') %>"></textarea>
               </div>
             </div>
             <div class="flexRow borderBottom custCol-border">
