@@ -18,7 +18,7 @@
     "Close": "Zavřít",
     "Yes": "Ano",
     "No": "Ne",
-    "of": "z",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "Nový",
     "Retry": "Opakovat",
     "HighlightToStyle": "Highlight text to style",
@@ -46,6 +46,7 @@
     "RemoveModerator": "Odebrat jako Moderátor",
     "About": "Informace",
     "Version": "Verze %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "Nebyl přidán žádný popis",
     "NoListings": "Žádné položky",
     "CoverPhoto": "Úvodní fotka",
@@ -259,7 +260,7 @@
     "UploadAvatar": "Vybrat Avatar",
     "NewAvatar": "Zvolit nový Avatar",
     "NewCoverImage": "Select New Cover Image",
-    "CheckExchanges": "Contacting vendors's node and updating exchange rates if applicable...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "Transakce",
     "Purchases": "Nákupy",
     "Sales": "Prodeje",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "The username/password combination used failed.",
         "goodSMTPAuthentication": "You have successfully connected to the SMTP server.",
         "tagIsTooLongHeadline": "The tag is too long",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "Connecting to listing ${listing}",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Restart needed for language change",
     "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Afghanistan",
         "ALAND_ISLANDS": "Aland Islands",

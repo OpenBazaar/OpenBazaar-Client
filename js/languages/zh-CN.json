@@ -18,7 +18,7 @@
     "Close": "关闭",
     "Yes": "是",
     "No": "否",
-    "of": "有关",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "新",
     "Retry": "Retry",
     "HighlightToStyle": "Highlight text to style",
@@ -46,6 +46,7 @@
     "RemoveModerator": "Remove as Moderator",
     "About": "关于",
     "Version": "Version %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "未加描述",
     "NoListings": "No listings",
     "CoverPhoto": "封面照片",
@@ -259,7 +260,7 @@
     "UploadAvatar": "上载头像",
     "NewAvatar": "选择新的头像",
     "NewCoverImage": "选择新的封面照片",
-    "CheckExchanges": "Contacting vendors's node and updating exchange rates if applicable...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "Transactions",
     "Purchases": "已买",
     "Sales": "已卖",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "The username/password combination used failed.",
         "goodSMTPAuthentication": "You have successfully connected to the SMTP server.",
         "tagIsTooLongHeadline": "The tag is too long",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "Connecting to listing ${listing}",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Restart needed for language change",
     "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Afghanistan",
         "ALAND_ISLANDS": "Aland Islands",

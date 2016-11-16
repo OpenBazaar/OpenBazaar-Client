@@ -18,7 +18,7 @@
     "Close": "Închide",
     "Yes": "Da",
     "No": "Nu",
-    "of": "din",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "Nou",
     "Retry": "Retry",
     "HighlightToStyle": "Highlight text to style",
@@ -46,6 +46,7 @@
     "RemoveModerator": "Remove as Moderator",
     "About": "Despre",
     "Version": "Version %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "Nu a fost adăgată descrirea",
     "NoListings": "Nu sunt listări",
     "CoverPhoto": "Fotografie Copertă",
@@ -259,7 +260,7 @@
     "UploadAvatar": "Încărcare Avatar",
     "NewAvatar": "Selectare Avatar Nou",
     "NewCoverImage": "Selectare Imagine Copertă Nouă",
-    "CheckExchanges": "Contacting vendors's node and updating exchange rates if applicable...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "Transactions",
     "Purchases": "Cumpărături",
     "Sales": "Vinzări",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "The username/password combination used failed.",
         "goodSMTPAuthentication": "You have successfully connected to the SMTP server.",
         "tagIsTooLongHeadline": "The tag is too long",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "Conectare la listarea ${listing}",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Restart needed for language change",
     "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Afghanistan",
         "ALAND_ISLANDS": "Aland Islands",

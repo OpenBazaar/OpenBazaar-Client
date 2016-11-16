@@ -18,7 +18,7 @@
     "Close": "Zavrieť",
     "Yes": "Áno",
     "No": "Nie",
-    "of": "z",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "Nové",
     "Retry": "Skúsiť znovu",
     "HighlightToStyle": "Označte text pre naštýlovanie",
@@ -46,6 +46,7 @@
     "RemoveModerator": "Zmazať ako Moderátor",
     "About": "Informácie",
     "Version": "Verzia  %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "Bez popisu",
     "NoListings": "Žiadne ponuky",
     "CoverPhoto": "Titulná fotka",
@@ -259,7 +260,7 @@
     "UploadAvatar": "Nahrať Avatara",
     "NewAvatar": "Zvoľte nového avatara",
     "NewCoverImage": "Zvoľte nový titulný obrázok",
-    "CheckExchanges": "Kontaktujem predajcov uzol a v prípade potreby aktualizujem výmenný kurz...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "Transakcie",
     "Purchases": "Nákupy",
     "Sales": "Predaje",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "Použitá kombinácia používateľského mena a hesla zlyhala.",
         "goodSMTPAuthentication": "Boli ste úspešne pripojený k SMTP serveru.",
         "tagIsTooLongHeadline": "The tag is too long",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "Pripájam sa k položke ${listing}",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Na zmenu jazyka je potrebný reštart",
     "langChangeRestartMessage": "K tomu aby sa plne prejavili zmeny v nastavení jazyka musíte reštartovat aplikáciu.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Afganistan",
         "ALAND_ISLANDS": "Alandy",

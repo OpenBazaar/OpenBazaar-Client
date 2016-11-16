@@ -18,7 +18,7 @@
     "Close": "閉じる",
     "Yes": "はい",
     "No": "いいえ",
-    "of": "／",
+    "pageXofY": "%{currentPage} / %{totalPages}",
     "New": "新品",
     "Retry": "リトライ",
     "HighlightToStyle": "スタイル編集のテキストをハイライト",
@@ -46,6 +46,7 @@
     "RemoveModerator": "仲介者として削除",
     "About": "プロフィール",
     "Version": "バージョン %{version}",
+    "ServerVersion": "サーバー バージョン %{serverVersion}",
     "NoDescriptionAdded": "説明はありません",
     "NoListings": "出品はありません",
     "CoverPhoto": "カバー写真",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "ユーザー名/パスワードの組み合わせが間違っています。",
         "goodSMTPAuthentication": "SMTP サーバーに正常に接続しました。",
         "tagIsTooLongHeadline": "タグが長すぎます",
-        "tagIsTooLongBody": "タグは %{smart_count} 文字より長くすることはできません。 |||| タグは %{smart_count} 文字より長くすることはできません。"
+        "tagIsTooLongBody": "タグは %{smart_count} 文字より長くすることはできません。 |||| タグは %{smart_count} 文字より長くすることはできません。",
+        "retryingConnection": "ノードへの接続が失われました。接続の再試行中 %{attempt} / %{total}。"
     },
     "pageConnectingMessages": {
         "listingConnect": "出品 ${listing} に接続中",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "言語の変更は再起動が必要です",
     "langChangeRestartMessage": "言語の変更を完全に反映するためには、アプリを再起動する必要があります。",
+    "restartNow": "今すぐ再起動",
+    "restartLater": "後で再起動",
     "countries": {
         "AFGHANISTAN": "アフガニスタン",
         "ALAND_ISLANDS": "オーランド諸島",

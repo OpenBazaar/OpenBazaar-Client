@@ -18,7 +18,7 @@
     "Close": "Fermi",
     "Yes": "Jes",
     "No": "Ne",
-    "of": "de",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "Nova",
     "Retry": "Reprovi",
     "HighlightToStyle": "Marki tekston laŭ stilo",
@@ -46,6 +46,7 @@
     "RemoveModerator": "Forviŝi kiel moderatoron",
     "About": "Pri",
     "Version": "Versio %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "Neniu priskribo aldoniĝis",
     "NoListings": "Sen listigoj",
     "CoverPhoto": "Kovrilfoto",
@@ -259,7 +260,7 @@
     "UploadAvatar": "Elekti avataron",
     "NewAvatar": "Elekti novan avataron",
     "NewCoverImage": "Elekti novan kovrilbildon",
-    "CheckExchanges": "Kontaktas vendisto-nodon kaj ĝisdatigas monŝanĝvalorojn se aplikeblas...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "Transakcioj",
     "Purchases": "Aĉetoj",
     "Sales": "Vendoj",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "La kombino de uzantnomo kaj pasvorto fiaskis.",
         "goodSMTPAuthentication": "Vi sukcese konektiĝis al la SMTP-servilo.",
         "tagIsTooLongHeadline": "The tag is too long",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "Konektiĝas al listigo ${listing}",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Necesas restarti por ŝanĝi la lingvon",
     "langChangeRestartMessage": "Por plene efektivigi vian lingvoŝanĝon, vi devas restarti la aplikaĵon.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Afganujo",
         "ALAND_ISLANDS": "Alando",
