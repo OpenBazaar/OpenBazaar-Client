@@ -30,6 +30,7 @@ module.exports = baseModal.extend({
     if (this.model.get('page').profile.header_hash){
       this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
     }
+    this.existingMods = this.model.get('user').moderator_guids;
 
     this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
@@ -90,6 +91,7 @@ module.exports = baseModal.extend({
 
   render: function() {
     var self = this;
+    this.shownMods = []; //reset to blank
 
     loadTemplate('./js/templates/storeWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
@@ -148,12 +150,19 @@ module.exports = baseModal.extend({
   },
 
   renderModerator: function(moderator){
+    //make sure this moderator is not a duplicate
+    if (this.shownMods.indexOf(moderator.guid) > -1){
+      return;
+    }
+    this.shownMods.push(moderator.guid);
+
     moderator.serverUrl = this.model.get('user').serverUrl;
     moderator.userID = moderator.guid;
     moderator.avatarURL = this.model.get('user').serverUrl + "get_image?hash=" + moderator.avatar_hash + "&guid=" + moderator.guid;
     moderator.isModerator = true; //flag for template
     moderator.micro = true; //flag for template
     moderator.userCount = this.moderatorCount;
+    moderator.existingModerator = this.existingMods.indexOf(moderator.guid) > -1;
     var newModModel = new userShortModel(moderator);
     var modShort = new userShortView({model: newModModel});
 
