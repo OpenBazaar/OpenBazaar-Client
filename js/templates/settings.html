@@ -126,6 +126,27 @@
             <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
+                  <label><%= polyglot.t('BitcoinUnit') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <div class="fieldItem">
+                  <input type="radio" class="fieldItem" id="bitcoinUnitBTC" name="bitcoinUnit" value="BTC" />
+                  <label for="bitcoinUnitBTC" class="radioLabel">BTC</label>
+                  <input type="radio" class="fieldItem" id="bitcoinUnitmBTC" name="bitcoinUnit" value="mBTC" />
+                  <label for="bitcoinUnitmBTC" class="radioLabel">mBTC</label>
+                  <input type="radio" class="fieldItem" id="bitcoinUnitμBTC" name="bitcoinUnit" value="μBTC" />
+                  <label for="bitcoinUnitμBTC" class="radioLabel">μBTC</label>
+                  <input type="radio" class="fieldItem" id="bitcoinUnitSat" name="bitcoinUnit" value="sat" />
+                  <label for="bitcoinUnitSat" class="radioLabel">Satoshi (sat)</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border">
+                <div class="fieldItem">
                   <label>
                     <%= polyglot.t('EnableNotifications') %>
                   </label>
@@ -1257,6 +1278,33 @@
               <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="padding10">
                   <a class="btn btn-txt custCol-secondary js-changeServerSettings"><%= polyglot.t('Change') %></a>
+                </div>
+              </div>
+
+            </div>
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight custCol-border">
+                <div class="fieldItem">
+                  <label>
+                     Connected Peers
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <div class="fieldItem flexRow">
+                  <div class="flexRow">
+                    <span class="js-numConnectedPeers"></span>
+                    <div class="positionTopRight paddingright5">
+                      <a id="showPeersButton" class="btn btn-txt js-showPeers custCol-secondary">
+                        Show Connected Peers
+                      </a>
+                    </div>
+                  </div>
+                  <div class="flexRow">
+                    <div class="peersList custCol-text customThemeScrollbar js-connectedPeers"></div>
+                  </div>
                 </div>
               </div>
 

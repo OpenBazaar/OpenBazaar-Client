@@ -47,6 +47,7 @@ module.exports = pageVw.extend({
     'click .js-saveModerator': 'saveModeratorClick',
     'click .js-cancelAdvanced': 'cancelView',
     'click .js-saveAdvanced': 'saveAdvancedClick',
+    'click .js-showPeers': 'showPeers',
     'click .js-testSMTP': 'testSMTPClick',
     'click .js-changeServerSettings': 'launchServerConfig',
     'change .js-settingsThemeSelection': 'themeClick',
@@ -134,6 +135,8 @@ module.exports = pageVw.extend({
     this.listenTo(app.router, 'cache-reattached', this.onCacheReattached);
 
     __.bindAll(this, 'validateDescription');
+
+
   },
 
   // disabling caching on settings for now -- too much
@@ -236,6 +239,21 @@ module.exports = pageVw.extend({
         placeholder_text_multiple: window.polyglot.t('chosenJS.placeHolderTextMultiple')
       });
 
+      var connectedPeers = "<ul>";
+      $.ajax({
+        url: self.serverUrl + "routing_table",
+        success: function(data){
+          self.$('.js-numConnectedPeers').text(data.length);
+          data.forEach(function (peer) {
+            connectedPeers += `<li><a href="#userPage/${peer.guid}">${peer.ip}:${peer.port}</a></li>`;
+          });
+          self.$('.js-connectedPeers').html(connectedPeers + "</ul>").hide();
+        },
+        error: function(){
+          self.$('.js-numConnectedPeers').text(window.polyglot.t('errorMessages.peersFail'));
+        }
+      });
+
       self.avatarCropper = self.$('#settings-image-cropper');
 
       self.avatarCropper.cropit({
@@ -321,6 +339,10 @@ module.exports = pageVw.extend({
       }
     });
     return this;
+  },
+
+  showPeers: function () {
+    this.$el.find('.js-connectedPeers').toggle();
   },
 
   validateDescription: function() {
@@ -467,6 +489,7 @@ module.exports = pageVw.extend({
         currency_str = "",
         language_str = "",
         pageNSFW = this.model.get('page').profile.nsfw,
+        bitcoinUnit = app.getBitcoinUnit(),
         notifications = user.notifications,
         moderatorStatus = this.model.get('page').profile.moderator,
         vendorStatus = this.model.get('page').profile.vendor,
@@ -475,6 +498,7 @@ module.exports = pageVw.extend({
 
     this.$("#pageForm").find("input[name=nsfw]").val([String(pageNSFW)]);
     generalForm.find("input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
+    generalForm.find("input[name=bitcoinUnit][value=" + bitcoinUnit + "]").prop('checked', true);
     generalForm.find("input[name=notifications][value=" + notifications + "]").prop('checked', true);
     this.$("#storeForm").find("input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
     advancedForm.find("input[name=minEffects][value=" + fancyStatus + "]").prop('checked', true);
@@ -745,11 +769,13 @@ module.exports = pageVw.extend({
     var self = this,
         form = this.$("#generalForm"),
         cCode = this.$('#currency_code').val(),
+        bitcoinUnit = this.$("#generalForm input[name=bitcoinUnit]:checked").val(),
         $saveBtn = this.$('.js-saveGeneral');
 
     $saveBtn.addClass('loading');
 
     localStorage.setItem('NSFWFilter', this.$("#generalForm input[name=nsfw]:checked").val());
+    app.setBitcoinUnit(bitcoinUnit);
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings",
         function(){

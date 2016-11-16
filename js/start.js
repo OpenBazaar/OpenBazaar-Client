@@ -73,6 +73,8 @@ var Polyglot = require('node-polyglot'),
     updatePolyglot,
     validateLanguage;
 
+const {shell} = require('electron');
+
 if (process.platform === 'darwin') {
   platformClass = 'platform-mac';
 } else if (process.platform === 'win32') {
@@ -246,7 +248,7 @@ $('body').on('click', 'a', function(e){
     if (!/^https?:\/\//i.test(targUrl)) {
       targUrl = 'http://' + targUrl;
     }
-    require("shell").openExternal(targUrl);
+    shell.openExternal(targUrl);
   } else if ($(e.target).closest("a").attr("href") && !targUrl.startsWith('#')){ //internal links should start with #
     e.preventDefault(); //just ignore any anchor with an href that is not a valid internal link
   }

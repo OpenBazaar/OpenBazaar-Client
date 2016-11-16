@@ -18,7 +18,7 @@
     "Close": "Kapat",
     "Yes": "Evet",
     "No": "Hayır",
-    "of": "de",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "Yeni",
     "Retry": "Tekrar dene",
     "HighlightToStyle": "Metni vurgula",
@@ -46,6 +46,7 @@
     "RemoveModerator": "Aracılığı Kaldır",
     "About": "Hakkında",
     "Version": "Sürüm %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "Açıklama yok",
     "NoListings": "Listeleme yok",
     "CoverPhoto": "Kapak görseli",
@@ -259,7 +260,7 @@
     "UploadAvatar": "Avatar Seç",
     "NewAvatar": "Yeni Avatar Seç",
     "NewCoverImage": "Yeni Kapak Görseli Seç",
-    "CheckExchanges": "Mağaza ağına bağlanılıyor eğer uygunsa döviz kuru güncellenecek...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "Alışverişler",
     "Purchases": "Alımlar",
     "Sales": "Satışlar",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "Kullanıcı adı/parola başarısız oldu.",
         "goodSMTPAuthentication": "SMTP sunucusuna başarılı bir şekilde bağlandınız.",
         "tagIsTooLongHeadline": "Etiket fazla uzun",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "${listing} listelemesine bağlanılıyor",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Dil seçiminizin tamamlanması için yeniden başlatmanız gerekir.",
     "langChangeRestartMessage": "Dil değişiminizin tamamen etkinleşmesi için uygulamayı yeniden başlatmanız gerekir.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Afganistan",
         "ALAND_ISLANDS": "Åland Adaları",

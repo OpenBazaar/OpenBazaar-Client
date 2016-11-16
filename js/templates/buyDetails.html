@@ -36,7 +36,7 @@
                  step="1"
                  min="1"
                  name="max_quantity"
-                 max="<%= ob.vendor_offer.listing.metadata.max_quantity %>"
+                 max="<%= ob.vendor_offer.listing.metadata.max_quantity || 999999%>"
                  class="fieldItem spinButtons js-buyWizardQuantity border1 custCol-border marginTop4"
                  value="1"/>
           <div class="numberSpinnerUp"></div>
@@ -99,9 +99,9 @@
         <% } else { %>
           <span class="noOverflow fontSize13 js-buyWizardBTCShippingPrice">
             <% if(ob.shippingType === "domestic") { %>
-              <%= ob.intlNumFormat(ob.domesticShippingBTC, 8) %> BTC
+              <%= ob.formatBitcoin(ob.domesticShippingBTC) %>
             <% }else{ %>
-              <%= ob.intlNumFormat(ob.internationalShippingBTC, 8) %> BTC
+              <%= ob.formatBitcoin(ob.internationalShipping) %>
             <% } %>
           </span>
           <span class="noOverflow js-buyWizardShippingPrice textOpacity75 fontSize13">

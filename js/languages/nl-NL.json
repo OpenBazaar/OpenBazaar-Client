@@ -18,7 +18,7 @@
     "Close": "Sluiten",
     "Yes": "Ja",
     "No": "Nee",
-    "of": "van",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "Nieuw",
     "Retry": "Probeer opnieuw",
     "HighlightToStyle": "Selecteer tekst voor opmaak",
@@ -46,6 +46,7 @@
     "RemoveModerator": "Verwijder toe als Moderator",
     "About": "Over",
     "Version": "Versie %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "Geen beschrijving toegevoegd",
     "NoListings": "Geen aanbiedingen",
     "CoverPhoto": "Voorpaginafoto",
@@ -259,7 +260,7 @@
     "UploadAvatar": "Kies Avatar",
     "NewAvatar": "Kies Nieuwe Avatar",
     "NewCoverImage": "Kies Nieuwe Voorpaginafoto",
-    "CheckExchanges": "Contacting vendors's node and updating exchange rates if applicable...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "Transactions",
     "Purchases": "Aankopen",
     "Sales": "Verkopen",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "The username/password combination used failed.",
         "goodSMTPAuthentication": "You have successfully connected to the SMTP server.",
         "tagIsTooLongHeadline": "The tag is too long",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "Connecting to listing ${listing}",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Restart needed for language change",
     "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Afghanistan",
         "ALAND_ISLANDS": "Aland Islands",

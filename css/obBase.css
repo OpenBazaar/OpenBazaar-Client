@@ -6400,3 +6400,22 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .TODO.TODO.TODO.TODO.TODO {
   display: none; /* hide in production */
 }
+
+
+.peersList {
+  margin-top: 10px;
+  padding-right: 30px;
+  display: block;
+  color: #9999A0;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.peersList>ul{
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.peersList>ul>li {
+  padding-bottom: 5px;
+}

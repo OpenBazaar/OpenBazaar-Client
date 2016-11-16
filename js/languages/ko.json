@@ -18,7 +18,7 @@
     "Close": "닫기",
     "Yes": "예",
     "No": "아니요",
-    "of": "/",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "새 항목",
     "Retry": "다시하기",
     "HighlightToStyle": "스타일을 지정할 텍스트를 강조 표시",
@@ -46,6 +46,7 @@
     "RemoveModerator": "조정자에서 삭제",
     "About": "정보",
     "Version": "버전 %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "추가 설명 없음",
     "NoListings": "목록 없음",
     "CoverPhoto": "표지 사진",
@@ -259,7 +260,7 @@
     "UploadAvatar": "아바타 선택",
     "NewAvatar": "새 아바타 선택",
     "NewCoverImage": "새 표지 사진 선택",
-    "CheckExchanges": "Contacting vendors's node and updating exchange rates if applicable...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "거래",
     "Purchases": "구매",
     "Sales": "판매",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "The username/password combination used failed.",
         "goodSMTPAuthentication": "You have successfully connected to the SMTP server.",
         "tagIsTooLongHeadline": "The tag is too long",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "Connecting to listing ${listing}",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Restart needed for language change",
     "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Afghanistan",
         "ALAND_ISLANDS": "Aland Islands",

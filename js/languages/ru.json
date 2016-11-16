@@ -18,7 +18,7 @@
     "Close": "Закрыть",
     "Yes": "Да",
     "No": "Нет",
-    "of": "из",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "Новый",
     "Retry": "Обновить",
     "HighlightToStyle": "Подсвечивать текст по стилю",
@@ -46,6 +46,7 @@
     "RemoveModerator": "Удалить модератора",
     "About": "О нас",
     "Version": "Версия %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "Описание отсутствует",
     "NoListings": "Нет объявлений",
     "CoverPhoto": "Обложка",
@@ -259,7 +260,7 @@
     "UploadAvatar": "Загрузить с компьютера",
     "NewAvatar": "Выбрать новый аватар",
     "NewCoverImage": "Выбрать новую обложку",
-    "CheckExchanges": "Contacting vendors's node and updating exchange rates if applicable...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "Операции",
     "Purchases": "Покупки",
     "Sales": "Продажи",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "Ошибочная комбинация пользователя/пароля",
         "goodSMTPAuthentication": "Вы успешно подключились к SMTP серверу",
         "tagIsTooLongHeadline": "The tag is too long",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "Подключение к товару ${listing}",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Restart needed for language change",
     "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Афганистан",
         "ALAND_ISLANDS": "Аландские острова",

@@ -18,7 +18,7 @@
     "Close": "Κλείσιμο",
     "Yes": "Ναι",
     "No": "Όχι",
-    "of": "του",
+    "pageXofY": "%{currentPage} of %{totalPages}",
     "New": "Νέο",
     "Retry": "Ξαναπροσπαθήστε",
     "HighlightToStyle": "Επιλέξτε το κείμενο προς διαμόρφωση",
@@ -46,6 +46,7 @@
     "RemoveModerator": "Κατάργηση Μεσολαβητή",
     "About": "Σχετικά",
     "Version": "Έκδοση %{version}",
+    "ServerVersion": "Server Version %{serverVersion}",
     "NoDescriptionAdded": "Χωρίς περιγραφή",
     "NoListings": "Καμία καταχώρηση",
     "CoverPhoto": "Φωτογραφία καταστήματος",
@@ -259,7 +260,7 @@
     "UploadAvatar": "Επιλέξτε Avatar",
     "NewAvatar": "Επιλέξτε νέο Avatar",
     "NewCoverImage": "Επιλέξτε νέα εικόνα καταστήματος",
-    "CheckExchanges": "Contacting vendors's node and updating exchange rates if applicable...",
+    "CheckExchanges": "Contacting vendor's node and updating exchange rates if applicable...",
     "Transactions": "Συναλλαγές",
     "Purchases": "Αγορές",
     "Sales": "Πωλήσεις",
@@ -544,7 +545,8 @@
         "badSMTPAuthentication": "The username/password combination used failed.",
         "goodSMTPAuthentication": "You have successfully connected to the SMTP server.",
         "tagIsTooLongHeadline": "The tag is too long",
-        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long."
+        "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
+        "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
     },
     "pageConnectingMessages": {
         "listingConnect": "Σύνδεση σε λίστα ${listing}",
@@ -725,6 +727,8 @@
     },
     "langChangeRestartTitle": "Restart needed for language change",
     "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
+    "restartNow": "Restart Now",
+    "restartLater": "Restart Later",
     "countries": {
         "AFGHANISTAN": "Afghanistan",
         "ALAND_ISLANDS": "Aland Islands",

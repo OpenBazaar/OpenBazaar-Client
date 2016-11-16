@@ -23,7 +23,7 @@ if(_.intersection(ob.userCountries, ob.ships_to).length > 0 || ob.ships_to == "A
           <%= ob.title %>
         </div>
         <div class="textSize13px txt-fade textWeightNormal">
-          <%= ob.intlNumFormat(ob.vendorBTCPrice, 4) %> BTC
+          <%= ob.formatBitcoin(ob.vendorBTCPrice, 4) %>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
            (<%= ob.displayPrice %>)
           <% } %>

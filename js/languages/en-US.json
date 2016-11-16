@@ -158,6 +158,7 @@
   "BitcoinReturnAddressPlaceholder": "Enter Bitcoin address...",
   "BitcoinReturnAddressInfo": "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below. You must be able to access this address later to receive a refund.",
   "LocalCurrency": "Local Currency",
+  "BitcoinUnit": "Bitcoin Unit",
   "TimeZone": "Time Zone",
   "ShipToName": "Recipient Name",
   "ShipToStreet": "Street",
@@ -547,7 +548,8 @@
     "goodSMTPAuthentication": "You have successfully connected to the SMTP server.",
     "tagIsTooLongHeadline": "The tag is too long",
     "tagIsTooLongBody": "Tags cannot be more than %{smart_count} character long. |||| Tags cannot be more than %{smart_count} characters long.",
-    "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}."
+    "retryingConnection": "The connection to your node was lost. Retrying connection attempt %{attempt} of %{total}.",
+    "peersFail": "Call to the peers API failed."
   },
   "pageConnectingMessages": {
     "listingConnect": "Connecting to listing ${listing}",

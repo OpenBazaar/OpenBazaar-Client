@@ -38,7 +38,7 @@
           <tr>
             <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderTotal') %> </td>
             <td class="padding2 textOpacity75 js-searchPrice">
-              <%= ob.intlNumFormat(ob.btc_total, 8) %> BTC
+              <%= ob.formatBitcoin(ob.btc_total) %>
               <% if(ob.cCode != "BTC"){ %>
                 (<%= ob.displayPrice %><!-- Would like to get this working at some point <span class="tooltip ion-information-circled fontSize12" data-tooltip="You received *VAL* in Bitcoin at the time of the sale."></span> -->)
               <% } %>
