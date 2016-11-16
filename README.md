@@ -3,14 +3,14 @@
 [![Build Status](https://travis-ci.org/OpenBazaar/OpenBazaar-Client.svg)](https://travis-ci.org/OpenBazaar/OpenBazaar-Client)
 [![Slack Status](http://slack.openbazaar.org/badge.svg)](https://openbazaar-slackin-drwasho.herokuapp.com/)
 
-You **must** be running the [OpenBazaar backend](https://github.com/OpenBazaar/OpenBazaar-Server) for the client to work!
+You **must** be running the [OpenBazaar backend](https://github.com/OpenBazaar/OpenBazaar-Server) for the client to work! 
+If you are using a remote server (a server on a different computer) your connection will fail on the first install, and you will need to enter the information for the remote server as a new connection.
 
 Dependencies
 -----------
 
-- [NodeJS](https://nodejs.org/en/) v4.x LTS
-  - Linux: `sudo apt-get install nodejs-legacy`
-  - OSX using [homebrew](http://brew.sh/): `brew install homebrew/versions/node4-lts`
+- [NodeJS](https://nodejs.org/en/download/) v6.x
+- Install via [Package Manager] (https://nodejs.org/en/download/package-manager/)
 - Ensure that `npm` is added to your `PATH`!
 
 Running
@@ -25,7 +25,7 @@ Running
 4. Run the client
   - `npm start`
 
-Remember you must be running the [OpenBazaar-Server](https://github.com/OpenBazaar/OpenBazaar-Server) for the client to function properly. If you want to access the test network (testnet), run the server using the `-t` flag (e.g. `$ python openbazaard.py start -t`).
+Remember you must be running the [OpenBazaar-Server](https://github.com/OpenBazaar/OpenBazaar-Server) for the client to function properly. If you want to access the test network (testnet), run the server using the `-t` flag (e.g. `$ python openbazaard.py start -t`). If your router blocks your port after starting and stopping the server, you can set your server to a new port with the '-p' flag (-p followed by a port number).
 
 If the server component has not generated a GUID (which happens only once, when the server is first started), then the client will not fully start up until the GUID is created.
 
