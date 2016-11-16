@@ -245,11 +245,11 @@ module.exports = window.Backbone.Model.extend({
           }).format(newAttributes.internationalShipping);
         } else {
           newAttributes.price = vendorPriceInBitCoin;
-          newAttributes.displayPrice = app.intlNumFormat(vendorPriceInBitCoin, 4) + " BTC";
+          newAttributes.displayPrice = app.formatBitcoin(vendorPriceInBitCoin, 4);
           newAttributes.domesticShipping = vendorDomesticShippingInBitCoin;
-          newAttributes.displayDomesticShipping = app.intlNumFormat(vendorDomesticShippingInBitCoin, 4) + " BTC";
+          newAttributes.displayDomesticShipping = app.formatBitcoin(vendorDomesticShippingInBitCoin, 4);
           newAttributes.internationalShipping = vendorInternationalShippingInBitCoin;
-          newAttributes.displayInternationalShipping = app.intlNumFormat(vendorInternationalShippingInBitCoin, 4) + " BTC";
+          newAttributes.displayInternationalShipping = app.formatBitcoin(vendorInternationalShippingInBitCoin, 4);
         }
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();

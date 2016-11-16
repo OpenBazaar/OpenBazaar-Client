@@ -3,6 +3,7 @@
 var ipcRenderer = require('electron').ipcRenderer,
     $ = require('jquery'),
     Socket = require('./utils/Socket'),
+    btcConvert = require('bitcoin-convert'),
     _app;
 
 
@@ -125,9 +126,41 @@ App.prototype.setUnreadChatMessageCount = function(count) {
   }
 };
 
-App.prototype.intlNumFormat = function(numberToFormat, maxDigits){
-  maxDigits = maxDigits || 8; //default to show down to the satoshi (.00000001)
+App.prototype.intlNumFormat = function(numberToFormat, maxDigits = 8) {
   return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
+};
+
+App.prototype.getBitcoinUnit = function() {
+  if (!this._bitcoinUnit) {
+    this._bitcoinUnit = localStorage.getItem('BitcoinUnit') || 'BTC';
+  }
+  return this._bitcoinUnit;
+};
+
+App.prototype.setBitcoinUnit = function(unit) {
+  this._bitcoinUnit = unit;
+  localStorage.setItem('BitcoinUnit', unit);
+};
+
+/**
+ * Format a bitcoin amount in the user's locale.
+ *
+ * @param {Number} amount - Bitcoin (BTC) amount.
+ * @param {Number} [maxDigits=8] - Maximum number of fraction digits to display.
+ * @returns {String} localised amount ending with ' BTC' or the default bitcoin unit.
+ *
+ * @see intlNumFormat
+ */
+App.prototype.formatBitcoin = function(amount, maxDigits) {
+  let unit = this.getBitcoinUnit();
+  if (unit === 'mBTC') {
+    maxDigits = 2;
+  } else if (unit !== 'BTC') {
+    maxDigits = 0;
+  }
+  amount = btcConvert(amount, 'BTC', unit);
+  return this.intlNumFormat(amount, maxDigits)
+    + ' ' + unit;
 };
 
 App.getApp = function() {

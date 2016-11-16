@@ -30,6 +30,9 @@ function cssImageUrl(hash, guid, fallback) {
 module.exports = {
   cssImageUrl: cssImageUrl,
   intlNumFormat: app.intlNumFormat,
+  formatBitcoin: function() {
+    return app.formatBitcoin.apply(app, arguments);
+  },
   moment: moment,
   launchedFromInstaller: remote.getGlobal('launched_from_installer')
 };

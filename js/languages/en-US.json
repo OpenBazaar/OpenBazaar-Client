@@ -158,6 +158,7 @@
   "BitcoinReturnAddressPlaceholder": "Enter Bitcoin address...",
   "BitcoinReturnAddressInfo": "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below. You must be able to access this address later to receive a refund.",
   "LocalCurrency": "Local Currency",
+  "BitcoinUnit": "Bitcoin Unit",
   "TimeZone": "Time Zone",
   "ShipToName": "Recipient Name",
   "ShipToStreet": "Street",

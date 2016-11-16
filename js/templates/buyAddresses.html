@@ -39,7 +39,7 @@
                 <% } else { %>
                   <%= ob.displayDomesticShipping %>
                   <% if(ob.userCurrencyCode != 'BTC'){ %>
-                  <div class="textOpacity75 textSize12px letterSpacing02">(<%= ob.intlNumFormat(ob.domesticShippingBTC, 4) %> BTC)</div>
+                  <div class="textOpacity75 textSize12px letterSpacing02">(<%= ob.formatBitcoin(ob.domesticShippingBTC, 4) %>)</div>
                   <% } %>
                 <% } %>
               <% } else { %>
@@ -48,7 +48,7 @@
                 <% } else { %>
                   <%= ob.displayInternationalShipping %>
                   <% if(ob.userCurrencyCode != 'BTC'){ %>
-                  <div class="textOpacity75 textSize12px letterSpacing02">(<%= ob.intlNumFormat(ob.internationalShippingBTC, 4) %> BTC)</div>
+                  <div class="textOpacity75 textSize12px letterSpacing02">(<%= ob.formatBitcoin(ob.internationalShippingBTC, 4) %>)</div>
                   <% } %>
                 <% } %>
               <% } %>

@@ -41,7 +41,7 @@
       <ul class="itemMeta">
         <li class="alignCenter itemPrice">
           <span class="textSize22px textOpacity1 fontWeight500 marginRight2">
-            <%= ob.intlNumFormat(ob.vendorBTCPrice, 8) %> BTC
+            <%= ob.formatBitcoin(ob.vendorBTCPrice) %>
           </span>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
           <span class="textSize22px textOpacity65">(<%= ob.displayPrice %>)</span>
@@ -209,9 +209,9 @@
                 <h3><%= polyglot.t('Local') %></h3>
                 <div>
                   <% if(ob.userCurrencyCode != "BTC"){ %>
-                  <%= polyglot.t('Shipping2') %> <%= ob.displayDomesticShipping %> (<%= ob.intlNumFormat(ob.domesticShippingBTC, 8) %> BTC)
+                  <%= polyglot.t('Shipping2') %> <%= ob.displayDomesticShipping %> (<%= ob.formatBitcoin(ob.domesticShippingBTC) %>)
                 <% } else { %>
-                  <%= polyglot.t('Shipping2') %> <%= ob.intlNumFormat(ob.domesticShippingBTC, 8) %> BTC
+                  <%= polyglot.t('Shipping2') %> <%= ob.formatBitcoin(ob.domesticShippingBTC) %>
                 <% } %>
                 </div>
                 <p><%= polyglot.t('transactions.EstimatedDelivery') %> <%= ob.vendor_offer.listing.shipping.est_delivery.domestic %></p>
@@ -223,9 +223,9 @@
                 <h3><%= polyglot.t('International') %></h3>
                 <div>
                   <% if(ob.userCurrencyCode != "BTC"){ %>
-                    <%= polyglot.t('Shipping2') %> <%= ob.displayInternationalShipping %> (<%= ob.intlNumFormat(ob.internationalShippingBTC, 8) %> BTC)
+                    <%= polyglot.t('Shipping2') %> <%= ob.displayInternationalShipping %> (<%= ob.formatBitcoin(ob.internationalShippingBTC) %>)
                 <% } else { %>
-                  <%= polyglot.t('Shipping2') %> <%= ob.intlNumFormat(ob.internationalShippingBTC, 8) %> BTC
+                  <%= polyglot.t('Shipping2') %> <%= ob.formatBitcoin(ob.internationalShippingBTC) %>
                 <% } %>
                 </div>
                 <p><%= polyglot.t('transactions.EstimatedDelivery') %> <%= ob.vendor_offer.listing.shipping.est_delivery.international %></p>
