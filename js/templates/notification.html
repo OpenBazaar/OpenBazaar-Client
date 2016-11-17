@@ -13,7 +13,7 @@
                             <%= polyglot.t('NotificationOrderConfirmed') %>
                         </div>
                         <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
-                    <% } else if(ob.type == "dispute_close") { %>
+                    <% } else if(ob.type == "DISPUTE_CLOSE" || ob.type == "dispute_close") { %>
                         <div class="textSize12px row5">
                             <% if(ob.handle) { %>
                             <%= polyglot.t('NotificationDisputeClosed',{name: ob.handle}) %>
@@ -24,7 +24,7 @@
                             <% } %>
                         </div>
                         <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).locale(window.lang).format('MMM D, h:mm A') %></div>
-                    <% } else if(ob.type == "dispute_open") { %>
+                    <% } else if(ob.type == "DISPUTE_OPEN" || ob.type == "dispute_open") { %>
                     <div class="textSize12px row5">
                         <% if(ob.handle) { %>
                             <%= polyglot.t('NotificationDispute',{name:ob.handle}) %>
