@@ -23,15 +23,22 @@
           })
         %>
       </div>
-      <div class="txt-center row10 textSize20px custCol-text">
-        <img class="js-buyWizardShapeshiftURL" src="https://shapeshift.io/images/shifty/xs_dark_altcoins.png" class="ss-button"></a>
-      </div>
+      <div class="txt-center row10">
         <input type="checkbox" class="textSize11px fieldItem thin" id="BuyWizardQRDetailsInput">
         <label for="BuyWizardQRDetailsInput" class="textSize11px  custCol-text"> <%= polyglot.t('AdditionalPaymentDataInfo') %></label>
       </div>
       <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy custCol-secondary  custCol-text"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
       <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink custCol-secondary custCol-text"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
-      <a class="btn btn-txt btn-wide js-buyWizardPayCheck custCol-secondary custCol-text"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
+      <div class="flexRow pad">
+        <div class="flexCol-6">
+          <a class="btn btn-txt btn-wide js-buyWizardPayCheck custCol-secondary custCol-text"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
+        </div>
+        <div class="flexCol-6">
+          <a class="btn btn-txt btn-wide js-buyWizardShapeshiftURL custCol-secondary custCol-text ss-button">
+            <img src="imgs/shapeshift_logo.png" height="18px" width="18px" style="position: relative; top: 4px;"> <%= polyglot.t('buyFlow.PayWithAltCoins') %>
+          </a>
+        </div>
+      </div>
       <div class="rowTop10 txt-center note custCol-text">
         <%= polyglot.t('buyFlow.paymentNote') %>
       </div>

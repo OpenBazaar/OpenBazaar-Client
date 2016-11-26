@@ -70,6 +70,7 @@ module.exports = baseModal.extend({
     this.model.set('selectedModerator', "");
     this.model.updateAttributes();
     this.cachePayData = "";
+    this.totalBTCPrice = 0;
     this.partialPaymentAmount = 0;
 
     //create the country select list
@@ -578,18 +579,17 @@ module.exports = baseModal.extend({
       throw new Error('Data must be provided to the showPayAddress function');
     }
 
-    var totalBTCPrice = 0,
-        storeName = encodeURI(this.model.get('page').profile.name),
+    var storeName = encodeURI(this.model.get('page').profile.name),
         message = encodeURI(this.model.get('vendor_offer').listing.item.title.substring(0, 20) + " "+data.order_id),
         payHREF = "",
         dataURI;
     this.$el.find('.js-buyWizardSpinner').addClass('hide');
     this.orderID = data.order_id;
-    totalBTCPrice = data.amount - this.partialPaymentAmount;
-    this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(totalBTCPrice, 8));
+    this.totalBTCPrice = data.amount - this.partialPaymentAmount;
+    this.$el.find('.js-buyWizardDetailsTotalBTC').text(templateHelpers.intlNumFormat(this.totalBTCPrice, 8));
     this.payURL = data.payment_address;
 
-    payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;
+    payHREF = "bitcoin:"+ data.payment_address+"?amount="+this.totalBTCPrice;
     if (localStorage.getItem('AdditionalPaymentData') != "false") {
       payHREF += "&label="+storeName+"&message="+message;
     }
@@ -599,15 +599,12 @@ module.exports = baseModal.extend({
     dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
     this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
     this.$el.find('.js-buyWizardPayPrice').text();
-    this.$el.find('.js-buyWizardPayURL').text(data.payment_address);
+    this.$el.find('.js-buyWizardPayURL').text(this.payURL);
     this.$el.find('.js-buyWizardPayLink').attr('href', payHREF);
-    console.log(electron);
   },
 
   openShapeshiftURL: function() {
-    var totalBTCPrice = this.buyDetailsView.model.attributes.totalBTCDisplayPrice;
-    var paymentAddress = this.buyRequest.responseJSON.payment_address;
-    var shapeshiftURL = 'https://shapeshift.io/shifty.html?destination='+paymentAddress+'&amp;output=BTC&apiKey=24ad734e196c948de4608e00472ab8a4b956a298c52abc20fda74114d6cebcb632714a9c5a0f38f46cef0bc974dfd41c34488432128d65acc099b3892f92d602&amount='+totalBTCPrice;
+    var shapeshiftURL = 'https://shapeshift.io/shifty.html?destination='+this.payURL+'&amp;output=BTC&apiKey=24ad734e196c948de4608e00472ab8a4b956a298c52abc20fda74114d6cebcb632714a9c5a0f38f46cef0bc974dfd41c34488432128d65acc099b3892f92d602&amount='+this.totalBTCPrice;
     var shapeshiftWin = new BrowserWindow({width: 700, height: 500, frame: true});
     shapeshiftWin.loadURL(shapeshiftURL);
   },
