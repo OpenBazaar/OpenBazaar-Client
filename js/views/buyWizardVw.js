@@ -12,7 +12,10 @@ var __ = require('underscore'),
     qr = require('qr-encode'),
     app = require('../App').getApp(),
     clipboard = require('electron').clipboard,
-    templateHelpers = require('../utils/templateHelpers');
+    templateHelpers = require('../utils/templateHelpers'),
+    electron = require('electron'),
+    BrowserWindow = electron.remote.BrowserWindow;
+
 
 module.exports = baseModal.extend({
 
@@ -37,6 +40,7 @@ module.exports = baseModal.extend({
     'click .js-buyWizardPurchaseBack': 'backPurchase',
     'click .js-buyWizardPayCopy': 'copyPayAddress',
     'click .js-accordionNext': 'accNext',
+    'click .js-buyWizardShapeshiftURL': 'openShapeshiftURL',
     'click .js-accordionPrev': 'accPrev',
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'click .js-buyWizardPayCheck': 'checkPayment',
@@ -597,7 +601,15 @@ module.exports = baseModal.extend({
     this.$el.find('.js-buyWizardPayPrice').text();
     this.$el.find('.js-buyWizardPayURL').text(data.payment_address);
     this.$el.find('.js-buyWizardPayLink').attr('href', payHREF);
-    this.buyDetailsView.lockForm();
+    console.log(electron);
+  },
+
+  openShapeshiftURL: function() {
+    var totalBTCPrice = this.buyDetailsView.model.attributes.totalBTCDisplayPrice;
+    var paymentAddress = this.buyRequest.responseJSON.payment_address;
+    var shapeshiftURL = 'https://shapeshift.io/shifty.html?destination='+paymentAddress+'&amp;output=BTC&apiKey=24ad734e196c948de4608e00472ab8a4b956a298c52abc20fda74114d6cebcb632714a9c5a0f38f46cef0bc974dfd41c34488432128d65acc099b3892f92d602&amount='+totalBTCPrice;
+    var shapeshiftWin = new BrowserWindow({width: 700, height: 500, frame: true});
+    shapeshiftWin.loadURL(shapeshiftURL);
   },
 
   hidePayAddress: function(){
