@@ -50,8 +50,13 @@
               <input name="server_ip" type="text" id="fld_server" placeholder="" class="fieldItem" required="" value="<%= ob.server_ip %>">
             </div>
             <div class="flexCol-5 sslSwitch-radio ustCol-border <% ob.errors.server_ip && print('invalid') %>">
+              <% if(ob.SSL) { %>
               <input type="radio" class="fieldItem" id="js-sslOn" name="sslSwitch" value="true" checked /><label for="js-sslOn" class="radioLabel"><%= polyglot.t('SSLOn') %></label>
               <input type="radio" class="fieldItem" id="js-sslOff" name="sslSwitch" value="false" /><label for="js-sslOff" class="radioLabel"><%= polyglot.t('SSLOff') %></label>
+              <% } else { %>
+              <input type="radio" class="fieldItem" id="js-sslOn" name="sslSwitch" value="true" /><label for="js-sslOn" class="radioLabel"><%= polyglot.t('SSLOn') %></label>
+              <input type="radio" class="fieldItem" id="js-sslOff" name="sslSwitch" value="false" checked/><label for="js-sslOff" class="radioLabel"><%= polyglot.t('SSLOff') %></label>
+              <% } %>
             </div>
           </div>
           <div class="flexRow">
