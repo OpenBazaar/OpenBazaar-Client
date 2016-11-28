@@ -13,8 +13,7 @@ var __ = require('underscore'),
     app = require('../App').getApp(),
     clipboard = require('electron').clipboard,
     templateHelpers = require('../utils/templateHelpers'),
-    electron = require('electron'),
-    BrowserWindow = electron.remote.BrowserWindow;
+    BrowserWindow = require('electron').remote.BrowserWindow;
 
 
 module.exports = baseModal.extend({

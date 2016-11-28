@@ -55,7 +55,17 @@
              href="bitcoin:<%= ob.buyer_order.order.payment.address %>?amount=<%= ob.buyer_order.order.payment.amount %>&message=<%= ob.vendor_offer.listing.item.title %>">
             <i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %>
           </a>
-          <a class="btn btn-txt btn-wide js-transactionPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
+
+          <div class="flexRow pad">
+            <div class="flexCol-6">
+              <a class="btn btn-txt btn-wide js-transactionPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.Refresh') %></a>
+            </div>
+            <div class="flexCol-6">
+              <a class="btn btn-txt btn-wide js-transactionShapeshiftURL">
+                <img src="imgs/shapeshift_logo.png" height="18px" width="18px" style="position: relative; top: 4px;"> <%= polyglot.t('buyFlow.AltCoins') %>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
