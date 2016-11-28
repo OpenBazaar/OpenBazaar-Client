@@ -662,8 +662,6 @@
   "buyFlow": {
     "PayForOrder": "Pay for Order",
     "BuyOwnProductMsg": "You can't buy your own listing",
-    "NeedTempAddress": "I need a temporary Bitcoin address",
-    "NeedTempAddressHelper": "Please bookmark the url to your temporary bitcoin address",
     "CantFindAddress": "I can't find my bitcoin address",
     "BitcoinWallet": "Bitcoin Wallet",
     "ModeratedPaymentDescription": "Your payment is held in a secure wallet until the vendor completes their end of the agreement. If issues arise, a Moderator will help.",
