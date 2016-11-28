@@ -688,7 +688,7 @@
     "RefreshPayment": "Refresh Payment Status",
     "Refresh": "Refresh",
     "PayWithAltCoins": "Pay with Altcoins",
-    "AltCoins": "Altcoins",
+    "AltCoins": "Use Altcoins",
     "summaryMsg1": "Your payment has been sent to %{recipient}",
     "summaryMsg2": "The expected processing time for this order is %{time}",
     "summaryMsg3": "You can check the status of your order on your %{purchasesPageLink}",
