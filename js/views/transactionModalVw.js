@@ -11,7 +11,8 @@ var __ = require('underscore'),
     qr = require('qr-encode'),
     app = require('../App.js').getApp(),
     discussionCl = require('../collections/discussionCl'),
-    clipboard = require('electron').clipboard;
+    clipboard = require('electron').clipboard,
+    BrowserWindow = require('electron').remote.BrowserWindow;
 
 module.exports = baseModal.extend({
 
@@ -56,7 +57,8 @@ module.exports = baseModal.extend({
     //'blur textarea': 'validateInput',
     'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
     'keydown #transactionDiscussionSendText': 'onKeydownDiscussion',
-    'keyup #transactionDiscussionSendText': 'onKeyupDiscussion'
+    'keyup #transactionDiscussionSendText': 'onKeyupDiscussion',
+    'click .js-transactionShapeshiftURL': 'openShapeshiftURL',
   },
 
   initialize: function (options) {
@@ -151,8 +153,8 @@ module.exports = baseModal.extend({
   render: function () {
     var self = this,
         orderPrice = 0,
-        orderPaid = 0,
-        orderDue = 0;
+        orderPaid = 0;
+        this.orderDue = 0;
 
     //make sure data is valid
     if (this.model.get('invalidData')){
@@ -168,7 +170,7 @@ module.exports = baseModal.extend({
     __.each(this.model.get("bitcoin_txs"), function(payment){
       orderPaid += payment.value;
     });
-    orderDue = orderPrice - orderPaid;
+    this.orderDue = orderPrice - orderPaid;
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(
@@ -184,7 +186,7 @@ module.exports = baseModal.extend({
           orderID: self.orderID,
           orderPrice: orderPrice,
           orderPaid: orderPaid,
-          orderDue: orderDue
+          orderDue: self.orderDue
         })
       ));
 
@@ -259,7 +261,8 @@ module.exports = baseModal.extend({
     var payHREF,
         dataURI;
     if (this.model.get('buyer_order')){
-      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount;
+      this.payURL = this.model.get('buyer_order').order.payment.address;
+      payHREF = "bitcoin:" + this.payURL + "?amount=" + this.orderDue;
 
       if (localStorage.getItem('AdditionalPaymentData') != "false") {
         payHREF += "&message=" + this.model.get('vendor_offer').listing.item.title.substring(0, 20) + " " + this.orderID;
@@ -817,6 +820,12 @@ module.exports = baseModal.extend({
     targ2.text(app.intlNumFormat(updatedVal * adjustedTotal), 8);
     targ3.val(100 - updatedVal * 100);
     targ4.text(app.intlNumFormat(adjustedTotal - updatedVal * adjustedTotal, 8));
+  },
+
+  openShapeshiftURL: function() {
+    var shapeshiftURL = 'https://shapeshift.io/shifty.html?destination='+this.payURL+'&amp;output=BTC&apiKey=24ad734e196c948de4608e00472ab8a4b956a298c52abc20fda74114d6cebcb632714a9c5a0f38f46cef0bc974dfd41c34488432128d65acc099b3892f92d602&amount='+this.orderDue;
+    var shapeshiftWin = new BrowserWindow({width: 700, height: 500, frame: true});
+    shapeshiftWin.loadURL(shapeshiftURL);
   },
 
   closeOrderForm: function(){
