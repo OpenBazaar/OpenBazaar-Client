@@ -11,8 +11,8 @@ module.exports = BaseVw.extend({
     'click .js-save': 'saveForm',
     'keyup': 'processKey',
     'input input': 'inputEntered',
-    'click .js-sslOn': 'sslOn',
-    'click .js-sslOff': 'sslOff'
+    'click #js-sslOn': 'sslOn',
+    'click #js-sslOff': 'sslOff'
   },
 
   initialize: function(options) {
@@ -23,10 +23,6 @@ module.exports = BaseVw.extend({
     }
 
     this.listenTo(this.model, 'invalid sync', function() {
-      this.render();
-    });
-
-    this.listenTo(this.model, 'change:SSL', function() {
       this.render();
     });
   },
@@ -54,11 +50,11 @@ module.exports = BaseVw.extend({
   },
 
   sslOn: function(){
-    this.model.set('SSL', false);
+    this.model.set('SSL', true);
   },
 
   sslOff: function(){
-    this.model.set('SSL', true);
+    this.model.set('SSL', false);
   },
 
   render: function() {
