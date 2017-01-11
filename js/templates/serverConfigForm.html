@@ -25,7 +25,7 @@
             </div>
 
             <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.name && print('invalid') %>">
-              <input name="name" type="text" id="fld_name" class="fieldItem" value="<%= ob.name %>">
+              <input name="name" type="text" id="fld_name" class="fieldItem <% if (ob.default) print('disabled') %>" value="<%= ob.name %>">
             </div>
           </div>
 
@@ -47,14 +47,15 @@
             </div>
 
             <div class="flexCol-3 borderRight0 custCol-border <% ob.errors.server_ip && print('invalid') %>">
-              <input name="server_ip" type="text" id="fld_server" placeholder="" class="fieldItem" required="" value="<%= ob.server_ip %>">
+              <input name="server_ip" type="text" id="fld_server" placeholder="" class="fieldItem <% if (ob.default) print('disabled') %>" required="" value="<%= ob.server_ip %>">
             </div>
-            <div class="flexCol-5 sslSwitch-radio ustCol-border <% ob.errors.server_ip && print('invalid') %>">
+            <div class="flexCol-5 sslSwitch-radio ustCol-border <% ob.errors.server_ip && print('invalid') %>   <% if (ob.default) print('disabled') %>">
               <input type="radio" class="fieldItem" id="js-sslOn" name="sslSwitch" value="true" <% if(ob.SSL) { print("checked") } %> /><label for="js-sslOn" class="radioLabel"><%= polyglot.t('SSLOn') %></label>
               <input type="radio" class="fieldItem" id="js-sslOff" name="sslSwitch" value="false" <% if(!ob.SSL) { print("checked") } %>/><label for="js-sslOff" class="radioLabel"><%= polyglot.t('SSLOff') %></label>
 
             </div>
           </div>
+          <% if (!ob.isLocal) { %>
           <div class="flexRow">
             <% if (ob.errors.username) { %>
             <div class="flexCol-12">
@@ -73,7 +74,7 @@
             </div>
 
             <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.username && print('invalid') %>">
-              <input name="username" type="text" id="fld_username" class="fieldItem" value="<%= ob.username %>">
+              <input name="username" type="text" id="fld_username" class="fieldItem <% if (ob.default) print('disabled') %>" value="<%= ob.username %>">
             </div>
           </div>
 
@@ -95,9 +96,10 @@
             </div>
 
             <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.password && print('invalid') %>">
-              <input name="password" type="password" id="fld_password" class="fieldItem" value="<%= ob.password %>">
+              <input name="password" type="password" id="fld_password" class="fieldItem <% if (ob.default) print('disabled') %>" value="<%= ob.password %>">
             </div>
           </div>
+          <% } %>
 
           <div class="flexRow">
             <% if (ob.errors.rest_api_port) { %>
@@ -117,7 +119,7 @@
             </div>
 
             <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.rest_api_port && print('invalid') %>">
-              <input name="rest_api_port" type="text" id="fld_rest_port" placeholder="" class="fieldItem" value="<%= ob.rest_api_port %>">
+              <input name="rest_api_port" type="text" id="fld_rest_port" placeholder="" class="fieldItem <% if (ob.default) print('disabled') %>" value="<%= ob.rest_api_port %>">
             </div>
           </div>
 
@@ -139,7 +141,7 @@
             </div>
 
             <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.api_socket_port && print('invalid') %>">
-              <input name="api_socket_port" type="text" id="fld_api_socket_port" placeholder="" class="fieldItem" value="<%= ob.api_socket_port %>">
+              <input name="api_socket_port" type="text" id="fld_api_socket_port" placeholder="" class="fieldItem <% if (ob.default) print('disabled') %>" value="<%= ob.api_socket_port %>">
             </div>
           </div>
 
@@ -161,7 +163,7 @@
             </div>
 
             <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.heartbeat_socket_port && print('invalid') %>">
-              <input name="heartbeat_socket_port" type="text" id="fld_heartbeat_socket_port" placeholder="" class="fieldItem" value="<%= ob.heartbeat_socket_port %>">
+              <input name="heartbeat_socket_port" type="text" id="fld_heartbeat_socket_port" placeholder="" class="fieldItem <% if (ob.default) print('disabled') %>" value="<%= ob.heartbeat_socket_port %>">
             </div>
           </div>
 
@@ -174,7 +176,7 @@
       <span class="fontSize10 marginRight2"></span>
       <%= polyglot.t('Cancel') %>
     </a>
-    <a class="btn btn-bar btn-half js-save color-secondary custCol-secondary textOpacity90 custCol-border-primary custCol-text" tabindex="0">
+    <a class="btn btn-bar btn-half js-save color-secondary custCol-secondary textOpacity90 custCol-border-primary custCol-text  <% if (ob.default) print('disabled') %>" tabindex="0">
       <span class="ion-checkmark fontSize10 marginRight2 textOpacity50"></span>
       <%= polyglot.t('serverConnectModal.saveChanges') %>
     </a>

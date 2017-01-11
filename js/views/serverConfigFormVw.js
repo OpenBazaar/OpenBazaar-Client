@@ -28,7 +28,7 @@ module.exports = BaseVw.extend({
   },
 
   processKey: function(e) {
-    if(e.which === 13) this.saveForm();
+    if (e.which === 13) this.saveForm();
   },
 
   inputEntered: function(e) {
@@ -60,7 +60,10 @@ module.exports = BaseVw.extend({
   render: function() {
     loadTemplate('./js/templates/serverConfigForm.html', (t) => {
       this.$el.html(
-        t(__.extend(this.model.toJSON(), { errors: this.model.validationError || {} }))
+        t(__.extend(this.model.toJSON(), {
+          errors: this.model.validationError || {},
+          isLocal: this.model.isLocalServer(),
+        }))
       );
     });
 
