@@ -603,7 +603,7 @@ module.exports = baseModal.extend({
   },
 
   openShapeshiftURL: function() {
-    var shapeshiftURL = 'https://shapeshift.io/shifty.html?destination='+this.payURL+'&amp;output=BTC&apiKey=24ad734e196c948de4608e00472ab8a4b956a298c52abc20fda74114d6cebcb632714a9c5a0f38f46cef0bc974dfd41c34488432128d65acc099b3892f92d602&amount='+this.totalBTCPrice;
+    var shapeshiftURL = 'https://shapeshift.io/shifty.html?destination='+this.payURL+'&amp;output=BTC&apiKey=407531b0fa5d84a3c0d335c54d1ae7d5939f05b45aa90cf4d5dcfdca22c4be13f68a24a0d5ce6f1bbc5bd51b3cc0bc8a165254d29af6b8fb377d85287b747d41&amount='+this.totalBTCPrice;
     var shapeshiftWin = new BrowserWindow({width: 700, height: 500, frame: true});
     shapeshiftWin.loadURL(shapeshiftURL);
   },
