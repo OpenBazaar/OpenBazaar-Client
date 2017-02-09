@@ -1140,9 +1140,14 @@ label.fieldItem {
   border-radius: 0;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  height: 76px;
+  height: 80px;
   width: 80px;
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
+}
+
+.transactionsView .thumbnail-large {
+  height: 76px;
+  width: 76px;
 }
 
 .thumbnail-large .userPageEditBtn {
