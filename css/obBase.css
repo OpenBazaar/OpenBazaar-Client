@@ -4878,7 +4878,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
     z-index: 1;
     padding: 20px;
     opacity: 0;
-    background: #086A9E;
+    background: #141414;
     color: #fff;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.70);
     transition: bottom 1s, opacity 1s;
@@ -4908,7 +4908,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .socialReminder .socialLink {
-    background: #08324A;
+    background: #106DA3;
     display: block;
     padding: 10px;
     border-radius: 50%;
