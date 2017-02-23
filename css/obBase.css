@@ -4871,6 +4871,60 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
     word-wrap: break-word;
 }
 
+.socialReminder {
+    position: fixed;
+    bottom: -150px;
+    right: 0;
+    z-index: 1;
+    padding: 20px;
+    opacity: 0;
+    background: #086A9E;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.70);
+    transition: bottom 1s, opacity 1s;
+}
+
+.socialReminder.show {
+    bottom: 0;
+    opacity: 1;
+}
+
+.socialReminder .socialTitle {
+    margin-right: 40px;
+}
+
+.socialReminder .closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 14px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.socialReminder .socialLinkWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.socialReminder .socialLink {
+    background: #08324A;
+    display: block;
+    padding: 10px;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+}
+
+.socialReminder .socialIcon {
+    font-size: 28px;
+}
+
+.socialReminder .socialIcon:before {
+    line-height: 44px;
+}
+
 /*========== utility classes ==========*/
 
 /* the #ov1 id is on the HTML tag. It is used to force specificity

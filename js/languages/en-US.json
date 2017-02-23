@@ -731,6 +731,16 @@
     "newConfigTitle": "New Configuration",
     "new": "New"
   },
+  "socialSharing": {
+    "title": "OpenBazaar",
+    "blurb": "OpenBazaar%20is%20a%20decentralized%2C%20P2P%20Bitcoin%20Marketplace.",
+    "shareTwitter": "Share on Twitter",
+    "shareFacebook": "Share on Facebook",
+    "sharePinterest": "Share on Pinterest",
+    "shareLinkedIn": "Share on LinkedIn",
+    "shareTumblr": "Share on Tumblr",
+    "reminder": "Help Spread the Word About OpenBazaar"
+  },
   "langChangeRestartTitle": "Restart needed for language change",
   "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
 	"restartNow": "Restart Now",

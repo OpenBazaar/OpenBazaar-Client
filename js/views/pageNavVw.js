@@ -43,7 +43,8 @@ module.exports = baseVw.extend({
     'mouseenter .js-serverSubmenuTrigger': 'mouseenterServerSubmenuTrigger',
     'mouseleave .js-serverSubmenuTrigger': 'mouseleaveServerSubmenuTrigger',
     'mouseenter .js-serverSubmenu': 'mouseenterServerSubmenu',
-    'mouseleave .js-serverSubmenu': 'mouseleaveServerSubmenu'
+    'mouseleave .js-serverSubmenu': 'mouseleaveServerSubmenu',
+    'click .js-socialCloseBtn': 'clickSocialCloseBtn',
   },
 
   initialize: function(options){
@@ -377,6 +378,7 @@ module.exports = baseVw.extend({
       self.suggestionsVw = new SuggestionsVw({
         $input: self.$addressInput
       });
+      self.$socialReminder = self.$('.js-socialReminder');
 
       self.$('.js-mainSearchWrapper').append(self.suggestionsVw.render().el);
 
@@ -400,9 +402,20 @@ module.exports = baseVw.extend({
         self.aboutModal.render();
         self.registerChild(self.aboutModal);
       }
+
+      if (localStorage.getItem('showSocial') !== 'hide') {
+        setTimeout(function() {
+          self.$socialReminder.addClass('show');
+        }, 10000);
+      }
     });
 
     return this;
+  },
+
+  clickSocialCloseBtn: function() {
+    this.$socialReminder.removeClass('show');
+    localStorage.setItem('showSocial', 'hide');
   },
 
   showAboutModal: function(){
