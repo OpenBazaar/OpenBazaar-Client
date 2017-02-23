@@ -731,8 +731,11 @@
     "newConfigTitle": "New Configuration",
     "new": "New"
   },
-  "socialSharing": {
+  "socialReminder": {
     "title": "OpenBazaar",
+    "explanationLink": "(%{linkText})",
+    "explanationLinkText": "<span class='socialInfoLinkInner'>more</span>",
+    "explanation": "If you can take a few seconds to post a link to OpenBazaar to social media, you can help OpenBazaar grow. The more buyers and sellers that are active, the stronger the network will be, with a greater variety of better products and services available for purchase.",
     "blurb": "OpenBazaar%20is%20a%20decentralized%2C%20P2P%20Bitcoin%20Marketplace.",
     "shareTwitter": "Share on Twitter",
     "shareFacebook": "Share on Facebook",

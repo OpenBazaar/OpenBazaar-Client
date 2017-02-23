@@ -4876,7 +4876,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
     bottom: -150px;
     right: 0;
     z-index: 1;
-    padding: 20px;
+    width: 490px;
+    padding: 38px;
     opacity: 0;
     background: #141414;
     color: #fff;
@@ -4890,7 +4891,23 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .socialReminder .socialTitle {
-    margin-right: 40px;
+    margin-bottom: 20px;
+}
+
+.socialReminder .socialInfoLink {
+    font-style: normal;
+    cursor: pointer;
+}
+
+.socialReminder .socialInfoLinkInner {
+    font-style: normal;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.socialReminder .socialParagraph {
+    line-height: 1.4;
+    margin-bottom: 20px;
 }
 
 .socialReminder .closeBtn {

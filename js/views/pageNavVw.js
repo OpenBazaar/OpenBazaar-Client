@@ -45,6 +45,7 @@ module.exports = baseVw.extend({
     'mouseenter .js-serverSubmenu': 'mouseenterServerSubmenu',
     'mouseleave .js-serverSubmenu': 'mouseleaveServerSubmenu',
     'click .js-socialCloseBtn': 'clickSocialCloseBtn',
+    'click .js-socialInfoLink': 'clickSocialInfoLink',
   },
 
   initialize: function(options){
@@ -409,6 +410,7 @@ module.exports = baseVw.extend({
 
       if (self.showSocial) {
         self.$socialReminder = self.$('.js-socialReminder');
+        self.$socialParagraph = self.$('.js-socialParagraph');
         setTimeout(function() {
           self.$socialReminder.addClass('show');
         }, 10000);
@@ -421,6 +423,10 @@ module.exports = baseVw.extend({
   clickSocialCloseBtn: function() {
     this.$socialReminder.removeClass('show');
     localStorage.setItem('showSocial', 'hide');
+  },
+
+  clickSocialInfoLink: function() {
+    this.$socialParagraph.toggleClass('hide');
   },
 
   showAboutModal: function(){
