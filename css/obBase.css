@@ -3661,6 +3661,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-decoration: none;
 }
 
+.popMenu-navBar a [class *= "ion-"]:before {
+    /*standardize the icon width*/
+    width: 1em;
+}
+
 .popMenu-navBar hr {
   width: 100%;
   border: 1px solid rgba(255,255,255,0.08);
@@ -4876,8 +4881,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
     bottom: -150px;
     right: 0;
     z-index: 1;
-    width: 490px;
-    padding: 38px;
+    width: 398px;
+    padding: 32px;
     opacity: 0;
     background: #141414;
     color: #fff;
@@ -4892,6 +4897,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .socialReminder .socialTitle {
     margin-bottom: 20px;
+    font-size: 16px;
 }
 
 .socialReminder .socialInfoLink {
@@ -4929,8 +4935,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
     display: block;
     padding: 10px;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
+    width: 34px;
+    height: 34px;
     text-align: center;
 }
 
@@ -4939,7 +4945,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .socialReminder .socialIcon:before {
-    line-height: 44px;
+    line-height: 34px;
 }
 
 /*========== utility classes ==========*/

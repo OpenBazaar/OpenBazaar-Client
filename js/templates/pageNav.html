@@ -74,23 +74,23 @@
     <% var shareURL = "https%3A%2F%2Fopenbazaar.org" %>
     <a href="https://twitter.com/intent/tweet/?text=<%= polyglot.t('socialReminder.blurb') %>&url=<%= shareURL %>&hashtags=OpenBazaar&related=openbazaar%3AOpenBazaar,News%20about%20OpenBazaar">
       <span class="ion-social-twitter fontSize11 marginRight2 textOpacity1"></span>
-      Twitter
+      <%= polyglot.t('socialReminder.shareTwitter') %>
     </a>
     <a href="https://www.facebook.com/sharer/sharer.php?u=<%= shareURL %>">
       <span class="ion-social-facebook fontSize11 marginRight2 textOpacity1"></span>
-      Facebook
+      <%= polyglot.t('socialReminder.shareFacebook') %>
     </a>
     <a href=http://pinterest.com/pin/create/button/?url=<%= shareURL %>&description=<%= polyglot.t('socialReminder.blurb') %>">
       <span class="ion-social-pinterest fontSize11 marginRight2 textOpacity1"></span>
-      Pinterest
+      <%= polyglot.t('socialReminder.sharePinterest') %>
     </a>
     <a href="https://www.linkedin.com/shareArticle?mini=true&url=<%= shareURL %>&title=<%= polyglot.t('socialReminder.title') %>&summary=<%= polyglot.t('socialReminder.blurb') %>&source=OpenBazaar">
       <span class="ion-social-linkedin fontSize11 marginRight2 textOpacity1"></span>
-      LinkedIn
+      <%= polyglot.t('socialReminder.shareLinkedIn') %>
     </a>
     <a href="http://www.tumblr.com/share/link?url=<%= shareURL %>&name=OpenBazaar&description=<%= polyglot.t('socialReminder.blurb') %>">
       <span class="ion-social-tumblr fontSize11 marginRight2 textOpacity1"></span>
-      Tumblr
+      <%= polyglot.t('socialReminder.shareTumblr') %>
     </a>
   </div>
 
