@@ -85,13 +85,13 @@ style="background-image: <% if(ob.headerURL) { %>url(<%= ob.headerURL %>),<% } %
         <%= polyglot.t('StoreModeratorsOptional') %>
         <span class="textOpacity75 fontSize14 floatRight"><%= polyglot.t('pageXofY', {currentPage: 2, totalPages: 2}) %></span>
       </div>
-      <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar">
+      <div id="modSearch" class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar">
         <div class="flexRow">
           <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-primary custCol-border">
             <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Searchformoderators') %>" />
           </div>
         </div>
-        <div class="flexRow js-storeWizardModeratorList">
+        <div class="flexRow list js-storeWizardModeratorList">
         </div>
       </div>
       <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3  custCol-text">
