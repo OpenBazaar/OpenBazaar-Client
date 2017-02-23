@@ -57,6 +57,8 @@ module.exports = baseVw.extend({
     this.languages = new languagesModel();
     this.showDiscIntro = options.showDiscIntro;
 
+    this.showSocial = localStorage.getItem('showSocial') !== 'hide';
+
     this.listenTo(window.obEventBus, "updateProfile", function(){
       this.refreshProfile();
     });
@@ -332,7 +334,10 @@ module.exports = baseVw.extend({
       var connectedServer = app.serverConnectModal.getConnectedServer();
 
       self.$el.html(loadedTemplate(
-        __.extend(self.model.toJSON(), { connectedServer: connectedServer && connectedServer.toJSON() })
+        __.extend(self.model.toJSON(), {
+          connectedServer: connectedServer && connectedServer.toJSON(),
+          showSocial: self.showSocial,
+        })
       ));
 
       self.$notifMenu = self.$('.js-navNotificationsMenu');
@@ -378,7 +383,6 @@ module.exports = baseVw.extend({
       self.suggestionsVw = new SuggestionsVw({
         $input: self.$addressInput
       });
-      self.$socialReminder = self.$('.js-socialReminder');
 
       self.$('.js-mainSearchWrapper').append(self.suggestionsVw.render().el);
 
@@ -403,7 +407,8 @@ module.exports = baseVw.extend({
         self.registerChild(self.aboutModal);
       }
 
-      if (localStorage.getItem('showSocial') !== 'hide') {
+      if (self.showSocial) {
+        self.$socialReminder = self.$('.js-socialReminder');
         setTimeout(function() {
           self.$socialReminder.addClass('show');
         }, 10000);

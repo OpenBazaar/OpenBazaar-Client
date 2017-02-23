@@ -170,6 +170,7 @@
   </div>
 </div>
 
+<% if (ob.showSocial) { %>
 <div class="socialReminder js-socialReminder">
   <% var shareURL = "https%3A%2F%2Fopenbazaar.org" %>
   <h3 class="socialTitle"><%= polyglot.t('socialSharing.reminder') %></h3>
@@ -192,3 +193,4 @@
     </a>
   </div>
 </div>
+<% } %>
