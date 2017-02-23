@@ -4913,6 +4913,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .socialReminder .socialParagraph {
     line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.socialReminder .socialDisclaimer {
+    font-size: 10px;
+    font-style: italic;
+    line-height: 1.4;
     margin-bottom: 20px;
 }
 

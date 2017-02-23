@@ -735,14 +735,15 @@
     "title": "OpenBazaar",
     "explanationLink": "(%{linkText})",
     "explanationLinkText": "<span class='socialInfoLinkInner'>more</span>",
-    "explanation": "If you can take a few seconds to post a link to OpenBazaar to social media, you can help OpenBazaar grow. The more buyers and sellers that are active, the stronger the network will be, with a greater variety of better products and services available for purchase.",
-    "blurb": "OpenBazaar%20is%20a%20decentralized%2C%20P2P%20Bitcoin%20Marketplace.",
+    "explanation": "You can grow the OpenBazaar Network on social media! Click below to share a link to OpenBazaar, and help us add more buyers, sellers, products and services.",
+    "disclaimer": "A page will open in your browser with some suggested content. This panel won't appear again after you close it.",
+    "blurb": "Join%20OpenBazaar%2C%20the%20P2P%20market%20where%20anyone%20anywhere%20can%20sell%20anything!",
     "shareTwitter": "Share OB on Twitter",
     "shareFacebook": "Share OB on Facebook",
     "sharePinterest": "Share OB on Pinterest",
     "shareLinkedIn": "Share OB on LinkedIn",
     "shareTumblr": "Share OB on Tumblr",
-    "reminder": "Help Spread the Word About OpenBazaar"
+    "reminder": "Help Us Grow the OpenBazaar Network"
   },
   "langChangeRestartTitle": "Restart needed for language change",
   "langChangeRestartMessage": "In order for your language change to fully take effect, you must restart the app.",
