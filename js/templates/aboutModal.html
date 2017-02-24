@@ -38,9 +38,47 @@
         </div>
         <% } else if (ob.tab === 'support') { %>
         <div class="modal-section custCol-primary modal-about-section js-externalLinks customThemeScrollbar lineHeight20">
-          <div class="width100 alignCenter marginBottom12">
-            <img src="./imgs/donations.png" />
+          <% var shareURL = "https%3A%2F%2Fopenbazaar.org" %>
+          <div class="supportWrapper">
+            <div class="supportPayWrapper">
+              <img src="./imgs/donations.png" />
+            </div>
+            <div class="socialReminder">
+              <div class="socialLinkWrapper">
+                <a href="https://twitter.com/intent/tweet/?text=<%= polyglot.t('socialReminder.blurb') %>&url=<%= shareURL %>&hashtags=TradeFree&related=openbazaar%3AOpenBazaar,News%20about%20OpenBazaar">
+                  <span class="socialLink">
+                    <span class="ion-social-twitter socialIcon"></span>
+                  </span>
+                  <%= polyglot.t('socialReminder.shareTwitter') %>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<%= shareURL %>">
+                  <span class="socialLink">
+                    <span class="ion-social-facebook socialIcon"></span>
+                  </span>
+                  <%= polyglot.t('socialReminder.shareFacebook') %>
+                </a>
+                <a href=http://pinterest.com/pin/create/button/?url=<%= shareURL %>&description=<%= polyglot.t('socialReminder.blurb') %>">
+                  <span class="socialLink">
+                    <span class="ion-social-pinterest socialIcon"></span>
+                  </span>
+                  <%= polyglot.t('socialReminder.sharePinterest') %>
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<%= shareURL %>&title=<%= polyglot.t('socialReminder.title') %>&summary=<%= polyglot.t('socialReminder.blurb') %>&source=OpenBazaar">
+                  <span class="socialLink">
+                    <span class="ion-social-linkedin socialIcon"></span>
+                  </span>
+                  <%= polyglot.t('socialReminder.shareLinkedIn') %>
+                </a>
+                <a href="http://www.tumblr.com/share/link?url=<%= shareURL %>&name=OpenBazaar&description=<%= polyglot.t('socialReminder.blurb') %>">
+                  <span class="socialLink">
+                    <span class="ion-social-tumblr socialIcon"></span>
+                  </span>
+                  <%= polyglot.t('socialReminder.shareTumblr') %>
+                </a>
+              </div>
+            </div>
           </div>
+          <h2 class="socialTitle txt-center"><%= polyglot.t('socialReminder.reminder') %></h2>
           <%= polyglot.t('aboutSection.support') %>
         </div>
         <% } else if (ob.tab === 'contributors') { %>

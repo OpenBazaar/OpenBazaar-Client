@@ -414,6 +414,63 @@ h6, .h6 {
   padding: 0;
 }
 
+.modal-about .supportWrapper {
+  display: flex;
+  height: 220px;
+  margin: 10px 0 20px 0;
+}
+
+.modal-about .socialReminder {
+  position: static;
+  width: 50%;
+  padding: 10px;
+  opacity: 1;
+  background: none;
+  box-shadow: none;
+  transition: none;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.modal-about .supportPayWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 50%;
+
+}
+
+.modal-about .socialReminder .socialLinkWrapper {
+  flex-direction: column;
+  height: 100%;
+}
+
+.modal-about .socialReminder .socialLinkWrapper a {
+  font-size: 12px;
+}
+
+.modal-about .socialReminder .socialLink {
+  background: #141414;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin-right: 2px;
+  display: inline-block;
+}
+
+.modal-about .socialReminder .socialLink .socialIcon {
+  font-size: 14px;
+}
+
+.modal-about .socialReminder .socialLink .socialIcon:before {
+  line-height: 28px;
+}
+
+.modal-about .socialTitle {
+  margin-bottom: 10px;
+}
+
 .navMoreButtons {
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -4881,7 +4938,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
     bottom: -150px;
     right: 0;
     z-index: 1;
-    width: 398px;
+    width: 360px;
     padding: 32px;
     opacity: 0;
     background: #141414;
@@ -4896,7 +4953,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .socialReminder .socialTitle {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     font-size: 16px;
 }
 

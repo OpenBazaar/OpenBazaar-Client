@@ -58,7 +58,8 @@ module.exports = baseVw.extend({
     this.languages = new languagesModel();
     this.showDiscIntro = options.showDiscIntro;
 
-    this.showSocial = localStorage.getItem('showSocial') !== 'hide';
+    this.showSocial = localStorage.getItem('showSocial') !== 'hide' &&
+        localStorage.getItem('firstTime') !== 'true';
 
     this.listenTo(window.obEventBus, "updateProfile", function(){
       this.refreshProfile();
@@ -337,7 +338,6 @@ module.exports = baseVw.extend({
       self.$el.html(loadedTemplate(
         __.extend(self.model.toJSON(), {
           connectedServer: connectedServer && connectedServer.toJSON(),
-          showSocial: self.showSocial,
         })
       ));
 
@@ -379,6 +379,8 @@ module.exports = baseVw.extend({
       self.$statusBar = self.$el.find('.js-navStatusBar');
       self.$serverSubmenu = self.$('.js-serverSubmenu');
       self.$serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
+      self.$socialReminder = self.$('.js-socialReminder');
+      self.$socialParagraph = self.$('.js-socialParagraph');
 
       self.suggestionsVw && self.suggestionsVw.remove();
       self.suggestionsVw = new SuggestionsVw({
@@ -409,12 +411,11 @@ module.exports = baseVw.extend({
       }
 
       if (self.showSocial) {
-        self.$socialReminder = self.$('.js-socialReminder');
-        self.$socialParagraph = self.$('.js-socialParagraph');
         setTimeout(function() {
           self.$socialReminder.addClass('show');
         }, 10000);
       }
+
     });
 
     return this;

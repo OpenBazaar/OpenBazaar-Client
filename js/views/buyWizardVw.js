@@ -670,6 +670,13 @@ module.exports = baseModal.extend({
     var notificationSound = document.createElement('audio');
     notificationSound.setAttribute('src', './audio/notification.mp3');
     notificationSound.play();
+
+    // if this is a new user, show the social sharing panel
+    if (localStorage.getItem('firstTime') === 'true') {
+      $('.js-socialReminder').addClass('show');
+      localStorage.setItem('firstTime', 'false');
+    }
+
   },
 
   openCountrySelect: function(){
