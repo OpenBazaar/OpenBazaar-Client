@@ -571,6 +571,7 @@ launchOnboarding = function(guidCreating) {
     loadProfile('#userPage/' + guid + '/store', true);
     startUpLoadingModal.open();
   });
+  localStorage.setItem('firstTime', 'true');
 };
 
 // start - server connection and app initialization flow

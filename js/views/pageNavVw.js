@@ -43,7 +43,9 @@ module.exports = baseVw.extend({
     'mouseenter .js-serverSubmenuTrigger': 'mouseenterServerSubmenuTrigger',
     'mouseleave .js-serverSubmenuTrigger': 'mouseleaveServerSubmenuTrigger',
     'mouseenter .js-serverSubmenu': 'mouseenterServerSubmenu',
-    'mouseleave .js-serverSubmenu': 'mouseleaveServerSubmenu'
+    'mouseleave .js-serverSubmenu': 'mouseleaveServerSubmenu',
+    'click .js-socialCloseBtn': 'clickSocialCloseBtn',
+    'click .js-socialInfoLink': 'clickSocialInfoLink',
   },
 
   initialize: function(options){
@@ -55,6 +57,9 @@ module.exports = baseVw.extend({
     this.model.set('moderator', this.userProfile.get('profile').moderator);
     this.languages = new languagesModel();
     this.showDiscIntro = options.showDiscIntro;
+
+    this.showSocial = localStorage.getItem('showSocial') !== 'hide' &&
+        localStorage.getItem('firstTime') !== 'true';
 
     this.listenTo(window.obEventBus, "updateProfile", function(){
       this.refreshProfile();
@@ -331,7 +336,9 @@ module.exports = baseVw.extend({
       var connectedServer = app.serverConnectModal.getConnectedServer();
 
       self.$el.html(loadedTemplate(
-        __.extend(self.model.toJSON(), { connectedServer: connectedServer && connectedServer.toJSON() })
+        __.extend(self.model.toJSON(), {
+          connectedServer: connectedServer && connectedServer.toJSON(),
+        })
       ));
 
       self.$notifMenu = self.$('.js-navNotificationsMenu');
@@ -372,6 +379,8 @@ module.exports = baseVw.extend({
       self.$statusBar = self.$el.find('.js-navStatusBar');
       self.$serverSubmenu = self.$('.js-serverSubmenu');
       self.$serverSubmenuTrigger = self.$('.js-serverSubmenuTrigger');
+      self.$socialReminder = self.$('.js-socialReminder');
+      self.$socialParagraph = self.$('.js-socialParagraph');
 
       self.suggestionsVw && self.suggestionsVw.remove();
       self.suggestionsVw = new SuggestionsVw({
@@ -400,9 +409,25 @@ module.exports = baseVw.extend({
         self.aboutModal.render();
         self.registerChild(self.aboutModal);
       }
+
+      if (self.showSocial) {
+        setTimeout(function() {
+          self.$socialReminder.addClass('show');
+        }, 10000);
+      }
+
     });
 
     return this;
+  },
+
+  clickSocialCloseBtn: function() {
+    this.$socialReminder.removeClass('show');
+    localStorage.setItem('showSocial', 'hide');
+  },
+
+  clickSocialInfoLink: function() {
+    this.$socialParagraph.toggleClass('hide');
   },
 
   showAboutModal: function(){

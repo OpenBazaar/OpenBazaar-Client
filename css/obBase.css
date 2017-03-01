@@ -414,6 +414,63 @@ h6, .h6 {
   padding: 0;
 }
 
+.modal-about .supportWrapper {
+  display: flex;
+  height: 220px;
+  margin: 10px 0 20px 0;
+}
+
+.modal-about .socialReminder {
+  position: static;
+  width: 50%;
+  padding: 10px;
+  opacity: 1;
+  background: none;
+  box-shadow: none;
+  transition: none;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.modal-about .supportPayWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 50%;
+
+}
+
+.modal-about .socialReminder .socialLinkWrapper {
+  flex-direction: column;
+  height: 100%;
+}
+
+.modal-about .socialReminder .socialLinkWrapper a {
+  font-size: 12px;
+}
+
+.modal-about .socialReminder .socialLink {
+  background: #141414;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin-right: 2px;
+  display: inline-block;
+}
+
+.modal-about .socialReminder .socialLink .socialIcon {
+  font-size: 14px;
+}
+
+.modal-about .socialReminder .socialLink .socialIcon:before {
+  line-height: 28px;
+}
+
+.modal-about .socialTitle {
+  margin-bottom: 10px;
+}
+
 .navMoreButtons {
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -3666,6 +3723,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-decoration: none;
 }
 
+.popMenu-navBar a [class *= "ion-"]:before {
+    /*standardize the icon width*/
+    width: 1em;
+}
+
 .popMenu-navBar hr {
   width: 100%;
   border: 1px solid rgba(255,255,255,0.08);
@@ -4874,6 +4936,85 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .payAddressWrapper {
     padding: 20px 15px;
     word-wrap: break-word;
+}
+
+.socialReminder {
+    position: fixed;
+    bottom: -150px;
+    right: 0;
+    z-index: 1;
+    width: 360px;
+    padding: 32px;
+    opacity: 0;
+    background: #141414;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.70);
+    transition: bottom 1s, opacity 1s;
+}
+
+.socialReminder.show {
+    bottom: 0;
+    opacity: 1;
+}
+
+.socialReminder .socialTitle {
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.socialReminder .socialInfoLink {
+    font-style: normal;
+    cursor: pointer;
+}
+
+.socialReminder .socialInfoLinkInner {
+    font-style: normal;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.socialReminder .socialParagraph {
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.socialReminder .socialDisclaimer {
+    font-size: 10px;
+    font-style: italic;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.socialReminder .closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 14px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.socialReminder .socialLinkWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.socialReminder .socialLink {
+    background: #106DA3;
+    display: block;
+    padding: 10px;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    text-align: center;
+}
+
+.socialReminder .socialIcon {
+    font-size: 28px;
+}
+
+.socialReminder .socialIcon:before {
+    line-height: 34px;
 }
 
 /*========== utility classes ==========*/
