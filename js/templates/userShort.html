@@ -70,7 +70,7 @@
           </div>
           <div class="marginLeft15 marginRight15 marginTop2 <% if(ob.micro){ %>textSize10<% }else{ %>fontSize14<% } %> txt-fade textWeightNormal">
             <% if(ob.short_description) { %>
-              <div class="clamp2"><%= ob.short_description %></div>
+              <div class="clamp2 js-userDescription"><%= ob.short_description %></div>
             <% } else { %>
               <div><%= polyglot.t('NoDescriptionAdded') %></div>
             <% } %>

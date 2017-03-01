@@ -144,12 +144,15 @@ module.exports = baseModal.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
+
     if (data.id == this.socketModeratorID && data.moderator.guid != this.model.get('user').guid && this.model.get('user').blocked_guids.indexOf(data.moderator.guid) == -1){
       this.renderModerator(data.moderator);
     }
   },
 
   renderModerator: function(moderator){
+    const searchOptions = {valueNames: ['js-searchName', 'js-userDescription'], page: 1000};
+
     //make sure this moderator is not a duplicate
     if (this.shownMods.indexOf(moderator.guid) > -1){
       return;
@@ -168,6 +171,13 @@ module.exports = baseModal.extend({
 
     this.$el.find('.js-storeWizardModeratorList').append(modShort.el);
     this.moderatorCount++;
+
+    // create or update the search
+    if (!this.modSearch) {
+      this.modSearch = new window.List('modSearch', searchOptions);
+    } else {
+      this.modSearch.reIndex();
+    }
   },
 
   blockClicks: function(e) {
