@@ -47,12 +47,14 @@
           <span class="textSize22px textOpacity65">(<%= ob.displayPrice %>)</span>
           <% } %>
         </li>
+        <% if(!ob.ownPage) { %>
         <li class="border0 alignCenter padding10 height70 marginBottom12">
           <div class="btn btn-light btn-buyNow js-buyButton custCol-secondary
           <% if(ob.vendor_offer.listing.metadata.max_quantity === 0) { %>disabled<% } %>">
             <%= polyglot.t('BUYNOW') %>
           </div>
         </li>
+        <% } %>
         <% if (ob.totalReviews) { %>
         <li class="border0 alignCenter padding10 marginBottom12 clickable js-itemRating">
           <span class="marginRight3"><%= ob.totalReviews %> Review</span><% print(ob.starsTemplate({ rating: ob.avgRating })) %><span class="marginLeft2">(<%= ob.avgRating %>/5)</span>
