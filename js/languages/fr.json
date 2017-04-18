@@ -344,6 +344,7 @@
     "PayWithAltCoins": "Altcoins acceptés ici",
     "PayWithBitCoins": "Bitcoin accepté ici",
     "ShippableHelp": "Le produit peut être expédié à une de vos adresses enregistrées. Ajoutez plus d’adresses dans la section Paramètres/Adresses pour pouvoir acheter plus d'annonces.",
+    "Size": "Size",
     "firewall": {
         "Open": "Ouvert",
         "Restricted": "Limité",
