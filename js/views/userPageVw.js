@@ -50,6 +50,7 @@ var defaultItem = {
       "item": {
         "category": "",
         "sku": "",
+        "size": "",
         "description": "",
         "price_per_unit": {
           "fiat": {
