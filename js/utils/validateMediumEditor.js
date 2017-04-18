@@ -17,8 +17,6 @@ function checkVal($field) {
   // replace double quotes with single quotes to avoid invalid json
   //fVal = fVal.replace(/\\([\s\S])|(")/g, "'");
 
-  //decode text the medium editor encodes, or  the medium editor will remove it the second time
-  fVal = decodeHtml(fVal);
 
   fVal = sanitizeHTML(fVal, {
     allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'u', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote', 'span' ],
@@ -28,6 +26,9 @@ function checkVal($field) {
     },
     allowedSchemes: [ 'http', 'https', 'ftp', 'mailto', 'ob' ]
   });
+  
+  //decode text the medium editor encodes, or  the medium editor will remove it the second time
+  fVal = decodeHtml(fVal);
   
   $field.val(fVal);
 
