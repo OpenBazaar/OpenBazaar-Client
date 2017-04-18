@@ -319,6 +319,8 @@ module.exports = baseVw.extend({
 
   notificationClick: function() {
     this.closeNotificationsMenu();
+    
+    this.markNotificationAsRead(e.view)
   },
 
   render: function(){
@@ -450,6 +452,27 @@ module.exports = baseVw.extend({
     app.hideOverlay();
     this.$notifMenu.removeClass('popMenu-opened');
     this.onNotifMenuClose();
+  },
+  
+  markNotificationAsRead: function(view) {
+    if (view.model.get('read') === false) {
+      var formData = new FormData();
+      
+      view.model.set('read', true);
+      formData.append('id', view.model.get('id'));
+      
+      $.ajax({
+        url: app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read',
+        type: 'POST',
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        data: formData
+      });
+      
+      this.fetchNotifsMarkedAsRead++;
+      this.setNotificationCount(this.getUnreadNotifCount());
+    }
   },
 
   isNotifMenuOpen: function() {
