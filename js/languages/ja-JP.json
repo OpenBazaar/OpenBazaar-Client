@@ -563,7 +563,7 @@
         "userFail": "表示しようとしているページは現在オフラインです"
     },
     "aboutSection": {
-        "about": "<p>OpenBazaar は、ビットコインを使用して、お互いに直接商品やサービスを売買するユーザーのネットワークです。このネットワークは、分散型で、何かの組織が制御しているわけではありません。</p><p>ソフトウェアはオープンソースで MIT でライセンスされます。コードは <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">GitHub</a> で参照することができます。</p><p>OpenBazaar はコミュニティ プロジェクトです。 <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> チャンネルまたは <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a> での参加を歓迎します。</p><p>ヘルプが必要な場合は、OpenBazaar バージョン 1.0 <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">チュートリアル</a> をお読みください。</p><p>まだご質問があれば、 <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">サポートデスク</a> でイシューを開いてください。</p>",
+        "about": "<p>OpenBazaar は、ビットコインを使用して、お互いに直接商品やサービスを売買するユーザーのネットワークです。このネットワークは、分散型で、何らかの組織が制御しているわけではありません。</p><p>ソフトウェアはオープンソースで MIT でライセンスされます。コードは <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">GitHub</a> で参照することができます。</p><p>OpenBazaar はコミュニティ プロジェクトです。 <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> チャンネルまたは <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a> での参加を歓迎します。</p><p>ヘルプが必要な場合は、OpenBazaar バージョン 1.0 <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">チュートリアル</a> をお読みください。</p><p>その他ご質問があれば、 <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">サポートデスク</a> でイシューを作ってください。</p>",
         "contributors": "<p>OpenBazaar は、自分の時間を貢献する開発者やボランティアの国際コミュニティによって、自由な取引を行うことができます。これは、コードやその他の援助を通じて、プロジェクトに貢献してきた人々のリストの一部です。</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
         "support": "<p>自由な取引を行うという私たちの使命に、いくつかの方法で OpenBazaar を支援することができます。</p><p>ネットワーク上で商品やサービスを売買することは、私たちのコミュニティを成長させ、新しいユーザーに対してプラットフォームをより魅力的にするのに役立ちます。プラットフォーム上で販売にビットコインを扱う事業に関して丁寧に説明することは、言葉を広めること、ピア・ツー・ピア取引の需要を示すことに役立ちます。</p><p>あなたが開発者の場合、 <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">私たちの GitHub</a> をチェックアウトして、支援できることを見つけてください。 コアコードを手伝うことの先に、プロジェクトの権限のないオープンソースの特性から、私たちは、あなたが既存のネットワークの最上段に新たなサービスを構築することを願っています。</p><p>プロジェクトに <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">Bitcoin を寄付</a> することもできます。 カンファレンスを訪問するため、開発のための報奨金を提供するため、そして OpenBazaar をプロモーションするための費用に賄われます。</p><p>OpenBazaar に新しいアイデアがある、またはコア開発者に質問がある場合は <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">私たちの Slack に参加</a>してください。 </p>",
         "licensing": "<p>OpenBazaar は MIT ライセンスのオープンソースソフトウェアです。このライセンスは、寛容で、人々が他のオープンソースプロジェクトのために、またはプロプライエタリのソフトウェアのために自由にコードを再利用することができるようにデザインされています。完全なライセンスのテキストは以下の通りです。</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>"
@@ -603,6 +603,7 @@
         "restart": "アプリケーションを再起動",
         "about": "OpenBazaarについて",
         "support": "OpenBazaarをサポートする",
+        "share": "OpenBazaarについて投稿",
         "Forward": "前へ",
         "Back": "戻る",
         "newServer": "新しいサーバー",
@@ -730,6 +731,20 @@
         "serverConfigsTitle": "サーバー構成",
         "newConfigTitle": "新しい構成",
         "new": "新規"
+    },
+    "socialReminder": {
+        "title": "OpenBazaar",
+        "explanationLink": "(%{linkText})",
+        "explanationLinkText": "<span class='socialInfoLinkInner'>さらに</span>",
+        "explanation": "制限や手数料のない、このワールドワイドなマーケットプレイスで、さらに多くの素晴らしい購入者や販売者を見たいですか？ 以下をクリックしてソーシャルメディアでリンクを共有して、#TradeFree にもっと多くの人を招待してください。",
+        "disclaimer": "お使いのブラウザでいくつかの提案された内容を含むページが開きます。 このパネルを閉じると、このパネルは再び表示されません。",
+        "blurb": "手数料%2C%20仲介者%20そして%20制限なく、欲しいものを%20オンラインで%20買う%20%26%20売りましょう。%20%40OpenBazaar%20に参加しましょう!",
+        "shareTwitter": "TwitterでOBについて投稿",
+        "shareFacebook": "FacebookでOBについて投稿",
+        "sharePinterest": "PrinterestでOBについて投稿",
+        "shareLinkedIn": "LinkedInでOBについて投稿",
+        "shareTumblr": "TumblrでOBについて投稿",
+        "reminder": "OpenBazaarの成長を支援しよう!"
     },
     "langChangeRestartTitle": "言語の変更は再起動が必要です",
     "langChangeRestartMessage": "言語の変更を完全に反映するためには、アプリを再起動する必要があります。",
