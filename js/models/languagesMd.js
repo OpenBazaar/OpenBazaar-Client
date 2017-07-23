@@ -13,7 +13,7 @@ module.exports = Backbone.Model.extend({
         langCode: "en-US"
       },
       {
-        langName: "Amharic (Amharic, Ethiopia",
+        langName: "Amharic (Amharic, Ethiopia)",
         langCode: "am-ET"
       },
       {
