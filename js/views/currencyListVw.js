@@ -46,7 +46,7 @@ module.exports = baseVw.extend({
 
     $.ajax({
       method: "GET",
-      url: "https://api.bitcoinaverage.com/ticker/global/all"
+      url: "https://ticker.openbazaar.org/api"
     })
         .done(function (response) {
           for (var bcaCurrency in response) {

@@ -1430,6 +1430,12 @@ label.fieldItem {
   float: left;
 }
 
+.accordion > .accordion-window > .accordion-child .bar {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .accordion-active input, .accordion-active textarea, .accordion-active a {
   visibility: visible;
 }

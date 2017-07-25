@@ -603,6 +603,7 @@
         "restart": "Uygulamayı Yeniden Başlat",
         "about": "OpenBazaar Hakkında",
         "support": "OpenBazaar'ı Destekle",
+        "share": "Post About OpenBazaar",
         "Forward": "İleri",
         "Back": "Geri",
         "newServer": "Yeni Sunucu",
@@ -730,6 +731,20 @@
         "serverConfigsTitle": "Sunucu Yapılandırmaları",
         "newConfigTitle": "Yeni Yapılandırma",
         "new": "Yeni"
+    },
+    "socialReminder": {
+        "title": "OpenBazaar",
+        "explanationLink": "(%{linkText})",
+        "explanationLinkText": "<span class='socialInfoLinkInner'>more</span>",
+        "explanation": "Want to see more great buyers and sellers on this worldwide marketplace with no restrictions or fees? Please click below to share a link on social media and invite more people to #TradeFree.",
+        "disclaimer": "A page will open in your browser with some suggested content. This panel won't appear again after you close it.",
+        "blurb": "Buy%20%26%20sell%20whatever%20you%20want%20online%20with%20no%20fees%2C%20no%20middlemen%20and%20no%20restrictions.%20Join%20%40OpenBazaar!",
+        "shareTwitter": "Post about OB on Twitter",
+        "shareFacebook": "Post about OB on Facebook",
+        "sharePinterest": "Post about OB on Pinterest",
+        "shareLinkedIn": "Post about OB on LinkedIn",
+        "shareTumblr": "Post about OB on Tumblr",
+        "reminder": "Help OpenBazaar Grow!"
     },
     "langChangeRestartTitle": "Dil seçiminizin tamamlanması için yeniden başlatmanız gerekir.",
     "langChangeRestartMessage": "Dil değişiminizin tamamen etkinleşmesi için uygulamayı yeniden başlatmanız gerekir.",

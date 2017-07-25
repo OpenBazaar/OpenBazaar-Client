@@ -603,6 +603,7 @@
         "restart": "Redémarrer l'appli",
         "about": "À propos d'OpenBazaar",
         "support": "Soutenir OpenBazaar",
+        "share": "Parler d'OpenBazaar",
         "Forward": "Avancer",
         "Back": "Reculer",
         "newServer": "Nouveau serveur",
@@ -730,6 +731,20 @@
         "serverConfigsTitle": "Configurations du serveur",
         "newConfigTitle": "Nouvelle configuration",
         "new": "Nouveau"
+    },
+    "socialReminder": {
+        "title": "OpenBazaar",
+        "explanationLink": "(%{linkText})",
+        "explanationLinkText": "<span class='socialInfoLinkInner'>plus</span>",
+        "explanation": "Vous souhaitez voir d'autres acheteurs et vendeurs intéressants sur ce marché mondial sans aucune restriction ou frais ? Veuillez cliquer ci-dessous pour partager un lien sur les réseaux sociaux et inviter plus de gens à #TradeFree.",
+        "disclaimer": "Une page s'ouvrira dans votre navigateur avec du contenu suggéré. Ce panneau n'apparaîtra pas de nouveau après l'avoir fermé.",
+        "blurb": "Achetez%20%26%20vendez%20ce%20que%20vous%20voulez%20en ligne%20avec%20aucun%20frais%2C%20aucun%20intermédiaire%20et%20sans%20restriction.%20Rejoignez%20%40OpenBazaar%20!",
+        "shareTwitter": "Parler d'OB sur Twitter",
+        "shareFacebook": "Parler d'OB sur Facebook",
+        "sharePinterest": "Parler d'OB sur Pinterest",
+        "shareLinkedIn": "Parler d'OB sur LinkedIn",
+        "shareTumblr": "Parler d'OB sur Tumblr",
+        "reminder": "Aidez OpenBazaar à grandir !"
     },
     "langChangeRestartTitle": "Redémarrage requis pour le changement de langue",
     "langChangeRestartMessage": "Vous devez redémarrer l'application pour que le changement de langue soit pleinement effectif.",
