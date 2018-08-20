@@ -1,3 +1,5 @@
+Note: This project is no longer maintained. Please see version 2 at https://github.com/OpenBazaar/openbazaar-desktop
+
 # OpenBazaar-Client
 
 [![Build Status](https://travis-ci.org/OpenBazaar/OpenBazaar-Client.svg)](https://travis-ci.org/OpenBazaar/OpenBazaar-Client)
