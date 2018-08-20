@@ -164,6 +164,19 @@
 </div>
 
 <div class="flexRow border0">
+  <div lass="flexCol-12">
+    <div id="shareBar" class="marginLeft20">
+      Share via <a href="https://duosear.ch">Duo Search</a>:
+      <a class="marginRight10 marginLeft10" title="Twitter" href="https://twitter.com/intent/tweet?text=<%= ob.vendor_offer.listing.item.title %>&via=duosearch&hashtags=OpenBazaar&url=https://duosear.ch/<%= ob.vendor_offer.listing.id.blockchain_id || ob.vendor_offer.listing.id.guid %>/listing/<%= ob.itemHash %>"><span class="ion-social-twitter"></span></a>
+      <a class="marginRight10" title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://duosear.ch/<%= ob.vendor_offer.listing.id.blockchain_id || ob.vendor_offer.listing.id.guid %>/listing/<%= ob.itemHash %>"><span class="ion-social-facebook"></span></a>
+      <a class="marginRight10" title="Reddit" href="https://www.reddit.com/submit?url=https://duosear.ch/<%= ob.vendor_offer.listing.id.blockchain_id || ob.vendor_offer.listing.id.guid %>/listing/<%= ob.itemHash %>"><span class="ion-social-reddit"></span></a>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="flexRow border0">
   <div class="flexCol-12">
     <div class="custCol-border marginBottom40 marginTop30">
       <div class="bar navBar barFlush navBar custCol-secondary height55">
@@ -269,4 +282,3 @@
     </div>
   </div>
 </div>
-
