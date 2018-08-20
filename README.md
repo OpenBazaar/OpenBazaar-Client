@@ -1,4 +1,7 @@
-# OpenBazaar-Client
+## _Note: This project is no longer maintained._ Please see version 2 at https://github.com/OpenBazaar/openbazaar-desktop
+---
+
+# OpenBazaar-Client (v1.0) (deprecated)
 
 [![Build Status](https://travis-ci.org/OpenBazaar/OpenBazaar-Client.svg)](https://travis-ci.org/OpenBazaar/OpenBazaar-Client)
 [![Slack Status](http://slack.openbazaar.org/badge.svg)](https://openbazaar-slackin-drwasho.herokuapp.com/)
